@@ -1,9 +1,9 @@
 ---
-title: Integrate Data with Confluent Cloud and Snowflake
+title: Integrate Data with Confluent Cloud, Snowflake, ksqlDB, and SQL Server
 summary: Learn how to stream TiDB data to Confluent Cloud, Snowflake, ksqlDB, and SQL Server.
 ---
 
-# Integrate Data with Confluent Cloud and Snowflake
+# Integrate Data with Confluent Cloud, Snowflake, ksqlDB, and SQL Server
 
 Confluent is an Apache Kafka-compatible streaming data platform that provides strong data integration capabilities. On this platform, you can access, store, and manage non-stop real-time streaming data.
 
@@ -124,7 +124,7 @@ The preceding steps are performed in a lab environment. You can also deploy a cl
             ```shell
             Create changefeed successfully!
             ID: confluent-changefeed
-            Info: {... changfeed info json struct ...}
+            Info: {... changefeed info json struct ...}
             ```
 
         - If no result is returned after you run the command, check the network connectivity between the server where you run the command and Confluent Cloud. For details, see [Test connectivity to Confluent Cloud](https://docs.confluent.io/cloud/current/networking/testing.html).
@@ -199,8 +199,8 @@ The structure of the `ITEM` table is as follows:
 
 ```
 CREATE TABLE `item` (
-  `i_id` int(11) NOT NULL,
-  `i_im_id` int(11) DEFAULT NULL,
+  `i_id` int NOT NULL,
+  `i_im_id` int DEFAULT NULL,
   `i_name` varchar(24) DEFAULT NULL,
   `i_price` decimal(5,2) DEFAULT NULL,
   `i_data` varchar(50) DEFAULT NULL,

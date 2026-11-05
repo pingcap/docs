@@ -9,7 +9,7 @@ Release date: March 30, 2023
 
 TiDB version: 7.0.0-[DMR](/releases/versioning.md#development-milestone-releases)
 
-Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.0/quick-start-with-tidb)
+Quick access: [Quick start](https://docs-archive.pingcap.com/tidb/v7.0/quick-start-with-tidb)
 
 In v7.0.0-DMR, the key new features and improvements are as follows:
 
@@ -24,11 +24,11 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 <tbody>
   <tr>
     <td rowspan="2">Scalability and Performance<br/></td>
-    <td>Session level <a href="https://docs.pingcap.com/tidb/v7.0/sql-non-prepared-plan-cache" target="_blank">non-prepared SQL plan cache</a> (experimental)</td>
+    <td>Session level <a href="https://docs-archive.pingcap.com/tidb/v7.0/sql-non-prepared-plan-cache" target="_blank">non-prepared SQL plan cache</a> (experimental)</td>
     <td>Support automatically reusing plan cache at the session level to reduce compilation and shorten the query time for the same SQL patterns without manually setting prepare statements in advance.</td>
   </tr>
   <tr>
-    <td>TiFlash supports the <a href="https://docs.pingcap.com/tidb/v7.0/tiflash-disaggregated-and-s3" target="_blank">disaggregated storage and compute architecture and S3 shared storage</a> (experimental)</td>
+    <td>TiFlash supports the <a href="https://docs-archive.pingcap.com/tidb/v7.0/tiflash-disaggregated-and-s3" target="_blank">disaggregated storage and compute architecture and S3 shared storage</a> (experimental)</td>
     <td>TiFlash introduces a cloud-native architecture as an option:
       <ul>
         <li>Disaggregates TiFlash's compute and storage, which is a milestone for elastic HTAP resource utilization.</li>
@@ -38,29 +38,29 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
   </tr>
   <tr>
     <td rowspan="2">Reliability and Availability<br/></td>
-    <td><a href="https://docs.pingcap.com/tidb/v7.0/tidb-resource-control" target="_blank">Resource control enhancement</a> (experimental) </td>
+    <td><a href="https://docs-archive.pingcap.com/tidb/v7.0/tidb-resource-control" target="_blank">Resource control enhancement</a> (experimental) </td>
     <td>Support using resource groups to allocate and isolate resources for various applications or workloads within one cluster. In this release, TiDB adds support for different resource binding modes (user, session, and statement levels) and user-defined priorities. Additionally, you can also use commands to perform resource calibration (estimation for the whole resource amount).</td>
   </tr>
   <tr>
-    <td>TiFlash supports <a href="https://docs.pingcap.com/tidb/v7.0/tiflash-spill-disk" target="_blank">spill to disk</a></td>
+    <td>TiFlash supports <a href="https://docs-archive.pingcap.com/tidb/v7.0/tiflash-spill-disk" target="_blank">spill to disk</a></td>
     <td>TiFlash supports intermediate result spill to disk to mitigate OOMs in data-intensive operations such as aggregations, sorts, and hash joins.</td>
   </tr>
   <tr>
     <td rowspan="2">SQL</td>
-    <td><a href="https://docs.pingcap.com/tidb/v7.0/time-to-live" target="_blank">Row-level TTL</a> (GA)</td>
+    <td><a href="https://docs-archive.pingcap.com/tidb/v7.0/time-to-live" target="_blank">Row-level TTL</a> (GA)</td>
     <td>Support managing database size and improve performance by automatically expiring data of a certain age.</td>
   </tr>
   <tr>
-    <td><a href="https://docs.pingcap.com/tidb/v7.0/partitioned-table#reorganize-partitions" target="_blank">Reorganize <code>LIST</code>/<code>RANGE</code> partition</a></td>
+    <td><a href="https://docs-archive.pingcap.com/tidb/v7.0/partitioned-table#reorganize-partitions" target="_blank">Reorganize <code>LIST</code>/<code>RANGE</code> partition</a></td>
     <td>The <code>REORGANIZE PARTITION</code> statement can be used for merging adjacent partitions or splitting one partition into many, which provides better usability of partitioned tables.</td>
   </tr>
   <tr>
     <td rowspan="2">DB Operations and Observability<br/></td>
-    <td>TiDB enhances the functionalities of <a href="https://docs.pingcap.com/tidb/v7.0/sql-statement-load-data" target="_blank"><code>LOAD DATA</code> statements</a> (experimental)</td>
+    <td>TiDB enhances the functionalities of <a href="https://docs-archive.pingcap.com/tidb/v7.0/sql-statement-load-data" target="_blank"><code>LOAD DATA</code> statements</a> (experimental)</td>
     <td>TiDB enhances the functionalities of <code>LOAD DATA</code> SQL statements, such as supporting data import from S3/GCS.<br/></td>
   </tr>
   <tr>
-    <td>TiCDC supports <a href="https://docs.pingcap.com/tidb/v7.0/ticdc-sink-to-cloud-storage" target="_blank">object storage sink</a> (GA)</td>
+    <td>TiCDC supports <a href="https://docs-archive.pingcap.com/tidb/v7.0/ticdc-sink-to-cloud-storage" target="_blank">object storage sink</a> (GA)</td>
     <td>TiCDC supports replicating row change events to object storage services, including Amazon S3, GCS, Azure Blob Storage, and NFS.<br/></td>
   </tr>
 </tbody>
@@ -86,7 +86,7 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
     Starting from TiDB v7.0.0, Fast Online DDL and PITR are fully compatible. When restoring cluster data through PITR, the index operations added via Fast Online DDL during log backup will be automatically replayed to achieve compatibility.
 
-    For more information, see [documentation](/ddl-introduction.md).
+    For more information, see [documentation](/best-practices/ddl-introduction.md).
 
 * TiFlash supports null-aware semi join and null-aware anti semi join operators [#6674](https://github.com/pingcap/tiflash/issues/6674) @[gengliqi](https://github.com/gengliqi)
 
@@ -106,7 +106,7 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
     When processing a `SELECT` statement with filter conditions (`WHERE` clause), TiFlash reads all the data from the columns required by the query by default, and then filters and aggregates the data based on the query conditions. Late materialization is an optimization method that supports pushing down part of the filter conditions to the TableScan operator. That is, TiFlash first scans the column data related to the filter conditions that are pushed down, filters the rows that meet the condition, and then scans the other column data of these rows for further calculation, thereby reducing IO scans and computations of data processing.
 
-    The TiFlash late materialization feature is not enabled by default. You can enable it by setting the `tidb_opt_enable_late_materialization` system variable to `OFF`. When the feature is enabled, the TiDB optimizer will determine which filter conditions to be pushed down based on statistics and filter conditions.
+    The TiFlash late materialization feature is not enabled by default. You can enable it by setting the `tidb_opt_enable_late_materialization` system variable to `ON`. When the feature is enabled, the TiDB optimizer will determine which filter conditions to be pushed down based on statistics and filter conditions.
 
     For more information, see [documentation](/tiflash/tiflash-late-materialization.md).
 
@@ -142,7 +142,7 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
     TiDB v6.5.0 supports creating ordinary secondary indexes via Fast Online DDL. TiDB v7.0.0 supports creating unique indexes via Fast Online DDL. Compared to v6.1.0, adding unique indexes to large tables is expected to be several times faster with improved performance.
 
-    For more information, see [documentation](/ddl-introduction.md).
+    For more information, see [documentation](/best-practices/ddl-introduction.md).
 
 ### Reliability
 
@@ -162,13 +162,13 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
     - Session level. Set the resource group used by the current session via [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md).
     - Statement level. Set the resource group used by the current statement via [`RESOURCE_GROUP()`](/optimizer-hints.md#resource_groupresource_group_name).
 
-  For more information, see [documentation](/tidb-resource-control.md).
+  For more information, see [documentation](/tidb-resource-control-ru-groups.md).
 
 * Support a checkpoint mechanism for Fast Online DDL, improving fault tolerance and automatic recovery capability [#42164](https://github.com/pingcap/tidb/issues/42164) @[tangenta](https://github.com/tangenta)
 
     TiDB v7.0.0 introduces a checkpoint mechanism for [Fast Online DDL](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630), which significantly improves its fault tolerance and automatic recovery capabilities. By periodically recording and synchronizing the DDL progress, ongoing DDL operations can continue to be executed in Fast Online DDL mode even if there is a TiDB DDL Owner failure or switch. This makes the execution of DDL more stable and efficient.
 
-    For more information, see [documentation](/ddl-introduction.md).
+    For more information, see [documentation](/best-practices/ddl-introduction.md).
 
 * TiFlash supports spilling to disk [#6528](https://github.com/pingcap/tiflash/issues/6528) @[windtalker](https://github.com/windtalker)
 
@@ -248,7 +248,7 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 * [DBeaver](https://dbeaver.io/) v23.0.1 supports TiDB by default [#17396](https://github.com/dbeaver/dbeaver/issues/17396) @[Icemap](https://github.com/Icemap)
 
     - Provides an independent TiDB module, icon, and logo.
-    - The default configuration supports [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless), making it easier to connect to TiDB Serverless.
+    - The default configuration supports [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter), making it easier to connect to {{{ .starter }}}.
     - Supports identifying TiDB versions to display or hide foreign key tabs.
     - Supports visualizing SQL execution plans in `EXPLAIN` results.
     - Supports highlighting TiDB keywords such as `PESSIMISTIC`, `OPTIMISTIC`, `AUTO_RANDOM`, `PLACEMENT`, `POLICY`, `REORGANIZE`, `EXCHANGE`, `CACHE`, `NONCLUSTERED`, and `CLUSTERED`.
@@ -345,6 +345,7 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 | [`tidb_opt_enable_late_materialization`](/system-variables.md#tidb_opt_enable_late_materialization-new-in-v700) | Newly added | This variable controls whether to enable the [TiFlash Late Materialization](/tiflash/tiflash-late-materialization.md) feature. The default value is `OFF`, which means the feature is not enabled. |
 | [`tidb_opt_ordering_index_selectivity_threshold`](/system-variables.md#tidb_opt_ordering_index_selectivity_threshold-new-in-v700) | Newly added | This variable controls how the optimizer selects indexes when the SQL statement contains `ORDER BY` and `LIMIT` clauses and has filtering conditions. |
 | [`tidb_pessimistic_txn_fair_locking`](/system-variables.md#tidb_pessimistic_txn_fair_locking-new-in-v700) | Newly added | Controls whether to enable the enhanced pessimistic lock-waking model to reduce the tail latency of transactions under single-row conflict scenarios. The default value is `ON`. When the cluster is upgraded from an earlier version to v7.0.0 or later, the value of this variable is set to `OFF`. |
+| [`tidb_slow_txn_log_threshold`](/system-variables.md#tidb_slow_txn_log_threshold-new-in-v700) | Newly added | Sets the threshold for slow transaction logging. When the execution time of a transaction exceeds this threshold, TiDB logs detailed information about the transaction. The default value `0` means that this feature is disabled. |
 | [`tidb_ttl_running_tasks`](/system-variables.md#tidb_ttl_running_tasks-new-in-v700) | Newly added | This variable is used to limit the concurrency of TTL tasks across the entire cluster. The default value `-1` means that the TTL tasks are the same as the number of TiKV nodes. |
 
 ### Configuration file parameters
@@ -356,12 +357,12 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 | TiKV | [`resolved-ts.advance-ts-interval`](/tikv-configuration-file.md#advance-ts-interval) | Modified | The default value changes from `"1s"` to `"20s"`. This modification can increase the interval of the regular advancement of Resolved TS and reduce the traffic consumption between TiKV nodes. |
 | TiKV | [`resource-control.enabled`](/tikv-configuration-file.md#resource-control) | Modified | The default value changes from `false` to `true`. |
 | TiKV | [`raft-engine.prefill-for-recycle`](/tikv-configuration-file.md#prefill-for-recycle-new-in-v700) | Newly added | Controls whether to generate empty log files for log recycling in Raft Engine. The default value is `false`. |
-| PD | [`degraded-mode-wait-duration`](/pd-configuration-file.md#degraded-mode-wait-duration) | Newly added | A [Resource Control](/tidb-resource-control.md)-related configuration item. It controls the waiting time for triggering the degraded mode. The default value is `0s`. |
-| PD | [`read-base-cost`](/pd-configuration-file.md#read-base-cost) | Newly added | A [Resource Control](/tidb-resource-control.md)-related configuration item. It controls the basis factor for conversion from a read request to RU. The default value is `0.25`. |
-| PD | [`read-cost-per-byte`](/pd-configuration-file.md#read-cost-per-byte) | Newly added | A [Resource Control](/tidb-resource-control.md)-related configuration item. It controls the basis factor for conversion from read flow to RU. The default value is `1/ (64 * 1024)`. |
-| PD | [`read-cpu-ms-cost`](/pd-configuration-file.md#read-cpu-ms-cost) | Newly added | A [Resource Control](/tidb-resource-control.md)-related configuration item. It controls the basis factor for conversion from CPU to RU. The default value is `1/3`. |
-| PD | [`write-base-cost`](/pd-configuration-file.md#write-base-cost) | Newly added | A [Resource Control](/tidb-resource-control.md)-related configuration item. It controls the basis factor for conversion from a write request to RU. The default value is `1`. |
-| PD | [`write-cost-per-byte`](/pd-configuration-file.md#write-cost-per-byte) | Newly added | A [Resource Control](/tidb-resource-control.md)-related configuration item. It controls the basis factor for conversion from write flow to RU. The default value is `1/1024`. |
+| PD | [`degraded-mode-wait-duration`](/pd-configuration-file.md#degraded-mode-wait-duration) | Newly added | A [Resource Control](/tidb-resource-control-ru-groups.md)-related configuration item. It controls the waiting time for triggering the degraded mode. The default value is `0s`. |
+| PD | [`read-base-cost`](/pd-configuration-file.md#read-base-cost) | Newly added | A [Resource Control](/tidb-resource-control-ru-groups.md)-related configuration item. It controls the basis factor for conversion from a read request to RU. The default value is `0.25`. |
+| PD | [`read-cost-per-byte`](/pd-configuration-file.md#read-cost-per-byte) | Newly added | A [Resource Control](/tidb-resource-control-ru-groups.md)-related configuration item. It controls the basis factor for conversion from read flow to RU. The default value is `1/ (64 * 1024)`. |
+| PD | [`read-cpu-ms-cost`](/pd-configuration-file.md#read-cpu-ms-cost) | Newly added | A [Resource Control](/tidb-resource-control-ru-groups.md)-related configuration item. It controls the basis factor for conversion from CPU to RU. The default value is `1/3`. |
+| PD | [`write-base-cost`](/pd-configuration-file.md#write-base-cost) | Newly added | A [Resource Control](/tidb-resource-control-ru-groups.md)-related configuration item. It controls the basis factor for conversion from a write request to RU. The default value is `1`. |
+| PD | [`write-cost-per-byte`](/pd-configuration-file.md#write-cost-per-byte) | Newly added | A [Resource Control](/tidb-resource-control-ru-groups.md)-related configuration item. It controls the basis factor for conversion from write flow to RU. The default value is `1/1024`. |
 | TiFlash | [`mark_cache_size`](/tiflash/tiflash-configuration.md) | Modified | Change the default cache limit of the metadata for a data block in TiFlash from `5368709120` to `1073741824` to reduce unnecessary memory usage. |
 | TiFlash | [`minmax_index_cache_size`](/tiflash/tiflash-configuration.md) | Modified | Change the default cache limit of the min-max index for a data block in TiFlash from `5368709120` to `1073741824` to reduce unnecessary memory usage. |
 | TiFlash | [`flash.disaggregated_mode`](/tiflash/tiflash-disaggregated-and-s3.md) | Newly added | In the disaggregated architecture of TiFlash, it indicates whether this TiFlash node is a write node or a compute node. The value can be `tiflash_write` or `tiflash_compute`. |
@@ -411,9 +412,9 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
         - Support splitting transactions in the redo applier to improve its throughput and reduce RTO in disaster recovery scenarios [#8318](https://github.com/pingcap/tiflow/issues/8318) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - Improve the table scheduling to split a single table more evenly across various TiCDC nodes [#8247](https://github.com/pingcap/tiflow/issues/8247) @[overvenus](https://github.com/overvenus)
-        - Add the Large Row monitoring metrics in MQ sink [#8286](https://github.com/pingcap/tiflow/issues/8286) @[hi-rustin](https://github.com/hi-rustin)
+        - Add the Large Row monitoring metrics in MQ sink [#8286](https://github.com/pingcap/tiflow/issues/8286) @[hi-rustin](https://github.com/Rustin170506)
         - Reduce network traffic between TiKV and TiCDC nodes in scenarios where a Region contains data of multiple tables [#6346](https://github.com/pingcap/tiflow/issues/6346) @[overvenus](https://github.com/overvenus)
-        - Move the P99 metrics panel of Checkpoint TS and Resolved TS to the Lag analyze panel [#8524](https://github.com/pingcap/tiflow/issues/8524) @[hi-rustin](https://github.com/hi-rustin)
+        - Move the P99 metrics panel of Checkpoint TS and Resolved TS to the Lag analyze panel [#8524](https://github.com/pingcap/tiflow/issues/8524) @[hi-rustin](https://github.com/Rustin170506)
         - Support applying DDL events in redo logs [#8361](https://github.com/pingcap/tiflow/issues/8361) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - Support splitting and scheduling tables to TiCDC nodes based on upstream write throughput [#7720](https://github.com/pingcap/tiflow/issues/7720) @[overvenus](https://github.com/overvenus)
 

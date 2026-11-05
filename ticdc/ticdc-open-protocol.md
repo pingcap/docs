@@ -169,7 +169,7 @@ This section introduces the formats of Row Changed Event, DDL Event, and Resolve
     | :---------- | :----- | :---------------------------------- |
     | TS          | Number |  The timestamp of the transaction that performs the DDL change.    |
     | Schema Name | String |  The schema name of the DDL change, which might be an empty string.  |
-    | Table Name  | String |  The table name of the DDL change, which might be am empty string. |
+    | Table Name  | String |  The table name of the DDL change, which might be an empty string. |
 
 + **Value:**
 
@@ -206,7 +206,7 @@ This section introduces the formats of Row Changed Event, DDL Event, and Resolve
 
 This section shows and displays the output logs of the Event stream.
 
-Suppose that you execute the following SQL statement in the upstream and the MQ Partition number is 2:
+Suppose that you execute the following SQL statement in the upstream and the number of MQ partitions is 2:
 
 {{< copyable "sql" >}}
 
@@ -241,10 +241,10 @@ COMMIT;
 + Log 8 is a repeated event of Log 7. Row Changed Event might be repeated, but the first Event of each version is sent orderly.
 
 ```
-5. [partition=0] [key="{\"ts\":415508878783938562,\"scm\":\"test\",\"tbl\":\"t1\",\"t\":1}"] [value="{\"u\":{\"id\":{\"t\":3,\"h\":true,\"v\":1},\"val\":{\"t\":15,\"v\":\"YWE=\"}}}"]
-6. [partition=1] [key="{\"ts\":415508878783938562,\"scm\":\"test\",\"tbl\":\"t1\",\"t\":1}"] [value="{\"u\":{\"id\":{\"t\":3,\"h\":true,\"v\":2},\"val\":{\"t\":15,\"v\":\"YmI=\"}}}"]
-7. [partition=0] [key="{\"ts\":415508878783938562,\"scm\":\"test\",\"tbl\":\"t1\",\"t\":1}"] [value="{\"u\":{\"id\":{\"t\":3,\"h\":true,\"v\":3},\"val\":{\"t\":15,\"v\":\"Y2M=\"}}}"]
-8. [partition=0] [key="{\"ts\":415508878783938562,\"scm\":\"test\",\"tbl\":\"t1\",\"t\":1}"] [value="{\"u\":{\"id\":{\"t\":3,\"h\":true,\"v\":3},\"val\":{\"t\":15,\"v\":\"Y2M=\"}}}"]
+5. [partition=0] [key="{\"ts\":415508878783938562,\"scm\":\"test\",\"tbl\":\"t1\",\"t\":1}"] [value="{\"u\":{\"id\":{\"t\":3,\"h\":true,\"v\":1},\"val\":{\"t\":15,\"v\":\"aa\"}}}"]
+6. [partition=1] [key="{\"ts\":415508878783938562,\"scm\":\"test\",\"tbl\":\"t1\",\"t\":1}"] [value="{\"u\":{\"id\":{\"t\":3,\"h\":true,\"v\":2},\"val\":{\"t\":15,\"v\":\"bb\"}}}"]
+7. [partition=0] [key="{\"ts\":415508878783938562,\"scm\":\"test\",\"tbl\":\"t1\",\"t\":1}"] [value="{\"u\":{\"id\":{\"t\":3,\"h\":true,\"v\":3},\"val\":{\"t\":15,\"v\":\"cc\"}}}"]
+8. [partition=0] [key="{\"ts\":415508878783938562,\"scm\":\"test\",\"tbl\":\"t1\",\"t\":1}"] [value="{\"u\":{\"id\":{\"t\":3,\"h\":true,\"v\":3},\"val\":{\"t\":15,\"v\":\"cc\"}}}"]
 ```
 
 Execute the following SQL statements in the upstream:
@@ -308,6 +308,7 @@ Currently, TiCDC does not provide the standard parsing library for TiCDC Open Pr
 | LONGTEXT/LONGBLOB     | 251  | {"t":251,"v":"5rWL6K+VdGV4dA=="} | The value is encoded in Base64. |
 | TEXT/BLOB             | 252  | {"t":252,"v":"5rWL6K+VdGV4dA=="} | The value is encoded in Base64. |
 | CHAR/BINARY           | 254  | {"t":254,"v":"test"} / {"t":254,"v":"\\\\x89PNG\\\\r\\\\n\\\\x1a\\\\n"} | The value is encoded in UTF-8. When the upstream type is BINARY, invisible characters are escaped. |
+| TiDBVectorFloat32              | 225  | {"t":225,"v":"[1.23, -0.4]"} |  |
 | GEOMETRY              | 255  |  | Unsupported |
 
 ## DDL Type Code

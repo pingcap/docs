@@ -335,7 +335,7 @@ This error occurs when the `WHERE` clause concatenated in a query involves table
 ```sql
 BATCH ON test.t2.id LIMIT 1 
 INSERT INTO t 
-SELECT t2.id, t2.v, t3. FROM t2, t3 WHERE t2.id = t3.id
+SELECT t2.id, t2.v, t3.id FROM t2, t3 WHERE t2.id = t3.id
 ```
 
 ```sql
@@ -347,7 +347,7 @@ If the error occurs, you can print the query statement for confirmation by using
 ```sql
 BATCH ON test.t2.id LIMIT 1 
 DRY RUN QUERY INSERT INTO t 
-SELECT t2.id, t2.v, t3. FROM t2, t3 WHERE t2.id = t3.id
+SELECT t2.id, t2.v, t3.id FROM t2, t3 WHERE t2.id = t3.id
 ```
 
 To avoid the error, you can move the condition related to other tables in the `WHERE` clause to the `ON` condition in the `JOIN` clause. For example:
@@ -355,7 +355,7 @@ To avoid the error, you can move the condition related to other tables in the `W
 ```sql
 BATCH ON test.t2.id LIMIT 1 
 INSERT INTO t 
-SELECT t2.id, t2.v, t3. FROM t2 JOIN t3 ON t2.id=t3.id
+SELECT t2.id, t2.v, t3.id FROM t2 JOIN t3 ON t2.id = t3.id
 ```
 
 ```
@@ -365,6 +365,27 @@ SELECT t2.id, t2.v, t3. FROM t2 JOIN t3 ON t2.id=t3.id
 | 0              | all succeeded |
 +----------------+---------------+
 ```
+
+### The `Unknown column '<alias>.<column>' in 'where clause'` error occurs when using table aliases in non-transactional DML statements
+
+When you execute a non-transactional DML statement, TiDB internally constructs a query for dividing batches and then generates the actual split execution statements. You can use [`DRY RUN QUERY`](/non-transactional-dml.md#query-the-batch-dividing-statement) and [`DRY RUN`](/non-transactional-dml.md#query-the-statements-corresponding-to-the-first-and-the-last-batches) to view these two types of statements, respectively.
+
+In the current version, the rewritten statements might not preserve the table aliases from the original DML statement. Therefore, if you use the `<alias>.<column>` format to reference columns in a `WHERE` clause or other expressions, an `Unknown column` error might occur.
+
+For example, the following statement might return an error in some cases:
+
+```sql
+BATCH ON t_old.id LIMIT 5000
+INSERT INTO t_new
+SELECT * FROM t_old AS t
+WHERE t.c1 IS NULL;
+```
+
+To avoid this error, follow these recommendations:
+
+- Avoid using table aliases in non-transactional DML statements. For example, rewrite `t.c1` as `c1` or `t_old.c1`.
+- When specifying the [shard column](#parameter-description), do not use table aliases. For example, rewrite `BATCH ON t.id` as `BATCH ON db.t_old.id` or `BATCH ON t_old.id`.
+- Before execution, use `DRY RUN QUERY` or `DRY RUN` to preview the rewritten statements and verify that they meet your expectations.
 
 ### The actual batch size is not the same as the specified batch size
 

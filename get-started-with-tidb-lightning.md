@@ -1,10 +1,10 @@
 ---
-title: Quick Start for TiDB Lightning
+title: Get Started with TiDB Lightning
 aliases: ['/docs/dev/get-started-with-tidb-lightning/','/docs/dev/how-to/get-started/tidb-lightning/']
 summary: TiDB Lightning is a tool for importing MySQL data into a TiDB cluster. It is recommended for test and trial purposes only, not for production or development environments. The process involves preparing full backup data, deploying the TiDB cluster, installing TiDB Lightning, starting TiDB Lightning, and checking data integrity. For detailed features and usage, refer to the TiDB Lightning Overview.
 ---
 
-# Quick Start for TiDB Lightning
+# Get Started with TiDB Lightning
 
 This document provides a quick guide on getting started with TiDB Lightning by importing MySQL data into a TiDB cluster.
 
@@ -14,7 +14,7 @@ This document provides a quick guide on getting started with TiDB Lightning by i
 
 ## Step 1: Prepare full backup data
 
-First, you can use [dumpling](/dumpling-overview.md) to export data from MySQL.
+First, use [Dumpling](/dumpling-overview.md) to export data from MySQL.
 
 1. Run `tiup --version` to check if TiUP is already installed. If TiUP is installed, skip this step. If TiUP is not installed, run the following command:
 
@@ -47,14 +47,14 @@ First, you can use [dumpling](/dumpling-overview.md) to export data from MySQL.
 
 Before starting the data import, you need to deploy a TiDB cluster for the import. If you already have a TiDB cluster, you can skip this step.
 
-For the steps on deploying a TiDB cluster, refer to the [Quick Start Guide for the TiDB Database Platform](/quick-start-with-tidb.md).
+For the steps on deploying a TiDB cluster, refer to the [Quick Start with TiDB Self-Managed](/quick-start-with-tidb.md).
 
 ## Step 3: Install TiDB Lightning
 
-Run the following command to install the latest version of TiDB Lightning:
+It is recommended to use the same version of TiDB Lightning as the target TiDB cluster. Run the following command to install TiDB Lightning, replacing `<version>` with the version of the target TiDB cluster (for example, `v{{{ .tidb-version }}}`):
 
 ```shell
-tiup install tidb-lightning
+tiup install tidb-lightning:<version>
 ```
 
 ## Step 4: Start TiDB Lightning
@@ -96,11 +96,11 @@ tiup install tidb-lightning
     pd-addr = "172.16.31.3:2379,56.78.90.12:3456"
     ```
 
-2. Run `tidb-lightning`. To avoid the program exiting due to the `SIGHUP` signal when starting the program directly in the command line using `nohup`, it is recommended to put the `nohup` command in a script. For example:
+2. Run `tidb-lightning`. To avoid the program exiting due to the `SIGHUP` signal when starting the program directly in the command line using `nohup`, it is recommended to put the `nohup` command in a script. In the following example, replace `<version>` with the TiDB Lightning version installed in [Step 3](#step-3-install-tidb-lightning):
 
     ```shell
     #!/bin/bash
-    nohup tiup tidb-lightning -config tidb-lightning.toml > nohup.out &
+    nohup tiup tidb-lightning:<version> -config tidb-lightning.toml > nohup.out &
     ```
 
 ## Step 5: Check data integrity
@@ -114,3 +114,9 @@ If any error occurs, refer to [TiDB Lightning FAQs](/tidb-lightning/tidb-lightni
 This tutorial briefly introduces what TiDB Lightning is and how to quickly deploy a TiDB Lightning cluster to import full backup data to the TiDB cluster.
 
 For detailed features and usage about TiDB Lightning, refer to [TiDB Lightning Overview](/tidb-lightning/tidb-lightning-overview.md).
+
+## Related resources
+
+<RelatedResources>
+  <ResourceCard title="TiDB Admin Lab 6: Importing Data into TiDB Using TiDB Lightning" type="lab" link="https://labs.tidb.io/labs/dba_303_lab_ff5" imgSrc="https://lab-static.pingcap.com/quick-demo/dba_303_ch07_en.png" duration="60 mins" />
+</RelatedResources>

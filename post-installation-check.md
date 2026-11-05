@@ -26,7 +26,13 @@ Expected output: If the `Status` information of each node is `Up`, the cluster r
 
 ### Use TiDB Dashboard
 
-1. Log in to TiDB Dashboard at `${pd-ip}:${pd-port}/dashboard`. The username and password is the same as that of the TiDB `root` user. If you have modified the `root` password, enter the modified password. The password is empty by default.
+1. Log in to TiDB Dashboard at `${pd-ip}:${pd-port}/dashboard` using the TiDB `root` account and its current password.
+
+    > **Note:**
+    >
+    > If you initialized the cluster with `--init`, TiUP generates the initial root password. Otherwise, the initial password is empty.
+    >
+    > If you have changed the password, use the updated password. Restarting the cluster without `--init` does not reset an existing password.
 
     ![TiDB-Dashboard](/media/tiup/tidb-dashboard.png)
 
@@ -48,22 +54,28 @@ Expected output: If the `Status` information of each node is `Up`, the cluster r
 >
 > Install the MySQL client before you log in to the database.
 
-Log in to the database by running the following command:
+To log in with a root password, run the following command and enter the password when prompted. If you used the recommended [safe start method](/production-deployment-using-tiup.md#step-7-start-a-tidb-cluster) (`tiup cluster start tidb-test --init`), use the password displayed in the TiUP command output, unless you have since changed it:
 
 {{< copyable "shell-regular" >}}
+
+```shell
+mysql -u root -p -h ${tidb_server_host_IP_address} -P 4000
+```
+
+If the cluster was initially started without `--init` and no root password has been set, omit `-p`:
 
 ```shell
 mysql -u root -h ${tidb_server_host_IP_address} -P 4000
 ```
 
-`${tidb_server_host_IP_address}` is one of the IP addresses set for `tidb_servers` when you [initialize the cluster topology file](/production-deployment-using-tiup.md#step-3-initialize-cluster-topology-file), such as `10.0.1.7`.
+`${tidb_server_host_IP_address}` is one of the IP addresses set for `tidb_servers` when you [initialize the cluster topology file](/production-deployment-using-tiup.md#step-3-initialize-the-cluster-topology-file), such as `10.0.1.7`.
 
 The following information indicates successful login:
 
 ```sql
 Welcome to the MySQL monitor.  Commands end with ; or \g.
 Your MySQL connection id is 3
-Server version: 8.0.11-TiDB-v8.2.0 TiDB Server (Apache License 2.0) Community Edition, MySQL 8.0 compatible
+Server version: 8.0.11-TiDB-v8.5.0 TiDB Server (Apache License 2.0) Community Edition, MySQL 8.0 compatible
 Copyright (c) 2000, 2023, Oracle and/or its affiliates. All rights reserved.
 Oracle is a registered trademark of Oracle Corporation and/or its
 affiliates. Other names may be trademarks of their respective
@@ -132,9 +144,9 @@ Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 
     ```sql
     CREATE TABLE `tab_tidb` (
-    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `id` int NOT NULL AUTO_INCREMENT,
     `name` varchar(20) NOT NULL DEFAULT '',
-    `age` int(11) NOT NULL DEFAULT 0,
+    `age` int NOT NULL DEFAULT 0,
     `version` varchar(20) NOT NULL DEFAULT '',
     PRIMARY KEY (`id`),
     KEY `idx_age` (`age`));

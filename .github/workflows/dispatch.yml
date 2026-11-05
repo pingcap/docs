@@ -18,9 +18,11 @@ on:
       - release-5.0
       - release-4.0
       - release-3.0
+      - i18n-zh-release-8.5
 
 jobs:
   trigger:
+    if: github.repository == 'pingcap/docs'
     runs-on: ubuntu-latest
 
     steps:
@@ -38,3 +40,12 @@ jobs:
           -H "Authorization: token ${{ secrets.DOCS_STAGING }}" \
           https://api.github.com/repos/pingcap/docs-staging/actions/workflows/update.yml/dispatches \
           -d '{"ref":"main","inputs":{"full": "false", "repo":"${{ github.repository }}","branch":"${{ github.ref_name }}"}}'
+      
+      - name: trigger docs-staging nextgen workflow
+        run: |
+          curl \
+          -X POST \
+          -H "Accept: application/vnd.github+json" \
+          -H "Authorization: token ${{ secrets.DOCS_STAGING }}" \
+          https://api.github.com/repos/pingcap/docs-staging/actions/workflows/update-nextgen.yml/dispatches \
+          -d '{"ref":"nextgen","inputs":{"full": "false", "repo":"${{ github.repository }}","branch":"${{ github.ref_name }}"}}'

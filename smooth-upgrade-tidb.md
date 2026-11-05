@@ -27,7 +27,7 @@ Refer to the following table for the upgrade methods supported by specific versi
 | Original version | Upgraded version | Upgrade methods | Note |
 |------|--------|-------------|-------------|
 | < v7.1.0  | Any version                 | Does not support smooth upgrade. | |
-| v7.1.0    | v7.1.1、v7.2.0, or v7.3.0   | Smooth upgrade is automatically supported. No additional operations are required. | Experimental feature. It might encounter the issue [#44760](https://github.com/pingcap/tidb/pull/44760). |
+| v7.1.0    | v7.1.1, v7.2.0, or v7.3.0   | Smooth upgrade is automatically supported. No additional operations are required. | Experimental feature. It might encounter the issue [#44760](https://github.com/pingcap/tidb/pull/44760). |
 | v7.1.1    | v7.2.0 or v7.3.0         | Smooth upgrade is automatically supported. No additional operations are required. | Experimental feature.  |
 | v7.2.0    | v7.3.0                   | Smooth upgrade is automatically supported. No additional operations are required. | Experimental feature.  |
 | [v7.1.2, v7.2.0)                     | [v7.1.2, v7.2.0) | Enable smooth upgrade by sending the `/upgrade/start` HTTP request. There are two methods: [Use TiUP](#use-tiup-to-upgrade) and [Other upgrade methods](#other-upgrade-methods) | When smooth upgrade is not enabled, ensure that no DDL operations are performed during the upgrade. |
@@ -73,12 +73,16 @@ You can take the following steps to upgrade TiDB manually or by using a script:
 
 When using the smooth upgrade feature, note the following limitations.
 
+> **Note:**
+>
+> The limitations in this section apply not only to scenarios using the smooth upgrade feature, but also to [upgrading TiDB using TiUP](/upgrade-tidb-using-tiup.md#upgrade-tidb-using-tiup).
+
 ### Limitations on user operations
 
 * Before the upgrade, consider the following restrictions:
 
     * If there is a canceling DDL job in the cluster, that is, an ongoing DDL job is being canceled by a user, because the job in the canceling state cannot be paused, TiDB will retry canceling the job. If the retry fails, an error is reported and the upgrade is exited.
-    * If your current TiDB version is earlier than v8.1.0 and the TiDB Distributed eXecution Framework (DXF) is enabled, disable it by setting [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) to `OFF`. Make sure that all ongoing distributed `ADD INDEX` and `IMPORT INTO` tasks are completed. Alternatively, you can cancel these tasks and wait until the upgrade is complete to restart them. Otherwise, the `ADD INDEX` operations during the upgrade might cause data index inconsistency.
+    * If your current TiDB version is earlier than v8.1.0 and the TiDB Distributed eXecution Framework (DXF) is enabled, disable it by setting [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) to `OFF`. Make sure that all ongoing distributed `ADD INDEX` and `IMPORT INTO` tasks are completed. Alternatively, you can cancel these tasks and wait until the upgrade is complete to restart them. Otherwise, the `ADD INDEX` operations during the upgrade might cause data index inconsistency. If your current TiDB version is v8.1.0 or later, you do not need to disable the DXF, and you can just ignore this limitation.
 
 * In scenarios of using TiUP to upgrade TiDB, because TiUP upgrade has a timeout period, if the cluster has a large number of DDL jobs (more than 300) waiting in queues before the upgrade, the upgrade might fail.
 

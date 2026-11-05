@@ -126,3 +126,9 @@ The output is as follows:
 ```bash
 curl http://127.0.0.1:3080/metrics/
 ```
+
+## Access control
+
+You can restrict access to the TiProxy API by enabling TLS through [`server-http-tls`](/tiproxy/tiproxy-configuration.md#server-http-tls) and configuring the `cert-allowed-cn` option in the `server-http-tls` subsection under the [security](/tiproxy/tiproxy-configuration.md#security) section. TiProxy then uses the common name (CN) in the client certificate to [verify component caller's identity](/enable-tls-between-components.md#verify-component-callers-identity). 
+
+If TLS is not enabled, you can control access using firewall rules instead.

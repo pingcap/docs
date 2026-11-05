@@ -9,13 +9,13 @@ Single Sign-On (SSO) is an authentication scheme that enables members in your Ti
 
 TiDB Cloud supports the following two types of SSO authentication:
 
-- [Basic SSO](/tidb-cloud/tidb-cloud-sso-authentication.md): members can log in to the [TiDB Cloud console](https://tidbcloud.com/) using their GitHub, Google, or Microsoft authentication methods. The basic SSO is enabled by default for all organizations in TiDB Cloud.
+- [Standard SSO](/tidb-cloud/tidb-cloud-sso-authentication.md): members can log in to the [TiDB Cloud console](https://tidbcloud.com/) using their GitHub, Google, or Microsoft authentication methods. The standard SSO is enabled by default for all organizations in TiDB Cloud.
 
 - Cloud Organization SSO: members can log in to a custom login page of TiDB Cloud using the authentication methods specified by your organization. The Cloud Organization SSO is disabled by default.
 
-Compared with basic SSO, Cloud Organization SSO provides more flexibility and customization so you can better meet your organization's security and compliance requirements. For example, you can specify which authentication methods are displayed on the login page, limit which email address domains are allowed for login, and let your members log in to TiDB Cloud with your identity provider (IdP) that uses the [OpenID Connect (OIDC)](https://openid.net/connect/) or [Security Assertion Markup Language (SAML)](https://en.wikipedia.org/wiki/Security_Assertion_Markup_Language) identity protocol.
+Compared with standard SSO, Cloud Organization SSO provides more flexibility and customization so you can better meet your organization's security and compliance requirements. For example, you can specify which authentication methods are displayed on the login page, limit which email address domains are allowed for login, and let your members log in to TiDB Cloud with your identity provider (IdP) that uses the [OpenID Connect (OIDC)](https://openid.net/connect/) or [Security Assertion Markup Language (SAML)](https://en.wikipedia.org/wiki/Security_Assertion_Markup_Language) identity protocol.
 
-In this document, you will learn how to migrate the authentication scheme of your organization from basic SSO to Cloud Organization SSO.
+In this document, you will learn how to migrate the authentication scheme of your organization from standard SSO to Cloud Organization SSO.
 
 > **Note:**
 >
@@ -58,7 +58,7 @@ All the enabled authentication methods will be displayed on your custom TiDB Clo
 Auto-provision is a feature that allows members to automatically join an organization without requiring an invitation from the `Organization Owner` or `Project Owner`. In TiDB Cloud, it is disabled by default for all the supported authentication methods.
 
 - When auto-provision is disabled for an authentication method, only users who have been invited by an `Organization Owner` or `Project Owner` can log in to your custom URL.
-- When auto-provision is enabled for an authentication method, any users using this authentication method can log in to your custom URL. After login, they are automatically assigned the default **Member** role within the organization.
+- When auto-provision is enabled for an authentication method, any users using this authentication method can log in to your custom URL. After login, they are automatically assigned the default `Organization Viewer` role within the organization.
 
 For security considerations, if you choose to enable auto-provision, it is recommended to limit the allowed email domains for authentication when you [configure the authentication method details](#step-2-configure-authentication-methods).
 
@@ -75,10 +75,10 @@ Before enabling Cloud Organization SSO, make sure to inform your members about t
 
 To enable Cloud Organization SSO, take the following steps:
 
-1. Log in to [TiDB Cloud console](https://tidbcloud.com) as a user with the `Organization Owner` role.
-2. In the lower-left corner of the TiDB Cloud console, click <MDSvgIcon name="icon-top-organization" />, and then click **Organization Settings**.
-3. On the **Organization Settings** page, click the **Authentication** tab, and then click **Enable**.
-4. In the dialog, fill in the custom URL for your organization, which must be unique in TiDB Cloud.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com) as a user with the `Organization Owner` role, and then switch to your target organization using the combo box in the upper-left corner.
+2. In the left navigation pane, click **Organization Settings** > **Authentication**.
+3. On the **Authentication** page, click **Enable**.
+4. In the dialog, enter the custom URL for your organization, which must be unique in TiDB Cloud.
 
     > **Note:**
     >
@@ -168,7 +168,7 @@ In TiDB Cloud, the SAML authentication method is disabled by default. After enab
     - Sign on URL
     - Signing Certificate
 
-2. On the **Organization Settings** page, click the **Authentication** tab, locate the row of SAML in the **Authentication Methods** area, and then click <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 20H21M3.00003 20H4.67457C5.16376 20 5.40835 20 5.63852 19.9447C5.84259 19.8957 6.03768 19.8149 6.21663 19.7053C6.41846 19.5816 6.59141 19.4086 6.93732 19.0627L19.5001 6.49998C20.3285 5.67156 20.3285 4.32841 19.5001 3.49998C18.6716 2.67156 17.3285 2.67156 16.5001 3.49998L3.93729 16.0627C3.59139 16.4086 3.41843 16.5816 3.29475 16.7834C3.18509 16.9624 3.10428 17.1574 3.05529 17.3615C3.00003 17.5917 3.00003 17.8363 3.00003 18.3255V20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg> to show the SAML method details.
+2. On the **Organization Settings** page, click the **Authentication** tab in the left navigation pane, locate the row of SAML in the **Authentication Methods** area, and then click <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 20H21M3.00003 20H4.67457C5.16376 20 5.40835 20 5.63852 19.9447C5.84259 19.8957 6.03768 19.8149 6.21663 19.7053C6.41846 19.5816 6.59141 19.4086 6.93732 19.0627L19.5001 6.49998C20.3285 5.67156 20.3285 4.32841 19.5001 3.49998C18.6716 2.67156 17.3285 2.67156 16.5001 3.49998L3.93729 16.0627C3.59139 16.4086 3.41843 16.5816 3.29475 16.7834C3.18509 16.9624 3.10428 17.1574 3.05529 17.3615C3.00003 17.5917 3.00003 17.8363 3.00003 18.3255V20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg> to show the SAML method details.
 3. In the method details, you can configure the following:
 
     - **Name**
@@ -231,9 +231,10 @@ In TiDB Cloud, the SAML authentication method is disabled by default. After enab
 
 3. In TiDB Cloud, view groups pushed from your identity provider.
 
-    1. In the lower-left corner of the [TiDB Cloud console](https://tidbcloud.com), click <MDSvgIcon name="icon-top-organization" />, and then click **Organization Settings**.
-    2. On the **Organization Settings** page, click the **Groups** tab. The groups synchronized from your identity provider are displayed.
-    3. To view users in a group, click **View**.
+    1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
+    2. In the left navigation pane, click **Organization Settings** > **Authentication**.
+    3. Click the **Groups** tab. The groups synchronized from your identity provider are displayed.
+    4. To view users in a group, click **View**.
 
 4. In TiDB Cloud, grant roles to the groups pushed from your identity provider.
 

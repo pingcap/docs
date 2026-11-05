@@ -12,6 +12,14 @@ The `ALTER TABLE.. ADD INDEX` statement adds an index to an existing table. This
 >
 > The [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md) can be used to speed up the operation of this statement.
 
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> For [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters with 4 vCPU, it is recommended to manually disable [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) to prevent resource limitations from affecting cluster stability during index creation. Disabling this setting allows indexes to be created using transactions, which reduces the overall impact on the cluster.
+
+</CustomContent>
+
 <CustomContent platform="tidb">
 
 > **Warning:**
@@ -38,11 +46,14 @@ IndexPartSpecification
 
 IndexOption
          ::= 'KEY_BLOCK_SIZE' '='? LengthNum
-           | IndexType
+           | 'USING' IndexType
            | 'WITH' 'PARSER' Identifier
            | 'COMMENT' stringLit
            | 'VISIBLE'
            | 'INVISIBLE'
+           | 'GLOBAL'
+           | 'LOCAL'
+           | 'WHERE' Expression
 
 IndexType
          ::= 'BTREE'
@@ -83,13 +94,138 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 2 rows in set (0.00 sec)
 ```
 
+## Partial indexes <span class="version-mark">New in v8.5.7 and v9.0.0</span>
+
+A partial index is an index built on a subset of rows in a table. When adding a partial index, you can specify a conditional expression, also known as a predicate, to define that subset of rows. The index contains entries only for the rows that satisfy the predicate.
+
+### Usage scenarios
+
+In the following scenarios, using partial indexes helps improve query performance or reduce index maintenance overhead:
+
+- **Selective filtering**: when you frequently query a small subset of rows based on specific conditions, you can use partial indexes. For queries that satisfy the partial index predicate, TiDB can use the partial index to avoid scanning irrelevant rows and reduce the storage space occupied by the index.
+- **Conditional uniqueness**: when you only need to enforce a uniqueness constraint on rows that satisfy specific conditions, you can use a unique partial index to avoid applying the uniqueness constraint to the entire table.
+- **Reduced DML overhead**: when many `INSERT`, `UPDATE`, or `DELETE` operations affect rows that do not need to be indexed, you can use partial indexes. Compared with maintaining a full index, maintaining a partial index can reduce index maintenance overhead.
+
+### Add partial indexes
+
+You can add a partial index by appending a `WHERE` clause to the index definition. For example:
+
+```sql
+CREATE TABLE t1 (c1 INT, c2 INT, c3 TEXT);
+ALTER TABLE t1 ADD INDEX idx1 (c1) WHERE c2 > 10;
+```
+
+You can also add a unique partial index:
+
+```sql
+ALTER TABLE t1 ADD UNIQUE INDEX idx2 (c1, c2) WHERE c3 = 'abc';
+```
+
+### Usage examples
+
+The following examples demonstrate how to use partial indexes effectively.
+
+Create a table with user data:
+
+```sql
+CREATE TABLE users (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100),
+    status VARCHAR(20),
+    created_at DATETIME,
+    score INT
+);
+```
+
+Add partial indexes for common query patterns:
+
+```sql
+ALTER TABLE users ADD INDEX idx_active_users (name) WHERE status = 'active';
+ALTER TABLE users ADD INDEX idx_high_score_users (created_at) WHERE score > 1000;
+ALTER TABLE users ADD INDEX idx_pending_status (status) WHERE status = 'pending';
+```
+
+Then the following queries can use the partial index:
+
+```sql
+mysql> EXPLAIN SELECT * FROM users WHERE status = 'active' AND name = 'John';
++-------------------------------+---------+-----------+-------------------------------------------+-------------------------------------------------------+
+| id                            | estRows | task      | access object                             | operator info                                         |
++-------------------------------+---------+-----------+-------------------------------------------+-------------------------------------------------------+
+| IndexLookUp_9                 | 1.00    | root      |                                           |                                                       |
+| ├─IndexRangeScan_6(Build)     | 10.00   | cop[tikv] | table:users, index:idx_active_users(name) | range:["John","John"], keep order:false, stats:pseudo |
+| └─Selection_8(Probe)          | 1.00    | cop[tikv] |                                           | eq(test.users.status, "active")                       |
+|   └─TableRowIDScan_7          | 10.00   | cop[tikv] | table:users                               | keep order:false, stats:pseudo                        |
++-------------------------------+---------+-----------+-------------------------------------------+-------------------------------------------------------+
+4 rows in set (0.00 sec)
+
+mysql> EXPLAIN SELECT * FROM users WHERE status = 'active' ORDER BY name;
++-------------------------------+----------+-----------+-------------------------------------------+---------------------------------+
+| id                            | estRows  | task      | access object                             | operator info                   |
++-------------------------------+----------+-----------+-------------------------------------------+---------------------------------+
+| IndexLookUp_18                | 10.00    | root      |                                           |                                 |
+| ├─IndexFullScan_15(Build)     | 10000.00 | cop[tikv] | table:users, index:idx_active_users(name) | keep order:true, stats:pseudo   |
+| └─Selection_17(Probe)         | 10.00    | cop[tikv] |                                           | eq(test.users.status, "active") |
+|   └─TableRowIDScan_16         | 10000.00 | cop[tikv] | table:users                               | keep order:false, stats:pseudo  |
++-------------------------------+----------+-----------+-------------------------------------------+---------------------------------+
+4 rows in set (0.00 sec)
+
+mysql> EXPLAIN SELECT * FROM users WHERE score > 10000 ORDER BY created_at;
++-------------------------------+----------+-----------+-----------------------------------------------------+--------------------------------+
+| id                            | estRows  | task      | access object                                       | operator info                  |
++-------------------------------+----------+-----------+-----------------------------------------------------+--------------------------------+
+| IndexLookUp_18                | 3333.33  | root      |                                                     |                                |
+| ├─IndexFullScan_15(Build)     | 10000.00 | cop[tikv] | table:users, index:idx_high_score_users(created_at) | keep order:true, stats:pseudo  |
+| └─Selection_17(Probe)         | 3333.33  | cop[tikv] |                                                     | gt(test.users.score, 10000)     |
+|   └─TableRowIDScan_16         | 10000.00 | cop[tikv] | table:users                                         | keep order:false, stats:pseudo |
++-------------------------------+----------+-----------+-----------------------------------------------------+--------------------------------+
+4 rows in set (0.00 sec)
+
+mysql> EXPLAIN SELECT * FROM users WHERE status = 'pending';
++-------------------------------+---------+-----------+-----------------------------------------------+-------------------------------------------------------------+
+| id                            | estRows | task      | access object                                 | operator info                                               |
++-------------------------------+---------+-----------+-----------------------------------------------+-------------------------------------------------------------+
+| IndexLookUp_7                 | 10.00   | root      |                                               |                                                             |
+| ├─IndexRangeScan_5(Build)     | 10.00   | cop[tikv] | table:users, index:idx_pending_status(status) | range:["pending","pending"], keep order:false, stats:pseudo |
+| └─TableRowIDScan_6(Probe)     | 10.00   | cop[tikv] | table:users                                   | keep order:false, stats:pseudo                              |
++-------------------------------+---------+-----------+-----------------------------------------------+-------------------------------------------------------------+
+3 rows in set (0.00 sec)
+```
+
+If the predicate for a query does not satisfy the conditions defined by the partial index, TiDB does not select the partial index, even with a hint. For example, the following statement cannot use the partial index `idx_high_score_users`, because the query predicate `score > 100` does not satisfy the partial index definition `score > 1000`:
+
+```sql
+mysql> EXPLAIN SELECT * FROM users USE INDEX(idx_high_score_users) WHERE score > 100 ORDER BY created_at;
++---------------------------+----------+-----------+---------------+--------------------------------+
+| id                        | estRows  | task      | access object | operator info                  |
++---------------------------+----------+-----------+---------------+--------------------------------+
+| Sort_5                    | 3333.33  | root      |               | test.users.created_at          |
+| └─TableReader_10          | 3333.33  | root      |               | data:Selection_9               |
+|   └─Selection_9           | 3333.33  | cop[tikv] |               | gt(test.users.score, 100)      |
+|     └─TableFullScan_8     | 10000.00 | cop[tikv] | table:users   | keep order:false, stats:pseudo |
++---------------------------+----------+-----------+---------------+--------------------------------+
+```
+
+### Limitations
+
+- The `WHERE` clause in partial indexes supports basic comparison operators (`=`, `!=`, `<`, `<=`, `>`, `>=`), `IS NULL`, `IS NOT NULL`, and `IN` predicates with constant values.
+- The columns and constant values in the predicate must be of the same data type.
+- The predicate can only reference columns from the same table.
+- Partial indexes cannot be created on expression indexes.
+
 ## MySQL compatibility
 
 * TiDB accepts index types such as `HASH`, `BTREE` and `RTREE` in syntax for compatibility with MySQL, but ignores them.
 * `SPATIAL` indexes are not supported.
-* TiDB supports parsing the `FULLTEXT` syntax but does not support using the `FULLTEXT` indexes.
+* TiDB Self-Managed and TiDB Cloud Dedicated support parsing the `FULLTEXT` syntax but do not support using the `FULLTEXT` indexes.
+
+    >**Note:**
+    >
+    > Currently, only {{{ .starter }}} and {{{ .essential }}} instances in certain AWS regions support [`FULLTEXT` syntax and indexes](https://docs.pingcap.com/tidbcloud/vector-search-full-text-search-sql).
+
 * Descending indexes are not supported (similar to MySQL 5.7).
 * Adding the primary key of the `CLUSTERED` type to a table is not supported. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
+* Setting a `PRIMARY KEY` or `UNIQUE INDEX` as a [global index](/global-indexes.md) with the `GLOBAL` index option is a TiDB extension for [partitioned tables](/partitioned-table.md) and is not compatible with MySQL.
 
 ## See also
 

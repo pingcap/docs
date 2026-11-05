@@ -28,16 +28,19 @@ Every additional index introduces a new KV pair for each row. If there are N ind
 
 TiDB Lightning works the best when the data source is broken down into multiple files of size around 256 MB so that the data can be processed in parallel. If each file is too large, TiDB Lightning might not respond.
 
-If the data source is CSV, and all CSV files have no fields containing newline control characters (U+000A and U+000D), you can turn on "strict format" to let TiDB Lightning automatically split the large files.
+If the data source is CSV, and all CSV files have no fields containing newline control characters (U+000A and U+000D), you can turn on "strict format" to let TiDB Lightning automatically split the large files. When you enable `strict-format`, you also need to set `mydumper.csv.terminator` to a non-empty value that matches the line terminator in your source files.
 
 ```toml
 [mydumper]
 strict-format = true
+
+[mydumper.csv]
+terminator = "\n" # Set it to "\n", "\r", or "\r\n", depending on the actual line terminator in your files.
 ```
 
 **Cause 4**: TiDB Lightning is too old.
 
-Try the latest version. Maybe there is new speed improvement.
+A newer TiDB Lightning version might improve import performance. When upgrading, it is recommended to use a TiDB Lightning version that matches the target TiDB cluster version.
 
 ## The `tidb-lightning` process suddenly quits while running in background
 

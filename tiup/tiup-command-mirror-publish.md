@@ -66,7 +66,7 @@ The meaning of each parameter is as follows:
 
 ### --hide
 
-- Specifies whether the component is hidden. If it is a hidden component, it can be seen in the result list of `tiup list -all`, but not in that of `tiup list`.
+- Specifies whether the component is hidden. If it is a hidden component, it can be seen in the result list of `tiup list --all`, but not in that of `tiup list`.
 - Data type: `STRING`
 - Default: NULL
 
@@ -82,5 +82,3 @@ The meaning of each parameter is as follows:
 - If the component owner is not authorized to modify the target component:
     - If the mirror is a remote mirror, TiUP reports the error `Error: The server refused, make sure you have access to this component`.
     - If the mirror is a local mirror, TiUP reports the error `Error: the signature is not correct`.
-
-[<< Back to the previous page - TiUP Mirror command list](/tiup/tiup-command-mirror.md#command-list)

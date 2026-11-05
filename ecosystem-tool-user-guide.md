@@ -75,7 +75,7 @@ The following are the basics of Dumpling:
 
 > **Note:**
 >
-> PingCAP previously maintained a fork of the [mydumper project](https://github.com/maxbube/mydumper) with enhancements specific to TiDB. Starting from v7.5.0, [Mydumper](https://docs.pingcap.com/tidb/v4.0/mydumper-overview) is deprecated and most of its features have been replaced by [Dumpling](/dumpling-overview.md). It is strongly recommended that you use Dumpling instead of mydumper.
+> PingCAP previously maintained a fork of the [mydumper project](https://github.com/maxbube/mydumper) with enhancements specific to TiDB. Starting from v7.5.0, [Mydumper](https://docs-archive.pingcap.com/tidb/v4.0/mydumper-overview/) is deprecated and most of its features have been replaced by [Dumpling](/dumpling-overview.md). It is strongly recommended that you use Dumpling instead of mydumper.
 
 ### Full data import - TiDB Lightning
 
@@ -91,7 +91,7 @@ The following are the basics of TiDB Lightning:
 - Data source:
     - The output files of Dumpling
     - Other compatible CSV files
-    - Parquet files exported from Amazon Aurora or Apache Hive
+    - Parquet files exported from Amazon Aurora, Apache Hive, or Snowflake
 - Supported TiDB versions: v2.1 and later versions
 - Kubernetes support: Yes. See [Quickly restore data into a TiDB cluster on Kubernetes using TiDB Lightning](https://docs.pingcap.com/tidb-in-kubernetes/stable/restore-data-using-tidb-lightning) for details.
 
@@ -123,17 +123,6 @@ The following are the basics of TiCDC:
 - Target: TiDB clusters, MySQL, Kafka, and Confluent
 - Supported TiDB versions: v4.0.6 and later versions
 
-### Incremental log replication - TiDB Binlog
-
-[TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) is a tool that collects binlog for TiDB clusters and provides nearly real-time data replication and backup. You can use it for incremental data replication between TiDB clusters, such as making a TiDB cluster the secondary cluster of the primary TiDB cluster.
-
-The following are the basics of TiDB Binlog:
-
-- Source: TiDB clusters
-- Target: TiDB clusters, MySQL, Kafka, or incremental backup files
-- Supported TiDB versions: v2.1 and later versions
-- Kubernetes support: Yes. See [TiDB Binlog Cluster Operations](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-tidb-binlog) and [TiDB Binlog Drainer Configurations on Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-tidb-binlog-drainer) for details.
-
 ### sync-diff-inspector
 
 [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md) is a tool that compares data stored in the MySQL or TiDB databases. In addition, you can also use sync-diff-inspector to repair data in the scenario where a small amount of data is inconsistent.
@@ -143,7 +132,3 @@ The following are the basics of sync-diff-inspector:
 - Source: MySQL/TiDB clusters
 - Target: MySQL/TiDB clusters
 - Supported TiDB versions: all versions
-
-## OLAP Query tool - TiSpark
-
-[TiSpark](/tispark-overview.md) is a product developed by PingCAP to address the complexiy of OLAP queries. It combines strengths of Spark, and the features of distributed TiKV clusters and TiDB to provide a one-stop Hybrid Transactional and Analytical Processing (HTAP) solution.

@@ -77,9 +77,9 @@ Warning: Unable to load '/usr/share/zoneinfo/zone.tab' as time zone. Skipping it
 Warning: Unable to load '/usr/share/zoneinfo/zone1970.tab' as time zone. Skipping it.
 ```
 
-If the downstream is a special MySQL environment (a public cloud RDS or some MySQL derivative versions) and importing the time zone using the preceding method fails, you can use the default time zone of the downstream by setting `time-zone` to an empty value, such as `time-zone=""`.
+If the downstream is a special MySQL environment (a public cloud RDS or some MySQL derivative versions) and importing the time zone using the preceding method fails, you can use the default time zone of the downstream by setting `time-zone` in the sink URI to an empty value, such as `time-zone=""`. Note that `time-zone` is only effective for `mysql` and `tidb` sinks.
 
-When using time zones in TiCDC, it is recommended to explicitly specify the time zone, such as `time-zone="Asia/Shanghai"`. Also, make sure that the `tz` specified in TiCDC server configurations and the `time-zone` specified in Sink URI are consistent with the time zone configuration of the downstream database. This prevents data inconsistency caused by inconsistent time zones.
+When using `mysql` and `tidb` sinks, it is recommended to explicitly specify the time zone, such as `time-zone="Asia/Shanghai"`. Also, make sure that the `tz` specified in TiCDC server configurations and the `time-zone` specified in Sink URI are consistent with the time zone configuration of the downstream database. This prevents data inconsistency caused by inconsistent time zones.
 
 ## How do I handle the incompatibility issue of configuration files caused by TiCDC upgrade?
 
@@ -108,20 +108,74 @@ If the result of `pd-ctl service-gc-safepoint --pd <pd-addrs>` does not have `gc
 
 ## When I use TiCDC to replicate messages to Kafka, Kafka returns the `Message was too large` error. Why?
 
-For TiCDC v4.0.8 or earlier versions, you cannot effectively control the size of the message output to Kafka only by configuring the `max-message-bytes` setting for Kafka in the Sink URI. To control the message size, you also need to increase the limit on the bytes of messages to be received by Kafka. To add such a limit, add the following configuration to the Kafka server configuration.
+To resolve this error, check both `max-message-bytes` in the TiCDC Kafka Sink URI and `max.message.bytes` for the receiving Kafka topics to ensure that the settings are compatible.
 
+TiCDC limits the message size sent to Kafka with `max-message-bytes`, while Kafka applies the `max.message.bytes` limit to record batches in the receiving topic (after compression if compression is enabled). TiCDC also adjusts the effective sending limit based on the default topic's `max.message.bytes`, leaving room for protocol overhead. If you configure [topic dispatchers](/ticdc/ticdc-sink-to-kafka.md#topic-dispatchers), TiCDC might send data to another topic. The receiving topic must also permit messages of that size. Changing only the Sink URI or one topic can still result in a message size error.
+
+First, run `cdc cli changefeed query` to find the default topic in the current Sink URI. Check the topic dispatch rules in the changefeed configuration to identify all topics that might receive messages:
+
+```shell
+cdc cli changefeed query --server=http://127.0.0.1:8300 --changefeed-id=test-cf
 ```
-# The maximum byte number of a message that the broker receives
-message.max.bytes=2147483648
-# The maximum byte number of a message that the broker copies
-replica.fetch.max.bytes=2147483648
-# The maximum message byte number that the consumer side reads
-fetch.message.max.bytes=2147483648
+
+The following example sets the limit to 10 MiB (`10485760` bytes) for the default topic `default-topic` and one routed topic `routed-topic`. Determine the target limit based on your actual message sizes and existing configuration. If the existing limit is higher, do not lower it to the example value. Replace the Kafka address, topic names, and limit values in the commands with your actual values. If topic dispatchers route messages to multiple topics, update every possible receiving topic. If you have not configured a topic dispatcher, you only need to update the default topic.
+
+```shell
+bin/kafka-configs.sh --bootstrap-server localhost:9092 \
+  --entity-type topics --entity-name default-topic \
+  --alter --add-config max.message.bytes=10485760
+
+bin/kafka-configs.sh --bootstrap-server localhost:9092 \
+  --entity-type topics --entity-name routed-topic \
+  --alter --add-config max.message.bytes=10485760
 ```
+
+Query the default topic and all routed topics that might receive messages to confirm that each topic's `max.message.bytes` has been updated to the target value. The following commands correspond to the preceding example. If you have not configured a topic dispatcher, query only the default topic.
+
+```shell
+bin/kafka-configs.sh --bootstrap-server localhost:9092 \
+  --entity-type topics --entity-name default-topic --describe
+
+bin/kafka-configs.sh --bootstrap-server localhost:9092 \
+  --entity-type topics --entity-name routed-topic --describe
+```
+
+Then update the changefeed Sink URI. The `--sink-uri` option takes a complete URI, so preserve the existing protocol, authentication settings, and other parameters. The following example sets `max-message-bytes` to `10485760` (10 MiB). Replace this value with your target limit.
+
+If the changefeed is running, pause it first, then query it and confirm that its state is `stopped`. If the changefeed is already in the `stopped` or `failed` state, you can proceed directly to the update command.
+
+```shell
+cdc cli changefeed pause --server=http://127.0.0.1:8300 --changefeed-id=test-cf
+```
+
+```shell
+cdc cli changefeed query --server=http://127.0.0.1:8300 --changefeed-id=test-cf
+```
+
+Run the update command, review the configuration differences in the output, and confirm the changes when prompted:
+
+```shell
+cdc cli changefeed update --server=http://127.0.0.1:8300 --changefeed-id=test-cf \
+  --sink-uri='kafka://127.0.0.1:9092/default-topic?protocol=canal-json&max-message-bytes=10485760'
+```
+
+After confirming that the update succeeds, resume the changefeed:
+
+```shell
+cdc cli changefeed resume --server=http://127.0.0.1:8300 --changefeed-id=test-cf
+```
+
+After resuming the changefeed, run the following command to confirm that the Sink URI in the query result contains the updated `max-message-bytes` parameter and that the changefeed state returns to `normal`:
+
+```shell
+cdc cli changefeed query --server=http://127.0.0.1:8300 --changefeed-id=test-cf
+```
+
+Repeat the query after an interval to confirm that `checkpoint-ts` continues to advance, and check the TiCDC logs for any recurring message size errors.
 
 ## How can I find out whether a DDL statement fails to execute in downstream during TiCDC replication? How to resume the replication?
 
-If a DDL statement fails to execute, the replication task (changefeed) automatically stops. The checkpoint-ts is the DDL statement's finish-ts minus one. If you want TiCDC to retry executing this statement in the downstream, use `cdc cli changefeed resume` to resume the replication task. For example:
+If a DDL statement fails to execute, the replication task (changefeed) automatically stops. The checkpoint-ts is the DDL statement's finish-ts. If you want TiCDC to retry executing this statement in the downstream, use `cdc cli changefeed resume` to resume the replication task. For example:
 
 {{< copyable "shell-regular" >}}
 
@@ -131,7 +185,15 @@ cdc cli changefeed resume -c test-cf --server=http://127.0.0.1:8300
 
 If you want to skip this DDL statement that goes wrong, set the start-ts of the changefeed to the checkpoint-ts (the timestamp at which the DDL statement goes wrong) plus one, and then run the `cdc cli changefeed create` command to create a new changefeed task. For example, if the checkpoint-ts at which the DDL statement goes wrong is `415241823337054209`, run the following commands to skip this DDL statement:
 
-{{< copyable "shell-regular" >}}
+To skip this DDL statement that goes wrong, you can configure the `ignore-txn-start-ts` parameter to skip the transactions corresponding to the specified `start-ts`. For example:
+
+1. Search the TiCDC log for the `apply job` field, and identify the `start-ts` of the DDLs that are taking a long time.
+2. Modify the changefeed configuration. Add the above `start-ts` to the `ignore-txn-start-ts` configuration item.
+3. Resume the suspended changefeed.
+
+> **Note:**
+>
+> Although setting the changefeed `start-ts` to the value of `checkpoint-ts` (at the time of the error) plus one and then recreating the task can skip the DDL statement, it can also cause TiCDC to lose the DML data change at the time of `checkpointTs+1`. Therefore, this operation is strictly prohibited in production environments.
 
 ```shell
 cdc cli changefeed remove --server=http://127.0.0.1:8300 --changefeed-id simple-replication-task

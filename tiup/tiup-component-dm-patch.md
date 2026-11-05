@@ -45,7 +45,7 @@ You need to pack the binary package required for this command in advance accordi
 
 ### -N, --node
 
-- Specifies the nodes to be replaced. The value of this option is a comma-separated list of node IDs. You can get the node IDs from the first column of the cluster status table returned by the `[tiup dm display](/tiup/tiup-component-dm-display.md)` command.
+- Specifies the nodes to be replaced. The value of this option is a comma-separated list of node IDs. You can get the node IDs from the first column of the cluster status table returned by the [`tiup dm display`](/tiup/tiup-component-dm-display.md) command.
 - Data type: `STRING`
 - If this option is not specified, TiUP selects all nodes to replace by default.
 
@@ -55,7 +55,7 @@ You need to pack the binary package required for this command in advance accordi
 
 ### -R, --role
 
-- Specifies the roles to be replaced. The value of this option is a comma-separated list of the roles of the nodes. You can get the roles of the nodes from the second column of the cluster status table returned by the `[tiup dm display](/tiup/tiup-component-dm-display.md)` command.
+- Specifies the roles to be replaced. The value of this option is a comma-separated list of the roles of the nodes. You can get the roles of the nodes from the second column of the cluster status table returned by the [`tiup dm display`](/tiup/tiup-component-dm-display.md) command.
 - Data type: `STRING`
 - If this option is not specified, TiUP selects all roles to replace by default.
 
@@ -79,7 +79,7 @@ The following example shows how to apply `v5.3.0-hotfix` to the `v5.3.0` cluster
 
 > **Note:**
 >
-> Hotfix is used only for emergency fixes. Its daily maintenance is complicated. It is recommend that you upgrade the DM cluster to an official version as soon as it is released.
+> Hotfix is used only for emergency fixes. Its daily maintenance is complicated. It is recommended that you upgrade the DM cluster to an official version as soon as it is released.
 
 ### Preparations
 
@@ -200,5 +200,3 @@ Go Version: go version go1.16.4 linux/amd64
     172.16.100.21:9090  prometheus           172.16.100.21  9090       linux/x86_64  Up         /home/tidb/dm/data/prometheus-9090    /home/tidb/dm/deploy/prometheus-9090
     Total nodes: 5
     ```
-
-[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)

@@ -7,11 +7,11 @@ summary: Learn the concept, user scenarios, usages, limitations, and compatibili
 
 TiDB supports the clustered index feature since v5.0. This feature controls how data is stored in tables containing primary keys. It provides TiDB the ability to organize tables in a way that can improve the performance of certain queries.
 
-The term _clustered_ in this context refers to the _organization of how data is stored_ and not _a group of database servers working together_. Some database management systems refer to clustered indexes as _index-organized tables_ (IOT).
+The term _clustered_ in this context refers to the _organization of how data is stored_ and not _a group of database servers working together_. Some database management systems refer to clustered index tables as _index-organized tables_ (IOT).
 
 Currently, tables containing primary keys in TiDB are divided into the following two categories:
 
-- `NONCLUSTERED`: The primary key of the table is non-clustered index. In tables with non-clustered indexes, the keys for row data consist of internal `_tidb_rowid` implicitly assigned by TiDB. Because primary keys are essentially unique indexes, tables with non-clustered indexes need at least two key-value pairs to store a row, which are:
+- `NONCLUSTERED`: The primary key of the table is non-clustered index. In tables with non-clustered indexes, the keys for row data consist of internal [`_tidb_rowid`](/tidb-rowid.md) values implicitly assigned by TiDB. Because primary keys are essentially unique indexes, tables with non-clustered indexes need at least two key-value pairs to store a row, which are:
     - `_tidb_rowid` (key) - row data (value)
     - Primary key data (key) - `_tidb_rowid` (value)
 - `CLUSTERED`: The primary key of the table is clustered index. In tables with clustered indexes, the keys for row data consist of primary key data given by the user. Therefore, tables with clustered indexes need only one key-value pair to store a row, which is:
@@ -37,7 +37,7 @@ On the other hand, tables with clustered indexes have certain disadvantages. See
 
 ## Usages
 
-## Create a table with clustered indexes
+### Create a table with clustered indexes
 
 Since TiDB v5.0, you can add non-reserved keywords `CLUSTERED` or `NONCLUSTERED` after `PRIMARY KEY` in a `CREATE TABLE` statement to specify whether the table's primary key is a clustered index. For example:
 
@@ -106,7 +106,7 @@ mysql> SHOW CREATE TABLE t;
 | Table | Create Table                                                                                                                                                                                      |
 +-------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | t     | CREATE TABLE `t` (
-  `a` bigint(20) NOT NULL,
+  `a` bigint NOT NULL,
   `b` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`a`) /*T![clustered_index] CLUSTERED */
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin |
@@ -143,19 +143,10 @@ mysql> SELECT TIDB_PK_TYPE FROM information_schema.tables WHERE table_schema = '
 Currently, there are several different types of limitations for the clustered index feature. See the following:
 
 - Situations that are not supported and not in the support plan:
-    - Using clustered indexes together with the attribute [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md) is not supported. Also, the attribute [`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions) does not take effect on tables with clustered indexes.
+    - Using clustered indexes together with the attribute [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md) is not supported. Also, the attribute [`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions) does not take effect on tables with clustered indexes that are not [`AUTO_RANDOM`](/auto-random.md).
     - Downgrading tables with clustered indexes is not supported. If you need to downgrade such tables, use logical backup tools to migrate data instead.
 - Situations that are not supported yet but in the support plan:
     - Adding, dropping, and altering clustered indexes using `ALTER TABLE` statements are not supported.
-- Limitations for specific versions:    
-    - In v5.0, using the clustered index feature together with TiDB Binlog is not supported. After TiDB Binlog is enabled, TiDB only allows creating a single integer column as the clustered index of a primary key. TiDB Binlog does not replicate data changes (such as insertion, deletion, and update) on existing tables with clustered indexes to the downstream. If you need to replicate tables with clustered indexes to the downstream, upgrade your cluster to v5.1 or use [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) for replication instead.
-
-After TiDB Binlog is enabled, if the clustered index you create is not a single integer primary key, TiDB returns the following error:
-
-```sql
-mysql> CREATE TABLE t (a VARCHAR(255) PRIMARY KEY CLUSTERED);
-ERROR 8200 (HY000): Cannot create clustered index table when the binlog is ON
-```
 
 If you use clustered indexes together with the attribute `SHARD_ROW_ID_BITS`, TiDB reports the following error:
 
@@ -224,3 +215,9 @@ The attribute [`AUTO_RANDOM`](/auto-random.md) can only be used on clustered ind
 mysql> create table t (a bigint primary key nonclustered auto_random);
 ERROR 8216 (HY000): Invalid auto random: column a is not the integer primary key, or the primary key is nonclustered
 ```
+
+## Related resources
+
+<RelatedResources>
+  <ResourceCard title="TiDB SQL Tuning Lab 1: Clustered and Non-Clustered Indexes" type="lab" link="https://labs.tidb.io/labs/dba_307_lab_ff0" imgSrc="https://lab-static.pingcap.com/quick-demo/307-01.png" duration="90 mins" />
+</RelatedResources>

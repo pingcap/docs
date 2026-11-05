@@ -69,7 +69,7 @@ In v5.0, the key new features or improvements are as follows:
 
 ### Others
 
-+ Before the upgrade, check the value of the TiDB configuration [`feedback-probability`](https://docs.pingcap.com/tidb/v5.0/tidb-configuration-file#feedback-probability). If the value is not 0, the "panic in the recoverable goroutine" error will occur after the upgrade, but this error does not affect the upgrade.
++ Before the upgrade, check the value of the TiDB configuration [`feedback-probability`](https://docs-archive.pingcap.com/tidb/v5.0/tidb-configuration-file#feedback-probability). If the value is not 0, the "panic in the recoverable goroutine" error will occur after the upgrade, but this error does not affect the upgrade.
 + Forbid conversion between `VARCHAR` type and `CHAR` type during the column type change to avoid data correctness issues.
 
 ## New features
@@ -177,7 +177,7 @@ Currently, the main features that the MPP mode does not support are as follows (
 
 When you are designing table structures or analyzing database behaviors, it is recommended to use the clustered index feature if you find that some columns with primary keys are often grouped and sorted, queries on these columns often return a certain range of data or a small amount of data with different values, and the corresponding data does not cause read or write hotspot issues.
 
-Clustered indexes, also known as _index-organized tables_ in some database management systems, is a storage structure associated with the data of a table. When creating a clustered index, you can specify one or more columns from the table as the keys for the index. TiDB stores these keys in a specific structure, which allows TiDB to quickly and efficiently find the rows associated with the keys, thus improves the performance of querying and writing data.
+Clustered indexes is a storage structure associated with the data of a table. Some database management systems refer to clustered index tables as _index-organized tables_. When creating a clustered index, you can specify one or more columns from the table as the keys for the index. TiDB stores these keys in a specific structure, which allows TiDB to quickly and efficiently find the rows associated with the keys, thus improves the performance of querying and writing data.
 
 When the clustered index feature is enabled, the TiDB performance improves significantly (for example in the TPC-C tpmC test, the performance of TiDB, with clustered index enabled, improves by 39%) in the following cases:
 

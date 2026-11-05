@@ -17,11 +17,11 @@ Currently, the `SHOW STATS_BUCKETS` statement returns the following columns:
 | `Column_name` | The column name (when `is_index` is `0`) or the index name (when `is_index` is `1`) |
 | `Is_index` | Whether it is an index column or not |
 | `Bucket_id` | The ID of a bucket |
-| `Count` | The number of all the values that falls on the bucket and the previous buckets |
+| `Count` | The number of all the values that fall on the bucket and the previous buckets |
 | `Repeats` | The occurrence number of the maximum value |
 | `Lower_bound` | The minimum value |
 | `Upper_bound` | The maximum value |
-| `Ndv` | The number of different values in the bucket. When `tidb_analyze_version` = `1`, `Ndv` is always `0`, which has no actual meaning. |
+| `Ndv` | The number of distinct values in the bucket. This field is deprecated and always shows `0` due to its inaccurate value. |
 
 ## Synopsis
 

@@ -25,7 +25,7 @@ tiup cluster reload <cluster-name> [flags]
 
 ### --transfer-timeout
 
-- When restarting PD or TiKV, the leader of the restarted node is migrated to other nodes first, and the migration process takes some time. You can set the maximum wait time (in seconds) by setting `-transfer-timeout`. After the timeout, the service can be restarted directly without waiting.
+- When restarting PD or TiKV, the leader of the restarted node is migrated to other nodes first, and the migration process takes some time. You can set the maximum wait time (in seconds) by setting `--transfer-timeout`. After the timeout, the service can be restarted directly without waiting.
 - Data type: `UINT`
 - Default: 600
 
@@ -79,8 +79,30 @@ After you specify the `--skip-restart` option, it only refreshes the configurati
 - Data type: `BOOLEAN`
 - Default: false
 
+### --pre-restart-script
+
+> **Warning:**
+>
+> This option is experimental and is not recommended for production deployments.
+
+- Runs a script before the reload.
+- Data type: `STRINGS`
+- This option specifies the path of a script to be run on the node that is to be reloaded. It does not take effect when `--skip-restart` is set to `true`.
+
+### --post-restart-script
+
+> **Warning:**
+>
+> This option is experimental and is not recommended for production deployments.
+
+- Runs a script after the reload.
+- Data type: `STRINGS`
+- This option specifies the path of a script to be run after the reload of a node. It does not take effect when `--skip-restart` is set to `true`.
+
 ## Output
 
 The execution log of the tiup-cluster.
 
-[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
+## See also
+
+- [TiUP Common Operations](/maintain-tidb-using-tiup.md)

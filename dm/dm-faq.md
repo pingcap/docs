@@ -147,7 +147,7 @@ You need to check the error message and log files to further analyze this error.
 Check the configuration items `block-allow-list` and `table-route`:
 
 - You need to configure the names of upstream databases and tables under `block-allow-list`. You can add "~" before `do-tables` to use regular expressions to match names.
-- `table-route` uses wildcard characters instead of regular expressions to match table names. For example, `table_parttern_[0-63]` only matches 7 tables, from `table_parttern_0` to `table_pattern_6`.
+- `table-route` uses wildcard characters instead of regular expressions to match table names. For example, `table_pattern_[0-63]` only matches 7 tables, from `table_pattern_0` to `table_pattern_6`.
 
 ## Why does the `replicate lag` monitor metric show no data when DM is not replicating from upstream?
 
@@ -165,7 +165,7 @@ You need to first check and confirm the following things:
 - The data is not inserted manually or by other replication programs.
 - No DML filter associated with this table is configured.
 
-To facilitate troubleshooting, you can first collect general log files of the downstream TiDB instance and then ask for technical support at [TiDB Community slack channel](https://tidbcommunity.slack.com/archives/CH7TTLL7P). The following example shows how to collect general log files:
+To facilitate troubleshooting, you can first collect general log files of the downstream TiDB instance and then ask for technical support at [TiDB Community Slack channel](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=docs). The following example shows how to collect general log files:
 
 ```bash
 # Enable general log collection
@@ -231,7 +231,7 @@ If this issue occurs, you need to pause the task, delete all migrated data in th
 
 You can avoid this issue in advance by configuring in the following ways:
 
-1. Increase the value of `expire_logs_days` in the upstream MySQL database to avoid wrongly purging needed binlog files before the full migration task completes. If the data volume is large, it is recommended to use dumpling and TiDB-Lightning at the same time to speed up the task.
+1. Increase the value of `expire_logs_days` in the upstream MySQL database to avoid wrongly purging needed binlog files before the full migration task completes. If the data volume is large, it is recommended to use Dumpling and TiDB Lightning at the same time to speed up the task.
 2. Enable the relay log feature for this task so that DM can read data from relay logs even though the binlog position is purged.
 
 ## Why does the Grafana dashboard of a DM cluster display `failed to fetch dashboard` if the cluster is deployed using TiUP v1.3.0 or v1.3.1?
@@ -243,7 +243,7 @@ This is a known bug of TiUP, which is fixed in TiUP v1.3.2. The following are tw
     2. Scale in and then scale out Grafana nodes in the cluster to restart the Grafana service.
 - Solution two:
     1. Back up the `deploy/grafana-$port/bin/public` folder.
-    2. Download the [TiUP DM offline package](https://download.pingcap.org/tidb-dm-v2.0.1-linux-amd64.tar.gz) and unpack it.
+    2. Download the [TiUP DM offline package](https://download.pingcap.com/tidb-dm-v2.0.1-linux-amd64.tar.gz) and unpack it.
     3. Unpack the `grafana-v4.0.3-**.tar.gz` in the offline package.
     4. Replace the folder `deploy/grafana-$port/bin/public` with the `public` folder in `grafana-v4.0.3-**.tar.gz`.
     5. Execute `tiup dm restart $cluster_name -R grafana` to restart the Grafana service.
@@ -369,7 +369,7 @@ When using dmctl execute commands, you might find the connection to DM master fa
 
 In this case, you can check the environment variable `https_proxy` (note that it is **https**). If this variable is configured, dmctl automatically connects the host and port specified by `https_proxy`. If the host does not have a corresponding `proxy` forwarding service, the connection fails.
 
-To solve this issue, check whether `https_proxy` is mandatory. If not, cancel the setting. Otherwise, add the environment variable setting `https_proxy="" ./dmctl --master-addr "x.x.x.x:8261"` before the oringial dmctl commands.
+To solve this issue, check whether `https_proxy` is mandatory. If not, cancel the setting. Otherwise, add the environment variable setting `https_proxy="" ./dmctl --master-addr "x.x.x.x:8261"` before the original dmctl commands.
 
 > **Note:**
 >

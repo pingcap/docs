@@ -1,6 +1,7 @@
 ---
 title: Paginate Results
 summary: Introduce paginate result feature in TiDB.
+aliases: ['/tidb/stable/dev-guide-paginate-results/','/tidb/dev/dev-guide-paginate-results/','/tidbcloud/dev-guide-paginate-results/']
 ---
 
 # Paginate Results
@@ -306,28 +307,36 @@ The result is as follows:
 To delete all rating records on page 1, replace the `start_key` and `end_key` with values of page 1 in the above result:
 
 ```sql
-SELECT * FROM ratings
-WHERE
-    (book_id > 268996 AND book_id < 140982742)
-    OR (
-        book_id = 268996 AND user_id >= 92104804
+SELECT *
+FROM ratings
+WHERE (
+        268996 = 140982742
+        AND book_id = 268996
+        AND user_id >= 92104804
+        AND user_id <= 374645100
     )
     OR (
-        book_id = 140982742 AND user_id <= 374645100
+        268996 != 140982742
+        AND (
+            (
+                book_id > 268996
+                AND book_id < 140982742
+            )
+            OR (
+                book_id = 268996
+                AND user_id >= 92104804
+            )
+            OR (
+                book_id = 140982742
+                AND user_id <= 374645100
+            )
+        )
     )
 ORDER BY book_id, user_id;
 ```
 
 ## Need help?
 
-<CustomContent platform="tidb">
-
-Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](/support.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](https://support.pingcap.com/).
-
-</CustomContent>
+- Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs).
+- [Submit a support ticket for TiDB Cloud](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [Submit a support ticket for TiDB Self-Managed](/support.md)

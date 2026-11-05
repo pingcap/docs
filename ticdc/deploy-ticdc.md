@@ -9,12 +9,7 @@ This document describes how to deploy and maintain a TiCDC cluster, including th
 
 ## Software and hardware recommendations
 
-In production environments, the recommendations of software and hardware for TiCDC are as follows:
-
-| Linux OS       | Version         |
-| :----------------------- | :----------: |
-| Red Hat Enterprise Linux | 7.3 or later versions   |
-| CentOS                   | 7.3 or later versions   |
+In production environments, the recommendations of hardware for TiCDC are as follows:
 
 | CPU | Memory | Disk | Network | Number of TiCDC cluster instances (minimum requirements for production environment) |
 | :--- | :--- | :--- | :--- | :--- |
@@ -38,7 +33,7 @@ cdc_servers:
 
 More references:
 
-- For detailed operations, see [Edit the initialization configuration file](/production-deployment-using-tiup.md#step-3-initialize-cluster-topology-file).
+- For detailed operations, see [Edit the initialization configuration file](/production-deployment-using-tiup.md#step-3-initialize-the-cluster-topology-file).
 - For detailed configurable fields, see [Configure `cdc_servers` using TiUP](/tiup/tiup-cluster-topology-reference.md#cdc_servers).
 - For detailed steps to deploy a TiDB cluster, see [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md).
 
@@ -46,7 +41,7 @@ More references:
 >
 > Before installing TiCDC, ensure that you have [manually configured the SSH mutual trust and sudo without password](/check-before-deployment.md#manually-configure-the-ssh-mutual-trust-and-sudo-without-password) between the TiUP control machine and the TiCDC host.
 
-## Add or scale out TiCDC to an existing TiDB cluster using TiUP
+## Add or scale out TiCDC to an existing {{{ .tidb }}} cluster using TiUP {#add-or-scale-out-ticdc}
 
 The method of scaling out a TiCDC cluster is similar to that of deploying one. It is recommended to use TiUP to perform the scale-out.
 
@@ -95,7 +90,7 @@ tiup cluster upgrade <cluster-name> <version> --transfer-timeout 600
 
 > **Note:**
 >
-> In the preceding command, you need to replace `<cluster-name>` and `<version>` with the actual cluster name and cluster version. For example, the version can be v8.2.0.
+> In the preceding command, you need to replace `<cluster-name>` and `<version>` with the actual cluster name and cluster version. For example, the version can be v8.5.0.
 
 ### Upgrade cautions
 
@@ -103,9 +98,9 @@ When you upgrade a TiCDC cluster, you need to pay attention to the following:
 
 - TiCDC v4.0.2 reconfigured `changefeed`. For details, see [Configuration file compatibility notes](/ticdc/ticdc-compatibility.md#cli-and-configuration-file-compatibility).
 - If you encounter any problem during the upgrade, you can refer to [upgrade FAQs](/upgrade-tidb-using-tiup.md#faq) for solutions.
-- Since v6.3.0, TiCDC supports rolling upgrade. During the upgrade, the replication latency is stable and does not fluctuate significantly. Rolling upgrade takes effect automatically if the following conditions are met:
+- Since v6.3.0, TiCDC supports rolling upgrades. You can directly perform a rolling upgrade between minor versions (for example, v8.5.0 -> v8.5.3 is a minor version upgrade, while v8.1.x -> v8.5.x is a major version upgrade). For the TiCDC classic architecture, do not run changefeeds during a cross-major-version upgrade. Pause changefeeds before upgrading the classic architecture. The new TiCDC architecture supports running changefeeds during the rolling upgrade process. For more information, see [Compatibility notes for rolling upgrades from earlier TiCDC versions](/ticdc/ticdc-compatibility.md#compatibility-notes-for-upgrading-from-earlier-versions). Rolling upgrade takes effect automatically if the following conditions are met:
 
-- TiCDC is v6.3.0 or later.
+    - TiCDC is v6.3.0 or later.
     - TiUP is v1.11.3 or later.
     - At least two TiCDC instances are running in the cluster.
 
@@ -128,23 +123,21 @@ This section describes how to use the [`tiup cluster edit-config`](/tiup/tiup-co
       pd: {}
       tiflash: {}
       tiflash-learner: {}
-      pump: {}
-      drainer: {}
       cdc:
         gc-ttl: 172800
     ```
 
     In the preceding command, `gc-ttl` is set to 48 hours.
 
-3. Run the `tiup cluster reload -R cdc` command to reload the configuration.
+3. Run the `tiup cluster reload <cluster-name> -R cdc` command to reload the configuration.
 
 ## Stop and start TiCDC using TiUP
 
 You can use TiUP to easily stop and start TiCDC nodes. The commands are as follows:
 
-- Stop TiCDC: `tiup cluster stop -R cdc`
-- Start TiCDC: `tiup cluster start -R cdc`
-- Restart TiCDC: `tiup cluster restart -R cdc`
+- Stop TiCDC: `tiup cluster stop <cluster-name> -R cdc`
+- Start TiCDC: `tiup cluster start <cluster-name> -R cdc`
+- Restart TiCDC: `tiup cluster restart <cluster-name> -R cdc`
 
 ## Enable TLS for TiCDC
 
@@ -152,7 +145,7 @@ See [Enable TLS Between TiDB Components](/enable-tls-between-components.md).
 
 ## View TiCDC status using the command-line tool
 
-Run the following command to view the TiCDC cluster status. Note that you need to replace `v<CLUSTER_VERSION>` with the TiCDC cluster version, such as `v8.2.0`:
+Run the following command to view the TiCDC cluster status. Note that you need to replace `v<CLUSTER_VERSION>` with the TiCDC cluster version, such as `v8.5.0`:
 
 ```shell
 tiup cdc:v<CLUSTER_VERSION> cli capture list --server=http://10.0.10.25:8300

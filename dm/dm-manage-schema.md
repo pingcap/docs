@@ -15,7 +15,7 @@ To deal with some special occasions, or to handle migration interruptions caused
 
 The internal table schema comes from the following sources:
 
-- For full data migration (`task-mode=all`), the migration task goes through three stages: dump/load/sync, which means full export, full import, and incremental replication. In the dump stage, DM exports the table schema information along with the data and automatically creates the corresponding table in the downstream. In the sync stage, this table schema is used as the starting table scheme for incremental replication.
+- For full data migration (`task-mode=all`), the migration task goes through three stages: dump/load/sync, which means full export, full import, and incremental replication. In the dump stage, DM exports the table schema information along with the data and automatically creates the corresponding table in the downstream. In the sync stage, this table schema is used as the starting table schema for incremental replication.
 - In the sync stage, when DM handles DDL statements such as `ALTER TABLE`, it updates the internal table schema at the same time.
 - If the task is an incremental migration (`task-mode=incremental`), in which the downstream has completed creating the table to be migrated, DM obtains the table schema information from the downstream database. This behavior varies with DM versions.
 
@@ -124,7 +124,7 @@ binlog-schema list -s mysql-replica-01 task_single db_single t1
     "sources": [
         {
             "result": true,
-            "msg": "CREATE TABLE `t1` ( `c1` int(11) NOT NULL, `c2` int(11) DEFAULT NULL, PRIMARY KEY (`c1`)) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin",
+            "msg": "CREATE TABLE `t1` ( `c1` int NOT NULL, `c2` int DEFAULT NULL, PRIMARY KEY (`c1`)) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin",
             "source": "mysql-replica-01",
             "worker": "127.0.0.1:8262"
         }
@@ -163,8 +163,8 @@ If you want to set the table schema of the ``` `db_single`.`t1` ``` table corres
 
 ```sql
 CREATE TABLE `t1` (
-    `c1` int(11) NOT NULL,
-    `c2` bigint(11) DEFAULT NULL,
+    `c1` int NOT NULL,
+    `c2` bigint DEFAULT NULL,
     PRIMARY KEY (`c1`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin
 ```
@@ -174,7 +174,7 @@ Save the `CREATE TABLE` statement above as a file (for example, `db_single.t1-sc
 {{< copyable "shell-regular" >}}
 
 ```bash
-operate-schema set -s mysql-replica-01 task_single -d db_single -t t1 db_single.t1-schema.sql
+binlog-schema update -s mysql-replica-01 task_single db_single t1 db_single.t1-schema.sql
 ```
 
 ```

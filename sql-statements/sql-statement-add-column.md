@@ -29,9 +29,9 @@ ColumnType
 ColumnOption
          ::= 'NOT'? 'NULL'
            | 'AUTO_INCREMENT'
-           | 'PRIMARY'? 'KEY' ( 'CLUSTERED' | 'NONCLUSTERED' )?
-           | 'UNIQUE' 'KEY'?
-           | 'DEFAULT' ( NowSymOptionFraction | SignedLiteral | NextValueForSequence )
+           | 'PRIMARY'? 'KEY' ( 'CLUSTERED' | 'NONCLUSTERED' )? ( 'GLOBAL' | 'LOCAL' )?
+           | 'UNIQUE' 'KEY'? ( 'GLOBAL' | 'LOCAL' )?
+           | 'DEFAULT' DefaultValueExpr
            | 'SERIAL' 'DEFAULT' 'VALUE'
            | 'ON' 'UPDATE' NowSymOptionFraction
            | 'COMMENT' stringLit
@@ -42,6 +42,13 @@ ColumnOption
            | 'COLUMN_FORMAT' ColumnFormat
            | 'STORAGE' StorageMedia
            | 'AUTO_RANDOM' ( '(' LengthNum ')' )?
+
+DefaultValueExpr ::=
+    NowSymOptionFractionParentheses
+|   SignedLiteral
+|   NextValueForSequenceParentheses
+|   BuiltinFunction
+|   '(' SignedLiteral ')'
 ```
 
 ## Examples
@@ -89,6 +96,7 @@ mysql> SELECT * FROM t1;
 * Adding a new column and setting it to the `PRIMARY KEY` is not supported.
 * Adding a new column and setting it to `AUTO_INCREMENT` is not supported.
 * There are limitations on adding generated columns, refer to: [generated column limitations](/generated-columns.md#limitations).
+* Setting a [global index](/global-indexes.md) by specifying `PRIMARY KEY` or `UNIQUE INDEX` as `GLOBAL` when you add a new column is a TiDB extension for [partitioned tables](/partitioned-table.md) and is not compatible with MySQL.
 
 ## See also
 

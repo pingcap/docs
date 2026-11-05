@@ -7,6 +7,10 @@ summary: This document describes monitoring and alert for backup and restore, in
 
 This document describes the monitoring and alert of the backup and restore feature, including how to deploy monitoring components, monitoring metrics, and common alerts.
 
+## Snapshot backup and restore monitoring
+
+To view the snapshot backup and restore metrics, go to the [**TiKV-Details** > **Backup & Import** dashboard](/grafana-tikv-dashboard.md#backup--import) in Grafana.
+
 ## Log backup monitoring
 
 Log backup supports using [Prometheus](https://prometheus.io/) to collect monitoring metrics. Currently all monitoring metrics are built into TiKV.

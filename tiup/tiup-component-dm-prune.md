@@ -5,7 +5,7 @@ summary: When scaling in the cluster, a small amount of metadata in etcd may not
 
 # tiup dm prune
 
-When you scale in the cluster(/tiup/tiup-component-dm-scale-in.md), a small amount of metadata in etcd is not cleaned up, which usually causes no problem. If you need to clean up the metadata, you can manually execute the `tiup dm prune` command.
+When you [scale in the cluster](/tiup/tiup-component-dm-scale-in.md), a small amount of metadata in etcd is not cleaned up, which usually causes no problem. If you need to clean up the metadata, you can manually execute the `tiup dm prune` command.
 
 ## Syntax
 
@@ -24,5 +24,3 @@ tiup dm prune <cluster-name> [flags]
 ## Output
 
 The log of the cleanup process.
-
-[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)

@@ -6,7 +6,7 @@ aliases: ['/docs/dev/tiup/tiup-troubleshooting-guide/']
 
 # TiUP Troubleshooting Guide
 
-This document introduces some common issues when you use TiUP and the troubleshooting methods. If this document does not include the issues you bump into, [file a new issue](https://github.com/pingcap/tiup/issues) in the Github TiUP repository.
+This document introduces some common issues when you use TiUP and the troubleshooting methods. If this document does not include the issues you bump into, [file a new issue](https://github.com/pingcap/tiup/issues) in the GitHub TiUP repository.
 
 ## Troubleshoot TiUP commands
 

@@ -7,21 +7,81 @@ summary: Learn about compatibility issues of TiCDC and how to handle them.
 
 This section describes compatibility issues related to TiCDC and how to handle them.
 
-<!--
-## component compatibility matrix
+## Compatibility between TiCDC new architecture and TiDB clusters
 
-TODO
+The TiCDC new architecture supports TiDB clusters of v7.5.0 and later. For special compatibility notes, see [Compatibility](/ticdc/ticdc-architecture.md#compatibility).
 
-## feature compatibility matrix
+## Compatibility with TiDB Lightning
 
-TODO
--->
+[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) provides two data import modes: [logical import mode](/tidb-lightning/tidb-lightning-logical-import-mode.md) and [physical import mode](/tidb-lightning/tidb-lightning-physical-import-mode.md). This section describes the compatibility of these modes with TiCDC and the steps to use TiDB Lightning and TiCDC together in a cluster.
+
+In the logical import mode, TiDB Lightning imports data by executing SQL statements. This mode is compatible with TiCDC. To use TiDB Lightning's logical import mode with TiCDC for data replication, perform the following steps:
+
+1. Create a changefeed. For more information, see [Create a replication task](/ticdc/ticdc-manage-changefeed.md#create-a-replication-task).
+2. Start TiDB Lightning and import data using the logical import mode. For more information, see [Use logical import mode](/tidb-lightning/tidb-lightning-logical-import-mode-usage.md).
+
+In the physical import mode, TiDB Lightning imports data by inserting SST files into TiKV. TiCDC is not compatible with this mode and does not support replicating data imported through physical import mode. If you need to use both TiDB Lightning's physical import mode and TiCDC, choose one of the following solutions based on your downstream system:
+
+- If the downstream is a TiDB cluster, perform the following steps:
+
+    1. Use TiDB Lightning to import data into both the upstream and downstream TiDB clusters to ensure data consistency.
+    2. Create a changefeed to replicate subsequent incremental data written through SQL. For more information, see [Create a replication task](/ticdc/ticdc-manage-changefeed.md#create-a-replication-task).
+
+- If the downstream is not a TiDB cluster, perform the following steps:
+
+    1. Use the offline import tool provided by your downstream system to import TiDB Lightning's input files.
+    2. Create a changefeed to replicate subsequent incremental data written through SQL. For more information, see [Create a replication task](/ticdc/ticdc-manage-changefeed.md#create-a-replication-task).
+
+## Compatibility with TiFlash
+
+Currently, when you use TiCDC to replicate tables to a downstream TiDB cluster, creating TiFlash replicas for the tables is not supported, which means that TiCDC does not support replicating TiFlash-related DDL statements, such as:
+
+* `ALTER TABLE table_name SET TIFLASH REPLICA count;`
+* `ALTER DATABASE db_name SET TIFLASH REPLICA count;`
+
+## Compatibility notes for upgrading from earlier versions
+
+TiCDC relies on TiDB, TiKV, and PD to provide upstream change data and related interfaces. As TiDB and related components continue to evolve, these data formats and interfaces might change. For example, features such as parallel DDL and fast table creation in TiDB can change related logic and data processing workflows, and TiCDC needs corresponding adaptations. Therefore, the **TiCDC classic architecture does not guarantee official forward or backward compatibility in mixed TiDB/TiKV/PD deployments across versions**. The TiCDC new architecture provides **backward compatibility** for TiDB clusters of v7.5.0 and later.
+
+### Upgrade recommendations for the TiCDC classic architecture
+
+Before upgrading TiCDC from the classic architecture to the new architecture, pause all changefeeds. For more information, see [TiCDC new architecture upgrade guide](/ticdc/ticdc-architecture.md#upgrade-guide).
+
+If the upgrade is between TiCDC deployments that both use the classic architecture, rolling upgrades are supported between minor versions. However, for upgrades across major versions (for example, v8.5.0 -> v8.5.3 is a minor version upgrade, while v8.1.x -> v8.5.x is a major version upgrade), it is **not recommended to keep changefeeds running during a TiDB cluster rolling upgrade**. For a major version upgrade, perform the following steps in order:
+
+1. Pause all changefeeds.
+2. Perform a rolling upgrade on the TiDB cluster.
+3. Resume all changefeeds after the upgrade is complete.
+
+For example, assuming that you upgrade the cluster from v8.5.4 to v8.5.5, if you manage the cluster using TiUP, you can refer to the following commands. The following example uses `linux-amd64`. For other platforms, replace the platform information in the package names based on your environment.
+
+```sh
+# 1. Pause all changefeeds. Run this command once for each changefeed.
+tiup cdc:v8.5.4 cli changefeed pause \
+  --server=http://<ticdc-host>:8300 \
+  --changefeed-id=<changefeed-id>
+
+# 2. Perform a rolling upgrade on the TiDB cluster.
+tiup cluster upgrade <cluster-name> v8.5.5
+
+# 3. Resume all changefeeds after the upgrade is complete.
+#    Run this command once for each changefeed.
+tiup cdc:v8.5.5 cli changefeed resume \
+  --server=http://<ticdc-host>:8300 \
+  --changefeed-id=<changefeed-id>
+```
+
+### Upgrade recommendations for the TiCDC new architecture
+
+The TiCDC new architecture can keep changefeeds running during a TiDB rolling upgrade, but only if TiCDC has already been using the new architecture before the upgrade.
+
+If you need to upgrade or switch between the TiCDC classic and new architectures, see [Upgrade guide](/ticdc/ticdc-architecture.md#upgrade-guide).
 
 ## CLI and configuration file compatibility
 
-* In TiCDC v4.0.0, `ignore-txn-commit-ts` is removed and `ignore-txn-start-ts` is added, which uses start_ts to filter transactions.
+* In TiCDC v4.0.0, `ignore-txn-commit-ts` is removed and `ignore-txn-start-ts` is added, which uses `start_ts` to filter transactions.
 * In TiCDC v4.0.2, `db-dbs`/`db-tables`/`ignore-dbs`/`ignore-tables` are removed and `rules` is added, which uses new filter rules for databases and tables. For detailed filter syntax, see [Table Filter](/table-filter.md).
-* Starting from TiCDC v6.2.0, `cdc cli` can directly interact with TiCDC server via TiCDC Open API. You can specify the address of the TiCDC server using the `--server` parameter. `--pd` is deprecated.
+* Starting from TiCDC v6.2.0, `cdc cli` interacts directly with TiCDC server via the TiCDC Open API, without requiring access to PD. The `--pd` parameter in `cdc cli` subcommands is deprecated, and the `--server` parameter is added to specify the TiCDC server address. Use `--server` instead of `--pd`.
 * Since v6.4.0, only the changefeed with the `SYSTEM_VARIABLES_ADMIN` or `SUPER` privilege can use the TiCDC Syncpoint feature.
 
 ## Handle compatibility issues
@@ -64,3 +124,11 @@ The `sort-dir` configuration is used to specify the temporary file directory for
 Since v5.3.0, TiCDC supports [global temporary tables](/temporary-tables.md#global-temporary-tables). Replicating global temporary tables to the downstream using TiCDC of a version earlier than v5.3.0 causes table definition error.
 
 If the upstream cluster contains a global temporary table, the downstream TiDB cluster is expected to be v5.3.0 or a later version. Otherwise, an error occurs during the replication process.
+
+### Compatibility with vector data types
+
+Starting from v8.4.0, TiCDC supports replicating tables with [vector data types](/ai/reference/vector-search-data-types.md) to downstream (experimental).
+
+When the downstream is Kafka or a storage service (such as Amazon S3, GCS, Azure Blob Storage, or NFS), TiCDC converts vector data types into string types before writing to the downstream.
+
+When the downstream is a MySQL-compatible database that does not support vector data types, TiCDC fails to write DDL events involving vector types to the downstream. In this case, add the `has-vector-type=true` parameter to `sink-url`, which allows TiCDC to convert vector data types into the `LONGTEXT` type before writing.

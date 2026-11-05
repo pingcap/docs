@@ -47,7 +47,7 @@ TiDB version: 4.0.0-rc.1
 
     - Fix the replication failure that occurs because the schema internally maintained in TiCDC fails to correctly handle the timing issue of read and write operations [#438](https://github.com/pingcap/tiflow/pull/438) [#450](https://github.com/pingcap/tiflow/pull/450) [#478](https://github.com/pingcap/tiflow/pull/478) [#496](https://github.com/pingcap/tiflow/pull/496)
     - Fix the bug that the TiKV client fails to correctly maintain the internal resources when encountering some TiKV anomalies [#499](https://github.com/pingcap/tiflow/pull/499) [#492](https://github.com/pingcap/tiflow/pull/492)
-    - Fix the bug that meta data is not correctly cleaned up and abnormally remains in the TiCDC nodes [#488](https://github.com/pingcap/tiflow/pull/488) [#504](https://github.com/pingcap/tiflow/pull/504)
+    - Fix the bug that metadata is not correctly cleaned up and abnormally remains in the TiCDC nodes [#488](https://github.com/pingcap/tiflow/pull/488) [#504](https://github.com/pingcap/tiflow/pull/504)
     - Fix the issue that the TiKV client fails to correctly handle the repeated sending of the prewrite event [#446](https://github.com/pingcap/tiflow/pull/446)
     - Fix the issue that the TiKV client fails to correctly handle the redundant prewrite events received before the initialization [#448](https://github.com/pingcap/tiflow/pull/448)
 

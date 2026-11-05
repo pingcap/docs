@@ -14,7 +14,7 @@ To solve the hotspot problem in the above scenario, TiDB introduces the pre-spli
 
 > **Note:**
 >
-> This feature is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+> This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) instances.
 
 ## Synopsis
 
@@ -49,7 +49,7 @@ There are two types of Split Region syntax:
     SPLIT TABLE table_name [INDEX index_name] BETWEEN (lower_value) AND (upper_value) REGIONS region_num
     ```
 
-    `BETWEEN lower_value AND upper_value REGIONS region_num` defines the upper boundary, the lower boundary, and the Region amount. Then the current region will be evenly spilt into the number of regions (as specified in `region_num`) between the upper and lower boundaries.
+    `BETWEEN lower_value AND upper_value REGIONS region_num` defines the upper boundary, the lower boundary, and the Region amount. Then the current region will be evenly split into the number of regions (as specified in `region_num`) between the upper and lower boundaries.
 
 - The syntax of uneven split:
 
@@ -57,7 +57,7 @@ There are two types of Split Region syntax:
     SPLIT TABLE table_name [INDEX index_name] BY (value_list) [, (value_list)] ...
     ```
 
-    `BY value_list…` specifies a series of points manually, based on which the current Region is spilt. It is suitable for scenarios with unevenly distributed data.
+    `BY value_list…` specifies a series of points manually, based on which the current Region is split. It is suitable for scenarios with unevenly distributed data.
 
 The following example shows the result of the `SPLIT` statement:
 
@@ -135,7 +135,7 @@ t22_i5abc
 
 The `table_id` and `index_id` of the same index data in one table is the same. To split index Regions, you need to split Regions based on `index_value`.
 
-#### Even Spilt
+#### Even Split
 
 The way to split index evenly works the same as splitting data evenly. However, calculating the value of step is more complicated, because `index_value` might not be an integer.
 
@@ -155,7 +155,7 @@ If the column of index idx1 is of varchar type, and you want to split index data
 SPLIT TABLE t INDEX idx1 BETWEEN ("a") AND ("z") REGIONS 25;
 ```
 
-This statement splits index idx1 into 25 Regions from a~z. The range of Region 1 is `[minIndexValue, b)`; the range of Region 2 is `[b, c)`; … the range of Region 25 is `[y, minIndexValue]`. For the `idx` index, data with the `a` prefix is written into Region 1, and data with the `b` prefix is written into Region 2.
+This statement splits index idx1 into 25 Regions from a~z. The range of Region 1 is `[minIndexValue, b)`; the range of Region 2 is `[b, c)`; … the range of Region 25 is `[y, maxIndexValue]`. For the `idx` index, data with the `a` prefix is written into Region 1, and data with the `b` prefix is written into Region 2.
 
 In the split method above, both data with the `y` and `z` prefixes are written into Region 25, because the upper bound is not `z`, but `{` (the character next to `z` in ASCII). Therefore, a more accurate split method is as follows:
 
@@ -179,19 +179,19 @@ If you want to split the index Region by day, see the following example:
 SPLIT TABLE t INDEX idx2 BETWEEN ("2020-06-01 00:00:00") AND ("2020-07-01 00:00:00") REGIONS 30;
 ```
 
-This statement splits the data of June 2020 of index `idex2` in table `t` into 30 Regions, each Region representing 1 day.
+This statement splits the data of June 2020 of index `idx2` in table `t` into 30 Regions, each Region representing 1 day.
 
 Region split methods for other types of index columns are similar.
 
 For data Region split of joint indexes, the only difference is that you can specify multiple columns values.
 
-For example, index `idx3 (a, b)` contains 2 columns, with column `a` of timestamp type and column `b` int. If you just want to do a time range split according to column `a`, you can use the SQL statement for splitting time index of a single column. In this case, do not specify the value of column `b` in `lower_value` and `upper_velue`.
+For example, index `idx3 (a, b)` contains 2 columns, with column `a` of timestamp type and column `b` int. If you just want to do a time range split according to column `a`, you can use the SQL statement for splitting time index of a single column. In this case, do not specify the value of column `b` in `lower_value` and `upper_value`.
 
 ```sql
 SPLIT TABLE t INDEX idx3 BETWEEN ("2010-01-01 00:00:00") AND ("2020-01-01 00:00:00") REGIONS 10;
 ```
 
-Within the same range of time, if you want to do one more split according to column b column. Just specify the value for column b when splitting.
+Within the same range of time, if you want to do one more split according to column b, just specify the value for column b when splitting.
 
 ```sql
 SPLIT TABLE t INDEX idx3 BETWEEN ("2010-01-01 00:00:00", "a") AND ("2010-01-01 00:00:00", "z") REGIONS 10;
@@ -269,7 +269,7 @@ Splitting Regions for partitioned tables is the same as splitting Regions for or
     split partition table t between (0) and (10000) regions 4;
     ```
 
-    In the above statement, `0` and `10000` respectively represent the `row_id` of the upper and lower boundaries corresponding to the hotspot data you want to scatter.
+    In the above statement, `0` and `10000` respectively represent the `row_id` of the lower and upper boundaries corresponding to the hotspot data you want to scatter.
 
     > **Note:**
     >
@@ -355,13 +355,13 @@ You can specify the partition to be split.
 
 ## pre_split_regions
 
-To have evenly split Regions when a table is created, it is recommended you use `SHARD_ROW_ID_BITS` together with `PRE_SPLIT_REGIONS`. When a table is created successfully, `PRE_SPLIT_REGIONS` pre-spilts tables into the number of Regions as specified by `2^(PRE_SPLIT_REGIONS)`.
+When creating a table with the `AUTO_RANDOM` or `SHARD_ROW_ID_BITS` attribute, you can also specify the `PRE_SPLIT_REGIONS` option if you want to evenly pre-split the table into Regions immediately after the table is created. The number of pre-split Regions for a table is `2^(PRE_SPLIT_REGIONS)`.
 
 > **Note:**
 >
-> The value of `PRE_SPLIT_REGIONS` must be less than or equal to that of `SHARD_ROW_ID_BITS`.
+> The value of `PRE_SPLIT_REGIONS` must be less than or equal to that of `SHARD_ROW_ID_BITS` or `AUTO_RANDOM`.
 
-The `tidb_scatter_region` global variable affects the behavior of `PRE_SPLIT_REGIONS`. This variable controls whether to wait for Regions to be pre-split and scattered before returning results after the table creation. If there are intensive writes after creating the table, you need to set the value of this variable to `1`, then TiDB will not return the results to the client until all the Regions are split and scattered. Otherwise, TiDB writes the data before the scattering is completed, which will have a significant impact on write performance.
+The [`tidb_scatter_region`](/system-variables.md#tidb_scatter_region) global variable affects the behavior of `PRE_SPLIT_REGIONS`. This variable controls whether to wait for Regions to be pre-split and scattered before returning results after the table creation. If there are intensive writes after creating the table, you need to set the value of this variable to `global`, then TiDB scatters the Regions of newly created tables according to the data distribution of the entire cluster. Otherwise, TiDB writes the data before the scattering is completed, which will have a significant impact on write performance.
 
 ### Examples of pre_split_regions
 
@@ -384,7 +384,7 @@ region4:   [ 3<<61     ,  +inf  )
 
 > **Note:**
 >
-> The Region split by the Split Region statement is controlled by the [Region merge](/best-practices/pd-scheduling-best-practices.md#region-merge) scheduler in PD. To avoid PD re-merging the newly split Region soon after, you need to [dynamically modify](/pd-control.md) configuration items related to the Region merge feature.
+> The Region split by the Split Region statement is controlled by the [Region merge](/best-practices/pd-scheduling-best-practices.md#region-merge) scheduler in PD. To avoid PD re-merging the newly split Region soon after, you need to use [table attributes](/table-attributes.md) or [dynamically modify](/pd-control.md) configuration items related to the Region merge feature.
 
 </CustomContent>
 

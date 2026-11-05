@@ -45,9 +45,9 @@ Assume that tables 1~4 have the same table structure as follows.
 
 ```sql
 CREATE TABLE `table1` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `sid` bigint(20) NOT NULL,
-  `pid` bigint(20) NOT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `sid` bigint NOT NULL,
+  `pid` bigint NOT NULL,
   `comment` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `sid` (`sid`)
@@ -60,9 +60,9 @@ For those four tables, the `id` column is the primary key. It is auto-incrementa
 
 ```sql
 CREATE TABLE `table5` (
-  `id` bigint(20) NOT NULL,
-  `sid` bigint(20) NOT NULL,
-  `pid` bigint(20) NOT NULL,
+  `id` bigint NOT NULL,
+  `sid` bigint NOT NULL,
+  `pid` bigint NOT NULL,
   `comment` varchar(255) DEFAULT NULL,
   INDEX (`id`),
   UNIQUE KEY `sid` (`sid`)
@@ -140,9 +140,9 @@ Create `mydb.table5` at downstream.
 
 ```sql
 CREATE TABLE `table5` (
-  `id` bigint(20) NOT NULL,
-  `sid` bigint(20) NOT NULL,
-  `pid` bigint(20) NOT NULL,
+  `id` bigint NOT NULL,
+  `sid` bigint NOT NULL,
+  `pid` bigint NOT NULL,
   `comment` varchar(255) DEFAULT NULL,
   INDEX (`id`),
   UNIQUE KEY `sid` (`sid`)
@@ -192,11 +192,11 @@ Follow these steps to start `tidb-lightning`:
     [tidb]
     # Information of the target TiDB cluster.
     # Values here are only for illustration purpose. Replace them with your own values.
-    host = ${host}           # For example: "172.16.31.1"
-    port = ${port}           # For example: 4000
+    host = "${host}"           # For example: "172.16.31.1"
+    port = "${port}"           # For example: 4000
     user = "${user_name}"    # For example: "root"
     password = "${password}" # For example: "rootroot"
-    status-port = ${status-port} # The table information is read from the status port. For example: 10080
+    status-port = "${status-port}" # The table information is read from the status port. For example: 10080
     # the IP address of the PD cluster. TiDB Lightning gets some information through the PD cluster.
     # For example: "172.16.31.3:2379".
     # When backend = "local", make sure that the values of status-port and pd-addr are correct. Otherwise an error will occur.
@@ -217,7 +217,6 @@ Follow these steps to start `tidb-lightning`:
 
    - Use `grep` tool to search the keyword `progress` in the log. By default, a message reporting the progress is flushed into the log file every 5 minutes.
    - View progress via the monitoring dashboard. For more information, see [TiDB Lightning Monitoring]( /tidb-lightning/monitor-tidb-lightning.md).
-   - View the progress via the Web page. See [Web Interface](/tidb-lightning/tidb-lightning-web-interface.md).
 
 After TiDB Lightning completes the import, it exits automatically. Check whether `tidb-lightning.log` contains `the whole procedure completed` in the last lines. If yes, the import is successful. If no, the import encounters an error. Address the error as instructed in the error message.
 
@@ -281,7 +280,7 @@ name: task-test               # The name of the task. Should be globally unique.
 task-mode: incremental        # The mode of the task. "incremental" means full data migration is skipped and only incremental replication is performed.
 # Required for incremental replication from sharded tables. By default, the "pessimistic" mode is used.
 # If you have a deep understanding of the principles and usage limitations of the optimistic mode, you can also use the "optimistic" mode.
-# For more information, see [Merge and Migrate Data from Sharded Tables](https://docs.pingcap.com/zh/tidb/dev/feature-shard-merge/).
+# For more information, see [Merge and Migrate Data from Sharded Tables](https://docs.pingcap.com/tidb/dev/feature-shard-merge/).
 
 shard-mode: "pessimistic"
 

@@ -56,7 +56,7 @@ On August 24, 2018, TiDB 2.1 RC1 is released! Compared with TiDB 2.1 Beta, this 
     - Add the `GrpcKeepAlive` option [#7100](https://github.com/pingcap/tidb/pull/7100)
     - Add the connection or `Token` time monitor [#7110](https://github.com/pingcap/tidb/pull/7110)
     - Optimize the data decoding performance [#7149](https://github.com/pingcap/tidb/pull/7149)
-    - Add the `PROCESSLIST` table in `INFORMMATION_SCHEMA` [#7236](https://github.com/pingcap/tidb/pull/7236)
+    - Add the `PROCESSLIST` table in `INFORMATION_SCHEMA` [#7236](https://github.com/pingcap/tidb/pull/7236)
     - Fix the order issue when multiple rules are hit in verifying the privilege [#7211](https://github.com/pingcap/tidb/pull/7211)
     - Change some default values of encoding related system variables to UTF-8 [#7198](https://github.com/pingcap/tidb/pull/7198)
     - Make the slow query log show more detailed information [#7302](https://github.com/pingcap/tidb/pull/7302)

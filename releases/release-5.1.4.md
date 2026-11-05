@@ -55,7 +55,7 @@ TiDB version: 5.1.4
         - Add metrics for observing the remaining time of incremental scan [#2985](https://github.com/pingcap/tiflow/issues/2985)
         - Reduce the count of "EventFeed retry rate limited" logs [#4006](https://github.com/pingcap/tiflow/issues/4006)
         - Add more Prometheus and Grafana monitoring metrics and alerts, including `no owner alert`, `mounter row`, `table sink total row`, and `buffer sink total row` [#4054](https://github.com/pingcap/tiflow/issues/4054) [#1606](https://github.com/pingcap/tiflow/issues/1606)
-        - Optimize rate limiting control on TiKV reloads to reduce gPRC congestion during changefeed initialization [#3110](https://github.com/pingcap/ticdc/issues/3110)
+        - Optimize rate-limiting control on TiKV reloads to reduce gRPC congestion during changefeed initialization [#3110](https://github.com/pingcap/ticdc/issues/3110)
         - Reduce the time for the KV client to recover when a TiKV store is down [#3191](https://github.com/pingcap/tiflow/issues/3191)
 
 ## Bug fixes
@@ -153,7 +153,7 @@ TiDB version: 5.1.4
         - Fix the TiCDC panic issue that occurs when manually cleaning the task status in etcd [#2980](https://github.com/pingcap/tiflow/issues/2980)
         - Fix the issue that the service cannot be started because of a timezone issue in the RHEL release [#3584](https://github.com/pingcap/tiflow/issues/3584)
         - Fix the issue of overly frequent warnings caused by MySQL sink deadlock [#2706](https://github.com/pingcap/tiflow/issues/2706)
-        - Fix the bug that the `enable-old-value` configuration item is not automatically set to `true` on Canal and Maxwell protocols [#3676](https://github.com/pingcap/tiflow/issues/3676)
+        - Fix the bug that the `enable-old-value` configuration item is not automatically set to `true` on the Canal protocol [#3676](https://github.com/pingcap/tiflow/issues/3676)
         - Fix the issue that Avro sink does not support parsing JSON type columns [#3624](https://github.com/pingcap/tiflow/issues/3624)
         - Fix the negative value error in the changefeed checkpoint lag [#3010](https://github.com/pingcap/ticdc/issues/3010)
         - Fix the OOM issue in the container environment [#1798](https://github.com/pingcap/tiflow/issues/1798)

@@ -30,8 +30,8 @@ You can use the `tiup list` command to query the component list. This usage of t
 You can also use the following flags in the above commands:
 
 - `--installed`: checks which components or which version of a specific component has been installed locally.
--`--all`: views all components, including the hidden ones
--`--verbose`: views all columns (including installed versions and supported platforms)
+- `--all`: views all components, including the hidden ones
+- `--verbose`: views all columns (including installed versions and supported platforms)
 
 Example 1: View all currently installed components.
 
@@ -51,10 +51,10 @@ tiup list tikv
 
 ## Install components
 
-You can use the `tiup install` command to query the component list. This usage of this command is as follows:
+You can use the `tiup install` command to install components. This usage of this command is as follows:
 
 - `tiup install <component>`: installs the latest stable version of a specified component.
-- `tiup install <component>:[version]`: installs the specified version of a specified component.
+- `tiup install <component>[:version]`: installs the specified version of a specified component.
 
 Example 1: Use TiUP to install the latest stable version of TiDB.
 
@@ -72,12 +72,12 @@ Example 2: Use TiUP to install the nightly version of TiDB.
 tiup install tidb:nightly
 ```
 
-Example 3: Use TiUP to install TiKV v8.2.0.
+Example 3: Use TiUP to install TiKV v8.5.0.
 
 {{< copyable "shell-regular" >}}
 
 ```shell
-tiup install tikv:v8.2.0
+tiup install tikv:v8.5.0
 ```
 
 ## Upgrade components
@@ -130,12 +130,12 @@ Before the component is started, TiUP creates a directory for it, and then puts 
 
 If you want to start the same component multiple times and reuse the previous working directory, you can use `--tag` to specify the same name when the component is started. After the tag is specified, the working directory will *not be automatically deleted* when the instance is terminated, which makes it convenient to reuse the working directory.
 
-Example 1: Operate TiDB v8.2.0.
+Example 1: Operate TiDB v8.5.0.
 
 {{< copyable "shell-regular" >}}
 
 ```shell
-tiup tidb:v8.2.0
+tiup tidb:v8.5.0
 ```
 
 Example 2: Specify the tag with which TiKV operates.
@@ -221,12 +221,12 @@ The following flags are supported in this command:
 - If the version is ignored, adding `--all` means to uninstall all versions of this component.
 - If the version and the component are both ignored, adding `--all` means to uninstall all components of all versions.
 
-Example 1: Uninstall TiDB v8.2.0.
+Example 1: Uninstall TiDB v8.5.0.
 
 {{< copyable "shell-regular" >}}
 
 ```shell
-tiup uninstall tidb:v8.2.0
+tiup uninstall tidb:v8.5.0
 ```
 
 Example 2: Uninstall TiKV of all versions.

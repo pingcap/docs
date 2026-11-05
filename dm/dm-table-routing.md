@@ -23,7 +23,7 @@ routes:
     target-table: "t"
     # extract-table, extract-schema, and extract-source are optional and
     # are required only when you need to extract information about sharded
-    # tables, sharded schemas, and source datatabase information.
+    # tables, sharded schemas, and source database information.
     extract-table:
       table-regexp: "t_(.*)"
       target-column: "c_table"
@@ -116,7 +116,7 @@ To extract the source information of upstream sharded tables to the merged table
 
 ```sql
 CREATE TABLE `test`.`t` (
-    a int(11) PRIMARY KEY,
+    a int PRIMARY KEY,
     c_table varchar(10) DEFAULT NULL,
     c_schema varchar(10) DEFAULT NULL,
     c_source varchar(10) DEFAULT NULL
@@ -184,7 +184,7 @@ mysql> select * from test.t;
 ```sql
 CREATE TABLE `test`.`t` (
     c_table varchar(10) DEFAULT NULL,
-    a int(11) PRIMARY KEY,
+    a int PRIMARY KEY,
     c_schema varchar(10) DEFAULT NULL,
     c_source varchar(10) DEFAULT NULL
 );
@@ -194,7 +194,7 @@ CREATE TABLE `test`.`t` (
 
 ```sql
 CREATE TABLE `test`.`t` (
-    a int(11) PRIMARY KEY,
+    a int PRIMARY KEY,
     c_table varchar(10) DEFAULT NULL,
     c_schema varchar(10) DEFAULT NULL,
 );
@@ -204,9 +204,9 @@ CREATE TABLE `test`.`t` (
 
 ```sql
 CREATE TABLE `test`.`t` (
-    a int(11) PRIMARY KEY,
+    a int PRIMARY KEY,
     c_table varchar(10) DEFAULT NULL,
-    c_schema int(11) DEFAULT NULL,
+    c_schema int DEFAULT NULL,
     c_source varchar(10) DEFAULT NULL,
 );
 ```

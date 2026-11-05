@@ -18,7 +18,7 @@ TiDB version: 5.2.4
 
 + TiKV
 
-    - Add [`raft-log-compact-sync-interval`](https://docs.pingcap.com/tidb/v5.2/tikv-configuration-file#raft-log-compact-sync-interval-new-in-v524) to control the time interval (`"2s"` by default) to compact unnecessary Raft logs [#11404](https://github.com/tikv/tikv/issues/11404)
+    - Add [`raft-log-compact-sync-interval`](https://docs-archive.pingcap.com/tidb/v5.2/tikv-configuration-file#raft-log-compact-sync-interval-new-in-v524) to control the time interval (`"2s"` by default) to compact unnecessary Raft logs [#11404](https://github.com/tikv/tikv/issues/11404)
     - Change the default value of [`raft-log-gc-tick-interval`](/tikv-configuration-file.md#raft-log-gc-tick-interval) from `"10s"` to `"3s"` [#11404](https://github.com/tikv/tikv/issues/11404)
     - When [`storage.flow-control.enable`](/tikv-configuration-file.md#enable) is set to `true`, the value of [`storage.flow-control.hard-pending-compaction-bytes-limit`](/tikv-configuration-file.md#hard-pending-compaction-bytes-limit) overwrites that of [`rocksdb.(defaultcf|writecf|lockcf).hard-pending-compaction-bytes-limit`](/tikv-configuration-file.md#hard-pending-compaction-bytes-limit-1) [#11424](https://github.com/tikv/tikv/issues/11424)
 
@@ -182,7 +182,7 @@ TiDB version: 5.2.4
         - Fix the issue that the service cannot be started because of a timezone issue in the RHEL release [#3584](https://github.com/pingcap/tiflow/issues/3584)
         - Fix the issue that `stopped` changefeeds resume automatically after a cluster upgrade [#3473](https://github.com/pingcap/tiflow/issues/3473)
         - Fix the issue of overly frequent warnings caused by MySQL sink deadlock [#2706](https://github.com/pingcap/tiflow/issues/2706)
-        - Fix the bug that the `enable-old-value` configuration item is not automatically set to `true` on Canal and Maxwell protocols [#3676](https://github.com/pingcap/tiflow/issues/3676)
+        - Fix the bug that the `enable-old-value` configuration item is not automatically set to `true` on the Canal protocol [#3676](https://github.com/pingcap/tiflow/issues/3676)
         - Fix the issue that Avro sink does not support parsing JSON type columns [#3624](https://github.com/pingcap/tiflow/issues/3624)
         - Fix the negative value error in the changefeed checkpoint lag [#3010](https://github.com/pingcap/tiflow/issues/3010)
         - Fix the OOM issue in the container environment [#1798](https://github.com/pingcap/tiflow/issues/1798)

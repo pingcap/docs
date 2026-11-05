@@ -9,7 +9,7 @@ Release date: June 13, 2022
 
 TiDB version: 6.1.0
 
-Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-tidb) | [Production deployment](https://docs.pingcap.com/tidb/v6.1/production-deployment-using-tiup)
+Quick access: [Quick start](https://docs-archive.pingcap.com/tidb/v6.1/quick-start-with-tidb) | [Production deployment](https://docs-archive.pingcap.com/tidb/v6.1/production-deployment-using-tiup)
 
 In 6.1.0, the key new features or improvements are as follows:
 
@@ -342,7 +342,7 @@ In 6.1.0, the key new features or improvements are as follows:
     - CDC supports RawKV [#11965](https://github.com/tikv/tikv/issues/11965)
     - Support splitting a large snapshot file into multiple files [#11595](https://github.com/tikv/tikv/issues/11595)
     - Move the snapshot garbage collection from Raftstore to background thread to prevent snapshot GC from blocking Raftstore message loops [#11966](https://github.com/tikv/tikv/issues/11966)
-    - Support dynamic setting of the maximum message length (`max-grpc-send-msg-len`) and the maximum batch size of gPRC messages (`raft-msg-max-batch-size`) [#12334](https://github.com/tikv/tikv/issues/12334)
+    - Support dynamic setting of the maximum message length (`max-grpc-send-msg-len`) and the maximum batch size of gRPC messages (`raft-msg-max-batch-size`) [#12334](https://github.com/tikv/tikv/issues/12334)
     - Support executing online unsafe recovery plan through Raft [#10483](https://github.com/tikv/tikv/issues/10483)
 
 + PD
@@ -398,7 +398,7 @@ In 6.1.0, the key new features or improvements are as follows:
 
     - Fix the wrong status code of `not leader` [#4797](https://github.com/tikv/pd/issues/4797)
     - Fix a bug of TSO fallback in some corner cases [#4884](https://github.com/tikv/pd/issues/4884)
-    - Fix the issue that a removed tombstone store appears again after the PD leader transfer ​​[#4941](https://github.com/tikv/pd/issues/4941)
+    - Fix the issue that a removed tombstone store appears again after the PD leader transfer [#4941](https://github.com/tikv/pd/issues/4941)
     - Fix the issue that scheduling cannot start immediately after the PD leader transfer [#4769](https://github.com/tikv/pd/issues/4769)
 
 + TiDB Dashboard

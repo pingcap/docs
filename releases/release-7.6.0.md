@@ -9,7 +9,7 @@ Release date: January 25, 2024
 
 TiDB version: 7.6.0
 
-Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-tidb)
+Quick access: [Quick start](https://docs-archive.pingcap.com/tidb/v7.6/quick-start-with-tidb/)
 
 7.6.0 introduces the following key features and improvements:
 
@@ -24,28 +24,28 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
 <tbody>
   <tr>
     <td rowspan="4">Scalability and Performance</td>
-    <td><a href="https://docs.pingcap.com/tidb/v7.6/sql-plan-management#cross-database-binding">Cross-database SQL binding</a></td>
+    <td><a href="https://docs-archive.pingcap.com/tidb/v7.6/sql-plan-management/#cross-database-binding">Cross-database SQL binding</a></td>
     <td>When managing hundreds of databases with the same schema, it is often necessary to apply SQL bindings across these databases. For example, in SaaS or PaaS data platforms, each user typically operates separate databases with the same schema and runs similar SQL queries on them. In this case, it is impractical to bind SQL for each database one by one. TiDB v7.6.0 introduces cross-database SQL bindings that enable matching bindings across all schema-equivalent databases.</td>
   </tr>
   <tr>
-    <td><a href="https://docs.pingcap.com/tidb/v7.6/br-snapshot-guide#restore-cluster-snapshots">Achieve up to 10 times faster for snapshot restore (experimental)</a></td>
+    <td><a href="https://docs-archive.pingcap.com/tidb/v7.6/br-snapshot-guide/#restore-cluster-snapshots">Achieve up to 10 times faster for snapshot restore (experimental)</a></td>
     <td>BR v7.6.0 introduces an experimental coarse-grained Region scatter algorithm to accelerate snapshot restores for clusters. In clusters with many TiKV nodes, this algorithm significantly improves cluster resource efficiency by more evenly distributing load across nodes and better utilizing per-node network bandwidth. In several real-world cases, this improvement accelerates restore process by about up to 10 times.</td>
   </tr>
   <tr>
-    <td><a href="https://docs.pingcap.com/tidb/v7.6/ddl-v2">Achieve up to 10 times faster for creating tables in batch (experimental)</a></td>
+    <td><a href="https://docs-archive.pingcap.com/tidb/v7.6/ddl-v2/">Achieve up to 10 times faster for creating tables in batch (experimental)</a></td>
     <td>With the implementation of the new DDL architecture in v7.6.0, the performance of batch table creation has witnessed a remarkable improvement, up to 10 times faster. This substantial enhancement drastically reduces the time needed for creating numerous tables. This acceleration is particularly noteworthy in SaaS scenarios, where the prevalence of high volumes of tables, ranging from tens to hundreds of thousands, is a common challenge.</td>
   </tr>
   <tr>
-    <td><a href="https://docs.pingcap.com/tidb/v7.6/tune-region-performance#use-the-active-pd-follower-feature-to-enhance-the-scalability-of-pds-region-information-query-service">Use Active PD Followers to enhance PD's Region information query service (experimental)</a></td>
+    <td><a href="https://docs-archive.pingcap.com/tidb/v7.6/tune-region-performance/#use-the-active-pd-follower-feature-to-enhance-the-scalability-of-pds-region-information-query-service">Use Active PD Followers to enhance PD's Region information query service (experimental)</a></td>
     <td>TiDB v7.6.0 introduces an experimental feature "Active PD Follower", which allows PD followers to provide Region information query services. This feature improves the capability of the PD cluster to handle <code>GetRegion</code> and <code>ScanRegions</code> requests in clusters with a large number of TiDB nodes and Regions, thereby reducing the CPU pressure on the PD leader.</td>
   </tr>
   <tr>
     <td rowspan="2">Reliability and Availability</td>
-    <td><a href="https://docs.pingcap.com/tidb/v7.6/tiproxy-overview">Support TiProxy (experimental)</a></td>
+    <td><a href="https://docs-archive.pingcap.com/tidb/v7.6/tiproxy-overview/">Support TiProxy (experimental)</a></td>
     <td>Full support for the TiProxy service, easily deployable via deployment tooling, to manage and maintain connections to TiDB so that they live through rolling restarts, upgrades, or scaling events.</td>
   </tr>
   <tr>
-    <td><a href="https://docs.pingcap.com/tidb/v7.6/dm-compatibility-catalog">Data Migration (DM) officially supports MySQL 8.0 (GA)</a></td>
+    <td><a href="https://docs-archive.pingcap.com/tidb/v7.6/dm-compatibility-catalog/">Data Migration (DM) officially supports MySQL 8.0 (GA)</a></td>
     <td>Previously, using DM to migrate data from MySQL 8.0 is an experimental feature and is not available for production environments. TiDB v7.6.0 enhances the stability and compatibility of this feature to help you smoothly and quickly migrate data from MySQL 8.0 to TiDB in production environments. In v7.6.0, this feature becomes generally available (GA).</td>
   </tr>
 </tbody>
@@ -111,15 +111,15 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
 
 * Improve the performance of creating tables by 10 times (experimental) [#49752](https://github.com/pingcap/tidb/issues/49752) @[gmhdbjd](https://github.com/gmhdbjd)
 
-    In previous versions, when migrating tens of thousands of tables from the upstream database to TiDB, it is time-consuming and inefficient for TiDB to create these tables. Starting from v7.6.0, TiDB introduces a new TiDB DDL V2 architecture. You can enable it by configuring the system variable [`tidb_ddl_version`](https://docs.pingcap.com/tidb/v7.6/system-variables#tidb_ddl_version-new-in-v760). Compared with previous versions, the new version of the DDL improves the performance of creating batch tables by 10 times, and significantly reduces time for creating tables.
+    In previous versions, when migrating tens of thousands of tables from the upstream database to TiDB, it is time-consuming and inefficient for TiDB to create these tables. Starting from v7.6.0, TiDB introduces a new TiDB DDL V2 architecture. You can enable it by configuring the system variable [`tidb_ddl_version`](https://docs-archive.pingcap.com/tidb/v7.6/system-variables/#tidb_ddl_version-new-in-v760). Compared with previous versions, the new version of the DDL improves the performance of creating batch tables by 10 times, and significantly reduces time for creating tables.
 
-    For more information, see [documentation](https://docs.pingcap.com/tidb/v7.6/ddl-v2).
+    For more information, see [documentation](https://docs-archive.pingcap.com/tidb/v7.6/ddl-v2/).
 
 * Support periodic full compaction (experimental) [#12729](https://github.com/tikv/tikv/issues/12729) [afeinberg](https://github.com/afeinberg)
 
     Starting from v7.6.0, TiDB supports periodic full compaction for TiKV. This feature serves as an enhancement to Garbage Collection (GC) to eliminate redundant data versions. In scenarios where application activity shows obvious peaks and valleys, you can use this feature to perform data compaction during idle periods to improve the performance during peak periods.
 
-    You can set the specific times that TiKV initiates periodic full compaction by configuring the TiKV configuration item [`periodic-full-compact-start-times`](/tikv-configuration-file.md#periodic-full-compact-start-times-new-in-v760) and limit the maximum CPU usage rate for TiKV periodic full compaction by configuring [`periodic-full-compact-start-max-cpu`](/tikv-configuration-file.md#periodic-full-compact-start-max-cpu-new-in-v760). The default value of `periodic-full-compact-start-max-cpu` is 10%, which means that periodic full compaction is triggered only when the CPU utilization of TiKV is lower than 10%, thereby reducing the impact on application traffic.
+    You can set the specific times that TiKV initiates periodic full compaction by configuring the TiKV configuration item [`periodic-full-compact-start-times`](/tikv-configuration-file.md#periodic-full-compact-start-times-new-in-v760) and limit the maximum CPU usage rate for TiKV periodic full compaction by configuring [`periodic-full-compact-start-max-cpu`](/tikv-configuration-file.md#periodic-full-compact-start-max-cpu-new-in-v760). The default value of `periodic-full-compact-start-max-cpu` is `0.1`, which means that periodic full compaction is triggered only when the CPU utilization of TiKV is lower than 10%, thereby reducing the impact on application traffic.
 
     For more information, see [documentation](/tikv-configuration-file.md#periodic-full-compact-start-times-new-in-v760).
 
@@ -176,7 +176,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
 
     ```sql
     FLASHBACK CLUSTER TO TSO 445494839813079041;
-    ````
+    ```
 
     For more information, see [documentation](/sql-statements/sql-statement-flashback-cluster.md).
 
@@ -200,7 +200,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
 
 * Support dynamically modifying the size limit of a single row record in TiDB [#49237](https://github.com/pingcap/tidb/pull/49237) @[zyguan](https://github.com/zyguan)
 
-    Before v7.6.0, the size of a single row record in a transaction is limited by the TiDB configuration item [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50). If the size limit is exceeded, TiDB returns the `entry too large` error. In this case, you need to manually modify the TiDB configuration file and restart TiDB to make the modification take effect. To reduce your management overhead, TiDB v7.6.0 introduces the system variable [`tidb_txn_entry_size_limit`](/system-variables.md#tidb_txn_entry_size_limit-new-in-v760), which supports dynamically modifying the value of the `txn-entry-size-limit` configuration item. The default value of this variable is `0`, which means that TiDB uses the value of the configuration item `txn-entry-size-limit` by default. When this variable is set to a non-zero value, TiDB limits the size of a row record in transactions to the value of this variable. This improvement enhances the flexibility for you to adjust system configurations without restarting TiDB.
+    Before v7.6.0, the size of a single row record in a transaction is limited by the TiDB configuration item [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v4010-and-v500). If the size limit is exceeded, TiDB returns the `entry too large` error. In this case, you need to manually modify the TiDB configuration file and restart TiDB to make the modification take effect. To reduce your management overhead, TiDB v7.6.0 introduces the system variable [`tidb_txn_entry_size_limit`](/system-variables.md#tidb_txn_entry_size_limit-new-in-v760), which supports dynamically modifying the value of the `txn-entry-size-limit` configuration item. The default value of this variable is `0`, which means that TiDB uses the value of the configuration item `txn-entry-size-limit` by default. When this variable is set to a non-zero value, TiDB limits the size of a row record in transactions to the value of this variable. This improvement enhances the flexibility for you to adjust system configurations without restarting TiDB.
 
     For more information, see [documentation](/system-variables.md#tidb_txn_entry_size_limit-new-in-v760).
 
@@ -220,9 +220,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
 
     * [Slow Queries](/identify-slow-queries.md): add the resource group name, resource unit (RU) consumption, and time for waiting for resources.
     * [Statement Summary Tables](/statement-summary-tables.md): add the resource group name, RU consumption, and time for waiting for resources.
-    * In the system variable [`tidb_last_query_info`](/system-variables.md#tidb_last_query_info-new-in-v4014), add a new entry `ru_consumption` to indicate the consumed [RU](/tidb-resource-control.md#what-is-request-unit-ru) by SQL statements. You can use this variable to get the resource consumption of the last statement in the session.
+    * In the system variable [`tidb_last_query_info`](/system-variables.md#tidb_last_query_info-new-in-v4014), add a new entry `ru_consumption` to indicate the consumed [RU](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru) by SQL statements. You can use this variable to get the resource consumption of the last statement in the session.
     * Add database metrics based on resource groups: QPS/TPS, execution time (P999/P99/P95), number of failures, and number of connections.
-    * Add the system table [`request_unit_by_group`](/mysql-schema.md#system-tables-related-to-resource-control) to record the history records of daily consumed RUs of all resource groups.
+    * Add the system table [`request_unit_by_group`](/mysql-schema/mysql-schema.md#system-tables-related-to-resource-control) to record the history records of daily consumed RUs of all resource groups.
 
   For more information, see [Identify Slow Queries](/identify-slow-queries.md), [Statement Summary Tables](/statement-summary-tables.md), and [Key Monitoring Metrics of Resource Control](/grafana-resource-control-dashboard.md).
 
@@ -234,9 +234,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
 
     For more information, see [documentation](/dm/dm-compatibility-catalog.md).
 
-* TiCDC supports replicating DDL statements in bi-directional replication (BDR) mode (experimental) [#10301](https://github.com/pingcap/tiflow/issues/10301) [#48519](https://github.com/pingcap/tidb/issues/48519) @[okJiang](https://github.com/okJiang) @[asddongmen](https://github.com/asddongmen)
+* TiCDC supports replicating DDL statements in bidirectional replication (BDR) mode (experimental) [#10301](https://github.com/pingcap/tiflow/issues/10301) [#48519](https://github.com/pingcap/tidb/issues/48519) @[okJiang](https://github.com/okJiang) @[asddongmen](https://github.com/asddongmen)
 
-    Starting from v7.6.0, TiCDC supports replication of DDL statements with bi-directional replication configured. Previously, replicating DDL statements was not supported by TiCDC, so users of TiCDC's bi-directional replication had to apply DDL statements to both TiDB clusters separately. With this feature, TiCDC allows for a cluster to be assigned the `PRIMARY` BDR role, and enables the replication of DDL statements from that cluster to the downstream cluster.
+    Starting from v7.6.0, TiCDC supports replication of DDL statements with bidirectional replication configured. Previously, replicating DDL statements was not supported by TiCDC, so users of TiCDC's bidirectional replication had to apply DDL statements to both TiDB clusters separately. With this feature, TiCDC allows for a cluster to be assigned the `PRIMARY` BDR role, and enables the replication of DDL statements from that cluster to the downstream cluster.
 
     For more information, see [documentation](/ticdc/ticdc-bidirectional-replication.md).
 
@@ -269,11 +269,12 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
 | [`tidb_auto_analyze_partition_batch_size`](/system-variables.md#tidb_auto_analyze_partition_batch_size-new-in-v640) | Modified | Changes the default value from `1` to `128` after further tests.  |
 | [`tidb_sysproc_scan_concurrency`](/system-variables.md#tidb_sysproc_scan_concurrency-new-in-v650) | Modified  | In a large-scale cluster, the concurrency of `scan` operations can be adjusted higher to meet the needs of `ANALYZE`. Therefore, change the maximum value from `256` to `4294967295`.  |
 | [`tidb_analyze_distsql_scan_concurrency`](/system-variables.md#tidb_analyze_distsql_scan_concurrency-new-in-v760)       |    Newly added       |    Sets the concurrency of the `scan` operation when executing the `ANALYZE` operation. The default value is `4`.  |
-| [`tidb_ddl_version`](https://docs.pingcap.com/tidb/v7.6/system-variables#tidb_ddl_version-new-in-v760)  |  Newly added  | Controls whether to enable [TiDB DDL V2](https://docs.pingcap.com/tidb/v7.6/ddl-v2). Set the value to `2` to enable it and `1` to disable it. The default value is `1`. When TiDB DDL V2 is enabled, DDL statements will be executed using TiDB DDL V2. The execution speed of DDL statements for creating tables is increased by 10 times compared with TiDB DDL V1. |
+| [`tidb_ddl_version`](https://docs-archive.pingcap.com/tidb/v7.6/system-variables/#tidb_ddl_version-new-in-v760)  |  Newly added  | Controls whether to enable [TiDB DDL V2](https://docs-archive.pingcap.com/tidb/v7.6/ddl-v2/). Set the value to `2` to enable it and `1` to disable it. The default value is `1`. When TiDB DDL V2 is enabled, DDL statements will be executed using TiDB DDL V2. The execution speed of DDL statements for creating tables is increased by 10 times compared with TiDB DDL V1. |
 | [`tidb_enable_global_index`](/system-variables.md#tidb_enable_global_index-new-in-v760)  |  Newly added   | Controls whether to support creating `Global indexes` for partitioned tables. The default value is `OFF`. `Global index` is currently in the development stage. **It is not recommended to modify the value of this system variable**. |
 | [`tidb_idle_transaction_timeout`](/system-variables.md#tidb_idle_transaction_timeout-new-in-v760) | Newly added | Controls the idle timeout for transactions in a user session. When a user session is in a transactional state and remains idle for a duration exceeding the value of this variable, TiDB will terminate the session. The default value `0` means unlimited. |
+| [`tidb_ignore_inlist_plan_digest`](/system-variables.md#tidb_ignore_inlist_plan_digest-new-in-v760) | Newly added | Controls whether TiDB ignores the element differences in the `IN` list across different queries when generating Plan Digests. The default value `OFF` means differences are not ignored. |
 | [`tidb_opt_enable_fuzzy_binding`](/system-variables.md#tidb_opt_enable_fuzzy_binding-new-in-v760) | Newly added | Controls whether to enable the cross-database binding feature. The default value `OFF` means cross-database binding is disabled. |
-| [`tidb_txn_entry_size_limit`](/system-variables.md#tidb_txn_entry_size_limit-new-in-v760) | Newly added | Dynamically modifies the TiDB configuration item [`performance.txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50). It limits the size of a single row of data in TiDB. The default value of this variable is `0`, which means that TiDB uses the value of the configuration item `txn-entry-size-limit` by default. When this variable is set to a non-zero value, `txn-entry-size-limit` is also set to the same value. |
+| [`tidb_txn_entry_size_limit`](/system-variables.md#tidb_txn_entry_size_limit-new-in-v760) | Newly added | Dynamically modifies the TiDB configuration item [`performance.txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v4010-and-v500). It limits the size of a single row of data in TiDB. The default value of this variable is `0`, which means that TiDB uses the value of the configuration item `txn-entry-size-limit` by default. When this variable is set to a non-zero value, `txn-entry-size-limit` is also set to the same value. |
 | [`pd_enable_follower_handle_region`](/system-variables.md#pd_enable_follower_handle_region-new-in-v760) | Newly added | Controls whether to enable the [Active PD Follower](/tune-region-performance.md#use-the-active-pd-follower-feature-to-enhance-the-scalability-of-pds-region-information-query-service) feature (experimental). When the value is `OFF`, TiDB only obtains Region information from the PD leader. When the value is `ON`, TiDB evenly distributes requests for Region information to all PD servers, and PD followers can also handle Region requests, thereby reducing the CPU pressure on the PD leader. |
 
 ### Configuration file parameters
@@ -281,12 +282,15 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
 | Configuration file | Configuration parameter | Change type | Description |
 | -------- | -------- | -------- | -------- |
 | TiDB | [`tls-version`](/tidb-configuration-file.md#tls-version) | Modified | The default value is "". The default supported TLS versions of TiDB are changed from `TLS1.1` or higher to `TLS1.2` or higher. |
+| TiKV | [`raftstore.report-min-resolved-ts-interval`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file/#report-min-resolved-ts-interval-new-in-v600) | Renamed | To make the name more accurate, this configuration item is renamed to [`raftstore.pd-report-min-resolved-ts-interval`](/tikv-configuration-file.md#pd-report-min-resolved-ts-interval-new-in-v760). `raftstore.report-min-resolved-ts-interval` is no longer effective. |
 | TiKV | [`blob-file-compression`](/tikv-configuration-file.md#blob-file-compression) | Modified | The algorithm used for compressing values in Titan, which takes value as the unit. Starting from TiDB v7.6.0, the default compression algorithm is `zstd`. |
 | TiKV | [`rocksdb.defaultcf.titan.min-blob-size`](/tikv-configuration-file.md#min-blob-size) | Modified   | Starting from TiDB v7.6.0, the default value for new clusters is `32KB`. For existing clusters upgrading to v7.6.0, the default value `1KB` remains unchanged. |
 | TiKV | [`rocksdb.titan.enabled`](/tikv-configuration-file.md#enabled) | Modified  |  Enables or disables Titan. For v7.5.0 and earlier versions, the default value is `false`. Starting from v7.6.0, the default value is `true` for only new clusters. Existing clusters upgraded to v7.6.0 or later versions will retain the original configuration. |
+| TiKV | [`cdc.incremental-scan-concurrency-limit`](/tikv-configuration-file.md#incremental-scan-concurrency-limit-new-in-v760) | Newly added | Sets the maximum queue length for the tasks of incrementally scanning historical data waiting to be executed. The default value is `10000`, which means that at most 10000 tasks can be queued for execution. |
 | TiKV | [`gc.num-threads`](/tikv-configuration-file.md#num-threads-new-in-v658-v714-v751-and-v760) | Newly added | When `enable-compaction-filter` is set to `false`, this parameter controls the number of GC threads. The default value is `1`. |
 | TiKV | [`raftstore.periodic-full-compact-start-times`](/tikv-configuration-file.md#periodic-full-compact-start-times-new-in-v760) | Newly added | Sets the specific times that TiKV initiates periodic full compaction. The default value `[]` means periodic full compaction is disabled. |
 | TiKV | [`raftstore.periodic-full-compact-start-max-cpu`](/tikv-configuration-file.md#periodic-full-compact-start-max-cpu-new-in-v760) | Newly added | Limits the maximum CPU usage rate for TiKV periodic full compaction. The default value is `0.1`. |
+| TiKV | [`raftstore.pd-report-min-resolved-ts-interval`](/tikv-configuration-file.md#pd-report-min-resolved-ts-interval-new-in-v760) | Newly added | Renamed from [`raftstore.report-min-resolved-ts-interval`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#report-min-resolved-ts-interval-new-in-v600). It specifies the minimum interval for TiKV to report Resolved TS to the PD leader. The default value is `"1s"`. |
 | TiKV | [`zstd-dict-size`](/tikv-configuration-file.md#zstd-dict-size) |  Newly added | Specifies the `zstd` dictionary compression size. The default value is `"0KB"`, which means to disable the `zstd` dictionary compression. |
 | TiFlash | [`logger.level`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file) | Modified | Changes the default value from `"debug"` to `"INFO"` to reduce the cost of logging. |
 | TiDB Lightning| [`tidb.pd-addr`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) | Modified  | Configures the addresses of the PD Servers. Starting from v7.6.0, TiDB supports setting multiple PD addresses. |
@@ -326,7 +330,7 @@ Starting from v7.6.0, the `TiDB-community-server` [binary-package](/binary-packa
     - Modify the `CANCEL IMPORT JOB` statement to a synchronous statement [#48736](https://github.com/pingcap/tidb/issues/48736) @[D3Hunter](https://github.com/D3Hunter)
     - Improve the speed of adding indexes to empty tables [#49682](https://github.com/pingcap/tidb/issues/49682) @[zimulala](https://github.com/zimulala)
     - When the columns of a correlated subquery are not referenced by the upper-level operator, the correlated subquery can be eliminated directly [#45822](https://github.com/pingcap/tidb/issues/45822) @[King-Dylan](https://github.com/King-Dylan)
-    - `EXCHANGE PARTITION` operations now trigger maintenance updates of statistics [#47354](https://github.com/pingcap/tidb/issues/47354) @[hi-rustin](https://github.com/hi-rustin)
+    - `EXCHANGE PARTITION` operations now trigger maintenance updates of statistics [#47354](https://github.com/pingcap/tidb/issues/47354) @[hi-rustin](https://github.com/Rustin170506)
     - TiDB supports building binary files that meet the requirements of Federal Information Processing Standards (FIPS) [#47948](https://github.com/pingcap/tidb/issues/47948) @[tiancaiamao](https://github.com/tiancaiamao)
     - Optimize the TiDB implementation when handling some type conversions and fix related issues [#47945](https://github.com/pingcap/tidb/issues/47945) [#47864](https://github.com/pingcap/tidb/issues/47864) [#47829](https://github.com/pingcap/tidb/issues/47829) [#47816](https://github.com/pingcap/tidb/issues/47816) @[YangKeao](https://github.com/YangKeao) @[lcwangchao](https://github.com/lcwangchao)
     - When obtaining the schema version, TiDB uses the KV timeout feature to read by default, reducing the impact of slow meta Region leader reads on schema version updates [#48125](https://github.com/pingcap/tidb/pull/48125) @[cfzjywxk](https://github.com/cfzjywxk)
@@ -428,16 +432,16 @@ Starting from v7.6.0, the `TiDB-community-server` [binary-package](/binary-packa
     - Fix the issue that MPP plans might not be selected when indexes on generated columns are set as visible [#47766](https://github.com/pingcap/tidb/issues/47766) @[AilinKid](https://github.com/AilinKid)
     - Fix the issue that `LIMIT` might not be pushed down to the `OR` type `Index Merge` [#48588](https://github.com/pingcap/tidb/issues/48588) @[AilinKid](https://github.com/AilinKid)
     - Fix the issue that duplicate built-in rows might exist in the `mysql.bind_info` table after BR import [#46527](https://github.com/pingcap/tidb/issues/46527) @[qw4990](https://github.com/qw4990)
-    - Fix the issue that statistics for partitioned tables are not updated as expected after partitions are dropped [#48182](https://github.com/pingcap/tidb/issues/48182) @[hi-rustin](https://github.com/hi-rustin)
+    - Fix the issue that statistics for partitioned tables are not updated as expected after partitions are dropped [#48182](https://github.com/pingcap/tidb/issues/48182) @[hi-rustin](https://github.com/Rustin170506)
     - Fix the issue that errors might be returned during the concurrent merging of global statistics for partitioned tables [#48713](https://github.com/pingcap/tidb/issues/48713) @[hawkingrei](https://github.com/hawkingrei)
     - Fix the issue that query results might be incorrect when the `LIKE` operator is used for index range scans on a column with PADDING SPACE [#48821](https://github.com/pingcap/tidb/issues/48821) @[time-and-fate](https://github.com/time-and-fate)
     - Fix the issue that generated columns might trigger concurrent read and write on memory and result in data race [#44919](https://github.com/pingcap/tidb/issues/44919) @[tangenta](https://github.com/tangenta)
     - Fix the issue that `ANALYZE TABLE` might still collect Top1 statistics even when `WITH 0 TOPN` (indicating not collecting topN statistics) is specified [#49080](https://github.com/pingcap/tidb/issues/49080) @[hawkingrei](https://github.com/hawkingrei)
-    - Fix the issue that illegal optimizer hints might cause valid hints to be ineffective [#49308](https://github.com/pingcap/tidb/issues/49308) @[hawkingrei](https://github.com/hawkingrei)
-    - Fix the issue that statistics for Hash partitioned tables are not correspondingly updated when you add, drop, reorganize, or `TRUNCATE` partitions [#48235](https://github.com/pingcap/tidb/issues/48235) [#48233](https://github.com/pingcap/tidb/issues/48233) [#48226](https://github.com/pingcap/tidb/issues/48226) [#48231](https://github.com/pingcap/tidb/issues/48231) @[hi-rustin](https://github.com/hi-rustin)
+    - Fix the issue that invalid optimizer hints might cause valid hints to be ineffective [#49308](https://github.com/pingcap/tidb/issues/49308) @[hawkingrei](https://github.com/hawkingrei)
+    - Fix the issue that statistics for Hash partitioned tables are not correspondingly updated when you add, drop, reorganize, or `TRUNCATE` partitions [#48235](https://github.com/pingcap/tidb/issues/48235) [#48233](https://github.com/pingcap/tidb/issues/48233) [#48226](https://github.com/pingcap/tidb/issues/48226) [#48231](https://github.com/pingcap/tidb/issues/48231) @[hi-rustin](https://github.com/Rustin170506)
     - Fix the issue that after the time window for automatic statistics updates is configured, statistics might still be updated outside that time window [#49552](https://github.com/pingcap/tidb/issues/49552) @[hawkingrei](https://github.com/hawkingrei)
-    - Fix the issue that old statistics are not automatically deleted when a partitioned table is converted to a non-partitioned table [#49547](https://github.com/pingcap/tidb/issues/49547) @[hi-rustin](https://github.com/hi-rustin)
-    - Fix the issue that old statistics are not automatically deleted when you clear data from a non-partitioned table using `TRUNCATE TABLE` [#49663](https://github.com/pingcap/tidb/issues/49663) @[hi-rustin](https://github.com/hi-rustin)
+    - Fix the issue that old statistics are not automatically deleted when a partitioned table is converted to a non-partitioned table [#49547](https://github.com/pingcap/tidb/issues/49547) @[hi-rustin](https://github.com/Rustin170506)
+    - Fix the issue that old statistics are not automatically deleted when you clear data from a non-partitioned table using `TRUNCATE TABLE` [#49663](https://github.com/pingcap/tidb/issues/49663) @[hi-rustin](https://github.com/Rustin170506)
     - Fix the issue that enforced sorting might become ineffective when a query uses optimizer hints (such as `STREAM_AGG()`) that enforce sorting and its execution plan contains `IndexMerge` [#49605](https://github.com/pingcap/tidb/issues/49605) @[AilinKid](https://github.com/AilinKid)
     - Fix the issue that histogram statistics might not be parsed into readable strings when the histogram boundary contains `NULL` [#49823](https://github.com/pingcap/tidb/issues/49823) @[AilinKid](https://github.com/AilinKid)
     - Fix the issue that executing queries containing the `GROUP_CONCAT(ORDER BY)` syntax might return errors [#49986](https://github.com/pingcap/tidb/issues/49986) @[AilinKid](https://github.com/AilinKid)

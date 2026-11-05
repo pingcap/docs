@@ -56,7 +56,7 @@ SELECT * FROM information_schema.analyze_status;
 | test         | t          | p0             | analyze columns                                                    |              0 | 2022-05-27 11:29:46 | 2022-05-27 11:29:46 | finished |        NULL | 127.0.0.1:4000 | NULL       | NULL                 | NULL     |                  NULL |
 | test         | t          | p1             | analyze table all columns with 256 buckets, 500 topn, 1 samplerate |        1000000 | 2022-05-27 11:30:12 | 2022-05-27 11:40:12 | running  |        NULL | 127.0.0.1:4000 | 690208308  | 600s                 | 0.25     | 4000000               |
 +--------------+------------+----------------+--------------------------------------------------------------------+----------------+---------------------+---------------------+----------+-------------+----------------+------------+----------------------+----------+-----------------------+
-6 rows in set (0.00 sec)
+7 rows in set (0.00 sec)
 ```
 
 Fields in the `ANALYZE_STATUS` table are described as follows:
@@ -64,7 +64,7 @@ Fields in the `ANALYZE_STATUS` table are described as follows:
 * `TABLE_SCHEMA`: The name of the database to which the table belongs.
 * `TABLE_NAME`: The name of the table.
 * `PARTITION_NAME`: The name of the partitioned table.
-* `JOB_INFO`: The information of the `ANALYZE` task. If an index is analyzed, this information will include the index name. When `tidb_analyze_version = 2`, this information will include configuration items such as sample rate.
+* `JOB_INFO`: A brief description of the `ANALYZE` subtask. It shows the `ANALYZE` scope, such as columns, indexes, or global statistics merging, and might include the effective options used, such as `buckets`, `topn`, `samplerate`, or `samples`.
 * `PROCESSED_ROWS`: The number of rows that have been processed.
 * `START_TIME`: The start time of the `ANALYZE` task.
 * `END_TIME`: The end time of the `ANALYZE` task.

@@ -9,7 +9,7 @@ Release date: September 1, 2022
 
 TiDB version: 6.1.1
 
-Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-tidb) | [Production deployment](https://docs.pingcap.com/tidb/v6.1/production-deployment-using-tiup)
+Quick access: [Quick start](https://docs-archive.pingcap.com/tidb/v6.1/quick-start-with-tidb) | [Production deployment](https://docs-archive.pingcap.com/tidb/v6.1/production-deployment-using-tiup)
 
 ## Compatibility changes
 
@@ -33,7 +33,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-
     - `blackbox_exporter-{version}-linux-amd64.tar.gz`
     - `node_exporter-{version}-linux-amd64.tar.gz`
 
-- Introduce multi-level support for different quality standards on the combination of operating systems and CPU architectures. See [OS and platform requirements](https://docs.pingcap.com/tidb/v6.1/hardware-and-software-requirements#os-and-platform-requirements).
+- Introduce multi-level support for different quality standards on the combination of operating systems and CPU architectures. See [OS and platform requirements](https://docs-archive.pingcap.com/tidb/v6.1/hardware-and-software-requirements#os-and-platform-requirements).
 
 ## Improvements
 
@@ -44,7 +44,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-
 + TiKV
 
     - Support compressing the metrics response using gzip to reduce the HTTP body size [#12355](https://github.com/tikv/tikv/issues/12355) @[winoros](https://github.com/winoros)
-    - Support reducing the amount of data returned for each request by filtering out some metrics using the [`server.simplify-metrics`](https://docs.pingcap.com/tidb/v6.1/tikv-configuration-file#simplify-metrics-new-in-v611) configuration item [#12355](https://github.com/tikv/tikv/issues/12355) @[glorv](https://github.com/glorv)
+    - Support reducing the amount of data returned for each request by filtering out some metrics using the [`server.simplify-metrics`](https://docs-archive.pingcap.com/tidb/v6.1/tikv-configuration-file#simplify-metrics-new-in-v611) configuration item [#12355](https://github.com/tikv/tikv/issues/12355) @[glorv](https://github.com/glorv)
     - Support dynamically modifying the number of sub-compaction operations performed concurrently in RocksDB (`rocksdb.max-sub-compactions`) [#13145](https://github.com/tikv/tikv/issues/13145) @[ethercflow](https://github.com/ethercflow)
 
 + PD
@@ -59,7 +59,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-
 
     + TiDB Data Migration (DM)
 
-        - Users can manually set the amount of concurrency for lightning loader [#5505](https://github.com/pingcap/tiflow/issues/5505) @[buchuitoudegou](https://github.com/buchuitoudegou)
+        - Users can manually set the amount of concurrency for TiDB Lightning loader [#5505](https://github.com/pingcap/tiflow/issues/5505) @[buchuitoudegou](https://github.com/buchuitoudegou)
 
     + TiCDC
 
@@ -92,7 +92,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-
     - Fix the issue that the column list does not work in the LOAD DATA statement [#35198](https://github.com/pingcap/tidb/issues/35198) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
     - Fix the issue of the `data and columnID count not match` error that occurs when inserting duplicated values with TiDB Binlog enabled [#33608](https://github.com/pingcap/tidb/issues/33608) @[zyguan](https://github.com/zyguan)
     - Remove the limitation of `tidb_gc_life_time` [#35392](https://github.com/pingcap/tidb/issues/35392) @[TonsnakeLin](https://github.com/TonsnakeLin)
-    - Fix the `LOAD DATA` statement dead loop when an empty filed terminator is used [#33298](https://github.com/pingcap/tidb/issues/33298) @[zyguan](https://github.com/zyguan)
+    - Fix the `LOAD DATA` statement dead loop when an empty field terminator is used [#33298](https://github.com/pingcap/tidb/issues/33298) @[zyguan](https://github.com/zyguan)
     - Avoid sending requests to unhealthy TiKV nodes to improve availability [#34906](https://github.com/pingcap/tidb/issues/34906) @[sticnarf](https://github.com/sticnarf)
 
 + TiKV
@@ -152,16 +152,16 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-
 
     + TiCDC
 
-        - Fix the wrong maximum compatible version number [#6039](https://github.com/pingcap/tiflow/issues/6039) @[hi-rustin](https://github.com/hi-rustin)
+        - Fix the wrong maximum compatible version number [#6039](https://github.com/pingcap/tiflow/issues/6039) @[hi-rustin](https://github.com/Rustin170506)
         - Fix a bug that may cause the cdc server to panic when it receives an HTTP request before it fully starts [#5639](https://github.com/pingcap/tiflow/issues/5639) @[asddongmen](https://github.com/asddongmen)
         - Fix the ddl sink panic issue when the changefeed sync-point is enabled [#4934](https://github.com/pingcap/tiflow/issues/4934) @[asddongmen](https://github.com/asddongmen)
         - Fix the issue that a changefeed is stuck in some scenarios when sync-point is enabled [#6827](https://github.com/pingcap/tiflow/issues/6827) @[hicqu](https://github.com/hicqu)
         - Fix a bug that changefeed API does not work properly after the cdc server restarts [#5837](https://github.com/pingcap/tiflow/issues/5837) @[asddongmen](https://github.com/asddongmen)
         - Fix the data race issue in the black hole sink [#6206](https://github.com/pingcap/tiflow/issues/6206) @[asddongmen](https://github.com/asddongmen)
-        - Fix the TiCDC panic issue when you set `enable-old-value = false` [#6198](https://github.com/pingcap/tiflow/issues/6198) @[hi-rustin](https://github.com/hi-rustin)
+        - Fix the TiCDC panic issue when you set `enable-old-value = false` [#6198](https://github.com/pingcap/tiflow/issues/6198) @[hi-rustin](https://github.com/Rustin170506)
         - Fix the data consistency issue when the redo log feature is enabled [#6189](https://github.com/pingcap/tiflow/issues/6189) [#6368](https://github.com/pingcap/tiflow/issues/6368) [#6277](https://github.com/pingcap/tiflow/issues/6277) [#6456](https://github.com/pingcap/tiflow/issues/6456) [#6695](https://github.com/pingcap/tiflow/issues/6695) [#6764](https://github.com/pingcap/tiflow/issues/6764) [#6859](https://github.com/pingcap/tiflow/issues/6859) @[asddongmen](https://github.com/asddongmen)
         - Fix poor redo log performance by writing redo events asynchronously [#6011](https://github.com/pingcap/tiflow/issues/6011) @[CharlesCheung96](https://github.com/CharlesCheung96)
-        - Fix the issue that the MySQL sink cannot connect to IPv6 addresses [#6135](https://github.com/pingcap/tiflow/issues/6135) @[hi-rustin](https://github.com/hi-rustin)
+        - Fix the issue that the MySQL sink cannot connect to IPv6 addresses [#6135](https://github.com/pingcap/tiflow/issues/6135) @[hi-rustin](https://github.com/Rustin170506)
 
     + Backup & Restore (BR)
 

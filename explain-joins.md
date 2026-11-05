@@ -70,7 +70,7 @@ Index join is efficient in memory usage, but might be slower to execute than oth
 SELECT * FROM t1 INNER JOIN t2 ON t1.id=t2.t1_id WHERE t1.pad1 = 'value' and t2.pad1='value';
 ```
 
-In an inner join operation, TiDB implements join reordering and might access either `t1` or `t2` first. Assume that TiDB selects `t1` as the first table to apply the `build` step, and then TiDB is able to filter on the predicate `t1.col = 'value'` before probing the table `t2`. The filter for the predicate `t2.col='value'` will be applied on each probe of table `t2`, which might be less efficient than other join methods.
+In an inner join operation, TiDB implements join reordering and might access either `t1` or `t2` first. Assume that TiDB selects `t1` as the first table to apply the `build` step, and then TiDB is able to filter on the predicate `t1.pad1 = 'value'` before probing the table `t2`. The filter for the predicate `t2.pad1='value'` will be applied on each probe of table `t2`, which might be less efficient than other join methods.
 
 Index join is effective if the build side is small and the probe side is pre-indexed and large. Consider the following query where an index join performs worse than a hash join and is not chosen by the SQL Optimizer:
 
@@ -219,7 +219,7 @@ The `operator info` column in the `EXPLAIN` result table also records other info
 
 ### Runtime Statistics
 
-If [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) (default value: 1 GB) is exceeded, and the [`tidb_enable_tmp_storage_on_oom`](/system-variables.md#tidb_enable_tmp_storage_on_oom) value is `ON` (default), TiDB will attempt to use temporary storage, and might create the `Build` operator (used as part of the hash join) on disk. Runtime statistics such as memory usage are recorded in the `execution info` of the `EXPLAIN ANALYZE` result table. The following example shows the output of `EXPLAIN ANALYZE` with a 1 GB (default) and a 500 MB quota for `tidb_mem_quota_query`. At 500 MB, disk is used for temporary storage:
+If [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) (default value: 1 GB) is exceeded, and the [`tidb_enable_tmp_storage_on_oom`](/system-variables.md#tidb_enable_tmp_storage_on_oom) value is `ON` (default), TiDB will attempt to use temporary storage and might spill data from the Build side of the hash join to disk. Runtime statistics such as memory usage are recorded in the `execution info` of the `EXPLAIN ANALYZE` result table. The following example shows the output of `EXPLAIN ANALYZE` with a 1 GB (default) and a 500 MB quota for `tidb_mem_quota_query`. At 500 MB, disk is used for temporary storage:
 
 ```sql
 EXPLAIN ANALYZE SELECT /*+ HASH_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;

@@ -169,6 +169,23 @@ Range partitioning is particularly useful when one or more of the following cond
 
 Range COLUMNS partitioning is a variant of Range partitioning. You can use one or more columns as partitioning keys. The data types of partition columns can be integer, string (`CHAR` or `VARCHAR`), `DATE`, and `DATETIME`. Any expressions, such as non-COLUMNS partitioning, are not supported.
 
+Like Range partitioning, Range COLUMNS partitioning also requires the partition ranges to be strictly increasing. The partition definition in the following example is not supported:
+
+```sql
+CREATE TABLE t(
+    a int,
+    b datetime,
+    c varchar(8)
+) PARTITION BY RANGE COLUMNS(`c`,`b`)
+(PARTITION `p20240520A` VALUES LESS THAN ('A','2024-05-20 00:00:00'),
+ PARTITION `p20240520Z` VALUES LESS THAN ('Z','2024-05-20 00:00:00'),
+ PARTITION `p20240521A` VALUES LESS THAN ('A','2024-05-21 00:00:00'));
+```
+
+```
+Error 1493 (HY000): VALUES LESS THAN value must be strictly increasing for each partition
+```
+
 Suppose that you want to partition by name, and drop old and invalid data, then you can create a table as follows:
 
 ```sql
@@ -257,7 +274,7 @@ It creates this table:
 
 ```
 CREATE TABLE `monthly_report_status` (
-  `report_id` int(11) NOT NULL,
+  `report_id` int NOT NULL,
   `report_status` varchar(20) NOT NULL,
   `report_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
@@ -298,11 +315,6 @@ ALTER TABLE table_name LAST PARTITION LESS THAN (<expression>)
 - To use the `INTERVAL` syntax for `RANGE COLUMNS` partitioning, you can only specify a single column in the `INTEGER`, `DATE`, or `DATETIME` type as the partitioning key.
 
 ### List partitioning
-
-Before creating a List partitioned table, make sure the following system variables are set to their default values of `ON`:
-
-- [`tidb_enable_list_partition`](/system-variables.md#tidb_enable_list_partition-new-in-v50)
-- [`tidb_enable_table_partition`](/system-variables.md#tidb_enable_table_partition)
 
 List partitioning is similar to Range partitioning. Unlike Range partitioning, in List partitioning, the partitioning expression values for all rows in each partition are in a given value set. This value set defined for each partition can have any number of values but cannot have duplicate values. You can use the `PARTITION ... VALUES IN (...)` clause to define a value set.
 
@@ -1121,7 +1133,7 @@ SHOW CREATE TABLE\G
 *************************** 1. row ***************************
        Table: example
 Create Table: CREATE TABLE `example` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `data` varchar(1024) DEFAULT NULL,
   PRIMARY KEY (`id`) /*T![clustered_index] CLUSTERED */
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
@@ -1164,7 +1176,7 @@ ALTER TABLE members REMOVE PARTITIONING
 To partition an existing non-partitioned table or modify the partition type of an existing partitioned table, you can use the following statement, which copies all rows and recreates the indexes online according to the new partition definitions:
 
 ```sql
-ALTER TABLE <table_name> PARTITION BY <new partition type and definitions>
+ALTER TABLE <table_name> PARTITION BY <new partition type and definitions> [UPDATE INDEXES (<index name> {GLOBAL|LOCAL}[ , <index name> {GLOBAL|LOCAL}...])]
 ```
 
 Examples:
@@ -1183,6 +1195,21 @@ ALTER TABLE member_level PARTITION BY RANGE(level)
  PARTITION pMid VALUES LESS THAN (3),
  PARTITION pHigh VALUES LESS THAN (7)
  PARTITION pMax VALUES LESS THAN (MAXVALUE));
+```
+
+When partitioning a non-partitioned table or repartitioning an already partitioned table, you can update the indexes to be [global indexes](/global-indexes.md) or local indexes as needed:
+
+```sql
+CREATE TABLE t1 (
+    col1 INT NOT NULL,
+    col2 DATE NOT NULL,
+    col3 INT NOT NULL,
+    col4 INT NOT NULL,
+    UNIQUE KEY uidx12(col1, col2),
+    UNIQUE KEY uidx3(col3)
+);
+
+ALTER TABLE t1 PARTITION BY HASH (col1) PARTITIONS 3 UPDATE INDEXES (uidx12 LOCAL, uidx3 GLOBAL);
 ```
 
 ## Partition pruning
@@ -1293,6 +1320,7 @@ Currently, partition pruning does not work with `LIKE` conditions.
 
     * [`UNIX_TIMESTAMP()`](/functions-and-operators/date-and-time-functions.md)
     * [`TO_DAYS()`](/functions-and-operators/date-and-time-functions.md)
+    * [`EXTRACT(<time unit> FROM <DATETIME/DATE/TIME column>)`](/functions-and-operators/date-and-time-functions.md). For `DATE` and `DATETIME` columns, `YEAR` and `YEAR_MONTH` time units are considered monotonous functions. For the `TIME` column, `HOUR`, `HOUR_MINUTE`, `HOUR_SECOND` and `HOUR_MICROSECOND` are considered monotonous functions. Note that `WEEK` is not supported as time unit in `EXTRACT` for partition pruning.
 
     For example, the partition expression is a simple column:
 
@@ -1451,9 +1479,19 @@ Partition selection is supported for all types of table partitioning, including 
 
 This section introduces some restrictions and limitations on partitioned tables in TiDB.
 
+- Using the [`ALTER TABLE ... CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md) statement to change column types of partitioned tables is not supported.
+- Using the [`ALTER TABLE ... CACHE`](/cached-tables.md) statement to set partitioned tables to cached tables is not supported.
+- [Temporary tables](/temporary-tables.md) in TiDB are **NOT** compatible with partitioned tables.
+- Creating a [foreign key](/foreign-key.md) on a partitioned table is not supported.
+- The [`ORDER_INDEX(t1_name, idx1_name [, idx2_name ...])`](/optimizer-hints.md#order_indext1_name-idx1_name--idx2_name-) hint does not work for partitioned tables and their related indexes, because indexes on partitioned tables cannot be read in order.
+
 ### Partitioning keys, primary keys and unique keys
 
-This section discusses the relationship of partitioning keys with primary keys and unique keys. The rule governing this relationship can be expressed as follows: **Every unique key on the table must use every column in the table's partitioning expression**. This also includes the table's primary key, because it is by definition a unique key.
+This section discusses the relationship of partitioning keys with primary keys and unique keys. The rule governing this relationship is as follows: every unique key on the partitioned table, including the primary key, must use every column in the table's partitioning expression, because the primary key is also a unique key by definition.
+
+> **Note:**
+>
+> You can ignore this rule when using [global indexes](/global-indexes.md).
 
 For example, the following table creation statements are invalid:
 
@@ -1533,7 +1571,7 @@ PARTITIONS 4;
 ```
 
 ```
-ERROR 1491 (HY000): A PRIMARY KEY must include all columns in the table's partitioning function
+ERROR 8264 (HY000): Global Index is needed for index 'col1', since the unique index is not including all partitioning columns, and GLOBAL is not given as IndexOption
 ```
 
 The `CREATE TABLE` statement fails because both `col1` and `col3` are included in the proposed partitioning key, but neither of these columns is part of both of unique keys on the table. After the following modifications, the `CREATE TABLE` statement becomes valid:
@@ -1659,8 +1697,12 @@ CREATE TABLE t (a varchar(20), b blob,
 ```
 
 ```sql
-ERROR 1503 (HY000): A UNIQUE INDEX must include all columns in the table's partitioning function
+ERROR 8264 (HY000): Global Index is needed for index 'a', since the unique index is not including all partitioning columns, and GLOBAL is not given as IndexOption
 ```
+
+### Global indexes
+
+For detailed information about global indexes, see [Global Indexes](/global-indexes.md).
 
 ### Partitioning limitations relating to functions
 
@@ -1695,8 +1737,6 @@ YEARWEEK()
 ### Compatibility with MySQL
 
 Currently, TiDB supports Range partitioning, Range COLUMNS partitioning, List partitioning, List COLUMNS partitioning, Hash partitioning, and Key partitioning. Other partitioning types that are available in MySQL are not supported yet in TiDB.
-
-With regard to partition management, any operation that requires moving data in the bottom implementation is not supported currently, including but not limited to: adjust the number of partitions in a Hash partitioned table, modify the Range of a Range partitioned table, and merge partitions.
 
 For the unsupported partitioning types, when you create a table in TiDB, the partitioning information is ignored and the table is created in the regular form with a warning reported.
 
@@ -1792,13 +1832,9 @@ select * from t;
 5 rows in set (0.00 sec)
 ```
 
-The `tidb_enable_list_partition` environment variable controls whether to enable the partitioned table feature. If this variable is set to `OFF`, the partition information will be ignored when a table is created, and this table will be created as a normal table.
+## Dynamic pruning mode
 
-This variable is only used in table creation. After the table is created, modify this variable value takes no effect. For details, see [system variables](/system-variables.md#tidb_enable_list_partition-new-in-v50).
-
-### Dynamic pruning mode
-
-TiDB accesses partitioned tables in either `dynamic` or `static` mode. `dynamic` mode is used by default since v6.3.0. However, dynamic partitioning is effective only after the full table-level statistics, or GlobalStats, are collected. Before GlobalStats are collected, TiDB will use the `static` mode instead. For detailed information about GlobalStats, see [Collect statistics of partitioned tables in dynamic pruning mode](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode).
+TiDB accesses partitioned tables in either `dynamic` or `static` mode. `dynamic` mode is used by default since v6.3.0. However, dynamic partitioning is effective only after the full table-level statistics, or global statistics, are collected. If you enable the `dynamic` pruning mode before global statistics collection is completed, TiDB remains in the `static` mode until global statistics are fully collected. For detailed information about global statistics, see [Collect statistics of partitioned tables in dynamic pruning mode](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode).
 
 {{< copyable "sql" >}}
 
@@ -1808,9 +1844,9 @@ set @@session.tidb_partition_prune_mode = 'dynamic'
 
 Manual ANALYZE and normal queries use the session-level `tidb_partition_prune_mode` setting. The `auto-analyze` operation in the background uses the global `tidb_partition_prune_mode` setting.
 
-In `static` mode, partitioned tables use partition-level statistics. In `dynamic` mode, partitioned tables use table-level GlobalStats.
+In `static` mode, partitioned tables use partition-level statistics. In `dynamic` mode, partitioned tables use table-level global statistics.
 
-When switching from `static` mode to `dynamic` mode, you need to check and collect statistics manually. This is because after the switch to `dynamic` mode, partitioned tables have only partition-level statistics but no table-level statistics. GlobalStats are collected only upon the next `auto-analyze` operation.
+When switching from `static` mode to `dynamic` mode, you need to check and collect statistics manually. This is because after the switch to `dynamic` mode, partitioned tables have only partition-level statistics but no table-level statistics. Global statistics are collected only upon the next `auto-analyze` operation.
 
 {{< copyable "sql" >}}
 
@@ -1830,7 +1866,7 @@ show stats_meta where table_name like "t";
 3 rows in set (0.01 sec)
 ```
 
-To make sure that the statistics used by SQL statements are correct after you enable global `dynamic` pruning mode, you need to manually trigger `analyze` on the tables or on a partition of the table to obtain GlobalStats.
+To make sure that the statistics used by SQL statements are correct after you enable global `dynamic` pruning mode, you need to manually trigger `analyze` on the tables or on a partition of the table to obtain global statistics.
 
 {{< copyable "sql" >}}
 
@@ -1936,7 +1972,7 @@ mysql> create table t2 (id int, code int);
 Query OK, 0 rows affected (0.01 sec)
 
 mysql> set @@tidb_partition_prune_mode = 'static';
-Query OK, 0 rows affected (0.00 sec)
+Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 mysql> explain select /*+ TIDB_INLJ(t1, t2) */ t1.* from t1, t2 where t2.code = 0 and t2.id = t1.id;
 +--------------------------------+----------+-----------+------------------------+------------------------------------------------+
@@ -2001,7 +2037,7 @@ From example 2, you can see that in `dynamic` mode, the execution plan with Inde
 
 Currently, `static` pruning mode does not support plan cache for both prepared and non-prepared statements.
 
-#### Update statistics of partitioned tables in dynamic pruning mode
+### Update statistics of partitioned tables in dynamic pruning mode
 
 1. Locate all partitioned tables:
 
@@ -2067,3 +2103,9 @@ Currently, `static` pruning mode does not support plan cache for both prepared a
     SET session tidb_partition_prune_mode = dynamic;
     source gatherGlobalStats.sql
     ```
+
+## Related resources
+
+<RelatedResources>
+  <ResourceCard title="TiDB SQL Tuning Lab 2: Partitioned Tables" type="lab" link="https://labs.tidb.io/labs/dba_307_lab_ff1" imgSrc="https://lab-static.pingcap.com/quick-demo/307-02.png" duration="90 mins" />
+</RelatedResources>

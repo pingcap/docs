@@ -9,7 +9,7 @@ summary: An overview of the usage of SET RESOURCE GROUP in the TiDB database.
 
 > **Note:**
 >
-> This feature is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+> This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) instances.
 
 ## Synopsis
 
@@ -38,6 +38,7 @@ Create a user `user1`, create two resource groups `rg1` and `rg2`, and bind the 
 ```sql
 CREATE USER 'user1';
 CREATE RESOURCE GROUP 'rg1' RU_PER_SEC = 1000;
+CREATE RESOURCE GROUP 'rg2' RU_PER_SEC = 2000;
 ALTER USER 'user1' RESOURCE GROUP `rg1`;
 ```
 
@@ -97,4 +98,4 @@ MySQL also supports [SET RESOURCE GROUP](https://dev.mysql.com/doc/refman/8.0/en
 * [CREATE RESOURCE GROUP](/sql-statements/sql-statement-create-resource-group.md)
 * [DROP RESOURCE GROUP](/sql-statements/sql-statement-drop-resource-group.md)
 * [ALTER RESOURCE GROUP](/sql-statements/sql-statement-alter-resource-group.md)
-* [Resource Control](/tidb-resource-control.md)
+* [Resource Control](/tidb-resource-control-ru-groups.md)

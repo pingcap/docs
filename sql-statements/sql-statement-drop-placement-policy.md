@@ -1,6 +1,6 @@
 ---
 title: DROP PLACEMENT POLICY
-summary: The usage of ALTER PLACEMENT POLICY in TiDB.
+summary: The usage of DROP PLACEMENT POLICY in TiDB.
 ---
 
 # DROP PLACEMENT POLICY
@@ -9,7 +9,7 @@ summary: The usage of ALTER PLACEMENT POLICY in TiDB.
 
 > **Note:**
 >
-> This feature is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+> This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) instances.
 
 ## Synopsis
 

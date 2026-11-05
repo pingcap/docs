@@ -60,7 +60,33 @@ In addition, TiDB also provides the following aggregate functions:
     1 row in set (0.00 sec)
     ```
 
-Except for the `GROUP_CONCAT()` and `APPROX_PERCENTILE()` functions, all the preceding functions can serve as [Window functions](/functions-and-operators/window-functions.md).
++ `APPROX_COUNT_DISTINCT(expr, [expr...])`
+
+    This function is similar to `COUNT(DISTINCT)` in counting the number of distinct values but returns an approximate result. It uses the `BJKST` algorithm, significantly reducing memory consumption when processing large datasets with a power-law distribution. Moreover, for low-cardinality data, this function provides high accuracy while maintaining efficient CPU utilization.
+
+    The following example shows how to use this function:
+
+    ```sql
+    DROP TABLE IF EXISTS t;
+    CREATE TABLE t(a INT, b INT, c INT);
+    INSERT INTO t VALUES(1, 1, 1), (2, 1, 1), (2, 2, 1), (3, 1, 1), (5, 1, 2), (5, 1, 2), (6, 1, 2), (7, 1, 2);
+    ```
+
+    ```sql
+    SELECT APPROX_COUNT_DISTINCT(a, b) FROM t GROUP BY c;
+    ```
+
+    ```
+    +-----------------------------+
+    | approx_count_distinct(a, b) |
+    +-----------------------------+
+    |                           3 |
+    |                           4 |
+    +-----------------------------+
+    2 rows in set (0.00 sec)
+    ```
+
+Except for the `GROUP_CONCAT()`, `APPROX_PERCENTILE()`, and `APPROX_COUNT_DISTINCT` functions, all the preceding functions can serve as [Window functions](/functions-and-operators/window-functions.md).
 
 ## GROUP BY modifiers
 
@@ -68,7 +94,7 @@ Starting from v7.4.0, the `GROUP BY` clause of TiDB supports the `WITH ROLLUP` m
 
 ## SQL mode support
 
-TiDB supports the SQL Mode `ONLY_FULL_GROUP_BY`, and when enabled TiDB will refuse queries with ambiguous non-aggregated columns. For example, this query is illegal with `ONLY_FULL_GROUP_BY` enabled because the non-aggregated column "b" in the `SELECT` list does not appear in the `GROUP BY` statement:
+TiDB supports the SQL Mode `ONLY_FULL_GROUP_BY`, and when enabled TiDB will refuse queries with ambiguous non-aggregated columns. For example, this query is invalid with `ONLY_FULL_GROUP_BY` enabled because the non-aggregated column "b" in the `SELECT` list does not appear in the `GROUP BY` statement:
 
 ```sql
 drop table if exists t;

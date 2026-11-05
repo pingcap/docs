@@ -1,0 +1,18 @@
+[
+  {
+    "id": "data-branch",
+    "definition": {
+      "en": "A branch of your TiDB Cloud Starter or Essential instance that contains a copy of its data, allowing you to experiment without affecting the original instance.",
+      "zh": "基于当前 TiDB Cloud Starter 或 Essential 实例的一个分支，包含该实例数据的副本，可以让你在该分支上进行实验而不影响原始实例。",
+      "ja": "TiDB Cloud Starter または Essential インスタンスから作成されるブランチであり、そのデータのコピーを含み、元のインスタンスに影響を与えることなく実験できます。"
+    }
+  },
+  {
+    "id": "sql-editor",
+    "definition": {
+      "en": "A built-in AI-assisted SQL editor in the TiDB Cloud console, allowing you to generate SQL queries automatically or write SQL queries manually.",
+      "zh": "TiDB Cloud 控制台内置的 AI 辅助 SQL 编辑器，支持自动生成 SQL 查询或手动编写 SQL 查询。",
+      "ja": "TiDB Cloud コンソールに組み込まれた AI 支援の SQL エディタで、SQL クエリを自動生成したり手動で作成したりできます。"
+    }
+  }
+]

@@ -20,10 +20,10 @@ This document introduces how to use DM in an elegant and efficient way, and how 
 | Performance item  | Limitation |
 | ----------------- | :--------: |
 |  Max work nodes              |  1000           |
-|  Max task number             |  600            |
+|  Max number of tasks         |  600            |
 |  Max QPS                     |  30k QPS/worker |
 |  Max Binlog throughput       |  20 MB/s/worker |
-|  Table number limit per task |  Unlimited      |
+|  Max number of tables per task |  Unlimited      |
 
 - DM supports managing 1000 work nodes simultaneously, and the maximum number of tasks is 600. To ensure the high availability of work nodes, you should reserve some work nodes as standby nodes. The recommended number of standby nodes is 20% to 50% of the number of the work nodes that have running migration tasks.
 - A single work node can theoretically support replication QPS of up to 30K QPS/worker. It varies for different schemas and workloads. The ability to handle upstream binlogs is up to 20 MB/s/worker.
@@ -41,7 +41,7 @@ To distribute the workload evenly on multiple nodes, the design for the distribu
 
 `AUTO_INCREMENT` in TiDB is compatible with `AUTO_INCREMENT` in MySQL. However, as a distributed database, TiDB usually has multiple computing nodes (entries for the client end). When the application data is written, the workload is evenly distributed. This leads to the result that when there is an `AUTO_INCREMENT` column in the table, the auto-increment IDs of the column might be inconsecutive. For more details, see [AUTO_INCREMENT](/auto-increment.md#implementation-principles).
 
-If your business has a strong dependence on auto-increment IDs, consider using the [SEQUENCE function](/sql-statements/sql-statement-create-sequence.md#sequence-function).
+If your business has a strong dependence on auto-increment IDs, consider using the [MySQL-compatible `AUTO_INCREMENT` mode](/auto-increment.md#mysql-compatibility-mode) or the [`SEQUENCE` function](/sql-statements/sql-statement-create-sequence.md#sequence-function).
 
 #### Usage of clustered indexes
 
@@ -61,11 +61,11 @@ When you create a table, you can declare that the primary key is either a cluste
 
 - Clustered indexes + `AUTO_RANDOM`
 
-    This solution can retain the benefits of using clustered indexes and avoid the write hotspot problem. It requires less effort for customization. You can modify the schema attribute when you switch to use TiDB as the write database. In subsequent queries, if you have to use the ID column to sort data, you can use the [`AUTO_RANDOM`](/auto-random.md) ID column and left shift 5 bits to ensure the order of the query data. For example:
+    This solution can retain the benefits of using clustered indexes and avoid the write hotspot problem. It requires less effort for customization. You can modify the schema attribute when you switch to use TiDB as the write database. In subsequent queries, if you have to use the ID column to sort data, you can use the [`AUTO_RANDOM`](/auto-random.md) ID column and left shift 6 bits (1 sign bit + 5 shard bits) to ensure the order of the query data. For example:
 
     ```sql
     CREATE TABLE t (a bigint PRIMARY KEY AUTO_RANDOM, b varchar(255));
-    Select a, a<<5 ,b from t order by a <<5 desc
+    Select a, a<<6 ,b from t order by a <<6 desc
     ```
 
 The following table summarizes the pros and cons of each solution.
@@ -99,7 +99,7 @@ The following table summarizes the pros and cons of optimistic mode and pessimis
 
 | Scenario | Pros | Cons |
 | :--- | :--- | :--- |
-| Pessimistic mode (Default) | It can ensure that the data migrated to the downstream will not go wrong.  | If there are a large number of shards, the migration task will be blocked for a long time, or even stop if the upstream binlogs have been cleaned up. You can enable the relay log to avoid this problem. For more information, see [Use the relay log](#use-the relay-log). |
+| Pessimistic mode (Default) | It can ensure that the data migrated to the downstream will not go wrong.  | If there are a large number of shards, the migration task will be blocked for a long time, or even stop if the upstream binlogs have been cleaned up. You can enable the relay log to avoid this problem. For more information, see [Use the relay log](#use-the-relay-log). |
 | Optimistic mode| Upstream schema changes will not cause data migration latency.  | In this mode, ensure that schema changes are compatible (check whether the incremental column has a default value). It is possible that the inconsistent data can be overlooked. For more information, see [Merge and Migrate Data from Sharded Tables in Optimistic Mode](/dm/feature-shard-merge-optimistic.md#restrictions).|
 
 ### Other restrictions and impact
@@ -145,7 +145,7 @@ The following table describes the recommended deployment plans for DM-master and
 
 | Scenario | DM-master deployment | DM-worker deployment |
 | :--- | :--- | :--- |
-| <li>Small dataset (less than 1 TiB)</li><li>One-time data migration</li> | Deploy 1 DM-master node | Deploy 1~N DM-worker nodes according to the number of upstream data sources. Generally, 1 DM-worker node is recommended. |
+| <li>Small dataset (less than 1 TiB)</li><li>One-time data migration</li> | Deploy 1 DM-master node | Deploy 1 to N DM-worker nodes, where N is the number of upstream data sources. Generally, 1 DM-worker node is recommended. |
 | <li>Large dataset (more than 1 TiB) and migrating and merging MySQL shards</li><li>One-time data migration</li> | It is recommended to deploy 3 DM-master nodes to ensure the availability of the DM cluster during long-time data migration. | Deploy DM-worker nodes according to the number of data sources or migration tasks. Besides working DM-worker nodes, it is recommended to deploy 1~3 idle DM-worker nodes. |
 | Long-term data replication | It is necessary to deploy 3 DM-master nodes. If you deploy DM-master nodes on the cloud, try to deploy them in different availability zones (AZ). | Deploy DM-worker nodes according to the number of data sources or migration tasks. It is necessary to deploy 1.5~2 times the number of DM-worker nodes that are actually needed. |
 
@@ -194,11 +194,11 @@ In the MySQL master/standby mechanism, the standby node saves a copy of relay lo
 
 There are some restrictions on using the relay log. DM supports high availability. When a DM-worker fails, it will try to promote an idle DM-worker instance to a working instance. If the upstream binlogs do not contain the necessary migration logs, it may cause interruption. You need to intervene manually to copy the relay log to the new DM-worker node as soon as possible, and modify the corresponding relay meta file. For details, see [Troubleshooting](/dm/dm-error-handling.md#the-relay-unit-throws-error-event-from--in--diff-from-passed-in-event--or-a-migration-task-is-interrupted-with-failing-to-get-or-parse-binlog-errors-like-get-binlog-error-error-1236-hy000-and-binlog-checksum-mismatch-data-may-be-corrupted-returned).
 
-#### Use PT-osc/GH-ost in upstream
+#### Use pt-osc/gh-ost in upstream
 
-In daily MySQL operation and maintenance, usually you use tools such as PT-osc/GH-ost to change the schema online to minimize impact on the business. However, the whole process will be logged to MySQL Binlog. Migrating such data to TiDB downstream will result in a lot of unnecessary write operations, which is neither efficient nor economical.
+In daily MySQL operation and maintenance, usually you use tools such as pt-osc/gh-ost to change the schema online to minimize impact on the business. However, the whole process will be logged to MySQL Binlog. Migrating such data to TiDB downstream will result in many unnecessary write operations, which is neither efficient nor economical.
 
-To resolve this issue, DM supports third-party data tools such as PT-osc and GH-ost when you configure the migration task. When you use such tools, DM does not migrate redundant data and ensure data consistency. For details, see [Migrate from Databases that Use GH-ost/PT-osc](/dm/feature-online-ddl.md).
+To resolve this issue, DM supports third-party data tools such as pt-osc and gh-ost when you configure the migration task. When you use such tools, DM does not migrate redundant data and ensure data consistency. For details, see [Migrate from Databases that Use gh-ost/pt-osc](/dm/feature-online-ddl.md).
 
 ## Best practices during migration
 

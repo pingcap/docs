@@ -21,6 +21,10 @@ The deployment machine has multiple CPU processors with sufficient memory. To im
 | TiKV | 6 | 32 VCore 64GB | 10.0.1.7<br/> 10.0.1.8<br/> 10.0.1.9 | 1. Separate the instance-level port and status_port; <br/> 2. Configure the global parameters `readpool`, `storage` and `raftstore`; <br/> 3. Configure labels of the instance-level host; <br/> 4. Configure NUMA to bind CPU cores |
 | Monitoring & Grafana | 1 | 4 VCore 8GB * 1 500GB (ssd)  | 10.0.1.10 | Default configuration |
 
+> **Note:**
+>
+> The IP addresses of the instances are given as examples only. In your actual deployment, replace the IP addresses with your actual IP addresses.
+
 ### Topology templates
 
 - [The simple template for the hybrid deployment](https://github.com/pingcap/docs/blob/master/config-templates/simple-multi-instance.yaml)
@@ -65,7 +69,7 @@ This section introduces the key parameters when you deploy multiple instances on
 
 - The label scheduling configuration
 
-    Since multiple instances of TiKV are deployed on a single machine, if the physical machines go down, the Raft Group might lose two of the default three replicas, which causes the cluster unavailability. To address this issue, you can use the label to enable the smart scheduling of PD, which ensures that the Raft Group has more than two replicas in multiple TiKV instances on the same machine.
+    When multiple TiKV instances are deployed on a single physical machine, a machine failure might cause a Raft Group to lose two of its default three replicas. Losing these replicas makes that Raft Group unavailable. Configure host-level labels so that PD can spread replicas across different physical machines and reduce this risk.
 
     - The TiKV configuration
 
@@ -88,11 +92,11 @@ This section introduces the key parameters when you deploy multiple instances on
 
 - `numa_node` core binding
 
-    - In the instance parameter module, configure the corresponding `numa_node` parameter and add the number of CPU cores.
+    - In the instance configuration, set `numa_node` to the NUMA node ID or IDs, such as `"0"` or `"0,1"`.
     
     - Before using NUMA to bind cores, make sure that the numactl tool is installed, and confirm the information of CPUs in the physical machines. After that, configure the parameters.
 
-    - The `numa_node` parameter corresponds to the `numactl --membind` configuration.
+    - After you configure `numa_node`, TiUP uses `numactl` to bind the CPU and memory resources of the instance to the specified NUMA nodes.
 
 > **Note:**
 >

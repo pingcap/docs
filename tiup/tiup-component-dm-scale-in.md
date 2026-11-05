@@ -13,7 +13,7 @@ The `tiup dm scale-in` command is used to scale in the cluster. Scaling in the c
 tiup dm scale-in <cluster-name> [flags]
 ```
 
-`<cluster-name>`: the name of the cluster to operate on. If you forget the cluster name, you can check it with the [cluster list](/tiup/tiup-component-dm-list.md) command.
+`<cluster-name>`: the name of the cluster to operate on. If you forget the cluster name, you can check it with the [tiup dm list](/tiup/tiup-component-dm-list.md) command.
 
 ## Options
 
@@ -38,5 +38,3 @@ tiup dm scale-in <cluster-name> [flags]
 ## Output
 
 The log of scaling in.
-
-[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)

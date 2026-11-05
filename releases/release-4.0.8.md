@@ -80,7 +80,7 @@ TiDB version: 4.0.8
 
     + Dumpling
 
-        - Support dumpling data directly to S3 storages [#155](https://github.com/pingcap/dumpling/pull/155)
+        - Support dumping data directly to S3 storages [#155](https://github.com/pingcap/dumpling/pull/155)
         - Support dumping views [#158](https://github.com/pingcap/dumpling/pull/158)
         - Support dumping the table that only contains generated columns [#166](https://github.com/pingcap/dumpling/pull/166)
 
@@ -149,7 +149,6 @@ TiDB version: 4.0.8
 
         - Fix the unexpected exit caused by the failure to update the GC safepoint [#979](https://github.com/pingcap/tiflow/pull/979)
         - Fix the issue that the task status is unexpectedly flushed because of the incorrect mod revision cache [#1017](https://github.com/pingcap/tiflow/pull/1017)
-        - Fix the unexpected empty Maxwell messages [#978](https://github.com/pingcap/tiflow/pull/978)
 
     + TiDB Lightning
 

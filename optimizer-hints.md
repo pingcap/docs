@@ -32,7 +32,7 @@ An incorrect or incomplete hint will not result in a statement error. This is be
 
 Currently, TiDB supports two categories of hints, which are different in scope. The first category of hints takes effect in the scope of query blocks, such as [`/*+ HASH_AGG() */`](#hash_agg); the second category of hints takes effect in the whole query, such as [`/*+ MEMORY_QUOTA(1024 MB)*/`](#memory_quotan).
 
-Each query or sub-query in a statement corresponds to a different query block, and each query block has its own name. For example:
+Each query or subquery in a statement corresponds to a different query block, and each query block has its own name. For example:
 
 {{< copyable "sql" >}}
 
@@ -40,7 +40,7 @@ Each query or sub-query in a statement corresponds to a different query block, a
 SELECT * FROM (SELECT * FROM t) t1, (SELECT * FROM t) t2;
 ```
 
-The above query statement has three query blocks: the outermost `SELECT` corresponds to the first query block, whose name is `sel_1`; the two `SELECT` sub-queries correspond to the second and the third query block, whose names are `sel_2` and `sel_3`, respectively. The sequence of the numbers is based on the appearance of `SELECT` from left to right. If you replace the first `SELECT` with `DELETE` or `UPDATE`, then the corresponding query block names are `del_1` or `upd_1`.
+The above query statement has three query blocks: the outermost `SELECT` corresponds to the first query block, whose name is `sel_1`; the two `SELECT` subqueries correspond to the second and the third query block, whose names are `sel_2` and `sel_3`, respectively. The sequence of the numbers is based on the appearance of `SELECT` from left to right. If you replace the first `SELECT` with `DELETE` or `UPDATE`, then the corresponding query block names are `del_1` or `upd_1`.
 
 ## Hints that take effect in query blocks
 
@@ -145,7 +145,11 @@ The `NO_INDEX_HASH_JOIN(t1_name [, tl_name ...])` hint tells the optimizer not t
 
 ### INL_MERGE_JOIN
 
-The `INL_MERGE_JOIN(t1_name [, tl_name])` hint tells the optimizer to use the index nested loop merge join algorithm. The conditions for using this algorithm are the same with the conditions for using the index nested loop join algorithm.
+> **Warning:** 
+>
+> Starting from TiDB v8.3.0, the `INL_MERGE_JOIN` hint is deprecated and no longer takes effect, because it might return incorrect results. If a query specifies this hint, TiDB ignores it and selects another join algorithm.
+
+Before v8.3.0, the `INL_MERGE_JOIN(t1_name [, tl_name])` hint tells the optimizer to use the index nested loop merge join algorithm. The conditions for using this algorithm are the same with the conditions for using the index nested loop join algorithm.
 
 ### NO_INDEX_MERGE_JOIN(t1_name [, tl_name ...])
 
@@ -475,6 +479,60 @@ EXPLAIN SELECT /*+ NO_ORDER_INDEX(t, a) */ a FROM t ORDER BY a LIMIT 10;
 
 The same as the example of `ORDER_INDEX` hint, the optimizer generates two types of plans for this query: `Limit + IndexScan(keep order: true)` and `TopN + IndexScan(keep order: false)`. When the `NO_ORDER_INDEX` hint is used, the optimizer will choose the latter plan to read the index out of order.
 
+### INDEX_LOOKUP_PUSHDOWN(t1_name, idx1_name [, idx2_name ...]) <span class="version-mark">New in v8.5.5 and v9.0.0</span>
+
+The `INDEX_LOOKUP_PUSHDOWN(t1_name, idx1_name [, idx2_name ...])` hint instructs the optimizer to access the specified table using only the specified indexes and push down the `IndexLookUp` operator to TiKV for execution.
+
+The following example shows the execution plan generated when using this hint:
+
+```sql
+CREATE TABLE t1(a INT, b INT, KEY(a));
+EXPLAIN SELECT /*+ INDEX_LOOKUP_PUSHDOWN(t1, a) */ a, b FROM t1;
+```
+
+```sql
++-----------------------------+----------+-----------+----------------------+--------------------------------+
+| id                          | estRows  | task      | access object        | operator info                  |
++-----------------------------+----------+-----------+----------------------+--------------------------------+
+| IndexLookUp_7               | 10000.00 | root      |                      |                                |
+| ├─LocalIndexLookUp(Build)   | 10000.00 | cop[tikv] |                      | index handle offsets:[1]       |
+| │ ├─IndexFullScan_5(Build)  | 10000.00 | cop[tikv] | table:t1, index:a(a) | keep order:false, stats:pseudo |
+| │ └─TableRowIDScan_8(Probe) | 10000.00 | cop[tikv] | table:t1             | keep order:false, stats:pseudo |
+| └─TableRowIDScan_6(Probe)   | 0.00     | cop[tikv] | table:t1             | keep order:false, stats:pseudo |
++-----------------------------+----------+-----------+----------------------+--------------------------------+
+```
+
+When you use the `INDEX_LOOKUP_PUSHDOWN` hint, the outermost Build operator on the TiDB side in the original execution plan is replaced with `LocalIndexLookUp` and pushed down to TiKV for execution. While scanning the index, TiKV attempts to perform a table lookup locally to read the corresponding row data. Because the index and row data might be distributed across different Regions, requests pushed down to TiKV might not cover all target rows. As a result, the execution plan still retains the `TableRowIDScan` operator on the TiDB side to fetch rows that are not hit on the TiKV side.
+
+The `INDEX_LOOKUP_PUSHDOWN` hint currently has the following limitations:
+
+- Cached tables and temporary tables are not supported.
+- Queries using [global indexes](/global-indexes.md) are not supported.
+- Queries using [multi-valued indexes](/choose-index.md#use-multi-valued-indexes) are not supported.
+- Isolation levels other than `REPEATABLE-READ` are not supported.
+- [Follower Read](/follower-read.md) is not supported.
+- [Stale Read](/stale-read.md) and [reading historical data using `tidb_snapshot`](/read-historical-data.md) are not supported.
+- The pushed-down `LocalIndexLookUp` operator does not support `keep order`. If the execution plan includes an `ORDER BY` based on index columns, the query falls back to a regular `IndexLookUp`.
+- The pushed-down `LocalIndexLookUp` operator does not support sending Coprocessor requests in paging mode.
+- The pushed-down `LocalIndexLookUp` operator does not support [Coprocessor Cache](/coprocessor-cache.md).
+
+### NO_INDEX_LOOKUP_PUSHDOWN(t1_name) <span class="version-mark">New in v8.5.5 and v9.0.0</span>
+
+The `NO_INDEX_LOOKUP_PUSHDOWN(t1_name)` hint explicitly disables the `IndexLookUp` pushdown for a specified table. This hint is typically used with the [`tidb_index_lookup_pushdown_policy`](/system-variables.md#tidb_index_lookup_pushdown_policy-new-in-v855-and-v900) system variable. When the value of this variable is `force` or `affinity-force`, you can use this hint to prevent `IndexLookUp` pushdown for specific tables.
+
+The following example sets the `tidb_index_lookup_pushdown_policy` variable to `force`, which automatically enables pushdown for all `IndexLookUp` operators in the current session. If you specify the `NO_INDEX_LOOKUP_PUSHDOWN` hint in a query, `IndexLookUp` is not pushed down for the corresponding table:
+
+```sql
+SET @@tidb_index_lookup_pushdown_policy = 'force';
+
+-- The IndexLookUp operator will not be pushed down.
+SELECT /*+ NO_INDEX_LOOKUP_PUSHDOWN(t) */ * FROM t WHERE a > 1;
+```
+
+> **Note:**
+>
+> `NO_INDEX_LOOKUP_PUSHDOWN` takes precedence over [`INDEX_LOOKUP_PUSHDOWN`](#index_lookup_pushdownt1_name-idx1_name--idx2_name--new-in-v855-and-v900). When you specify both hints in the same query, `NO_INDEX_LOOKUP_PUSHDOWN` takes effect.
+
 ### AGG_TO_COP()
 
 The `AGG_TO_COP()` hint tells the optimizer to push down the aggregate operation in the specified query block to the coprocessor. If the optimizer does not push down some aggregate function that is suitable for pushdown, then it is recommended to use this hint. For example:
@@ -497,7 +555,7 @@ SELECT /*+ LIMIT_TO_COP() */ * FROM t WHERE a = 1 AND b > 10 ORDER BY c LIMIT 1;
 
 ### READ_FROM_STORAGE(TIFLASH[t1_name [, tl_name ...]], TIKV[t2_name [, tl_name ...]])
 
-The `READ_FROM_STORAGE(TIFLASH[t1_name [, tl_name ...]], TIKV[t2_name [, tl_name ...]])` hint tells the optimizer to read specific table(s) from specific storage engine(s). Currently, this hint supports two storage engine parameters - `TIKV` and `TIFLASH`. If a table has an alias, use the alias as the parameter of `READ_FROM_STORAGE()`; if the table does not has an alias, use the table's original name as the parameter. For example:
+The `READ_FROM_STORAGE(TIFLASH[t1_name [, tl_name ...]], TIKV[t2_name [, tl_name ...]])` hint tells the optimizer to read specific table(s) from specific storage engine(s). Currently, this hint supports two storage engine parameters - `TIKV` and `TIFLASH`. If a table has an alias, use the alias as the parameter of `READ_FROM_STORAGE()`; if the table does not have an alias, use the table's original name as the parameter. For example:
 
 {{< copyable "sql" >}}
 
@@ -717,7 +775,7 @@ In addition to this hint, setting the `tidb_enable_index_merge` system variable 
 
 ### USE_TOJA(boolean_value)
 
-The `boolean_value` parameter can be `TRUE` or `FALSE`. The `USE_TOJA(TRUE)` hint enables the optimizer to convert an `in` condition (containing a sub-query) to join and aggregation operations. Comparatively, the `USE_TOJA(FALSE)` hint disables this feature.
+The `boolean_value` parameter can be `TRUE` or `FALSE`. The `USE_TOJA(TRUE)` hint enables the optimizer to convert an `in` condition (containing a subquery) to join and aggregation operations. Comparatively, the `USE_TOJA(FALSE)` hint disables this feature.
 
 For example, the following query will convert `in (select t2.a from t2) subq` to corresponding join and aggregation operations:
 
@@ -851,7 +909,7 @@ SELECT /*+ NTH_PLAN(3) */ count(*) from t where a > 5;
 
 ### RESOURCE_GROUP(resource_group_name)
 
-`RESOURCE_GROUP(resource_group_name)` is used for [Resource Control](/tidb-resource-control.md) to isolate resources. This hint temporarily executes the current statement using the specified resource group. If the specified resource group does not exist, this hint will be ignored.
+`RESOURCE_GROUP(resource_group_name)` is used for [Resource Control](/tidb-resource-control-ru-groups.md) to isolate resources. This hint temporarily executes the current statement using the specified resource group. If the specified resource group does not exist, this hint will be ignored.
 
 Example:
 

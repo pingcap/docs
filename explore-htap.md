@@ -9,7 +9,7 @@ This guide describes how to explore and use the features of TiDB Hybrid Transact
 
 > **Note:**
 >
-> If you are new to TiDB HTAP and want to start using it quickly, see [Quick start with HTAP](/quick-start-with-htap.md).
+> If you are new to TiDB HTAP and want to start using it quickly, see [Quick Start with TiDB HTAP](/quick-start-with-htap.md).
 
 ## Use cases
 
@@ -57,21 +57,15 @@ For more information about the architecture, see [architecture of TiDB HTAP](/ti
 
 ## Environment preparation
 
-Before exploring the features of TiDB HTAP, you need to deploy TiDB and the corresponding storage engines according to the data volume. If the data volume is large (for example, 100 T), it is recommended to use TiFlash Massively Parallel Processing (MPP) as the primary solution and TiSpark as the supplementary solution.
+Before exploring TiDB HTAP features, you need to deploy TiDB and its columnar storage engine TiFlash. If the data volume is large (for example, 100 T), it is recommended to use TiFlash Massively Parallel Processing (MPP) as the solution.
 
-- TiFlash
+- If you have deployed a TiDB cluster with no TiFlash node, add the TiFlash nodes in the current TiDB cluster. For detailed information, see [Scale out a TiFlash cluster](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster).
+- If you have not deployed a TiDB cluster, see [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md). Based on the minimal TiDB topology, you also need to deploy the [topology of TiFlash](/tiflash-deployment-topology.md).
+- When deciding how to choose the number of TiFlash nodes, consider the following scenarios:
 
-    - If you have deployed a TiDB cluster with no TiFlash node, add the TiFlash nodes in the current TiDB cluster. For detailed information, see [Scale out a TiFlash cluster](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster).
-    - If you have not deployed a TiDB cluster, see [Deploy a TiDB Cluster using TiUP](/production-deployment-using-tiup.md). Based on the minimal TiDB topology, you also need to deploy the [topology of TiFlash](/tiflash-deployment-topology.md).
-    - When deciding how to choose the number of TiFlash nodes, consider the following scenarios:
-
-        - If your use case requires OLTP with small-scale analytical processing and Ad-Hoc queries, deploy one or several TiFlash nodes. They can dramatically increase the speed of analytic queries.
-        - If the OLTP throughput does not cause significant pressure to I/O usage rate of the TiFlash nodes, each TiFlash node uses more resources for computation, and thus the TiFlash cluster can have near-linear scalability. The number of TiFlash nodes should be tuned based on expected performance and response time.
-        - If the OLTP throughput is relatively high (for example, the write or update throughput is higher than 10 million lines/hours), due to the limited write capacity of network and physical disks, the I/O between TiKV and TiFlash becomes a bottleneck and is also prone to read and write hotspots. In this case, the number of TiFlash nodes has a complex non-linear relationship with the computation volume of analytical processing, so you need to tune the number of TiFlash nodes based on the actual status of the system.
-
-- TiSpark
-
-    - If your data needs to be analyzed with Spark, deploy TiSpark. For specific process, see [TiSpark User Guide](/tispark-overview.md).
+    - If your use case requires OLTP with small-scale analytical processing and Ad-Hoc queries, deploy one or several TiFlash nodes. They can dramatically increase the speed of analytic queries.
+    - If the OLTP throughput does not cause significant pressure to I/O usage rate of the TiFlash nodes, each TiFlash node uses more resources for computation, and thus the TiFlash cluster can have near-linear scalability. The number of TiFlash nodes should be tuned based on expected performance and response time.
+    - If the OLTP throughput is relatively high (for example, the write or update throughput is higher than 10 million lines/hours), due to the limited write capacity of network and physical disks, the I/O between TiKV and TiFlash becomes a bottleneck and is also prone to read and write hotspots. In this case, the number of TiFlash nodes has a complex non-linear relationship with the computation volume of analytical processing, so you need to tune the number of TiFlash nodes based on the actual status of the system.
 
 <!--    - Real-time stream processing
   - If you want to build an efficient and easy-to-use real-time data warehouse with TiDB and Flink, you are welcome to participate in Apache Flink x TiDB meetups.-->
@@ -99,7 +93,7 @@ With TiDB, you can simply enter SQL statements for query or write requests. For 
 
 When using TiDB, you can monitor the TiDB cluster status and performance metrics in either of the following ways:
 
-- [TiDB Dashboard](/dashboard/dashboard-intro.md): you can see the overall running status of the TiDB cluster, analyse distribution and trends of read and write traffic, and learn the detailed execution information of slow queries.
+- [TiDB Dashboard](/dashboard/dashboard-intro.md): you can see the overall running status of the TiDB cluster, analyze distribution and trends of read and write traffic, and learn the detailed execution information of slow queries.
 - [Monitoring system (Prometheus & Grafana)](/grafana-overview-dashboard.md): you can see the monitoring parameters of TiDB cluster-related components including PD, TiDB, TiKV, TiFlash, TiCDC, and Node_exporter.
 
 To see the alert rules of TiDB cluster and TiFlash cluster, see [TiDB cluster alert rules](/alert-rules.md) and [TiFlash alert rules](/tiflash/tiflash-alert-rules.md).
@@ -114,7 +108,7 @@ If any issue occurs during using TiDB, refer to the following documents:
 - [TiDB cluster troubleshooting guide](/troubleshoot-tidb-cluster.md)
 - [Troubleshoot a TiFlash Cluster](/tiflash/troubleshoot-tiflash.md)
 
-You are also welcome to create [GitHub Issues](https://github.com/pingcap/tiflash/issues) or submit your questions on [AskTUG](https://asktug.com/).
+You are also welcome to create [GitHub Issues](https://github.com/pingcap/tiflash/issues) or ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs).
 
 ## What's next
 

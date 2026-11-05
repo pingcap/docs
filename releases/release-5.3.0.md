@@ -26,7 +26,7 @@ In v5.3, the key new features or improvements are as follows:
 
 > **Note:**
 >
-> When upgrading from an earlier TiDB version to v5.3.0, if you want to know the compatibility change notes of all intermediate versions, you can check the [Release Notes](/releases/release-notes.md) of the corresponding version.
+> When upgrading from an earlier TiDB version to v5.3.0, if you want to know the compatibility change notes of all intermediate versions, you can check the [Release Notes](/releases/_index.md) of the corresponding version.
 
 ### System variables
 
@@ -54,7 +54,7 @@ In v5.3, the key new features or improvements are as follows:
 | PD | [`patrol-region-interval`](/pd-configuration-file.md#patrol-region-interval) | Modified | Controls the running frequency at which replicaChecker checks the health state of a Region. The smaller this value is, the faster replicaChecker runs. Normally, you do not need to adjust this parameter. The default value is changed from `100ms` to `10ms`. |
 | PD | [`max-snapshot-count`](/pd-configuration-file.md#max-snapshot-count) | Modified | Controls the maximum number of snapshots that a single store receives or sends at the same time. PD schedulers depend on this configuration to prevent the resources used for normal traffic from being preempted. The default value is changed from `3` to `64`. |
 | PD | [`max-pending-peer-count`](/pd-configuration-file.md#max-pending-peer-count) | Modified | Controls the maximum number of pending peers in a single store. PD schedulers depend on this configuration to prevent too many Regions with outdated logs from being generated on some nodes. The default value is changed from `16` to `64`. |
-| TiD Lightning | `meta-schema-name` | Newly added | The schema name where the meta information for each TiDB Lightning instance is stored in the target cluster. The default value is "lightning_metadata". |
+| TiDB Lightning | `meta-schema-name` | Newly added | The schema name where the meta information for each TiDB Lightning instance is stored in the target cluster. The default value is "lightning_metadata". |
 
 ### Others
 
@@ -69,7 +69,7 @@ In v5.3, the key new features or improvements are as follows:
         - the downstream cluster in a replication task using TiDB migration tools
     - For the compatibility information of temporary tables, refer to [Compatibility with MySQL temporary tables](/temporary-tables.md#compatibility-with-mysql-temporary-tables) and [Compatibility restrictions with other TiDB features](/temporary-tables.md#compatibility-restrictions-with-other-tidb-features).
 
-- For releases earlier than v5.3.0, TiDB reports an error when a system variable is set to an illegal value. For v5.3.0 and later releases, TiDB returns success with a warning such as "|Warning | 1292 | Truncated incorrect xxx: 'xx'" when a system variable is set to an illegal value.
+- For releases earlier than v5.3.0, TiDB reports an error when a system variable is set to an invalid value. For v5.3.0 and later releases, TiDB returns success with a warning such as "|Warning | 1292 | Truncated incorrect xxx: 'xx'" when a system variable is set to an invalid value.
 - Fix the issue that the `SHOW VIEW` permission is not required to execute `SHOW CREATE VIEW`. Now you are expected to have the `SHOW VIEW` permission to execute the `SHOW CREATE VIEW` statement.
 - The system variable `sql_auto_is_null` is added to the noop functions. When `tidb_enable_noop_functions = 0/OFF`, modifying this variable value causes an error.
 - The `GRANT ALL ON performance_schema.*` syntax is no longer permitted. If you execute this statement in TiDB, an error occurs.
@@ -88,7 +88,7 @@ In v5.3, the key new features or improvements are as follows:
 
     - Merge multiple databases of different applications to reduce the cost on database maintenance, and achieve application resource isolation through the rule configuration
     - Increase replica count for important data to improve the application availability and data reliability
-    - Store new data into SSDs and store old data into HHDs to lower the cost on data archiving and storage
+    - Store new data into SSDs and store old data into HDDs to lower the cost on data archiving and storage
     - Schedule the leaders of hotspot data to high-performance TiKV instances
     - Separate cold data to lower-cost storage mediums to improve cost efficiency
 
@@ -311,7 +311,7 @@ Starting from TiCDC v5.3.0, the cyclic replication feature between TiDB clusters
 
         - Reduce the default value of the Kafka sink configuration item `MaxMessageBytes` from 64 MB to 1 MB to fix the issue that large messages are rejected by the Kafka Broker [#3104](https://github.com/pingcap/tiflow/pull/3104)
         - Reduce memory usage in the replication pipeline [#2553](https://github.com/pingcap/tiflow/issues/2553) [#3037](https://github.com/pingcap/tiflow/pull/3037) [#2726](https://github.com/pingcap/tiflow/pull/2726)
-        - Optimize monitoring items and alert rules to improve observability of synchronous links, memory GC, and stock data scanning processes [#2735](https://github.com/pingcap/tiflow/pull/2735) [#1606](https://github.com/pingcap/tiflow/issues/1606) [#3000](https://github.com/pingcap/tiflow/pull/3000) [#2985](https://github.com/pingcap/tiflow/issues/2985) [#2156](https://github.com/pingcap/tiflow/issues/2156)
+        - Optimize monitoring items and alert rules to improve observability of synchronous links, memory GC, and incremental scan processes [#2735](https://github.com/pingcap/tiflow/pull/2735) [#1606](https://github.com/pingcap/tiflow/issues/1606) [#3000](https://github.com/pingcap/tiflow/pull/3000) [#2985](https://github.com/pingcap/tiflow/issues/2985) [#2156](https://github.com/pingcap/tiflow/issues/2156)
         - When the sync task status is normal, no more historical error messages are displayed to avoid misleading users [#2242](https://github.com/pingcap/tiflow/issues/2242)
 
 ## Bug Fixes
@@ -340,8 +340,8 @@ Starting from TiCDC v5.3.0, the cyclic replication feature between TiDB clusters
     - Fix the issue of error log `cannot found column in Schema column` for MPP queries [#28149](https://github.com/pingcap/tidb/pull/28149)
     - Fix the issue that TiDB might panic when TiFlash is shutting down [#28096](https://github.com/pingcap/tidb/issues/28096)
     - Remove the support for insecure 3DES (Triple Data Encryption Algorithm) based TLS cipher suites [#27859](https://github.com/pingcap/tidb/pull/27859)
-    - Fix the issue that Lightning connects to offline TiKV nodes during pre-check and causes import failures [#27826](https://github.com/pingcap/tidb/pull/27826)
-    - Fix the issue that pre-check cost too much time when importing many files to tables [#27605](https://github.com/pingcap/tidb/issues/27605)
+    - Fix the issue that Lightning connects to offline TiKV nodes during precheck and causes import failures [#27826](https://github.com/pingcap/tidb/pull/27826)
+    - Fix the issue that precheck cost too much time when importing many files to tables [#27605](https://github.com/pingcap/tidb/issues/27605)
     - Fix the issue that rewriting expressions makes `between` infer wrong collation [#27146](https://github.com/pingcap/tidb/issues/27146)
     - Fix the issue that `group_concat` function did not consider the collation [#27429](https://github.com/pingcap/tidb/issues/27429)
     - Fix the result wrong that occurs when the argument of the `extract` function is a negative duration [#27236](https://github.com/pingcap/tidb/issues/27236)
@@ -402,7 +402,7 @@ Starting from TiCDC v5.3.0, the cyclic replication feature between TiDB clusters
         - Fix the issue that the volume of Kafka messages generated by TiCDC is not constrained by `max-message-size` [#2962](https://github.com/pingcap/tiflow/issues/2962)
         - Fix the issue that TiCDC sync task might pause when an error occurs during writing a Kafka message [#2978](https://github.com/pingcap/tiflow/issues/2978)
         - Fix the issue that some partitioned tables without valid indexes might be ignored when `force-replicate` is enabled [#2834](https://github.com/pingcap/tiflow/issues/2834)
-        - Fix the issue that scanning stock data might fail due to TiKV performing GC when scanning stock data takes too long [#2470](https://github.com/pingcap/tiflow/issues/2470)
+        - Fix the issue that a changefeed might fail when initialization takes too long and TiKV advances the GC safepoint [#2470](https://github.com/pingcap/tiflow/issues/2470)
         - Fix a possible panic issue when encoding some types of columns into Open Protocol format [#2758](https://github.com/pingcap/tiflow/issues/2758)
         - Fix a possible panic issue when encoding some types of columns into Avro format [#2648](https://github.com/pingcap/tiflow/issues/2648)
 

@@ -58,7 +58,7 @@ For more detailed information on TiKV performance tuning, see [Tune TiKV Perform
 
 > **Note:**
 >
-> The test in this document was performed without load balancing tools such as HAproxy. We run the Sysbench test on individual TiDB node and added the results up. The load balancing tools and the parameters of different versions might also impact the performance.
+> The test in this document was performed without load balancing tools such as HAProxy. We run the Sysbench test on individual TiDB node and added the results up. The load balancing tools and the parameters of different versions might also impact the performance.
 
 ### Sysbench configuration
 
@@ -96,19 +96,9 @@ db-driver=mysql
 
 > **Note:**
 >
-> If you enable the optimistic transaction model (TiDB uses the pessimistic transaction mode by default), TiDB rolls back transactions when a concurrency conflict is found. Setting `tidb_disable_txn_auto_retry` to `off` turns on the automatic retry mechanism after meeting a transaction conflict, which can prevent Sysbench from quitting because of the transaction conflict error.
+> Starting from v8.0.0, TiDB no longer supports automatic retries of explicit optimistic transactions. If optimistic transaction conflicts cause Sysbench to stop, switch to pessimistic transaction mode or implement transaction retries in the client application.
 
-Before importing the data, it is necessary to make some settings to TiDB. Execute the following command in MySQL client:
-
-{{< copyable "sql" >}}
-
-```sql
-set global tidb_disable_txn_auto_retry = off;
-```
-
-Then exit the client.
-
-Restart MySQL client and execute the following SQL statement to create a database `sbtest`:
+Execute the following SQL statement in the MySQL client to create a database named `sbtest`:
 
 {{< copyable "sql" >}}
 
@@ -171,7 +161,7 @@ sysbench --config-file=config oltp_read_only --tables=32 --table-size=10000000 -
 
 This issue often has things to do with the use of a proxy. You can add pressure on single TiDB server, sum each result up and compare the summed result with the result with proxy.
 
-Take HAproxy as an example. The parameter `nbproc` can increase the number of processes it can start at most. Later versions of HAproxy also support `nbthread` and `cpu-map`. All of these can mitigate the negative impact of proxy use on performance.
+Take HAProxy as an example. The parameter `nbproc` can increase the number of processes it can start at most. Later versions of HAProxy also support `nbthread` and `cpu-map`. All of these can mitigate the negative impact of proxy use on performance.
 
 ### Under high concurrency, why is the CPU utilization rate of TiKV still low?
 

@@ -19,7 +19,7 @@ A topology configuration file for DM cluster deployment using TiUP might contain
 - [worker_servers](#worker_servers): the configuration of the DM-worker instance. The configuration specifies the machines to which the worker service of the DM component is deployed.
 - [monitoring_servers](#monitoring_servers): specifies the machines to which the Prometheus instances are deployed. TiUP supports deploying multiple Prometheus instances but only the first instance is used.
 - [grafana_servers](#grafana_servers): the configuration of the Grafana instances. The configuration specifies the machines to which the Grafana instances are deployed.
-- [alertmanager_servers](#alertmanager_servers): the configuration of the Alertemanager instances. The configuration specifies the machines to which the Alertmanager instances are deployed.
+- [alertmanager_servers](#alertmanager_servers): the configuration of the Alertmanager instances. The configuration specifies the machines to which the Alertmanager instances are deployed.
 
 ### `global`
 
@@ -37,7 +37,7 @@ The `global` section corresponds to the cluster's global configuration and has t
     - If the absolute path `data_dir` is configured at the instance level, the actual data directory is the `data_dir` configured for the instance.
     - For each instance, if `data_dir` is not configured, the default value is `<global.data_dir>`.
     - If `data_dir` is set to a relative path, the component data is stored in `<deploy_dir>/<data_dir>`. For the construction rules of `<deploy_dir>`, see the construction rules of the `deploy_dir` field.
-- `log_dir`: the data directory. The default value is "log". The construction rules are as follows.
+- `log_dir`: the log directory. The default value is "log". The construction rules are as follows.
     - If the absolute path of `log_dir` is configured at the instance level, the actual log directory is the `log_dir` configured for the instance.
     - For each instance, if `log_dir` is not configured by the user, the default value is `<global.log_dir>`.
     - If `log_dir` is a relative path, the component logs will be stored in `<deploy_dir>/<log_dir>`. For the construction rules of `<deploy_dir>`, see the construction rules of the `deploy_dir` field.
@@ -140,7 +140,7 @@ master_servers:
 
 ## `worker_servers`
 
-`worker_servers` specifies the machines to which the master node of the DM component is deployed. You can also specify the service configuration on each machine. `worker_servers` is an array. Each array element contains the following fields:
+`worker_servers` specifies the machines to which the worker node of the DM component is deployed. You can also specify the service configuration on each machine. `worker_servers` is an array. Each array element contains the following fields:
 
 - `host`: specifies the machine to deploy to. The field value is an IP address and is mandatory.
 - `ssh_port`: specifies the SSH port to connect to the target machine for operations. If the field is not specified, the `ssh_port` in the `global` section is used.
@@ -199,6 +199,7 @@ worker_servers:
     - `remote_write`: See the Prometheus document [`<remote_write>`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_write).
     - `remote_read`: See the Prometheus document [`<remote_read>`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_read).
 - `external_alertmanagers`: If the `external_alertmanagers` field is configured, Prometheus alerts the configuration behavior to the Alertmanager that is outside the cluster. This field is an array, each element of which is an external Alertmanager and consists of the `host` and `web_port` fields.
+- `external_labels`: Introduced in TiUP v1.17.0, this field configures Prometheus global `external_labels` as key-value pairs. Use this field to attach stable metadata that is propagated through Prometheus `remote_write`, federation, and alerting. TiUP reserves the `cluster` and `monitor` labels and manages them automatically, so you must not configure them in this field. Label names starting with `__` are also reserved. In addition, all label names must conform to the Prometheus label naming rules. If an earlier version of TiUP that does not support this field reads the topology file, TiUP fails to parse the topology instead of ignoring the field.
 - `os`: the operating system of the machine specified in the `host` field. If the field is not specified, the default value is the `os` value configured in the `global` section.
 - `arch`: the architecture of the machine specified in the `host` field. If the field is not specified, the default value is the `arch` value configured in the `global` section.
 - `resource_control`: resource control on this service. If this field is specified, the configuration of this field will be merged with the configuration of `resource_control` in the `global` section (if the two fields overlap, the configuration of this field takes effect), and then the configuration file of systemd is generated and distributed to the machine specified in the `host` field. The configuration rules of this field are the same as that of `resource_control` in the `global` section.
@@ -219,6 +220,9 @@ A `monitoring_servers` configuration example is as follows:
 monitoring_servers:
   - host: 10.0.1.11
     rule_dir: /local/rule/dir
+    external_labels:
+      environment: production
+      region: us-east-1
     remote_config:
       remote_write:
       - queue_config:
@@ -281,7 +285,7 @@ grafana_servers:
 - `host`: specifies the machine to deploy to. The field value is an IP address and is mandatory.
 - `ssh_port`: specifies the SSH port to connect to the target machine for operations. If the field is not specified, the `ssh_port` in the `global` section is used.
 - `web_port`: specify the port on which Alertmanager provides web services. The default value is "9093".
-- `cluster_port`: Specify the communication port between one Alertmanger and other Alertmanager. The default value is "9094".
+- `cluster_port`: Specify the communication port between one Alertmanager and other Alertmanager. The default value is "9094".
 - `deploy_dir`: specifies the deployment directory. If the field is not specified, or specified as a relative directory, the deployment directory is generated according to the `deploy_dir` configuration in the `global` section.
 - `data_dir`: specifies the data directory. If the field is not specified, or specified as a relative directory, the data directory is generated according to the `data_dir` configuration in the `global` section.
 - `log_dir`: specifies the log directory. If the field is not specified, or specified as a relative directory, the log directory is generated according to the `log_dir` configuration in the `global` section.

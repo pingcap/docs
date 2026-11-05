@@ -34,7 +34,7 @@ ColumnOption
            | 'AUTO_INCREMENT'
            | 'PRIMARY'? 'KEY' ( 'CLUSTERED' | 'NONCLUSTERED' )?
            | 'UNIQUE' 'KEY'?
-           | 'DEFAULT' ( NowSymOptionFraction | SignedLiteral | NextValueForSequence )
+           | 'DEFAULT' DefaultValueExpr
            | 'SERIAL' 'DEFAULT' 'VALUE'
            | 'ON' 'UPDATE' NowSymOptionFraction
            | 'COMMENT' stringLit
@@ -48,6 +48,13 @@ ColumnOption
 
 ColumnName ::=
     Identifier ( '.' Identifier ( '.' Identifier )? )?
+
+DefaultValueExpr ::=
+    NowSymOptionFractionParentheses
+|   SignedLiteral
+|   NextValueForSequenceParentheses
+|   BuiltinFunction
+|   '(' SignedLiteral ')'
 ```
 
 ## Examples
@@ -152,7 +159,7 @@ ERROR 8200 (HY000): Unsupported modify column: change from original type decimal
 * Changes of [Reorg-Data](/sql-statements/sql-statement-modify-column.md#reorg-data-change) types on primary key columns are not supported.
 * Changes of column types on partitioned tables are not supported.
 * Changes of column types on generated columns are not supported.
-* Changes of some data types (for example, some TIME, Bit, Set, Enum, and JSON types) are not supported due to the compatibility issues of the `CAST` function's behavior between TiDB and MySQL.
+* Changes from some data types (for example, TIME, BIT, SET, ENUM, and JSON types) to some other types are not supported due to the compatibility issues of the `CAST` function's behavior between TiDB and MySQL.
 
 ## See also
 

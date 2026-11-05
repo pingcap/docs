@@ -15,7 +15,7 @@ TiDB version: 6.2.0-DMR
 
 In v6.2.0-DMR, the key new features and improvements are as follows:
 
-* TiDB Dashboard supports [visual execution plans](https://docs.pingcap.com/tidb/v6.2/dashboard-slow-query#visual-execution-plans), allowing more intuitive display of execution plans.
+* TiDB Dashboard supports [visual execution plans](https://docs-archive.pingcap.com/tidb/v6.2/dashboard-slow-query#visual-execution-plans), allowing more intuitive display of execution plans.
 * Add a [Monitoring page](/dashboard/dashboard-monitoring.md) in TiDB Dashboard to make the performance analysis and tuning more efficient.
 * The [Lock View](/information-schema/information-schema-data-lock-waits.md) of TiDB feature supports showing the waiting information of optimistic transactions, facilitating quick locating of lock conflicts.
 * TiFlash supports [a newer version of storage format](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file), enhancing stability and performance.
@@ -64,7 +64,7 @@ In v6.2.0-DMR, the key new features and improvements are as follows:
 
     This feature is particularly useful when you are trying to learn the execution of complex and large queries. Meanwhile, for each query execution plan, TiDB Dashboard automatically analyzes the execution details, spots potential problems, and provides optimization suggestions to reduce the time required for executing specific query plans.
 
-    [User document](https://docs.pingcap.com/tidb/v6.2/dashboard-slow-query#visual-execution-plans) [#1224](https://github.com/pingcap/tidb-dashboard/issues/1224) @[time-and-fate](https://github.com/time-and-fate)
+    [User document](https://docs-archive.pingcap.com/tidb/v6.2/dashboard-slow-query#visual-execution-plans) [#1224](https://github.com/pingcap/tidb-dashboard/issues/1224) @[time-and-fate](https://github.com/time-and-fate)
 
 * Lock View supports showing the waiting information of optimistic transactions
 
@@ -156,7 +156,7 @@ In v6.2.0-DMR, the key new features and improvements are as follows:
 
 * TiKV supports listing detailed configuration information using command-line flags
 
-    The TiKV configuration file can be used to manage TiKV instances. However, for instances that run for a long time and are managed by different users, it is difficult to know which configuration item has been modified and what the default value is. This might cause confusion when you upgrade the cluster or migrate data. Since TiDB v6.2.0, tikv-server supports a new command-line flag [`—-config-info`](/command-line-flags-for-tikv-configuration.md#--config-info-format) that lists default and current values of all TiKV configuration items, helps users to quickly verify the startup parameters of the TiKV process, and improves usability.
+    The TiKV configuration file can be used to manage TiKV instances. However, for instances that run for a long time and are managed by different users, it is difficult to know which configuration item has been modified and what the default value is. This might cause confusion when you upgrade the cluster or migrate data. Since TiDB v6.2.0, tikv-server supports a new command-line flag [`--config-info`](/command-line-flags-for-tikv-configuration.md#--config-info-format) that lists default and current values of all TiKV configuration items, helps users to quickly verify the startup parameters of the TiKV process, and improves usability.
 
     [User document](/command-line-flags-for-tikv-configuration.md#--config-info-format) [#12492](https://github.com/tikv/tikv/issues/12492) @[glorv](https://github.com/glorv)
 
@@ -259,9 +259,9 @@ In v6.2.0-DMR, the key new features and improvements are as follows:
 | [tidb_generate_binary_plan](/system-variables.md#tidb_generate_binary_plan-new-in-v620) | Newly added | This variable controls whether to generate binary-encoded execution plans in slow logs and statement summaries. |
 | [tidb_opt_skew_distinct_agg](/system-variables.md#tidb_opt_skew_distinct_agg-new-in-v620) | Newly added | This variable sets whether the optimizer rewrites the aggregate functions with `DISTINCT` to the two-level aggregate functions, such as rewriting `SELECT b, COUNT(DISTINCT a) FROM t GROUP BY b` to `SELECT b, COUNT(a) FROM (SELECT b, a FROM t GROUP BY b, a) t GROUP BY b`. |
 | [tidb_enable_noop_variables](/system-variables.md#tidb_enable_noop_variables-new-in-v620) | Newly added | This variable controls whether to show `noop` variables in the result of `SHOW [GLOBAL] VARIABLES`. |
-| [tidb_min_paging_size](/system-variables.md#tidb_min_paging_size-new-in-v620) | Newly added | This variable is used to set the maximum number of rows during the coprocessor paging request process. |
+| [tidb_min_paging_size](/system-variables.md#tidb_min_paging_size-new-in-v620) | Newly added | This variable is used to set the minimum number of rows during the coprocessor paging request process. |
 | [tidb_txn_commit_batch_size](/system-variables.md#tidb_txn_commit_batch_size-new-in-v620) | Newly added | This variable is used to control the batch size of transaction commit requests that TiDB sends to TiKV. |
-| tidb_enable_change_multi_schema | Deleted | This variable is used to control whether multiple columns or indexes can be altered in one `ALTER TABLE` statement. |
+| tidb_enable_change_multi_schema | Deleted | This variable is deleted because, starting from v6.2.0, you can alter multiple columns or indexes in one `ALTER TABLE` statement by default. |
 | [tidb_enable_outer_join_reorder](/system-variables.md#tidb_enable_outer_join_reorder-new-in-v610) | Modified | This variable controls whether the Join Reorder algorithm of TiDB supports Outer Join. In v6.1.0, the default value is `ON`, which means the Join Reorder's support for Outer Join is enabled by default. From v6.2.0, the default value is `OFF`, which means the support is disabled by default. |
 
 ### Configuration file parameters
@@ -335,7 +335,7 @@ Since TiDB v6.2.0, backing up and restoring RawKV using BR is deprecated.
     - Improve the performance of JSON-related functions [#35859](https://github.com/pingcap/tidb/issues/35859) @[wjhuang2016](https://github.com/wjhuang2016)
     - Improve the verification speed of password login using SHA-2 [#35998](https://github.com/pingcap/tidb/issues/35998) @[virusdefender](https://github.com/virusdefender)
     - Simplify some log outputs [#36011](https://github.com/pingcap/tidb/issues/36011) @[dveeden](https://github.com/dveeden)
-    - Optimize the Coprocessor communication protocol. This can greatly reduce the memory consumption of the TiDB processes when reading data, and further alleviate the OOM issue in the scenario of scanning tables and exporting data by Dumpling. The system variable `tidb_enable_paging` is introduced to control whether to enable this communication protocol (with the scope of SESSION or GLOBAL). This protocol is disabled by default. To enable it, set the variable value to `true` [#35633](https://github.com/pingcap/tidb/issues/35633) @[tiancaiama](https://github.com/tiancaiamao) @[wshwsh12](https://github.com/wshwsh12)
+    - Optimize the Coprocessor communication protocol. This can greatly reduce the memory consumption of the TiDB processes when reading data, and further alleviate the OOM issue in the scenario of scanning tables and exporting data by Dumpling. The system variable `tidb_enable_paging` is introduced to control whether to enable this communication protocol (with the scope of SESSION or GLOBAL). This protocol is disabled by default. To enable it, set the variable value to `true` [#35633](https://github.com/pingcap/tidb/issues/35633) @[tiancaiamao](https://github.com/tiancaiamao) @[wshwsh12](https://github.com/wshwsh12)
     - Optimize the accuracy of memory tracking for some operators (HashJoin, HashAgg, Update, Delete) ([#35634](https://github.com/pingcap/tidb/issues/35634), [#35631](https://github.com/pingcap/tidb/issues/35631), [#35635](https://github.com/pingcap/tidb/issues/35635) @[wshwsh12](https://github.com/wshwsh12)) ([#34096](https://github.com/pingcap/tidb/issues/34096) @[ekexium](https://github.com/ekexium))
 
     - The system table `INFORMATION_SCHEMA.DATA_LOCK_WAIT` supports recording the locking information of optimistic transactions [#34609](https://github.com/pingcap/tidb/issues/34609) @[longfangson](https://github.com/longfangsong)

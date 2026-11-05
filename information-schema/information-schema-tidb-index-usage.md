@@ -13,7 +13,7 @@ Starting from v8.0.0, TiDB provides the `TIDB_INDEX_USAGE` table. You can use `T
 
 <CustomContent platform="tidb-cloud">
 
-Starting from v8.0.0, TiDB provides the `TIDB_INDEX_USAGE` table. You can use `TIDB_INDEX_USAGE` to get the usage statistics of all indexes on the current TiDB node. By default, TiDB collects these index usage statistics during SQL statement execution. You can disable this feature by turning off the [`instance.tidb_enable_collect_execution_info`](https://docs.pingcap.com/tidb/v8.0/tidb-configuration-file#tidb_enable_collect_execution_info) configuration item or the [`tidb_enable_collect_execution_info`](/system-variables.md#tidb_enable_collect_execution_info) system variable.
+Starting from v8.0.0, TiDB provides the `TIDB_INDEX_USAGE` table. You can use `TIDB_INDEX_USAGE` to get the usage statistics of all indexes on the current TiDB node. By default, TiDB collects these index usage statistics during SQL statement execution. You can disable this feature by turning off the [`instance.tidb_enable_collect_execution_info`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#tidb_enable_collect_execution_info) configuration item or the [`tidb_enable_collect_execution_info`](/system-variables.md#tidb_enable_collect_execution_info) system variable.
 
 </CustomContent>
 
@@ -75,25 +75,25 @@ DESC CLUSTER_TIDB_INDEX_USAGE;
 The output is as follows:
 
 ```sql
-+-------------------------+-----------------------------------------------------------------+------+------+---------+-------+
-| Field                   | Type                                                            | Null | Key  | Default | Extra |
-+-------------------------+-----------------------------------------------------------------+------+------+---------+-------+
-| INSTANCE                | varchar(64)                                                     | YES  |      | NULL    |       |
-| ID                      | bigint(21) unsigned                                             | NO   | PRI  | NULL    |       |
-| START_TIME              | timestamp(6)                                                    | YES  |      | NULL    |       |
-| CURRENT_SQL_DIGEST      | varchar(64)                                                     | YES  |      | NULL    |       |
-| CURRENT_SQL_DIGEST_TEXT | text                                                            | YES  |      | NULL    |       |
-| STATE                   | enum('Idle','Running','LockWaiting','Committing','RollingBack') | YES  |      | NULL    |       |
-| WAITING_START_TIME      | timestamp(6)                                                    | YES  |      | NULL    |       |
-| MEM_BUFFER_KEYS         | bigint(64)                                                      | YES  |      | NULL    |       |
-| MEM_BUFFER_BYTES        | bigint(64)                                                      | YES  |      | NULL    |       |
-| SESSION_ID              | bigint(21) unsigned                                             | YES  |      | NULL    |       |
-| USER                    | varchar(16)                                                     | YES  |      | NULL    |       |
-| DB                      | varchar(64)                                                     | YES  |      | NULL    |       |
-| ALL_SQL_DIGESTS         | text                                                            | YES  |      | NULL    |       |
-| RELATED_TABLE_IDS       | text                                                            | YES  |      | NULL    |       |
-| WAITING_TIME            | double                                                          | YES  |      | NULL    |       |
-+-------------------------+-----------------------------------------------------------------+------+------+---------+-------+
++--------------------------+-------------+------+------+---------+-------+
+| Field                    | Type        | Null | Key  | Default | Extra |
++--------------------------+-------------+------+------+---------+-------+
+| INSTANCE                 | varchar(64) | YES  |      | NULL    |       |
+| TABLE_SCHEMA             | varchar(64) | YES  |      | NULL    |       |
+| TABLE_NAME               | varchar(64) | YES  |      | NULL    |       |
+| INDEX_NAME               | varchar(64) | YES  |      | NULL    |       |
+| QUERY_TOTAL              | bigint(21)  | YES  |      | NULL    |       |
+| KV_REQ_TOTAL             | bigint(21)  | YES  |      | NULL    |       |
+| ROWS_ACCESS_TOTAL        | bigint(21)  | YES  |      | NULL    |       |
+| PERCENTAGE_ACCESS_0      | bigint(21)  | YES  |      | NULL    |       |
+| PERCENTAGE_ACCESS_0_1    | bigint(21)  | YES  |      | NULL    |       |
+| PERCENTAGE_ACCESS_1_10   | bigint(21)  | YES  |      | NULL    |       |
+| PERCENTAGE_ACCESS_10_20  | bigint(21)  | YES  |      | NULL    |       |
+| PERCENTAGE_ACCESS_20_50  | bigint(21)  | YES  |      | NULL    |       |
+| PERCENTAGE_ACCESS_50_100 | bigint(21)  | YES  |      | NULL    |       |
+| PERCENTAGE_ACCESS_100    | bigint(21)  | YES  |      | NULL    |       |
+| LAST_ACCESS_TIME         | datetime    | YES  |      | NULL    |       |
++--------------------------+-------------+------+------+---------+-------+
 15 rows in set (0.00 sec)
 ```
 
@@ -101,6 +101,7 @@ The output is as follows:
 
 - The data in the `TIDB_INDEX_USAGE` table might be delayed by up to 5 minutes.
 - After TiDB restarts, the data in the `TIDB_INDEX_USAGE` table is cleared.
+- TiDB records index usage for a table only when the table has valid statistics.
 
 ## Read more
 

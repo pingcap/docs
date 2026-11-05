@@ -7,7 +7,7 @@ summary: Summarize this doc in 115 to 145 characters. Start with an SEO-friendly
 
 > About this template:
 >
-> - This document is a template for task topics, which tells users how to perform a specific task step by step. You can directly copy and use this template and delete unnecessary annotations. An example of this type of document: [Quick Start Guide for the TiDB Database Platform](/quick-start-with-tidb.md)
+> - This document is a template for task topics, which tells users how to perform a specific task step by step. You can directly copy and use this template and delete unnecessary annotations. An example of this type of document: [Quick Start with TiDB Self-Managed](/quick-start-with-tidb.md)
 > - For a new document, please add a link to the appropriate location in the `TOC.md` file (consider where users are most likely to look for this document in the table of contents).
 > - The headings within the document cannot skip levels, and try to avoid using level 5 headings.
 
@@ -81,11 +81,10 @@ You can divide the step into smaller sub-steps by using ordered lists (1, 2, 3, 
     ### tidb-lightning global configuration
 
     [lightning]
-    # The HTTP port used to pull the web interface and Prometheus metrics. Set to 0 to disable the port.
+    # The HTTP port used to pull Prometheus metrics and expose debug data. Set to 0 to disable the port.
     status-addr = ':8289'
 
-    # Switch to server mode and use the web interface
-    # For details, see the "TiDB Lightning Web UI" document.
+    # Switch to server mode and submit import tasks through the HTTP API.
     server-mode = false
 
     # log

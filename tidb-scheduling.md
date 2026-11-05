@@ -23,9 +23,9 @@ Now consider about the following situations:
     * Replicas of all Regions.
         * If the number of replicas is not enough for some Regions, PD needs to complete them.
         * If the number of replicas is more than expected (for example, the failed store re-joins into the cluster after recovery), PD needs to delete them.
-* Read/Write operations are performed on leaders, which cannot be distributed only on a few individual stores;
+* Read/Write operations are performed on leaders, so leaders cannot be concentrated on only a few individual stores;
 * Not all Regions are hot, so loads of all TiKV stores need to be balanced;
-* When Regions are in balancing, data transferring utilizes much network/disk traffic and CPU time, which can influence online services.
+* When Regions are being balanced, data transferring utilizes much network/disk traffic and CPU time, which can influence online services.
 
 These situations can occur at the same time, which makes it harder to resolve. Also, the whole system is changing dynamically, so a scheduler is needed to collect all information about the cluster, and then adjust the cluster. So, PD is introduced into the TiDB cluster.
 
@@ -83,7 +83,7 @@ Scheduling is based on information collection. In short, the PD scheduling compo
     + **Disconnect**: Heartbeat messages between the PD and the TiKV store are lost for more than 20 seconds. If the lost period exceeds the time specified by `max-store-down-time`, the status "Disconnect" changes to "Down".
     + **Down**: Heartbeat messages between the PD and the TiKV store are lost for a time longer than `max-store-down-time` (30 minutes by default). In this status, the TiKV store starts replenishing replicas of each Region on the surviving store.
     + **Offline**: A TiKV store is manually taken offline through PD Control. This is only an intermediate status for the store to go offline. The store in this status moves all its Regions to other "Up" stores that meet the relocation conditions. When `leader_count` and `region_count` (obtained through PD Control) both show `0`, the store status changes to "Tombstone" from "Offline". In the "Offline" status, **do not** disable the store service or the physical server where the store is located. During the process that the store goes offline, if the cluster does not have target stores to relocate the Regions (for example, inadequate stores to hold replicas in the cluster), the store is always in the "Offline" status.
-    + **Tombstone**: The TiKV store is completely offline. You can use the `remove-tombstone` interface to safely clean up TiKV in this status.
+    + **Tombstone**: The TiKV store is completely offline. You can use the `remove-tombstone` interface to safely clean up TiKV in this status. Starting from v6.5.0, if not manually handled, PD will automatically delete the Tombstone records stored internally one month after the node is converted to Tombstone.
 
     ![TiKV store status relationship](/media/tikv-store-status-relationship.png)
 

@@ -9,7 +9,7 @@ Data Service (beta) enables you to access TiDB Cloud data via an HTTPS request u
 
 > **Tip:**
 >
-> TiDB Cloud provides a Chat2Query API for TiDB clusters. After it is enabled, TiDB Cloud will automatically create a system Data App called **Chat2Query** and a Chat2Data endpoint in Data Service. You can call this endpoint to let AI generate and execute SQL statements by providing instructions.
+> TiDB Cloud provides a Chat2Query API for {{{ .starter }}} instances. After it is enabled, TiDB Cloud will automatically create a system Data App called **Chat2Query** and a Chat2Data endpoint in Data Service. You can call this endpoint to let AI generate and execute SQL statements by providing instructions.
 >
 > For more information, see [Get started with Chat2Query API](/tidb-cloud/use-chat2query-api.md).
 
@@ -17,23 +17,27 @@ This document introduces how to quickly get started with TiDB Cloud Data Service
 
 ## Before you begin
 
-Before creating a Data App, make sure that you have created a [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) cluster. If you do not have one, follow the steps in [Create a TiDB Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create one.
+Before creating a Data App, make sure that you have created a [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md) instance hosted on AWS. If you do not have one, follow the steps in [Create a {{{ .starter }}} or Essential Instance](/tidb-cloud/create-tidb-cluster-serverless.md) to create one.
+
+> **Note:**
+>
+> Data Service is available only for [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md) instances hosted on AWS. To use Data Service in TiDB Cloud Dedicated clusters, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 ## Get started with a sample Data App
 
 Creating a sample Data App is the best way to get started with Data Service. If your project does not have any Data App yet, you can follow the on-screen instructions on the **Data Service** page to create a sample Data App and use this App to explore Data Service features.
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), click <MDSvgIcon name="icon-left-data-service" /> **Data Service** in the left navigation pane.
+1. In the [TiDB Cloud console](https://tidbcloud.com), click the **Project view** tab on the [**My TiDB**](https://tidbcloud.com/tidbs) page, click **...** for your project, and then click **Data Service**.
 
 2. On the **Data Service** page, click **Create Sample Data App**. A dialog is displayed.
 
-3. In the dialog, update the App name if necessary, select clusters that you want the Data App to access, and then click **Create**.
+3. In the dialog, update the App name if necessary, select {{{ .starter }}} instances that you want the Data App to access, and then click **Create**.
 
     The creation process takes a few seconds.
 
     > **Note:**
     >
-    > If there is no cluster in your current project, you can click **Create New Cluster** in the **Link Data Sources** drop-down list to create one first.
+    > If there is no {{{ .starter }}} instance in your current project, you can click **Create New Resource** in the **Link Data Sources** drop-down list to create one first.
 
 4. After the sample Data App is automatically created, you can find the App name, a list of endpoints in the left pane, the SQL statements of an endpoint in the middle pane, and instructions about using the sample Data App on the right side.
 
@@ -47,15 +51,15 @@ To get started with Data Service, you can also create your own Data App, and the
 
  To create a Data App, perform the following steps:
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), click <MDSvgIcon name="icon-left-data-service" /> **Data Service** in the left navigation pane.
+1. In the [TiDB Cloud console](https://tidbcloud.com), click the **Project view** tab on the [**My TiDB**](https://tidbcloud.com/tidbs) page, click **...** for your project, and then click **Data Service**.
 
-2. On the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project, click <MDSvgIcon name="icon-create-data-app" /> **Create DataApp** in the left pane.
+2. On the [**Data Service**](https://tidbcloud.com/project/data-service) page of your project, click <MDSvgIcon name="icon-create-data-app" /> **Create DataApp** in the left pane.
 
     > **Tip:**
     >
     > If this is the first Data App in your project, click **Create Data App** in the middle of the page.
 
-3. In the **Create Data App** dialog, enter a name, a description, and select clusters that you want the Data App to access.
+3. In the **Create Data App** dialog, enter a name, a description, and select {{{ .starter }}} instances that you want the Data App to access.
 
     > **Note:**
     >
@@ -64,7 +68,7 @@ To get started with Data Service, you can also create your own Data App, and the
 4. (Optional) To automatically deploy endpoints of the Data App to your preferred GitHub repository and branch, enable **Connect to GitHub**, and then do the following:
 
     1. Click **Install on GitHub**, and then follow the on-screen instructions to install **TiDB Cloud Data Service** as an application on your target repository.
-    2. Click **Authorize** to authorize access to the application on GitHub.
+    2. Go back to the TiDB Cloud console, and then click **Authorize** to authorize access to the application on GitHub.
     3. Specify the target repository, branch, and directory where you want to save the configuration files of your Data App.
 
     > **Note:**
@@ -72,7 +76,7 @@ To get started with Data Service, you can also create your own Data App, and the
     > - The directory must start with a slash (`/`). For example, `/mydata`. If the directory you specified does not exist in the target repository and branch, it will be created automatically.
     > - The combination of repository, branch, and directory identifies the path of the configuration files, which must be unique among Data Apps. If your specified path is already used by another Data App, you need to specify a new path instead. Otherwise, the endpoints configured in the TiDB Cloud console for the current Data App will overwrite the files in your specified path.
 
-5. Click **Create Data App**. The [**Data Service**](https://tidbcloud.com/console/data-service) details page is displayed.
+5. Click **Create Data App**. The [**Data Service**](https://tidbcloud.com/project/data-service) details page is displayed.
 
 6. If you have configured to connect your Data App to GitHub, check your specified GitHub directory. You will find that the [Data App configuration files](/tidb-cloud/data-service-app-config-files.md) have been committed to the directory by `tidb-cloud-data-service`, which means that your Data App is connected to GitHub successfully.
 
@@ -82,9 +86,7 @@ To get started with Data Service, you can also create your own Data App, and the
 
 An endpoint is a web API that you can customize to execute SQL statements.
 
-After creating a Data App, a default `untitled endpoint` is created for you automatically. You can use the default endpoint to access your TiDB Cloud cluster.
-
-If you want to create a new endpoint, locate the newly created Data App and click **+** **Create Endpoint** to the right of the App name.
+To create a new endpoint, locate the newly created Data App and click **+** **Create Endpoint** to the right of the App name.
 
 #### Configure properties
 
@@ -92,7 +94,7 @@ On the right pane, click the **Properties** tab and set properties for the endpo
 
 - **Path**: the path that users use to access the endpoint. The combination of the request method and the path must be unique within a Data App.
 
-- **Endpoint URL**: (read-only) the URL is automatically generated based on the region where the corresponding cluster is located, the service URL of the Data App, and the path of the endpoint. For example, if the path of the endpoint is `/my_endpoint/get_id`, the endpoint URL is `https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id`.
+- **Endpoint URL**: (read-only) the URL is automatically generated based on the region where the corresponding {{{ .starter }}} instance is located, the service URL of the Data App, and the path of the endpoint. For example, if the path of the endpoint is `/my_endpoint/get_id`, the endpoint URL is `https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id`.
 
 - **Request Method**: the HTTP method of the endpoint. You can use `GET` to retrieve data, use `POST` to create or insert data, use `PUT` to update or modify data, and use `DELETE` to delete data.
 
@@ -100,21 +102,25 @@ For more information about endpoint properties, see [Configure properties](/tidb
 
 #### Write SQL statements
 
-You can customize SQL statements for the endpoint in the SQL editor, which is the middle pane on the **Data Service** page.
+You can customize SQL statements for the endpoint in the <Tooltip id="sql-editor">SQL Editor</Tooltip>, which is the middle pane on the **Data Service** page.
 
-1. Select a cluster.
+1. Select a {{{ .starter }}} instance.
 
     > **Note:**
     >
-    > Only clusters that are linked to the Data App are displayed in the drop-down list. To manage the linked clusters, see [Manage linked clusters](/tidb-cloud/data-service-manage-data-app.md#manage-linked-data-sources).
+    > Only {{{ .starter }}} instances that are linked to the Data App are displayed in the drop-down list. To manage the linked {{{ .starter }}} instances, see [Manage linked data sources](/tidb-cloud/data-service-manage-data-app.md#manage-linked-data-sources).
 
-    On the upper part of the SQL editor, select a cluster on which you want to execute SQL statements from the drop-down list. Then, you can view all databases of this cluster in the **Schema** tab on the right pane.
+    On the upper part of the SQL editor, select a {{{ .starter }}} instance on which you want to execute SQL statements from the drop-down list. Then, you can view all databases of this {{{ .starter }}} instance in the **Schema** tab on the right pane.
 
 2. Write SQL statements.
 
     Before querying or modifying data, you need to first specify the database in the SQL statements. For example, `USE database_name;`.
 
     In the SQL editor, you can write statements such as table join queries, complex queries, and aggregate functions. You can also simply type `--` followed by your instructions to let AI generate SQL statements automatically.
+
+    > **Note:**
+    >
+    > To try the AI capacity of TiDB Cloud, you need to allow PingCAP and Amazon Bedrock to use your code snippets for research and service improvement. For more information, see [Enable or disable AI to generate SQL queries](/tidb-cloud/explore-data-with-chat2query.md#enable-or-disable-ai-to-generate-sql-queries).
 
     To define a parameter, you can insert it as a variable placeholder like `${ID}` in the SQL statement. For example, `SELECT * FROM table_name WHERE id = ${ID}`. Then, you can click the **Params** tab on the right pane to change the parameter definition and test values.
 
@@ -131,9 +137,31 @@ You can customize SQL statements for the endpoint in the SQL editor, which is th
 
     If you have inserted parameters in the SQL statements, make sure that you have set test values or default values for the parameters in the **Params** tab on the right pane. Otherwise, an error is returned.
 
-    To run a SQL statement, select the line of the SQL with your cursor and click **Run** > **Run at cursor**.
+    <SimpleTab>
+    <div label="macOS">
 
-    To run all SQL statements in the SQL editor, click **Run**. In this case, only the last SQL results are returned.
+    For macOS:
+
+    - If you have only one statement in the editor, to run it, press **⌘ + Enter** or click <svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.70001 20.7756C6.01949 20.3926 6.00029 19.5259 6.00034 19.0422L6.00034 12.1205L6 5.33028C6 4.75247 6.00052 3.92317 6.38613 3.44138C6.83044 2.88625 7.62614 2.98501 7.95335 3.05489C8.05144 3.07584 8.14194 3.12086 8.22438 3.17798L19.2865 10.8426C19.2955 10.8489 19.304 10.8549 19.3126 10.8617C19.4069 10.9362 20 11.4314 20 12.1205C20 12.7913 19.438 13.2784 19.3212 13.3725C19.307 13.3839 19.2983 13.3902 19.2831 13.4002C18.8096 13.7133 8.57995 20.4771 8.10002 20.7756C7.60871 21.0812 7.22013 21.0683 6.70001 20.7756Z" fill="currentColor"></path></svg>**Run**.
+
+    - If you have multiple statements in the editor, to run one or several of them sequentially, place your cursor on your target statement or select the lines of the target statements with your cursor, and then press **⌘ + Enter** or click **Run**.
+
+    - To run all statements in the editor sequentially, press **⇧ + ⌘ + Enter**, or select the lines of all statements with your cursor and click **Run**.
+
+    </div>
+
+    <div label="Windows/Linux">
+
+    For Windows or Linux:
+
+    - If you have only one statement in the editor, to run it, press **Ctrl + Enter** or click <svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.70001 20.7756C6.01949 20.3926 6.00029 19.5259 6.00034 19.0422L6.00034 12.1205L6 5.33028C6 4.75247 6.00052 3.92317 6.38613 3.44138C6.83044 2.88625 7.62614 2.98501 7.95335 3.05489C8.05144 3.07584 8.14194 3.12086 8.22438 3.17798L19.2865 10.8426C19.2955 10.8489 19.304 10.8549 19.3126 10.8617C19.4069 10.9362 20 11.4314 20 12.1205C20 12.7913 19.438 13.2784 19.3212 13.3725C19.307 13.3839 19.2983 13.3902 19.2831 13.4002C18.8096 13.7133 8.57995 20.4771 8.10002 20.7756C7.60871 21.0812 7.22013 21.0683 6.70001 20.7756Z" fill="currentColor"></path></svg>**Run**.
+
+    - If you have multiple statements in the editor, to run one or several of them sequentially, place your cursor on your target statement or select the lines of the target statements with your cursor, and then press **Ctrl + Enter** or click **Run**.
+
+    - To run all statements in the editor sequentially, press **Shift + Ctrl + Enter**, or select the lines of all statements with your cursor and click **Run**.
+
+    </div>
+    </SimpleTab>
 
     After running the statements, you can see the query results immediately in the **Result** tab at the bottom of the page.
 
@@ -153,7 +181,7 @@ To deploy the endpoint, perform the following steps:
 
 2. Click **Deploy** to confirm the deployment. You will get the **Endpoint has been deployed** prompt if the endpoint is successfully deployed.
 
-    On the right pane of the endpoint details page, you can click the **Deployments** tab to view the deployed history.
+    To view the deployment history, you can click the name of your Data App in the left pane, and then click the **Deployments** tab in the right pane.
 
 ### Step 5. Call the endpoint
 
@@ -161,14 +189,14 @@ You can call the endpoint by sending an HTTPS request. Before calling an endpoin
 
 #### 1. Create an API key
 
-1. In the left pane of the [**Data Service**](https://tidbcloud.com/console/data-service) page, click the name of your Data App to view its details.
+1. In the left pane of the [**Data Service**](https://tidbcloud.com/project/data-service) page, click the name of your Data App to view its details.
 2. In the **Authentication** area, click **Create API Key**.
 3. In the **Create API Key** dialog box, do the following:
 
     1. (Optional) Enter a description for your API key.
     2. Select a role for your API key.
 
-        The role is used to control whether the API key can read or write data to the clusters linked to the Data App. You can select the `ReadOnly` or `ReadAndWrite` role:
+        The role is used to control whether the API key can read or write data to the {{{ .starter }}} instances linked to the Data App. You can select the `ReadOnly` or `ReadAndWrite` role:
 
         - `ReadOnly`: only allows the API key to read data, such as `SELECT`, `SHOW`, `USE`, `DESC`, and `EXPLAIN` statements.
         - `ReadAndWrite`: allows the API key to read and write data. You can use this API key to execute all SQL statements, such as DML and DDL statements.
@@ -187,9 +215,9 @@ For more information about API keys, see [API Keys in Data Service](/tidb-cloud/
 
 TiDB Cloud generates code examples to help you call an endpoint. To get the code example, perform the following steps:
 
-1. In the left pane of the [**Data Service**](https://tidbcloud.com/console/data-service) page, click the name of your endpoint, and then click **...** > **Code Example** in the upper-right corner. The **Code Example** dialog box is displayed.
+1. In the left pane of the [**Data Service**](https://tidbcloud.com/project/data-service) page, click the name of your endpoint, and then click **...** > **Code Example** in the upper-right corner. The **Code Example** dialog box is displayed.
 
-2. In the dialog box, select the cluster and database that you want to use to call the endpoint, and then copy the code example.
+2. In the dialog box, select the {{{ .starter }}} instance and database that you want to use to call the endpoint, and then copy the code example.
 
     An example of the curl code example is as follows:
 
@@ -222,7 +250,7 @@ TiDB Cloud generates code examples to help you call an endpoint. To get the code
 
     > **Note:**
     >
-    > - By requesting the regional domain `<region>.data.tidbcloud.com`, you can directly access the endpoint in the region where the TiDB cluster is located.
+    > - By requesting the regional domain `<region>.data.tidbcloud.com`, you can directly access the endpoint in the region where the {{{ .starter }}} instance is located.
     > - Alternatively, you can also request the global domain `data.tidbcloud.com` without specifying a region. In this way, TiDB Cloud will internally redirect the request to the target region, but this might result in additional latency. If you choose this way, make sure to add the `--location-trusted` option to your curl command when calling an endpoint.
 
 #### 3. Use the code example

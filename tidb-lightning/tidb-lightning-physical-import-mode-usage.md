@@ -26,7 +26,7 @@ max-backups = 14
 check-requirements = true
 
 [mydumper]
-# The local data source directory or the URI of the external storage. For more information about the URI of the external storage, see https://docs.pingcap.com/tidb/v6.6/backup-and-restore-storages#uri-format.
+# The local data source directory or the URI of the external storage. For more information about the URI of the external storage, see https://docs.pingcap.com/tidb/stable/backup-and-restore-storages/#uri-format.
 data-source-dir = "/data/my_database"
 
 [conflict]
@@ -151,14 +151,14 @@ Suppose an `order_line` table has the following schema:
 
 ```sql
 CREATE TABLE IF NOT EXISTS `order_line` (
-  `ol_o_id` int(11) NOT NULL,
-  `ol_d_id` int(11) NOT NULL,
-  `ol_w_id` int(11) NOT NULL,
-  `ol_number` int(11) NOT NULL,
-  `ol_i_id` int(11) NOT NULL,
-  `ol_supply_w_id` int(11) DEFAULT NULL,
+  `ol_o_id` int NOT NULL,
+  `ol_d_id` int NOT NULL,
+  `ol_w_id` int NOT NULL,
+  `ol_number` int NOT NULL,
+  `ol_i_id` int NOT NULL,
+  `ol_supply_w_id` int DEFAULT NULL,
   `ol_delivery_d` datetime DEFAULT NULL,
-  `ol_quantity` int(11) DEFAULT NULL,
+  `ol_quantity` int DEFAULT NULL,
   `ol_amount` decimal(6,2) DEFAULT NULL,
   `ol_dist_info` char(24) DEFAULT NULL,
   PRIMARY KEY (`ol_w_id`,`ol_d_id`,`ol_o_id`,`ol_number`)

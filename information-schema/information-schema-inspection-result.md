@@ -12,7 +12,7 @@ The `INSPECTION_RESULT` diagnostic table can help you quickly find problems and 
 
 > **Note:**
 >
-> This table is only applicable to TiDB Self-Hosted and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
+> This table is only applicable to TiDB Self-Managed and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
 
 The structure of the `information_schema.inspection_result` diagnostic result table `information_schema.inspection_result` is as follows:
 
@@ -230,7 +230,6 @@ In the `config` diagnostic rule, the following two diagnostic rules are executed
     |  Component  | Configuration item | Expected value |
     |  ----  | ----  |  ----  |
     | TiDB | log.slow-threshold | larger than `0` |
-    | TiKV | raftstore.sync-log | `true` |
 
 ### `version` diagnostic rule
 
@@ -263,8 +262,7 @@ In `critical-error` diagnostic rule, the following two diagnostic rules are exec
     |  Component  | Error name | Monitoring table | Error description |
     |  ----  | ----  |  ----  |  ----  |
     | TiDB | panic-count | tidb_panic_count_total_count | Panic occurs in TiDB. |
-    | TiDB | binlog-error | tidb_binlog_error_total_count | An error occurs when TiDB writes binlog. |
-    | TiKV | critical-error | tikv_critical_error_total_coun | The critical error of TiKV. |
+    | TiKV | critical-error | tikv_critical_error_total_count | The critical error of TiKV. |
     | TiKV | scheduler-is-busy       | tikv_scheduler_is_busy_total_count | The TiKV scheduler is too busy, which makes TiKV temporarily unavailable. |
     | TiKV | coprocessor-is-busy | tikv_coprocessor_is_busy_total_count | The TiKV Coprocessor is too busy. |
     | TiKV | channel-is-full | tikv_channel_full_total_count | The "channel full" error occurs in TiKV. |
@@ -288,7 +286,7 @@ The `threshold-check` diagnostic rule checks whether the following metrics in th
 | TiKV | rocksdb-write-duration    | tikv_engine_write_duration          | < 100ms |  The write latency of TiKV RocksDB. |
 | TiKV | rocksdb-get-duration | tikv_engine_max_get_duration | < 50ms |   The read latency of TiKV RocksDB. |
 | TiKV | rocksdb-seek-duration | tikv_engine_max_seek_duration | < 50ms |  The latency of TiKV RocksDB to execute `seek`.   |
-| TiKV | scheduler-pending-cmd-coun | tikv_scheduler_pending_commands  | < 1000 |  The number of commands stalled in TiKV.  |
+| TiKV | scheduler-pending-cmd-count | tikv_scheduler_pending_commands  | < 1000 |  The number of commands stalled in TiKV.  |
 | TiKV | index-block-cache-hit | tikv_block_index_cache_hit | > 0.95 |  The hit rate of index block cache in TiKV. |
 | TiKV | filter-block-cache-hit | tikv_block_filter_cache_hit | > 0.95 |  The hit rate of filter block cache in TiKV. |
 | TiKV | data-block-cache-hit | tikv_block_data_cache_hit | > 0.80 |  The hit rate of data block cache in TiKV. |

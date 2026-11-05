@@ -59,7 +59,7 @@ In this directory:
 
 - `dbt_project.yml` is the dbt project configuration file, which holds the project name and database configuration file information.
 
-- The `models` directory contains the project's SQL models and table schemas. Note that the data analyst writes this section. For more information about models, see [SQL models](https://docs.getdbt.com/docs/build/sql-models).
+- The `models` directory contains the project’s SQL models and table schemas. Note that the data analyst writes this section. For more information about models, see [SQL models](https://docs.getdbt.com/docs/build/sql-models).
 
 - The `seeds` directory stores the CSV files that are dumped by the database export tools. For example, you can [export the TiDB Cloud data](https://docs.pingcap.com/tidbcloud/export-data-from-tidb-cloud) into CSV files through Dumpling. In the `jaffle_shop` project, these CSV files are used as raw data to be processed.
 
@@ -77,7 +77,7 @@ To configure the project, take the following steps:
 
     In the editor, add the following configuration:
 
-   ```yaml
+    ```yaml
     jaffle_shop_tidb:                                                 # Project name
       target: dev                                                     # Target
       outputs:
@@ -90,7 +90,7 @@ To configure the project, take the following steps:
           password: "your_password"                                   # The password to use for authenticating to the TiDB Cloud clusters
     ```
 
-    You can get the values of `server`, `port`, and `username` from the connection dialog of your cluster. To open this dialog, go to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, click the name of your target cluster to go to its overview page, and then click **Connect** in the upper-right corner.
+    You can get the values of `server`, `port`, and `username` from the connection dialog in the TiDB Cloud console. To open the dialog, go to the [**My TiDB**](https://tidbcloud.com/tidbs) page, click the name of your target <CustomContent plan="starter">{{{ .starter }}} instance</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent> to go to its overview page, and then click **Connect** in the upper-right corner.
 
 2. Complete the project configuration.
 
@@ -145,7 +145,7 @@ To configure the project, take the following steps:
 >
 > This step is optional. If the data for processing is already in the target database, you can skip this step.
 
-Now that you have successfully created and configured the project, it's time to load the CSV data and materialize the CSV as a table in the target database.
+Now that you have successfully created and configured the project, it’s time to load the CSV data and materialize the CSV as a table in the target database.
 
 1. Load the CSV data and materialize the CSV as a table in the target database.
 
@@ -322,7 +322,7 @@ To generate visual documents, take the following steps:
 | Option           | Description                                                             | Required? | Example                                           |
 |------------------|-------------------------------------------------------------------------|-----------|---------------------------------------------------|
 | `type`             | The specific adapter to use                                             | Required  | `tidb`                                            |
-| `server`           | The TiDB Cloud clusters' endpoint to connect to                         | Required  | `gateway01.ap-southeast-1.prod.aws.tidbcloud.com` |
+| `server`           | The TiDB endpoint to connect to                         | Required  | `gateway01.ap-southeast-1.prod.aws.tidbcloud.com` |
 | `port`             | The port to use                                                         | Required  | `4000`                                            |
 | `schema`           | The schema (database) to normalize data into                      | Required  | `analytics`                                       |
 | `username`         | The username to use to connect to the TiDB Cloud clusters               | Required  | `xxxxxxxxxxx.root`                                |

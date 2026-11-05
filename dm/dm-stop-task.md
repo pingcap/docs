@@ -62,3 +62,10 @@ stop-task test
     ]
 }
 ```
+
+> **Note:**
+>
+> After you stop a migration task with the `stop-task` command, running [`query-status`](/dm/dm-query-status.md) will no longer display the task. However, the checkpoint and other related information for this task is still retained in the `dm_meta` database.
+>
+> + To start over the migration task, add the `--remove-meta` option when running the [`start-task`](/dm/dm-create-task.md) command.
+> + To completely remove the migration task, manually delete the four tables that use the task name as a prefix from the `dm_meta` database.

@@ -15,7 +15,7 @@ This document provides the additional steps to be taken when you migrate data to
 
 ## Use DM to migrate data to a downstream TiDB table with more columns
 
-When replicating the upstream binlog, DM tries to use the current table schema of the downstream to parse the binlog and generate the corresponding DML statements. If the column number of the table in the upstream binlog does not match the column number in the downstream table schema, the following error occurs:
+When replicating the upstream binlog, DM tries to use the current table schema of the downstream to parse the binlog and generate the corresponding DML statements. If the number of columns of the table in the upstream binlog does not match the number of columns in the downstream table schema, the following error occurs:
 
 ```json
 "errors": [
@@ -36,7 +36,7 @@ The following is an example upstream table schema:
 ```sql
 # Upstream table schema
 CREATE TABLE `messages` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   PRIMARY KEY (`id`)
 )
 ```
@@ -46,7 +46,7 @@ The following is an example downstream table schema:
 ```sql
 # Downstream table schema
 CREATE TABLE `messages` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `message` varchar(255) DEFAULT NULL, # This is the additional column that only exists in the downstream table.
   PRIMARY KEY (`id`)
 )
@@ -61,7 +61,7 @@ In such cases, you can use the `binlog-schema` command to set a table schema for
     ```sql
     # Upstream table schema
     CREATE TABLE `messages` (
-    `id` int(11) NOT NULL,
+    `id` int NOT NULL,
     PRIMARY KEY (`id`)
     )
     ```
@@ -78,8 +78,8 @@ In such cases, you can use the `binlog-schema` command to set a table schema for
 
     |Parameter |Description|
     |:-- |:---|
-    |`-master-addr` |Specifies `${advertise-addr}` of any DM-master node in the cluster where dmctl is to be connected. `${advertise-addr}` indicates the address that DM-master advertises to the outside world.|
-    |`binlog-schema set`| Manually set the schema information.|
+    |`--master-addr` |Specifies `${advertise-addr}` of any DM-master node in the cluster where dmctl is to be connected. `${advertise-addr}` indicates the address that DM-master advertises to the outside world.|
+    |`binlog-schema update`| Manually updates the schema information.|
     |`-s` | Specifies the source. `${source-id}` indicates the source ID of MySQL data.|
     |`${task-name}`| Specifies the name of the migration task defined in the `task.yaml` configuration file of the data migration task.|
     |`${database-name}`| Specifies the database. `${database-name}` indicates the name of the upstream database. |
@@ -91,7 +91,7 @@ In such cases, you can use the `binlog-schema` command to set a table schema for
     {{< copyable "shell-regular" >}}
 
     ```
-    tiup dmctl --master-addr 172.16.10.71:8261 binlog-schema update -s mysql-01 task-test -d log -t message log.message.sql
+    tiup dmctl --master-addr 172.16.10.71:8261 binlog-schema update -s mysql-01 task-test log messages log.messages.sql
     ```
 
 3. Use the `resume-task` command to resume the migration task in the Paused state.

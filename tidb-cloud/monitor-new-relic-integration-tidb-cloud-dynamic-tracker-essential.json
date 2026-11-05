@@ -1,0 +1,674 @@
+{
+  "name": "TiDB Cloud Essential Dynamic Tracker",
+  "permissions": "PUBLIC_READ_WRITE",
+  "description": "This dashboard provides a high-level overview for TiDB Cloud Essential instances. It includes resource unit metrics, and excludes Dedicated-only node, DM, and CDC metrics.",
+  "pages": [
+    {
+      "name": "Overview",
+      "description": null,
+      "widgets": [
+        {
+          "title": "",
+          "layout": {
+            "column": 1,
+            "row": 1,
+            "width": 12,
+            "height": 1
+          },
+          "linkedEntityGuids": null,
+          "visualization": {
+            "id": "viz.markdown"
+          },
+          "rawConfiguration": {
+            "text": "This dashboard provides a high-level overview for TiDB Cloud Essential instances. It includes resource unit metrics, and excludes Dedicated-only node, DM, and CDC metrics.\n\nFurther reading on TiDB monitoring: [Metrics available to New Relic](https://docs.pingcap.com/tidbcloud/monitor-new-relic-integration#metrics-available-to-newrelic)\n\nClone this template dashboard to make changes and add your own graph widgets."
+          }
+        },
+        {
+          "title": "",
+          "layout": {
+            "column": 1,
+            "row": 2,
+            "width": 12,
+            "height": 1
+          },
+          "linkedEntityGuids": null,
+          "visualization": {
+            "id": "viz.markdown"
+          },
+          "rawConfiguration": {
+            "text": "# Performance Overview\n\nDatabase performance and storage metrics for TiDB Cloud Essential."
+          }
+        },
+        {
+          "title": "Database Time",
+          "layout": {
+            "column": 1,
+            "row": 3,
+            "width": 6,
+            "height": 3
+          },
+          "linkedEntityGuids": null,
+          "visualization": {
+            "id": "viz.line"
+          },
+          "rawConfiguration": {
+            "facet": {
+              "showOtherSeries": false
+            },
+            "legend": {
+              "enabled": true
+            },
+            "nrqlQueries": [
+              {
+                "accountIds": [],
+                "query": "SELECT (average(`tidb_cloud.db_database_time`) * cardinality(`tidb_cloud.db_database_time`)) AS 'Total' FROM Metric WHERE ('*' IN ({{instance_name}}) OR instance_name IN ({{instance_name}})) AND ('*' IN ({{instance_id}}) OR instance_id IN ({{instance_id}})) SINCE 24 HOURS AGO TIMESERIES"
+              },
+              {
+                "accountIds": [],
+                "query": "SELECT (average(`tidb_cloud.db_database_time`) * cardinality(`tidb_cloud.db_database_time`)) FROM Metric WHERE ('*' IN ({{instance_name}}) OR instance_name IN ({{instance_name}})) AND ('*' IN ({{instance_id}}) OR instance_id IN ({{instance_id}})) FACET sql_type LIMIT MAX SINCE 24 HOURS AGO TIMESERIES"
+              }
+            ],
+            "nullValues": {
+              "nullValue": "remove"
+            },
+            "platformOptions": {
+              "ignoreTimeRange": false
+            },
+            "units": {
+              "unit": "SECONDS"
+            },
+            "yAxisLeft": {
+              "zero": true,
+              "scale": "logarithmic"
+            }
+          }
+        },
+        {
+          "title": "Queries Per Second",
+          "layout": {
+            "column": 7,
+            "row": 3,
+            "width": 6,
+            "height": 3
+          },
+          "linkedEntityGuids": null,
+          "visualization": {
+            "id": "viz.line"
+          },
+          "rawConfiguration": {
+            "facet": {
+              "showOtherSeries": false
+            },
+            "legend": {
+              "enabled": true
+            },
+            "nrqlQueries": [
+              {
+                "accountIds": [],
+                "query": "SELECT (average(`tidb_cloud.db_query_per_second`) * cardinality(`tidb_cloud.db_query_per_second`)) AS 'Total' FROM Metric WHERE ('*' IN ({{instance_name}}) OR instance_name IN ({{instance_name}})) AND ('*' IN ({{instance_id}}) OR instance_id IN ({{instance_id}})) SINCE 24 HOURS AGO TIMESERIES"
+              },
+              {
+                "accountIds": [],
+                "query": "SELECT (average(`tidb_cloud.db_query_per_second`) * cardinality(`tidb_cloud.db_query_per_second`)) FROM Metric WHERE ('*' IN ({{instance_name}}) OR instance_name IN ({{instance_name}})) AND ('*' IN ({{instance_id}}) OR instance_id IN ({{instance_id}})) FACET type LIMIT MAX SINCE 24 HOURS AGO TIMESERIES"
+              }
+            ],
+            "nullValues": {
+              "nullValue": "remove"
+            },
+            "platformOptions": {
+              "ignoreTimeRange": false
+            },
+            "units": {
+              "unit": "COUNT"
+            },
+            "yAxisLeft": {
+              "zero": true
+            }
+          }
+        },
+        {
+          "title": "Average Query Duration",
+          "layout": {
+            "column": 1,
+            "row": 6,
+            "width": 6,
+            "height": 3
+          },
+          "linkedEntityGuids": null,
+          "visualization": {
+            "id": "viz.line"
+          },
+          "rawConfiguration": {
+            "facet": {
+              "showOtherSeries": false
+            },
+            "legend": {
+              "enabled": true
+            },
+            "nrqlQueries": [
+              {
+                "accountIds": [],
+                "query": "SELECT average(`tidb_cloud.db_average_query_duration`) AS 'Average' FROM Metric WHERE ('*' IN ({{instance_name}}) OR instance_name IN ({{instance_name}})) AND ('*' IN ({{instance_id}}) OR instance_id IN ({{instance_id}})) SINCE 24 HOURS AGO TIMESERIES"
+              },
+              {
+                "accountIds": [],
+                "query": "SELECT average(`tidb_cloud.db_average_query_duration`) FROM Metric WHERE ('*' IN ({{instance_name}}) OR instance_name IN ({{instance_name}})) AND ('*' IN ({{instance_id}}) OR instance_id IN ({{instance_id}})) FACET sql_type LIMIT MAX SINCE 24 HOURS AGO TIMESERIES"
+              }
+            ],
+            "nullValues": {
+              "nullValue": "remove"
+            },
+            "platformOptions": {
+              "ignoreTimeRange": false
+            },
+            "units": {
+              "unit": "SECONDS"
+            },
+            "yAxisLeft": {
+              "zero": true,
+              "scale": "logarithmic"
+            }
+          }
+        },
+        {
+          "title": "Failed Queries",
+          "layout": {
+            "column": 7,
+            "row": 6,
+            "width": 6,
+            "height": 3
+          },
+          "linkedEntityGuids": null,
+          "visualization": {
+            "id": "viz.line"
+          },
+          "rawConfiguration": {
+            "facet": {
+              "showOtherSeries": false
+            },
+            "legend": {
+              "enabled": true
+            },
+            "nrqlQueries": [
+              {
+                "accountIds": [],
+                "query": "SELECT (average(`tidb_cloud.db_failed_queries`) * cardinality(`tidb_cloud.db_failed_queries`)) AS 'Total' FROM Metric WHERE ('*' IN ({{instance_name}}) OR instance_name IN ({{instance_name}})) AND ('*' IN ({{instance_id}}) OR instance_id IN ({{instance_id}})) SINCE 24 HOURS AGO TIMESERIES"
+              },
+              {
+                "accountIds": [],
+                "query": "SELECT (average(`tidb_cloud.db_failed_queries`) * cardinality(`tidb_cloud.db_failed_queries`)) FROM Metric WHERE ('*' IN ({{instance_name}}) OR instance_name IN ({{instance_name}})) AND ('*' IN ({{instance_id}}) OR instance_id IN ({{instance_id}})) FACET type LIMIT MAX SINCE 24 HOURS AGO TIMESERIES"
+              }
+            ],
+            "nullValues": {
+              "nullValue": "remove"
+            },
+            "platformOptions": {
+              "ignoreTimeRange": false
+            },
+            "units": {
+              "unit": "COUNT"
+            },
+            "yAxisLeft": {
+              "zero": true
+            }
+          }
+        },
+        {
+          "title": "Row Storage Used",
+          "layout": {
+            "column": 1,
+            "row": 9,
+            "width": 6,
+            "height": 3
+          },
+          "linkedEntityGuids": null,
+          "visualization": {
+            "id": "viz.line"
+          },
+          "rawConfiguration": {
+            "facet": {
+              "showOtherSeries": false
+            },
+            "legend": {
+              "enabled": true
+            },
+            "nrqlQueries": [
+              {
+                "accountIds": [],
+                "query": "SELECT (average(`tidb_cloud.db_row_storage_used_bytes`) * cardinality(`tidb_cloud.db_row_storage_used_bytes`)) AS 'Total' FROM Metric WHERE ('*' IN ({{instance_name}}) OR instance_name IN ({{instance_name}})) AND ('*' IN ({{instance_id}}) OR instance_id IN ({{instance_id}})) SINCE 24 HOURS AGO TIMESERIES"
+              }
+            ],
+            "nullValues": {
+              "nullValue": "remove"
+            },
+            "platformOptions": {
+              "ignoreTimeRange": false
+            },
+            "units": {
+              "unit": "BYTES"
+            },
+            "yAxisLeft": {
+              "zero": true
+            }
+          }
+        },
+        {
+          "title": "Columnar Storage Used",
+          "layout": {
+            "column": 7,
+            "row": 9,
+            "width": 6,
+            "height": 3
+          },
+          "linkedEntityGuids": null,
+          "visualization": {
+            "id": "viz.line"
+          },
+          "rawConfiguration": {
+            "facet": {
+              "showOtherSeries": false
+            },
+            "legend": {
+              "enabled": true
+            },
+            "nrqlQueries": [
+              {
+                "accountIds": [],
+                "query": "SELECT (average(`tidb_cloud.db_columnar_storage_used_bytes`) * cardinality(`tidb_cloud.db_columnar_storage_used_bytes`)) AS 'Total' FROM Metric WHERE ('*' IN ({{instance_name}}) OR instance_name IN ({{instance_name}})) AND ('*' IN ({{instance_id}}) OR instance_id IN ({{instance_id}})) SINCE 24 HOURS AGO TIMESERIES"
+              }
+            ],
+            "nullValues": {
+              "nullValue": "remove"
+            },
+            "platformOptions": {
+              "ignoreTimeRange": false
+            },
+            "units": {
+              "unit": "BYTES"
+            },
+            "yAxisLeft": {
+              "zero": true
+            }
+          }
+        },
+        {
+          "title": "",
+          "layout": {
+            "column": 1,
+            "row": 12,
+            "width": 12,
+            "height": 1
+          },
+          "linkedEntityGuids": null,
+          "visualization": {
+            "id": "viz.markdown"
+          },
+          "rawConfiguration": {
+            "text": "# Connections\n\nConnection state at TiDB Cloud Essential instance scope."
+          }
+        },
+        {
+          "title": "Total Connections",
+          "layout": {
+            "column": 1,
+            "row": 13,
+            "width": 6,
+            "height": 3
+          },
+          "linkedEntityGuids": null,
+          "visualization": {
+            "id": "viz.line"
+          },
+          "rawConfiguration": {
+            "facet": {
+              "showOtherSeries": false
+            },
+            "legend": {
+              "enabled": true
+            },
+            "nrqlQueries": [
+              {
+                "accountIds": [],
+                "query": "SELECT (average(`tidb_cloud.db_total_connection`) * cardinality(`tidb_cloud.db_total_connection`)) AS 'Total' FROM Metric WHERE ('*' IN ({{instance_name}}) OR instance_name IN ({{instance_name}})) AND ('*' IN ({{instance_id}}) OR instance_id IN ({{instance_id}})) SINCE 24 HOURS AGO TIMESERIES"
+              }
+            ],
+            "nullValues": {
+              "nullValue": "remove"
+            },
+            "platformOptions": {
+              "ignoreTimeRange": false
+            },
+            "units": {
+              "unit": "COUNT"
+            },
+            "yAxisLeft": {
+              "zero": true
+            }
+          }
+        },
+        {
+          "title": "Active Connections",
+          "layout": {
+            "column": 7,
+            "row": 13,
+            "width": 6,
+            "height": 3
+          },
+          "linkedEntityGuids": null,
+          "visualization": {
+            "id": "viz.line"
+          },
+          "rawConfiguration": {
+            "facet": {
+              "showOtherSeries": false
+            },
+            "legend": {
+              "enabled": true
+            },
+            "nrqlQueries": [
+              {
+                "accountIds": [],
+                "query": "SELECT (average(`tidb_cloud.db_active_connections`) * cardinality(`tidb_cloud.db_active_connections`)) AS 'Total' FROM Metric WHERE ('*' IN ({{instance_name}}) OR instance_name IN ({{instance_name}})) AND ('*' IN ({{instance_id}}) OR instance_id IN ({{instance_id}})) SINCE 24 HOURS AGO TIMESERIES"
+              }
+            ],
+            "nullValues": {
+              "nullValue": "remove"
+            },
+            "platformOptions": {
+              "ignoreTimeRange": false
+            },
+            "units": {
+              "unit": "COUNT"
+            },
+            "yAxisLeft": {
+              "zero": true
+            }
+          }
+        },
+        {
+          "title": "Disconnection Count",
+          "layout": {
+            "column": 1,
+            "row": 16,
+            "width": 6,
+            "height": 3
+          },
+          "linkedEntityGuids": null,
+          "visualization": {
+            "id": "viz.line"
+          },
+          "rawConfiguration": {
+            "facet": {
+              "showOtherSeries": false
+            },
+            "legend": {
+              "enabled": true
+            },
+            "nrqlQueries": [
+              {
+                "accountIds": [],
+                "query": "SELECT (average(`tidb_cloud.db_disconnections`) * cardinality(`tidb_cloud.db_disconnections`)) FROM Metric WHERE ('*' IN ({{instance_name}}) OR instance_name IN ({{instance_name}})) AND ('*' IN ({{instance_id}}) OR instance_id IN ({{instance_id}})) FACET result LIMIT MAX SINCE 24 HOURS AGO TIMESERIES"
+              }
+            ],
+            "nullValues": {
+              "nullValue": "remove"
+            },
+            "platformOptions": {
+              "ignoreTimeRange": false
+            },
+            "units": {
+              "unit": "COUNT"
+            },
+            "yAxisLeft": {
+              "zero": true
+            }
+          }
+        },
+        {
+          "title": "",
+          "layout": {
+            "column": 1,
+            "row": 19,
+            "width": 12,
+            "height": 1
+          },
+          "linkedEntityGuids": null,
+          "visualization": {
+            "id": "viz.markdown"
+          },
+          "rawConfiguration": {
+            "text": "# Command & Transaction\n\nSQL command throughput, plan cache usage, and transaction activity."
+          }
+        },
+        {
+          "title": "Command Per Second",
+          "layout": {
+            "column": 1,
+            "row": 20,
+            "width": 6,
+            "height": 3
+          },
+          "linkedEntityGuids": null,
+          "visualization": {
+            "id": "viz.line"
+          },
+          "rawConfiguration": {
+            "facet": {
+              "showOtherSeries": false
+            },
+            "legend": {
+              "enabled": true
+            },
+            "nrqlQueries": [
+              {
+                "accountIds": [],
+                "query": "SELECT (average(`tidb_cloud.db_command_per_second`) * cardinality(`tidb_cloud.db_command_per_second`)) AS 'Total' FROM Metric WHERE ('*' IN ({{instance_name}}) OR instance_name IN ({{instance_name}})) AND ('*' IN ({{instance_id}}) OR instance_id IN ({{instance_id}})) SINCE 24 HOURS AGO TIMESERIES"
+              },
+              {
+                "accountIds": [],
+                "query": "SELECT (average(`tidb_cloud.db_command_per_second`) * cardinality(`tidb_cloud.db_command_per_second`)) FROM Metric WHERE ('*' IN ({{instance_name}}) OR instance_name IN ({{instance_name}})) AND ('*' IN ({{instance_id}}) OR instance_id IN ({{instance_id}})) FACET type LIMIT MAX SINCE 24 HOURS AGO TIMESERIES"
+              }
+            ],
+            "nullValues": {
+              "nullValue": "remove"
+            },
+            "platformOptions": {
+              "ignoreTimeRange": false
+            },
+            "units": {
+              "unit": "COUNT"
+            },
+            "yAxisLeft": {
+              "zero": true
+            }
+          }
+        },
+        {
+          "title": "Queries Using Plan Cache OPS",
+          "layout": {
+            "column": 7,
+            "row": 20,
+            "width": 6,
+            "height": 3
+          },
+          "linkedEntityGuids": null,
+          "visualization": {
+            "id": "viz.line"
+          },
+          "rawConfiguration": {
+            "facet": {
+              "showOtherSeries": false
+            },
+            "legend": {
+              "enabled": true
+            },
+            "nrqlQueries": [
+              {
+                "accountIds": [],
+                "query": "SELECT (average(`tidb_cloud.db_queries_using_plan_cache_ops`) * cardinality(`tidb_cloud.db_queries_using_plan_cache_ops`)) AS 'Total' FROM Metric WHERE ('*' IN ({{instance_name}}) OR instance_name IN ({{instance_name}})) AND ('*' IN ({{instance_id}}) OR instance_id IN ({{instance_id}})) SINCE 24 HOURS AGO TIMESERIES"
+              }
+            ],
+            "nullValues": {
+              "nullValue": "remove"
+            },
+            "platformOptions": {
+              "ignoreTimeRange": false
+            },
+            "units": {
+              "unit": "COUNT"
+            },
+            "yAxisLeft": {
+              "zero": true
+            }
+          }
+        },
+        {
+          "title": "Transaction Per Second",
+          "layout": {
+            "column": 1,
+            "row": 23,
+            "width": 6,
+            "height": 3
+          },
+          "linkedEntityGuids": null,
+          "visualization": {
+            "id": "viz.line"
+          },
+          "rawConfiguration": {
+            "facet": {
+              "showOtherSeries": false
+            },
+            "legend": {
+              "enabled": true
+            },
+            "nrqlQueries": [
+              {
+                "accountIds": [],
+                "query": "SELECT (average(`tidb_cloud.db_transaction_per_second`) * cardinality(`tidb_cloud.db_transaction_per_second`)) AS 'Total' FROM Metric WHERE ('*' IN ({{instance_name}}) OR instance_name IN ({{instance_name}})) AND ('*' IN ({{instance_id}}) OR instance_id IN ({{instance_id}})) SINCE 24 HOURS AGO TIMESERIES"
+              },
+              {
+                "accountIds": [],
+                "query": "SELECT (average(`tidb_cloud.db_transaction_per_second`) * cardinality(`tidb_cloud.db_transaction_per_second`)) FROM Metric WHERE ('*' IN ({{instance_name}}) OR instance_name IN ({{instance_name}})) AND ('*' IN ({{instance_id}}) OR instance_id IN ({{instance_id}})) FACET tuple(type, txn_mode) LIMIT MAX SINCE 24 HOURS AGO TIMESERIES"
+              }
+            ],
+            "nullValues": {
+              "nullValue": "remove"
+            },
+            "platformOptions": {
+              "ignoreTimeRange": false
+            },
+            "units": {
+              "unit": "COUNT"
+            },
+            "yAxisLeft": {
+              "zero": true
+            }
+          }
+        },
+        {
+          "title": "",
+          "layout": {
+            "column": 1,
+            "row": 26,
+            "width": 12,
+            "height": 1
+          },
+          "linkedEntityGuids": null,
+          "visualization": {
+            "id": "viz.markdown"
+          },
+          "rawConfiguration": {
+            "text": "# Request Unit\n\nThis panel shows RU usage for TiDB Cloud Essential instances."
+          }
+        },
+        {
+          "title": "Request Unit",
+          "layout": {
+            "column": 1,
+            "row": 27,
+            "width": 12,
+            "height": 3
+          },
+          "linkedEntityGuids": null,
+          "visualization": {
+            "id": "viz.line"
+          },
+          "rawConfiguration": {
+            "facet": {
+              "showOtherSeries": false
+            },
+            "legend": {
+              "enabled": true
+            },
+            "nrqlQueries": [
+              {
+                "accountIds": [],
+                "query": "SELECT (average(`tidb_cloud.resource_manager_resource_request_unit_total`) * cardinality(`tidb_cloud.resource_manager_resource_request_unit_total`)) AS 'Total' FROM Metric WHERE ('*' IN ({{instance_name}}) OR instance_name IN ({{instance_name}})) AND ('*' IN ({{instance_id}}) OR instance_id IN ({{instance_id}})) SINCE 24 HOURS AGO TIMESERIES"
+              }
+            ],
+            "nullValues": {
+              "nullValue": "remove"
+            },
+            "platformOptions": {
+              "ignoreTimeRange": false
+            },
+            "units": {
+              "unit": "COUNT"
+            },
+            "yAxisLeft": {
+              "zero": true
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variables": [
+    {
+      "name": "instance_name",
+      "items": null,
+      "defaultValues": [
+        {
+          "value": {
+            "string": "*"
+          }
+        }
+      ],
+      "nrqlQuery": {
+        "accountIds": [],
+        "query": "SELECT uniques(instance_name) FROM Metric WHERE metricName LIKE 'tidb_cloud.%'"
+      },
+      "options": {
+        "ignoreTimeRange": false,
+        "excluded": false
+      },
+      "title": "instance_name",
+      "type": "NRQL",
+      "isMultiSelection": false,
+      "replacementStrategy": "STRING"
+    },
+    {
+      "name": "instance_id",
+      "items": null,
+      "defaultValues": [
+        {
+          "value": {
+            "string": "*"
+          }
+        }
+      ],
+      "nrqlQuery": {
+        "accountIds": [],
+        "query": "SELECT uniques(instance_id) FROM Metric WHERE metricName LIKE 'tidb_cloud.%'"
+      },
+      "options": {
+        "ignoreTimeRange": false,
+        "excluded": false
+      },
+      "title": "instance_id",
+      "type": "NRQL",
+      "isMultiSelection": false,
+      "replacementStrategy": "STRING"
+    }
+  ]
+}

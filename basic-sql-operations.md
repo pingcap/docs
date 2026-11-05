@@ -14,7 +14,7 @@ To experiment with SQL and test out TiDB compatibility with MySQL queries, you c
 
 </CustomContent>
 
-This page walks you through the basic TiDB SQL statements such as DDL, DML and CRUD operations. For a complete list of TiDB statements, see [TiDB SQL Syntax](/sql-statements/sql-statement-overview.md)).
+This page walks you through the basic TiDB SQL statements such as DDL, DML and CRUD operations. For a complete list of TiDB statements, see [SQL Statement Overview](/sql-statements/sql-statement-overview.md).
 
 ## Category
 
@@ -100,18 +100,18 @@ For example, to create a table named `person` which includes fields such as numb
 
 ```sql
 CREATE TABLE person (
-    id INT(11),
+    id INT,
     name VARCHAR(255),
     birthday DATE
     );
 ```
 
-To view the statement that creates the table (DDL), use the `SHOW CREATE` statement:
+To view the statement that creates the table (DDL), use the `SHOW CREATE TABLE` statement:
 
 {{< copyable "sql" >}}
 
 ```sql
-SHOW CREATE table person;
+SHOW CREATE TABLE person;
 ```
 
 To delete a table, use the `DROP TABLE` statement:

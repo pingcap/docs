@@ -215,7 +215,7 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
     A new parameter `--start-time` is added to migration tasks. You can define time in the format of '2021-10-21 00:01:00' or '2021-10-21T00:01:00'.
 
-    This feature is particularly useful in scenarios where you migrate and merge incremental data from shard mysql instances. Specifically, you do not need to set a binlog start point for each source in an incremental migration task. Instead, you can create an incremental migration task quickly by using the `--start-time` parameter in `safe-mode`.
+    This feature is particularly useful in scenarios where you migrate and merge incremental data from shard MySQL instances. Specifically, you do not need to set a binlog start point for each source in an incremental migration task. Instead, you can create an incremental migration task quickly by using the `--start-time` parameter in `safe-mode`.
 
     [User document](/dm/dm-create-task.md#flags-description)
 
@@ -245,7 +245,7 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
     [User documentation](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)
 
-- ​​Accelerate leader balancing after restarting TiKV nodes
+- Accelerate leader balancing after restarting TiKV nodes
 
     After a restart of TiKV nodes, the unevenly scattered leaders must be redistributed for load balance. In large-scale clusters, leader balancing time is positively correlated with the number of Regions. For example, the leader balancing of 100K Regions can take 20-30 minutes, which is prone to performance issues and stability risks due to uneven load. TiDB v6.0.0 provides a parameter to control the balancing concurrency and enlarges the default value to 4 times of the original, which greatly shortens the leader rebalancing time and accelerates the business recovery after a restart of the TiKV nodes.
 
@@ -283,7 +283,7 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
 > **Note:**
 >
-> When upgrading from an earlier TiDB version to v6.0.0, if you want to know the compatibility change notes of all intermediate versions, you can check the [Release Notes](/releases/release-notes.md) of the corresponding version.
+> When upgrading from an earlier TiDB version to v6.0.0, if you want to know the compatibility change notes of all intermediate versions, you can check the [Release Notes](/releases/_index.md) of the corresponding version.
 
 ### System variables
 
@@ -556,7 +556,7 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
     - A `loader.<name>.on-duplicate` parameter is added. The default value is `replace`, which means using the new data to replace the existing data. If you want to keep the previous behavior, you can set the value to `error`. This parameter only controls the behavior during the full import phase.
 - To use DM, you should use the corresponding version of `dmctl`
     - Due to internal mechanism changes, after upgrading DM to v6.0.0, you should also upgrade `dmctl` to v6.0.0.
-- In v5.4 (v5.4 only), TiDB allows incorrect values for some noop system variables. Since v6.0.0, TiDB disallows setting incorrect values for system variables. [#31538](https://github.com/pingcap/tidb/issues/31538)
+- For v5.4 and earlier versions, TiDB allows incorrect values for some noop system variables. Starting from v6.0.0, TiDB disallows setting incorrect values for system variables. [#31538](https://github.com/pingcap/tidb/issues/31538)
 
 ## Improvements
 
@@ -667,7 +667,7 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
     - Fix the `invalid transaction` error when executing a query using index lookup join [#30468](https://github.com/pingcap/tidb/issues/30468)
     - Fix a bug that `show grants` returns incorrect results when two or more privileges are granted [#30855](https://github.com/pingcap/tidb/issues/30855)
     - Fix a bug that `INSERT INTO t1 SET timestamp_col = DEFAULT` would set the timestamp to the zero timestamp for the field defaulted to `CURRENT_TIMESTAMP` [#29926](https://github.com/pingcap/tidb/issues/29926)
-    - ​Fix errors reported in reading the results by avoiding encoding the maximum value and minimum non-null value of the string type [#31721](https://github.com/pingcap/tidb/issues/31721)
+    - Fix errors reported in reading the results by avoiding encoding the maximum value and minimum non-null value of the string type [#31721](https://github.com/pingcap/tidb/issues/31721)
     - Fix load data panic if the data is broken at an escape character [#31589](https://github.com/pingcap/tidb/issues/31589)
     - Fix the issue that the `greatest` or `least` function with collation gets a wrong result [#31789](https://github.com/pingcap/tidb/issues/31789)
     - Fix a bug that the date_add and date_sub functions might return incorrect data types [#31809](https://github.com/pingcap/tidb/issues/31809)

@@ -5,7 +5,7 @@ summary: The `tiup cluster audit cleanup` command is used to clean up logs gener
 
 # tiup cluster audit cleanup
 
-The `tiup cluster audit cleanup` command is used to clean up the logs generated in executing the `tiup cluster`command.
+The `tiup cluster audit cleanup` command is used to clean up the logs generated in executing the `tiup cluster` command.
 
 ## Syntax
 
@@ -34,5 +34,3 @@ tiup cluster audit cleanup [flags]
 ```shell
 clean audit log successfully
 ```
-
-[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)

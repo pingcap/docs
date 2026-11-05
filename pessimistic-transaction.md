@@ -40,7 +40,7 @@ The `BEGIN PESSIMISTIC;` and `BEGIN OPTIMISTIC;` statements take precedence over
 
 ## Behaviors
 
-Pessimistic transactions in TiDB behave similarly to those in MySQL. See the minor differences in [Difference with MySQL InnoDB](#difference-with-mysql-innodb).
+Pessimistic transactions in TiDB behave similarly to those in MySQL. See the minor differences in [Differences from MySQL InnoDB](#differences-from-mysql-innodb).
 
 - For pessimistic transactions, TiDB introduces snapshot read and current read.
 
@@ -80,9 +80,13 @@ Pessimistic transactions in TiDB behave similarly to those in MySQL. See the min
 
 - If the `Point Get` and `Batch Point Get` operators do not read data, they still lock the given primary key or unique key, which blocks other transactions from locking or writing data to the same primary key or unique key.
 
+    > **Note:**
+    >
+    > This behavior applies only to the [Repeatable Read](/transaction-isolation-levels.md#repeatable-read-isolation-level) isolation level. Under the [Read Committed](/transaction-isolation-levels.md#read-committed-isolation-level) isolation level, `Point Get` and `Batch Point Get` operators do not lock non-existent keys.
+
 - TiDB supports the `FOR UPDATE OF TABLES` syntax. For a statement that joins multiple tables, TiDB only applies pessimistic locks on the rows that are associated with the tables in `OF TABLES`.
 
-## Difference with MySQL InnoDB
+## Differences from MySQL InnoDB
 
 1. When TiDB executes DML or `SELECT FOR UPDATE` statements that use range in the WHERE clause, concurrent DML statements within the range are not blocked.
 
@@ -111,7 +115,9 @@ Pessimistic transactions in TiDB behave similarly to those in MySQL. See the min
 
 2. TiDB does not support `SELECT LOCK IN SHARE MODE`.
 
-    When `SELECT LOCK IN SHARE MODE` is executed, it has the same effect as that without the lock, so the read or write operation of other transactions is not blocked.
+    TiDB does not support the `SELECT LOCK IN SHARE MODE` syntax by default. You can enable [`tidb_enable_noop_functions`](/system-variables.md#tidb_enable_noop_functions-new-in-v40) to make TiDB compatible with the `SELECT LOCK IN SHARE MODE` syntax. Executing `SELECT LOCK IN SHARE MODE` has the same effect as that without the lock, so it does not block read or write operations of other transactions.
+
+    Starting from v8.3.0, TiDB supports using the [`tidb_enable_shared_lock_promotion`](/system-variables.md#tidb_enable_shared_lock_promotion-new-in-v830) system variable to enable the `SELECT LOCK IN SHARE MODE` statement to add locks. However, note that the lock added at this time is not a true shared lock, but an exclusive lock, which is consistent with `SELECT FOR UPDATE`. If you want to block writes to prevent data from being modified by write transactions in parallel during reads while keeping TiDB compatible with the `SELECT LOCK IN SHARE MODE` syntax, you can enable this variable. Enabling this variable takes effect on the `SELECT LOCK IN SHARE MODE` statement, regardless of whether [`tidb_enable_noop_functions`](/system-variables.md#tidb_enable_noop_functions-new-in-v40) is enabled or not.
 
 3. DDL may result in failure of the pessimistic transaction commit.
 
@@ -145,7 +151,39 @@ TiDB supports the following two isolation levels in the pessimistic transaction 
 
 In the transaction commit process, pessimistic transactions and optimistic transactions have the same logic. Both transactions adopt the two-phase commit (2PC) mode. The important adaptation of pessimistic transactions is DML execution.
 
-![TiDB pessimistic transaction commit process](/media/pessimistic-transaction-commit.png)
+```mermaid
+---
+config:
+  themeCSS: |
+    /* workaround for https://github.com/mermaid-js/mermaid/issues/523 */
+    /* mark the two "Lock" arrows as red, by restyling the dashed arrows */
+    line.messageLine1 {
+        stroke: #d32f2f;
+        stroke-dasharray: none !important;
+    }
+    /* make sure the arrow heads inherit the stroke color (another bug in mermaid) */
+    #arrowhead path {
+        fill: context-stroke;
+        stroke: context-stroke;
+    }
+---
+sequenceDiagram
+    participant Client
+    participant TiDB
+    participant TiKV
+
+    Client->>TiDB: BEGIN
+    rect rgba(255, 0, 0, 0.08)
+        Client->>TiDB: DML
+        TiDB-->>TiKV: Lock
+        TiDB-->>TiKV: Lock
+    end
+    rect rgba(0, 0, 0, 0.04)
+        Client->>TiDB: COMMIT
+        TiDB->>TiKV: Prewrite
+        TiDB->>TiKV: Commit
+    end
+```
 
 The pessimistic transaction adds an `Acquire Pessimistic Lock` phase before 2PC. This phase includes the following steps:
 
@@ -153,7 +191,52 @@ The pessimistic transaction adds an `Acquire Pessimistic Lock` phase before 2PC.
 2. When the TiDB server receives a writing request from the client, the TiDB server initiates a pessimistic lock request to the TiKV server, and the lock is persisted to the TiKV server.
 3. (Same as the optimistic transaction mode) When the client sends the commit request, TiDB starts to perform the two-phase commit similar to the optimistic transaction mode.
 
-![Pessimistic transactions in TiDB](/media/pessimistic-transaction-in-tidb.png)
+```mermaid
+---
+title: Pessimistic Transaction in TiDB
+---
+sequenceDiagram
+    participant client
+    participant TiDB
+    participant PD
+    participant TiKV
+
+    client->>TiDB: begin
+    TiDB->>PD: get ts as start_ts
+    loop execute SQL
+        rect rgba(0, 0, 0, 0.04)
+            alt do read
+                TiDB->>TiKV: get data from TiKV with start_ts
+                TiDB->>client: return read result
+            else do write
+                rect rgba(255, 0, 0, 0.08)
+                    loop if has write conflict
+                        TiDB->>PD: get ts as for_update_ts
+                        TiDB->>TiDB: write in cache
+                        TiDB->>TiKV: acquire pessimistic locks parallelly
+                    end
+                end
+                TiDB->>client: return write result
+            end
+        end
+    end
+    client->>TiDB: commit
+    opt start 2PC
+        rect rgba(0, 0, 0, 0.04)
+            par prewrite
+                TiDB->>TiKV: prewrite each key in cache with start_ts parallelly
+            end
+        end
+        rect rgba(0, 0, 0, 0.04)
+            par commit
+                TiDB->>PD: get ts as commit_ts
+                TiDB->>TiKV: commit primary_key with commit_ts first
+                TiDB->>client: success
+                TiDB->>TiKV: commit each secondary_key with commit_ts parallelly
+            end
+        end
+    end
+```
 
 ## Pipelined locking process
 
@@ -169,7 +252,25 @@ To reduce the overhead of locking, TiKV implements the pipelined locking process
 
 If the application logic relies on the locking or lock waiting mechanisms, or if you want to guarantee as much as possible the success rate of transaction commits even in the case of TiKV cluster anomalies, you should disable the pipelined locking feature.
 
-![Pipelined pessimistic lock](/media/pessimistic-transaction-pipelining.png)
+```mermaid
+---
+title: pipelined pessimistic lock
+---
+sequenceDiagram
+    participant Client
+    participant TiDB
+    participant TiKV1
+    participant TiKV2
+    participant TiKV3
+
+    loop
+        Client->>TiDB: DML
+        TiDB->>TiKV1: Acquire pessimistic locks
+        TiKV1->>TiDB: OK
+        TiKV1--)TiKV2: Log replication
+        TiKV1--)TiKV3: Log replication
+    end
+```
 
 This feature is enabled by default. To disable it, modify the TiKV configuration:
 
@@ -198,7 +299,17 @@ If the application logic relies on the locking or lock waiting mechanisms, or if
 
 In v6.0.0, TiKV introduces the feature of in-memory pessimistic lock. When this feature is enabled, pessimistic locks are usually stored in the memory of the Region leader only, and are not persisted to disk or replicated through Raft to other replicas. This feature can greatly reduce the overhead of acquiring pessimistic locks and improve the throughput of pessimistic transactions.
 
-When the memory usage of in-memory pessimistic locks exceeds the memory threshold of the Region or the TiKV node, the acquisition of pessimistic locks turns to the [pipelined locking process](#pipelined-locking-process). When the Region is merged or the leader is transferred, to avoid the loss of the pessimistic lock, TiKV writes the in-memory pessimistic lock to disk and replicates it to other replicas.
+<CustomContent platform="tidb">
+
+When the memory usage of in-memory pessimistic locks exceeds the memory threshold of the [Region](/tikv-configuration-file.md#in-memory-peer-size-limit-new-in-v840) or the [TiKV node](/tikv-configuration-file.md#in-memory-instance-size-limit-new-in-v840), the acquisition of pessimistic locks turns to the [pipelined locking process](#pipelined-locking-process). When the Region is merged or the leader is transferred, to avoid the loss of the pessimistic lock, TiKV writes the in-memory pessimistic lock to disk and replicates it to other replicas.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+When the memory usage of in-memory pessimistic locks exceeds the memory threshold of the [Region](https://docs.pingcap.com/tidb/dev/tikv-configuration-file#in-memory-peer-size-limit-new-in-v840) or the [TiKV node](https://docs.pingcap.com/tidb/dev/tikv-configuration-file#in-memory-instance-size-limit-new-in-v840), the acquisition of pessimistic locks turns to the [pipelined locking process](#pipelined-locking-process). When the Region is merged or the leader is transferred, to avoid the loss of the pessimistic lock, TiKV writes the in-memory pessimistic lock to disk and replicates it to other replicas.
+
+</CustomContent>
 
 The in-memory pessimistic lock performs similarly to the pipelined locking process, which does not affect the lock acquisition when the cluster is healthy. However, when network isolation occurs in TiKV or a TiKV node is down, the acquired pessimistic lock might be lost.
 
@@ -218,3 +329,22 @@ To dynamically disable this feature, modify the TiKV configuration dynamically:
 ```sql
 set config tikv pessimistic-txn.in-memory='false';
 ```
+
+<CustomContent platform="tidb">
+
+Starting from v8.4.0, you can configure the memory usage limit for in-memory pessimistic locks in a Region or a TiKV instance using [`pessimistic-txn.in-memory-peer-size-limit`](/tikv-configuration-file.md#in-memory-peer-size-limit-new-in-v840) or [`pessimistic-txn.in-memory-instance-size-limit`](/tikv-configuration-file.md#in-memory-instance-size-limit-new-in-v840):
+
+```toml
+[pessimistic-txn]
+in-memory-peer-size-limit = "512KiB"
+in-memory-instance-size-limit = "100MiB"
+```
+
+To dynamically modify these limits, [modify TiKV configuration dynamically](/dynamic-config.md#modify-tikv-configuration-dynamically) as follows:
+
+```sql
+SET CONFIG tikv `pessimistic-txn.in-memory-peer-size-limit`="512KiB";
+SET CONFIG tikv `pessimistic-txn.in-memory-instance-size-limit`="100MiB";
+```
+
+</CustomContent>

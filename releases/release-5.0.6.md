@@ -42,7 +42,7 @@ TiDB version: 5.0.6
 
     + TiCDC
 
-        - Optimize rate limiting control on TiKV reloads to reduce gPRC congestion during changefeed initialization [#3110](https://github.com/pingcap/ticdc/issues/3110)
+        - Optimize rate-limiting control on TiKV reloads to reduce gRPC congestion during changefeed initialization [#3110](https://github.com/pingcap/ticdc/issues/3110)
         - Add a tick frequency limit to EtcdWorker to prevent frequent etcd writes from affecting PD services [#3112](https://github.com/pingcap/ticdc/issues/3112)
         - Add the default configuration for `config.Metadata.Timeout` in Kafka sink [#3352](https://github.com/pingcap/tiflow/issues/3352)
         - Set the default value of `max-message-bytes` to `10M`, to reduce the probability that Kafka messages cannot be sent [#3081](https://github.com/pingcap/tiflow/issues/3081)
@@ -109,7 +109,7 @@ TiDB version: 5.0.6
     - Fix the issue that TiDB cannot correctly identify whether the `Int64` types in `Max`/`Min` functions are a signed integer or not, which causes the wrong calculation result of `Max`/`Min` [#10158](https://github.com/tikv/tikv/issues/10158)
     - Fix the issue that the node of a TiKV replica is down after the node gets snapshots because TiKV cannot modify the metadata accurately [#10225](https://github.com/tikv/tikv/issues/10225)
     - Fix the leak issue of the backup thread pool [#10287](https://github.com/tikv/tikv/issues/10287)
-    - Fix the issue of casting illegal strings into floating-point numbers [#23322](https://github.com/pingcap/tidb/issues/23322)
+    - Fix the issue of casting invalid strings into floating-point numbers [#23322](https://github.com/pingcap/tidb/issues/23322)
 
 + PD
 
@@ -151,13 +151,13 @@ TiDB version: 5.0.6
         - Fix the issue that Avro sink does not support parsing JSON type columns [#3624](https://github.com/pingcap/tiflow/issues/3624)
         - Fix the bug that TiCDC reads the incorrect schema snapshot from TiKV when the TiKV owner restarts [#2603](https://github.com/pingcap/tiflow/issues/2603)
         - Fix the memory leak issue after processing DDLs [#3174](https://github.com/pingcap/ticdc/issues/3174)
-        - Fix the bug that the `enable-old-value` configuration item is not automatically set to `true` on Canal and Maxwell protocols [#3676](https://github.com/pingcap/tiflow/issues/3676)
+        - Fix the bug that the `enable-old-value` configuration item is not automatically set to `true` on the Canal protocol [#3676](https://github.com/pingcap/tiflow/issues/3676)
         - Fix the timezone error that occurs when the `cdc server` command runs on some Red Hat Enterprise Linux releases (such as 6.8 and 6.9) [#3584](https://github.com/pingcap/tiflow/issues/3584)
         - Fix the issue of the inaccurate `txn_batch_size` monitoring metric for Kafka sink [#3431](https://github.com/pingcap/tiflow/issues/3431)
         - Fix the issue that `tikv_cdc_min_resolved_ts_no_change_for_1m` keeps alerting when there is no changefeed [#11017](https://github.com/tikv/tikv/issues/11017)
         - Fix the TiCDC panic issue that occurs when manually cleaning the task status in etcd [#2980](https://github.com/pingcap/tiflow/issues/2980)
         - Fix the issue that changefeed does not fail fast enough when the ErrGCTTLExceeded error occurs [#3111](https://github.com/pingcap/ticdc/issues/3111)
-        - Fix the issue that scanning stock data might fail due to TiKV performing GC when scanning stock data takes too long [#2470](https://github.com/pingcap/tiflow/issues/2470)
+        - Fix the issue that a changefeed might fail when initialization takes too long and TiKV advances the GC safepoint [#2470](https://github.com/pingcap/tiflow/issues/2470)
         - Fix OOM in container environments [#1798](https://github.com/pingcap/ticdc/issues/1798)
 
     + Backup & Restore (BR)

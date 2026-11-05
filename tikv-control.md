@@ -329,7 +329,7 @@ Use the `compact-cluster` command to manually compact data of the whole TiKV clu
 
 ### Set a Region to tombstone
 
-The `tombstone` command is usually used in circumstances where the sync-log is not enabled, and some data written in the Raft state machine is lost caused by power down.
+The `tombstone` command is usually used in circumstances where some data written in the Raft state machine is lost caused by power down.
 
 In a TiKV instance, you can use this command to set the status of some Regions to tombstone. Then when you restart the instance, those Regions are skipped to avoid the restart failure caused by damaged Raft state machines of those Regions. Those Regions need to have enough healthy replicas in other TiKV instances to be able to continue the reads and writes through the Raft mechanism.
 
@@ -442,14 +442,6 @@ success
 
 ```shell
 tikv-ctl --host ip:port modify-tikv-config -n raftdb.defaultcf.disable-auto-compactions -v true
-```
-
-```
-success
-```
-
-```shell
-tikv-ctl --host ip:port modify-tikv-config -n raftstore.sync-log -v false
 ```
 
 ```
@@ -656,7 +648,7 @@ From the output above, you can see that the information of the damaged SST file 
 
 ### Get the state of a Region's `RegionReadProgress`
 
-Starting from v6.5.4 and v7.3.0, TiKV introduces the `get-region-read-progress` subcommand to get up-to-date details of the resolver and `RegionReadProgress`. You need to specify a Region ID and a TiKV, which can be obtained from Grafana (`Min Resolved TS Region` and `Min Safe TS Region`) or `DataIsNotReady` logs.
+Starting from v6.5.4 and v7.3.0, TiKV introduces the `get-region-read-progress` subcommand to get up-to-date details of the resolver and `RegionReadProgress`. You need to specify a Region ID and a TiKV, which can be obtained from Grafana (`Min Resolved TS Region` and `Min Safe TS Follower Region`) or `DataIsNotReady` logs.
 
 - `--log` (optional): If specified, TiKV logs the smallest `start_ts` of locks in the Region's resolver in this TiKV at `INFO` level. This option helps you identify locks that might block resolved-ts in advance.
 

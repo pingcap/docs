@@ -52,5 +52,3 @@ A component can run in one of the following statuses:
 > `Pending Offline` in TiUP, `Offline` returned by PD API, and `Leaving` in TiDB Dashboard indicate the same status.
 
 Component status derives from the PD scheduling information. For more details, see [Information collection](/tidb-scheduling.md#information-collection).
-
-[<< Back to the previous page - TiUP Reference command list](/tiup/tiup-reference.md#command-list)

@@ -23,7 +23,7 @@ In v5.1, the key new features or improvements are as follows:
 
 > **Note:**
 >
-> When upgrading from an earlier TiDB version to v5.1, if you want to know the compatibility change notes of all intermediate versions, you can check the [Release Notes](/releases/release-notes.md) for the corresponding version.
+> When upgrading from an earlier TiDB version to v5.1, if you want to know the compatibility change notes of all intermediate versions, you can check the [Release Notes](/releases/_index.md) for the corresponding version.
 
 ### System variables
 
@@ -59,7 +59,7 @@ In v5.1, the key new features or improvements are as follows:
 
 ### Others
 
-- Before the upgrade, check the value of the TiDB configuration [`feedback-probability`](https://docs.pingcap.com/tidb/v5.1/tidb-configuration-file#feedback-probability). If the value is not 0, the "panic in the recoverable goroutine" error will occur after the upgrade, but this error does not affect the upgrade.
+- Before the upgrade, check the value of the TiDB configuration [`feedback-probability`](https://docs-archive.pingcap.com/tidb/v5.1/tidb-configuration-file#feedback-probability). If the value is not 0, the "panic in the recoverable goroutine" error will occur after the upgrade, but this error does not affect the upgrade.
 - Upgrade the Go compiler version of TiDB from go1.13.7 to go1.16.4, which improves the TiDB performance. If you are a TiDB developer, upgrade your Go compiler version to ensure a smooth compilation.
 - Avoid creating tables with clustered indexes in the cluster that uses TiDB Binlog during the TiDB rolling upgrade.
 - Avoid executing statements like `alter table ... modify column` or `alter table ... change column` during the TiDB rolling upgrade.
@@ -249,7 +249,7 @@ To learn more about the information and how to disable this behavior, refer to [
     + TiDB Lightning
 
         - Improve data importing speed. The optimization results show that the speed of importing TPC-C data is increased by 30%, and the speed of importing large tables (2TB+) with more indexes (5 indexes) is increased by more than 50%. [#753](https://github.com/pingcap/br/pull/753)
-        - Add a pre-check on the data to be imported and also on the target cluster before importing, and report errors to reject the import process if it does not meet the import requirements [#999](https://github.com/pingcap/br/pull/999)
+        - Add a precheck on the data to be imported and also on the target cluster before importing, and report errors to reject the import process if it does not meet the import requirements [#999](https://github.com/pingcap/br/pull/999)
         - Optimize the timing of checkpoint updates on the Local backend to improve performance of restarting from breakpoints [#1080](https://github.com/pingcap/br/pull/1080)
 
 ## Bug Fixes

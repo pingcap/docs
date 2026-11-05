@@ -1,10 +1,10 @@
 ---
-title: TiDB Introduction
+title: What is TiDB Self-Managed
 summary: Learn about the key features and usage scenarios of TiDB.
 aliases: ['/docs/dev/key-features/','/tidb/dev/key-features','/docs/dev/overview/']
 ---
 
-# TiDB Introduction
+# What is TiDB Self-Managed
 
 <!-- Localization note for TiDB:
 
@@ -15,6 +15,8 @@ aliases: ['/docs/dev/key-features/','/tidb/dev/key-features','/docs/dev/overview
 -->
 
 [TiDB](https://github.com/pingcap/tidb) (/'taɪdiːbi:/, "Ti" stands for Titanium) is an open-source distributed SQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. It is MySQL compatible and features horizontal scalability, strong consistency, and high availability. The goal of TiDB is to provide users with a one-stop database solution that covers OLTP (Online Transactional Processing), OLAP (Online Analytical Processing), and HTAP services. TiDB is suitable for various use cases that require high availability and strong consistency with large-scale data.
+
+TiDB Self-Managed is a product option of TiDB, where users or organizations can deploy and manage TiDB on their own infrastructure with complete flexibility. With TiDB Self-Managed, you can enjoy the power of open source, distributed SQL while retaining full control over your environment.
 
 The following video introduces key features of TiDB.
 
@@ -50,7 +52,7 @@ The following video introduces key features of TiDB.
 
 - **Massive data and high concurrency scenarios**
 
-    Traditional standalone databases cannot meet the data capacity requirements of rapidly growing applications. TiDB is a cost-effective solution that adopts a separate computing and storage architecture, enabling easy scaling of computing or storage capacity separately. The computing layer supports a maximum of 512 nodes, each node supports a maximum of 1,000 concurrencies, and the maximum cluster capacity is at the PB (petabytes) level.
+    Traditional standalone databases cannot meet the data capacity requirements of rapidly growing applications. TiDB is a cost-effective solution that adopts a separate computing and storage architecture, enabling easy scaling of computing or storage capacity separately. The computing layer supports a maximum of 512 nodes. By default, each TiDB node allows up to 1,000 sessions to execute requests concurrently, and you can adjust this limit up to 1,048,576 by configuring [`token-limit`](/tidb-configuration-file.md#token-limit). The maximum cluster capacity is at the PB (petabytes) level.
 
 - **Real-time HTAP scenarios**
 
@@ -66,3 +68,9 @@ The following video introduces key features of TiDB.
 - [TiDB Storage](/tidb-storage.md)
 - [TiDB Computing](/tidb-computing.md)
 - [TiDB Scheduling](/tidb-scheduling.md)
+
+## Related resources
+
+<RelatedResources>
+  <ResourceCard title="Why #TiDB?" type="video" link="https://www.youtube.com/watch?v=aWBNNPm21zg" imgSrc="https://i.ytimg.com/vi/aWBNNPm21zg/hqdefault.jpg" author="PingCAP" duration="2 mins" />
+</RelatedResources>

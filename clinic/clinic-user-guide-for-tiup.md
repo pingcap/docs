@@ -49,7 +49,7 @@ Before using PingCAP Clinic, you need to install Diag (a component to collect da
 
 2. Get and set an access token (token) to upload data.
 
-    When uploading collected data through Diag, you need a token for user authentication. If you already set a token Diag, you can reuse the token and skip this step.
+    When uploading collected data through Diag, you need a token for user authentication. If you already set a token in Diag, you can reuse the token and skip this step.
 
     To get a token, perform the following steps:
 
@@ -174,6 +174,15 @@ With Diag, you can collect data from the TiDB clusters and the DM clusters deplo
     - `-N/--node`: only collects data from a specified node. The format is `ip:port`.
     - `--include`: only collects specific types of data. The optional values are `system`, `monitor`, `log`, `config`, and `db_vars`. To include two or more types, you can use `,` as a separator between the types.
     - `--exclude`: does not collect specific types of data. The optional values are `system`, `monitor`, `log`, `config`, and `db_vars`. To exclude two or more types, you can use `,` as a separator between the types.
+    - `--metricsfilter`: only collects specified Prometheus metrics. You can specify metrics using a comma-separated list of metric prefixes. For example, `--metricsfilter=tidb,pd` collects metrics that start with `tidb` and metrics that start with `pd`.
+    
+        > **Tip:**
+        >
+        > To get available metric prefixes, you can query the TiDB monitoring API using the following command:
+        >
+        > ```bash
+        > curl -s 'http://${prometheus-host}:${prometheus-port}/api/v1/label/__name__/values' | jq -r '.data[]' | cut -d\_ -f1 | uniq -c | sort -rn
+        > ```
 
     After you run the command, Diag does not start collecting data immediately. Instead, Diag provides the estimated data size and the target data storage path in the output for you to confirm whether to continue. For example:
 
@@ -209,7 +218,7 @@ The collected data is stored in separate subdirectories based on its data source
 - List of kernel parameters: in `sysctl.conf`
 - Kernel logs: in `dmesg.log`
 - Network connection during data collection: in `ss.txt`
-- Configuration data: in the `config.json` directory of each node
+- Configuration data: in the `config.json` file under each node's directory
 - Meta-information for the cluster itself: in `meta.yaml` (this file is located at the top level of the directory that stores collected data)
 - Monitoring data: in the `/monitor` file directory. The monitoring data is compressed by default and cannot be viewed directly. To directly view the JSON files with monitoring data, disable compression with the `--compress-metrics=false` parameter when collecting data.
 

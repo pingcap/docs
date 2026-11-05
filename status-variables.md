@@ -31,6 +31,18 @@ Additionally, the [FLUSH STATUS](/sql-statements/sql-statement-flush-status.md) 
 - Type: Integer
 - The compression level that is used for the MySQL Protocol.
 
+### Performance_schema_session_connect_attrs_longest_seen
+
+- Scope: GLOBAL
+- Type: Integer
+- The largest total size (in bytes) of session connection attributes observed by TiDB.
+
+### Performance_schema_session_connect_attrs_lost
+
+- Scope: GLOBAL
+- Type: Integer
+- The number of sessions whose connection attributes were truncated due to `performance_schema_session_connect_attrs_size`.
+
 ### Ssl_cipher
 
 - Scope: SESSION | GLOBAL

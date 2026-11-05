@@ -1,0 +1,687 @@
+from __future__ import annotations
+
+import dataclasses
+from functools import lru_cache
+import json
+import logging
+import os
+import re
+import shlex
+import shutil
+import subprocess
+import tempfile
+import textwrap
+from pathlib import Path
+from typing import Any
+from urllib.parse import urlsplit, urlunsplit
+
+from .constants import (
+    DOC_IMPACT_PROMPT_TEMPLATE,
+    GENERATION_PROMPT_TEMPLATE,
+    GITHUB_ITEM_URL_RE,
+    RELEASE_NOTE_PROMPT_TEMPLATE,
+)
+from .models import (
+    DocImpactChange,
+    GeneratedNote,
+    RowContext,
+    VariableOrConfigDocImpact,
+)
+
+logger = logging.getLogger(__name__)
+DEFAULT_CODEX_MODEL = "gpt-5.4"
+
+
+class AIClient:
+    """Base AI client with shared generation and validation logic."""
+
+    def generate(
+        self,
+        prompt: str,
+        expected_links: list[str],
+        contributors: list[str],
+        expected_pr_links: list[str],
+        generate_release_note: bool = True,
+        generate_doc_impact: bool = True,
+    ) -> GeneratedNote:
+        output_schema = ai_output_schema(
+            include_release_note=generate_release_note,
+            include_doc_impact=generate_doc_impact,
+        )
+        result, errors = self._run_and_validate(
+            prompt,
+            output_schema,
+            expected_links,
+            contributors,
+            expected_pr_links,
+            generate_release_note,
+            generate_doc_impact,
+        )
+        if result:
+            return result
+
+        repair_prompt = build_repair_prompt(prompt, errors)
+        result, repair_errors = self._run_and_validate(
+            repair_prompt,
+            output_schema,
+            expected_links,
+            contributors,
+            expected_pr_links,
+            generate_release_note,
+            generate_doc_impact,
+        )
+        if result:
+            return result
+        raise ValueError("; ".join(repair_errors))
+
+    def _run_and_validate(
+        self,
+        prompt: str,
+        output_schema: dict[str, Any],
+        expected_links: list[str],
+        contributors: list[str],
+        expected_pr_links: list[str],
+        validate_release_note: bool,
+        validate_doc_impact_result: bool,
+    ) -> tuple[GeneratedNote | None, list[str]]:
+        output = self._run(prompt, output_schema)
+        try:
+            data = extract_json_object(output, set(output_schema["required"]))
+        except ValueError as exc:
+            return None, [str(exc)]
+        return validate_ai_response(
+            data,
+            expected_links,
+            contributors,
+            expected_pr_links,
+            validate_release_note=validate_release_note,
+            validate_doc_impact_result=validate_doc_impact_result,
+        )
+
+    def _run(self, prompt: str, output_schema: dict[str, Any]) -> str:
+        raise NotImplementedError("Subclasses must implement _run")
+
+
+class CodexAIClient(AIClient):
+    """AI client that invokes the Codex CLI as a subprocess."""
+
+    def __init__(self, command: str, model: str | None, timeout: int):
+        self.command = shlex.split(command)
+        self.model = model
+        self.timeout = timeout
+
+    def _run(self, prompt: str, output_schema: dict[str, Any]) -> str:
+        command = list(self.command)
+        if not command:
+            raise ValueError("AI command is empty. Pass a command with --ai-command.")
+        if not is_executable_available(command[0]):
+            raise FileNotFoundError(
+                f"AI command executable not found: {command[0]!r}. "
+                "Install it or pass a custom command with --ai-command."
+            )
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            output_path: Path | None = None
+            if self._is_codex_exec(command):
+                if self.model:
+                    command.extend(["-m", self.model])
+                temp_path = Path(temp_dir)
+                schema_path = temp_path / "ai-output-schema.json"
+                output_path = temp_path / "ai-output.txt"
+                schema_path.write_text(json.dumps(output_schema), encoding="utf-8")
+                output_path.touch()
+                command.extend(["--output-schema", str(schema_path)])
+                command.extend(["--output-last-message", str(output_path)])
+
+            completed = subprocess.run(
+                command,
+                input=prompt,
+                text=True,
+                capture_output=True,
+                timeout=self.timeout,
+                check=False,
+            )
+            if completed.returncode != 0:
+                raise RuntimeError(
+                    "AI command failed with exit code "
+                    f"{completed.returncode}: {summarize_process_output(completed)}"
+                )
+            if output_path and output_path.exists():
+                last_message = output_path.read_text(encoding="utf-8").strip()
+                if last_message:
+                    return last_message
+            return completed.stdout.strip()
+
+    @staticmethod
+    def _is_codex_exec(command: list[str]) -> bool:
+        if not command:
+            return False
+        executable = Path(command[0]).name
+        return executable == "codex" and "exec" in command[1:]
+
+
+class AzureOpenAIClient(AIClient):
+    """AI client that calls Azure OpenAI via the OpenAI Python SDK."""
+
+    MAX_OUTPUT_TOKENS = 16384
+    TEMPERATURE = 0.1
+    REASONING_MODEL_PREFIXES = ("o1", "o3", "o4", "gpt-5")
+
+    def __init__(self, model: str | None, timeout: int):
+        from openai import OpenAI
+
+        key = (
+            os.environ.get("AZURE_OPENAI_KEY")
+            or os.environ.get("AZURE_FOUNDRY_API_KEY")
+            or os.environ.get("AZURE_OPENAI_API_KEY")
+        )
+        base_url = (
+            os.environ.get("AZURE_OPENAI_BASE_URL")
+            or os.environ.get("OPENAI_BASE_URL", "")
+        )
+        if not key:
+            raise ValueError(
+                "AZURE_OPENAI_KEY, AZURE_FOUNDRY_API_KEY, or "
+                "AZURE_OPENAI_API_KEY environment variable is required when "
+                "using --ai-provider azure"
+            )
+        if not base_url:
+            raise ValueError(
+                "AZURE_OPENAI_BASE_URL or OPENAI_BASE_URL environment variable "
+                "is required when using --ai-provider azure"
+            )
+        deployment = (model or os.environ.get("AZURE_OPENAI_DEPLOYMENT", "")).strip()
+        if not deployment:
+            raise ValueError(
+                "An Azure OpenAI deployment name is required when using "
+                "--ai-provider azure. Pass it with --ai-model or set "
+                "AZURE_OPENAI_DEPLOYMENT."
+            )
+        base_url = azure_openai_v1_base_url(base_url)
+        self.client = OpenAI(api_key=key, base_url=base_url, timeout=timeout)
+        if not hasattr(self.client, "responses"):
+            raise ValueError(
+                "The installed OpenAI Python SDK does not support the Responses API. "
+                "Install a newer 'openai' package version before using --ai-provider azure."
+            )
+        self.model = deployment
+
+    def _is_reasoning_model(self) -> bool:
+        model_lower = self.model.lower()
+        return any(model_lower.startswith(p) for p in self.REASONING_MODEL_PREFIXES)
+
+    def _run(self, prompt: str, output_schema: dict[str, Any]) -> str:
+        kwargs: dict[str, Any] = {
+            "model": self.model,
+            "input": [{"role": "user", "content": prompt}],
+            "max_output_tokens": self.MAX_OUTPUT_TOKENS,
+            "text": {
+                "format": {
+                    "type": "json_schema",
+                    "name": "release_note_generation",
+                    "strict": True,
+                    "schema": output_schema,
+                }
+            },
+        }
+        logger.debug("Azure OpenAI prompt:\n%s", prompt)
+        if not self._is_reasoning_model():
+            kwargs["temperature"] = self.TEMPERATURE
+        response = self.client.responses.create(**kwargs)
+        if response.status != "completed":
+            reason = getattr(response.incomplete_details, "reason", None)
+            error = getattr(response, "error", None)
+            details = reason or error or "no failure details"
+            raise RuntimeError(
+                f"Azure OpenAI response ended with status {response.status!r}: {details}"
+            )
+        return response.output_text.strip()
+
+
+def azure_openai_v1_base_url(base_url: str) -> str:
+    """Normalize an Azure OpenAI endpoint to the v1 API base URL."""
+    parsed = urlsplit(base_url.strip())
+    if parsed.scheme not in {"http", "https"} or not parsed.netloc:
+        raise ValueError("Azure OpenAI base URL must be an absolute HTTP(S) URL")
+    if parsed.query or parsed.fragment:
+        raise ValueError("Azure OpenAI base URL must not contain a query or fragment")
+
+    path = parsed.path.rstrip("/")
+    if not path:
+        path = "/openai/v1"
+    elif path != "/openai/v1":
+        raise ValueError(
+            "Azure OpenAI base URL must be the resource endpoint or end with "
+            "'/openai/v1/'"
+        )
+    return urlunsplit((parsed.scheme, parsed.netloc, path + "/", "", ""))
+
+
+def is_executable_available(executable: str) -> bool:
+    if os.sep in executable or (os.altsep and os.altsep in executable):
+        return Path(executable).exists()
+    return shutil.which(executable) is not None
+
+
+def ai_output_schema(
+    include_release_note: bool = True,
+    include_doc_impact: bool = True,
+) -> dict[str, Any]:
+    if not include_release_note and not include_doc_impact:
+        raise ValueError("At least one AI output must be requested")
+
+    required: list[str] = []
+    properties: dict[str, Any] = {}
+    if include_release_note:
+        required.extend(["type", "release_note", "needs_review", "reason"])
+        properties.update(
+            {
+                "type": {
+                    "type": "string",
+                    "enum": ["improvement", "bug_fix", "not_needed"],
+                },
+                "release_note": {"type": "string"},
+                "needs_review": {"type": "boolean"},
+                "reason": {"type": "string"},
+            }
+        )
+    if include_doc_impact:
+        required.append("variable_or_config_doc_impact")
+        properties["variable_or_config_doc_impact"] = {
+            "type": "object",
+            "additionalProperties": False,
+            "required": ["status", "changes", "needs_review", "reason"],
+            "properties": {
+                "status": {
+                    "type": "string",
+                    "enum": ["detected", "not_detected", "uncertain"],
+                },
+                "changes": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": False,
+                        "required": [
+                            "kind",
+                            "name",
+                            "change_type",
+                            "description",
+                            "source_pr",
+                        ],
+                        "properties": {
+                            "kind": {
+                                "type": "string",
+                                "enum": [
+                                    "system_variable",
+                                    "configuration_parameter",
+                                ],
+                            },
+                            "name": {"type": "string"},
+                            "change_type": {
+                                "type": "string",
+                                "enum": [
+                                    "newly_added",
+                                    "modified",
+                                    "deprecated",
+                                    "deleted",
+                                    "renamed",
+                                ],
+                            },
+                            "description": {"type": "string"},
+                            "source_pr": {"type": "string"},
+                        },
+                    },
+                },
+                "needs_review": {"type": "boolean"},
+                "reason": {"type": "string"},
+            },
+        }
+
+    return {
+        "type": "object",
+        "additionalProperties": False,
+        "required": required,
+        "properties": properties,
+    }
+
+
+def summarize_process_output(completed: subprocess.CompletedProcess[str]) -> str:
+    parts = []
+    if completed.stderr.strip():
+        parts.append("stderr:\n" + tail_output(completed.stderr))
+    if completed.stdout.strip():
+        parts.append("stdout:\n" + tail_output(completed.stdout))
+    return "\n\n".join(parts) or "no output"
+
+
+def tail_output(text: str, max_lines: int = 40, max_chars: int = 4000) -> str:
+    tail = "\n".join(text.strip().splitlines()[-max_lines:])
+    if len(tail) > max_chars:
+        tail = "...[truncated]\n" + tail[-max_chars:]
+    return tail
+
+
+def build_generation_prompt(
+    row_context: RowContext,
+    expected_links: list[str],
+    contributors: list[str],
+    generate_release_note: bool = True,
+    generate_doc_impact: bool = True,
+) -> str:
+    if not generate_release_note and not generate_doc_impact:
+        raise ValueError("At least one AI task must be requested")
+
+    prompt_template = load_prompt_template(GENERATION_PROMPT_TEMPLATE)
+    context = {
+        "row_number": row_context.row_number,
+        "component": row_context.component,
+        "raw_component_from_excel": row_context.raw_component,
+        "pr_title_from_excel": row_context.pr_title,
+        "pr_urls": row_context.pr_urls,
+        "issues": [dataclasses.asdict(issue) for issue in row_context.issues],
+        "pull_requests": [dataclasses.asdict(pull) for pull in row_context.pulls],
+        "fetch_failed_urls": row_context.fetch_failed_urls,
+    }
+    task_instructions: list[str] = []
+    release_note_metadata = ""
+    if generate_release_note:
+        context.update(
+            {
+                "issue_type_from_excel": row_context.issue_type,
+                "formatted_release_note_from_excel": row_context.formatted_release_note,
+            }
+        )
+        task_instructions.append(load_prompt_template(RELEASE_NOTE_PROMPT_TEMPLATE))
+        release_note_metadata = (
+            "Expected links to include in the release note "
+            "(the entry must contain exactly these, no more and no fewer):\n"
+            f"{json.dumps(expected_links, ensure_ascii=False, indent=2)}\n\n"
+            "Contributors to append in order as `@[user](https://github.com/user)`:\n"
+            f"{json.dumps(contributors, ensure_ascii=False, indent=2)}"
+        )
+    if generate_doc_impact:
+        task_instructions.append(load_prompt_template(DOC_IMPACT_PROMPT_TEMPLATE))
+
+    return render_prompt_template(
+        prompt_template,
+        {
+            "TASK_INSTRUCTIONS": "\n\n".join(task_instructions),
+            "ROW_CONTEXT": json.dumps(context, ensure_ascii=False, indent=2),
+            "RELEASE_NOTE_METADATA": release_note_metadata,
+        },
+    )
+
+
+def build_repair_prompt(original_prompt: str, errors: list[str]) -> str:
+    return textwrap.dedent(
+        f"""
+        Your previous answer did not satisfy the required JSON schema or output rules.
+
+        Validation errors:
+        {json.dumps(errors, ensure_ascii=False, indent=2)}
+
+        Rewrite the answer. Return only the corrected JSON object.
+
+        Original task:
+        {original_prompt}
+        """
+    ).strip()
+
+
+def render_prompt_template(template: str, values: dict[str, str]) -> str:
+    for key, value in values.items():
+        template = template.replace(f"{{{{{key}}}}}", value)
+    return template.strip()
+
+
+@lru_cache(maxsize=None)
+def load_prompt_template(path: Path) -> str:
+    try:
+        return strip_prompt_template_heading(path.read_text(encoding="utf-8"))
+    except FileNotFoundError as exc:
+        raise FileNotFoundError(
+            f"Cannot find AI prompt template: {path}. "
+            "Make sure scripts/release-notes-ai-generator/prompts contains all "
+            "required prompt files."
+        ) from exc
+
+
+def strip_prompt_template_heading(template: str) -> str:
+    lines = template.splitlines()
+    if lines and lines[0].startswith("# "):
+        lines = lines[1:]
+        if lines and not lines[0].strip():
+            lines = lines[1:]
+    return "\n".join(lines)
+
+
+def extract_json_object(
+    output: str,
+    required_keys: set[str] | None = None,
+) -> dict[str, Any]:
+    output = output.strip()
+    if not output:
+        raise ValueError("AI command returned no output")
+    try:
+        data = json.loads(output)
+    except json.JSONDecodeError:
+        candidates = extract_json_object_candidates(output)
+        if not candidates:
+            raise ValueError("AI output did not contain a JSON object") from None
+        required_keys = required_keys or set()
+        data = next(
+            (candidate for candidate in candidates if required_keys <= candidate.keys()),
+            candidates[0],
+        )
+    if not isinstance(data, dict):
+        raise ValueError("AI output JSON is not an object")
+    return data
+
+
+def extract_json_object_candidates(output: str) -> list[dict[str, Any]]:
+    decoder = json.JSONDecoder()
+    candidates: list[dict[str, Any]] = []
+    for index, char in enumerate(output):
+        if char != "{":
+            continue
+        try:
+            data, _end = decoder.raw_decode(output[index:])
+        except json.JSONDecodeError:
+            continue
+        if isinstance(data, dict):
+            candidates.append(data)
+    return candidates
+
+
+def validate_ai_response(
+    data: dict[str, Any],
+    expected_links: list[str],
+    contributors: list[str],
+    expected_pr_links: list[str],
+    validate_release_note: bool = True,
+    validate_doc_impact_result: bool = True,
+) -> tuple[GeneratedNote | None, list[str]]:
+    errors: list[str] = []
+    note_type = data.get("type")
+    release_note = data.get("release_note")
+    needs_review = data.get("needs_review")
+    reason = data.get("reason")
+    doc_impact_data = data.get("variable_or_config_doc_impact")
+
+    if validate_release_note:
+        if note_type not in {"improvement", "bug_fix", "not_needed"}:
+            errors.append('type must be "improvement", "bug_fix", or "not_needed"')
+        if not isinstance(needs_review, bool):
+            errors.append("needs_review must be a boolean")
+        if not isinstance(reason, str):
+            errors.append("reason must be a string")
+
+    doc_impact = None
+    if validate_doc_impact_result:
+        doc_impact, doc_impact_errors = validate_doc_impact(
+            doc_impact_data, expected_pr_links
+        )
+        errors.extend(doc_impact_errors)
+
+    if not validate_release_note:
+        pass
+    elif note_type == "not_needed":
+        if not isinstance(release_note, str) or not release_note.startswith("Release note is not needed:"):
+            errors.append(
+                'when type is "not_needed", release_note must start with '
+                '"Release note is not needed:"'
+            )
+    else:
+        if not isinstance(release_note, str) or not release_note.startswith("- "):
+            errors.append('release_note must be a string that starts with "- "')
+        if isinstance(release_note, str) and release_note.rstrip().endswith("."):
+            errors.append("release_note must not end with a period")
+        if isinstance(release_note, str):
+            for link in expected_links:
+                if link and link not in release_note:
+                    errors.append(f"release_note is missing expected link: {link}")
+            for contributor in contributors:
+                expected = f"@[{contributor}](https://github.com/{contributor})"
+                if contributor and expected not in release_note:
+                    errors.append(f"release_note is missing contributor: {contributor}")
+            extra_links = [
+                match.group()
+                for match in GITHUB_ITEM_URL_RE.finditer(release_note)
+                if match.group() not in expected_links
+            ]
+            if extra_links:
+                errors.append(
+                    f"release_note contains unexpected link(s): {', '.join(extra_links)}"
+                )
+            extra_contributors = [
+                match.group("user")
+                for match in re.finditer(
+                    r"@\[(?P<user>[^\]]+)\]\(https://github\.com/[^)]+\)",
+                    release_note,
+                )
+                if match.group("user") not in contributors
+            ]
+            if extra_contributors:
+                errors.append(
+                    f"release_note contains unexpected contributor(s): "
+                    f"{', '.join(extra_contributors)}"
+                )
+
+    if errors:
+        return None, errors
+    if validate_doc_impact_result and doc_impact is None:
+        return None, [
+            "variable_or_config_doc_impact validation returned no result"
+        ]
+    return (
+        GeneratedNote(
+            note_type=note_type if validate_release_note else None,
+            release_note=release_note.strip() if validate_release_note else None,
+            needs_review=needs_review if validate_release_note else None,
+            reason=reason.strip() if validate_release_note else None,
+            doc_impact=doc_impact,
+        ),
+        [],
+    )
+
+
+def validate_doc_impact(
+    data: Any,
+    expected_pr_links: list[str],
+) -> tuple[VariableOrConfigDocImpact | None, list[str]]:
+    prefix = "variable_or_config_doc_impact"
+    if not isinstance(data, dict):
+        return None, [f"{prefix} must be an object"]
+
+    errors: list[str] = []
+    status = data.get("status")
+    changes_data = data.get("changes")
+    needs_review = data.get("needs_review")
+    reason = data.get("reason")
+
+    if status not in {"detected", "not_detected", "uncertain"}:
+        errors.append(
+            f'{prefix}.status must be "detected", "not_detected", or "uncertain"'
+        )
+    if not isinstance(changes_data, list):
+        errors.append(f"{prefix}.changes must be an array")
+        changes_data = []
+    if not isinstance(needs_review, bool):
+        errors.append(f"{prefix}.needs_review must be a boolean")
+    if not isinstance(reason, str) or not reason.strip():
+        errors.append(f"{prefix}.reason must be a non-empty string")
+
+    changes: list[DocImpactChange] = []
+    for index, change_data in enumerate(changes_data):
+        change_prefix = f"{prefix}.changes[{index}]"
+        if not isinstance(change_data, dict):
+            errors.append(f"{change_prefix} must be an object")
+            continue
+        kind = change_data.get("kind")
+        name = change_data.get("name")
+        change_type = change_data.get("change_type")
+        description = change_data.get("description")
+        source_pr = change_data.get("source_pr")
+        if kind not in {"system_variable", "configuration_parameter"}:
+            errors.append(
+                f"{change_prefix}.kind must be system_variable or configuration_parameter"
+            )
+        if not isinstance(name, str) or not name.strip():
+            errors.append(f"{change_prefix}.name must be a non-empty string")
+        if change_type not in {
+            "newly_added",
+            "modified",
+            "deprecated",
+            "deleted",
+            "renamed",
+        }:
+            errors.append(f"{change_prefix}.change_type is invalid")
+        if not isinstance(description, str) or not description.strip():
+            errors.append(f"{change_prefix}.description must be a non-empty string")
+        if not isinstance(source_pr, str):
+            errors.append(f"{change_prefix}.source_pr must be a string")
+        elif expected_pr_links and source_pr not in expected_pr_links:
+            errors.append(
+                f"{change_prefix}.source_pr must be one of the input PR links"
+            )
+        elif not expected_pr_links and source_pr:
+            errors.append(
+                f"{change_prefix}.source_pr must be empty when the row has no PR link"
+            )
+        if not errors_for_prefix(errors, change_prefix):
+            changes.append(
+                DocImpactChange(
+                    kind=str(kind),
+                    name=str(name).strip(),
+                    change_type=str(change_type),
+                    description=str(description).strip(),
+                    source_pr=str(source_pr).strip(),
+                )
+            )
+
+    if status == "detected" and not changes:
+        errors.append(
+            f'{prefix}.changes must contain at least one valid change when status is "detected"'
+        )
+    if status in {"not_detected", "uncertain"} and changes_data:
+        errors.append(
+            f'{prefix}.changes must be empty when status is "{status}"'
+        )
+    if status == "uncertain" and needs_review is not True:
+        errors.append(f'{prefix}.needs_review must be true when status is "uncertain"')
+
+    if errors:
+        return None, errors
+    return (
+        VariableOrConfigDocImpact(
+            status=str(status),
+            changes=changes,
+            needs_review=bool(needs_review),
+            reason=str(reason).strip(),
+        ),
+        [],
+    )
+
+
+def errors_for_prefix(errors: list[str], prefix: str) -> bool:
+    return any(error.startswith(prefix) for error in errors)

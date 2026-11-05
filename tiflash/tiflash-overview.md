@@ -6,7 +6,7 @@ aliases: ['/docs/dev/tiflash/tiflash-overview/','/docs/dev/reference/tiflash/ove
 
 # TiFlash Overview
 
-[TiFlash](https://github.com/pingcap/tiflash) is the key component that makes TiDB essentially an Hybrid Transactional/Analytical Processing (HTAP) database. As a columnar storage extension of TiKV, TiFlash provides both good isolation level and strong consistency guarantee.
+[TiFlash](https://github.com/pingcap/tiflash) is the key component that makes TiDB essentially a Hybrid Transactional/Analytical Processing (HTAP) database. As a columnar storage extension of TiKV, TiFlash provides both good isolation level and strong consistency guarantee.
 
 In TiFlash, the columnar replicas are asynchronously replicated according to the Raft Learner consensus algorithm. When these replicas are read, the Snapshot Isolation level of consistency is achieved by validating Raft index and multi-version concurrency control (MVCC).
 
@@ -26,11 +26,11 @@ TiFlash provides the columnar storage, with a layer of coprocessors efficiently 
 
 TiFlash conducts real-time replication of data in the TiKV nodes at a low cost that does not block writes in TiKV. Meanwhile, it provides the same read consistency as in TiKV and ensures that the latest data is read. The Region replica in TiFlash is logically identical to those in TiKV, and is split and merged along with the Leader replica in TiKV at the same time.
 
-To deploy TiFlash under the Linux AMD64 architecture, the CPU must support the AVX2 instruction set. Ensure that `grep avx2 /proc/cpuinfo` has output. To deploy TiFlash under the Linux ARM64 architecture, the CPU must support the ARMv8 instruction set architecture. Ensure that `grep 'crc32' /proc/cpuinfo | grep 'asimd'` has output. By using the instruction set extensions, TiFlash's vectorization engine can deliver better performance.
+Deploying TiFlash on Linux AMD64 architecture requires a CPU that supports the AVX2 instruction set. Verify this by ensuring that `grep avx2 /proc/cpuinfo` produces output. For Linux ARM64 architecture, the CPU must support the ARMv8 instruction set architecture. Verify this by ensuring that `grep 'crc32' /proc/cpuinfo | grep 'asimd'` produces output. By using the instruction set extensions, TiFlash's vectorization engine can deliver better performance.
 
 <CustomContent platform="tidb">
 
-TiFlash is compatible with both TiDB and TiSpark, which enables you to freely choose between these two computing engines.
+TiFlash is compatible with TiDB. You can use TiDB as the computing engine for TiFlash.
 
 </CustomContent>
 
@@ -38,9 +38,9 @@ It is recommended that you deploy TiFlash in different nodes from TiKV to ensure
 
 Currently, data cannot be written directly into TiFlash. You need to write data in TiKV and then replicate it to TiFlash, because it connects to the TiDB cluster as a Learner role. TiFlash supports data replication in the unit of table, but no data is replicated by default after deployment. To replicate data of a specified table, see [Create TiFlash replicas for tables](/tiflash/create-tiflash-replicas.md#create-tiflash-replicas-for-tables).
 
-TiFlash has three components: the columnar storage module, `tiflash proxy`, and `pd buddy`. `tiflash proxy` is responsible for the communication using the Multi-Raft consensus algorithm. `pd buddy` works with PD to replicate data from TiKV to TiFlash in the unit of table.
+TiFlash consists of two main components: the columnar storage component, and the TiFlash proxy component. The TiFlash proxy component is responsible for the communication using the Multi-Raft consensus algorithm.
 
-When TiDB receives the DDL command to create replicas in TiFlash, the `pd buddy` component acquires the information of the table to be replicated via the status port of TiDB, and sends the information to PD. Then PD performs the corresponding data scheduling according to the information provided by `pd buddy`.
+After receiving a DDL command to create replicas for a table in TiFlash, TiDB automatically creates the corresponding [placement rules](https://docs.pingcap.com/tidb/stable/configure-placement-rules) in PD, and then PD performs the corresponding data scheduling based on these rules.
 
 ## Key features
 
@@ -85,32 +85,15 @@ TiFlash shares the computing workload in the same way as the TiKV Coprocessor do
 
 After TiFlash is deployed, data replication does not automatically begin. You need to manually specify the tables to be replicated.
 
-<CustomContent platform="tidb">
-
-You can either use TiDB to read TiFlash replicas for medium-scale analytical processing, or use TiSpark to read TiFlash replicas for large-scale analytical processing, which is based on your own needs. See the following sections for details:
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-You can use TiDB to read TiFlash replicas for analytical processing. See the following sections for details:
-
-</CustomContent>
+You can use TiDB to read TiFlash replicas. See the following sections for details:
 
 - [Create TiFlash Replicas](/tiflash/create-tiflash-replicas.md)
 - [Use TiDB to Read TiFlash Replicas](/tiflash/use-tidb-to-read-tiflash.md)
-
-<CustomContent platform="tidb">
-
-- [Use TiSpark to Read TiFlash Replicas](/tiflash/use-tispark-to-read-tiflash.md)
-
-</CustomContent>
-
 - [Use MPP Mode](/tiflash/use-tiflash-mpp-mode.md)
 
 <CustomContent platform="tidb">
 
-To experience the whole process from importing data to querying in a TPC-H dataset, refer to [Quick Start Guide for TiDB HTAP](/quick-start-with-htap.md).
+To experience the whole process from importing data to querying in a TPC-H dataset, refer to [Quick Start with TiDB HTAP](/quick-start-with-htap.md).
 
 </CustomContent>
 
@@ -118,7 +101,7 @@ To experience the whole process from importing data to querying in a TPC-H datas
 
 <CustomContent platform="tidb">
 
-- To deploy a new cluster with TiFlash nodes, see [Deploy a TiDB cluster using TiUP](/production-deployment-using-tiup.md).
+- To deploy a new cluster with TiFlash nodes, see [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md).
 - To add a TiFlash node in a deployed cluster, see [Scale out a TiFlash cluster](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster).
 - [Maintain a TiFlash cluster](/tiflash/maintain-tiflash.md).
 - [Tune TiFlash performance](/tiflash/tune-tiflash-performance.md).

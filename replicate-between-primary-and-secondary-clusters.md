@@ -233,7 +233,7 @@ After setting up the environment, you can use the backup and restore functions o
     In the upstream cluster, run the following command to create a changefeed from the upstream to the downstream clusters:
 
     ```shell
-    tiup cdc cli changefeed create --server=http://172.16.6.122:8300 --sink-uri="mysql://root:@172.16.6.125:4000" --changefeed-id="primary-to-secondary" --start-ts="431434047157698561"
+    tiup cdc cli changefeed create --server=http://172.16.6.122:8300 --sink-uri="mysql://root:@172.16.6.125:4000" --changefeed-id="primary-to-secondary" --start-ts="431434047157698561" --config=./changefeed.toml
     ```
 
     In this command, the parameters are as follows:

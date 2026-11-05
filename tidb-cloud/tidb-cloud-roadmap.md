@@ -5,6 +5,10 @@ summary: Learn about TiDB Cloud's roadmap for the next few months. See the new f
 
 # TiDB Cloud Roadmap
 
+> **Warning:**
+>
+> This roadmap might contain outdated information. We are working on updating it to reflect the latest product plans and development priorities.
+
 The TiDB Cloud roadmap brings you what's coming in the near future, so you can see the new features or improvements in advance, follow the progress, and learn about the key milestones on the way. In the course of development, this roadmap is subject to change based on user needs, feedback, and our assessment.
 
 ✅: The feature or improvement is already available in TiDB Cloud.
@@ -66,10 +70,6 @@ The TiDB Cloud roadmap brings you what's coming in the near future, so you can s
   </tr>
 </tbody>
 </table>
-
-## TiDB kernel
-
-For the roadmap of TiDB kernel, refer to [TiDB Roadmap](https://docs.pingcap.com/tidb/dev/tidb-roadmap).
 
 ## Diagnosis and maintenance
 

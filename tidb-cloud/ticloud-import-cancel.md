@@ -1,14 +1,14 @@
 ---
-title: ticloud import cancel
-summary: The reference of `ticloud import cancel`.
+title: ticloud serverless import cancel
+summary: The reference of `ticloud serverless import cancel`.
 ---
 
-# ticloud import cancel
+# ticloud serverless import cancel
 
 Cancel a data import task:
 
 ```shell
-ticloud import cancel [flags]
+ticloud serverless import cancel [flags]
 ```
 
 ## Examples
@@ -16,26 +16,25 @@ ticloud import cancel [flags]
 Cancel an import task in interactive mode:
 
 ```shell
-ticloud import cancel
+ticloud serverless import cancel
 ```
 
 Cancel an import task in non-interactive mode:
 
 ```shell
-ticloud import cancel --project-id <project-id> --cluster-id <cluster-id> --import-id <import-id>
+ticloud serverless import cancel --cluster-id <cluster-id> --import-id <import-id>
 ```
 
 ## Flags
 
 In non-interactive mode, you need to manually enter the required flags. In interactive mode, you can just follow CLI prompts to fill them in.
 
-| Flag                    | Description                           | Required | Note                                               |
-|-------------------------|---------------------------------------|----------|-----------------------------------------------------|
-| -c, --cluster-id string | Cluster ID                            | Yes      | Only works in non-interactive mode.                   |
-| --force                 | Deletes a profile without confirmation | No       | Works in both non-interactive and interactive modes. |
-| -h, --help              | Help information for this command             | No       | Works in both non-interactive and interactive modes. |
-| --import-id string      | The ID of the import task                 | Yes      | Only works in non-interactive mode.                   |
-| -p, --project-id string | Project ID                            | Yes      | Only works in non-interactive mode.                   |
+| Flag                    | Description                                  | Required | Note                                                 |
+|-------------------------|----------------------------------------------|----------|------------------------------------------------------|
+| -c, --cluster-id string | Specifies the ID of the cluster.                                  | Yes      | Only works in non-interactive mode.                  |
+| --force                 | Cancels an import task without confirmation. | No       | Works in both non-interactive and interactive modes. |
+| -h, --help              | Shows help information for this command.     | No       | Works in both non-interactive and interactive modes. |
+| --import-id string      | Specifies the ID of the import task.         | Yes      | Only works in non-interactive mode.                  |
 
 ## Inherited flags
 
@@ -43,6 +42,7 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 |----------------------|-------------------------------------------------------------------------------------------|----------|--------------------------------------------------------------------------------------------------------------------------|
 | --no-color           | Disables color in output.                                                                  | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components. |
 | -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Works in both non-interactive and interactive modes.                                                                      |
+| -D, --debug          | Enables debug mode.                                                                                   | No       | Works in both non-interactive and interactive modes.                                                             |
 
 ## Feedback
 

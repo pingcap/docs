@@ -7,7 +7,7 @@ summary: Learn how to run your Data App in Postman.
 
 [Postman](https://www.postman.com/) is an API platform that simplifies the API lifecycle and enhances collaboration for faster and better API development.
 
-In TiDB Cloud [Data Service](https://tidbcloud.com/console/data-service), you can easily import your Data App to Postman and leverage Postman's extensive tools to enhance your API development experience.
+In TiDB Cloud [Data Service](https://tidbcloud.com/project/data-service), you can easily import your Data App to Postman and leverage Postman's extensive tools to enhance your API development experience.
 
 This document describes how to import your Data App to Postman and how to run your Data App in Postman.
 
@@ -19,7 +19,7 @@ Before importing a Data App to Postman, make sure that you have the following:
 - A [Postman desktop app](https://www.postman.com/downloads) (optional). Alternatively, you can use the Postman web version without downloading the app.
 - A [Data App](/tidb-cloud/data-service-manage-data-app.md) with at least one well-defined [endpoint](/tidb-cloud/data-service-manage-endpoint.md). Only endpoints that meet the following requirements can be imported to Postman:
 
-    - The target cluster is selected.
+    - The target {{{ .starter }}} instance is selected.
     - The endpoint path and request method are configured.
     - The SQL statements are written.
 
@@ -29,13 +29,13 @@ Before importing a Data App to Postman, make sure that you have the following:
 
 To import your Data App to Postman, take the following steps:
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
+1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**Data Service**](https://tidbcloud.com/project/data-service) page of your project.
 2. In the left pane, click the name of your target Data App to view its details.
 3. In the upper-right corner of the page, click **Run in Postman**. A dialog with import instructions is displayed.
 
     > **Note:**
     >
-    > - If a Data App lacks a well-defined endpoint (the target cluster, path, request method, and SQL statements are configured), **Run in Postman** remains disabled for the Data App.
+    > - If a Data App lacks a well-defined endpoint (the target {{{ .starter }}} instance, path, request method, and SQL statements are configured), **Run in Postman** remains disabled for the Data App.
     > - For a Chat2Query Data App, **Run in Postman** is not available.
 
 4. Follow the steps provided in the dialog for the Data App import:

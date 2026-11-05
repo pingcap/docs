@@ -1,6 +1,7 @@
 ---
 title: Stale Read
 summary: Learn how to use Stale Read to accelerate queries under certain conditions.
+aliases: ['/tidb/stable/dev-guide-use-stale-read/','/tidb/dev/dev-guide-use-stale-read/','/tidbcloud/dev-guide-use-stale-read/']
 ---
 
 # Stale Read
@@ -446,7 +447,7 @@ public class BookDAO {
 
 ## Session level
 
-To support reading historical data, TiDB has introduced a new system variable `tidb_read_staleness` since v5.4. you can use it to set the range of historical data that the current session is allowed to read. Its data type is `int` and its scope is `SESSION`.
+To support reading historical data, TiDB has introduced a new system variable `tidb_read_staleness` since v5.4. You can use it to set the range of historical data that the current session is allowed to read. Its data type is `int` and its scope is `SESSION`.
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
@@ -500,14 +501,6 @@ public static class StaleReadHelper{
 
 ## Need help?
 
-<CustomContent platform="tidb">
-
-Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](/support.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](https://support.pingcap.com/).
-
-</CustomContent>
+- Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs).
+- [Submit a support ticket for TiDB Cloud](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [Submit a support ticket for TiDB Self-Managed](/support.md)

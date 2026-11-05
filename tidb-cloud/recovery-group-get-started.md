@@ -9,22 +9,22 @@ This document describes how to create a recovery group to protect your databases
 
 ## Prerequisites
 
-- A recovery group replicates your databases to another cluster to protect your databases from regional disasters. Before creating a recovery group, you need to have two TiDB Cloud Dedicated clusters. One cluster hosts the primary databases, and a second cluster hosts the replicas of the primary databases. If you have not done so already, follow the steps in [Create a TiDB Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md) to create the necessary clusters.
+- A recovery group replicates your databases to another cluster to protect your databases from regional disasters. Before creating a recovery group, you need to have two TiDB Cloud Dedicated clusters. One cluster hosts the primary databases, and a second cluster hosts the replicas of the primary databases. If you have not done so already, follow the steps in [Create a TiDB Cloud Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md) to create the necessary clusters.
 - To create a recovery group, you must be in the `Organization Owner` role of your organization or the `Project Owner` role of the target project.
 
 > **Note**
 >
-> Currently, only TiDB Dedicated clusters hosted on AWS support recovery groups.
+> Currently, only TiDB Cloud Dedicated clusters hosted on AWS support recovery groups.
 
 ## Create a new recovery group
 
 To create a recovery group, perform the following steps:
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Settings**.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), switch to your target project using the combo box in the upper-left corner.
 
-2. In the **Project Settings** navigation pane, click **Recovery Group**.
+2. In the left navigation pane, click **Recovery Group**.
 
-3. On the **Recovery Group** page, click **Create Recovery Group**. 
+3. On the **Recovery Group** page, click **Create Recovery Group**.
 
 4. On the **Create Recovery Group** page, enter a name for the recovery group.
 
@@ -32,9 +32,9 @@ To create a recovery group, perform the following steps:
     >
     > Currently only one resiliency level is supported. For more information, see [About resiliency levels](#about-resiliency-levels).
 
-5. Select the TiDB Dedicated cluster that will be the primary cluster for this group.
+5. Select the TiDB Cloud Dedicated cluster that will be the primary cluster for this group.
 
-6. Select the TiDB Dedicated cluster that will be the secondary cluster where databases will be replicated for this group.
+6. Select the TiDB Cloud Dedicated cluster that will be the secondary cluster where databases will be replicated for this group.
 
 7. Select which databases you wish to replicate as part of this recovery group.
 
@@ -57,9 +57,9 @@ To create a recovery group, perform the following steps:
 
 After creating a recovery group, you can view its status information on the **Recovery Group Detail** page:
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Settings**.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), switch to your target project using the combo box in the upper-left corner.
 
-2. In the **Project Settings** navigation pane, click **Recovery Group**.
+2. In the left navigation pane, click **Recovery Group**.
 
 3. On the **Recovery Group** page, click the name of the recovery group that you wish to view.
 

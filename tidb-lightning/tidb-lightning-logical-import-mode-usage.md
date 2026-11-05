@@ -24,7 +24,7 @@ max-backups = 14
 check-requirements = true
 
 [mydumper]
-# The local data source directory or the URI of the external storage. For more information about the URI of the external storage, see https://docs.pingcap.com/tidb/v6.6/backup-and-restore-storages#uri-format.
+# The local data source directory or the URI of the external storage. For more information about the URI of the external storage, see https://docs.pingcap.com/tidb/stable/backup-and-restore-storages/#uri-format.
 data-source-dir = "/data/my_database"
 
 [tikv-importer]
@@ -52,7 +52,7 @@ Conflicting data refers to two or more records with the same data in the PK or U
 | Strategy | Default behavior of conflicting data | The corresponding SQL statement |
 | :-- | :-- | :-- |
 | `"replace"` | Replacing existing data with new data. | `REPLACE INTO ...` |
-| `"ignore"` | Keeping existing data and ignoring new data. | `INSERT IGNORE INTO ...` |
+| `"ignore"` | Keeping existing data and ignoring new data. | If `conflict.threshold` is greater than 0, `INSERT INTO` is used; if `conflict.threshold` is `0`, `INSERT IGNORE INTO ...` is used |
 | `"error"` | Terminating the import when conflicting data is detected. | `INSERT INTO ...` |
 |  `""`  | Converted to `"error"`, which means terminating the import when conflicting data is detected.  |  None   |
 
@@ -62,7 +62,7 @@ When the strategy is `"ignore"`, conflicting data is recorded in the downstream 
 
 ## Performance tuning
 
-- In the logical import mode, the performance of TiDB Lightning largely depends on the write performance of the target TiDB cluster. If the cluster hits a performance bottleneck, refer to [Highly Concurrent Write Best Practices](/best-practices/high-concurrency-best-practices.md).
+- In the logical import mode, the performance of TiDB Lightning largely depends on the write performance of the target TiDB cluster. If the cluster hits a performance bottleneck, refer to [Best Practices for High-Concurrency Writes](/best-practices/high-concurrency-best-practices.md).
 
 - If the target TiDB cluster does not hit a write bottleneck, consider increasing the value of `region-concurrency` in TiDB Lightning configuration. The default value of `region-concurrency` is the number of CPU cores. The meaning of `region-concurrency` is different between the physical import mode and the logical import mode. In the logical import mode, `region-concurrency` is the write concurrency.
 

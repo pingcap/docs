@@ -33,7 +33,7 @@ The Data Migration job measures incremental data migration performance in rows/s
 
 ## Price
 
-To learn about the supported regions and the price of TiDB Cloud for each Data Migration RCU, see [Data Migration Cost](https://www.pingcap.com/tidb-cloud-pricing-details/#dm-cost).
+To learn about the supported regions and the price of TiDB Cloud for each Data Migration RCU, see [Data Migration Cost](https://www.pingcap.com/tidb-dedicated-pricing-details/#dm-cost).
 
 The Data Migration job is in the same region as the target TiDB node.
 
@@ -51,7 +51,7 @@ Note that if you are using AWS PrivateLink or VPC peering connections, and if th
 
     ![Cross-region and cross-AZ traffic charges](/media/tidb-cloud/dm-billing-cross-region-and-az-fees.png)
 
-The cross-region and cross-AZ traffic prices are the same as those for TiDB Cloud. For more information, see [TiDB Cloud Pricing Details](https://www.pingcap.com/tidb-dedicated-pricing-details/).
+The cross-region and cross-AZ traffic prices are the same as those for TiDB Cloud. For more information, see [TiDB Cloud Dedicated Pricing Details](https://www.pingcap.com/tidb-dedicated-pricing-details/).
 
 ## See also
 

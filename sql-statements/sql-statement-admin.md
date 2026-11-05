@@ -14,6 +14,7 @@ This statement is a TiDB extension syntax, used to view the status of TiDB and c
 - [`ADMIN REPAIR`](#admin-repair-statement)
 - [`ADMIN SHOW NEXT_ROW_ID`](#admin-show-next_row_id-statement)
 - [`ADMIN SHOW SLOW`](#admin-show-slow-statement)
+- [`ADMIN CREATE WORKLOAD SNAPSHOT`](#admin-create-workload-snapshot-statement)
 
 ## DDL related statement
 
@@ -34,11 +35,10 @@ This statement is a TiDB extension syntax, used to view the status of TiDB and c
 
 | Statement                                                                                | Description                 |
 |------------------------------------------------------------------------------------------|-----------------------------|
-| [`ADMIN CANCEL DDL JOBS`](/sql-statements/sql-statement-admin-cancel-ddl.md)             | Cancels a currently running DDL jobs. |
+| [`ADMIN CANCEL DDL JOBS`](/sql-statements/sql-statement-admin-cancel-ddl.md)             | Cancels the currently running DDL jobs. |
 | [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)          | Calculates the CRC64 of all rows + indexes of a table. |
 | [<code>ADMIN CHECK [TABLE\|INDEX]</code>](/sql-statements/sql-statement-admin-check-table-index.md) | Checks for consistency of a table or index. |
 | [<code>ADMIN SHOW DDL [JOBS\|QUERIES]</code>](/sql-statements/sql-statement-admin-show-ddl.md)      | Shows details about currently running or recently completed DDL jobs. |
-| [`ADMIN SHOW TELEMETRY`](/sql-statements/sql-statement-admin-show-telemetry.md)      | Shows information that will be reported back to PingCAP as part of the telemetry feature. |
 
 </CustomContent>
 
@@ -48,7 +48,7 @@ This statement is a TiDB extension syntax, used to view the status of TiDB and c
 ADMIN RELOAD expr_pushdown_blacklist;
 ```
 
-The above statement is used to reload the blocklist pushed down by the expression.
+The above statement is used to reload the blocklist of expression pushdown.
 
 ```sql
 ADMIN RELOAD opt_rule_blacklist;
@@ -60,7 +60,7 @@ The above statement is used to reload the blocklist of logic optimization rules.
 
 > **Note:**
 >
-> This feature is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+> This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) instances.
 
 ```sql
 ADMIN PLUGINS ENABLE plugin_name [, plugin_name] ...;
@@ -92,7 +92,7 @@ The above statement can generate the binding of SQL Plan from the `SELECT` state
 ADMIN EVOLVE BINDINGS;
 ```
 
-After the automatic binding feature is enabled, the evolution of SQL Plan binding information is triggered every `bind-info-leave` (the default value is `3s`). The above statement is used to proactively trigger this evolution.
+After the automatic binding feature is enabled, the evolution of SQL Plan binding information is triggered every `bind-info-lease` (the default value is `3s`). The above statement is used to proactively trigger this evolution.
 
 ```sql
 ADMIN RELOAD BINDINGS;
@@ -134,7 +134,7 @@ The above statement is used to view the details of some special columns of a tab
 
 > **Note:**
 >
-> This feature is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+> This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) instances.
 
 ```sql
 ADMIN SHOW SLOW RECENT N;
@@ -149,6 +149,28 @@ ADMIN SHOW SLOW TOP [INTERNAL | ALL] N;
 For details, refer to [`ADMIN SHOW SLOW` command](/identify-slow-queries.md#admin-show-slow-command).
 
 </CustomContent>
+
+## `ADMIN CREATE WORKLOAD SNAPSHOT` statement
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> This TiDB statement is not applicable to TiDB Cloud.
+
+</CustomContent>
+
+<CustomContent platform="tidb">
+
+The following SQL statement will trigger a manual snapshot in the [Workload Repository](/workload-repository.md):
+
+</CustomContent>
+
+```sql
+ADMIN CREATE WORKLOAD SNAPSHOT;
+```
+
+Note that the Workload Repository must be enabled for this statement to take effect. Otherwise, it will generate an error.
 
 ## Synopsis
 
@@ -187,6 +209,7 @@ AdminStmt ::=
         | 'FLUSH' ('SESSION' | 'INSTANCE') 'PLAN_CACHE'
         | 'SET' 'BDR' 'ROLE' ( 'PRIMARY' | 'SECONDARY' )
         | 'UNSET' 'BDR' 'ROLE'
+        | 'CREATE' 'WORKLOAD' 'SNAPSHOT'
     )
 
 NumList ::=
@@ -296,8 +319,8 @@ ADMIN SHOW DDL JOBS 5 WHERE state != 'synced' AND db_name = 'test';
     * `synced`: it indicates that the operation has been performed successfully and all TiDB instances have been synced to this state.
     * `rollback done`: it indicates that the operation has failed and has finished rolling back.
     * `rollingback`: it indicates that the operation has failed and is rolling back.
-    * `cancelling`: it indicates that the operation is being cancelled. This state only occurs when you cancel DDL jobs using the [`ADMIN CANCEL DDL JOBS`](/sql-statements/sql-statement-admin-cancel-ddl.md) command.
-    * `paused`: it indicates that the operation has been paused. This state only appears when you use the [`ADMIN PAUSED DDL JOBS`](/sql-statements/sql-statement-admin-pause-ddl.md) command to pause the DDL job. You can use the [`ADMIN RESUME DDL JOBS`](/sql-statements/sql-statement-admin-resume-ddl.md) command to resume the DDL job.
+    * `cancelling`: it indicates that the operation is being canceled. This state only occurs when you cancel DDL jobs using the [`ADMIN CANCEL DDL JOBS`](/sql-statements/sql-statement-admin-cancel-ddl.md) command.
+    * `paused`: it indicates that the operation has been paused. This state only appears when you use the [`ADMIN PAUSE DDL JOBS`](/sql-statements/sql-statement-admin-pause-ddl.md) command to pause the DDL job. You can use the [`ADMIN RESUME DDL JOBS`](/sql-statements/sql-statement-admin-resume-ddl.md) command to resume the DDL job.
 
 ## MySQL compatibility
 

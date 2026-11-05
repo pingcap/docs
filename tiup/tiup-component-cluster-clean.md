@@ -26,7 +26,7 @@ tiup cluster clean <cluster-name> [flags]
 - Cleans data and the log at the same time. It is equivalent to specifying `--data` and `--log` at the same time.
 - Data type: `BOOLEAN`
 - This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command, and pass the `true` value or do not pass any value.
-- If it is not specified, you must specify at lease one of the following options:
+- If it is not specified, you must specify at least one of the following options:
     - --data: Cleans data
     - --log: Cleans the log
 
@@ -64,4 +64,6 @@ tiup cluster clean <cluster-name> [flags]
 
 The execution logs of tiup-cluster.
 
-[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
+## See also
+
+- [TiUP Common Operations](/maintain-tidb-using-tiup.md)

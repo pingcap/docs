@@ -14,7 +14,7 @@ This section lists some FAQs and their solutions when you upgrade TiDB.
 
 ### What are the effects of rolling updates?
 
-When you apply rolling updates to the TiDB services, the running application is affected to varying degrees. Therefore, it is not recommended that you perform a rolling update during business peak hours. You need to configure the minimum cluster topology (TiDB \* 2, PD \* 3, TiKV \* 3). If the Pump or Drainer service is involved in the cluster, it is recommended to stop Drainer before rolling updates. When you upgrade TiDB, Pump is also upgraded.
+When you apply rolling updates to the TiDB services, the running application is affected to varying degrees. Therefore, it is not recommended that you perform a rolling update during business peak hours. You need to configure the minimum cluster topology (TiDB \* 2, PD \* 3, TiKV \* 3).
 
 ### Can I upgrade the TiDB cluster during the DDL execution?
 
@@ -35,6 +35,12 @@ It is not recommended to upgrade TiDB using the binary. Instead, it is recommend
 ## After upgrade FAQs
 
 This section lists some FAQs and their solutions after you upgrade TiDB.
+
+### The collation in JDBC connections changes after upgrading TiDB
+
+When upgrading from an earlier version to v7.4 or later, if the `connectionCollation` is not configured, and the `characterEncoding` is either not configured or configured as `UTF-8` in the JDBC URL, the default collation in your JDBC connections might change from `utf8mb4_bin` to `utf8mb4_0900_ai_ci` after upgrading. If you need to maintain the collation as `utf8mb4_bin`, configure `connectionCollation=utf8mb4_bin` in the JDBC URL.
+
+For more information, see [Collation used in JDBC connections](/faq/sql-faq.md#collation-used-in-jdbc-connections).
 
 ### The character set (charset) errors when executing DDL operations
 

@@ -1,23 +1,23 @@
 ---
-title: Use Restore Resource
-summary: Learn how to use restore resource.
+title: Use the `tidbcloud_restore` Resource
+summary: Learn how to use the `tidbcloud_restore` resource to create and modify a restore task.
 ---
 
-# Use Restore Resource
+# Use the `tidbcloud_restore` Resource
 
 You can learn how to manage a restore task with the `tidbcloud_restore` resource in this document.
 
 The features of the `tidbcloud_restore` resource include the following:
 
-- Create restore tasks for TiDB Dedicated clusters according to your backup.
+- Create restore tasks for TiDB Cloud Dedicated clusters according to your backup.
 
 ## Prerequisites
 
 - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md).
-- The backup and restore feature is unavailable for TiDB Serverless clusters. To use restore resources, make sure that you have created a TiDB Dedicated cluster.
+- The backup and restore feature introduced in this document is unavailable for {{{ .starter }}} and {{{ .essential }}} instances. To use `tidbcloud_restore` resources, make sure that you have created a TiDB Cloud Dedicated cluster.
 
 ## Create a restore task
-
+    
 After creating a backup of a cluster, you can restore the cluster by creating a restore task with the `tidbcloud_restore` resource.
 
 > **Note:**
@@ -177,7 +177,7 @@ After creating a backup of a cluster, you can restore the cluster by creating a 
 
     You can see the restore task's status is `PENDING` and the cluster's status is `INITIALIZING`.
 
-5. Wait for some minutes. Then use `terraform refersh` to update the status.
+5. Wait for some minutes. Then use `terraform refresh` to update the status.
 
 6. After the cluster status changes to `AVAILABLE`, the restore task will be `RUNNING` and turn to `SUCCESS` at last.
 

@@ -27,7 +27,7 @@ In v5.4, the key new features or improvements are as follows:
 
 > **Note:**
 >
-> When upgrading from an earlier TiDB version to v5.4.0, if you want to know the compatibility change notes of all intermediate versions, you can check the [Release Notes](/releases/release-notes.md) of the corresponding version.
+> When upgrading from an earlier TiDB version to v5.4.0, if you want to know the compatibility change notes of all intermediate versions, you can check the [Release Notes](/releases/_index.md) of the corresponding version.
 
 ### System variables
 
@@ -121,7 +121,7 @@ In v5.4, the key new features or improvements are as follows:
 | TiFlash | [`raftstore.store-pool-size`](/tiflash/tiflash-configuration.md#configure-the-tiflash-learnertoml-file) | Newly added | The allowable number of threads that process Raft, which is the size of the Raftstore thread pool. The default value is `4`. |
 | TiDB Data Migration (DM)  | [`collation_compatible`](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced) | Newly added | The mode to sync the default collation in `CREATE` SQL statements. The value options are "loose" (by default) and "strict".  |
 | TiCDC | `max-message-bytes` | Modified| Change the default value of `max-message-bytes` in Kafka sink to `104857601` (10MB)  |
-| TiCDC | `partition-num`     | Modified | Change the default value of `partition-num` in Kafka Sink from `4` to `3`. It makes TiCDC send messages to Kafaka partitions more evenly. |
+| TiCDC | `partition-num`     | Modified | Change the default value of `partition-num` in Kafka Sink from `4` to `3`. It makes TiCDC send messages to Kafka partitions more evenly. |
 | TiDB Lightning | `meta-schema-name` | Modified | Specifies the schema name for the metadata in the target TiDB. From v5.4.0, this schema is created only if you have enabled [parallel import](/tidb-lightning/tidb-lightning-distributed-import.md) (the corresponding parameter is `tikv-importer.incremental-import = true`). |
 | TiDB Lightning | `task-info-schema-name` |  Newly added  | Specifies the name of the database where duplicated data is stored when TiDB Lightning detects conflicts. By default, the value is "lightning_task_info". Specify this parameter only if you have enabled the "duplicate-resolution" feature. |
 | TiDB Lightning | `incremental-import` | Newly added | Determines whether to allow importing data to tables where data already exists. The default value is `false`. |
@@ -160,7 +160,7 @@ In v5.4, the key new features or improvements are as follows:
 
     This feature is disabled by default. When it is enabled, if a user operating through TiSpark does not have the needed permissions, the user gets an exception from TiSpark.
 
-    [User document](/tispark-overview.md#security)
+    [User document](https://docs-archive.pingcap.com/tidb/v5.4/tispark-overview#security)
 
 - **TiUP supports generating an initial password for the root user**
 
@@ -172,7 +172,7 @@ In v5.4, the key new features or improvements are as follows:
 
 - **Continue improving the stability and performance of the columnar storage engine TiFlash and the computing engine MPP**
 
-    - Support pusing down more functions to the MPP engine:
+    - Support pushing down more functions to the MPP engine:
 
         - String functions: `LPAD()`, `RPAD()`, `STRCMP()`
         - Date functions: `ADDDATE(string, real)`, `DATE_ADD(string, real)`, `DATE_SUB(string, real)`, `SUBDATE(string, real)`, `QUARTER()`
@@ -325,7 +325,7 @@ In v5.4, the key new features or improvements are as follows:
 
 - **Top SQL (experimental feature)**
 
-    A new experimental feature, Top SQL (disabled by default), is introduced to help you easily find source-consuming queries.
+    A new experimental feature, Top SQL (disabled by default), is introduced to help you easily find resource-consuming queries.
 
     [User document](/dashboard/top-sql.md)
 

@@ -5,7 +5,7 @@ summary: The `tiup mirror sign` command is used to sign metadata files in TiUP m
 
 # tiup mirror sign
 
-The `tiup mirror sign` command is used to sign the metadata files (*.json）defined in TiUP [mirror](/tiup/tiup-mirror-reference.md). These metadata files might be stored on the local file system or remotely stored using the HTTP protocol to provide a signature entry.
+The `tiup mirror sign` command is used to sign the metadata files (*.json) defined in TiUP [mirror](/tiup/tiup-mirror-reference.md). These metadata files might be stored on the local file system or remotely stored using the HTTP protocol to provide a signature entry.
 
 ## Syntax
 
@@ -46,5 +46,3 @@ If it is a network address, this address must provide the following features:
 - If the command is executed successfully, there is no output.
 - If the file has been signed by the specified key, TiUP reports the error `Error: this manifest file has already been signed by specified key`.
 - If the file is not a valid manifest, TiUP reports the error `Error: unmarshal manifest: %s`.
-
-[<< Back to the previous page - TiUP Mirror command list](/tiup/tiup-command-mirror.md#command-list)

@@ -19,7 +19,7 @@ The SQL diagnostic system has the following advantages:
 
 The SQL diagnostic system consists of three major parts:
 
-+ **Cluster information table**: The SQL diagnostics system introduces cluster information tables that provide a unified way to get the discrete information of each instance. This system fully integrates the cluster topology, hardware information, software information, kernel parameters, monitoring, system information, slow queries, statements, and logs of the entire cluster into the table. So you can query these information using SQL statements.
++ **Cluster information table**: The SQL diagnostics system introduces cluster information tables that provide a unified way to get the discrete information of each instance. This system fully integrates the cluster topology, hardware information, software information, kernel parameters, monitoring, system information, slow queries, statements, and logs of the entire cluster into the table. So you can query this information using SQL statements.
 
 + **Cluster monitoring table**: The SQL diagnostic system introduces cluster monitoring tables. All of these tables are in `metrics_schema`, and you can query monitoring information using SQL statements. Compared to the visualized monitoring before v4.0, you can use this SQL-based method to perform correlated queries on all the monitoring information of the entire cluster, and compare the results of different time periods to quickly identify performance bottlenecks. Because the TiDB cluster has many monitoring metrics, the SQL diagnostic system also provides monitoring summary tables, so you can find abnormal monitoring items more easily.
 
@@ -46,7 +46,7 @@ To dynamically observe and compare cluster conditions in different time periods,
 
 Because the TiDB cluster has many monitoring metrics, TiDB provides the following monitoring summary tables in v4.0:
 
-+ The monitoring summary table [`information_schema.metrics_summary`](/information-schema/information-schema-metrics-summary.md) summarizes all monitoring data to for you to check each monitoring metric with higher efficiency.
++ The monitoring summary table [`information_schema.metrics_summary`](/information-schema/information-schema-metrics-summary.md) summarizes all monitoring data for you to check each monitoring metric with higher efficiency.
 + [`information_schema.metrics_summary_by_label`](/information-schema/information-schema-metrics-summary.md) also summarizes all monitoring data. Particularly, this table aggregates statistics using different labels of each monitoring metric.
 
 ## Automatic diagnostics

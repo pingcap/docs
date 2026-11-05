@@ -10,7 +10,7 @@ TiDB Dashboard is a Web UI for monitoring, diagnosing, and managing the TiDB clu
 
 > **Note:**
 >
-> TiDB v6.5.0 (and later) and TiDB Operator v1.4.0 (and later) support deploying TiDB Dashboard as an independent Pod on Kubernetes. For details, see [Deploy TiDB Dashboard independently in TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/dev/get-started#deploy-tidb-dashboard-independently).
+> TiDB v6.5.0 (and later) and TiDB Operator v1.4.0 (and later) support deploying TiDB Dashboard as an independent Pod on Kubernetes. For details, see [Deploy TiDB Dashboard independently in TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/v1.6/get-started#deploy-tidb-dashboard-independently).
 
 ![TiDB Dashboard interface](/media/dashboard/dashboard-intro.gif)
 
@@ -62,7 +62,7 @@ See [Search Logs Page](/dashboard/dashboard-log-search.md) for details.
 
 ## Estimate cluster capacity for resource control
 
-To implement resource isolation using the [Resource Control](/tidb-resource-control.md) feature, cluster administrators can create resource groups and set quotas for each group.
+To implement resource isolation using the [Resource Control](/tidb-resource-control-ru-groups.md) feature, cluster administrators can create resource groups and set quotas for each group.
 
 Before resource planning, you need to know the overall capacity of the cluster. For more details, see [Resource Manager page](/dashboard/dashboard-resource-manager.md).
 

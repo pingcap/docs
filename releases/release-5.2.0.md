@@ -27,7 +27,7 @@ In v5.2, the key new features and improvements are as follows:
 
 > **Note:**
 >
-> When upgrading from an earlier TiDB version to v5.2, if you want to know the compatibility change notes of all intermediate versions, you can check the [Release Note](/releases/release-notes.md) for the corresponding version.
+> When upgrading from an earlier TiDB version to v5.2, if you want to know the compatibility change notes of all intermediate versions, you can check the [Release Note](/releases/_index.md) for the corresponding version.
 
 ### System variables
 
@@ -62,7 +62,7 @@ In v5.2, the key new features and improvements are as follows:
 
 - Before the upgrade, check whether the value of the [`tidb_evolve_plan_baselines`](/system-variables.md#tidb_evolve_plan_baselines-new-in-v40) system variable is `ON`. If the value is `ON`, set it to `OFF`; otherwise, the upgrade will fail.
 - For TiDB clusters upgraded from v4.0 to v5.2, the default value of [`tidb_multi_statement_mode`](/system-variables.md#tidb_multi_statement_mode-new-in-v4011) changes from `WARN` to `OFF`.
-- Before the upgrade, check the value of the TiDB configuration [`feedback-probability`](https://docs.pingcap.com/tidb/v5.2/tidb-configuration-file#feedback-probability). If the value is not `0`, the "panic in the recoverable goroutine" error will occur after the upgrade, but this error does not affect the upgrade.
+- Before the upgrade, check the value of the TiDB configuration [`feedback-probability`](https://docs-archive.pingcap.com/tidb/v5.2/tidb-configuration-file#feedback-probability). If the value is not `0`, the "panic in the recoverable goroutine" error will occur after the upgrade, but this error does not affect the upgrade.
 - TiDB is now compatible with MySQL 5.7's noop variable `innodb_default_row_format`. Setting this variable has no effect. [#23541](https://github.com/pingcap/tidb/issues/23541)
 - Starting from TiDB 5.2, to improve system security, it is recommended (but not mandatory) to encrypt the transport layer for connections from clients. TiDB provides the Auto TLS feature to automatically configure and enable encryption in TiDB. To use the Auto TLS feature, before the TiDB upgrade, set [`security.auto-tls`](/tidb-configuration-file.md#auto-tls) in the TiDB configuration file to `true`.
 - Support the `caching_sha2_password` authentication method to make migration from MySQL 8.0 easier and to improve security.
@@ -112,7 +112,7 @@ In v5.2, the key new features and improvements are as follows:
     In v5.2, the following enhancements are made to Lock View:
 
     - In addition to the SQL digest column in the Lock View-related tables, add a column to these tables that shows the corresponding normalized SQL text. You do not have to manually query the statement corresponding to a SQL digest.
-    - Add the `TIDB_DECODE_SQL_DIGESTS` function to query the normalized SQL statements (a form without formats and arguments) corresponding to a set of SQL digests in the cluster. This simplifies the operation of querying the statements that have been historically executed by a transaction.
+    - Add the `TIDB_DECODE_SQL_DIGESTS` function to query the normalized SQL statements (in which literal values are replaced with placeholders such as `?` or `...`) corresponding to a set of SQL digests in the cluster. This simplifies the operation of querying the statements that have been historically executed by a transaction.
     - Add a column in the `DATA_LOCK_WAITS` and `DEADLOCKS` system tables to show the table name, row ID, index value, and other key information interpreted from a key. This simplifies the operations such as locating the table to which a key belongs and interpreting the key information.
     - Support collecting the information of retryable deadlock errors in the `DEADLOCKS` table, which makes it easier to troubleshoot issues caused by such errors. The error collection is disabled by default and can be enabled using the `pessimistic-txn.deadlock-history-collect-retryable` configuration.
     - Support distinguishing query-executing transactions from idle transactions on the `TIDB_TRX` system table. The `Normal` state is now divided into `Running` and `Idle` states.
@@ -211,7 +211,7 @@ Support running the `tiup playground` command on Mac computers with Apple M1 chi
     - Support completing the garbage collection automatically for the bindings in the "deleted" status [#26206](https://github.com/pingcap/tidb/pull/26206)
     - Support showing whether a binding is used for query optimization in the result of `EXPLAIN VERBOSE` [#26930](https://github.com/pingcap/tidb/pull/26930)
     - Add a new status variation `last_plan_binding_update_time` to view the timestamp corresponding to the binding cache in the current TiDB instance [#26340](https://github.com/pingcap/tidb/pull/26340)
-    - Support reporting an error when starting binding evolution or running `admin evolve bindings` to ban the baseline evolution (currently disabled in the TiDB Self-Hosted version because it is an experimental feature) affecting other features [#26333](https://github.com/pingcap/tidb/pull/26333)
+    - Support reporting an error when starting binding evolution or running `admin evolve bindings` to ban the baseline evolution (currently disabled in the TiDB Self-Managed version because it is an experimental feature) affecting other features [#26333](https://github.com/pingcap/tidb/pull/26333)
 
 + PD
 
@@ -288,7 +288,7 @@ Support running the `tiup playground` command on Mac computers with Apple M1 chi
     - Fix a bug that TiFlash adds wrong padding for non-binary characters in the `CAST` function
     - Fix the issue of incorrect results when handling aggregation queries with complex `GROUP BY` columns
     - Fix the TiFlash panic issue that occurs under heavy write pressure
-    - Fix the panic that occurs when the right jon key is not nullable and the left join key is nullable
+    - Fix the panic that occurs when the right join key is not nullable and the left join key is nullable
     - Fix the potential issue that the `read-index` requests take a long time
     - Fix the panic issue that occurs when the read load is heavy
     - Fix the panic issue that might occur when the `Date_Format` function is called with the `STRING` type argument and `NULL` values

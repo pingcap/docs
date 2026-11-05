@@ -27,8 +27,6 @@ TiDB version: 4.0.6
 
     + TiCDC (GA since v4.0.6)
 
-        - Support outputting data in the `maxwell` format [#869](https://github.com/pingcap/tiflow/pull/869)
-
 ## Improvements
 
 + TiDB
@@ -38,7 +36,7 @@ TiDB version: 4.0.6
     - Record more RPC runtime information in `Cop Runtime` statistics [#19264](https://github.com/pingcap/tidb/pull/19264)
     - Forbid creating tables in `metrics_schema` and `performance_schema` [#19792](https://github.com/pingcap/tidb/pull/19792)
     - Support adjusting the concurrency of the union executor [#19886](https://github.com/pingcap/tidb/pull/19886)
-    - Support out join in broadcast join [#19664](https://github.com/pingcap/tidb/pull/19664)
+    - Support outer join in broadcast join [#19664](https://github.com/pingcap/tidb/pull/19664)
     - Add SQL digest for the process list [#19829](https://github.com/pingcap/tidb/pull/19829)
     - Switch to the pessimistic transaction mode for autocommit statement retry [#19796](https://github.com/pingcap/tidb/pull/19796)
     - Support the `%r` and `%T` data format in `Str_to_date()` [#19693](https://github.com/pingcap/tidb/pull/19693)

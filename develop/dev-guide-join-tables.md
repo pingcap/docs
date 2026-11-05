@@ -1,6 +1,7 @@
 ---
 title: Multi-table Join Queries
 summary: This document describes how to use multi-table join queries.
+aliases: ['/tidb/stable/dev-guide-join-tables/','/tidb/dev/dev-guide-join-tables/','/tidbcloud/dev-guide-join-tables/']
 ---
 
 # Multi-table Join Queries
@@ -86,11 +87,11 @@ public List<Author> getTop10AuthorsOrderByBooks() throws SQLException {
 
 ### LEFT OUTER JOIN
 
-The left outer join returns all the rows in the left table and the values ​​in the right table that match the join condition. If no rows are matched in the right table, it will be filled with `NULL`.
+The left outer join returns all the rows in the left table and the values in the right table that match the join condition. If no rows are matched in the right table, it will be filled with `NULL`.
 
 ![Left Outer Join](/media/develop/left-outer-join.png)
 
-In some cases, you want to use multiple tables to complete the data query, but do not want the data set to become too small because the join condition are not met.
+In some cases, you want to use multiple tables to complete the data query, but do not want the data set to become too small because the join condition is not met.
 
 For example, on the homepage of the Bookshop app, you want to display a list of new books with average ratings. In this case, the new books may not have been rated by anyone yet. Using inner joins will cause the information of these unrated books to be filtered out, which is not what you expect.
 
@@ -189,7 +190,7 @@ public List<Book> getLatestBooksWithAverageScore() throws SQLException {
 
 ### RIGHT OUTER JOIN
 
-A right outer join returns all the records in the right table and the values ​​in the left table that match the join condition. If there is no matching value, it is filled with `NULL`.
+A right outer join returns all the records in the right table and the values in the left table that match the join condition. If there is no matching value, it is filled with `NULL`.
 
 ![Right Outer Join](/media/develop/right-outer-join.png)
 
@@ -256,14 +257,6 @@ For more information about the implementation details and limitations of this Jo
 
 ## Need help?
 
-<CustomContent platform="tidb">
-
-Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](/support.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](https://support.pingcap.com/).
-
-</CustomContent>
+- Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs).
+- [Submit a support ticket for TiDB Cloud](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [Submit a support ticket for TiDB Self-Managed](/support.md)

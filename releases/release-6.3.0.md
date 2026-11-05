@@ -13,7 +13,7 @@ TiDB version: 6.3.0-DMR
 >
 > The TiDB 6.3.0-DMR documentation has been [archived](https://docs-archive.pingcap.com/tidb/v6.3/). PingCAP encourages you to use [the latest LTS version](https://docs.pingcap.com/tidb/stable) of the TiDB database.
 
-Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.3/quick-start-with-tidb)
+Quick access: [Quick start](https://docs-archive.pingcap.com/tidb/v6.3/quick-start-with-tidb)
 
 In v6.3.0-DMR, the key new features and improvements are as follows:
 
@@ -145,9 +145,9 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
     You can [disable Titan](/storage-engine/titan-configuration.md#disable-titan) for online TiKV nodes.
 
-* Use `static` partition pruning when GlobalStats are not ready [#37535](https://github.com/pingcap/tidb/issues/37535) @[Yisaer](https://github.com/Yisaer)
+* Use `static` partition pruning when global statistics are not ready [#37535](https://github.com/pingcap/tidb/issues/37535) @[Yisaer](https://github.com/Yisaer)
 
-    When [`dynamic pruning`](/partitioned-table.md#dynamic-pruning-mode) is enabled, the optimizer selects execution plans based on [GlobalStats](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode). Before GlobalStats are fully collected, using pseudo statistics might cause performance regression. In v6.3.0, this issue is addressed by maintaining the `static` mode if you enable dynamic pruning before GlobalStats are collected. TiDB remains in the `static` mode until GlobalStats are collected. This ensures performance stability when you change the partition pruning settings.
+    When [`dynamic pruning`](/partitioned-table.md#dynamic-pruning-mode) is enabled, the optimizer selects execution plans based on [global statistics](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode). Before global statistics are fully collected, using pseudo statistics might cause performance regression. In v6.3.0, if you enable the `dynamic` pruning mode before global statistics collection is completed, TiDB remains in the `static` mode until global statistics are fully collected. This ensures performance stability when you change the partition pruning settings.
 
 ### Ease of use
 
@@ -229,7 +229,7 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 | [`tidb_enable_unsafe_substitute`](/system-variables.md#tidb_enable_unsafe_substitute-new-in-v630) | Newly added | Controls whether to replace expressions with generated columns in an unsafe way. |
 | `tidb_general_plan_cache_size` | Newly added | Controls the maximum number of execution plans that can be cached by General Plan Cache. The feature controlled by this variable is not fully functional in TiDB v6.3.0. Do not change the default value.  |
 | [`tidb_last_plan_replayer_token`](/system-variables.md#tidb_enable_unsafe_substitute-new-in-v630) | Newly added | Read-only and used to obtain the result of the last `PLAN REPLAYER DUMP` execution in the current session. |
-| [tidb_max_paging_size](/system-variables.md#tidb_max_paging_size-new-in-v630) | Newly added | This variable is used to set the minimum number of rows during the coprocessor paging request process. |
+| [tidb_max_paging_size](/system-variables.md#tidb_max_paging_size-new-in-v630) | Newly added | This variable is used to set the maximum number of rows during the coprocessor paging request process. |
 | [`tidb_opt_force_inline_cte`](/system-variables.md#tidb_opt_force_inline_cte-new-in-v630) | Newly added | Controls whether common table expressions (CTEs) in the entire session are inlined or not. The default value is `OFF`, which means that inlining CTE is not enforced by default. |
 | [`tidb_opt_three_stage_distinct_agg`](/system-variables.md#tidb_opt_three_stage_distinct_agg-new-in-v630) | Newly added | Specifies whether to rewrite a `COUNT(DISTINCT)` aggregation into a three-stage aggregation in MPP mode. The default value is `ON`. |
 | [`tidb_partition_prune_mode`](/system-variables.md#tidb_partition_prune_mode-new-in-v51) | Modified | Specifies whether to enable dynamic pruning. Since v6.3.0, the default value changes to `dynamic`. |
@@ -317,8 +317,8 @@ Since v6.3.0, TiCDC no longer supports configuring Pulsar sink. [kop](https://gi
         - Improve TiCDC's compatibility with the concurrent DDL framework introduced in the upstream TiDB [#6506](https://github.com/pingcap/tiflow/issues/6506) @[lance6716](https://github.com/lance6716)
         - Support logging `start ts` of DML statements when MySQL sink gets an error [#6460](https://github.com/pingcap/tiflow/issues/6460) @[overvenus](https://github.com/overvenus)
         - Enhance the `api/v1/health` API to return a more accurate health state of a TiCDC cluster [#4757](https://github.com/pingcap/tiflow/issues/4757) @[overvenus](https://github.com/overvenus)
-        - Implement MQ sink and MySQL sink in the asynchronous mode to improve the sink throughput [#5928](https://github.com/pingcap/tiflow/issues/5928) @[hicqu](https://github.com/hicqu) @[hi-rustin](https://github.com/hi-rustin)
-        - Delete the deprecated pulsar sink [#7087](https://github.com/pingcap/tiflow/issues/7087) @[hi-rustin](https://github.com/hi-rustin)
+        - Implement MQ sink and MySQL sink in the asynchronous mode to improve the sink throughput [#5928](https://github.com/pingcap/tiflow/issues/5928) @[hicqu](https://github.com/hicqu) @[hi-rustin](https://github.com/Rustin170506)
+        - Delete the deprecated pulsar sink [#7087](https://github.com/pingcap/tiflow/issues/7087) @[hi-rustin](https://github.com/Rustin170506)
         - Improve replication performance by discarding DDL statements that are irrelevant to a changefeed [#6447](https://github.com/pingcap/tiflow/issues/6447) @[asddongmen](https://github.com/asddongmen)
 
     + TiDB Data Migration (DM)

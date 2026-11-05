@@ -44,6 +44,7 @@ tiup bench rawsql # Benchmark a database using arbitrary SQL files
 ```
 
 - You can pass comma-separated values to `--host` and `--port` to enable client-side load balancing. For example, when you specify `--host 172.16.4.1,172.16.4.2 --port 4000,4001`, the program will connect to 172.16.4.1:4000, 172.16.4.1:4001, 172.16.4.2:4000, and 172.16.4.2:4001, chosen in round-robin fashion.
+- For a local deployment, the default database host address is `127.0.0.1`. If you are connecting to a remote database, you need to specify the host and other relevant parameters. For example: `tiup bench tpcc -H 192.168.169.31 -P 4000 -D tpcc -U root -p tidb --warehouses 4 --parts 4 prepare`
 - `--conn-params` must follow the format of [query string](https://en.wikipedia.org/wiki/Query_string). Different databases might have different parameters. For example:
     - `--conn-params tidb_isolation_read_engines='tiflash'` forces TiDB to read from TiFlash.
     - `--conn-params sslmode=disable` disables SSL when you connect to PostgreSQL.
@@ -152,7 +153,17 @@ Flags:
     tiup bench tpch --sf=1 prepare
     ```
 
-2. Run the TPC-H test by executing one of the following commands:
+2. Collect statistics:
+
+    For the OLAP scenarios, to ensure that the TiDB optimizer can generate the optimal execution plan, execute the following SQL statements to collect statistics in advance. **Be sure to set [`tidb_analyze_column_options`](/system-variables.md#tidb_analyze_column_options-new-in-v830) to `ALL`, otherwise collecting statistics can result in a significant drop in query performance.**
+
+    {{< copyable "shell-regular" >}}
+
+    ```sql
+    set global tidb_analyze_column_options='ALL';
+    ```
+
+3. Run the TPC-H test by executing one of the following commands:
 
     - If you check the result, run this command:
 
@@ -170,7 +181,7 @@ Flags:
         tiup bench tpch --count=22 --sf=1 run
         ```
 
-3. Clean up data:
+4. Clean up data:
 
     {{< copyable "shell-regular" >}}
 

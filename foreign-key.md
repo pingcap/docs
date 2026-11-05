@@ -5,12 +5,11 @@ summary: An overview of the usage of FOREIGN KEY constraints for the TiDB databa
 
 # FOREIGN KEY Constraints
 
-Starting from v6.6.0, TiDB supports the foreign key feature, which allows cross-table referencing of related data, and foreign key constraints to maintain data consistency.
+Foreign keys allow cross-table references of related data, while foreign key constraints ensure the consistency of related data. Starting from v6.6.0, TiDB supports foreign keys and foreign key constraints. Starting from v8.5.0, this feature becomes generally available.
 
 > **Warning:**
 >
-> - Currently, the foreign key feature is experimental. It is not recommended that you use it in production environments. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-> - The foreign key feature is typically employed to enforce [referential integrity](https://en.wikipedia.org/wiki/Referential_integrity) constraint checks. It might cause performance degradation, so it is recommended to conduct thorough testing before using it in performance-sensitive scenarios.
+> The foreign key feature is typically employed to enforce [referential integrity](https://en.wikipedia.org/wiki/Referential_integrity) constraint checks. It might cause performance degradation, so it is recommended to conduct thorough testing before using it in performance-sensitive scenarios.
 
 The foreign key is defined in the child table. The syntax is as follows:
 
@@ -152,8 +151,8 @@ mysql> SHOW CREATE TABLE child\G
 *************************** 1. row ***************************
        Table: child
 Create Table: CREATE TABLE `child` (
-  `id` int(11) DEFAULT NULL,
-  `pid` int(11) DEFAULT NULL,
+  `id` int DEFAULT NULL,
+  `pid` int DEFAULT NULL,
   KEY `idx_pid` (`pid`),
   CONSTRAINT `fk_1` FOREIGN KEY (`pid`) REFERENCES `test`.`parent` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
@@ -178,9 +177,11 @@ When the foreign key constraint check is disabled, the foreign key constraint ch
 
 ## Locking
 
-When `INSERT` or `UPDATE` a child table, the foreign key constraint checks whether the corresponding foreign key value exists in the parent table, and locks the row in the parent table to avoid the foreign key value being deleted by other operations violating the foreign key constraint. The locking behavior is equivalent to performing a `SELECT FOR UPDATE` operation on the row where the foreign key value is located in the parent table.
+When you `INSERT` into or `UPDATE` a child table, the foreign key constraint checks whether the corresponding foreign key value exists in the parent table and locks the corresponding row in the parent table to prevent other operations from deleting the foreign key value and violating the foreign key constraint.
 
-Because TiDB currently does not support `LOCK IN SHARE MODE`, if a child table accepts a large number of concurrent writes and most of the referenced foreign key values are the same, there might be serious locking conflicts. It is recommended to disable [`foreign_key_checks`](/system-variables.md#foreign_key_checks) when writing a large number of child table data.
+By default, in pessimistic transactions, the locking behavior of foreign key checks on rows in the parent table is equivalent to performing a locking read using `SELECT ... FOR UPDATE` (that is, acquiring an exclusive lock) on the corresponding row. In high-concurrency write scenarios for a child table, if a large number of transactions repeatedly reference the same parent table row, serious lock conflicts might occur.
+
+You can enable the system variable [`tidb_foreign_key_check_in_shared_lock`](/system-variables.md#tidb_foreign_key_check_in_shared_lock-new-in-v856-and-v900) to let foreign key checks use shared locks. Shared locks allow multiple transactions to perform foreign key checks on the same parent table row simultaneously, thereby reducing lock conflicts and improving the performance of concurrent writes to child tables.
 
 ## Definition and metadata of foreign keys
 
@@ -191,8 +192,8 @@ mysql> SHOW CREATE TABLE child\G
 *************************** 1. row ***************************
        Table: child
 Create Table: CREATE TABLE `child` (
-  `id` int(11) DEFAULT NULL,
-  `pid` int(11) DEFAULT NULL,
+  `id` int DEFAULT NULL,
+  `pid` int DEFAULT NULL,
   KEY `idx_pid` (`pid`),
   CONSTRAINT `fk_1` FOREIGN KEY (`pid`) REFERENCES `test`.`parent` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
@@ -293,8 +294,8 @@ mysql> SHOW CREATE TABLE child\G
 ***************************[ 1. row ]***************************
 Table        | child
 Create Table | CREATE TABLE `child` (
-  `id` int(11) DEFAULT NULL,
-  `pid` int(11) DEFAULT NULL,
+  `id` int DEFAULT NULL,
+  `pid` int DEFAULT NULL,
   KEY `idx_pid` (`pid`),
   CONSTRAINT `fk_1` FOREIGN KEY (`pid`) REFERENCES `test`.`parent` (`id`) ON DELETE CASCADE /* FOREIGN KEY INVALID */
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
@@ -304,8 +305,7 @@ Create Table | CREATE TABLE `child` (
 
 <CustomContent platform="tidb">
 
-- [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) does not support foreign keys.
-- [DM](/dm/dm-overview.md) does not support foreign keys. DM disables the [`foreign_key_checks`](/system-variables.md#foreign_key_checks) of the downstream TiDB when replicating data to TiDB. Therefore, the cascading operations caused by foreign keys are not replicated from the upstream to the downstream, which might cause data inconsistency.
+- [DM](/dm/dm-overview.md): starting from v8.5.6, DM supports replicating tables that use foreign key constraints as an experimental feature. For supported scenarios and limitations, see [DM Compatibility Catalog](/dm/dm-compatibility-catalog.md#foreign-key-cascade-operations). In versions earlier than v8.5.6, DM disables the [`foreign_key_checks`](/system-variables.md#foreign_key_checks) system variable when replicating data to TiDB, so cascading operations are not replicated to the downstream cluster.
 - [TiCDC](/ticdc/ticdc-overview.md) v6.6.0 is compatible with foreign keys. The previous versions of TiCDC might report an error when replicating tables with foreign keys. It is recommended to disable the `foreign_key_checks` of the downstream TiDB cluster when using a TiCDC version earlier than v6.6.0.
 - [BR](/br/backup-and-restore-overview.md) v6.6.0 is compatible with foreign keys. The previous versions of BR might report an error when restoring tables with foreign keys to a v6.6.0 or later cluster. It is recommended to disable the `foreign_key_checks` of the downstream TiDB cluster before restoring the cluster when using a BR earlier than v6.6.0.
 - When you use [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md), if the target table uses a foreign key, it is recommended to disable the `foreign_key_checks` of the downstream TiDB cluster before importing data. For versions earlier than v6.6.0, disabling this system variable does not take effect, and you need to grant the `REFERENCES` privilege for the downstream database user, or manually create the target table in the downstream database in advance to ensure smooth data import.
@@ -346,8 +346,8 @@ The output shows that the `child` table does not contain any foreign keys:
 | Table | Create Table                                                |
 +-------+-------------------------------------------------------------+
 | child | CREATE TABLE `child` (                                      |
-|       |   `id` int(11) DEFAULT NULL,                                |
-|       |   `pid` int(11) DEFAULT NULL                                |
+|       |   `id` int DEFAULT NULL,                                |
+|       |   `pid` int DEFAULT NULL                                |
 |       | ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin |
 +-------+-------------------------------------------------------------+
 ```

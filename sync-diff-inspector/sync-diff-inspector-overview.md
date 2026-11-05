@@ -6,18 +6,9 @@ aliases: ['/docs/dev/sync-diff-inspector/sync-diff-inspector-overview/','/docs/d
 
 # sync-diff-inspector User Guide
 
-[sync-diff-inspector](https://github.com/pingcap/tidb-tools/tree/master/sync_diff_inspector) is a tool used to compare data stored in the databases with the MySQL protocol. For example, it can compare the data in MySQL with that in TiDB, the data in MySQL with that in MySQL, or the data in TiDB with that in TiDB. In addition, you can also use this tool to repair data in the scenario where a small amount of data is inconsistent.
+[sync-diff-inspector](https://github.com/pingcap/tiflow/tree/master/sync_diff_inspector) is a tool used to compare data stored in MySQL-compatible databases (including MySQL and TiDB). For example, it can compare the data in MySQL with that in TiDB, the data in MySQL with that in MySQL, or the data in TiDB with that in TiDB. In addition, you can also use this tool to repair data in the scenario where a small amount of data is inconsistent.
 
-This guide introduces the key features of sync-diff-inspector and describes how to configure and use this tool. To download sync-diff-inspector, use one of the following methods:
-
-+ Binary package. The sync-diff-inspector binary package is included in the TiDB Toolkit. To download the TiDB Toolkit, see [Download TiDB Tools](/download-ecosystem-tools.md).
-+ Docker image. Execute the following command to download:
-
-    {{< copyable "shell-regular" >}}
-
-    ```shell
-    docker pull pingcap/tidb-tools:latest
-    ```
+This guide introduces the key features of sync-diff-inspector and describes how to configure and use this tool.
 
 ## Key features
 
@@ -28,26 +19,61 @@ This guide introduces the key features of sync-diff-inspector and describes how 
 * Support [data check for TiDB upstream-downstream clusters](/ticdc/ticdc-upstream-downstream-check.md)
 * Support [data check in the DM replication scenario](/sync-diff-inspector/dm-diff.md)
 
+## Install sync-diff-inspector
+
+The installation method varies depending on your TiDB version:
+
+For TiDB v8.5.6 and later versions:
+
++ Install using TiUP:
+
+    ```shell
+    tiup install sync-diff-inspector
+    ```
+
++ Binary package. The sync-diff-inspector binary package is included in the TiDB Toolkit. To download the TiDB Toolkit, see [Download TiDB Tools](/download-ecosystem-tools.md).
+
++ Docker image. Execute the following command to download:
+
+    ```shell
+    docker pull pingcap/sync-diff-inspector:latest
+    ```
+
+For TiDB versions before v8.5.6:
+
++ Binary package from the legacy [`tidb-tools`](https://github.com/pingcap/tidb-tools) repository. The sync-diff-inspector binary package is included in the TiDB Toolkit. To download the TiDB Toolkit, see [Download TiDB Tools](/download-ecosystem-tools.md).
+
++ Docker image (legacy version). Execute the following command to download:
+
+    ```shell
+    docker pull pingcap/tidb-tools:latest
+    ```
+
 ## Restrictions of sync-diff-inspector
 
 * Online check is not supported for data migration between MySQL and TiDB. Ensure that no data is written into the upstream-downstream checklist, and that data in a certain range is not changed. You can check data in this range by setting `range`.
 
-* In TiDB and MySQL, `FLOAT`, `DOUBLE` and other floating-point types are implemented differently. `FLOAT` and `DOUBLE` respectively take 6 and 15 significant digits for calculating checksum. If you do not want to use this feature, set `ignore-columns` to skip checking these columns.
+* Data type support notes:
+
+    * **FLOAT/DOUBLE**: Floating-point types are implemented differently in TiDB and MySQL. `FLOAT` and `DOUBLE` respectively take 6 and 15 significant digits for calculating checksum. If you do not want to use this feature, set `ignore-columns` to skip checking these columns.
+    * **JSON**: Supported for comparison. Be aware that collation and character set differences for JSON string values between upstream and downstream can lead to false positives.
+    * **BLOB/VARBINARY**: Supported as binary data and compared byte-for-byte.
+    * **BIT**: Supported for MySQL to TiDB comparisons. Validated for widths 1, 8, 16, and 64. If your schema uses non-standard widths or application-level transformations, perform a targeted validation test.
 
 * Support checking tables that do not contain the primary key or the unique index. However, if data is inconsistent, the generated SQL statements might not be able to repair the data correctly.
 
 ## Database privileges for sync-diff-inspector
 
-sync-diff-inspector needs to obtain the information of table schema and to query data. The required database privileges are as follows:
+To access table schemas and query data, sync-diff-inspector requires specific database privileges. Grant the following privileges on both the upstream and downstream databases:
 
-* Upstream database
-    - `SELECT` (checks data for comparison)
-    - `SHOW_DATABASES` (views database name)
-    - `RELOAD` (views table schema)
-* Downstream database
-    - `SELECT` (checks data for comparison)
-    - `SHOW_DATABASES` (views database name)
-    - `RELOAD` (views table schema)
+- `SELECT`: required to compare data.
+- `RELOAD`: required to view table schemas.
+- `PROCESS`: required when both the upstream and downstream are TiDB clusters. It is used to query the `INFORMATION_SCHEMA.CLUSTER_INFO` table.
+
+> **Note**:
+> 
+> - **DO NOT** grant the [`SHOW DATABASES`](/sql-statements/sql-statement-show-databases.md) privilege on all databases (`*.*`). Otherwise, sync-diff-inspector will attempt to access inaccessible databases, which causes errors.
+> - For MySQL data sources, ensure that the [`skip_show_database`](https://dev.mysql.com/doc/refman/8.4/en/server-system-variables.html#sysvar_skip_show_database) system variable is set to `OFF`. If this variable is set to `ON`, the check might fail.
 
 ## Configuration file description
 
@@ -72,6 +98,9 @@ check-thread-count = 4
 
 # If enabled, SQL statements is exported to fix inconsistent tables.
 export-fix-sql = true
+
+# Only compares the data instead of the table structure. This configuration item is an experimental feature. It is not recommended that you use it in the production environment.
+check-data-only = false
 
 # Only compares the table structure instead of the data.
 check-struct-only = false
@@ -151,8 +180,9 @@ range = "age > 10 AND age < 20"
 # (optional) Specifies the column used to divide data into chunks. If you do not configure it,
 # sync-diff-inspector chooses an appropriate column (primary key, unique key, or a field with index).
 index-fields = ["col1","col2"]
-# (optional) Ignores checking some columns such as some types (json, bit, blob, etc.)
-# that sync-diff-inspector does not currently support.
+# (optional) Ignores checking columns that you want to exclude from validation.
+# For example, columns with known cross-implementation differences (such as floating-point types)
+# or columns you prefer to validate separately.
 # The floating-point data type behaves differently in TiDB and MySQL. You can use
 # `ignore-columns` to skip checking these columns.
 ignore-columns = ["",""]
@@ -172,7 +202,7 @@ Run the following command:
 ./sync_diff_inspector --config=./config.toml
 ```
 
-This command outputs a check report `summary.txt` in the `output-dir` of `config.toml` and the log `sync_diff.log`. In the `output-dir`, a folder named by the hash value of the `config. toml` file is also generated. This folder includes the checkpoint node information of breakpoints and the SQL file generated when the data is inconsistent.
+This command outputs a check report `summary.txt` in the `output-dir` of `config.toml` and the log `sync_diff.log`. In the `output-dir`, a folder named by the hash value of the `config.toml` file is also generated. This folder includes the checkpoint node information of breakpoints and the SQL file generated when the data is inconsistent.
 
 ### Progress information
 
@@ -260,12 +290,14 @@ Average Speed: 113.277149MB/s
 - `RESULT`: Whether the check is completed. If you have configured `skip-non-existing-table = true`, the value of this column is `skipped` for tables that do not exist in the upstream or downstream
 - `STRUCTURE EQUALITY`: Checks whether the table structure is the same
 - `DATA DIFF ROWS`: `rowAdd`/`rowDelete`. Indicates the number of rows that need to be added/deleted to fix the table
+- `UPCOUNT`: The number of rows in this table in the upstream data source
+- `DOWNCOUNT`: The number of rows in this table in the downstream data source
 
 ### SQL statements to fix inconsistent data
 
 If different rows exist during the data checking process, the SQL statements will be generated to fix them. If the data inconsistency exists in a chunk, a SQL file named by `chunk.Index` will be generated. The SQL file is located at `${output}/fix-on-${instance}`, and `${instance}` is the value of `task.target-instance` in the `config.toml` file.
 
-A SQL file contains the tale to which the chunk belong and the range information. For the SQL files, you should consider the following three situations:
+A SQL file contains the table to which the chunk belongs and the range information. For the SQL files, you should consider the following three situations:
 
 - If the rows in the downstream database are missing, REPLACE statements will be applied
 - If the rows in the downstream database are redundant, DELETE statements will be applied
@@ -279,8 +311,6 @@ A SQL file contains the tale to which the chunk belong and the range information
 ╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╋╍╍╍╍╍╍╍╍╍╋╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╋╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍
   source data  ╏ 2501808 ╏ 'hello'                            ╏ 'world'
 ╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╋╍╍╍╍╍╍╍╍╍╋╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╋╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍
-  target data  ╏ 5003616 ╏ '0709824117-9809973320-4456050422' ╏ '1714066100-7057807621-1425865505'
-╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╋╍╍╍╍╍╍╍╍╍╋╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╋╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍
 */
 REPLACE INTO `sbtest`.`sbtest99`(`id`,`k`,`c`,`pad`) VALUES (3700000,2501808,'hello','world');
 ```
@@ -288,7 +318,20 @@ REPLACE INTO `sbtest`.`sbtest99`(`id`,`k`,`c`,`pad`) VALUES (3700000,2501808,'he
 ## Note
 
 - sync-diff-inspector consumes a certain amount of server resources when checking data. Avoid using sync-diff-inspector to check data during peak business hours.
-- Before comparing the data in MySQL with that in TiDB, pay attention to the collation configuration of the tables. If the primary key or unique key is the `varchar` type and the collation configuration in MySQL differs from that in TiDB, the final check result might be incorrect because of the collation issue. You need to add collation to the sync-diff-inspector configuration file.
+- Before comparing data in MySQL with TiDB, verify the character set and `collation` configuration of your tables. This is critical for tables with `varchar`, `text`, or `JSON` columns containing UTF-8 data, especially when these columns are part of a primary key or unique key. MySQL 8.0 defaults to `utf8mb4_0900_ai_ci` (case-insensitive, accent-insensitive), while TiDB often uses `utf8mb4_bin` (binary/case-sensitive). This mismatch causes sync-diff-inspector to report false differences for identical UTF-8 strings and JSON string values. To avoid false positives, align collations on both upstream and downstream tables (for example, `utf8mb4_bin`) or use `ignore-columns` to exclude affected UTF-8 text and JSON columns.
+- If you configure `collation` in the sync-diff-inspector configuration file and explicitly use the same collation for both upstream and downstream during chunk-based comparison, note that the order of index fields depends on the table's collation configuration. If the collations differ, one side might be unable to use the index. Additionally, if the character sets differ between upstream and downstream (for example, MySQL uses `utf8` while TiDB uses `utf8mb4`), it is not possible to unify the collation configuration.
+- The following scenarios can produce false differences even when data is logically identical:
+    - VARCHAR and TEXT columns with different collations between upstream and downstream (for example, `utf8mb4_0900_ai_ci` vs `utf8mb4_bin`) will report differences for identical string values;
+    - JSON columns containing string values are subject to the same collation-based comparison issues;
+    - Auto-populated TIMESTAMP columns (such as `DEFAULT CURRENT_TIMESTAMP` or `ON UPDATE CURRENT_TIMESTAMP`) can introduce noise when schemas are loaded at different times or when comparing data with slight timing variations.
+- If you validate datasets that include auto-populated timestamp columns, consider setting deterministic TIMESTAMP values for validation data rather than relying on `DEFAULT CURRENT_TIMESTAMP`, or use `ignore-columns` to exclude auto-populated TIMESTAMP columns if their exact values are not critical to your validation goals.
+- If the primary key differs between upstream and downstream tables, sync-diff-inspector does not use the original primary key column to divide chunks. For example, when sharded tables in MySQL are merged into TiDB using a composite primary key that includes the original primary key and a shard key. In this case, configure the original primary key column using `index-fields` and set `check-data-only` to `true`.
 - sync-diff-inspector divides data into chunks first according to TiDB statistics and you need to guarantee the accuracy of the statistics. You can manually run the `analyze table {table_name}` command when the TiDB server's *workload is light*.
 - Pay special attention to `table-rules`. If you configure `schema-pattern="test1"`, `table-pattern = "t_1"`, `target-schema="test2"` and `target-table = "t_2"`, the `test1`.`t_1` schema in the source database and the `test2`.`t_2` schema in the target database are compared. Sharding is enabled by default in sync-diff-inspector, so if the source database has a `test2`.`t_2` table, the `test1`.`t_1` table and `test2`.`t_2` table in the source database serving as sharding are compared with the `test2`.`t_2` table in the target database.
 - The generated SQL file is only used as a reference for repairing data, and you need to confirm it before executing these SQL statements to repair data.
+
+## Related resources
+
+<RelatedResources>
+  <ResourceCard title="TiDB Admin Lab 9: Using sync-diff-inspector for Data Check" type="lab" link="https://labs.tidb.io/labs/dba_303_lab_ff8" imgSrc="https://lab-static.pingcap.com/quick-demo/dba_303_ch10_en.png" duration="60 mins" />
+</RelatedResources>

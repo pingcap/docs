@@ -23,7 +23,7 @@ cdc cli changefeed create \
 
 Create changefeed successfully!
 ID: simple-replication-task
-Info: {"upstream_id":7277814241002263370,"namespace":"default","id":"simple-replication-task","sink_uri":"pulsar://127.0.0.1:6650/consumer-test?protocol=canal-json","create_time":"2024-07-04T14:42:32.000904+08:00","start_ts":444203257406423044,"config":{"memory_quota":1073741824,"case_sensitive":false,"force_replicate":false,"ignore_ineligible_table":false,"check_gc_safe_point":true,"enable_sync_point":false,"bdr_mode":false,"sync_point_interval":600000000000,"sync_point_retention":86400000000000,"filter":{"rules":["pulsar_test.*"]},"mounter":{"worker_num":16},"sink":{"protocol":"canal-json","csv":{"delimiter":",","quote":"\"","null":"\\N","include_commit_ts":false,"binary_encoding_method":"base64"},"dispatchers":[{"matcher":["pulsar_test.*"],"partition":"","topic":"test_{schema}_{table}"}],"encoder_concurrency":16,"terminator":"\r\n","date_separator":"day","enable_partition_separator":true,"only_output_updated_columns":false,"delete_only_output_handle_key_columns":false,"pulsar_config":{"connection-timeout":30,"operation-timeout":30,"batching-max-messages":1000,"batching-max-publish-delay":10,"send-timeout":30},"advance_timeout":150},"consistent":{"level":"none","max_log_size":64,"flush_interval":2000,"use_file_backend":false},"scheduler":{"enable_table_across_nodes":false,"region_threshold":100000,"write_key_threshold":0},"integrity":{"integrity_check_level":"none","corruption_handle_level":"warn"}},"state":"normal","creator_version":"v8.2.0","resolved_ts":444203257406423044,"checkpoint_ts":444203257406423044,"checkpoint_time":"2024-07-04 14:42:31.410"}
+Info: {"upstream_id":7277814241002263370,"namespace":"default","id":"simple-replication-task","sink_uri":"pulsar://127.0.0.1:6650/consumer-test?protocol=canal-json","create_time":"2024-12-05T14:42:32.000904+08:00","start_ts":444203257406423044,"config":{"memory_quota":1073741824,"case_sensitive":false,"force_replicate":false,"ignore_ineligible_table":false,"check_gc_safe_point":true,"enable_sync_point":false,"bdr_mode":false,"sync_point_interval":600000000000,"sync_point_retention":86400000000000,"filter":{"rules":["pulsar_test.*"]},"mounter":{"worker_num":16},"sink":{"protocol":"canal-json","csv":{"delimiter":",","quote":"\"","null":"\\N","include_commit_ts":false,"binary_encoding_method":"base64"},"dispatchers":[{"matcher":["pulsar_test.*"],"partition":"","topic":"test_{schema}_{table}"}],"encoder_concurrency":16,"terminator":"\r\n","date_separator":"day","enable_partition_separator":true,"only_output_updated_columns":false,"delete_only_output_handle_key_columns":false,"pulsar_config":{"connection-timeout":30,"operation-timeout":30,"batching-max-messages":1000,"batching-max-publish-delay":10,"send-timeout":30},"advance_timeout":150},"consistent":{"level":"none","max_log_size":64,"flush_interval":2000,"use_file_backend":false},"scheduler":{"enable_table_across_nodes":false,"region_threshold":100000,"write_key_threshold":0},"integrity":{"integrity_check_level":"none","corruption_handle_level":"warn"}},"state":"normal","creator_version":"v8.5.0","resolved_ts":444203257406423044,"checkpoint_ts":444203257406423044,"checkpoint_time":"2024-12-05 14:42:31.410"}
 ```
 
 The meaning of each parameter is as follows:
@@ -267,15 +267,16 @@ dispatchers = [
 
 - The tables that match a matcher rule are dispatched according to the policy specified by the corresponding topic expression. For example, the table `test3.aa` is dispatched according to `Topic expression 2`, and the table `test5.aa` is dispatched according to `Topic expression 3`.
 - For a table that matches more than one matcher rule, it is dispatched according to the first matching topic expression. For example, the table `test1.aa` is dispatched according to `Topic expression 1`.
-- For tables that do not match any matcher, the corresponding data change events are sent to the default topic specified in `-sink-uri`. For example, the table `test10.aa` is sent to the default topic.
-- For tables that match the matcher rule but do not have a topic dispatcher specified, the corresponding data changes are sent to the default topic specified in `-sink-uri`. For example, the table `test6.abc` is sent to the default topic.
+- For tables that do not match any matcher, the corresponding data change events are sent to the default topic specified in `--sink-uri`. For example, the table `test10.aa` is sent to the default topic.
+- For tables that match the matcher rule but do not have a topic dispatcher specified, the corresponding data changes are sent to the default topic specified in `--sink-uri`. For example, the table `test6.abc` is sent to the default topic.
 
 ### Topic dispatcher
 
 You can use `topic = "xxx"` to specify a topic dispatcher and use topic expressions to implement flexible topic dispatching policies. It is recommended that the total number of topics be less than 1000.
 
-The format of a topic expression is `[prefix]{schema}[middle][{table}][suffix]`. The following are the meanings of each part:
+The format of a topic expression is `[tenant_and_namespace][prefix]{schema}[middle][{table}][suffix]`. The following are the meanings of each part:
 
+- `tenant_and_namespace`：Optional. Represents the tenant and namespace of the topic, such as `persistent://abc/def/`. If not configured, it means that the topic is in the default namespace `default` under the default tenant `public` of Pulsar.
 - `prefix`: Optional. Represents the prefix of the topic name.
 - `{schema}`: Optional. Represents the database name.
 - `middle`: Optional. Represents the separator between a database name and a table name.
@@ -287,15 +288,15 @@ The format of a topic expression is `[prefix]{schema}[middle][{table}][suffix]`.
 The following are some examples:
 
 - `matcher = ['test1.table1', 'test2.table2'], topic = "hello_{schema}_{table}"`
-    - Data change events corresponding to the table `test1.table1` are despatched to a topic named `hello_test1_table1`.
-    - Data change events corresponding to the table `test2.table2` are despatched to a topic named `hello_test2_table2`.
+    - Data change events corresponding to the table `test1.table1` are dispatched to a topic named `hello_test1_table1`.
+    - Data change events corresponding to the table `test2.table2` are dispatched to a topic named `hello_test2_table2`.
 
 - `matcher = ['test3.*', 'test4.*'], topic = "hello_{schema}_world"`
-    - Data change events for all tables under `test3` are despatched to a topic named `hello_test3_world`.
-    - Data change events for all tables under `test4` are despatched to a topic named `hello_test4_world`.
+    - Data change events for all tables under `test3` are dispatched to a topic named `hello_test3_world`.
+    - Data change events for all tables under `test4` are dispatched to a topic named `hello_test4_world`.
 
 - `matcher = ['*.*'], topic = "{schema}_{table}"`
-    - For all tables that TiCDC listens on, they are despatched to separate topics according to the `databaseName_tableName` rule. For example, for the table `test.account`, TiCDC despatches its data change log to a topic named `test_account`.
+    - For all tables that TiCDC listens on, they are dispatched to separate topics according to the `databaseName_tableName` rule. For example, for the table `test.account`, TiCDC dispatches its data change log to a topic named `test_account`.
 
 ### Dispatch DDL events
 
@@ -307,14 +308,18 @@ DDL statements such as `CREATE DATABASE` and `DROP DATABASE` that are not relate
 
 DDL statements such as `ALTER TABLE` and `CREATE TABLE` that are related to a specific table are called table-level DDL statements. Events corresponding to table-level DDL statements are dispatched to an appropriate topic according to the configuration of `dispatchers`.
 
-For example, for a `dispatchers` configuration like `matcher = ['test.*'], topic = {schema}_{table}`, the DDL events are despatched as follows:
+For example, for a `dispatchers` configuration like `matcher = ['test.*'], topic = "{schema}_{table}"`, the DDL events are dispatched as follows:
 
-- If a DDL event only involves a single table, the DDL event is dispatched to the appropriate topic as it is. For example, for the DDL event `DROP TABLE test.table1`, the event is dispatched to the topic named `test_table1`.
+- If a DDL event only involves a single table, the DDL event is dispatched to the appropriate topic. For example, for the DDL event `DROP TABLE test.table1`, the event is dispatched to the topic named `test_table1`.
 
 - If a DDL event involves more than one table (`RENAME TABLE`, `DROP TABLE`, and `DROP VIEW` might all involve more than one table), the single DDL event is split into multiple ones and dispatched to appropriate topics. For example, for the DDL event `RENAME TABLE test.table1 TO test.table10, test.table2 TO test.table20`, the processing is as follows:
 
     - Dispatch the DDL event for `RENAME TABLE test.table1 TO test.table10` to a topic named `test_table1`.
     - Dispatch the DDL event for `RENAME TABLE test.table2 TO test.table20` to a topic named `test_table2`.
+
+The SQL text in DDL messages might be reformatted or reconstructed. In the new architecture, single-table `ALTER TABLE ... RENAME` statements are rewritten as `RENAME TABLE` statements with fully qualified database and table names. When this architecture splits a multi-table `RENAME TABLE` statement, each resulting SQL statement ends with a semicolon. Consumers must support these SQL forms when parsing.
+
+Splitting a multi-table rename does not guarantee the atomicity of the original upstream DDL statement. When swapping table names, consumers must process all related rename steps in the correct order. For more information, see [DDL replication considerations for renaming tables](/ticdc/ticdc-ddl.md#ddl-replication-considerations-for-renaming-tables) and [Handling of DDL SQL text](/ticdc/ticdc-ddl.md#handling-of-ddl-sql-text).
 
 ### Partition dispatcher
 
