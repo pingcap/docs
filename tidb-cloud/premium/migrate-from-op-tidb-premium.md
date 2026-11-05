@@ -5,7 +5,7 @@ summary: 了解如何将数据从 TiDB Self-Managed 迁移到 {{{ .premium }}} �
 
 # 从 TiDB Self-Managed 迁移到 {{{ .premium }}} 或 {{{ .byoc }}}
 
-本文档介绍如何使用 Dumpling 和 TiCDC 将数据从你的 TiDB Self-Managed 集群迁移到 {{{ .premium }}}（AWS 上）的实例或 {{{ .byoc }}}。
+本文档介绍如何使用 Dumpling 和 TiCDC 将数据从你的 TiDB Self-Managed 集群迁移到 AWS 上的 {{{ .premium }}} 或 {{{ .byoc }}} 实例。
 
 整体流程如下：
 
@@ -217,6 +217,8 @@ SELECT @@global.tidb_gc_enable;
 
 3. 继续完成导入向导中的其余步骤，并在提示时使用已保存的 Role ARN。
 
+    对于 BYOC 实例，请在开始导入前为 IAM role 添加 `tidbcloud.com/allow-dataplane-access=true` 标签。
+
 #### 手动创建 IAM role（可选） {#manually-create-the-iam-role-optional}
 
 如果你的组织无法部署 CloudFormation stack，请手动创建访问策略和 IAM role：
@@ -264,6 +266,8 @@ SELECT @@global.tidb_gc_enable;
 
 2. 创建一个信任 {{{ .premium }}} 或 {{{ .byoc }}} 的 IAM role，方法是提供你之前记下的 **Account ID** 和 **External ID**。然后，将上一步创建的策略附加到该 role。
 
+    对于 BYOC 实例，请在开始导入前为 IAM role 添加 `tidbcloud.com/allow-dataplane-access=true` 标签。
+
 3. 复制生成的 Role ARN，并将其填入 {{{ .premium }}} 或 {{{ .byoc }}} 导入向导中。
 
 4. 按照[从 Amazon S3 导入数据到 {{{ .premium }}} 或 {{{ .byoc }}}](/tidb-cloud/premium/import-from-s3-premium.md)中的说明，将数据导入到 {{{ .premium }}} 或 {{{ .byoc }}}。
@@ -276,19 +280,16 @@ SELECT @@global.tidb_gc_enable;
 
     ![Metadata 中的开始时间](/media/tidb-cloud/start_ts_in_metadata.png)
 
-2. 授权 TiCDC 连接到 {{{ .premium }}} 或 {{{ .byoc }}}。
+2. 配置从 TiCDC 服务器到目标实例的网络连接，可以使用公网连接或 AWS PrivateLink。对于公网连接，请参见[通过公网连接](/tidb-cloud/premium/connect-to-premium-via-public-connection.md)。对于私有连接，请参见[通过 AWS PrivateLink 连接](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)。
 
-    1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/tidbs)中，进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，然后点击目标 {{{ .premium }}} 或 {{{ .byoc }}} 实例的名称，进入其实例概览页面。
-    2. 在左侧导航栏中，点击 **Settings** > **Networking**。
-    3. 在 **Networking** 页面中，点击 **Add IP Address**。
-    4. 在弹出的对话框中，选择 **Use IP addresses**，点击 **+**，在 **IP Address** 字段中填写 TiCDC 组件的公网 IP 地址，然后点击 **Confirm**。现在 TiCDC 就可以访问 {{{ .premium }}} 或 {{{ .byoc }}}。更多信息，请参见[配置 IP 访问列表](/tidb-cloud/configure-ip-access-list.md)。
+    对于 BYOC 实例，仅当你在部署期间提供了公网托管区域时，才可使用公网连接。如果你提供的是私有托管区域，请使用私有连接。
 
 3. 获取下游 {{{ .premium }}} 或 {{{ .byoc }}} 实例的连接信息。
 
     1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/tidbs)中，进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，然后点击目标 {{{ .premium }}} 或 {{{ .byoc }}} 实例的名称，进入其实例概览页面。
     2. 点击右上角的 **Connect**。
-    3. 在连接对话框中，从 **Connection Type** 下拉列表中选择 **Public**，并从 **Connect With** 下拉列表中选择 **General**。
-    4. 从连接信息中，你可以获取该实例的 host IP 地址和端口。更多信息，请参见[通过公网连接](/tidb-cloud/connect-via-standard-connection.md)。
+    3. 在连接对话框中，从 **Connection Type** 下拉列表中选择上一步配置的连接类型，并从 **Connect With** 下拉列表中选择 **General**。
+    4. 从连接信息中，获取该实例在所选连接类型下的主机和端口。在步骤 4 中，将 `--sink-uri` 里的 `172.16.6.125:4000` 替换为这些值。
 
 4. 创建并运行增量复制任务。在上游集群中，运行以下命令：
 

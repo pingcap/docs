@@ -58,7 +58,7 @@ summary: 了解如何使用 `tidbcloud_dedicated_private_endpoint_connection` �
     - 要使用 `tidbcloud_dedicated_private_endpoint_connection` 资源，需要将资源类型设置为 `tidbcloud_dedicated_private_endpoint_connection`。
     - 资源名称可以根据需要自定义，例如 `example`。
     - 如果你不知道如何获取所需参数的值，请参见 [通过 AWS 私有终端节点连接到 TiDB Cloud Dedicated 集群](/tidb-cloud/set-up-private-endpoint-connections.md)。
-    - 如需获取 TiDB Cloud Dedicated 私有终端节点连接的详细配置信息，请参见 [tidbcloud_private_endpoint_connection (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_private_endpoint_connection)。
+    - 如需获取 TiDB Cloud Dedicated 私有终端节点连接的详细配置信息，请参见 [tidbcloud_dedicated_private_endpoint_connection (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_private_endpoint_connection)。
 
 3. 运行 `terraform apply` 命令。应用资源时，不建议使用 `terraform apply --auto-approve`。
 

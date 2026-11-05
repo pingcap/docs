@@ -58,6 +58,22 @@ Github: https://github.com/tidbcloud/lakesql
 >>> More information at https://github.com/tidbcloud/lakesql
 ```
 
+安装程序会将 `lakesql` 二进制文件放置在 `~/.lakesql/bin` 中，并向 `~/.zprofile` 和 `~/.profile` 追加如下所示的一行：
+
+```bash
+export PATH="$PATH:$HOME/.lakesql/bin"
+```
+
+这些文件不会在当前 shell 中自动重新加载。要在当前终端中使用 `lakesql`，请运行以下命令：
+
+```bash
+source ~/.profile
+```
+
+> **注意：**
+>
+> 如果你使用 Bash，并且存在 `~/.bash_profile`（这在许多 Linux 发行版中是默认情况，例如 CentOS、RHEL 和 Alibaba Cloud Linux），则 Bash 在登录时不会读取 `~/.profile`。如果存在 `~/.bash_login` 且不存在 `~/.bash_profile`，也是如此。在这两种情况下，请将前面的 `export PATH` 命令添加到 Bash 读取的文件中。
+
 #### 使用 `--prefix` 自定义安装 {#custom-installation-with-prefix}
 
 将 LakeSQL 安装到指定目录（例如 /usr/local）：

@@ -114,6 +114,7 @@
   - [聚合索引](/tidb-cloud-lake/guides/aggregating-index.md)
   - [全文索引](/tidb-cloud-lake/guides/full-text-index.md)
   - [Ngram 索引](/tidb-cloud-lake/guides/ngram-index.md)
+  - [分区 Fuse 表](/tidb-cloud-lake/guides/partition-by.md)
   - [查询结果缓存](/tidb-cloud-lake/guides/query-result-cache.md)
 - 安全性与可靠性
   - [概览](/tidb-cloud-lake/guides/security-reliability.md)
@@ -1141,9 +1142,10 @@
       - [VECTOR_NORM](/tidb-cloud-lake/sql/vector-norm.md)
       - [向量函数](/tidb-cloud-lake/sql/vector-functions.md)
     - 散列函数
+      - [概述](/tidb-cloud-lake/sql/hash-functions.md)
       - [BLAKE3](/tidb-cloud-lake/sql/blake.md)
+      - [BUCKET](/tidb-cloud-lake/sql/bucket.md)
       - [CITY64WITHSEED](/tidb-cloud-lake/sql/city-withseed.md)
-      - [散列函数](/tidb-cloud-lake/sql/hash-functions.md)
       - [MD5](/tidb-cloud-lake/sql/md.md)
       - [SHA](/tidb-cloud-lake/sql/sha.md)
       - [SHA1](/tidb-cloud-lake/sql/sha-sql.md)

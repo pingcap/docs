@@ -4,7 +4,7 @@ summary: 了解 TiDB Cloud 及其架构。
 category: intro
 ---
 
-# 什么是 TiDB Cloud <!--Corresponding EN commit: 4274e26e46f003c1c4117cc2920d6c6b6ac5482d-->
+# 什么是 TiDB Cloud
 
 [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) 是一款完全托管的云原生数据库即服务（DBaaS），基于 [TiDB](https://docs.pingcap.com/tidb/stable/overview) —— 一个开源 HTAP (Hybrid Transactional and Analytical Processing) 数据库。TiDB Cloud 提供了一种简单的方式来部署和管理数据库，让你专注于应用程序开发，而无需关注数据库的复杂性。
 
