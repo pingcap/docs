@@ -1,6 +1,6 @@
 ---
 title: Pause or Resume a BYOC Resource Pool
-summary: Learn how to pause and resume a BYOC resource pool, understand the seven-day automatic resume limit, and review billing and restrictions.
+summary: Learn how to pause and resume a TiDB Cloud BYOC resource pool, understand the seven-day automatic resume limit, and review billing and restrictions.
 ---
 
 # Pause or Resume a BYOC Resource Pool
