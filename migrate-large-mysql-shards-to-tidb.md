@@ -139,7 +139,8 @@ Create `my_db.table5` downstream.
 {{< copyable "sql" >}}
 
 ```sql
-CREATE TABLE `table5` (
+CREATE DATABASE IF NOT EXISTS `my_db`;
+CREATE TABLE `my_db`.`table5` (
   `id` bigint NOT NULL,
   `sid` bigint NOT NULL,
   `pid` bigint NOT NULL,

@@ -25,7 +25,7 @@ In the task configuration file of DM, set the global parameter `online-ddl` to `
 ## ********* Basic configuration *********
 name: test                      # The name of the task. Should be globally unique.
 task-mode: all                  # The task mode. Can be set to `full`, `incremental`, or `all`.
-shard-mode: "pessimistic"       # Optional. Set the shard merge mode only for shard merge tasks. Optional modes are `pessimistic` and `optimistic`. If the task is a shard merge task, set this parameter to `pessimistic`. After understanding the principles and restrictions of the `optimistic` mode, you can set it to `optimistic`.
+shard-mode: ""                  # Optional. The default value is "", which disables shard DDL merge. For shard merge tasks, set this parameter to "pessimistic". You can also use "optimistic" after understanding its principles and restrictions.
 meta-schema: "dm_meta"          # The downstream database that stores the `meta` information.
 online-ddl: true                # Enable online-ddl support on DM to support automatic processing of "gh-ost" and "pt-osc" for the upstream database.
 ```
@@ -52,7 +52,7 @@ The workflow of DM:
 
 - Replicate DML changes from the real table, and skip DML statements on the ghost table.
 
-- Apply DDLs recorded downstream.
+- When the ghost table is renamed to replace the real table upstream, apply the recorded DDLs to the real table downstream.
 
 ![dm-online-ddl](/media/dm/dm-online-ddl.png)
 
