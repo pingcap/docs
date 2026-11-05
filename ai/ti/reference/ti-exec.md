@@ -5,7 +5,7 @@ summary: Run remote commands on TiDB Cloud Filesystem, preserve workspace files,
 
 # ti exec
 
-`ti exec` runs a command against a TiDB Cloud Filesystem without requiring you to create or mount a sandbox. Output streams to your terminal; the remote exit status is preserved.
+`ti exec` runs a command against a TiDB Cloud Filesystem without mounting the Filesystem locally. Output streams to your terminal; the remote exit status is preserved.
 
 > **Note:**
 >
@@ -21,7 +21,7 @@ summary: Run remote commands on TiDB Cloud Filesystem, preserve workspace files,
 
 - [Create a Filesystem](/ai/ti/reference/ti-fs-create-file-system.md) in a supported region and retain its ID and owner token.
 - Use a locally stored token for that ID, or set `TI_FS_TOKEN` in your environment. Prefer the environment variable over `--fs-token` to avoid exposing it in arguments. A delegated Vault token cannot run commands. Path-scoped tokens cannot mount a sandbox.
-- Check `ti exec --help`. Install a Runtime-enabled build if the command or companion is unavailable.
+- `ti exec --help` checks only that the local command exists. It does not verify the companion or remote Runtime. Both must support exec.
 
 ## Syntax and execution
 
