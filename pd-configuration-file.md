@@ -86,7 +86,7 @@ This document only describes parameters that are not included in command-line pa
 + The storage size of the meta-information database, which is 8GiB by default
 + Default value: `8589934592`
 
-### `auto-compaction-mod`
+### `auto-compaction-mode`
 
 + The automatic compaction modes of the meta-information database
 + Available options: `periodic` (by cycle) and `revision` (by version number).
@@ -94,7 +94,7 @@ This document only describes parameters that are not included in command-line pa
 
 ### `auto-compaction-retention`
 
-+ The time interval for automatic compaction of the meta-information database when `auto-compaction-retention` is `periodic`. When the compaction mode is set to `revision`, this parameter indicates the version number for the automatic compaction.
++ The time interval for automatic compaction of the meta-information database when `auto-compaction-mode` is `periodic`. When the compaction mode is set to `revision`, this parameter indicates the version number for the automatic compaction.
 + Default value: 1h
 
 ### `tick-interval`

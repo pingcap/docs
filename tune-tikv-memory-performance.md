@@ -57,7 +57,7 @@ log-level = "info"
 # data-dir = "/tmp/tikv/store"
 
 # In most cases, you can use the default value. When importing data, it is recommended to set the parameter to 1024000.
-# scheduler-concurrency = 102400
+# scheduler-concurrency = 524288
 # This parameter controls the number of write threads. When write operations occur frequently, set this parameter value
 # higher. Run `top -H -p tikv-pid` and if the threads named `sched-worker-pool` are busy, set the value of parameter
 # `scheduler-worker-pool-size` higher and increase the number of write threads.

@@ -7,16 +7,16 @@ summary: Learn how to use TiDB GROUP BY modifiers.
 
 Starting from v7.4.0, the `GROUP BY` clause of TiDB supports the `WITH ROLLUP` modifier.
 
-In the `GROUP BY` clause, you can specify one or more columns as a group list and append the `WITH ROLLUP` modifier after the list. Then, TiDB will conduct multidimensional descending grouping based on the columns in the group list and provide you with summary results for each group in the output.
+In the `GROUP BY` clause, you can specify one or more columns as a grouping list and append the `WITH ROLLUP` modifier after the list. Then, TiDB will conduct multidimensional descending grouping based on the columns in the grouping list and provide you with summary results for each group in the output.
 
 - Grouping method:
 
-    - The first grouping dimension includes all columns in the group list.
+    - The first grouping dimension includes all columns in the grouping list.
     - Subsequent grouping dimensions start from the right end of the grouping list and exclude one more column at a time to form new groups.
 
 - Aggregation summaries: for each dimension, the query performs aggregation operations, and then aggregates the results of this dimension with the results of all previous dimensions. This means that you can get aggregated data at different dimensions, from detailed to overall.
 
-With this grouping method, if there are `N` columns in the group list, TiDB aggregates the query results on `N+1` groups.
+With this grouping method, if there are `N` columns in the grouping list, TiDB aggregates the query results on `N+1` groups.
 
 For example:
 
