@@ -166,7 +166,7 @@ insert into t (a) values (11) on duplicate key update a = 11;
 insert into t (a) values (12) on duplicate key update a = 12;
 ```
 
-The above `INSERT` statements cannot be rewritten into one statement. But if you change the three statements into the following ones:
+The above `INSERT` statements cannot be rewritten into one statement. But if you change the three statements as follows, they meet the rewrite requirement:
 
 ```sql
 insert into t (a) values (10) on duplicate key update a = values(a);
@@ -174,7 +174,7 @@ insert into t (a) values (11) on duplicate key update a = values(a);
 insert into t (a) values (12) on duplicate key update a = values(a);
 ```
 
-Then they meet the rewrite requirement. The above `INSERT` statements will be rewritten into the following one statement:
+The above `INSERT` statements will be rewritten into the following one statement:
 
 ```sql
 insert into t (a) values (10), (11), (12) on duplicate key update a = values(a);
