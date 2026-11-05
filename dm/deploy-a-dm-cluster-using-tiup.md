@@ -152,7 +152,7 @@ For more `master_servers.host.config` parameter description, refer to [master pa
 
 > **Note:**
 >
-> You can use secret keys or interactive passwords for security authentication when you deploy TiDB using TiUP:
+> You can use secret keys or interactive passwords for security authentication when you deploy a DM cluster using TiUP:
 >
 > - If you use secret keys, you can specify the path of the keys through `-i` or `--identity_file`;
 > - If you use passwords, add the `-p` flag to enter the password interaction window;
