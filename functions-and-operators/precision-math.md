@@ -68,7 +68,7 @@ If a numeric expression contains strings, the strings are converted to double-pr
 Inserts into numeric columns are affected by the SQL mode. The following discussions mention strict mode and `ERROR_FOR_DIVISION_BY_ZERO`. To turn on all the restrictions, you can simply use the `TRADITIONAL` mode, which includes both strict mode values and `ERROR_FOR_DIVISION_BY_ZERO`:
 
 ```sql
-SET sql_mode = 'TRADITIONAL`;
+SET sql_mode = 'TRADITIONAL';
 ```
 
 If a number is inserted into an exact type column (DECIMAL or integer), it is inserted with its exact value if it is within the column range. For this number:
@@ -108,17 +108,21 @@ The following results are returned in different SQL modes:
 The result of the `ROUND()` function depends on whether its argument is exact or approximate:
 
 - For exact-value numbers, the `ROUND()` function uses the "round half up" rule.
-- For approximate-value numbers, the results in TiDB differs from that in MySQL:
+- For approximate-value numbers, the `ROUND()` function uses the "round to nearest even" rule, which rounds a value exactly halfway between two integers to the nearest even integer.
 
-    ```sql
-    TiDB > SELECT ROUND(2.5), ROUND(25E-1);
-    +------------+--------------+
-    | ROUND(2.5) | ROUND(25E-1) |
-    +------------+--------------+
-    |          3 |            3 |
-    +------------+--------------+
-    1 row in set (0.00 sec)
-    ```
+The following example shows both rules. `2.5` is an exact-value literal and `25E-1` is the same number written as an approximate value:
+
+```sql
+TiDB > SELECT ROUND(2.5), ROUND(25E-1);
++------------+--------------+
+| ROUND(2.5) | ROUND(25E-1) |
++------------+--------------+
+|          3 |            2 |
++------------+--------------+
+1 row in set (0.00 sec)
+```
+
+In MySQL, the result for approximate-value numbers depends on the C library, so `ROUND()` might not follow this rule on every platform.
 
 For inserts into a DECIMAL or integer column, the rounding uses [round half away from zero](https://en.wikipedia.org/wiki/Rounding#Round_half_away_from_zero).
 
