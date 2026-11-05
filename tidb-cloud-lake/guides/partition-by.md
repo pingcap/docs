@@ -20,7 +20,7 @@ summary: TiDB Cloud Lake で Fuse テーブルをパーティショニングし�
 
 ## パーティショニングとクラスタリングの比較 {#partitioning-vs-clustering}
 
-`PARTITION BY` と `CLUSTER BY` は相補的な機能です。
+`PARTITION BY` と `CLUSTER BY` は互いに補完し合う機能です。
 
 | 機能 | `PARTITION BY` | `CLUSTER BY` |
 |---------|----------------|--------------|
