@@ -310,12 +310,16 @@ DDL statements such as `ALTER TABLE` and `CREATE TABLE` that are related to a sp
 
 For example, for a `dispatchers` configuration like `matcher = ['test.*'], topic = "{schema}_{table}"`, the DDL events are despatched as follows:
 
-- If a DDL event only involves a single table, the DDL event is dispatched to the appropriate topic as it is. For example, for the DDL event `DROP TABLE test.table1`, the event is dispatched to the topic named `test_table1`.
+- If a DDL event only involves a single table, the DDL event is dispatched to the appropriate topic. For example, for the DDL event `DROP TABLE test.table1`, the event is dispatched to the topic named `test_table1`.
 
 - If a DDL event involves more than one table (`RENAME TABLE`, `DROP TABLE`, and `DROP VIEW` might all involve more than one table), the single DDL event is split into multiple ones and dispatched to appropriate topics. For example, for the DDL event `RENAME TABLE test.table1 TO test.table10, test.table2 TO test.table20`, the processing is as follows:
 
     - Dispatch the DDL event for `RENAME TABLE test.table1 TO test.table10` to a topic named `test_table1`.
     - Dispatch the DDL event for `RENAME TABLE test.table2 TO test.table20` to a topic named `test_table2`.
+
+The SQL text in DDL messages might be reformatted or reconstructed. In the new architecture, single-table `ALTER TABLE ... RENAME` statements are rewritten as `RENAME TABLE` statements with fully qualified database and table names. When this architecture splits a multi-table `RENAME TABLE` statement, each resulting SQL statement ends with a semicolon. Consumers must support these SQL forms when parsing.
+
+Splitting a multi-table rename does not guarantee the atomicity of the original upstream DDL statement. When swapping table names, consumers must process all related rename steps in the correct order. For more information, see [DDL replication considerations for renaming tables](/ticdc/ticdc-ddl.md#ddl-replication-considerations-for-renaming-tables) and [Handling of DDL SQL text](/ticdc/ticdc-ddl.md#handling-of-ddl-sql-text).
 
 ### Partition dispatcher
 
