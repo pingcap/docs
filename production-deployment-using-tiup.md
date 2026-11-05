@@ -250,7 +250,7 @@ alertmanager_servers:
   - host: 10.0.1.4
 ```
 
-The following examples cover six common scenarios. You need to modify the configuration file (named `topology.yaml`) according to the topology description and templates in the corresponding links. For other scenarios, edit the configuration template accordingly.
+The following examples cover five common scenarios. You need to modify the configuration file (named `topology.yaml`) according to the topology description and templates in the corresponding links. For other scenarios, edit the configuration template accordingly.
 
 | Application | Configuration task | Configuration file template | Topology description |
 | :-- | :-- | :-- | :-- |
