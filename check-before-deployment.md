@@ -173,79 +173,24 @@ Some operations in TiDB require writing temporary files to the server, so it is 
     >
     > If the directory does not exist, TiDB will automatically create it upon startup. If the directory creation fails or TiDB does not have the read and write permissions for that directory, [`Fast Online DDL`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) will be disabled during runtime.
 
-## Check the firewall service of target machines
+## Configure the firewall on target machines
 
-In TiDB clusters, the access ports between nodes must be open to ensure the transmission of information such as read and write requests and data heartbeats. In common online scenarios, the data interaction between the database and the application service and between the database nodes are all made within a secure network. Therefore, if there are no special security requirements, it is recommended to stop the firewall of the target machine. Otherwise, refer to [the port usage](/hardware-and-software-requirements.md#network-requirements) and add the needed port information to the allowlist of the firewall service.
+In a TiDB cluster, the required ports between nodes must be open so that read and write requests, data heartbeats, and other information can be transmitted. At the same time, keep a host firewall or equivalent network access control, such as a cloud security group, enabled. Follow the [network requirements](/hardware-and-software-requirements.md#network-requirements) and allow only trusted sources to access the required ports. Do not stop or disable the firewall, and do not use a zone that allows all traffic by default. In particular, restrict component status, monitoring, and administration ports to trusted management networks.
 
-### Stop and disable firewalld
+Check the `firewalld` status. The following example uses CentOS Linux release 7.7.1908 (Core):
 
-This section describes how to stop and disable the firewall service of a target machine.
-
-1. Check the firewall status. The following example uses CentOS Linux release 7.7.1908 (Core):
-
-    ```shell
-    sudo firewall-cmd --state
-    sudo systemctl status firewalld.service
-    ```
-
-2. Stop the firewall service:
-
-    ```bash
-    sudo systemctl stop firewalld.service
-    ```
-
-3. Disable automatic startup of the firewall service:
-
-    ```bash
-    sudo systemctl disable firewalld.service
-    ```
-
-4. Check the firewall status:
-
-    ```bash
-    sudo systemctl status firewalld.service
-    ```
-
-### Change the firewall zone
-
-Instead of disabling the firewall completely, you can use a less restrictive zone. The default `public` zone allows only specific services and ports, while the `trusted` zone allows all traffic by default.
-
-To set the default zone to `trusted`:
-
-```bash
-firewall-cmd --set-default-zone trusted
+```shell
+sudo firewall-cmd --state
+sudo systemctl status firewalld.service
 ```
 
-To verify the default zone:
+If `firewalld` is not running, start it and enable it at boot:
 
 ```bash
-firewall-cmd --get-default-zone
-# trusted
+sudo systemctl enable --now firewalld.service
 ```
 
-To list the policy for a zone:
-
-```bash
-firewall-cmd --zone=trusted --list-all
-# trusted
-#   target: ACCEPT
-#   icmp-block-inversion: no
-#   interfaces:
-#   sources:
-#   services:
-#   ports:
-#   protocols:
-#   forward: yes
-#   masquerade: no
-#   forward-ports:
-#   source-ports:
-#   icmp-blocks:
-#   rich rules:
-```
-
-### Configure the firewall
-
-To configure the firewall for TiDB cluster components, use the following commands. These examples are for reference only. Adjust the zone names, ports, and services based on your specific environment.
+To configure the firewall for TiDB cluster components, use the following commands. These examples are for reference only. Adjust the zone names, trusted sources, ports, and services based on your environment. For status, monitoring, and administration ports, also use source address rules to restrict access to the management network.
 
 Configure the firewall for the TiDB component:
 

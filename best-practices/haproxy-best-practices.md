@@ -185,7 +185,6 @@ listen admin_stats                         # The name of the Stats page reportin
    stats realm HAProxy                     # The authentication realm of the Stats page.
    stats auth <admin-user>:<strong-password> # User name and password for the Stats page. Replace the placeholders before startup.
    stats hide-version                      # Hides the version information of HAProxy on the Stats page.
-   stats admin if TRUE                     # Manually enables or disables the backend server (supported in HAProxy 1.4.9 or later versions).
 
 listen tidb-cluster                        # Database load balancing.
    bind 0.0.0.0:3390                       # The Floating IP address and listening port.
@@ -200,7 +199,7 @@ listen tidb-cluster                        # Database load balancing.
 >
 > - Before starting HAProxy, replace `<management-ip>`, `<admin-user>`, and `<strong-password>` with actual values. Set a unique strong password for the Stats page. Do not use a sample, default, or reused password.
 > - Use a firewall or security group to restrict port `8080` to trusted management networks. Do not expose the HAProxy Stats page directly to the internet. Because `stats auth` uses HTTP Basic Authentication, access the page only through Transport Layer Security (TLS) or another protected management channel; otherwise, another party on the network might intercept the user name and password.
-> - `stats admin if TRUE` grants all accounts configured with `stats auth` the ability to enable or disable backend servers. Remove this configuration item unless manual control is required. If you keep it, restrict access to trusted operators because HAProxy admin POST requests are prone to cross-site request forgery (CSRF) attacks.
+> - This example keeps the Stats page read-only. Do not grant every authenticated account permission to enable or disable backend servers. If backend administration through the Stats page is required, use a separate administrator identity and an access control list, and log administrative operations.
 
 To check the source IP address using `SHOW PROCESSLIST`, you need to configure the [PROXY protocol](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt) to connect to TiDB.
 

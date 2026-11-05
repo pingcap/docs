@@ -136,13 +136,14 @@ Start the Prometheus service:
 ```bash
 $ ./prometheus \
     --config.file="./prometheus.yml" \
-    --web.listen-address=":9090" \
-    --web.external-url="http://192.168.199.113:9090/" \
-    --web.enable-admin-api \
+    --web.listen-address="127.0.0.1:9090" \
+    --web.external-url="http://127.0.0.1:9090/" \
     --log.level="info" \
     --storage.tsdb.path="./data.metrics" \
     --storage.tsdb.retention="15d" &
 ```
+
+This example listens only on the loopback address and leaves the Prometheus admin API disabled. Because Grafana and Prometheus are both deployed on Node1, Grafana can access Prometheus locally. If Prometheus must be accessed from another machine, do not bind it directly to all network interfaces. Expose it through a trusted management network and a reverse proxy that provides TLS and authentication, and restrict source addresses with a firewall or security group.
 
 ### Step 4: Start Grafana on Node1
 
