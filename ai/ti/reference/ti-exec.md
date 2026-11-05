@@ -9,19 +9,30 @@ summary: Run remote commands on TiDB Cloud Filesystem, preserve workspace files,
 
 > **Note:**
 >
-> Runtime is available only in AWS Oregon (`us-west-2`) and AWS N. Virginia (`us-east-1`). Use `aws-us-west-2` or `aws-us-east-1` as the CLI region code. You need a `ti` build and companion that support Runtime exec, and a Runtime-enabled Filesystem in one of these regions. Support in the CLI does not enable Runtime on a server.
+> Runtime is available only in AWS Oregon (`us-west-2`) and AWS N. Virginia (`us-east-1`). Use `aws-us-west-2` or `aws-us-east-1` as the CLI region code. You need a Runtime-enabled Filesystem in one of these regions. Support in the CLI does not enable Runtime on a server.
 
 > **Warning:**
 >
 > Preview validation is incomplete. Cancellation in the current test environment can return an unknown outcome (`255`) without confirming whether the command has stopped. Verify the result before deciding whether to run the command again.
 
-<!-- Release gate: confirm published ti/companion versions and successful live validation before publishing. -->
-
 ## Prerequisites
 
+- Install TiDB Cloud CLI **v0.2.11 or later** with its `ti-drive9` companion. Earlier `ti` releases do not include `ti exec`. Run `ti --version` to check your installed version.
 - [Create a Filesystem](/ai/ti/reference/ti-fs-create-file-system.md) in a supported region and retain its ID and owner token.
 - Use a locally stored token for that ID, or set `TI_FS_TOKEN` in your environment. Prefer the environment variable over `--fs-token` to avoid exposing it in arguments. A delegated Vault token cannot run commands. Path-scoped tokens cannot mount a sandbox.
 - `ti exec --help` checks only that the local command exists. It does not verify the companion or remote Runtime. Both must support exec.
+
+### Upgrade an existing installation
+
+Before upgrading, stop writers and unmount any Filesystem or Vault mounts. On macOS or Linux with a ti-owned installation, update to the latest release and verify the version:
+
+```bash
+ti update
+ti --version
+ti exec --help
+```
+
+The updater replaces both `ti` and its companion. On Windows, rerun the PowerShell installer; in-place self-update is unsupported. For installation steps, see [Install TiDB Cloud CLI](/ai/ti/reference/ti-install-configure-update.md#install-tidb-cloud-cli).
 
 ## Syntax and execution
 
