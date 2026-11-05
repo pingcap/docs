@@ -62,6 +62,7 @@
   - Command Reference
     - [Overview](/ai/ti/reference/ti-cli-reference.md)
     - [configure](/ai/ti/reference/ti-configure.md)
+    - [exec](/ai/ti/reference/ti-exec.md)
     - [update](/ai/ti/reference/ti-update.md)
     - `ti db` Commands for Managing TiDB Cloud Starter Instances
       - [Overview](/ai/ti/reference/ti-starter-database.md)
