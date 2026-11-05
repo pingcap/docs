@@ -168,8 +168,8 @@ domain = 192.168.199.113
 [analytics]
 check_for_updates = true
 [security]
-admin_user = admin
-admin_password = admin
+admin_user = <grafana-admin-user>
+admin_password = <grafana-strong-password>
 [snapshots]
 [users]
 [auth.anonymous]
@@ -196,6 +196,8 @@ url = https://grafana.net
 
 ```
 
+Before starting Grafana, replace `<grafana-admin-user>` and `<grafana-strong-password>` with a custom administrator user name and a unique strong password. Do not use `admin` as the password or commit the actual password to version control. `admin_password` takes effect only when the administrator account is created on the first startup. For an existing Grafana instance, change the password in Grafana.
+
 Start the Grafana service:
 
 {{< copyable "shell-regular" >}}
@@ -214,12 +216,12 @@ This section describes how to configure Grafana.
 1. Log in to the Grafana Web interface.
 
     - Default address: [http://localhost:3000](http://localhost:3000)
-    - Default account: admin
-    - Default password: admin
+    - Administrator account: the `<grafana-admin-user>` value configured in `[security]`
+    - Administrator password: the `<grafana-strong-password>` value configured in `[security]`
 
     > **Note:**
     >
-    > For the **Change Password** step, you can choose **Skip**.
+    > If Grafana prompts you to complete the **Change Password** step, set a new unique strong password. Do not choose **Skip**.
 
 2. In the Grafana sidebar menu, click **Data Source** within the **Configuration**.
 

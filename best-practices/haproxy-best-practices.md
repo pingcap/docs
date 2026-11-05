@@ -176,14 +176,14 @@ defaults                                   # Default configuration.
    timeout server 30000s                   # The maximum inactivity time on the server side.
 
 listen admin_stats                         # The name of the Stats page reporting information from frontend and backend. You can customize the name according to your needs.
-   bind 0.0.0.0:8080                       # The listening port.
+   bind <management-ip>:8080               # Binds only to an IP address and port on a trusted management network.
    mode http                               # The monitoring mode.
    option httplog                          # Enables HTTP logging.
    maxconn 10                              # The maximum number of concurrent connections.
    stats refresh 30s                       # Automatically refreshes the Stats page every 30 seconds.
    stats uri /haproxy                      # The URL of the Stats page.
    stats realm HAProxy                     # The authentication realm of the Stats page.
-   stats auth admin:pingcap123             # User name and password in the Stats page. You can have multiple user names.
+   stats auth <admin-user>:<strong-password> # User name and password for the Stats page. Replace the placeholders before startup.
    stats hide-version                      # Hides the version information of HAProxy on the Stats page.
    stats admin if TRUE                     # Manually enables or disables the backend server (supported in HAProxy 1.4.9 or later versions).
 
@@ -195,6 +195,12 @@ listen tidb-cluster                        # Database load balancing.
    server tidb-2 10.9.39.208:4000 check inter 2000 rise 2 fall 3
    server tidb-3 10.9.64.166:4000 check inter 2000 rise 2 fall 3
 ```
+
+> **Warning:**
+>
+> - Before starting HAProxy, replace `<management-ip>`, `<admin-user>`, and `<strong-password>` with actual values. Set a unique strong password for the Stats page. Do not use a sample, default, or reused password.
+> - Use a firewall or security group to restrict port `8080` to trusted management networks. Do not expose the HAProxy Stats page directly to the internet. Because `stats auth` uses HTTP Basic Authentication, access the page only through TLS or another protected management channel.
+> - `stats admin if TRUE` lets users manually enable or disable backend servers. If you only need to view monitoring information, remove this configuration item.
 
 To check the source IP address using `SHOW PROCESSLIST`, you need to configure the [PROXY protocol](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt) to connect to TiDB.
 
