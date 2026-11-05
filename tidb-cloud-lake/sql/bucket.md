@@ -33,7 +33,7 @@ BUCKET(<bucket_count>, <value>)
 SELECT BUCKET(16, 'customer-123');
 ```
 
-固定のバケット数を使用して、高カーディナリティのキーをパーティション分割します。
+固定のバケット数を使用して、値の種類が多いキーをパーティション分割します。
 
 ```sql
 CREATE TABLE customer_events (
