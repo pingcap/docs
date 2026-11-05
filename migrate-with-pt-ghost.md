@@ -25,7 +25,7 @@ In the task configuration file of DM, set the global parameter `online-ddl` to `
 ## ********* Basic configuration *********
 name: test                      # The name of the task. Should be globally unique.
 task-mode: all                  # The task mode. Can be set to `full`, `incremental`, or `all`.
-shard-mode: ""                  # Optional. The default value is "", which disables shard DDL merge. For shard merge tasks, set this parameter to "pessimistic". You can also use "optimistic" after understanding its principles and restrictions.
+shard-mode: ""                  # Optional. The default value is "", which disables shard DDL merge. If you need DM to coordinate schema changes across sharded tables, set this parameter to "pessimistic". You can also use "optimistic" after understanding its principles and restrictions.
 meta-schema: "dm_meta"          # The downstream database that stores the `meta` information.
 online-ddl: true                # Enable online-ddl support on DM to support automatic processing of "gh-ost" and "pt-osc" for the upstream database.
 ```
@@ -50,7 +50,7 @@ The workflow of DM:
 
 - Record DDLs applied to the ghost table.
 
-- Replicate DML changes from the real table, and skip DML statements on the ghost table.
+- Replicate DML events for the real table and ignore DML events for the ghost table.
 
 - When the ghost table is renamed to replace the real table upstream, apply the recorded DDLs to the real table downstream.
 
