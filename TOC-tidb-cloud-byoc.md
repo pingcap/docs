@@ -43,7 +43,7 @@
   - Resource Pools
     - [Create a Resource Pool](/tidb-cloud/byoc/create-resource-pool-byoc.md)
     - [Manage Resource Pools](/tidb-cloud/byoc/manage-resource-pools-byoc.md)
-    - [Pause or Resume a BYOC Resource Pool](/tidb-cloud/byoc/pause-or-resume-byoc-resource-pool.md)
+    - [Pause or Resume a Resource Pool](/tidb-cloud/byoc/pause-or-resume-byoc-resource-pool.md)
 - Manage Instances
   - [Create a {{{ .byoc }}} Instance](/tidb-cloud/byoc/create-tidb-instance-byoc.md)
   - Connect to Your {{{ .byoc }}} Instance
