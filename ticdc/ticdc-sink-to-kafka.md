@@ -273,8 +273,12 @@ DDLs that are related to a specific table are called table-level DDLs, such as `
 
 For example, for a dispatcher like `matcher = ['test.*'], topic = "{schema}_{table}"`, DDL events are dispatched as follows:
 
-- If a single table is involved in the DDL event, the DDL event is sent to the corresponding topic as is. For example, for the DDL event `drop table test.table1`, the event is sent to the topic named `test_table1`.
+- If a single table is involved in the DDL event, the DDL event is sent to the corresponding topic. For example, for the DDL event `drop table test.table1`, the event is sent to the topic named `test_table1`.
 - If multiple tables are involved in the DDL event (`rename table` / `drop table` / `drop view` may involve multiple tables), the DDL event is split into multiple events and sent to the corresponding topics. For example, for the DDL event `rename table test.table1 to test.table10, test.table2 to test.table20`, the event `rename table test.table1 to test.table10` is sent to the topic named `test_table1` and the event `rename table test.table2 to test.table20` is sent to the topic named `test_table2`.
+
+The SQL text in DDL messages might be reformatted or reconstructed. In the new architecture, single-table `ALTER TABLE ... RENAME` statements are rewritten as `RENAME TABLE` statements with fully qualified database and table names. When this architecture splits a multi-table `RENAME TABLE` statement, each resulting SQL statement ends with a semicolon. Consumers must support these SQL forms when parsing.
+
+Splitting a multi-table rename does not guarantee the atomicity of the original upstream DDL statement. When swapping table names, consumers must process all related rename steps in the correct order. For more information, see [DDL replication considerations for renaming tables](/ticdc/ticdc-ddl.md#ddl-replication-considerations-for-renaming-tables) and [Handling of DDL SQL text](/ticdc/ticdc-ddl.md#handling-of-ddl-sql-text).
 
 ### Partition dispatchers
 

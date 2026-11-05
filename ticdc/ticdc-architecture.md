@@ -129,26 +129,16 @@ In the TiCDC classic architecture, DDL replication operations are strictly seria
 
 ### Changes in DDL replication behavior
 
-- The classic TiCDC architecture does not support DDLs that swap table names (for example, `RENAME TABLE a TO c, b TO a, c TO b;`). The new architecture supports such DDLs.
+The TiCDC new and classic architectures differ in the replication behavior of `RENAME` DDLs as follows:
 
-- The new architecture unifies and simplifies the filtering rules for `RENAME` DDLs.
+- **Swapping table names**: For DDLs that use an intermediate table name to swap two table names (for example, `RENAME TABLE a TO c, b TO a, c TO b;`), the classic architecture does not support replication, while the new architecture does. During replication, all interdependent renaming steps must be preserved.
+- **Table filtering**: In both architectures, whether to replicate a `RENAME` statement is determined by whether the old table name matches the filter rule. If the old table name does not match but the new table name does, the changefeed reports an error and stops replicating. For multi-table `RENAME`, the classic architecture also requires the target database to be within the replication scope, while the new architecture evaluates each renaming step separately. For example, when `filter.rules = ['test.t*']`, the new architecture can replicate `RENAME TABLE test.t1 TO ignore.t1, test.t2 TO test.t22;` and then stop replicating the renamed `ignore.t1`. For more information, see [DDL replication considerations for renaming tables](/ticdc/ticdc-ddl.md#ddl-replication-considerations-for-renaming-tables).
 
-    - In the classic architecture, the filtering logic is as follows:
+### Differences in DDL SQL text
 
-        - Single-table renaming: a DDL statement is replicated only if the old table name matches the filter rule.
-        - Multi-table renaming: a DDL statement is replicated only if both old and new table names match the filter rules.
+The DDL SQL text that TiCDC replicates downstream might differ from the original upstream statement or the output of the classic architecture. The new architecture rewrites single-table rename statements as `RENAME TABLE` statements with fully qualified database and table names. When splitting multi-table rename or batch table creation events, it also adds a trailing semicolon to each resulting statement. SQL rewriting might also occur for views, cross-database `CREATE TABLE ... LIKE ...` statements, unnamed indexes, and table routing.
 
-    - In the new architecture, for both single-table and multi-table renaming, a DDL statement is replicated as long as old table names in the statement match the filter rules.
-
-        Take the following filter rule as an example:
-
-        ```toml
-        [filter]
-        rules = ['test.t*']
-        ```
-
-        - In the classic architecture: for single-table renaming, such as `RENAME TABLE test.t1 TO ignore.t1`, the old table name `test.t1` matches the rule, so it will be replicated. For a multi-table renaming, such as `RENAME TABLE test.t1 TO ignore.t1, test.t2 TO test.t22;`, because the new table name `ignore.t1` does not match the rule, it will not be replicated.
-        - In the new TiCDC architecture: because the old table names in both `RENAME TABLE test.t1 TO ignore.t1` and `RENAME TABLE test.t1 TO ignore.t1, test.t2 TO test.t22;` match the rules, both DDL statements will be replicated.
+If downstream consumers need to parse DDL SQL, or if you need to compare the outputs of the new and classic architectures during an upgrade, see [Handling DDL SQL text](/ticdc/ticdc-ddl.md#handling-of-ddl-sql-text).
 
 ## Limitations
 

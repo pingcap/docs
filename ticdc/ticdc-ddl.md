@@ -72,7 +72,7 @@ During the execution of the `ADD INDEX` or `CREATE INDEX` DDL operation in the d
 
 ### DDL replication considerations for renaming tables
 
-Due to the lack of some context during the replication process, TiCDC has some constraints on the replication of `RENAME TABLE` DDLs.
+TiCDC determines whether to replicate `RENAME TABLE` DDLs based on the database and table names before and after renaming and the filter rules. The following examples assume that the tables meet the replication requirements and that no additional DDL event filter rules are configured.
 
 #### Rename a single table in a DDL statement
 
@@ -92,14 +92,20 @@ TiCDC processes this type of DDL as follows:
 | `RENAME TABLE test.t1 TO test.t2` | Replicate | `test.t1` matches the filter rule |
 | `RENAME TABLE test.t1 TO ignore.t1` | Replicate | `test.t1` matches the filter rule |
 | `RENAME TABLE ignore.t1 TO ignore.t2` | Ignore | `ignore.t1` does not match the filter rule |
-| `RENAME TABLE test.n1 TO test.t1` | Report an error and exit the replication | The old table name `test.n1` does not match the filter rule, but the new table name `test.t1` matches the filter rule. This operation is invalid. In this case, refer to the error message for handling. |
-| `RENAME TABLE ignore.t1 TO test.t1` | Report an error and exit the replication | Same reason as above. |
+| `RENAME TABLE test.n1 TO test.t1` | Report an error and stop replication | The old table name `test.n1` does not match the filter rule, but the new table name `test.t1` matches the filter rule. This operation is invalid. In this case, refer to the error message for handling. |
+| `RENAME TABLE ignore.t1 TO test.t1` | Report an error and stop replication | Same reason as above. |
+
+These rules apply to both the classic and new architectures. If the old table name matches the filter rule but the new table name does not, TiCDC replicates the `RENAME TABLE` DDL and then stops replicating subsequent data changes for that table. If the old table name does not match but the new table name matches, TiCDC reports the `CDC:ErrSyncRenameTableFailed` error because replicating only the rename cannot backfill data that was not previously replicated for that table.
 
 #### Rename multiple tables in a DDL statement
 
-If a DDL statement renames multiple tables, TiCDC replicates the DDL statement only when the **old database name**, **old table names**, and **new database name** all match the filter rule.
+When a DDL statement renames multiple tables, the new architecture evaluates each rename step according to the single-table rename rules:
 
-In addition, TiCDC does not support the `RENAME TABLE` DDL that swaps the table names. The following is an example.
+- If the old table name matches the filter rule, TiCDC replicates the corresponding rename step.
+- If neither the old nor the new table name matches, TiCDC ignores that step.
+- If the old table name does not match but the new table name does, the changefeed reports an error and replication stops.
+
+In addition, the classic architecture requires the target database of each replicated rename step to be within the replication scope. It also does not support `RENAME TABLE` statements that swap table names.
 
 Assume that the configuration file of your changefeed is as follows:
 
@@ -110,16 +116,49 @@ rules = ['test.t*']
 
 TiCDC processes this type of DDL as follows:
 
-| DDL | Whether to replicate | Reason for the handling |
-| --- | --- | --- |
-| `RENAME TABLE test.t1 TO test.t2, test.t3 TO test.t4` | Replicate | All database names and table names match the filter rule. |
-| `RENAME TABLE test.t1 TO test.ignore1, test.t3 TO test.ignore2` | Replicate | The old database name, the old table names, and the new database name match the filter rule. |
-| `RENAME TABLE test.t1 TO ignore.t1, test.t2 TO test.t22;` | Report an error | The new database name `ignore` does not match the filter rule. |
-| `RENAME TABLE test.t1 TO test.t4, test.t3 TO test.t1, test.t4 TO test.t3;` | Report an error | The `RENAME TABLE` DDL swaps the names of `test.t1` and `test.t3` in one DDL statement, which TiCDC cannot handle correctly. In this case, refer to the error message for handling. |
+| DDL | Classic architecture | New architecture | Reason |
+| --- | --- | --- | --- |
+| `RENAME TABLE test.t1 TO test.t2, test.t3 TO test.t4` | Replicate | Replicate | Both the old and new database and table names match the filter rule |
+| `RENAME TABLE test.t1 TO test.ignore1, test.t3 TO test.ignore2` | Replicate | Replicate | In both architectures, the old table names match the filter rule. The classic architecture additionally requires the target database to be within the replication scope. After replicating the rename, TiCDC stops replicating subsequent data changes for the renamed tables |
+| `RENAME TABLE test.t1 TO ignore.t1, test.t2 TO test.t22` | Report an error | Replicate | The target database `ignore` is not within the replication scope. After replicating the rename in the new architecture, TiCDC stops replicating `ignore.t1` and continues replicating `test.t22` |
+| `RENAME TABLE test.t1 TO test.t2, ignore.t1 TO ignore.t2` | Replicate only the rename step of `test.t1` | Replicate only the rename step of `test.t1` | Neither `ignore.t1` nor `ignore.t2` matches the filter rule |
+| `RENAME TABLE test.t1 TO test.t2, ignore.t1 TO test.t3` | Report an error | Report an error | `ignore.t1` does not match but `test.t3` matches the filter rule |
+| `RENAME TABLE test.t1 TO test.t4, test.t3 TO test.t1, test.t4 TO test.t3` | Report an error | Replicate | The two table names are swapped through the temporary table name `test.t4`, and the new architecture preserves the order of each rename step |
+
+In the new architecture, TiCDC coordinates the replication progress of all tables involved in a multi-table rename, but reconstructs the downstream SQL as multiple single-table `RENAME TABLE` statements. The MySQL sink executes multiple sub-statements separated by semicolons, while the Kafka and Pulsar sinks split them into single-table DDL messages. Therefore, downstream execution does not guarantee the atomicity of a single upstream multi-table rename statement. When using a temporary table name to swap table names, keep all mutually dependent steps and avoid removing any of them through filter rules.
 
 ### DDL statement considerations
 
 When executing cross-database DDL statements (such as `CREATE TABLE db1.t1 LIKE t2`) in the upstream, it is recommended that you explicitly specify all relevant database names in DDL statements (such as `CREATE TABLE db1.t1 LIKE db2.t2`). Otherwise, cross-database DDL statements might not be executed correctly in the downstream due to the lack of database name information.
+
+### Handling of DDL SQL text
+
+TiCDC parses, formats, or rebuilds DDL SQL. Therefore, the SQL text replicated downstream is not guaranteed to exactly match the original upstream statement. Both the classic and new architectures normalize keyword case, identifier quotes, spaces, and some synonymous syntax, and both also handle TiDB-specific syntax for compatibility. DDLs such as `DROP TABLE`, `DROP VIEW`, and `EXCHANGE PARTITION` all have SQL rebuilding logic in both architectures.
+
+The new architecture might also modify DDL SQL in the following ways. Except for MySQL sink rewrites specifically noted, these changes also affect the SQL field in message protocols that support DDL. The exact output format might vary by TiCDC version.
+
+| DDL or scenario | SQL text handling in the new architecture | Applicable conditions |
+| --- | --- | --- |
+| Single-table rename | Uniformly rebuilt as `RENAME TABLE db.old_table TO db.new_table` with full database and table names | Includes `ALTER TABLE ... RENAME AS ...`, `ALTER TABLE ... RENAME TO ...`, and regular `RENAME TABLE ... TO ...`. It is also rewritten when table routing is not enabled |
+| Multi-table rename | Rebuilt in the original order into multiple single-table `RENAME TABLE` statements, with each sub-statement ending with `;` | The MySQL sink receives the combined SQL; paths that output one table at a time, such as Kafka and Pulsar, split it into multiple messages |
+| Batch table creation | Each split `CREATE TABLE` statement ends with `;` | The upstream batch table creation produces one DDL event containing multiple tables, and the downstream outputs it as single-table events |
+| `CREATE TABLE ... LIKE ...` | Adds the missing database qualifier to the table referenced by `LIKE` | The original SQL does not qualify the database name of the referenced table, and the DDL metadata indicates that the referenced table and the target table are in different databases |
+| `CREATE VIEW` and `CREATE OR REPLACE VIEW` | Rebuilds SQL using the view query stored by TiDB and the database and table metadata at the DDL time, and might add database qualifiers to table and column references, normalize identifier case, or add column aliases | When names in the view definition need to be parsed; table routing does not need to be enabled |
+| Anonymous secondary indexes | Adds the upstream-generated index names for unnamed indexes in `ALTER TABLE ... ADD INDEX/KEY/...`, including multiple change operations in one `ALTER TABLE` | Processed only before the MySQL sink executes DDL on MySQL or TiDB, and does not apply to SQL in MQ messages |
+| Databases, tables, or partitions whose names contain backticks | When rebuilding SQL, escapes backticks in names as two backticks | Includes scenarios such as rename, `DROP TABLE`, `DROP VIEW`, and `EXCHANGE PARTITION` that require SQL rebuilding |
+| Table routing | Rewrites database names, table names, and related references according to routing rules, and regenerates SQL | `target-schema` or `target-table` is configured. For more information, see [DDL behavior of table routing](/ticdc/ticdc-table-routing.md#ddl-behavior) |
+
+For example, assume that the current database is `db`, table routing is not enabled, and the following rename events are not filtered. The outputs for single-table rename are as follows. Statement-ending semicolons are omitted in the table.
+
+| Upstream SQL | Classic architecture output | New architecture output |
+| --- | --- | --- |
+| `ALTER TABLE a RENAME AS b` | ``ALTER TABLE `a` RENAME AS `b` `` | ``RENAME TABLE `db`.`a` TO `db`.`b` `` |
+| `ALTER TABLE a RENAME TO b` | ``ALTER TABLE `a` RENAME AS `b` `` | ``RENAME TABLE `db`.`a` TO `db`.`b` `` |
+| `RENAME TABLE a TO b` | ``RENAME TABLE `a` TO `b` `` | ``RENAME TABLE `db`.`a` TO `db`.`b` `` |
+
+For `RENAME TABLE a TO b, c TO d`, when output as single-table events, the first SQL in the classic architecture is ``RENAME TABLE `db`.`a` TO `db`.`b` ``, and in the new architecture it is ``RENAME TABLE `db`.`a` TO `db`.`b`;``. The trailing semicolon comes from the multi-table DDL splitting in the new architecture.
+
+When developing downstream consumers or comparing the outputs of the classic and new architectures, parse the SQL and use the DDL type and database and table metadata to assess its meaning instead of comparing SQL text directly. Database names, table names, index names, and their letter case still need to be validated according to the specific scenario to avoid overlooking name resolution or table routing errors.
 
 ### Notes on using event filter rules to filter DDL events
 
@@ -145,6 +184,8 @@ ignore-event = ["create table", "drop table", "truncate table", "rename table"]
 | `TRUNCATE TABLE test.t1;` | Ignore | Replicate | `test.t1` matches the event filter rule, so the `TRUNCATE TABLE` event is ignored. The replication of DML events remains unaffected. |
 | `RENAME TABLE test.t1 TO test.t2;` | Ignore | Replicate | `test.t1` matches the event filter rule, so the `RENAME TABLE` event is ignored. The replication of DML events remains unaffected. |
 | `RENAME TABLE test.t1 TO test.ignore;` | Ignore | Ignore | `test.t1` matches the event filter rule, so the `RENAME TABLE` event is ignored. `test.ignore` matches the event filter rule, so both DDL and DML events are ignored. |
+
+When using `ignore-sql` to filter multi-table rename operations, note that the matching input differs between the classic and new architectures. In the classic architecture, `ignore-sql` is matched against each SQL statement after splitting the operation into single-table DDL events. In the new architecture, `ignore-sql` is matched against the reconstructed SQL for the entire multi-table rename operation when event filter rules are applied to individual tables. If the `matcher` of the same event filter rule matches multiple tables, `ignore-sql` matching one rename step might also filter other rename steps covered by that rule. Before switching architectures, check the actual matching results of such filter rules.
 
 > **Note:**
 >
