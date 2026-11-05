@@ -96,7 +96,7 @@ PARTITION BY (DATE_TRUNC(month, event_time))
 
 ### Identity パーティショニング {#identity-partitioning}
 
-カラムがすでに小さく安定した値の集合を持っている場合は、そのカラムを直接使用します。
+カラムが取りうる値の種類がすでに少なく、増減もほとんどない場合は、そのカラムを直接使用します。
 
 ```sql
 CREATE TABLE regional_sales (
