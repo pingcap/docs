@@ -105,20 +105,37 @@ Take the `/dev/nvme0n1` data disk as an example:
 
 ## Check and disable system swap
 
-TiDB needs a sufficient amount of memory for operation. If the memory that TiDB uses gets swapped out and later gets swapped back in, this can cause latency spikes. If you want to maintain stable performance, it is recommended that you permanently disable the system swap, but it might trigger OOM issues when there is insufficient memory. If you want to avoid such OOM issues, you can just decrease the swap priority, instead of permanently disabling it.
+Swapping TiDB memory out to disk and back can cause latency spikes. For stable performance, it is recommended that you permanently disable system swap. However, disabling swap can increase the risk of out-of-memory (OOM) issues when memory is insufficient. Choose one of the following options based on your memory capacity and latency requirements:
 
-- Enabling and using swap might introduce performance jitter issues. It is recommended that you permanently disable the operating system tier swap for low-latency and stability-critical database services. To permanently disable swap, you can use the following method:
+- Option 1: Disable swap for latency-sensitive workloads:
 
-    - During the initialization phase of the operating system, do not partition the swap partition disk separately.
-    - If you have already partitioned a separate swap partition disk during the initialization phase of the operating system and enabled swap, run the following command to disable it:
+    1. When installing the operating system, do not create swap partitions or swap files. If swap is already enabled, first ensure that enough memory is available to reload the swapped-out data, then run the following command to disable swap:
 
         ```bash
-        echo "vm.swappiness = 0">> /etc/sysctl.conf
-        sysctl -p
-        swapoff -a && swapon -a
+        swapoff -a
         ```
 
-- If the host memory is insufficient, disabling the system swap might be more likely to trigger OOM issues. You can run the following command to decrease the swap priority instead of disabling it permanently:
+    2. To prevent swap from being enabled at boot, remove or comment out all swap entries in `/etc/fstab`.
+
+        On hosts that use `systemd-gpt-auto-generator`, GPT swap partitions on the same disk as the root partition can be activated automatically even without an `/etc/fstab` entry. On these hosts, list the swap unit files:
+
+        ```bash
+        systemctl list-unit-files --type=swap
+        ```
+
+        For each swap unit you want to disable permanently, run the following command to prevent automatic activation. Replace `<swap-unit>` with the actual unit name from the output, such as `dev-sda2.swap`:
+
+        ```bash
+        systemctl mask <swap-unit>
+        ```
+
+        For more information, see [systemd-gpt-auto-generator](https://www.freedesktop.org/software/systemd/man/latest/systemd-gpt-auto-generator.html) and [systemctl mask](https://www.freedesktop.org/software/systemd/man/latest/systemctl.html).
+
+    3. After disabling swap, and again after the next reboot, run `cat /proc/swaps`. If swap is disabled, the output contains only the header row.
+
+- Option 2: For hosts with limited memory, keep swap enabled and reduce the kernel's tendency to swap:
+
+    Set `vm.swappiness=0` to reduce the kernel's tendency to swap. This setting does not disable swap: the kernel can still use it under memory pressure. Run the following commands to save the setting in `/etc/sysctl.conf` and apply it immediately:
 
     ```bash
     echo "vm.swappiness = 0">> /etc/sysctl.conf
@@ -816,7 +833,7 @@ sudo yum -y install numactl
 1. Follow [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md) to deploy a cluster `tidb-test`. If you have installed a TiDB cluster, you can skip this step.
 
     ```bash
-    tiup cluster deploy tidb-test v6.1.0 ./topology.yaml --user root [-p] [-i /home/root/.ssh/gcp_rsa]
+    tiup cluster deploy tidb-test {{{ .tidb-version }}} ./topology.yaml --user root [-p] [-i /home/root/.ssh/gcp_rsa]
     ```
 
 2. Run the `tiup cluster exec` command using the `sudo` privilege to install NUMA on all the target machines in the `tidb-test` cluster:
