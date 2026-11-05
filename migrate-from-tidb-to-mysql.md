@@ -221,7 +221,7 @@ After setting up the environment, you can use [Dumpling](/dumpling-overview.md) 
 
 ## Step 4. Migrate services
 
-After creating a changefeed, TiCDC replicates changes from the included upstream tables to the downstream cluster with low latency. You can migrate read traffic to the downstream cluster gradually. Observe the read traffic for a period. If the downstream cluster is stable, you can migrate write traffic to the downstream cluster as well in the following steps:
+After creating a changefeed, TiCDC replicates changes from the included upstream tables to the downstream cluster. Wait for incremental replication to catch up before gradually migrating read traffic to the downstream cluster. Reads might still return stale data because replication is asynchronous. Observe the read traffic for a period. If the downstream cluster is stable, you can migrate write traffic to the downstream cluster as well in the following steps:
 
 1. Stop write services in the upstream cluster. Make sure that all upstream data are replicated to downstream before stopping the changefeed.
 
