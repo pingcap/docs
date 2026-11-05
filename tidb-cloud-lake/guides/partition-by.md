@@ -125,7 +125,7 @@ PARTITION BY (BUCKET(32, customer_id));
 
 バケットパーティショニングは、等価フィルタがカーディナリティの高いカラムを対象とする一方で、値ごとに 1 つの物理パーティションを作成するのが現実的でない場合に有効です。
 
-`BUCKET()` でサポートされる値型は、整数、文字列、日付、タイムスタンプです。詳細は [`BUCKET()`](/tidb-cloud-lake/sql/bucket.md) を参照してください。
+`BUCKET()` でサポートされる値のデータ型は、整数、文字列、日付、タイムスタンプです。詳細は [`BUCKET()`](/tidb-cloud-lake/sql/bucket.md) を参照してください。
 
 ### 複合パーティショニング {#composite-partitioning}
 
