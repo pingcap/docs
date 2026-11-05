@@ -202,7 +202,7 @@ ALTER TABLE events PARTITION BY (DATE_TRUNC(month, event_time));
 INSERT OVERWRITE events SELECT * FROM events ORDER BY DATE_TRUNC(month, event_time);
 ```
 
-**キーを変更する場合:** いったん削除し、新しいキーを追加してからテーブルを書き直します。
+**キーを変更する場合:** いったんドロップし、新しいキーを追加してからテーブルを書き直します。
 
 ```sql
 ALTER TABLE events DROP PARTITION KEY;
