@@ -5,7 +5,7 @@ summary: サポートされている値を、固定数のハッシュバケッ�
 
 # BUCKET
 
-サポートされている値を、固定数のハッシュバケットのいずれかにマッピングします。`BUCKET()` は、`0` から `bucket_count - 1` までの決定論的な `UInt32` 値を返し、[`PARTITION BY`](/tidb-cloud-lake/guides/partition-by.md) および `CLUSTER BY` 式向けに設計されています。
+サポートされている値を、固定数のハッシュバケットのいずれかにマッピングします。`BUCKET()` は、`0` から `bucket_count - 1` までの決定的な `UInt32` 値を返し、[`PARTITION BY`](/tidb-cloud-lake/guides/partition-by.md) および `CLUSTER BY` 式向けに設計されています。
 
 ## 構文 {#syntax}
 
