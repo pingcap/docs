@@ -13,7 +13,7 @@ The TiDB Cloud API v1beta2 is a RESTful API that gives you programmatic access t
 
 Unless otherwise specified, "TiDB Cloud instance" on this page refers to either a TiDB Cloud Premium instance or a supported TiDB Cloud Essential instance.
 
-The [TiDB Cloud API v1beta2 reference](https://docs.pingcap.com/tidbcloud/api/v1beta2/premium) provides endpoints to manage the following resources:
+The [TiDB Cloud API v1beta2 reference](https://docs.pingcap.com/tidbcloud/api/v1beta2/) provides endpoints to manage the following resources:
 
 - **TiDB Cloud instance**: manage the lifecycle and configuration of TiDB Cloud instances, including passwords, CA certificates, and cloud provider information.
 - **Backup**: manage backups for TiDB Cloud instances, including backup-based restore.
