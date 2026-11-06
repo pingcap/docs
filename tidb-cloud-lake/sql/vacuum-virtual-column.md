@@ -7,10 +7,6 @@ summary: Removes obsolete virtual column files for a table.
 
 Removes obsolete virtual column files for a table.
 
-> **Note:**
->
-> This command requires the virtual column enterprise feature.
-
 ## Syntax
 
 ```sql

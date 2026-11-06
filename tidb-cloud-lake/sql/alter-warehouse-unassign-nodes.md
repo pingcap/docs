@@ -7,10 +7,6 @@ summary: "Learn how to use the ALTER WAREHOUSE UNASSIGN NODES command to remove 
 
 Removes assigned nodes from one or more clusters in a warehouse.
 
-> **Note:**
->
-> This command requires system management support and an enterprise license.
-
 ## Syntax
 
 ```sql

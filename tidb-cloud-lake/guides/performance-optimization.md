@@ -18,15 +18,3 @@ summary: "{{{ .lake }}} primarily accelerates query performance through various 
 | [**Aggregating Index**](/tidb-cloud-lake/guides/aggregating-index.md) | Precompute and store common aggregation results | When your analytical workloads frequently run SUM, COUNT, AVG queries on large datasets |
 | [**Full-Text Index**](/tidb-cloud-lake/guides/full-text-index.md) | Enable lightning-fast semantic text search capabilities | When you need advanced text search functionality like relevance scoring and fuzzy matching |
 | [**Ngram Index**](/tidb-cloud-lake/guides/ngram-index.md) | Accelerate pattern matching with wildcards | When your queries use LIKE operators with wildcards (especially '%keyword%') on large text columns |
-
-## Feature Availability
-
-| Feature | Community | Enterprise | Cloud |
-|---------|-----------|------------|-------|
-| Cluster Key | ✅ | ✅ | ✅ |
-| Table Partitioning | ✅ | ✅ | ✅ |
-| Query Result Cache | ✅ | ✅ | ✅ |
-| Virtual Column | ❌ | ✅ | ✅ |
-| Aggregating Index | ✅ | ✅ | ✅ |
-| Full-Text Index | ✅ | ✅ | ✅ |
-| Ngram Index | ✅ | ✅ | ✅ |

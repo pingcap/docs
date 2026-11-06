@@ -7,10 +7,6 @@ summary: "Learn how to use the ALTER WAREHOUSE ASSIGN NODES command to assign no
 
 Assigns nodes to one or more clusters in a warehouse.
 
-> **Note:**
->
-> This command requires system management support and an enterprise license.
-
 ## Syntax
 
 ```sql
