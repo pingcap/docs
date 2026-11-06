@@ -82,7 +82,7 @@ Service sizes are derived from the XSmall warehouse size. The monthly costs in t
 
 ## Example-2
 
-**Usage Scenario:** A user is using an XSmall warehouse (Business) in the AWS US East (N. Virginia) region to continuously import data into {{{ .lake }}}. The warehouse runs 24 hours a day with 1TiB (1,024 GiB) storage, using Task service for minute-by-minute data loading. The estimated number of API calls is 50,000.
+**Usage Scenario:** A user is using an XSmall warehouse (Business) in the AWS US East (N. Virginia) region to continuously import data into {{{ .lake }}}. The warehouse runs 24 hours a day with 1 TiB (1,024 GiB) storage, using Task service for minute-by-minute data loading. The estimated number of API calls is 50,000.
 
 | Cost | Formula | Amount |
 |------|---------|--------|
