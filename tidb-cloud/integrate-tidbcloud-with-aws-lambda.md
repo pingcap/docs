@@ -5,7 +5,7 @@ summary: TiDB Cloud StarterをAmazon LambdaおよびCloudFormationと統合す�
 
 # AWS CloudFormationを使用してTiDB Cloud StarterをAmazon Lambdaと統合する {#integrate-tidb-cloud-starter-with-amazon-lambda-using-aws-cloudformation}
 
-このドキュメントでは、 [AWS CloudFormation](https://aws.amazon.com/cloudformation/)を使用して、クラウドネイティブな分散 SQL データベースである[TiDB Cloud Starter](https://www.pingcap.com/tidb-cloud-starter/)と、サーバーレスでイベント駆動型のコンピューティング サービスである[AWS Lambda](https://aws.amazon.com/lambda/)を統合する手順を段階的に説明します。TiDB Cloud Starter をAmazon Lambda と統合することで、 TiDB Cloud Starterと AWS Lambda を通じてマイクロサービスの拡張性とコスト効率を活用できます。AWS CloudFormation は、Lambda関数、API Gateway、Secrets Manager などの AWS リソースの作成と管理を自動化します。
+このドキュメントでは、 [AWS CloudFormation](https://aws.amazon.com/cloudformation/)を使用して、クラウドネイティブな分散 SQL データベースである[TiDB Cloud Starter](https://www.pingcap.com/tidb-cloud-starter/)と、サーバーレスでイベント駆動型のコンピューティングサービスである[AWS Lambda](https://aws.amazon.com/lambda/)を統合する手順を段階的に説明します。TiDB Cloud Starter をAmazon Lambda と統合することで、 TiDB Cloud Starterと AWS Lambda を通じてマイクロサービスの拡張性とコスト効率を活用できます。AWS CloudFormation は、Lambda関数、API Gateway、Secrets Manager などの AWS リソースの作成と管理を自動化します。
 
 > **Note:**
 >
@@ -38,7 +38,7 @@ AWS CloudFormationは、Secrets Manager、API Gateway、Lambda関数など、プ
     - [S3](https://aws.amazon.com/s3/)
     - [IAMロール](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)
 
-- [TiDB Cloud](https://tidbcloud.com)アカウントとTiDB Cloud Starterインスタンスが必要です。TiDB Cloud Starterインスタンスの接続情報を取得するには、以下の手順に従ってください。
+- [TiDB Cloud](https://tidbcloud.com)アカウントとTiDB Cloud Starterインスタンスが必要です。TiDB Cloud Starterインスタンスの接続情報を取得します。
 
     ![TiDB Cloud connection information](/media/develop/aws-lambda-tidbcloud-connection-info.png)
 
@@ -55,7 +55,7 @@ AWS CloudFormationは、Secrets Manager、API Gateway、Lambda関数など、プ
 
 リージョンとして`us-east-1`を使用する場合は、このセクションをスキップして、 [ステップ1：AWS CloudFormationを使用してプロジェクトをセットアップする](#step-1-set-up-the-bookshop-project-using-aws-cloudformation)に進みます。
 
-AWS リソースを作成する際に`us-east-1`以外の別の AWS リージョンを使用する場合は、Lambda 関数のコードを変更し、再構築して、コード バンドルを独自の S3 バケットにアップロードする必要があります。
+AWS リソースを作成する際に`us-east-1`以外の別の AWS リージョンを使用する場合は、Lambda 関数のコードを変更し、再構築して、コードバンドルを独自の S3 バケットにアップロードする必要があります。
 
 ローカル開発環境の問題を回避するため、 [Gitpod](https://www.gitpod.io/)などのクラウドネイティブ開発環境を使用することをお勧めします。
 
@@ -65,7 +65,7 @@ AWS リソースを作成する際に`us-east-1`以外の別の AWS リージョ
 
     - [Gitpod](https://gitpod.io/#/https://github.com/pingcap/TiDB-Lambda-integration)ワークスペースを開き、GitHubアカウントでログインしてください。
 
-2. ラムダ関数のコードを修正してください。
+2. Lambda関数のコードを修正してください。
 
     1. 左側のサイドバーで`aws-lambda-cloudformation/src/secretManager.ts`ファイルを開きます。
     2. 22行目を見つけて、 `region`変数を自分のリージョンに合わせて変更してください。
@@ -119,7 +119,7 @@ AWS CloudFormation を使用して書店プロジェクトを設定するには�
 
     1. **Prerequisite**の領域で、 **Choose an existing template**を選択します。
 
-    2. **Specify template**領域で、 **Upload a template file**を選択し、 **Choose file**をクリックしてテンプレート ファイル (YAML または JSON) をアップロードし、 **Next**をクリックします。
+    2. **Specify template**領域で、 **Upload a template file**を選択し、 **Choose file**をクリックしてテンプレートファイル (YAML または JSON) をアップロードし、 **Next**をクリックします。
 
         まだファイルをお持ちでない場合は、 [GitHub](https://github.com/pingcap/TiDB-Lambda-integration/releases/latest)からダウンロードしてください。このファイルには、プロジェクトに必要なリソースを作成するAWS CloudFormationテンプレートが含まれています。
 
@@ -202,7 +202,7 @@ AWS CloudFormation を使用して書店プロジェクトを設定するには�
         curl -X DELETE https://<your-api-endpoint>/book/<book-id>
         ```
 
-## ステップ3．リソースをクリーンアップする {#step-3-clean-up-resources}
+## ステップ3. リソースをクリーンアップする {#step-3-clean-up-resources}
 
 不要な料金が発生しないように、作成されたすべてのリソースをクリーンアップしてください。
 

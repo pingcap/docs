@@ -3,11 +3,11 @@ title: Scale Your TiDB Cluster
 summary: TiDB Cloudクラスターを拡張する方法を学びます。
 ---
 
-# TiDBクラスタのスケール {#scale-your-tidb-cluster}
+# TiDBクラスターのスケール {#scale-your-tidb-cluster}
 
 > **Note:**
 >
-> - [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)および[TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)は、アプリケーションのワークロードの変化に応じて自動的にスケーリングされます。ただし、 TiDB Cloud Starter またはTiDB Cloud Essential クラスターは手動でスケーリングできません。
+> - [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)および[TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)は、アプリケーションのワークロードの変化に応じて自動的にスケーリングされます。ただし、 TiDB Cloud Starter またはTiDB Cloud Essential インスタンスは手動でスケーリングできません。
 > - クラスターが**MODIFYING**ステータスにある場合、そのクラスターに対して新しいスケーリング操作を実行できません。
 
 TiDB クラスターは次の次元で拡張できます。
@@ -85,7 +85,7 @@ TiDB Cloud APIを使用して、 [TiDB Cloud Dedicated クラスターを変更�
 
 ## ストレージの変更 {#change-storage}
 
-TiKV またはTiFlashのストレージを増やすことができます。
+TiKV またはTiFlashのストレージを増やせます。
 
 > **Warning:**
 >

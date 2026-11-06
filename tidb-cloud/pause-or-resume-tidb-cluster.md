@@ -3,13 +3,13 @@ title: Pause or Resume a TiDB Cloud Dedicated Cluster
 summary: TiDB Cloud Dedicatedクラスターの一時停止または再開方法について説明します。
 ---
 
-# TiDB Cloud Dedicatedクラスタの一時停止または再開 {#pause-or-resume-a-tidb-cloud-dedicated-cluster}
+# TiDB Cloud Dedicatedクラスターの一時停止または再開 {#pause-or-resume-a-tidb-cloud-dedicated-cluster}
 
 TiDB Cloudでは、常時稼働していないTiDB Cloud Dedicatedクラスターを簡単に一時停止および再開できます。
 
 一時停止しても、クラスターに保存されているデータには影響しません。一時停止するのは、監視情報の収集とコンピューティングリソースの消費のみです。一時停止後、いつでもクラスターを再開できます。
 
-バックアップとリストアと比較すると、クラスタの一時停止と再開は時間がかからず、クラスタ情報（クラスタバージョン、クラスタ構成、TiDBユーザーアカウントなど）を保持できます。
+バックアップとリストアと比較すると、クラスターの一時停止と再開は時間がかからず、クラスター情報（クラスターバージョン、クラスター構成、TiDBユーザーアカウントなど）を保持できます。
 
 > **Note:**
 >
@@ -24,7 +24,7 @@ TiDB Cloudでは、常時稼働していないTiDB Cloud Dedicatedクラスタ�
 - [Point-in-Time Restore (PITR)](/tidb-cloud/backup-and-restore.md#turn-on-point-in-time-restore) が有効になっている場合、クラスターを一時停止できません。クラスターを一時停止する前に、**Backup Setting** の **Point-in-time Restore** スイッチをオフにする必要があります。
 - [Data Migration](/tidb-cloud/tidb-cloud-migration-overview.md) ジョブの実行中は、クラスターを一時停止できません。クラスターを一時停止する前に、移行ジョブが実行されていないことを確認してください。
 
-## TiDBクラスタを一時停止する {#pause-a-tidb-cluster}
+## TiDBクラスターを一時停止する {#pause-a-tidb-cluster}
 
 一時停止期間と動作は、組織の作成日によって異なります。
 
@@ -36,13 +36,13 @@ TiDB Cloudでは、常時稼働していないTiDB Cloud Dedicatedクラスタ�
 
 クラスターが一時停止された場合は、以下の点に注意してください。
 
-- TiDB Cloudは、クラスタの監視情報の収集を停止します。
+- TiDB Cloudは、クラスターの監視情報の収集を停止します。
 
 - クラスターからデータを読み取ったり、クラスターにデータを書き込んだりできません。
 
 - データのインポートやバックアップはできません。
 
-- 請求される費用は以下のとおりです。
+- 以下の費用のみが請求されます。
 
     - ノードストレージコスト
     - データバックアップ費用
@@ -62,7 +62,7 @@ TiDB Cloudでは、常時稼働していないTiDB Cloud Dedicatedクラスタ�
 
 クラスターが一時停止された場合は、以下の点に注意してください。
 
-- TiDB Cloudは、クラスタの監視情報の収集を停止します。
+- TiDB Cloudは、クラスターの監視情報の収集を停止します。
 
 - クラスターからデータを読み取ったり、クラスターにデータを書き込んだりできません。
 
@@ -70,7 +70,7 @@ TiDB Cloudでは、常時稼働していないTiDB Cloud Dedicatedクラスタ�
 
 - TiDB Cloudは、一時停止したクラスターを自動的に再開しません。
 
-- 請求される費用は以下のとおりです。
+- 以下の費用のみが請求されます。
 
     - ノードストレージコスト
     - データバックアップ費用
@@ -98,13 +98,13 @@ TiDB Cloudでは、常時稼働していないTiDB Cloud Dedicatedクラスタ�
 
     **Pause**をクリックすると、クラスターはまず**Pausing**の状態になります。一時停止操作が完了すると、クラスターは**Paused**の状態に移行します。
 
-TiDB Cloud API を使用してクラスタを一時停止することもできます。現在、 TiDB Cloud API はパブリックプレビューです。詳細については、 [TiDB Cloud APIドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta)を参照してください。
+TiDB Cloud API を使用してクラスターを一時停止することもできます。現在、 TiDB Cloud API はパブリックプレビューです。詳細については、 [TiDB Cloud APIドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta)を参照してください。
 
-## TiDBクラスタを再開する {#resume-a-tidb-cluster}
+## TiDBクラスターを再開する {#resume-a-tidb-cluster}
 
 一時停止していたクラスターを再開した後は、以下の点に注意してください。
 
-- TiDB Cloudはクラスタの監視情報の収集を再開し、クラスタからのデータ読み取りやクラスタへのデータ書き込みが可能になります。
+- TiDB Cloudはクラスターの監視情報の収集を再開し、クラスターからのデータ読み取りやクラスターへのデータ書き込みが可能になります。
 - TiDB Cloudは、コンピューティングコストとストレージコストの両方の課金を再開します。
 - TiDB Cloud はクラスターの[自動バックアップ](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup)を再開します。
 
@@ -118,8 +118,8 @@ TiDB Cloud API を使用してクラスタを一時停止することもでき�
     >
     > **Pausing**状態のクラスターは再開できません。
 
-3. ダイアログで**Resume**をクリックして選択を確定します。クラスタの状態が**Resuming**になります。
+3. ダイアログで**Resume**をクリックして選択を確定します。クラスターの状態が**Resuming**になります。
 
 クラスターのサイズによっては、クラスターの再開に数分かかる場合があります。クラスターが再開されると、クラスターの状態が**Resuming**から**Available**に変わります。
 
-TiDB Cloud API を使用してクラスタを再開することもできます。現在、 TiDB Cloud API はパブリックプレビューです。詳細については、 [TiDB Cloud APIドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta)を参照してください。
+TiDB Cloud API を使用してクラスターを再開することもできます。現在、 TiDB Cloud API はパブリックプレビューです。詳細については、 [TiDB Cloud APIドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta)を参照してください。
