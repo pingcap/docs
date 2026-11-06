@@ -14,7 +14,7 @@ TiDB バージョン: 8.1.1
 ## 互換性の変更 {#compatibility-changes}
 
 - TiDB Lightningを使用してCSVファイルをインポートする際、並列性とインポートパフォーマンスを向上させるために大きなCSVファイルを複数の小さなCSVファイルに分割するために`strict-format = true`を設定する場合は、明示的に`terminator`を指定する必要があります。値は`\r` 、または`\r\n` `\n`かです。行末文字を指定しないと、CSVファイルデータの解析時に例外が発生する可能性があります[#37338](https://github.com/pingcap/tidb/issues/37338) @[lance6716](https://github.com/lance6716)
-- [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)を使用してCSVファイルをインポートする際、 `SPLIT_FILE`パラメータを指定して大きなCSVファイルを複数の小さなCSVファイルに分割し、同時実行性とインポートパフォーマンスを向上させる場合は、行末文字`LINES_TERMINATED_BY`を明示的に指定する必要があります。値は`\r` 、 `\n` 、または`\r\n`です。行末文字を指定しないと、CSVファイルデータの解析時に例外が発生する可能性があります[#37338](https://github.com/pingcap/tidb/issues/37338) @[lance6716](https://github.com/lance6716)
+- [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)を使用してCSVファイルをインポートする際、 `SPLIT_FILE`パラメーターを指定して大きなCSVファイルを複数の小さなCSVファイルに分割し、同時実行性とインポートパフォーマンスを向上させる場合は、行末文字`LINES_TERMINATED_BY`を明示的に指定する必要があります。値は`\r` 、 `\n` 、または`\r\n`です。行末文字を指定しないと、CSVファイルデータの解析時に例外が発生する可能性があります[#37338](https://github.com/pingcap/tidb/issues/37338) @[lance6716](https://github.com/lance6716)
 - 並列計算中のディスクオーバーフローによるクエリ結果の誤りを回避するため、変数[`tidb_enable_parallel_hashagg_spill`](https://docs.pingcap.com/tidb/v8.1/system-variables#tidb_enable_parallel_hashagg_spill-new-in-v800)のデフォルト値を`ON`から`OFF`に変更します。v8.0.0またはv8.1.0からv8.1.1にアップグレードしたクラスターの場合、この変数はアップグレード後もデフォルト値の`ON`のままとなるため、手動で`OFF`に変更することをお勧めします[#55290](https://github.com/pingcap/tidb/issues/55290) @[xzhangxian1008](https://github.com/xzhangxian1008)
 - TiKV設定項目[`server.grpc-compression-type`](/tikv-configuration-file.md#grpc-compression-type)のスコープを変更します。
 
@@ -86,7 +86,7 @@ v8.1.1 では、 `TiDB-community-toolkit` [バイナリパッケージ](/binary-
     - TiProxy とリソースグループを使用するときに、各リソースグループの接続数が正しくない問題を修正しました。 [#54545](https://github.com/pingcap/tidb/issues/54545) @[YangKeao](https://github.com/YangKeao)
     - 再帰CTE でビューの使用が機能しない問題を修正 [#49721](https://github.com/pingcap/tidb/issues/49721) @[hawkingrei](https://github.com/hawkingrei)
     - 大規模並列処理 (MPP) で`final` AggMode と`non-final` AggMode が共存できない問題を修正しました [#51362](https://github.com/pingcap/tidb/issues/51362) @[AilinKid](https://github.com/AilinKid)
-    - オプティマイザヒント使用時に誤った警告情報が表示される問題を修正しました [#53767](https://github.com/pingcap/tidb/issues/53767) @[hawkingrei](https://github.com/hawkingrei)
+    - オプティマイザーヒント使用時に誤った警告情報が表示される問題を修正しました [#53767](https://github.com/pingcap/tidb/issues/53767) @[hawkingrei](https://github.com/hawkingrei)
     - `HashJoin`または`IndexLookUp`オペレーターが`Apply`オペレーターの駆動側サブノードである場合に`memTracker`が切り離されないことで発生する異常に高いメモリ使用量の問題を修正しました。 [#54005](https://github.com/pingcap/tidb/issues/54005) @[XuHuaiyu](https://github.com/XuHuaiyu)
     - 場合によっては無効な列タイプ`DECIMAL(0,0)`が作成される可能性がある問題を修正[#53779](https://github.com/pingcap/tidb/issues/53779) @[tangenta](https://github.com/tangenta)
     - `(*PointGetPlan).StatsInfo()` の実行中に発生する可能性のあるデータ競合の問題を修正しました [#43339](https://github.com/pingcap/tidb/issues/43339) @[qw4990](https://github.com/qw4990) [#49803](https://github.com/pingcap/tidb/issues/49803)
@@ -104,10 +104,10 @@ v8.1.1 では、 `TiDB-community-toolkit` [バイナリパッケージ](/binary-
     - クエリに非相関サブクエリと`LIMIT`句が含まれている場合、列のプルーニングが不完全になり、最適でないプランになる可能性がある問題を修正しました。 [#54213](https://github.com/pingcap/tidb/issues/54213) @[qw4990](https://github.com/qw4990)
     - BIGINT 以外の符号なし整数が文字列/小数点と比較されたときに誤った結果を生成する可能性がある問題を修正しました [#41736](https://github.com/pingcap/tidb/issues/41736) @[LittleFall](https://github.com/LittleFall)
     - 分散実行フレームワーク (DXF) を使用してインデックスを追加するときに設定`max-index-length`で TiDB がpanicになる問題を修正しました [#53281](https://github.com/pingcap/tidb/issues/53281) @[zimulala](https://github.com/zimulala)
-    - クエリ内の特定のフィルタ条件により、プランナーモジュールが`invalid memory address or nil pointer dereference`エラーを報告する可能性がある問題を修正しました [#53582](https://github.com/pingcap/tidb/issues/53582) [#53580](https://github.com/pingcap/tidb/issues/53580) [#53594](https://github.com/pingcap/tidb/issues/53594) [#53603](https://github.com/pingcap/tidb/issues/53603) @[YangKeao](https://github.com/YangKeao)
-    - 再帰CTEクエリが無効なポインタを生成する可能性がある問題を修正しました [#54449](https://github.com/pingcap/tidb/issues/54449) @[hawkingrei](https://github.com/hawkingrei)
+    - クエリ内の特定のフィルター条件により、プランナーモジュールが`invalid memory address or nil pointer dereference`エラーを報告する可能性がある問題を修正しました [#53582](https://github.com/pingcap/tidb/issues/53582) [#53580](https://github.com/pingcap/tidb/issues/53580) [#53594](https://github.com/pingcap/tidb/issues/53594) [#53603](https://github.com/pingcap/tidb/issues/53603) @[YangKeao](https://github.com/YangKeao)
+    - 再帰CTEクエリが無効なポインターを生成する可能性がある問題を修正しました [#54449](https://github.com/pingcap/tidb/issues/54449) @[hawkingrei](https://github.com/hawkingrei)
     - 述語における`Longlong`型のオーバーフローの問題を修正 [#45783](https://github.com/pingcap/tidb/issues/45783) @[hawkingrei](https://github.com/hawkingrei)
-    - `GROUP BY`ステートメント内の間接プレースホルダ`?`参照が列を見つけられない問題を修正しました [#53872](https://github.com/pingcap/tidb/issues/53872) @[qw4990](https://github.com/qw4990)
+    - `GROUP BY`ステートメント内の間接プレースホルダー`?`参照が列を見つけられない問題を修正しました [#53872](https://github.com/pingcap/tidb/issues/53872) @[qw4990](https://github.com/qw4990)
     - トランザクションで使用されるメモリが複数回追跡される可能性がある問題を修正[#53984](https://github.com/pingcap/tidb/issues/53984) @[ekexium](https://github.com/ekexium)
     - 列のデフォルト値として`CURRENT_DATE()`を使用すると、クエリ結果が正しくなくなる問題を修正しました [#53746](https://github.com/pingcap/tidb/issues/53746) @[tangenta](https://github.com/tangenta)
     - グローバルソートを使用してインデックスを追加するときにパフォーマンスが不安定になる問題を修正しました [#54147](https://github.com/pingcap/tidb/issues/54147) @[tangenta](https://github.com/tangenta)
@@ -153,7 +153,7 @@ v8.1.1 では、 `TiDB-community-toolkit` [バイナリパッケージ](/binary-
     - 書き込みホットスポットのスケジュール設定により配置ポリシーの制約が破られる可能性がある問題を修正[#7848](https://github.com/tikv/pd/issues/7848) @[lhy1024](https://github.com/lhy1024)
     - 配置ルールを使用しているときに、ダウンしたピアが回復しない可能性がある問題を修正しました。 [#7808](https://github.com/tikv/pd/issues/7808) @[rleungx](https://github.com/rleungx)
     - リソースグループクエリをキャンセルするときに再試行回数が多すぎる問題を修正 [#8217](https://github.com/tikv/pd/issues/8217) @[nolouch](https://github.com/nolouch)
-    - PD がオペレーター チェック中に遭遇するデータ競合問題を修正しました [#8263](https://github.com/tikv/pd/issues/8263) @[lhy1024](https://github.com/lhy1024)
+    - PD がオペレーターチェック中に遭遇するデータ競合問題を修正しました [#8263](https://github.com/tikv/pd/issues/8263) @[lhy1024](https://github.com/lhy1024)
     - ロールをリソースグループにバインドするときにエラーが報告されない問題を修正しました [#54417](https://github.com/pingcap/tidb/issues/54417) @[JmPotato](https://github.com/JmPotato)
     - TiKV設定項目[`coprocessor.region-split-size`](/tikv-configuration-file.md#region-split-size)を1 MiB未満の値に設定するとPD panicが発生する問題を修正しました [#8323](https://github.com/tikv/pd/issues/8323) @[JmPotato](https://github.com/JmPotato)
 
@@ -180,7 +180,7 @@ v8.1.1 では、 `TiDB-community-toolkit` [バイナリパッケージ](/binary-
         - 空の`EndKey` が原因でBR がトランザクション KV クラスターの復元に失敗する問題を修正しました [#52574](https://github.com/pingcap/tidb/issues/52574) @[3pointer](https://github.com/3pointer)
         - アドバンサーオーナーの移行後にログバックアップが一時停止される可能性がある問題を修正しました [#53561](https://github.com/pingcap/tidb/issues/53561) @[RidRisR](https://github.com/RidRisR)
         - `ADD INDEX`や`MODIFY COLUMN`などのバックフィルを必要とする DDL が、増分リストア中に正しく回復されない可能性がある問題を修正しました。 [#54426](https://github.com/pingcap/tidb/issues/54426) @[3pointer](https://github.com/3pointer)
-        - PD接続障害により、ログバックアップアドバンサ所有者が配置されているTiDBインスタンスがpanicになる可能性がある問題を修正しました。 [#52597](https://github.com/pingcap/tidb/issues/52597) @[YuJuncen](https://github.com/YuJuncen)
+        - PD接続障害により、ログバックアップアドバンサー所有者が配置されているTiDBインスタンスがpanicになる可能性がある問題を修正しました。 [#52597](https://github.com/pingcap/tidb/issues/52597) @[YuJuncen](https://github.com/YuJuncen)
 
     - TiCDC
 
@@ -188,14 +188,14 @@ v8.1.1 では、 `TiDB-community-toolkit` [バイナリパッケージ](/binary-
         - アップストリームで新しい照合順序が無効になっている場合、TiCDC がクラスター化インデックステーブルの主キーを正しくデコードできない問題を修正しました。 [#11371](https://github.com/pingcap/tiflow/issues/11371) @[lidezhu](https://github.com/lidezhu)
         - `UPDATE`イベントを分割した後、チェックサムが正しく`0`に設定されない問題を修正しました。 [#11402](https://github.com/pingcap/tiflow/issues/11402) @[3AceShowHand](https://github.com/3AceShowHand)
         - マルチノード環境で大量の`UPDATE`操作を実行する際にChangefeedを繰り返し再起動するとデータの不整合が発生する可能性がある問題を修正[#11219](https://github.com/pingcap/tiflow/issues/11219) @[lidezhu](https://github.com/lidezhu)
-        - 下流の Kafka にアクセスできない場合にプロセッサモジュールがスタックする可能性がある問題を修正[#11340](https://github.com/pingcap/tiflow/issues/11340) @[asddongmen](https://github.com/asddongmen)
+        - 下流の Kafka にアクセスできない場合にプロセッサーモジュールがスタックする可能性がある問題を修正[#11340](https://github.com/pingcap/tiflow/issues/11340) @[asddongmen](https://github.com/asddongmen)
 
     - TiDB Data Migration (DM)
 
         - MariaDBデータの移行中に`SET`文がDM panicを引き起こす問題を修正[#10206](https://github.com/pingcap/tiflow/issues/10206) @[dveeden](https://github.com/dveeden)
         - `go-mysql` にアップグレードして接続ブロックの問題を修正しました [#11041](https://github.com/pingcap/tiflow/issues/11041) @[D3Hunter](https://github.com/D3Hunter)
         - インデックスの長さがデフォルト値の`max-index-length` を超えるとデータレプリケーションが中断される問題を修正しました [#11459](https://github.com/pingcap/tiflow/issues/11459) @[michaelmdeng](https://github.com/michaelmdeng)
-        - スキーマ トラッカーが LIST パーティションテーブルを誤って処理し、DM エラーが発生する問題を修正しました。 [#11408](https://github.com/pingcap/tiflow/issues/11408) @[lance6716](https://github.com/lance6716)
+        - スキーマトラッカーが LIST パーティションテーブルを誤って処理し、DM エラーが発生する問題を修正しました。 [#11408](https://github.com/pingcap/tiflow/issues/11408) @[lance6716](https://github.com/lance6716)
 
     - TiDB Lightning
 

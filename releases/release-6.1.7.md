@@ -73,7 +73,7 @@ TiDB バージョン: 6.1.7
 
     - TiDB Lightning がSST ファイルの漏洩を引き起こす可能性がある問題を修正[#14745](https://github.com/tikv/tikv/issues/14745) @[YuJuncen](https://github.com/YuJuncen)
     - 暗号化キーIDの競合により古いキーが削除される可能性がある問題を修正しました [#14585](https://github.com/tikv/tikv/issues/14585) @[tabokie](https://github.com/tabokie)
-    - 継続的プロファイリングにおけるファイル ハンドル リークの問題を修正しました [#14224](https://github.com/tikv/tikv/issues/14224) @[tabokie](https://github.com/tabokie)
+    - 継続的プロファイリングにおけるファイルハンドルリークの問題を修正しました [#14224](https://github.com/tikv/tikv/issues/14224) @[tabokie](https://github.com/tabokie)
 
 - PD
 

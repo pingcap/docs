@@ -1,6 +1,6 @@
 ---
 title: TiDB 6.1.1 Release Notes
-summary: "TiDB 6.1.1は2022年9月1日にリリースされました。変更点には、大文字と小文字を区別しない`SHOW DATABASES LIKE`ステートメント、`tidb_enable_outer_join_reorder`のデフォルト値の変更、オプティマイザとメトリクスレスポンスの圧縮の改善が含まれます。バグ修正では、`INL_HASH_JOIN`のハング、`UPDATE`文実行中のパニック、クエリ結果の誤りなどの問題が修正されています。その他の変更点には、異なる品質基準に対するマルチレベルサポートと、`TiDB-community-toolkit`バイナリパッケージへの追加が含まれます。"
+summary: "TiDB 6.1.1は2022年9月1日にリリースされました。変更点には、大文字と小文字を区別しない`SHOW DATABASES LIKE`ステートメント、`tidb_enable_outer_join_reorder`のデフォルト値の変更、オプティマイザーとメトリクスレスポンスの圧縮の改善が含まれます。バグ修正では、`INL_HASH_JOIN`のハング、`UPDATE`文実行中のパニック、クエリ結果の誤りなどの問題が修正されています。その他の変更点には、異なる品質基準に対するマルチレベルサポートと、`TiDB-community-toolkit`バイナリパッケージへの追加が含まれます。"
 ---
 
 # TiDB 6.1.1 リリースノート {#tidb-6-1-1-release-notes}
@@ -39,7 +39,7 @@ TiDB バージョン: 6.1.1
 
 - TiDB
 
-    - 新しいオプティマイザ`SEMI_JOIN_REWRITE`を追加して、 `EXISTS`クエリのパフォーマンスを向上させます。 [#35323](https://github.com/pingcap/tidb/issues/35323) @[winoros](https://github.com/winoros)
+    - 新しいオプティマイザー`SEMI_JOIN_REWRITE`を追加して、 `EXISTS`クエリのパフォーマンスを向上させます。 [#35323](https://github.com/pingcap/tidb/issues/35323) @[winoros](https://github.com/winoros)
 
 - TiKV
 
@@ -63,7 +63,7 @@ TiDB バージョン: 6.1.1
 
     - TiCDC
 
-        - シンクURIパラメータ`transaction-atomicity`を追加し、チェンジフィード内の大規模トランザクションの分割をサポートします。これにより、大規模トランザクションのレイテンシーとメモリ消費を大幅に削減できます[#5231](https://github.com/pingcap/tiflow/issues/5231) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        - シンクURIパラメーター`transaction-atomicity`を追加し、チェンジフィード内の大規模トランザクションの分割をサポートします。これにより、大規模トランザクションのレイテンシーとメモリ消費を大幅に削減できます。 [#5231](https://github.com/pingcap/tiflow/issues/5231) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - マルチリージョンシナリオにおける実行時コンテキスト切り替えによるパフォーマンスオーバーヘッドを削減[#5610](https://github.com/pingcap/tiflow/issues/5610) @[hicqu](https://github.com/hicqu)
         - MySQLシンクを強化してセーフモードを自動的にオフにする[#5611](https://github.com/pingcap/tiflow/issues/5611) @[overvenus](https://github.com/overvenus)
 
@@ -73,7 +73,7 @@ TiDB バージョン: 6.1.1
 
     - `LIMIT` と併用すると`INL_HASH_JOIN`がハングする可能性がある問題を修正しました [#35638](https://github.com/pingcap/tidb/issues/35638) @[guo-shaoge](https://github.com/guo-shaoge)
     - `UPDATE`文の実行時に TiDB がpanicする可能性がある問題を修正しました [#32311](https://github.com/pingcap/tidb/issues/32311) @[Yisaer](https://github.com/Yisaer)
-    - `SHOW COLUMNS`文を実行するときに TiDB がコプロセッサリクエストを送信する可能性があるバグを修正しました。 [#36496](https://github.com/pingcap/tidb/issues/36496) @[tangenta](https://github.com/tangenta)
+    - `SHOW COLUMNS`文を実行するときに TiDB がコプロセッサーリクエストを送信する可能性があるバグを修正しました。 [#36496](https://github.com/pingcap/tidb/issues/36496) @[tangenta](https://github.com/tangenta)
     - TiDBが`SHOW WARNINGS`文を実行するときに`invalid memory address or nil pointer dereference`エラーを返す可能性があるバグを修正しました [#31569](https://github.com/pingcap/tidb/issues/31569) @[zyguan](https://github.com/zyguan)
     - 静的パーティションプルーニングモードで、テーブルが空の場合に集計条件を含むSQL文が間違った結果を返す可能性があるバグを修正[#35295](https://github.com/pingcap/tidb/issues/35295) @[tiancaiamao](https://github.com/tiancaiamao)
     - Join Reorder 操作がその Outer Join 条件を誤ってプッシュダウンする問題を修正しました [#37238](https://github.com/pingcap/tidb/issues/37238) @[winoros](https://github.com/winoros)
@@ -110,13 +110,13 @@ TiDB バージョン: 6.1.1
     - Raft Engineが有効になっているときに稀に発生するパニックを修正[#12698](https://github.com/tikv/tikv/issues/12698) @[tabokie](https://github.com/tabokie)
     - proc ファイルシステム (procfs) が見つからない場合に冗長なログ警告を回避する[#13116](https://github.com/tikv/tikv/issues/13116) @[tabokie](https://github.com/tabokie)
     - ダッシュボードの`Unified Read Pool CPU`の誤った表現を修正 [#13086](https://github.com/tikv/tikv/issues/13086) @[glorv](https://github.com/glorv)
-    - リージョンが大きい場合、デフォルトの[`region-split-check-diff`](/tikv-configuration-file.md#region-split-check-diff)がバケット サイズよりも大きくなる可能性がある問題を修正しました。 [#12598](https://github.com/tikv/tikv/issues/12598) @[tonyxuqqi](https://github.com/tonyxuqqi)
+    - リージョンが大きい場合、デフォルトの[`region-split-check-diff`](/tikv-configuration-file.md#region-split-check-diff)がバケットサイズよりも大きくなる可能性がある問題を修正しました。 [#12598](https://github.com/tikv/tikv/issues/12598) @[tonyxuqqi](https://github.com/tonyxuqqi)
     - スナップショットの適用が中止され、 Raft Engineが有効になっている場合に TiKV がpanicする可能性がある問題を修正[#12470](https://github.com/tikv/tikv/issues/12470) @[tabokie](https://github.com/tabokie)
     - PD クライアントがデッドロックを引き起こす可能性がある問題を修正しました [#13191](https://github.com/tikv/tikv/issues/13191) @[bufferflies](https://github.com/bufferflies) [#12933](https://github.com/tikv/tikv/issues/12933) @[BurtonQin](https://github.com/BurtonQin)
 
 - PD
 
-    - クラスタノードのラベル構成が無効な場合にオンラインの進行状況が不正確になる問題を修正[#5234](https://github.com/tikv/pd/issues/5234) @[rleungx](https://github.com/rleungx)
+    - クラスターノードのラベル構成が無効な場合にオンラインの進行状況が不正確になる問題を修正[#5234](https://github.com/tikv/pd/issues/5234) @[rleungx](https://github.com/rleungx)
     - `enable-forwarding`が有効になっているときに gRPC がエラーを不適切に処理する問題によって発生する PD パニックを修正[#5373](https://github.com/tikv/pd/issues/5373) @[bufferflies](https://github.com/bufferflies)
     - `/regions/replicated`が間違ったステータスを返す可能性がある問題を修正しました [#5095](https://github.com/tikv/pd/issues/5095) @[rleungx](https://github.com/rleungx)
 
@@ -166,7 +166,7 @@ TiDB バージョン: 6.1.1
     - Backup & Restore (BR)
 
         - RawKVモードでBRが`ErrRestoreTableIDMismatch`を報告するバグを修正 [#35279](https://github.com/pingcap/tidb/issues/35279) @[3pointer](https://github.com/3pointer)
-        - 大規模クラスタバックアップでの S3 レート制限によるバックアップ失敗を修正するために、バックアップデータディレクトリ構造を調整します。 [#30087](https://github.com/pingcap/tidb/issues/30087) @[MoCuishle28](https://github.com/MoCuishle28)
+        - 大規模クラスターバックアップでの S3 レート制限によるバックアップ失敗を修正するために、バックアップデータディレクトリ構造を調整します。 [#30087](https://github.com/pingcap/tidb/issues/30087) @[MoCuishle28](https://github.com/MoCuishle28)
         - サマリーログのバックアップ時間の誤りを修正 [#35553](https://github.com/pingcap/tidb/issues/35553) @[ixuh12](https://github.com/ixuh12)
 
     - Dumpling
