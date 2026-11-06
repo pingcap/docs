@@ -5,7 +5,7 @@ summary: TiDB Self-ManagedからTiDB Cloud Premiumまたは{{{ .byoc }}}への�
 
 # TiDB Self-ManagedからTiDB Cloud Premiumまたは{{{ .byoc }}}への移行 {#migrate-from-tidb-self-managed-to-tidb-cloud-premium-or-tidb-cloud-byoc}
 
-このドキュメントでは、 DumplingとTiCDCを使用して、TiDB Self-ManagedクラスターからTiDB Cloud Premiumまたは{{{ .byoc }}}（AWS上）インスタンスにデータを移行する方法について説明します。
+このドキュメントでは、 DumplingとTiCDCを使用して、TiDB Self-ManagedクラスターからAWS上のTiDB Cloud Premiumまたは{{{ .byoc }}}インスタンスにデータを移行する方法について説明します。
 
 全体の手順は以下のとおりです。
 
@@ -218,6 +218,8 @@ TiDB Self-ManagedクラスターからAmazon S3にデータをエクスポート
 
 3. インポートウィザードの残りの手順に進み、プロンプトが表示されたら保存したロールARNを使用してください。
 
+    BYOCインスタンスの場合は、インポートを開始する前に、IAMロールに`tidbcloud.com/allow-dataplane-access=true`タグを追加してください。
+
 #### IAMロールを手動で作成する（オプション） {#manually-create-the-iam-role-optional}
 
 組織がCloudFormationスタックをデプロイできない場合は、アクセスポリシーとIAMロールを手動で作成してください。
@@ -265,6 +267,8 @@ TiDB Self-ManagedクラスターからAmazon S3にデータをエクスポート
 
 2. 先にメモしておいた**Account ID**と**External ID**を指定して、 TiDB Cloud Premiumまたは{{{ .byoc }}}を信頼するIAMロールを作成します。次に、前の手順で作成したポリシーをこのロールにアタッチします。
 
+    BYOCインスタンスの場合は、インポートを開始する前に、IAMロールに`tidbcloud.com/allow-dataplane-access=true`タグを追加してください。
+
 3. 生成されたロールARNをコピーし、 TiDB Cloud Premiumまたは{{{ .byoc }}}インポートウィザードに入力します。
 
 4. [Amazon S3からTiDB Cloud Premiumまたは{{{ .byoc }}}にデータをインポートする](/tidb-cloud/premium/import-from-s3-premium.md)の手順に従って、TiDB Cloud Premiumまたは{{{ .byoc }}}にデータをインポートします。
@@ -277,19 +281,16 @@ TiDB Self-ManagedクラスターからAmazon S3にデータをエクスポート
 
     ![Start Time in Metadata](/media/tidb-cloud/start_ts_in_metadata.png)
 
-2. TiCDCがTiDB Cloud Premiumまたは{{{ .byoc }}}に接続できるように許可します。
+2. パブリック接続または AWS PrivateLink のいずれかを使用して、TiCDCサーバーからターゲットインスタンスへのネットワーク接続を構成します。パブリック接続の場合は、[パブリック接続経由で接続する](/tidb-cloud/premium/connect-to-premium-via-public-connection.md)に従ってください。プライベート接続の場合は、[AWS PrivateLink 経由で接続する](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)に従ってください。
 
-    1. [TiDB Cloudコンソール](https://tidbcloud.com/tidbs)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Premiumまたは{{{ .byoc }}}インスタンスの名前をクリックして、その概要ページに移動します。
-    2. 左側のナビゲーションペインで、 **Settings** > **Networking**をクリックします。
-    3. **Networking**ページで、 **Add IP Address**をクリックします。
-    4. 表示されたダイアログで、 **Use IP addresses**を選択し、 **+**をクリックし、 **IP Address**フィールドに TiCDCコンポーネントのパブリック IP アドレスを入力して、 **Confirm**をクリックします。これで、TiCDC はTiDB Cloud Premiumまたは{{{ .byoc }}} にアクセスできるようになりました。詳細については、 [IPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md)を参照してください。
+    BYOCインスタンスの場合、パブリック接続を利用できるのは、デプロイ時にパブリックホストゾーンを指定した場合のみです。プライベートホストゾーンを指定した場合は、プライベート接続を使用してください。
 
 3. 下流のTiDB Cloud Premiumまたは{{{ .byoc }}}インスタンスの接続情報を取得します。
 
     1. [TiDB Cloudコンソール](https://tidbcloud.com/tidbs)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Premiumまたは{{{ .byoc }}}インスタンスの名前をクリックして、その概要ページに移動します。
     2. 右上隅の**Connect**をクリックしてください。
-    3. 接続ダイアログで、 **Connection Type**ドロップダウンリストから**Public**を選択し、 **Connect With**ドロップダウンリストから**General**を選択します。
-    4. 接続情報から、インスタンスのホスト IP アドレスとポートを取得できます。詳細については、 [パブリック接続経由で接続する](/tidb-cloud/connect-via-standard-connection.md)を参照してください。
+    3. 接続ダイアログで、 **Connection Type**ドロップダウンリストから前の手順で構成した接続タイプを選択し、 **Connect With**ドロップダウンリストから**General**を選択します。
+    4. 接続情報から、選択した接続タイプのインスタンスのホストとポートを取得します。手順4では、 `--sink-uri`内の`172.16.6.125:4000`をこれらの値に置き換えます。
 
 4. 増分レプリケーションタスクを作成して実行します。アップストリームクラスターで、以下を実行します。
 

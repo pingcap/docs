@@ -129,7 +129,7 @@ tiup dumpling -u root -P 4000 -h 127.0.0.1 -o /tmp/test --filetype csv --sql 'se
 
 上記のコマンドでは：
 
-- `--sql`オプションは、CSV ファイルへのエクスポートにのみ使用できます。上記のコマンドは、エクスポート対象のすべてのテーブルに対して`SELECT * FROM <table-name> WHERE id <100`ステートメントを実行します。テーブルに指定されたフィールドがない場合、エクスポートは失敗します。
+- ``SELECT * FROM `test`.`sbtest1` WHERE id < 100`` を実行し、クエリ結果をCSVファイルにエクスポートします。SQL文が存在しないカラムを参照している場合、エクスポートは失敗します。
 
 <CustomContent platform="tidb">
 
