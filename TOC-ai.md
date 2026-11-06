@@ -16,6 +16,7 @@
   - Vector Search
     - [Overview](/ai/guides/vector-search-overview.md)
     - [Vector Search Guide](/ai/guides/vector-search.md)
+    - [Troubleshoot Slow Queries with Vector Indexes](/ai/guides/vector-search-troubleshooting.md)
     - [Vector Search Example](/ai/guides/vector-search-with-pytidb.md)
   - Full-Text Search
     - [Full-Text Search via Python](/ai/guides/vector-search-full-text-search-python.md)
