@@ -6,7 +6,7 @@ aliases: ['/ja/tidb/stable/dev-guide-connect-to-tidb/','/ja/tidb/dev/dev-guide-c
 
 # TiDBに接続する {#connect-to-tidb}
 
-TiDBはMySQLプロトコルとの互換性が非常に高いため、ほとんどのMySQLツール、ドライバ、およびORMを使用して接続できます。
+TiDBはMySQLプロトコルとの互換性が非常に高いため、ほとんどのMySQLツール、ドライバー、およびORMを使用して接続できます。
 
 - SQLを手動で実行する（接続テスト、デバッグ、または簡単な検証のため）には、 [MySQL CLIツール](/develop/dev-guide-mysql-tools.md)から始めます。
 
@@ -20,7 +20,7 @@ TiDBはMySQLプロトコルとの互換性が非常に高いため、ほとん�
 
 - TiDB 上でアプリケーションを構築するには、プログラミング言語とフレームワークに基づいて [ドライバーまたはORMを選択してください](/develop/dev-guide-choose-driver-or-orm.md)。
 
-- エッジ環境から HTTP 経由でTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに接続するには、 [TiDB Cloud Serverless Driver](/develop/serverless-driver.md)を使用します。TiDB Cloud Serverless Driverはパブリックプレビューであり、 TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにのみ適用可能であることに注意してください。
+- エッジ環境から HTTP 経由で{{{ .starter }}}または{{{ .essential }}}インスタンスに接続するには、 [TiDB Cloud Serverless Driver](/develop/serverless-driver.md)を使用します。TiDB Cloud Serverless Driverはパブリックプレビューであり、 {{{ .starter }}}または{{{ .essential }}}インスタンスにのみ適用可能であることに注意してください。
 
 ## お困りですか？ {#need-help}
 

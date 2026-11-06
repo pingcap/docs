@@ -8,7 +8,7 @@ aliases: ['/ja/tidb/stable/dev-guide-choose-driver-or-orm/','/ja/tidbcloud/dev-g
 
 > **Note:**
 >
-> TiDB は、ドライバーと ORM に対して次の2つのサポート レベルを提供します。
+> TiDB は、ドライバーと ORM に対して次の2つのサポートレベルを提供します。
 >
 > - **フル**: TiDB がツールのほとんどの機能と互換性があり、最新バージョンとの互換性を維持していることを示します。PingCAP は、[TiDB でサポートされているサードパーティツール](/develop/dev-guide-third-party-support.md)との互換性テストを定期的に実施します。
 > - **互換**：対応するサードパーティ製ツールがMySQLに適合しており、TiDBはMySQLプロトコルと高い互換性があるため、TiDBはツールのほとんどの機能を使用できることを示します。ただし、PingCAPはツールのすべての機能について完全なテストを完了していないため、予期しない動作が発生する可能性があります。
@@ -28,7 +28,7 @@ TiDBはMySQLプロトコルと高い互換性がありますが、一部の機�
 
 サポートレベル:**フル**
 
-[MySQLドキュメント](https://dev.mysql.com/doc/connector-j/en/)に従ってJava JDBCドライバをダウンロードして設定してください。TiDB v6.3.0以降では、MySQL Connector/Jの最新GAバージョンを使用することをお勧めします。
+[MySQLドキュメント](https://dev.mysql.com/doc/connector-j/en/)に従ってJava JDBCドライバーをダウンロードして設定してください。TiDB v6.3.0以降では、MySQL Connector/Jの最新GAバージョンを使用することをお勧めします。
 
 > **Warning:**
 >
@@ -41,7 +41,7 @@ TiDBはMySQLプロトコルと高い互換性がありますが、一部の機�
 
 サポートレベル:**フル**
 
-[TiDB-JDBC](https://github.com/pingcap/mysql-connector-j)は、MySQL 8.0.29をベースにカスタマイズされたJavaドライバです。MySQL公式バージョン8.0.29をベースにコンパイルされたTiDB-JDBCは、元のJDBCにおける準備モードにおける複数パラメータおよび複数フィールドのEOFのバグを修正し、TiCDCスナップショットの自動メンテナンスやSM3認証プラグインなどの機能を追加しています。
+[TiDB-JDBC](https://github.com/pingcap/mysql-connector-j)は、MySQL 8.0.29をベースにカスタマイズされたJavaドライバーです。MySQL公式バージョン8.0.29をベースにコンパイルされたTiDB-JDBCは、元のJDBCにおける準備モードにおける複数パラメーターおよび複数フィールドのEOFのバグを修正し、TiCDCスナップショットの自動メンテナンスやSM3認証プラグインなどの機能を追加しています。
 
 SM3 に基づく認証は、TiDB の TiDB-JDBC でのみサポートされます。
 
@@ -246,7 +246,7 @@ GORM を使用して TiDB アプリケーションを構築する例について
 
 サポートレベル:**互換**
 
-[PyMySQLドキュメント](https://pypi.org/project/PyMySQL/)に従ってドライバをダウンロードし、設定してください。PyMySQL 1.0.2以降のバージョンの使用をお勧めします。
+[PyMySQLドキュメント](https://pypi.org/project/PyMySQL/)に従ってドライバーをダウンロードし、設定してください。PyMySQL 1.0.2以降のバージョンの使用をお勧めします。
 
 PyMySQL を使用して TiDB アプリケーションを構築する例については、 [PyMySQLでTiDBに接続する](/develop/dev-guide-sample-application-python-pymysql.md)を参照してください。
 
@@ -255,7 +255,7 @@ PyMySQL を使用して TiDB アプリケーションを構築する例につい
 
 サポートレベル:**互換**
 
-[mysqlclient ドキュメント](https://pypi.org/project/mysqlclient/)に従ってドライバをダウンロードし、設定してください。mysqlclient 2.1.1以降のバージョンを使用することをお勧めします。
+[mysqlclient ドキュメント](https://pypi.org/project/mysqlclient/)に従ってドライバーをダウンロードし、設定してください。mysqlclient 2.1.1以降のバージョンを使用することをお勧めします。
 
 mysqlclient を使用して TiDB アプリケーションを構築する例については、 [mysqlclientでTiDBに接続する](/develop/dev-guide-sample-application-python-mysqlclient.md)を参照してください。
 
@@ -264,7 +264,7 @@ mysqlclient を使用して TiDB アプリケーションを構築する例に�
 
 サポートレベル:**互換**
 
-[MySQL Connector/Pythonドキュメント](https://dev.mysql.com/doc/connector-python/en/connector-python-installation-binary.html)に従ってドライバをダウンロードし、設定してください。Connector/Python 8.0.31以降のバージョンを使用することをお勧めします。
+[MySQL Connector/Pythonドキュメント](https://dev.mysql.com/doc/connector-python/en/connector-python-installation-binary.html)に従ってドライバーをダウンロードし、設定してください。Connector/Python 8.0.31以降のバージョンを使用することをお勧めします。
 
 MySQL Connector/Python を使用して TiDB アプリケーションを構築する例については、 [MySQL Connector/Python で TiDB に接続する](/develop/dev-guide-sample-application-python-mysql-connector.md)を参照してください。
 

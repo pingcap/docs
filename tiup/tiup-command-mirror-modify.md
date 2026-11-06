@@ -13,7 +13,7 @@ summary: tiup mirror modifyコマンドは、公開済みコンポーネント�
 tiup mirror modify <component>[:version] [flags]
 ```
 
-各パラメータの説明は次のとおりです。
+各パラメーターの説明は次のとおりです。
 
 - `<component>` :コンポーネント名
 - `[version]` : 変更するコンポーネントのバージョン。指定されていない場合は、コンポーネント全体が変更されます。
@@ -59,7 +59,7 @@ tiup mirror modify <component>[:version] [flags]
 
 - コマンドが正常に実行された場合、出力はありません。
 - コンポーネント所有者にターゲットコンポーネントを変更する権限がない場合:
-    - ミラーがリモート ミラーの場合、 TiUP はエラー`Error: The server refused, make sure you have access to this component`を報告します。
-    - ミラーがローカル ミラーの場合、 TiUP はエラー`Error: the signature is not correct`を報告します。
+    - ミラーがリモートミラーの場合、 TiUP はエラー`Error: The server refused, make sure you have access to this component`を報告します。
+    - ミラーがローカルミラーの場合、 TiUP はエラー`Error: the signature is not correct`を報告します。
 
 [&lt;&lt; 前のページに戻る - TiUPミラーコマンドリスト](/tiup/tiup-command-mirror.md#command-list)

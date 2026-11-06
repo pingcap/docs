@@ -32,12 +32,12 @@ TiDB Cloud Starterインスタンスをお持ちでない場合は、 [TiDB Clou
         - `AWSCertificateManagerFullAccess` : [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/)の読み書きに使用されます。
         - `AWSCloudFormationFullAccess` : SAM CLI は[AWS CloudFormation](https://aws.amazon.com/cloudformation/)を使用して AWS リソースを宣言します。
         - `AmazonS3FullAccess` : AWS CloudFormation は[Amazon S3](https://aws.amazon.com/s3/?nc2=h_ql_prod_fs_s3)を使用して公開します。
-        - `AWSLambda_FullAccess` : 現在、Amazon AppFlow 用の新しいコネクタを実装する方法は[AWS Lambda](https://aws.amazon.com/lambda/?nc2=h_ql_prod_fs_lbd)のみです。
-        - `IAMFullAccess` : SAM CLI はコネクタ用に`ConnectorFunctionRole`を作成する必要があります。
+        - `AWSLambda_FullAccess` : 現在、Amazon AppFlow 用の新しいコネクターを実装する方法は[AWS Lambda](https://aws.amazon.com/lambda/?nc2=h_ql_prod_fs_lbd)のみです。
+        - `IAMFullAccess` : SAM CLI はコネクター用に`ConnectorFunctionRole`を作成する必要があります。
 
 - [Salesforce](https://developer.salesforce.com)アカウント。
 
-## ステップ1. TiDBコネクタを登録する {#step-1-register-a-tidb-connector}
+## ステップ1. TiDBコネクターを登録する {#step-1-register-a-tidb-connector}
 
 ### コードを複製する {#clone-the-code}
 
@@ -85,17 +85,17 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
 
     ![lambda dashboard](/media/develop/aws-appflow-step-lambda-dashboard.png)
 
-### Lambdaを使用してコネクタを登録します {#use-lambda-to-register-a-connector}
+### Lambdaを使用してコネクターを登録します {#use-lambda-to-register-a-connector}
 
-1. [AWS マネジメントコンソール](https://console.aws.amazon.com)で、 [Amazon AppFlow &gt; コネクタ](https://console.aws.amazon.com/appflow/home#/gallery)に移動し、 **Register a new connector**をクリックします。
+1. [AWS マネジメントコンソール](https://console.aws.amazon.com)で、 [Amazon AppFlow &gt; コネクター](https://console.aws.amazon.com/appflow/home#/gallery)に移動し、 **Register a new connector**をクリックします。
 
     ![register connector](/media/develop/aws-appflow-step-register-connector.png)
 
-2. **Register a new connector**ダイアログで、アップロードしたLambda関数を選択し、コネクタ名を使用してコネクタラベルを指定します。
+2. **Register a new connector**ダイアログで、アップロードしたLambda関数を選択し、コネクター名を使用してコネクターラベルを指定します。
 
     ![register connector dialog](/media/develop/aws-appflow-step-register-connector-dialog.png)
 
-3. **Register**をクリックします。すると、TiDBコネクタが正常に登録されます。
+3. **Register**をクリックします。すると、TiDBコネクターが正常に登録されます。
 
 ## ステップ2. フローを作成する {#step-2-create-a-flow}
 
@@ -111,7 +111,7 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
 
 ### ソーステーブルと宛先テーブルを設定する {#set-the-source-and-destination-tables}
 
-**Source details**と**Destination details**を選択してください。TiDBコネクタはどちらにも使用できます。
+**Source details**と**Destination details**を選択してください。TiDBコネクターはどちらにも使用できます。
 
 1. ソース名を選択してください。このドキュメントでは、例として**Salesforce**をソースとして使用します。
 
@@ -155,7 +155,7 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
 
 5. `sf_account`テーブルが作成されたら、 **Connect**をクリックします。接続ダイアログが表示されます。
 
-6. **Connect to TiDB-Connector**ダイアログで、 TiDB Cloud Starterインスタンスの接続プロパティを入力します。TiDB Cloud Starterの場合、 **TLS**オプションを`Yes`に設定する必要があります。これにより、TiDBコネクタがTLS接続を使用できるようになります。次に、 **Connect**をクリックします。
+6. **Connect to TiDB-Connector**ダイアログで、 TiDB Cloud Starterインスタンスの接続プロパティを入力します。TiDB Cloud Starterの場合、 **TLS**オプションを`Yes`に設定する必要があります。これにより、TiDBコネクターがTLS接続を使用できるようになります。次に、 **Connect**をクリックします。
 
     ![tidb connection message](/media/develop/aws-appflow-step-tidb-connection-message.png)
 
@@ -250,7 +250,7 @@ test> SELECT * FROM sf_account;
 ## 注目すべきこと {#noteworthy-things}
 
 - 何か問題が発生した場合は、AWS マネジメントコンソールの[CloudWatch](https://console.aws.amazon.com/cloudwatch/home)ページにアクセスしてログを取得できます。
-- このドキュメントの手順は、 [Amazon AppFlow Custom Connector SDK を使用したカスタムコネクタの構築](https://aws.amazon.com/blogs/compute/building-custom-connectors-using-the-amazon-appflow-custom-connector-sdk/)に基づいています。
+- このドキュメントの手順は、 [Amazon AppFlow Custom Connector SDK を使用したカスタムコネクターの構築](https://aws.amazon.com/blogs/compute/building-custom-connectors-using-the-amazon-appflow-custom-connector-sdk/)に基づいています。
 - [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)は本番環境では**ありません**。
 - 長くなりすぎないように、このドキュメントの例では`Insert`戦略のみを示していますが、 `Update`および`Upsert`戦略もテスト済みで使用できます。
 

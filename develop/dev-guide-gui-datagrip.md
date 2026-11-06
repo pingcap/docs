@@ -10,7 +10,7 @@ TiDBはMySQL互換のデータベースであり、 [JetBrains DataGrip](https:/
 
 > **Note:**
 >
-> このチュートリアルは、 TiDB Cloud Starter、 TiDB Cloud Essential、 TiDB Cloud Premium、 TiDB Cloud Dedicated、およびTiDB Self-Managedに対応しています。
+> このチュートリアルは、 {{{ .starter }}}、 {{{ .essential }}}、 {{{ .premium }}}、 TiDB Cloud Dedicated、およびTiDB Self-Managedに対応しています。
 
 DataGripは2つの方法で使用できます。
 
@@ -28,7 +28,7 @@ DataGripは2つの方法で使用できます。
 
 **TiDBクラスターをお持ちでない場合は、以下の手順で作成できます。**
 
-- (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
+- (推奨) [{{{ .starter }}}インスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
 - [ローカルテスト用のTiDB Self-Managedクラスターをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスターをデプロイ](/production-deployment-using-tiup.md)
 
 ## TiDBに接続する {#connect-to-tidb}
@@ -38,7 +38,7 @@ DataGripは2つの方法で使用できます。
 <SimpleTab>
 <div label="TiDB Cloud Starter or Essential">
 
-1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして、概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象の{{{ .starter }}}またはEssentialインスタンスの名前をクリックして、概要ページに移動します。
 
 2. 右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
@@ -65,20 +65,20 @@ DataGripは2つの方法で使用できます。
 
 7. TiDB Cloud接続ダイアログから接続文字列をコピーします。次に、それを**URL**フィールドに貼り付けると、残りのパラメーターは自動的に入力されます。結果の例は次のとおりです。
 
-    ![Configure the URL field for TiDB Cloud Starter](/media/develop/datagrip-url-paste.jpg)
+    ![Configure the URL field for {{{ .starter }}}](/media/develop/datagrip-url-paste.jpg)
 
     **Download missing driver files**という警告が表示された場合は、 **Download**をクリックしてドライバーファイルを入手してください。
 
-8. **Test Connection**をクリックして、対象のTiDB Cloud StarterまたはEssentialインスタンスへの接続を検証してください。
+8. **Test Connection**をクリックして、対象の{{{ .starter }}}またはEssentialインスタンスへの接続を検証してください。
 
-    ![Test the connection to a TiDB Cloud Starter instance](/media/develop/datagrip-test-connection.jpg)
+    ![Test the connection to a {{{ .starter }}} instance](/media/develop/datagrip-test-connection.jpg)
 
 9. 接続設定を保存するには、 **OK**をクリックしてください。
 
 </div>
 <div label="TiDB Cloud Premium">
 
-1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Premiumインスタンスの名前をクリックして概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象の{{{ .premium }}}インスタンスの名前をクリックして概要ページに移動します。
 
 2. 左側のナビゲーションペインで、 **Settings** > **Networking**をクリックします。
 
@@ -95,15 +95,15 @@ DataGripは2つの方法で使用できます。
     - 公開エンドポイントがまだ有効化中であることを示すメッセージが表示された場合は、処理が完了するまでお待ちください。
     - まだパスワードを設定していない場合は、ダイアログの**Set Root Password**をクリックしてください。
     - サーバー証明書を確認する必要がある場合、または接続に失敗して認証局（CA）証明書が必要な場合は、 **CA cert**をクリックしてダウンロードしてください。
-    - **Public**接続タイプに加えて、 TiDB Cloud Premium は**Private Endpoint**接続をサポートします。詳細については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
+    - **Public**接続タイプに加えて、 {{{ .premium }}} は**Private Endpoint**接続をサポートします。詳細については、 [AWS PrivateLink経由で{{{ .premium }}}に接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
 
 7. DataGripを起動し、接続を管理するためのプロジェクトを作成します。
 
 8. 新しく作成したプロジェクトで、**Database Explorer**パネルの左上隅にある**+**をクリックし、 **Data Source** > **Other** > **TiDB**を選択します。
 
-9. 適切な接続文字列をコピーして、DataGrip の **Data Source and Drivers**ウィンドウに貼り付けてください。DataGrip のフィールドとTiDB Cloud Premium の接続文字列のマッピングは以下のとおりです。
+9. 適切な接続文字列をコピーして、DataGrip の **Data Source and Drivers**ウィンドウに貼り付けてください。DataGrip のフィールドと{{{ .premium }}} の接続文字列のマッピングは以下のとおりです。
 
-    | DataGrip field | TiDB Cloud Premium接続文字列 |
+    | DataGrip field | {{{ .premium }}}接続文字列 |
     | ------------ | ----------------------- |
     | Host          | `{host}`                |
     | Port          | `{port}`                |
@@ -113,7 +113,7 @@ DataGripは2つの方法で使用できます。
     - **SSH/SSL**タブで、 **Use SSL**チェックボックスをオフにします。
     - **Download missing driver files**という警告が表示された場合は、 **Download**をクリックしてドライバーファイルを入手してください。
 
-10. **Test Connection**をクリックして、 TiDB Cloud Premiumインスタンスへの接続を検証してください。
+10. **Test Connection**をクリックして、 {{{ .premium }}}インスタンスへの接続を検証してください。
 
 11. 接続設定を保存するには、 **OK**をクリックしてください。
 

@@ -29,7 +29,7 @@ tiup cluster restart <cluster-name> [flags]
 
 > **Note:**
 >
-> オプション`-R, --role`を同時に指定すると、 TiUP は`-N, --node`と`-R, --role`の両方の要件に一致するサービス ノードを再起動します。
+> オプション`-R, --role`を同時に指定すると、 TiUP は`-N, --node`と`-R, --role`の両方の要件に一致するサービスノードを再起動します。
 
 ### -R, --role {#r-role}
 
@@ -39,7 +39,7 @@ tiup cluster restart <cluster-name> [flags]
 
 > **Note:**
 >
-> オプション`-N, --node`を同時に指定すると、 TiUP は`-N, --node`と`-R, --role`の両方の要件に一致するサービス ノードを再起動します。
+> オプション`-N, --node`を同時に指定すると、 TiUP は`-N, --node`と`-R, --role`の両方の要件に一致するサービスノードを再起動します。
 
 ### -h, --help {#h-help}
 
@@ -51,4 +51,4 @@ tiup cluster restart <cluster-name> [flags]
 
 サービスの再起動プロセスのログ。
 
-[&lt;&lt; 前のページに戻る - TiUPクラスタコマンドリスト](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPクラスターコマンドリスト](/tiup/tiup-component-cluster.md#command-list)

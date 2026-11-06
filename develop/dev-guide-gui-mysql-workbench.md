@@ -13,23 +13,23 @@ TiDBはMySQL互換データベースであり、 [MySQL Workbench](https://www.m
 > - MySQL WorkbenchはMySQLとの互換性があるため、TiDBに接続できますが、MySQL WorkbenchはTiDBを完全にサポートしているわけではありません。TiDBをMySQLとして扱うため、使用中に問題が発生する可能性があります。
 > - [DataGrip](/develop/dev-guide-gui-datagrip.md)、 [DBeaver](/develop/dev-guide-gui-dbeaver.md) 、 [VS Code SQLTools](/develop/dev-guide-gui-vscode-sqltools.md)など、TiDB を正式にサポートする他の GUI ツールを使用することをお勧めします。 TiDB で完全にサポートされている GUI ツールの完全なリストについては、 [TiDBがサポートするサードパーティツール](/develop/dev-guide-third-party-support.md#gui)を参照してください。
 
-このチュートリアルでは、MySQL Workbenchを使用してTiDBに接続する方法を学ぶことができます。
+このチュートリアルでは、MySQL Workbenchを使用してTiDBに接続する方法を学べます。
 
 > **Note:**
 >
-> このチュートリアルは、 TiDB Cloud Starter、 TiDB Cloud Essential、 TiDB Cloud Premium、 TiDB Cloud Dedicated、およびTiDB Self-Managedに対応しています。
+> このチュートリアルは、 {{{ .starter }}}、 {{{ .essential }}}、 {{{ .premium }}}、 TiDB Cloud Dedicated、およびTiDB Self-Managedに対応しています。
 
 ## 前提条件 {#prerequisites}
 
 このチュートリアルを完了するには、以下が必要です。
 
 - [MySQL Workbench](https://dev.mysql.com/downloads/workbench/) **8.0.31**以降のバージョン。
-- TiDBクラスタ。
+- TiDBクラスター。
 
-**TiDBクラスタをお持ちでない場合は、以下の手順で作成できます。**
+**TiDBクラスターをお持ちでない場合は、以下の手順で作成できます。**
 
-- (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
-- [ローカルテスト用のTiDB Self-Managedクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスタをデプロイ](/production-deployment-using-tiup.md)
+- (推奨) [{{{ .starter }}}インスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
+- [ローカルテスト用のTiDB Self-Managedクラスターをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスターをデプロイ](/production-deployment-using-tiup.md)
 
 ## TiDBに接続する {#connect-to-tidb}
 
@@ -38,7 +38,7 @@ TiDBはMySQL互換データベースであり、 [MySQL Workbench](https://www.m
 <SimpleTab>
 <div label="TiDB Cloud Starter or Essential">
 
-1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして、概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象の{{{ .starter }}}またはEssentialインスタンスの名前をクリックして、概要ページに移動します。
 
 2. 右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
@@ -59,28 +59,28 @@ TiDBはMySQL互換データベースであり、 [MySQL Workbench](https://www.m
 
     ![MySQL Workbench: add new connection](/media/develop/mysql-workbench-add-new-connection.png)
 
-6. **Setup New Connection**ダイアログで、以下の接続パラメータを設定します。
+6. **Setup New Connection**ダイアログで、以下の接続パラメーターを設定します。
 
     - **Connection Name**：この接続に分かりやすい名前を付けてください。
-    - **Hostname**： TiDB Cloud接続ダイアログから`HOST`パラメータを入力します。
-    - **Port**: TiDB Cloud接続ダイアログから`PORT`パラメータを入力します。
-    - **Username**： TiDB Cloud接続ダイアログから`USERNAME`パラメータを入力してください。
+    - **Hostname**： TiDB Cloud接続ダイアログから`HOST`パラメーターを入力します。
+    - **Port**: TiDB Cloud接続ダイアログから`PORT`パラメーターを入力します。
+    - **Username**： TiDB Cloud接続ダイアログから`USERNAME`パラメーターを入力してください。
     - **Password**： **Store in Keychain ...**または**Store in Vault**をクリックし、手順4で作成したパスワードを入力して、 **OK**をクリックしてパスワードを保存します。
 
-        ![MySQL Workbench: store the password of TiDB Cloud Starter in keychain](/media/develop/mysql-workbench-store-password-in-keychain.png)
+        ![MySQL Workbench: store the password of {{{ .starter }}} in keychain](/media/develop/mysql-workbench-store-password-in-keychain.png)
 
-    次の図は、接続パラメータの例を示しています。
+    次の図は、接続パラメーターの例を示しています。
 
-    ![MySQL Workbench: configure connection settings for TiDB Cloud Starter](/media/develop/mysql-workbench-connection-config-serverless-parameters.png)
+    ![MySQL Workbench: configure connection settings for {{{ .starter }}}](/media/develop/mysql-workbench-connection-config-serverless-parameters.png)
 
-7. **Test Connection**をクリックして、対象のTiDB Cloud StarterまたはEssentialインスタンスへの接続を検証してください。
+7. **Test Connection**をクリックして、対象の{{{ .starter }}}またはEssentialインスタンスへの接続を検証してください。
 
 8. 接続テストが成功すると、 **Successfully made the MySQL connection**というメッセージが表示されます。 **OK**をクリックして接続設定を保存してください。
 
 </div>
 <div label="TiDB Cloud Premium">
 
-1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Premiumインスタンスの名前をクリックして概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象の{{{ .premium }}}インスタンスの名前をクリックして概要ページに移動します。
 
 2. 左側のナビゲーションペインで、 **Settings** > **Networking**をクリックします。
 
@@ -97,50 +97,50 @@ TiDBはMySQL互換データベースであり、 [MySQL Workbench](https://www.m
     - 公開エンドポイントがまだ有効化中であることを示すメッセージが表示された場合は、処理が完了するまでお待ちください。
     - まだパスワードを設定していない場合は、ダイアログの**Set Root Password**をクリックしてください。
     - サーバー証明書を確認する必要がある場合、または接続に失敗して認証局（CA）証明書が必要な場合は、 **CA cert**をクリックしてダウンロードしてください。
-    - **Public**接続タイプに加えて、 TiDB Cloud Premium は**Private Endpoint**接続をサポートします。詳細については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
+    - **Public**接続タイプに加えて、 {{{ .premium }}} は**Private Endpoint**接続をサポートします。詳細については、 [AWS PrivateLink経由で{{{ .premium }}}に接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
 
 7. MySQL Workbenchを起動し、 **MySQL Connections**タイトルの横にある**+**をクリックします。
 
-8. **Setup New Connection**ダイアログで、以下の接続パラメータを設定します。
+8. **Setup New Connection**ダイアログで、以下の接続パラメーターを設定します。
 
     - **Connection Name**：この接続に分かりやすい名前を付けてください。
-    - **Hostname**： TiDB Cloud接続ダイアログから`HOST`パラメータを入力します。
-    - **Port**: TiDB Cloud接続ダイアログから`PORT`パラメータを入力します。
-    - **Username**： TiDB Cloud接続ダイアログから`USERNAME`パラメータを入力してください。
-    - **Password**： **Store in Keychain ...**または**Store in Vault**をクリックし、 TiDB Cloud Premiumインスタンスのパスワードを入力して、 **OK**をクリックするとパスワードが保存されます。
+    - **Hostname**： TiDB Cloud接続ダイアログから`HOST`パラメーターを入力します。
+    - **Port**: TiDB Cloud接続ダイアログから`PORT`パラメーターを入力します。
+    - **Username**： TiDB Cloud接続ダイアログから`USERNAME`パラメーターを入力してください。
+    - **Password**： **Store in Keychain ...**または**Store in Vault**をクリックし、 {{{ .premium }}}インスタンスのパスワードを入力して、 **OK**をクリックするとパスワードが保存されます。
 
-9. **Test Connection**をクリックして、 TiDB Cloud Premiumインスタンスへの接続を検証してください。
+9. **Test Connection**をクリックして、 {{{ .premium }}}インスタンスへの接続を検証してください。
 
 10. 接続テストが成功すると、 **Successfully made the MySQL connection**というメッセージが表示されます。 **OK**をクリックして接続設定を保存してください。
 
 </div>
 <div label="TiDB Cloud Dedicated">
 
-1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスタの名前をクリックして概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動します。
 
 2. 右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
 3. 接続ダイアログで、 **Connection Type**ドロップダウンリストから**Public**を選択し、 **CA cert**をクリックしてCA証明書をダウンロードします。
 
-    IP アクセス リストを設定していない場合は、最初の接続の前に、 **Configure IP Access List**をクリックするか、[IP アクセス リストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)の手順に従って設定します。
+    IP アクセスリストを設定していない場合は、最初の接続の前に、 **Configure IP Access List**をクリックするか、[IP アクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)の手順に従って設定します。
 
-    TiDB Cloud Dedicated は、**Public**接続タイプに加えて、**Private Endpoint**および**VPC Peering**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスタに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)を参照してください。
+    TiDB Cloud Dedicated は、**Public**接続タイプに加えて、**Private Endpoint**および**VPC Peering**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスターに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)を参照してください。
 
 4. MySQL Workbenchを起動し、 **MySQL Connections**タイトルの横にある**+**をクリックします。
 
     ![MySQL Workbench: add new connection](/media/develop/mysql-workbench-add-new-connection.png)
 
-5. **Setup New Connection**ダイアログで、以下の接続パラメータを設定します。
+5. **Setup New Connection**ダイアログで、以下の接続パラメーターを設定します。
 
     - **Connection Name**：この接続に分かりやすい名前を付けてください。
-    - **Hostname**： TiDB Cloud接続ダイアログから`HOST`パラメータを入力します。
-    - **Port**: TiDB Cloud接続ダイアログから`PORT`パラメータを入力します。
-    - **Username**： TiDB Cloud接続ダイアログから`USERNAME`パラメータを入力してください。
-    - **Password**： **Store in Keychain ...**をクリックし、 TiDB Cloud Dedicatedクラスタのパスワードを入力して、 **OK**をクリックするとパスワードが保存されます。
+    - **Hostname**： TiDB Cloud接続ダイアログから`HOST`パラメーターを入力します。
+    - **Port**: TiDB Cloud接続ダイアログから`PORT`パラメーターを入力します。
+    - **Username**： TiDB Cloud接続ダイアログから`USERNAME`パラメーターを入力してください。
+    - **Password**： **Store in Keychain ...**をクリックし、 TiDB Cloud Dedicatedクラスターのパスワードを入力して、 **OK**をクリックするとパスワードが保存されます。
 
         ![MySQL Workbench: store the password of TiDB Cloud Dedicated in keychain](/media/develop/mysql-workbench-store-dedicated-password-in-keychain.png)
 
-    次の図は、接続パラメータの例を示しています。
+    次の図は、接続パラメーターの例を示しています。
 
     ![MySQL Workbench: configure connection settings for TiDB Cloud Dedicated](/media/develop/mysql-workbench-connection-config-dedicated-parameters.png)
 
@@ -155,21 +155,21 @@ TiDBはMySQL互換データベースであり、 [MySQL Workbench](https://www.m
 
     ![MySQL Workbench: add new connection](/media/develop/mysql-workbench-add-new-connection.png)
 
-2. **Setup New Connection**ダイアログで、以下の接続パラメータを設定します。
+2. **Setup New Connection**ダイアログで、以下の接続パラメーターを設定します。
 
     - **Connection Name**：この接続に分かりやすい名前を付けてください。
-    - **Hostname**：TiDB Self-ManagedクラスタのIPアドレスまたはドメイン名を入力してください。
-    - **Port**：TiDB Self-Managedクラスタのポート番号を入力してください。
+    - **Hostname**：TiDB Self-ManagedクラスターのIPアドレスまたはドメイン名を入力してください。
+    - **Port**：TiDB Self-Managedクラスターのポート番号を入力してください。
     - **Username**：TiDBに接続するために使用するユーザー名を入力してください。
-    - **Password**： **Store in Keychain ...**をクリックし、TiDB Self-Managedクラスタへの接続に使用するパスワードを入力して、 **OK**をクリックしてパスワードを保存します。
+    - **Password**： **Store in Keychain ...**をクリックし、TiDB Self-Managedクラスターへの接続に使用するパスワードを入力して、 **OK**をクリックしてパスワードを保存します。
 
         ![MySQL Workbench: store the password of TiDB Self-Managed in keychain](/media/develop/mysql-workbench-store-self-hosted-password-in-keychain.png)
 
-    次の図は、接続パラメータの例を示しています。
+    次の図は、接続パラメーターの例を示しています。
 
     ![MySQL Workbench: configure connection settings for TiDB Self-Managed](/media/develop/mysql-workbench-connection-config-self-hosted-parameters.png)
 
-3. **Test Connection**をクリックして、TiDB Self-Managedクラスタへの接続を検証してください。
+3. **Test Connection**をクリックして、TiDB Self-Managedクラスターへの接続を検証してください。
 
 4. 接続テストが成功すると、 **Successfully made the MySQL connection**というメッセージが表示されます。 **OK**をクリックして接続設定を保存してください。
 

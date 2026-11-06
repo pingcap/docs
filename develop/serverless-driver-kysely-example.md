@@ -6,7 +6,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-kysely-example/']
 
 # TiDB Cloud Serverless Driver Kysely チュートリアル {#tidb-cloud-serverless-driver-kysely-tutorial}
 
-[Kysely](https://kysely.dev/docs/intro)は、タイプセーフでオートコンプリートに適した TypeScript SQL クエリ ビルダーです。 TiDB Cloudは[@tidbcloud/kysely](https://github.com/tidbcloud/kysely)を提供しており、 [TiDB Cloud Serverless Driver](/develop/serverless-driver.md)を使用して HTTPS 経由で Kysely を使用できるようにします。従来の TCP 方式と比較して、 [@tidbcloud/kysely](https://github.com/tidbcloud/kysely)は次の利点があります。
+[Kysely](https://kysely.dev/docs/intro)は、タイプセーフでオートコンプリートに適した TypeScript SQL クエリビルダーです。 TiDB Cloudは[@tidbcloud/kysely](https://github.com/tidbcloud/kysely)を提供しており、 [TiDB Cloud Serverless Driver](/develop/serverless-driver.md)を使用して HTTPS 経由で Kysely を使用できるようにします。従来の TCP 方式と比較して、 [@tidbcloud/kysely](https://github.com/tidbcloud/kysely)は次の利点があります。
 
 - サーバーレス環境におけるパフォーマンスの向上。
 - Kyselyをエッジ環境で使用できる機能。
@@ -23,7 +23,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-kysely-example/']
 
 - [Node.js](https://nodejs.org/en) &gt;= 18.0.0。
 - [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) 、またはお好みのパッケージマネージャーを使用してください。
-- TiDB Cloud Starterインスタンス。お持ちでない場合は、 [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
+- {{{ .starter }}}インスタンス。お持ちでない場合は、 [{{{ .starter }}}インスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
 
 ### ステップ1. プロジェクトを作成する {#step-1-create-a-project}
 
@@ -53,7 +53,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-kysely-example/']
    }
    ```
 
-4. プロジェクトのルートディレクトリに、TypeScriptコンパイラオプションを定義する`tsconfig.json`ファイルを追加します。以下にファイルの例を示します。
+4. プロジェクトのルートディレクトリに、TypeScriptコンパイラーオプションを定義する`tsconfig.json`ファイルを追加します。以下にファイルの例を示します。
 
    ```json
    {
@@ -74,7 +74,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-kysely-example/']
 
 ### ステップ2. 環境を設定する {#step-2-set-the-environment}
 
-1. TiDB Cloud Starterインスタンスの概要ページで、右上隅の**Connect**をクリックし、表示されたダイアログからデータベースの接続文字列を取得します。接続文字列は次のようになります。
+1. {{{ .starter }}}インスタンスの概要ページで、右上隅の**Connect**をクリックし、表示されたダイアログからデータベースの接続文字列を取得します。接続文字列は次のようになります。
 
     ```
     mysql://[username]:[password]@[host]/[database]
@@ -88,9 +88,9 @@ aliases: ['/ja/tidbcloud/serverless-driver-kysely-example/']
 
 ### ステップ3. Kyselyを使用してデータをクエリする {#step-3-use-kysely-to-query-data}
 
-1. TiDB Cloud Starterインスタンスにテーブルを作成し、データを挿入してください。
+1. {{{ .starter }}}インスタンスにテーブルを作成し、データを挿入してください。
 
-    [TiDB CloudコンソールのSQLエディタ](https://docs.pingcap.com/tidbcloud/explore-data-with-sql-editor)を使用してSQL文を実行できます。以下に例を示します。
+    [TiDB CloudコンソールのSQLエディター](https://docs.pingcap.com/tidbcloud/explore-data-with-sql-editor)を使用してSQL文を実行できます。以下に例を示します。
 
    ```sql
    CREATE TABLE `test`.`person`  (
@@ -167,7 +167,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-kysely-example/']
 
 - エッジ環境を提供する[Vercel](https://vercel.com/docs)アカウント。
 - [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) 、またはお好みのパッケージマネージャーを使用してください。
-- TiDB Cloud Starterインスタンス。お持ちでない場合は、 [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
+- {{{ .starter }}}インスタンス。お持ちでない場合は、 [{{{ .starter }}}インスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
 
 ### ステップ1. プロジェクトを作成する {#step-1-create-a-project}
 
@@ -192,7 +192,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-kysely-example/']
 
 ### ステップ2. 環境を設定する {#step-2-set-the-environment}
 
-TiDB Cloud Starterインスタンスの概要ページで、右上隅の**Connect**をクリックし、表示されたダイアログからデータベースの接続文字列を取得します。接続文字列は次のようになります。
+{{{ .starter }}}インスタンスの概要ページで、右上隅の**Connect**をクリックし、表示されたダイアログからデータベースの接続文字列を取得します。接続文字列は次のようになります。
 
 ```
 mysql://[username]:[password]@[host]/[database]
@@ -200,9 +200,9 @@ mysql://[username]:[password]@[host]/[database]
 
 ### ステップ3. エッジ関数を作成する {#step-3-create-an-edge-function}
 
-1. TiDB Cloud Starterインスタンスにテーブルを作成し、データを挿入してください。
+1. {{{ .starter }}}インスタンスにテーブルを作成し、データを挿入してください。
 
-    [TiDB CloudコンソールのSQLエディタ](https://docs.pingcap.com/tidbcloud/explore-data-with-sql-editor)を使用してSQL文を実行できます。以下に例を示します。
+    [TiDB CloudコンソールのSQLエディター](https://docs.pingcap.com/tidbcloud/explore-data-with-sql-editor)を使用してSQL文を実行できます。以下に例を示します。
 
    ```sql
    CREATE TABLE `test`.`person`  (
@@ -271,7 +271,7 @@ mysql://[username]:[password]@[host]/[database]
    }
    ```
 
-    上記のコードは、クエリパラメータ`query`を受け取り、クエリの結果を返します。クエリパラメータが指定されていない場合は、 `person`テーブル内のすべてのレコードを返します。
+    上記のコードは、クエリパラメーター`query`を受け取り、クエリの結果を返します。クエリパラメーターが指定されていない場合は、 `person`テーブル内のすべてのレコードを返します。
 
 3. コードをローカル環境でテストしてください。
 
