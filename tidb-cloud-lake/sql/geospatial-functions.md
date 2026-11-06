@@ -51,7 +51,7 @@ summary: "{{{ .lake }}} は、相互補完的な 2 つの地理空間機能セ�
 
 | 関数 | 説明 | 注記 | 例 |
 |----------|-------------|------|---------|
-| [ST_DIMENSION](/tidb-cloud-lake/sql/st-dimension.md) | トポロジ次元を返します |  | `ST_DIMENSION(ST_MAKEGEOMPOINT(-122.35, 37.55))` → `0` |
+| [ST_DIMENSION](/tidb-cloud-lake/sql/st-dimension.md) | トポロジー次元を返します |  | `ST_DIMENSION(ST_MAKEGEOMPOINT(-122.35, 37.55))` → `0` |
 | [ST_CENTROID](/tidb-cloud-lake/sql/st-centroid.md) | geometry の重心を返します | GEOMETRY のみ | `ST_CENTROID(TO_GEOMETRY('LINESTRING(0 0, 2 0)'))` → `POINT(1 0)` |
 | [ST_ENVELOPE](/tidb-cloud-lake/sql/st-envelope.md) | 最小外接矩形を返します | GEOMETRY のみ | `ST_ENVELOPE(TO_GEOMETRY('LINESTRING(0 0, 2 3)'))` → `POLYGON((0 0,2 0,2 3,0 3,0 0))` |
 | [ST_SRID](/tidb-cloud-lake/sql/st-srid.md) | geometry の SRID を返します |  | `ST_SRID(ST_MAKEGEOMPOINT(-122.35, 37.55))` → `4326` |

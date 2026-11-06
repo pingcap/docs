@@ -64,8 +64,8 @@ DROP [ COLUMN ] <column_name>
 - カラムを追加または変更する際、デフォルト値として受け入れられるのは定数値のみです。非定数式を使用するとエラーになります。
 - ALTER TABLE による保存計算カラムの追加は、まだサポートされていません。
 - テーブルのカラムのデータ型を変更する場合、変換エラーのリスクがあります。たとえば、テキスト（String）を含むカラムを数値（Float）に変換しようとすると、問題が発生する可能性があります。
-- カラムにマスキングポリシーを設定する場合は、ポリシーで定義されているデータ型（[CREATE MASKING POLICY](/tidb-cloud-lake/sql/create-masking-policy.md) の構文にあるパラメータ *arg_type_to_mask* を参照）がそのカラムと一致していることを確認してください。
-- ポリシー定義が追加パラメータを想定している場合は、任意の `USING` 句を使用します。各ポリシー引数に対応するカラムを順番に列挙してください。最初の引数は常にマスク対象のカラムを表します。
+- カラムにマスキングポリシーを設定する場合は、ポリシーで定義されているデータ型（[CREATE MASKING POLICY](/tidb-cloud-lake/sql/create-masking-policy.md) の構文にあるパラメーター *arg_type_to_mask* を参照）がそのカラムと一致していることを確認してください。
+- ポリシー定義が追加パラメーターを想定している場合は、任意の `USING` 句を使用します。各ポリシー引数に対応するカラムを順番に列挙してください。最初の引数は常にマスク対象のカラムを表します。
 - `USING` を含める場合は、少なくともマスク対象カラムと、ポリシーで必要な追加カラムを指定してください。`USING (...)` 内の最初の識別子は、変更対象のカラムと一致している必要があります。
 - マスキングポリシーを関連付けられるのは通常のテーブルのみです。ビュー、ストリーム、一時テーブルでは `SET MASKING POLICY` を使用できません。
 - 1 つのカラムに関連付けられるセキュリティポリシー（マスキングまたは行レベル）は最大 1 つです。新しいポリシーを関連付ける前に、既存のポリシーを削除してください。
@@ -339,7 +339,7 @@ ALTER TABLE fuse_table UNSET OPTIONS (block_per_segment, data_retention_period_i
 ALTER TABLE [ <database_name>. ]<table_name> CONNECTION = ( connection_name = '<connection_name>' )
 ```
 
-| パラメータ | 説明 | 必須 |
+| パラメーター | 説明 | 必須 |
 |-----------|-------------|----------|
 | connection_name | 外部テーブルで使用する接続の名前です。この接続はシステム内にすでに存在している必要があります。 | はい |
 
@@ -429,7 +429,7 @@ ALTER TABLE sales_data CONNECTION=( connection_name = 's3_role_conn' );
 ALTER TABLE [ IF EXISTS ] <source_table_name> SWAP WITH <target_table_name>
 ```
 
-| パラメータ | 説明 |
+| パラメーター | 説明 |
 |----------------------|------------------------------------------------|
 | `source_table_name`  | 入れ替え元となる 1 つ目のテーブル名 |
 | `target_table_name`  | 入れ替え先となる 2 つ目のテーブル名 |

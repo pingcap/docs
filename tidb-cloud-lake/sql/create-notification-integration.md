@@ -21,13 +21,13 @@ ENABLED = <bool>
 [ COMMENT = '<string_literal>' ]
 ```
 
-| 必須パラメータ | 説明 |
+| 必須パラメーター | 説明 |
 |---------------------|-------------|
 | name                | 通知統合の名前です。これは必須フィールドです。 |
 | type                | 通知統合のタイプです。現在は `webhook` のみサポートされています。 |
 | enabled             | 通知統合を有効にするかどうかです。 |
 
-| オプションパラメータ [(Webhook)](#webhook-notification) | 説明 |
+| オプションパラメーター [(Webhook)](#webhook-notification) | 説明 |
 |---------------------|-------------|
 | url                 | webhook の URL です。 |
 | method              | webhook の送信時に使用する HTTP メソッドです。デフォルトは `GET` です。|

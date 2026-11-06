@@ -22,7 +22,7 @@ CREATE [ OR REPLACE ] FUNCTION [ IF NOT EXISTS ] <function_name>
 
 説明:
 
-- `<parameter_list>`: 省略可能な、入力パラメータとその型のカンマ区切りリスト（例: `x INT, name VARCHAR`）
+- `<parameter_list>`: 省略可能な、入力パラメーターとその型のカンマ区切りリスト（例: `x INT, name VARCHAR`）
 - `<column_definition_list>`: 関数が返すカラム名とその型のカンマ区切りリスト
 - `<sql_statement>`: 関数ロジックを定義する SQL クエリ
 
@@ -65,7 +65,7 @@ AS $$ SELECT id, name, department, salary FROM employees $$;
 SELECT * FROM get_all_employees();
 ```
 
-### パラメータ付きテーブル関数 {#parameterized-table-function}
+### パラメーター付きテーブル関数 {#parameterized-table-function}
 
 ```sql
 -- Create a table function that filters employees by department

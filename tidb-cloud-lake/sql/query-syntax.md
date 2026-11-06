@@ -42,7 +42,7 @@ summary: このページでは、{{{ .lake }}} におけるクエリ構文のリ
 
 | コンポーネント | 説明 |
 |-----------|-------------|
-| **[Settings](/tidb-cloud-lake/sql/settings-clause.md)** | クエリの最適化および実行パラメータを設定します |
+| **[Settings](/tidb-cloud-lake/sql/settings-clause.md)** | クエリの最適化および実行パラメーターを設定します |
 
 ## クエリ構造 {#query-structure}
 

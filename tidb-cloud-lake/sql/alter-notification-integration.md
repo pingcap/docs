@@ -20,11 +20,11 @@ ALTER NOTIFICATION INTEGRATION [ IF NOT EXISTS ] <name> SET
     [ COMMENT = '<string_literal>' ]
 ```
 
-| 必須パラメータ | 説明 |
+| 必須パラメーター | 説明 |
 |---------------------|-------------|
 | name                | 通知統合の名前です。これは必須フィールドです。 |
 
-| オプションパラメータ [(Webhook)](#webhook-notification) | 説明 |
+| オプションパラメーター [(Webhook)](#webhook-notification) | 説明 |
 |---------------------|-------------|
 | enabled             | 通知統合を有効にするかどうかを指定します。 |
 | url                 | webhook の URL です。 |

@@ -23,7 +23,7 @@ CREATE [OR REPLACE] TABLE <table_name> (
 )...
 ```
 
-### パラメータ {#parameters}
+### パラメーター {#parameters}
 
 - **`distance`** (必須) - 類似検索に使用する距離メトリックを指定します。複数のメトリックはカンマで組み合わせることができます。
     - `'cosine'` - コサイン距離（意味的類似性、テキスト埋め込みに最適）
@@ -65,7 +65,7 @@ CREATE TABLE documents (
 );
 ```
 
-### カスタムパラメータを使用した Vector インデックスの作成 {#creating-a-vector-index-with-custom-parameters}
+### カスタムパラメーターを使用した Vector インデックスの作成 {#creating-a-vector-index-with-custom-parameters}
 
 ```sql
 -- Vector index with multiple distance metrics and tuned parameters
@@ -175,9 +175,9 @@ LIMIT 2;
 - **L2 (Euclidean) distance**: 絶対差が重要な画像特徴や空間データに最適です
 - **L1 (Manhattan) distance**: スパースベクトルや、各次元の差異を強調したい場合に適しています
 
-### HNSW パラメータのチューニング {#tuning-hnsw-parameters}
+### HNSW パラメーターのチューニング {#tuning-hnsw-parameters}
 
-| パラメータ | 低い値                               | 高い値                               |
+| パラメーター | 低い値                               | 高い値                               |
 |----------------|--------------------------------------|--------------------------------------|
 | `m`            | メモリ使用量が少ない、構築が速い     | 精度が高い、メモリ使用量が多い       |
 | `ef_construct` | 構築が速い、品質が低い               | 品質が高い、構築が遅い               |
@@ -192,6 +192,6 @@ LIMIT 2;
 ## 制限事項 {#limitations}
 
 - Vector インデックスは [VECTOR](/tidb-cloud-lake/sql/vector.md) データ型のカラムのみをサポートします
-- `distance` パラメータは必須です。これがないインデックスは無視されます
+- `distance` パラメーターは必須です。これがないインデックスは無視されます
 - 量子化により距離計算にごくわずかな誤差が生じる場合があります（通常は < 0.01%）
 - `m` の値を大きくするとインデックスサイズが増加します（ベクトルあたりおよそ `m * vector_dimension * 4 bytes`）

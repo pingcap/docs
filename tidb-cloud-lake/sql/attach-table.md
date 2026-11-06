@@ -21,7 +21,7 @@ ATTACH TABLE <target_table_name> [ ( <column_list> ) ] '<source_table_data_URI>'
 CONNECTION = ( CONNECTION_NAME = '<connection_name>' )
 ```
 
-### パラメータ {#parameters}
+### パラメーター {#parameters}
 
 - **`<target_table_name>`**: 作成する新しいアタッチ済みテーブルの名前
 
