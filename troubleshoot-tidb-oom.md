@@ -18,7 +18,7 @@ summary: TiDB OOM (メモリ不足) の問題を診断して解決する方法�
     - **TiDB** > **Server** > **稼働時間**が突然ゼロに低下します。
     - **TiDB-Runtime** > **メモリ使用量**では、 `estimate-inuse`メトリックが上昇し続けていることがわかります。
 
-- `tidb.log`を確認すると、次のログ エントリが見つかります。
+- `tidb.log`を確認すると、次のログエントリが見つかります。
     - OOMに関するアラーム: `[WARN] [memory_usage_alarm.go:139] ["tidb-server has the risk of OOM because of memory usage exceeds alarm ratio. Running SQLs and heap profile will be recorded in record path"]` 。詳細については、 [`memory-usage-alarm-ratio`](/system-variables.md#tidb_memory_usage_alarm_ratio)を参照してください。
     - 再起動に関するログエントリ: `[INFO] [printer.go:33] ["Welcome to TiDB."]` 。
 
@@ -53,7 +53,7 @@ OOM の問題をトラブルシューティングする場合は、次のプロ�
 
     - OOM がデプロイの問題によって発生した場合は、リソース構成とハイブリッドデプロイの影響を調査する必要があります。
     - OOM がデータベースの問題によって発生した場合、次のような原因が考えられます。
-        - TiDB は、大規模なクエリ、大規模な書き込み、データのインポートなどの大規模なデータ トラフィックを処理します。
+        - TiDB は、大規模なクエリ、大規模な書き込み、データのインポートなどの大規模なデータトラフィックを処理します。
         - TiDB は、複数の SQL文が同時にリソースを消費したり、オペレーターの同時実行性が高くなったりする、同時実行性の高いシナリオです。
         - TiDB にメモリリークがあり、リソースが解放されません。
 
@@ -73,7 +73,7 @@ OOM の問題は通常、次の原因で発生します。
 
 - オペレーティングシステムのメモリ容量が小さすぎます。
 - TiUP構成[`resource_control`](/tiup/tiup-cluster-topology-reference.md#global)は適切ではありません。
-- ハイブリッド デプロイメント (つまり、TiDB と他のアプリケーションが同じサーバーにデプロイされている) の場合、リソース不足により、TiDB が`oom-killer`によって誤って強制終了されることがあります。
+- ハイブリッドデプロイメント (つまり、TiDB と他のアプリケーションが同じサーバーにデプロイされている) の場合、リソース不足により、TiDB が`oom-killer`によって誤って強制終了されることがあります。
 
 ### データベースの問題 {#database-issues}
 
@@ -87,7 +87,7 @@ OOM の問題は通常、次の原因で発生します。
 
 OOM 問題のさまざまな原因に応じて、SQL文のメモリ使用量を削減するために次の対策を講じることができます。
 
-- SQL実行計画が最適でない場合（適切なインデックスの欠如、古い統計情報、オプティマイザのバグなど）、誤ったSQL実行計画が選択される可能性があり、その結果、膨大な中間結果セットがメモリに蓄積されます。このような場合は、以下の対策を検討してください。
+- SQL実行計画が最適でない場合（適切なインデックスの欠如、古い統計情報、オプティマイザーのバグなど）、誤ったSQL実行計画が選択される可能性があり、その結果、膨大な中間結果セットがメモリに蓄積されます。このような場合は、以下の対策を検討してください。
     - 適切なインデックスを追加します。
     - 実行オペレーターには[ディスクスピル](/configure-memory-usage.md#disk-spill)機能を使用します。
     - テーブル間の JOIN 順序を調整します。
@@ -140,7 +140,7 @@ TiDBノードは起動後、統計情報をメモリに読み込む必要があ�
 クライアント側で OOM が発生した場合は、次の点を調査します。
 
 - **Grafana TiDB Details** > **Server** > **Client Data Traffic**で傾向と速度を確認し、ネットワークのブロックがあるかどうかを確認します。
-- 誤ったJDBC設定パラメータによってアプリケーションのOOMが発生していないか確認してください。例えば、ストリーミング読み取りのパラメータ`defaultFetchSize`が正しく設定されていない場合、クライアント側に大量のデータが蓄積される可能性があります。
+- 誤ったJDBC設定パラメーターによってアプリケーションのOOMが発生していないか確認してください。例えば、ストリーミング読み取りのパラメーター`defaultFetchSize`が正しく設定されていない場合、クライアント側に大量のデータが蓄積される可能性があります。
 
 ## OOM の問題をトラブルシューティングするために収集される診断情報 {#diagnostic-information-to-be-collected-to-troubleshoot-oom-issues}
 
@@ -150,7 +150,7 @@ OOM 問題の根本原因を特定するには、次の情報を収集する必�
     - TiUP構成: `resource_control.memory_limit`
     - オペレーティングシステムの構成:
         - メモリ情報: `cat /proc/meminfo`
-        - カーネルパラメータ: `vm.overcommit_memory`
+        - カーネルパラメーター: `vm.overcommit_memory`
     - NUMA情報:
         - `numactl --hardware`
         - `numactl --show`
@@ -175,7 +175,7 @@ OOM 問題の根本原因を特定するには、次の情報を収集する必�
     - TiDB Dashboardで、SQL 文の分析、スロークエリ、メモリ使用量を確認します。
     - `INFORMATION_SCHEMA`の`SLOW_QUERY`と`CLUSTER_SLOW_QUERY`を確認してください。
     - 各 TiDB ノードで`tidb_slow_query.log`をチェックします。
-    - `grep "expensive_query" tidb.log`を実行して、対応するログ エントリを確認します。
+    - `grep "expensive_query" tidb.log`を実行して、対応するログエントリを確認します。
     - `EXPLAIN ANALYZE`を実行して、オペレーターのメモリ使用量を確認します。
     - `SELECT * FROM information_schema.processlist;`を実行して`MEM`列の値を確認します。
 
@@ -194,4 +194,4 @@ OOM 問題の根本原因を特定するには、次の情報を収集する必�
 ## 参照 {#see-also}
 
 - [TiDB メモリ制御](/configure-memory-usage.md)
-- [TiKVメモリパラメータのパフォーマンスを調整する](/tune-tikv-memory-performance.md)
+- [TiKVメモリパラメーターのパフォーマンスを調整する](/tune-tikv-memory-performance.md)

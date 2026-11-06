@@ -3,7 +3,7 @@ title: Upgrade Cluster Monitoring Services
 summary: TiDB クラスターの Prometheus、Grafana、および Alertmanager 監視サービスをアップグレードする方法を学習します。
 ---
 
-# TiDBクラスタ監視サービスのアップグレード {#upgrade-tidb-cluster-monitoring-services}
+# TiDBクラスター監視サービスのアップグレード {#upgrade-tidb-cluster-monitoring-services}
 
 TiDB クラスターをデプロイすると、 TiUP はクラスターの監視サービス（Prometheus、Grafana、Alertmanager など）を自動的にデプロイします。このクラスターをスケールアウトすると、 TiUP はスケーリング中に新しく追加されたノードの監視設定も自動的に追加します。TiUP によって自動的にデプロイされる監視サービスは、通常、これらのサードパーティ製監視サービスの最新バージョンではありません。最新バージョンを使用するには、こちらのドキュメントに従って監視サービスをアップグレードしてください。
 
@@ -62,7 +62,7 @@ Prometheus をアップグレードするには、次のコマンドを実行し
 tiup cluster patch <cluster-name> prometheus-v{new-version}.tar.gz -R prometheus --overwrite
 ```
 
-アップグレード後、Prometheusサーバーのホームページ (通常は`http://<Prometheus-server-host-name>:9090` ) に移動し、上部のナビゲーション メニューで**ステータス**をクリックして、 **ランタイムとビルド情報**ページを開き、Prometheus のバージョンを確認し、アップグレードが成功したかどうかを確認できます。
+アップグレード後、Prometheusサーバーのホームページ (通常は`http://<Prometheus-server-host-name>:9090` ) に移動し、上部のナビゲーションメニューで**Status**をクリックして、 **Runtime & Build Information**ページを開き、Prometheus のバージョンを確認し、アップグレードが成功したかどうかを確認できます。
 
 ## Grafanaのアップグレード {#upgrade-grafana}
 
@@ -130,4 +130,4 @@ Alertmanager をアップグレードするには、次のコマンドを実行�
 tiup cluster patch <cluster-name> alertmanager-v{new-version}-linux-amd64.tar.gz -R alertmanager --overwrite
 ```
 
-アップグレード後、Alertmanagerサーバーのホームページ (通常は`http://<Alertmanager-server-host-name>:9093` ) に移動し、上部のナビゲーション メニューで**ステータス**をクリックして、Alertmanager のバージョンを確認し、アップグレードが成功したかどうかを確認できます。
+アップグレード後、Alertmanagerサーバーのホームページ (通常は`http://<Alertmanager-server-host-name>:9093` ) に移動し、上部のナビゲーションメニューで**Status**をクリックして、Alertmanager のバージョンを確認し、アップグレードが成功したかどうかを確認できます。

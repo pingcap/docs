@@ -1,6 +1,6 @@
 ---
 title: Support Resources
-summary: TiDB の使用中に問題が発生した場合は、サポート リソースを見つけてください。
+summary: TiDB の使用中に問題が発生した場合は、サポートリソースを見つけてください。
 ---
 
 # サポートリソース {#support-resources}

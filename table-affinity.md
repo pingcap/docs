@@ -15,7 +15,7 @@ PDアフィニティスケジューリングを有効にし、テーブルの`AF
 
 ## 制限事項 {#limitations}
 
-テーブルレベルのデータ アフィニティを使用する前に、次の制限に注意してください。
+テーブルレベルのデータアフィニティを使用する前に、次の制限に注意してください。
 
 - この機能は[PDマイクロサービスモード](/pd-microservices.md)では有効になりません。
 - この機能は[一時テーブル](/temporary-tables.md)および[ビュー](/views.md)では動作しません。
@@ -29,7 +29,7 @@ PDアフィニティスケジューリングはデフォルトで無効になっ
 
 1. アフィニティスケジューリングを有効にするには、PD 設定項目[`schedule.affinity-schedule-limit`](/pd-configuration-file.md#affinity-schedule-limit-new-in-v855) `0`より大きい値に設定します。
 
-    たとえば、次のコマンドは値を`4`に設定し、PD が最大 4つのアフィニティスケジューリング タスクを同時に実行できるようにします。
+    たとえば、次のコマンドは値を`4`に設定し、PD が最大 4つのアフィニティスケジューリングタスクを同時に実行できるようにします。
 
     ```bash
     pd-ctl config set schedule.affinity-schedule-limit 4
@@ -90,9 +90,9 @@ ALTER TABLE t1 AFFINITY = '';
     - `Preparing` : PD はアフィニティ要件を満たすようにリージョンをスケジュールしています。
     - `Stable` : すべてのリージョンが目標配布に到達しました。
 
-- [`INFORMATION_SCHEMA.TABLES`](/information-schema/information-schema-tables.md)テーブルをクエリし、 `TIDB_AFFINITY`列でテーブルのアフィニティ レベルを確認します。
+- [`INFORMATION_SCHEMA.TABLES`](/information-schema/information-schema-tables.md)テーブルをクエリし、 `TIDB_AFFINITY`列でテーブルのアフィニティレベルを確認します。
 
-- [`INFORMATION_SCHEMA.PARTITIONS`](/information-schema/information-schema-partitions.md)テーブルをクエリし、パーティションのアフィニティ レベルの`TIDB_AFFINITY`列を確認します。
+- [`INFORMATION_SCHEMA.PARTITIONS`](/information-schema/information-schema-partitions.md)テーブルをクエリし、パーティションのアフィニティレベルの`TIDB_AFFINITY`列を確認します。
 
 ## 注記 {#notes}
 
