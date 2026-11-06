@@ -11,7 +11,7 @@ summary: TiDB の高信頼性に関連する FAQ について説明します。
 
 はい。ネットワークトラフィック内のデータを暗号化するには、 [TiDBクライアントとサーバー間のTLS](/enable-tls-between-clients-and-servers.md)を有効にします。ストレージエンジン内のデータを暗号化するには、 [透過的なデータ暗号化（TDE）](/encryption-at-rest.md)を有効にします。
 
-## TiDB は、サーバーの MySQL バージョン文字列を、セキュリティ脆弱性スキャン ツールに必要な特定のバージョンに変更することをサポートしていますか? {#does-tidb-support-modifying-the-mysql-version-string-of-the-server-to-a-specific-one-that-is-required-by-the-security-vulnerability-scanning-tool}
+## TiDB は、サーバーの MySQL バージョン文字列を、セキュリティ脆弱性スキャンツールに必要な特定のバージョンに変更することをサポートしていますか? {#does-tidb-support-modifying-the-mysql-version-string-of-the-server-to-a-specific-one-that-is-required-by-the-security-vulnerability-scanning-tool}
 
 - v3.0.8 以降、TiDB は設定ファイル内の[`server-version`](/tidb-configuration-file.md#server-version)を変更することでサーバーのバージョン文字列を変更することをサポートしています。
 
@@ -27,7 +27,7 @@ summary: TiDB の高信頼性に関連する FAQ について説明します。
 
 ## TiDB はどのような認証プロトコルをサポートしていますか? プロセスはどのようなものですか? {#what-authentication-protocols-does-tidb-support-what-s-the-process}
 
-MySQL と同様に、TiDB はユーザー ログイン認証とパスワード処理のための SASL プロトコルをサポートしています。
+MySQL と同様に、TiDB はユーザーログイン認証とパスワード処理のための SASL プロトコルをサポートしています。
 
 クライアントがTiDBに接続すると、チャレンジレスポンス認証モードが開始されます。プロセスは以下のとおりです。
 

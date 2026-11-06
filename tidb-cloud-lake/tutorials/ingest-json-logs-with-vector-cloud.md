@@ -18,11 +18,11 @@ summary: このチュートリアルでは、ローカルでのログ生成を�
 - **AWS CLI**: [AWS CLI](https://aws.amazon.com/cli/) がインストールされており、S3 バケットにアクセスするために必要な権限で設定されていることを確認してください。
 - **Docker**: Vector のセットアップに使用するため、ローカルマシンに [Docker](https://www.docker.com/) がインストールされていることを確認してください。
 
-## ステップ 1: S3 バケットに対象フォルダを作成する {#step-1-create-a-target-folder-in-s3-bucket}
+## ステップ 1: S3 バケットに対象フォルダーを作成する {#step-1-create-a-target-folder-in-s3-bucket}
 
-Vector が収集したログを保存するために、S3 バケットに logs という名前のフォルダを作成します。このチュートリアルでは、対象の保存先として `s3://lake-doc/logs/` を使用します。
+Vector が収集したログを保存するために、S3 バケットに logs という名前のフォルダーを作成します。このチュートリアルでは、対象の保存先として `s3://lake-doc/logs/` を使用します。
 
-このコマンドは、`lake-doc` バケットに `logs` という名前の空のフォルダを作成します。
+このコマンドは、`lake-doc` バケットに `logs` という名前の空のフォルダーを作成します。
 
 ```bash
 aws s3api put-object --bucket lake-doc --key logs/
@@ -87,7 +87,7 @@ aws s3api put-object --bucket lake-doc --key logs/
       timberio/vector:nightly-alpine
     ```
 
-3. 少し待ってから、ログが S3 上の `logs` フォルダに同期されているか確認します。
+3. 少し待ってから、ログが S3 上の `logs` フォルダーに同期されているか確認します。
 
 ```bash
 aws s3 ls s3://lake-doc/logs/
@@ -115,7 +115,7 @@ aws s3 cp s3://lake-doc/logs/1733871161-7b89e50a-6eb4-4531-8479-dd46981e4674.log
 
 ## ステップ 4: {{{ .lake }}} でタスクを作成する {#step-4-create-a-task-in--lake-}
 
-1. Worksheet を開き、バケット内の `logs` フォルダにリンクする外部 stage を作成します。
+1. Worksheet を開き、バケット内の `logs` フォルダーにリンクする外部 stage を作成します。
 
     ```sql
     CREATE STAGE mylog 's3://lake-doc/logs/' CONNECTION=(
@@ -192,7 +192,7 @@ echo '{"user_id": 3, "event": "logout", "timestamp": "2024-12-08T10:10:00Z"}' >>
 echo '{"user_id": 4, "event": "login", "timestamp": "2024-12-08T10:15:00Z"}' >> /Users/eric/Documents/logs/app.log
 ```
 
-ログが S3 に同期されるまで少し待ちます（`logs` フォルダに新しいファイルが表示されるはずです）。その後、スケジュールタスクによって新しいログがテーブルにロードされます。再度テーブルをクエリすると、次のログを確認できます。
+ログが S3 に同期されるまで少し待ちます（`logs` フォルダーに新しいファイルが表示されるはずです）。その後、スケジュールタスクによって新しいログがテーブルにロードされます。再度テーブルをクエリすると、次のログを確認できます。
 
 ```sql
 SELECT * FROM logs;

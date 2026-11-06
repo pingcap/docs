@@ -19,11 +19,11 @@ TiDBにおけるハイブリッド検索の一般的なワークフローは以�
 
 ## 前提条件 {#prerequisites}
 
-全文検索機能はまだ開発初期段階にあり、より多くのお客様に順次展開していく予定です。現在、全文検索機能は、以下のリージョンにおけるTiDB Cloud Starterでのみご利用いただけます。
+全文検索機能はまだ開発初期段階にあり、より多くのお客様に順次展開していく予定です。現在、全文検索機能は、以下のリージョンにおける{{{ .starter }}}でのみご利用いただけます。
 
 - AWS: `Oregon (us-west-2)` 、 `N. Virginia (us-east-1)` 、 `Tokyo (ap-northeast-1)` 、 `Frankfurt (eu-central-1)` 、および`Singapore (ap-southeast-1)`
 
-このチュートリアルを完了するには、サポートされているリージョンにTiDB Cloud Starterインスタンスがあることを確認してください。お持ちでない場合は、 [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)に従って作成してください。
+このチュートリアルを完了するには、サポートされているリージョンに{{{ .starter }}}インスタンスがあることを確認してください。お持ちでない場合は、 [{{{ .starter }}}インスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)に従って作成してください。
 
 ## さあ始めましょう {#get-started}
 
@@ -53,13 +53,13 @@ db = TiDBClient.connect(
 )
 ```
 
-これらの接続パラメータは、次のように[TiDB Cloudコンソール](https://tidbcloud.com)から取得できます。
+これらの接続パラメーターは、次のように[TiDB Cloudコンソール](https://tidbcloud.com)から取得できます。
 
-1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Starterインスタンスの名前をクリックして、概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象の{{{ .starter }}}インスタンスの名前をクリックして、概要ページに移動します。
 
-2. 右上隅の**Connect**をクリックします。接続ダイアログが表示され、接続パラメータが表示されます。
+2. 右上隅の**Connect**をクリックします。接続ダイアログが表示され、接続パラメーターが表示されます。
 
-    例えば、接続パラメータが以下のように表示される場合：
+    例えば、接続パラメーターが以下のように表示される場合：
 
     ```text
     HOST:     gateway01.us-east-1.prod.shared.aws.tidbcloud.com
@@ -70,7 +70,7 @@ db = TiDBClient.connect(
     CA:       /etc/ssl/cert.pem
     ```
 
-    TiDB Cloud Starterインスタンスに接続するための対応するPythonコードは以下のとおりです。
+    {{{ .starter }}}インスタンスに接続するための対応するPythonコードは以下のとおりです。
 
     ```python
     db = TiDBClient.connect(
@@ -82,7 +82,7 @@ db = TiDBClient.connect(
     )
     ```
 
-    上記の例はあくまでも説明のためのものです。パラメータにはご自身の値を入力し、安全に保管してください。
+    上記の例はあくまでも説明のためのものです。パラメーターにはご自身の値を入力し、安全に保管してください。
 
 ### ステップ3. テーブルを作成する {#step-3-create-a-table}
 
@@ -173,7 +173,7 @@ results = (
 )
 ```
 
-パラメータ:
+パラメーター:
 
 - `k` : ゼロ除算を防ぎ、高ランクのドキュメントの影響を制御するための定数 (デフォルト: 60)。
 
@@ -187,7 +187,7 @@ final_score = vs_weight * vector_score + fts_weight * fulltext_score
 
 `.fusion()`メソッドで`method`パラメーターを`"weighted"`に指定することで、加重スコア融合を有効にします。
 
-例えば、ベクトル検索の重みを大きくするには、 `vs_weight`パラメータを 0.7 に、 `fts_weight`パラメータを 0.3 に設定します。
+例えば、ベクトル検索の重みを大きくするには、 `vs_weight`パラメーターを 0.7 に、 `fts_weight`パラメーターを 0.3 に設定します。
 
 ```python
 results = (
@@ -200,7 +200,7 @@ results = (
 )
 ```
 
-パラメータ:
+パラメーター:
 
 - `vs_weight` : ベクトル検索スコアの重み。
 - `fts_weight` : 全文検索スコアの重み。

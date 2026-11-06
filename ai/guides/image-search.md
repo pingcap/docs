@@ -36,7 +36,7 @@ image_embed = EmbeddingFunction(
 
 ### ステップ2. テーブルとベクトルフィールドを作成する {#step-2-create-a-table-and-vector-field}
 
-`VectorField()`で画像の埋め込みを格納するためのベクトルフィールドを定義します。`source_field`は画像のURLを格納するフィールドを指定するためのパラメータです。
+`VectorField()`で画像の埋め込みを格納するためのベクトルフィールドを定義します。`source_field`は画像のURLを格納するフィールドを指定するためのパラメーターです。
 
 ```python
 from pytidb.schema import TableModel, Field
@@ -90,7 +90,7 @@ image = Image.open("/path/to/query.jpg")
 results = table.search(image).limit(3).to_list()
 ```
 
-クライアントは、PIL イメージ オブジェクトを埋め込みモデルに送信する前に、Base64 文字列に変換します。
+クライアントは、PIL イメージオブジェクトを埋め込みモデルに送信する前に、Base64 文字列に変換します。
 
 #### オプション3: キーワードテキストで検索 {#option-3-search-by-keyword-text}
 

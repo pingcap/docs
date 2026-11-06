@@ -8,7 +8,7 @@ aliases: ['/ja/tidb/stable/vector-search-get-started-using-python/','/ja/tidb/de
 
 このドキュメントでは、Python SDK を使用して TiDB で[ベクトル検索](/ai/guides/vector-search-overview.md)を開始する方法を説明します。手順に従って、TiDB で動作する最初の AI アプリケーションを構築します。
 
-このドキュメントに従うことで、以下のことを学ぶことができます。
+このドキュメントに従うことで、以下のことを学べます。
 
 - TiDB Python SDKを使用してTiDBに接続します。
 - 一般的な埋め込みモデルを使用してテキスト埋め込みを生成します。
@@ -22,7 +22,7 @@ aliases: ['/ja/tidb/stable/vector-search-get-started-using-python/','/ja/tidb/de
 
 ## 前提条件 {#prerequisites}
 
-- [tidbcloud.com](https://tidbcloud.com/)にアクセスしてTiDB Cloud Starterインスタンスを無料で作成するか、 [TiUP Playground](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb/#deploy-a-local-test-cluster)を使用してローカルテスト用の TiDB Self-Managedクラスタをデプロイします。
+- [tidbcloud.com](https://tidbcloud.com/)にアクセスしてTiDB Cloud Starterインスタンスを無料で作成するか、 [TiUP Playground](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb/#deploy-a-local-test-cluster)を使用してローカルテスト用の TiDB Self-Managedクラスターをデプロイします。
 
 ## インストール {#installation}
 
@@ -45,12 +45,12 @@ pip install "pytidb[models]"
 <SimpleTab>
 <div label="TiDB Cloud Starter">
 
-これらの接続パラメータは[TiDB Cloudコンソール](https://tidbcloud.com/tidbs)から取得できます。
+これらの接続パラメーターは[TiDB Cloudコンソール](https://tidbcloud.com/tidbs)から取得できます。
 
-1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、次に、対象のTiDB Cloud Starterインスタンスの名前をクリックして、概要ページに移動します。
-2. 右上隅の**Connect**をクリックします。接続ダイアログが表示され、接続パラメータが表示されます。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、次に、対象の{{{ .starter }}}インスタンスの名前をクリックして、概要ページに移動します。
+2. 右上隅の**Connect**をクリックします。接続ダイアログが表示され、接続パラメーターが表示されます。
 
-例えば、接続パラメータが以下のように表示される場合：
+例えば、接続パラメーターが以下のように表示される場合：
 
 ```text
 HOST:     gateway01.us-east-1.prod.shared.aws.tidbcloud.com
@@ -77,12 +77,12 @@ client = TiDBClient.connect(
 
 > **Note:**
 >
-> 上記の例はあくまでも説明のためのものです。パラメータにはご自身の値を入力し、安全に保管してください。
+> 上記の例はあくまでも説明のためのものです。パラメーターにはご自身の値を入力し、安全に保管してください。
 
 </div>
 <div label="TiDB Self-Managed">
 
-TiDB Self-Managedクラスタに接続するための基本的な例を以下に示します。
+TiDB Self-Managedクラスターに接続するための基本的な例を以下に示します。
 
 ```python
 from pytidb import TiDBClient
@@ -99,12 +99,12 @@ client = TiDBClient.connect(
 
 > **Note:**
 >
-> 実際の導入環境に合わせて、接続パラメータを必ず更新してください。
+> 実際の導入環境に合わせて、接続パラメーターを必ず更新してください。
 
 </div>
 </SimpleTab>
 
-接続が完了すると、 `client`オブジェクトを使用して、テーブルの操作、データのクエリなどを行うことができます。
+接続が完了すると、 `client`オブジェクトを使用して、テーブルの操作、データのクエリなどを行えます。
 
 ## 埋め込み関数を作成する {#create-an-embedding-function}
 
@@ -162,7 +162,7 @@ class Chunk(TableModel):
 table = client.create_table(schema=Chunk, if_exists="overwrite")
 ```
 
-作成後は、 `table`オブジェクトを使用して、データの挿入、データの検索などを行うことができます。
+作成後は、 `table`オブジェクトを使用して、データの挿入、データの検索などを行えます。
 
 ## データを挿入する {#insert-data}
 

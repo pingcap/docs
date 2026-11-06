@@ -271,7 +271,7 @@ SET @@GLOBAL.TIDB_EXP_EMBED_OPENAI_API_BASE = '';
 
 ## オプション {#options}
 
-すべての[OpenAIの埋め込みオプション](https://platform.openai.com/docs/api-reference/embeddings/create)は`EMBED_TEXT()`関数の`additional_json_options`パラメータを通じてサポートされます。
+すべての[OpenAIの埋め込みオプション](https://platform.openai.com/docs/api-reference/embeddings/create)は`EMBED_TEXT()`関数の`additional_json_options`パラメーターを通じてサポートされます。
 
 **例：text-embedding-3-large に別の次元を使用する**
 

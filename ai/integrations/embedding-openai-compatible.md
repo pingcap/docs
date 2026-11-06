@@ -9,7 +9,7 @@ summary: TiDBベクトル検索をOpenAI互換の埋め込みモデルと統合�
 
 > **Note:**
 >
-> 現在、 [自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)は、AWS でホストされているTiDB Cloud Starterインスタンスでのみ利用できます。
+> 現在、 [自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)は、AWS でホストされている{{{ .starter }}}インスタンスでのみ利用できます。
 
 ## OpenAI互換の埋め込みサービス {#openai-compatible-embedding-services}
 
@@ -41,7 +41,7 @@ tidb_client = TiDBClient.connect(
 
 ### ステップ2：埋め込み関数を定義する {#step-2-define-the-embedding-function}
 
-OpenAI互換の埋め込みサービスと統合するには、 `EmbeddingFunction`クラスを初期化し、 `model_name`パラメータに`openai/`プレフィックスを設定します。
+OpenAI互換の埋め込みサービスと統合するには、 `EmbeddingFunction`クラスを初期化し、 `model_name`パラメーターに`openai/`プレフィックスを設定します。
 
 ```python
 from pytidb.embeddings import EmbeddingFunction
@@ -53,7 +53,7 @@ openai_like_embed = EmbeddingFunction(
 )
 ```
 
-パラメータは以下のとおりです。
+パラメーターは以下のとおりです。
 
 - `model_name` : 使用するモデルを指定します。 `openai/{model_name}`の形式を使用してください。
 - `api_base` : OpenAI互換の埋め込みAPIサービスのベースURL。
@@ -128,4 +128,4 @@ results = table.search("How to start learning Java programming?") \
 print(results)
 ```
 
-[自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)を有効にすると、TiDB はベクトル検索中にクエリ テキストの埋め込みを自動的に生成します。
+[自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)を有効にすると、TiDB はベクトル検索中にクエリテキストの埋め込みを自動的に生成します。

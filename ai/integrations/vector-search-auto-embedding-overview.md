@@ -16,7 +16,7 @@ aliases: ['/ja/tidbcloud/vector-search-auto-embedding-overview/']
 
 > **Note:**
 >
-> 自動埋め込み機能は、AWS上でホストされているTiDB Cloud Starterインスタンスでのみ利用可能です。
+> 自動埋め込み機能は、AWS上でホストされている{{{ .starter }}}インスタンスでのみ利用可能です。
 
 ## クイックスタートの例 {#quick-start-example}
 
@@ -165,7 +165,7 @@ VEC_EMBED_COSINE_DISTANCE(vector_column, "query_text")
 VEC_EMBED_L2_DISTANCE(vector_column, "query_text")
 ```
 
-`ORDER BY`句でこの関数を使用すると、L2 距離に基づいて結果をランク付けできます。[`VEC_L2_DISTANCE()`](/ai/reference/vector-search-functions-and-operators.md#vec_l2_distance)と同じ計算方法を使用しますが、クエリ テキストの埋め込みを自動的に生成します。
+`ORDER BY`句でこの関数を使用すると、L2 距離に基づいて結果をランク付けできます。[`VEC_L2_DISTANCE()`](/ai/reference/vector-search-functions-and-operators.md#vec_l2_distance)と同じ計算方法を使用しますが、クエリテキストの埋め込みを自動的に生成します。
 
 ## Pythonで自動埋め込みを使用する {#use-auto-embedding-in-python}
 
@@ -184,7 +184,7 @@ TiDBは、さまざまな埋め込みプロバイダーやモデルとの統合�
   )
   ```
 
-**パラメータ:**
+**パラメーター:**
 
 - `model_name` *(必須)* : 使用する埋め込みモデルを`{provider_name}/{model_name}`の形式で指定します。
 

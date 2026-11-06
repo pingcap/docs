@@ -80,7 +80,7 @@ aliases: ['/ja/tidbcloud/vector-search-integrate-with-amazon-bedrock/']
     >
     > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **Reset Password**をクリックして新しいパスワードを生成できます。
 
-5. 環境変数を設定するには、ターミナルで以下のコマンドを実行してください。コマンド内のプレースホルダーは、接続ダイアログから取得した対応する接続パラメータに置き換える必要があります。
+5. 環境変数を設定するには、ターミナルで以下のコマンドを実行してください。コマンド内のプレースホルダーは、接続ダイアログから取得した対応する接続パラメーターに置き換える必要があります。
 
     ```shell
     export TIDB_HOST=<your-tidb-host>
@@ -149,7 +149,7 @@ Base = declarative_base()
 
 ### ステップ5. Bedrockランタイムクライアントを使用してAmazon Titan Text Embeddings V2モデルを呼び出す {#step-5-invoke-the-amazon-titan-text-embeddings-v2-model-using-the-bedrock-runtime-client}
 
-Amazon Bedrock ランタイム クライアントは、次のパラメーターを受け入れる`invoke_model` API を提供します。
+Amazon Bedrock ランタイムクライアントは、次のパラメーターを受け入れる`invoke_model` API を提供します。
 
 - `modelId` : Amazon Bedrock で利用可能な基盤モデルのモデル ID。
 - `accept` : 入力リクエストのタイプ。

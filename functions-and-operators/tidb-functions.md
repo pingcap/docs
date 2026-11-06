@@ -14,12 +14,12 @@ summary: TiDB 固有の関数の使用法について学習します。
 | [`CURRENT_RESOURCE_GROUP()`](#current_resource_group)   | 現在のセッションがバインドされているリソースグループの名前を返します。[リソース制御を使用してリソースグループの制限とフロー制御を実現する](/tidb-resource-control-ru-groups.md)を参照してください。                                                                                                                           |
 | [`TIDB_BOUNDED_STALENESS()`](#tidb_bounded_staleness)   | 指定された時間範囲内の最新のデータを読み取るようTiDBに指示します。[`AS OF TIMESTAMP`句を使用して履歴データを読み取る](/as-of-timestamp.md)を参照してください。                                                                                                                                           |
 | [`TIDB_CURRENT_TSO()`](#tidb_current_tso)               | 現在の[TiDB のタイムスタンプ Oracle (TSO)](/tso.md)を返します。                                                                                                                                                                                                   |
-| [`TIDB_DECODE_BINARY_PLAN()`](#tidb_decode_binary_plan) | バイナリ プランをデコードします。                                                                                                                                                                                                                                |
+| [`TIDB_DECODE_BINARY_PLAN()`](#tidb_decode_binary_plan) | バイナリプランをデコードします。                                                                                                                                                                                                                                |
 | [`TIDB_DECODE_KEY()`](#tidb_decode_key)                 | TiDBエンコードされたキーエントリを、 `_tidb_rowid`と`table_id`含むJSON構造にデコードします。これらのエンコードされたキーは、一部のシステムテーブルやログ出力で確認できます。                                                                                                                                           |
 | [`TIDB_DECODE_PLAN()`](#tidb_decode_plan)               | TiDB 実行計画をデコードします。                                                                                                                                                                                                                              |
 | [`TIDB_DECODE_SQL_DIGESTS()`](#tidb_decode_sql_digests) | クラスター内の一連の SQL ダイジェストに対応する正規化された SQL文（リテラル値が `?` や `...` などのプレースホルダーに置き換えられたもの）を照会します。                                                                                                                                                                                |
 | [`TIDB_ENCODE_INDEX_KEY()`](#tidb_encode_index_key)     | インデックスキーをエンコードします。                                                                                                                                                                                                                              |
-| [`TIDB_ENCODE_RECORD_KEY()`](#tidb_encode_record_key)   | レコード キーをエンコードします。                                                                                                                                                                                                                                |
+| [`TIDB_ENCODE_RECORD_KEY()`](#tidb_encode_record_key)   | レコードキーをエンコードします。                                                                                                                                                                                                                                |
 | [`TIDB_ENCODE_SQL_DIGEST()`](#tidb_encode_sql_digest)   | クエリ文字列のダイジェストを取得します。                                                                                                                                                                                                                             |
 | [`TIDB_IS_DDL_OWNER()`](#tidb_is_ddl_owner)             | 接続しているTiDBインスタンスがDDLオーナーであるかどうかを確認します。DDLオーナーとは、クラスター内の他のすべてのノードに代わってDDL文を実行する役割を担うTiDBインスタンスです。                                                                                                                                           |
 | [`TIDB_MVCC_INFO()`](#tidb_mvcc_info)                   | キーに関する[MVCC (マルチバージョン同時実行制御)](https://docs.pingcap.com/tidb/stable/glossary#multi-version-concurrency-control-mvcc)情報を返します。                                                                                                                      |
@@ -39,12 +39,12 @@ summary: TiDB 固有の関数の使用法について学習します。
 | [`CURRENT_RESOURCE_GROUP()`](#current_resource_group)   | 現在のセッションがバインドされているリソースグループ名を返します。[リソース制御を使用してリソースグループの制限とフロー制御を実現する](/tidb-resource-control-ru-groups.md)を参照してください。                                                                                                                                                        |
 | [`TIDB_BOUNDED_STALENESS()`](#tidb_bounded_staleness)   | 指定された時間範囲内の最新のデータを読み取るようTiDBに指示します。[`AS OF TIMESTAMP`句を使用して履歴データを読み取る](/as-of-timestamp.md)を参照してください。                                                                                                                                                                      |
 | [`TIDB_CURRENT_TSO()`](#tidb_current_tso)               | 現在の[TiDB のタイムスタンプ Oracle (TSO)](/tso.md)を返します。                                                                                                                                                                                                                              |
-| [`TIDB_DECODE_BINARY_PLAN()`](#tidb_decode_binary_plan) | バイナリ プランをデコードします。                                                                                                                                                                                                                                                           |
+| [`TIDB_DECODE_BINARY_PLAN()`](#tidb_decode_binary_plan) | バイナリプランをデコードします。                                                                                                                                                                                                                                                           |
 | [`TIDB_DECODE_KEY()`](#tidb_decode_key)                 | TiDBエンコードされたキーエントリを、 `_tidb_rowid`と`table_id`含むJSON構造にデコードします。これらのエンコードされたキーは、一部のシステムテーブルやログ出力で確認できます。                                                                                                                                                                      |
 | [`TIDB_DECODE_PLAN()`](#tidb_decode_plan)               | TiDB 実行計画をデコードします。                                                                                                                                                                                                                                                         |
 | [`TIDB_DECODE_SQL_DIGESTS()`](#tidb_decode_sql_digests) | クラスター内の一連の SQL ダイジェストに対応する正規化された SQL文（リテラル値が `?` や `...` などのプレースホルダーに置き換えられたもの）を照会します。                                                                                                                                                                                                           |
 | [`TIDB_ENCODE_INDEX_KEY()`](#tidb_encode_index_key)     | インデックスキーをエンコードします。                                                                                                                                                                                                                                                         |
-| [`TIDB_ENCODE_RECORD_KEY()`](#tidb_encode_record_key)   | レコード キーをエンコードします。                                                                                                                                                                                                                                                           |
+| [`TIDB_ENCODE_RECORD_KEY()`](#tidb_encode_record_key)   | レコードキーをエンコードします。                                                                                                                                                                                                                                                           |
 | [`TIDB_ENCODE_SQL_DIGEST()`](#tidb_encode_sql_digest)   | クエリ文字列のダイジェストを取得します。                                                                                                                                                                                                                                                        |
 | [`TIDB_IS_DDL_OWNER()`](#tidb_is_ddl_owner)             | 接続しているTiDBインスタンスがDDLオーナーであるかどうかを確認します。DDLオーナーとは、クラスター内の他のすべてのノードに代わってDDL文を実行する役割を担うTiDBインスタンスです。                                                                                                                                                                      |
 | [`TIDB_PARSE_TSO()`](#tidb_parse_tso)                   | TiDB TSOタイムスタンプから物理タイムスタンプを抽出します。参照: [`tidb_current_ts`](/system-variables.md#tidb_current_ts) 。                                                                                                                                                                            |
@@ -149,9 +149,9 @@ SELECT @@tidb_current_ts;
 
 ## TIDB_DECODE_BINARY_PLAN {#tidb_decode_binary_plan}
 
-`TIDB_DECODE_BINARY_PLAN(binary_plan)`関数は、 [`STATEMENTS_SUMMARY`](/statement-summary-tables.md)表の`BINARY_PLAN`列にあるようなバイナリ プランをデコードします。
+`TIDB_DECODE_BINARY_PLAN(binary_plan)`関数は、 [`STATEMENTS_SUMMARY`](/statement-summary-tables.md)表の`BINARY_PLAN`列にあるようなバイナリプランをデコードします。
 
-バイナリ プランを使用できるようにするには、 [`tidb_generate_binary_plan`](/system-variables.md#tidb_generate_binary_plan-new-in-v620)変数を`ON`に設定する必要があります。
+バイナリプランを使用できるようにするには、 [`tidb_generate_binary_plan`](/system-variables.md#tidb_generate_binary_plan-new-in-v620)変数を`ON`に設定する必要があります。
 
 例：
 
@@ -294,17 +294,17 @@ SELECT tidb_decode_plan('8QIYMAkzMV83CQEH8E85LjA0CWRhdGE6U2VsZWN0aW9uXzYJOTYwCXR
 
 ## TIDB_DECODE_SQL_DIGESTS {#tidb_decode_sql_digests}
 
-`TIDB_DECODE_SQL_DIGESTS()`関数は、クラスタ内のSQLダイジェストセットに対応する正規化されたSQL文（リテラル値が `?` や `...` などのプレースホルダーに置き換えられたもの）を照会するために使用されます。この関数は1つまたは2つの引数を取ります。
+`TIDB_DECODE_SQL_DIGESTS()`関数は、クラスター内のSQLダイジェストセットに対応する正規化されたSQL文（リテラル値が `?` や `...` などのプレースホルダーに置き換えられたもの）を照会するために使用されます。この関数は1つまたは2つの引数を取ります。
 
-- `digests` : 文字列。このパラメータはJSON文字列配列の形式であり、配列内の各文字列はSQLダイジェストです。
+- `digests` : 文字列。このパラメーターはJSON文字列配列の形式であり、配列内の各文字列はSQLダイジェストです。
 - `stmtTruncateLength` : 整数（オプション）。返される結果内の各SQL文の長さを制限するために使用されます。SQL文が指定された長さを超えた場合、文は切り捨てられます。`0`は長さが無制限であることを意味します。
 
-この関数は、JSON文字列配列形式の文字列を返します。配列の*i*番目の項目は、 `digests`パラメータの*i*番目の要素に対応する正規化されたSQL文です。 `digests`パラメータの要素が有効なSQLダイジェストでないか、システムが対応するSQL文を見つけられない場合、返される結果の対応する項目は`null`になります。切り捨て長が指定されている場合（ `stmtTruncateLength > 0` ）、返される結果のこの長さを超える各文については、最初の`stmtTruncateLength`文字が保持され、切り捨てを示すために末尾にサフィックス`"..."`が追加されます。 `digests`パラメータが`NULL`の場合、関数の戻り値は`NULL`になります。
+この関数は、JSON文字列配列形式の文字列を返します。配列の*i*番目の項目は、 `digests`パラメーターの*i*番目の要素に対応する正規化されたSQL文です。 `digests`パラメーターの要素が有効なSQLダイジェストでないか、システムが対応するSQL文を見つけられない場合、返される結果の対応する項目は`null`になります。切り捨て長が指定されている場合（ `stmtTruncateLength > 0` ）、返される結果のこの長さを超える各文については、最初の`stmtTruncateLength`文字が保持され、切り捨てを示すために末尾にサフィックス`"..."`が追加されます。 `digests`パラメーターが`NULL`の場合、関数の戻り値は`NULL`になります。
 
 > **Note:**
 >
 > - この機能を使用できるのは、 [PROCESS](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process)権限を持つユーザーのみです。
-> - `TIDB_DECODE_SQL_DIGESTS`を実行すると、TiDB は各 SQL ダイジェストに対応するステートメントをステートメントサマリーテーブルから照会します。そのため、どの SQL ダイジェストに対しても、必ず対応するステートメントが見つかるとは限りません。見つかるのはクラスタ内で実行されたステートメントのみであり、これらの SQL文を照会できるかどうかは、ステートメントサマリーテーブルの関連設定にも影響されます。ステートメントサマリーテーブルの詳細については、 [ステートメントサマリーテーブル](/statement-summary-tables.md)を参照してください。
+> - `TIDB_DECODE_SQL_DIGESTS`を実行すると、TiDB は各 SQL ダイジェストに対応するステートメントをステートメントサマリーテーブルから照会します。そのため、どの SQL ダイジェストに対しても、必ず対応するステートメントが見つかるとは限りません。見つかるのはクラスター内で実行されたステートメントのみであり、これらの SQL文を照会できるかどうかは、ステートメントサマリーテーブルの関連設定にも影響されます。ステートメントサマリーテーブルの詳細については、 [ステートメントサマリーテーブル](/statement-summary-tables.md)を参照してください。
 > - この関数はオーバーヘッドが大きいため、行数の多いクエリ（例えば、大規模で高負荷なクラスターでテーブル`information_schema.cluster_tidb_trx`全体を検索するなど）では、この関数を使用するとクエリの実行時間が長くなりすぎる可能性があります。注意して使用してください。
 >     - この関数は、呼び出されるたびに内部的に`STATEMENTS_SUMMARY` 、 `STATEMENTS_SUMMARY_HISTORY` 、 `CLUSTER_STATEMENTS_SUMMARY` 、 `CLUSTER_STATEMENTS_SUMMARY_HISTORY`テーブルを照会し、そのクエリに`UNION`演算が含まれるため、オーバーヘッドが大きくなります。この関数は現在ベクトル化をサポートしていません。つまり、複数行のデータに対してこの関数を呼び出す場合、上記のクエリは各行ごとに個別に実行されます。
 
@@ -323,7 +323,7 @@ SELECT TIDB_DECODE_SQL_DIGESTS(@digests);
 1 row in set (0.00 sec)
 ```
 
-上記の例では、パラメータは3つのSQLダイジェストを含むJSON配列であり、対応するSQL文はクエリ結果の3つの項目です。しかし、2番目のSQLダイジェストに対応するSQL文がクラスターから見つからないため、結果の2番目の項目は`null`なります。
+上記の例では、パラメーターは3つのSQLダイジェストを含むJSON配列であり、対応するSQL文はクエリ結果の3つの項目です。しかし、2番目のSQLダイジェストに対応するSQL文がクラスターから見つからないため、結果の2番目の項目は`null`になります。
 
 ```sql
 SELECT TIDB_DECODE_SQL_DIGESTS(@digests, 10);
@@ -349,7 +349,7 @@ SELECT TIDB_DECODE_SQL_DIGESTS(@digests, 10);
 
 `TIDB_ENCODE_SQL_DIGEST(query_str)`クエリ文字列の SQL ダイジェストを返します。
 
-次の例では、両方のクエリが同じクエリ ダイジェストを取得することがわかります。これは、両方のクエリのダイジェストが`select ?`になるためです。
+次の例では、両方のクエリが同じクエリダイジェストを取得することがわかります。これは、両方のクエリのダイジェストが`select ?`になるためです。
 
 ```sql
 SELECT TIDB_ENCODE_SQL_DIGEST('SELECT 1');
@@ -510,7 +510,7 @@ SELECT *, TIDB_ROW_CHECKSUM() FROM t WHERE id = 1;
     - `WHERE`サブクエリでは使用できません。
     - 整数フィールドのみの一意インデックスを分散させるために使用できます。
     - 複合インデックスでは効果がない可能性があります。
-    - FastPlan プロセスを実行できないため、オプティマイザのパフォーマンスに影響します。
+    - FastPlan プロセスを実行できないため、オプティマイザーのパフォーマンスに影響します。
     - プリペアドプランキャッシュには使用できません。
 
 次の例は、 `TIDB_SHARD()`関数の使用方法を示しています。
@@ -534,7 +534,7 @@ SELECT *, TIDB_ROW_CHECKSUM() FROM t WHERE id = 1;
     1 row in set (0.00 sec)
     ```
 
-- `TIDB_SHARD()`関数を使用してシャード インデックスを作成します。
+- `TIDB_SHARD()`関数を使用してシャードインデックスを作成します。
 
     ```sql
     CREATE TABLE test(id INT PRIMARY KEY CLUSTERED, a INT, b INT, UNIQUE KEY uk((tidb_shard(a)), a));
@@ -589,9 +589,9 @@ SELECT VITESS_HASH(123);
 TIDB_ENCODE_INDEX_KEY(<db_name>, <table_name>, <index_name>, <index_columns>..., <handle_columns>...)
 ```
 
-パラメータの説明:
+パラメーターの説明:
 
-- `<db_name>` : ターゲット インデックスを含むデータベースの名前。
+- `<db_name>` : ターゲットインデックスを含むデータベースの名前。
 - `<table_name>` : ターゲットインデックスを含むテーブルの名前。パーティションテーブルの場合は、パーティション名（例： `'t(p0)'` ）を指定できます。
 - `<index_name>` : ターゲットインデックスの名前。
 - `<index_columns>...` : インデックス列の値。インデックスで定義されている順序と同じ順序で値を指定する必要があります。複合インデックスの場合は、すべてのインデックス列の値を指定する必要があります。
@@ -601,7 +601,7 @@ TIDB_ENCODE_INDEX_KEY(<db_name>, <table_name>, <index_name>, <index_columns>...,
     - 主キーが`CLUSTERED`で、単一列の整数の場合、ハンドル値は主キー列の値になります。
     - 主キーが`CLUSTERED`で、複合主キーまたは非整数型 (共通ハンドル) の場合、ハンドル値はすべての主キー列の値を順番に含んだものになります。
 
-次の例は、異なる主キー タイプで複合セカンダリインデックス`idx(c1, c2)`に対してこの関数を呼び出す方法を示しています。
+次の例は、異なる主キータイプで複合セカンダリインデックス`idx(c1, c2)`に対してこの関数を呼び出す方法を示しています。
 
 ```sql
 -- For tables without a primary key or with a NONCLUSTERED primary key, use the _tidb_rowid column.
@@ -660,7 +660,7 @@ SELECT TIDB_ENCODE_INDEX_KEY('test', 't', 'idx', 2, 1);
 TIDB_ENCODE_RECORD_KEY(<db_name>, <table_name>, <handle_columns>...)
 ```
 
-パラメータの説明:
+パラメーターの説明:
 
 - `<db_name>` : ターゲットテーブルを含むデータベースの名前。
 - `<table_name>` : 対象テーブルの名前。パーティションテーブルの場合は、 `<table_name>`にパーティション名を指定できます（例： `'t(p0)'` ）。

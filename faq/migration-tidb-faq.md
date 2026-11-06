@@ -36,7 +36,7 @@ TiDB はほとんどの MySQL 構文をサポートしているため、ほと�
     iperf3 -c <server-IP>
     ```
 
-次の例は、ネットワーク接続が良好なクライアント ノードの出力です。
+次の例は、ネットワーク接続が良好なクライアントノードの出力です。
 
 ```shell
 $ iperf3 -c 192.168.196.58
@@ -67,7 +67,7 @@ iperf Done.
 
 ### 誤ってMySQLユーザーテーブルをTiDBにインポートしてしまった場合、またはパスワードを忘れてログインできない場合は、どのように対処すればよいですか? {#if-i-accidentally-import-the-mysql-user-table-into-tidb-or-forget-the-password-and-cannot-log-in-how-to-deal-with-it}
 
-TiDBサービスを再起動し、設定ファイルにパラメータ`-skip-grant-table=true`を追加します。パスワードなしでクラスターにログインし、ユーザーを再作成するか、テーブル`mysql.user`を再作成してください。具体的なテーブルスキーマについては、公式ドキュメントを参照してください。
+TiDBサービスを再起動し、設定ファイルにパラメーター`-skip-grant-table=true`を追加します。パスワードなしでクラスターにログインし、ユーザーを再作成するか、テーブル`mysql.user`を再作成してください。具体的なテーブルスキーマについては、公式ドキュメントを参照してください。
 
 ### TiDB のデータをエクスポートするにはどうすればいいですか? {#how-to-export-the-data-in-tidb}
 
@@ -109,16 +109,16 @@ Sqoopでは、 `--batch`各バッチで100個の`statement`文をコミットす
 
 - 単一の TiDB トランザクション内のステートメントの制限数を増やすこともできますが、これにより消費されるメモリが増加します。
 
-### Dumpling がテーブルをエクスポートするときに`The local disk space is insufficient`エラーを返したり、アップストリーム データベースのメモリ不足を引き起こしたりする原因になるのはなぜですか? {#why-does-dumpling-return-the-local-disk-space-is-insufficient-error-or-cause-the-upstream-database-to-run-out-of-memory-when-exporting-a-table}
+### Dumpling がテーブルをエクスポートするときに`The local disk space is insufficient`エラーを返したり、アップストリームデータベースのメモリ不足を引き起こしたりする原因になるのはなぜですか? {#why-does-dumpling-return-the-local-disk-space-is-insufficient-error-or-cause-the-upstream-database-to-run-out-of-memory-when-exporting-a-table}
 
 この問題には次の原因が考えられます。
 
 - データベースの主キーが均等に分散されていません (たとえば、 [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)を有効にした場合)。
-- アップストリーム データベースは TiDB であり、エクスポートされたテーブルはパーティションテーブルです。
+- アップストリームデータベースは TiDB であり、エクスポートされたテーブルはパーティションテーブルです。
 
 上記のケースでは、 Dumpling はエクスポート時に過度に大きなデータチャンクを分割し、過度に大きな結果を含むクエリを送信します。この問題に対処するには、 Dumplingの最新バージョンを入手してください。
 
-### TiDB には Oracle のフラッシュバック クエリのような機能がありますか? DDL をサポートしていますか? {#does-tidb-have-a-function-like-the-flashback-query-in-oracle-does-it-support-ddl}
+### TiDB には Oracle のフラッシュバッククエリのような機能がありますか? DDL をサポートしていますか? {#does-tidb-have-a-function-like-the-flashback-query-in-oracle-does-it-support-ddl}
 
 はい、サポートしています。DDLもサポートしています。詳細は[TiDBが履歴バージョンからデータを読み取る方法](/read-historical-data.md)ご覧ください。
 
@@ -136,7 +136,7 @@ Sqoopでは、 `--batch`各バッチで100個の`statement`文をコミットす
 
 ### TiDB の書き込み容量と読み取り容量の合計に制限はありますか? {#is-there-a-limit-for-the-total-write-and-read-capacity-in-tidb}
 
-読み取り容量の合計に制限はありません。TiDBサーバーを追加することで、読み取り容量を増やすことができます。書き込み容量にも、一般的に制限はありません。TiKVノードを追加することで、書き込み容量を増やすことができます。
+読み取り容量の合計に制限はありません。TiDBサーバーを追加することで、読み取り容量を増やせます。書き込み容量にも、一般的に制限はありません。TiKVノードを追加することで、書き込み容量を増やせます。
 
 ### `transaction too large`エラーメッセージが表示されます {#the-error-message-transaction-too-large-is-displayed}
 
@@ -175,4 +175,4 @@ Google Cloud Spanner には[同様の制限](https://cloud.google.com/spanner/do
 ### TiDB のデータ読み込み速度を向上させるにはどうすればよいでしょうか? {#how-to-improve-the-data-loading-speed-in-tidb}
 
 - [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)ツールは分散データインポート用に開発されています。パフォーマンス上の理由から、データインポートプロセスは完全なトランザクション処理を実行しないことに注意してください。そのため、インポートプロセス中にインポートされるデータのACID制約は保証されません。インポートされたデータのACID制約は、インポートプロセス全体が終了した後にのみ保証されます。したがって、適用可能なシナリオは主に、新規データ（新規テーブルや新規インデックスなど）のインポート、またはフルバックアップとリストア（元のテーブルを切り捨ててからデータをインポートする）です。
-- TiDBへのデータロードは、ディスクとクラスタ全体の状態に関連しています。データをロードする際は、ホストのディスク使用率、TiClientエラー、バックオフ、スレッドCPUなどのメトリクスに注目してください。これらのメトリクスを用いてボトルネックを分析できます。
+- TiDBへのデータロードは、ディスクとクラスター全体の状態に関連しています。データをロードする際は、ホストのディスク使用率、TiClientエラー、バックオフ、スレッドCPUなどのメトリクスに注目してください。これらのメトリクスを用いてボトルネックを分析できます。
