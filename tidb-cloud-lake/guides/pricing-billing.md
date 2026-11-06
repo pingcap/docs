@@ -36,17 +36,17 @@ A suspended warehouse does not consume any resources. By default, {{{ .lake }}} 
 
 Your data in {{{ .lake }}} is physically stored in the object storage service of your cloud provider: Amazon S3 on AWS and Object Storage Service (OSS) on Alibaba Cloud. Storage prices in {{{ .lake }}} are based on the object storage pricing of the cloud provider and region where your organization is deployed, so the price varies by cloud provider and region. Both the Personal Edition and Business Edition are priced the same.
 
-Storage usage is measured in binary units, where 1 GB is 2^30 bytes and 1 TB is 1,024 GB.
+Storage usage is measured in binary units, where 1 GiB is 2^30 bytes and 1 TiB is 1,024 GiB.
 
-| Cloud Provider | Region Name              | Region ID      | Price per GB per Month |
-|----------------|--------------------------|----------------|------------------------|
-| AWS            | US West (Oregon)         | us-west-2      | $0.023                 |
-| AWS            | US East (N. Virginia)    | us-east-1      | $0.023                 |
-| AWS            | Asia Pacific (Tokyo)     | ap-northeast-1 | $0.025                 |
-| AWS            | Asia Pacific (Singapore) | ap-southeast-1 | $0.025                 |
-| AWS            | Asia Pacific (Mumbai)    | ap-south-1     | $0.025                 |
-| Alibaba Cloud  | Japan (Tokyo)            | ap-northeast-1 | $0.020                 |
-| Alibaba Cloud  | Singapore                | ap-southeast-1 | $0.020                 |
+| Cloud Provider | Region Name              | Region ID      | Price per GiB per Month |
+|----------------|--------------------------|----------------|-------------------------|
+| AWS            | US West (Oregon)         | us-west-2      | $0.023                  |
+| AWS            | US East (N. Virginia)    | us-east-1      | $0.023                  |
+| AWS            | Asia Pacific (Tokyo)     | ap-northeast-1 | $0.025                  |
+| AWS            | Asia Pacific (Singapore) | ap-southeast-1 | $0.025                  |
+| AWS            | Asia Pacific (Mumbai)    | ap-south-1     | $0.025                  |
+| Alibaba Cloud  | Japan (Tokyo)            | ap-northeast-1 | $0.020                  |
+| Alibaba Cloud  | Singapore                | ap-southeast-1 | $0.020                  |
 
 ### Cloud Service Pricing
 
@@ -71,7 +71,7 @@ Service sizes are derived from the XSmall warehouse size. The monthly costs in t
 
 ## Example-1
 
-**Usage Scenario:** A user is using an XSmall warehouse (Business) in the AWS US East (N. Virginia) region and occasionally queries data. This specific query took 5 minutes and 20 seconds, and the data storage size is 100GB.
+**Usage Scenario:** A user is using an XSmall warehouse (Business) in the AWS US East (N. Virginia) region and occasionally queries data. This specific query took 5 minutes and 20 seconds, and the data storage size is 100 GiB.
 
 | Cost | Formula | Amount |
 |------|---------|--------|
@@ -82,7 +82,7 @@ Service sizes are derived from the XSmall warehouse size. The monthly costs in t
 
 ## Example-2
 
-**Usage Scenario:** A user is using an XSmall warehouse (Business) in the AWS US East (N. Virginia) region to continuously import data into {{{ .lake }}}. The warehouse runs 24 hours a day with 1TB (1,024 GB) storage, using Task service for minute-by-minute data loading. The estimated number of API calls is 50,000.
+**Usage Scenario:** A user is using an XSmall warehouse (Business) in the AWS US East (N. Virginia) region to continuously import data into {{{ .lake }}}. The warehouse runs 24 hours a day with 1TiB (1,024 GiB) storage, using Task service for minute-by-minute data loading. The estimated number of API calls is 50,000.
 
 | Cost | Formula | Amount |
 |------|---------|--------|
