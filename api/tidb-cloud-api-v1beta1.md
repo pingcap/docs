@@ -14,7 +14,7 @@ The TiDB Cloud API v1beta1 is a RESTful API that gives you programmatic access t
 Currently, you can use the following v1beta1 APIs to manage the resources in TiDB Cloud:
 
 - Cluster-level resources:
-    - [TiDB Cloud Starter or Essential Cluster](https://docs.pingcap.com/tidbcloud/api/v1beta1/serverless): manage clusters, branches, data export tasks, and data import tasks for TiDB Cloud Essential instances running TiDB v8.5.3 or earlier and TiDB Cloud Starter instances.
+    - [TiDB Cloud Starter or Essential Cluster](https://docs.pingcap.com/tidbcloud/api/v1beta1/serverless): manage clusters, branches, data export tasks, and data import tasks for TiDB Cloud Essential instances (running TiDB v8.5.3 or earlier) and TiDB Cloud Starter instances.
     - [TiDB Cloud Dedicated Cluster](https://docs.pingcap.com/tidbcloud/api/v1beta1/dedicated): manage clusters, regions, private endpoint connections, and data import tasks for TiDB Cloud Dedicated clusters.
 - Organization or project-level resources:
     - [Billing](https://docs.pingcap.com/tidbcloud/api/v1beta1/billing): manage billing for TiDB Cloud clusters.
