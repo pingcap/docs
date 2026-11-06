@@ -8,6 +8,16 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes','/ai/v
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2026.
 
+## November 6, 2026
+
+**API changes**
+
+- **TiDB Cloud Essential**
+
+    - [TiDB Cloud API v1beta2](https://docs.pingcap.com/tidbcloud/api/v1beta2/) now supports managing TiDB Cloud Essential instances running TiDB version `CLOUD.202603.x` or later.
+
+        For TiDB Cloud Essential instances running TiDB v8.5.3 or earlier, use the [v1beta1 API](https://docs.pingcap.com/tidbcloud/api/v1beta1/serverless/) instead.
+
 ## October 27, 2026
 
 **General changes**
@@ -198,7 +208,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
         You can use these endpoints to create, list, get, delete, pause, resume, and scale changefeeds for real-time data replication to downstream systems, including Apache Kafka, MySQL, Amazon S3, and Alibaba Cloud OSS.
 
-        For more information, see [Changefeed API v1beta2 Reference](https://docs.pingcap.com/tidbcloud/api/v1beta2/premium/#tag/Changefeed).
+        For more information, see [Changefeed API v1beta2 Reference](https://docs.pingcap.com/tidbcloud/api/v1beta2/#tag/Changefeed).
 
 ## September 1, 2026
 
@@ -568,8 +578,8 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     - Introduce the following backup API endpoints for [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium), enabling unified management for both active and deleted instances within your organization.
 
-        - [List backups](https://docs.pingcap.com/tidbcloud/api/v1beta2/premium/#tag/Backup/operation/BackupService_ListBackups): lists backups for both active and deleted TiDB Cloud Premium instances (in the recycle bin) within your organization.
-        - [Delete a backup](https://docs.pingcap.com/tidbcloud/api/v1beta2/premium/#tag/Backup/operation/BackupService_DeleteBackup): deletes a specific backup within your organization by `backupId`.
+        - [List backups](https://docs.pingcap.com/tidbcloud/api/v1beta2/#tag/Backup/operation/BackupService_ListBackups): lists backups for both active and deleted TiDB Cloud Premium instances (in the recycle bin) within your organization.
+        - [Delete a backup](https://docs.pingcap.com/tidbcloud/api/v1beta2/#tag/Backup/operation/BackupService_DeleteBackup): deletes a specific backup within your organization by `backupId`.
 
 ## June 2, 2026
 
@@ -730,7 +740,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
     - **Backup**: manage backups for TiDB Cloud Premium instances, including backup-based restore.
     - **Region**: retrieve available regions for creating TiDB Cloud Premium instances.
 
-  For more information, see [TiDB Cloud Premium API](https://docs.pingcap.com/tidbcloud/api/v1beta2/premium/).
+  For more information, see [TiDB Cloud Premium API](https://docs.pingcap.com/tidbcloud/api/v1beta2/).
 
 ## April 14, 2026
 
