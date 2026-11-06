@@ -34,12 +34,19 @@ A suspended warehouse does not consume any resources. By default, {{{ .lake }}} 
 
 ### Storage Pricing
 
-Your data in {{{ .lake }}} is physically stored in Amazon S3. Storage costs in {{{ .lake }}} are based on Amazon S3's pricing. Currently, both the Personal Edition and Business Edition are priced at $23.00 per month per terabyte (TB).
+Your data in {{{ .lake }}} is physically stored in the object storage service of your cloud provider: Amazon S3 on AWS and Object Storage Service (OSS) on Alibaba Cloud. Storage prices in {{{ .lake }}} are based on the object storage pricing of the cloud provider and region where your organization is deployed, so the price varies by cloud provider and region. Both the Personal Edition and Business Edition are priced the same.
 
-| Edition          | Price per TB per Month |
-| ---------------- | ---------------------- |
-| Personal Edition | $23.00                 |
-| Business Edition | $23.00                 |
+Storage usage is measured in binary units, where 1 GB is 2^30 bytes and 1 TB is 1,024 GB.
+
+| Cloud Provider | Region Name              | Region ID      | Price per GB per Month |
+|----------------|--------------------------|----------------|------------------------|
+| AWS            | US West (Oregon)         | us-west-2      | $0.023                 |
+| AWS            | US East (N. Virginia)    | us-east-1      | $0.023                 |
+| AWS            | Asia Pacific (Tokyo)     | ap-northeast-1 | $0.025                 |
+| AWS            | Asia Pacific (Singapore) | ap-southeast-1 | $0.025                 |
+| AWS            | Asia Pacific (Mumbai)    | ap-south-1     | $0.025                 |
+| Alibaba Cloud  | Japan (Tokyo)            | ap-northeast-1 | $0.020                 |
+| Alibaba Cloud  | Singapore                | ap-southeast-1 | $0.020                 |
 
 ### Cloud Service Pricing
 
@@ -64,26 +71,26 @@ Service sizes are derived from the XSmall warehouse size. The monthly costs in t
 
 ## Example-1
 
-**Usage Scenario:** A user is using an XSmall warehouse (Business) and occasionally queries data. This specific query took 5 minutes and 20 seconds, and the data storage size is 100GB.
+**Usage Scenario:** A user is using an XSmall warehouse (Business) in the AWS US East (N. Virginia) region and occasionally queries data. This specific query took 5 minutes and 20 seconds, and the data storage size is 100GB.
 
 | Cost | Formula | Amount |
 |------|---------|--------|
 | Warehouse | $2.4 ÷ 3600 × (5×60+20) | $0.21 |
-| Storage | $23 ÷ 1024 ÷ 30 × 100 | $0.07 |
-| **Daily Total** | | **$0.28** |
-| **Monthly Total** | | **$8.40** |
+| Storage | $0.023 × 100 ÷ 30 | $0.08 |
+| **Daily Total** | | **$0.29** |
+| **Monthly Total** | | **$8.70** |
 
 ## Example-2
 
-**Usage Scenario:** A user is using an XSmall warehouse (Business) to continuously import data into {{{ .lake }}}. The warehouse runs 24 hours a day with 1TB storage, using Task service for minute-by-minute data loading. The estimated number of API calls is 50,000.
+**Usage Scenario:** A user is using an XSmall warehouse (Business) in the AWS US East (N. Virginia) region to continuously import data into {{{ .lake }}}. The warehouse runs 24 hours a day with 1TB (1,024 GB) storage, using Task service for minute-by-minute data loading. The estimated number of API calls is 50,000.
 
 | Cost | Formula | Amount |
 |------|---------|--------|
 | Warehouse | $2.40 × 24h | $57.60/day |
-| Storage | $23 ÷ 30 | $0.77/day |
+| Storage | $0.023 × 1024 ÷ 30 | $0.79/day |
 | Cloud Service | $2 × 5 | $10.00/day |
-| **Daily Total** | | **$68.37** |
-| **Monthly Total** | | **$2,051.10** |
+| **Daily Total** | | **$68.39** |
+| **Monthly Total** | | **$2,051.70** |
 
 ## {{{ .lake }}} Billing
 
