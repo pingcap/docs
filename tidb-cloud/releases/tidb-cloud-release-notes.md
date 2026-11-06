@@ -8,6 +8,16 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes','/ai/v
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2026.
 
+## November 6, 2026
+
+**API changes**
+
+- **TiDB Cloud Essential**
+
+    - [TiDB Cloud API v1beta2](https://docs.pingcap.com/tidbcloud/api/v1beta2) now supports managing TiDB Cloud Essential instances running TiDB version `CLOUD.202603.x` or later.
+
+        For TiDB Cloud Essential instances running TiDB v8.5.3 or earlier, use the [v1beta1 API](https://docs.pingcap.com/tidbcloud/api/v1beta1/serverless/) instead.
+
 ## October 27, 2026
 
 **General changes**
