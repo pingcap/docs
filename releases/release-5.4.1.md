@@ -19,7 +19,7 @@ TiDB v5.4.1では、製品設計上の互換性に関する変更は行われて
 
     - `_tidb_rowid`列を読み取るクエリにPointGetプランの使用をサポート [#31543](https://github.com/pingcap/tidb/issues/31543)
     - `Apply`オペレーターのログとメトリクスを追加して、並列であるかどうかを確認します。 [#33887](https://github.com/pingcap/tidb/issues/33887)
-    - 統計情報を収集するために使用される分析バージョン 2 の`TopN`プルーニング ロジックを改善します。 [#34256](https://github.com/pingcap/tidb/issues/34256)
+    - 統計情報を収集するために使用される分析バージョン 2 の`TopN`プルーニングロジックを改善します。 [#34256](https://github.com/pingcap/tidb/issues/34256)
     - Grafanaダッシュボードで複数のKubernetesクラスターの表示をサポート [#32593](https://github.com/pingcap/tidb/issues/32593)
 
 - TiKV
@@ -39,7 +39,7 @@ TiDB v5.4.1では、製品設計上の互換性に関する変更は行われて
     - TiCDC
 
         - Grafanaダッシュボードで複数のKubernetesクラスターをサポート[#4665](https://github.com/pingcap/tiflow/issues/4665)
-        - Kafka プロデューサーの設定パラメータを公開して、TiCDC で設定できるようにします。 [#4385](https://github.com/pingcap/tiflow/issues/4385)
+        - Kafka プロデューサーの設定パラメーターを公開して、TiCDC で設定できるようにします。 [#4385](https://github.com/pingcap/tiflow/issues/4385)
 
     - TiDB Data Migration (DM)
 
@@ -138,7 +138,7 @@ TiDB v5.4.1では、製品設計上の互換性に関する変更は行われて
         - 復元操作が完了した後にリージョンが不均等に分散される可能性がある問題を修正しました[#31034](https://github.com/pingcap/tidb/issues/31034)
         - 復元中にリージョンが一致していない場合にBRが十分な回数再試行しない問題を修正[#33419](https://github.com/pingcap/tidb/issues/33419)
         - 小さなファイルのマージが有効になっているときにBRが時々panicする可能性がある問題を修正[#33801](https://github.com/pingcap/tidb/issues/33801)
-        - BRまたはTiDB Lightningが異常終了した後にスケジューラが再開しない問題を修正[#33546](https://github.com/pingcap/tidb/issues/33546)
+        - BRまたはTiDB Lightningが異常終了した後にスケジューラーが再開しない問題を修正[#33546](https://github.com/pingcap/tidb/issues/33546)
 
     - TiCDC
 
@@ -150,8 +150,8 @@ TiDB v5.4.1では、製品設計上の互換性に関する変更は行われて
         - PDリーダーが強制終了した際にTiCDCノードが異常終了するバグを修正[#4248](https://github.com/pingcap/tiflow/issues/4248)
         - MySQLシンクが`batch-replace-enable`が無効になっているときに重複した`replace` SQL文を生成するバグを修正[#4501](https://github.com/pingcap/tiflow/issues/4501)
         - `rename tables` DDL によって発生した DML 構築エラーを修正 [#5059](https://github.com/pingcap/tiflow/issues/5059)
-        - 所有者が変更され、新しいスケジューラが有効になっている場合（デフォルトでは無効）に、まれにレプリケーションが停止する可能性がある問題を修正しました[#4963](https://github.com/pingcap/tiflow/issues/4963)
-        - 新しいスケジューラが有効になっているときにエラー ErrProcessorDuplicateOperations が報告される問題を修正しました (デフォルトでは無効) [#4769](https://github.com/pingcap/tiflow/issues/4769)
+        - 所有者が変更され、新しいスケジューラーが有効になっている場合（デフォルトでは無効）に、まれにレプリケーションが停止する可能性がある問題を修正しました[#4963](https://github.com/pingcap/tiflow/issues/4963)
+        - 新しいスケジューラーが有効になっているときにエラー ErrProcessorDuplicateOperations が報告される問題を修正しました (デフォルトでは無効) [#4769](https://github.com/pingcap/tiflow/issues/4769)
         - TLS が有効になった後、 `--pd`で設定された最初の PD が利用できない場合に TiCDC が起動に失敗する問題を修正[#4777](https://github.com/pingcap/tiflow/issues/4777)
         - テーブルがスケジュールされているときにチェックポイントメトリックが欠落する問題を修正しました[#4714](https://github.com/pingcap/tiflow/issues/4714)
 

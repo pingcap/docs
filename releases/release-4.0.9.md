@@ -28,7 +28,7 @@ TiDB バージョン: 4.0.9
 - TiDB Dashboard
 
     - **SQL Statements**ページのすべてのフィールドによる表示と並べ替えをサポート [#749](https://github.com/pingcap/tidb-dashboard/pull/749)
-    - トポロジグラフのズームとパンをサポート[#772](https://github.com/pingcap/tidb-dashboard/pull/772)
+    - トポロジーグラフのズームとパンをサポート[#772](https://github.com/pingcap/tidb-dashboard/pull/772)
     - **SQL Statements**と**Slow Queries**ページでディスク使用量情報を表示する機能をサポート[#777](https://github.com/pingcap/tidb-dashboard/pull/777)
     - **SQL Statements**と**Slow Queries**ページでリストデータのエクスポートをサポート[#778](https://github.com/pingcap/tidb-dashboard/pull/778)
     - Prometheusアドレスのカスタマイズをサポート [#808](https://github.com/pingcap/tidb-dashboard/pull/808)
@@ -82,7 +82,7 @@ TiDB バージョン: 4.0.9
     - レプリカ読み取りのレイテンシーを削減
     - TiFlashのエラーメッセージを改善する
     - データ量が大きい場合、キャッシュデータのメモリ使用量を制限する
-    - 処理されているコプロセッサタスクの数を監視するメトリックを追加します。
+    - 処理されているコプロセッサータスクの数を監視するメトリックを追加します。
 
 - ツール
 
@@ -105,8 +105,8 @@ TiDB バージョン: 4.0.9
         - 失敗したチャンクデータのダンプを再試行します [#182](https://github.com/pingcap/dumpling/pull/182)
         - `-F`と`-r`引数を同時に設定することをサポート[#177](https://github.com/pingcap/dumpling/pull/177)
         - `--filter`でシステムデータベースをデフォルトで除外[#194](https://github.com/pingcap/dumpling/pull/194)
-        - `--transactional-consistency`パラメータをサポートし、再試行中に MySQL 接続を再構築することをサポートします。 [#199](https://github.com/pingcap/dumpling/pull/199)
-        - Dumplingで使用される圧縮アルゴリズムを指定するために、 `-c,--compress`パラメータの使用をサポートします。空の文字列は圧縮なしを意味します[#202](https://github.com/pingcap/dumpling/pull/202)
+        - `--transactional-consistency`パラメーターをサポートし、再試行中に MySQL 接続を再構築することをサポートします。 [#199](https://github.com/pingcap/dumpling/pull/199)
+        - Dumplingで使用される圧縮アルゴリズムを指定するために、 `-c,--compress`パラメーターの使用をサポートします。空の文字列は圧縮なしを意味します[#202](https://github.com/pingcap/dumpling/pull/202)
 
     - TiDB Lightning
 
@@ -165,10 +165,10 @@ TiDB バージョン: 4.0.9
     - リージョンマージによりネットワークパーティション中にデータが失われる可能性がある問題を修正しました [#9108](https://github.com/tikv/tikv/pull/9108)
     - `latin1`文字セットを使用すると`ANALYZE`文がpanicを引き起こす可能性がある問題を修正しました [#9082](https://github.com/tikv/tikv/pull/9082)
     - 数値型を時間型に変換するときに返される誤った結果を修正[#9031](https://github.com/tikv/tikv/pull/9031)
-    - 透過的データ暗号化 (TDE) が有効な場合、 TiDB Lightning がインポーターバックエンドまたはローカルバックエンドを使用して SST ファイルを TiKV に取り込むことができないバグを修正しました[#8995](https://github.com/tikv/tikv/pull/8995)
+    - 透過的データ暗号化 (TDE) が有効な場合、 TiDB Lightning がインポーターバックエンドまたはローカルバックエンドを使用して SST ファイルを TiKV に取り込めないバグを修正しました[#8995](https://github.com/tikv/tikv/pull/8995)
     - 無効な`advertise-status-addr`の値（ `0.0.0.0` ）を修正する [#9036](https://github.com/tikv/tikv/pull/9036)
     - コミットされたトランザクションでキーがロックされ削除されたときに、キーが存在することを示すエラーが返される問題を修正しました[#8930](https://github.com/tikv/tikv/pull/8930)
-    - RocksDB キャッシュ マッピング エラーによりデータ破損が発生する問題を修正[#9029](https://github.com/tikv/tikv/pull/9029)
+    - RocksDB キャッシュマッピングエラーによりデータ破損が発生する問題を修正[#9029](https://github.com/tikv/tikv/pull/9029)
     - リーダーが転送された後にFollower Readが古いデータを返す可能性があるバグを修正[#9240](https://github.com/tikv/tikv/pull/9240)
     - 悲観的ロックで古い値が読み取られる可能性がある問題を修正 [#9282](https://github.com/tikv/tikv/pull/9282)
     - リーダー転送後にレプリカ読み取りで古いデータが取得される可能性があるバグを修正[#9240](https://github.com/tikv/tikv/pull/9240)
@@ -183,7 +183,7 @@ TiDB バージョン: 4.0.9
 - TiDB Dashboard
 
     - 中国語の時間表示の問題を修正[#755](https://github.com/pingcap/tidb-dashboard/pull/755)
-    - ブラウザ互換性通知が機能しないバグを修正[#776](https://github.com/pingcap/tidb-dashboard/pull/776)
+    - ブラウザー互換性通知が機能しないバグを修正[#776](https://github.com/pingcap/tidb-dashboard/pull/776)
     - 一部のシナリオでトランザクション`start_ts`が誤って表示される問題を修正 [#793](https://github.com/pingcap/tidb-dashboard/pull/793)
     - 一部のSQLテキストのフォーマットが正しくない問題を修正[#805](https://github.com/pingcap/tidb-dashboard/pull/805)
 
@@ -211,7 +211,7 @@ TiDB バージョン: 4.0.9
         - Kafka のバッチサイズが有効にならないバグを修正[#1112](https://github.com/pingcap/tiflow/pull/1112)
         - TiCDC と PD 間のネットワークにジッターがあり、一時停止中の変更フィードが同時に再開されると、一部のテーブルの行の変更が失われる可能性があるバグを修正しました[#1213](https://github.com/pingcap/tiflow/pull/1213)
         - TiCDCとPD間のネットワークが安定していない場合にTiCDCプロセスが終了する可能性があるバグを修正[#1218](https://github.com/pingcap/tiflow/pull/1218)
-        - TiCDC でシングルトン PD クライアントを使用し、TiCDC が誤って PD クライアントを閉じてレプリケーション ブロックが発生するバグを修正しました。 [#1217](https://github.com/pingcap/tiflow/pull/1217)
+        - TiCDC でシングルトン PD クライアントを使用し、TiCDC が誤って PD クライアントを閉じてレプリケーションブロックが発生するバグを修正しました。 [#1217](https://github.com/pingcap/tiflow/pull/1217)
         - TiCDC 所有者が etcd ウォッチクライアントでメモリを過剰に消費する可能性があるバグを修正しました [#1224](https://github.com/pingcap/tiflow/pull/1224)
 
     - Dumpling

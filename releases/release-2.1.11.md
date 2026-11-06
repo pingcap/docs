@@ -1,6 +1,6 @@
 ---
 title: TiDB 2.1.11 Release Notes
-summary: TiDB 2.1.11は2019年6月3日にリリースされました。TiDB、PD、TiKV、ツールにおける様々な問題の修正が含まれています。主な修正点としては、結合からの削除におけるスキーマの誤り、unix_timestamp()の計算エラー、TiDB AnsibleへのDrainerパラメータの追加などが挙げられます。
+summary: TiDB 2.1.11は2019年6月3日にリリースされました。TiDB、PD、TiKV、ツールにおける様々な問題の修正が含まれています。主な修正点としては、結合からの削除におけるスキーマの誤り、unix_timestamp()の計算エラー、TiDB AnsibleへのDrainerパラメーターの追加などが挙げられます。
 ---
 
 # TiDB 2.1.11 リリースノート {#tidb-2-1-11-release-notes}
@@ -28,8 +28,8 @@ TiDB Ansible バージョン: 2.1.11
 - `balance-region` によりホットリージョンのスケジュールが失敗する可能性がある問題を修正しました [#1551](https://github.com/pingcap/pd/pull/1551)
 - ホットスポット関連のスケジュール優先度を高く設定[#1551](https://github.com/pingcap/pd/pull/1551)
 - 2つの設定項目を追加する [#1551](https://github.com/pingcap/pd/pull/1551)
-    - `hot-region-schedule-limit`同時ホットスポット スケジューリング タスクの最大数を制御します
-    - ホットリージョンを識別するには`hot-region-cache-hits-threshold`
+    - `hot-region-schedule-limit`は同時ホットスポットスケジューリングタスクの最大数を制御します
+    - `hot-region-cache-hits-threshold`はホットリージョンを識別します
 
 ## TiKV {#tikv}
 
@@ -44,4 +44,4 @@ TiDB Ansible バージョン: 2.1.11
 
 ## TiDB Ansible {#tidb-ansible}
 
-- Drainerパラメータを追加 [#760](https://github.com/pingcap/tidb-ansible/pull/760)
+- Drainerパラメーターを追加 [#760](https://github.com/pingcap/tidb-ansible/pull/760)

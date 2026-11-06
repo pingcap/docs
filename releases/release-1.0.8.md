@@ -24,7 +24,7 @@ summary: TiDB 1.0.8がリリースされました。このアップデートに�
 ## PD {#pd}
 
 - [リージョンハートビートのロックのオーバーヘッドを削減](https://github.com/pingcap/pd/pull/932)
-- [ホットリージョンスケジューラが間違ったLeaderを選択する問題を修正しました](https://github.com/pingcap/pd/pull/939)
+- [ホットリージョンスケジューラーが間違ったLeaderを選択する問題を修正しました](https://github.com/pingcap/pd/pull/939)
 
 ## TiKV {#tikv}
 

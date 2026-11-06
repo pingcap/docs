@@ -53,7 +53,7 @@ TiDB バージョン: 5.0.2
     - Backup & Restore (BR)
 
         - 曖昧なエラーメッセージを明確にする[#1132](https://github.com/pingcap/br/pull/1132)
-        - バックアップのクラスタバージョンの確認をサポート[#1091](https://github.com/pingcap/br/pull/1091)
+        - バックアップのクラスターバージョンの確認をサポート[#1091](https://github.com/pingcap/br/pull/1091)
         - `mysql`スキーマのシステムテーブルのバックアップと復元をサポート[#1143](https://github.com/pingcap/br/pull/1143) [#1078](https://github.com/pingcap/br/pull/1078)
 
     - Dumpling
@@ -91,7 +91,7 @@ TiDB バージョン: 5.0.2
 - PD
 
     - ストア数が多い場合にPD Leaderの再選出が遅くなる問題を修正[#3697](https://github.com/tikv/pd/issues/3697)
-    - 存在しないストアからエビクト リーダー スケジューラを削除するときに発生するpanic問題を修正しました[#3660](https://github.com/tikv/pd/issues/3660)
+    - 存在しないストアからエビクトリーダースケジューラーを削除するときに発生するpanic問題を修正しました[#3660](https://github.com/tikv/pd/issues/3660)
     - オフラインピアがマージされた後に統計が更新されない問題を修正[#3611](https://github.com/tikv/pd/issues/3611)
 
 - TiFlash
@@ -99,7 +99,7 @@ TiDB バージョン: 5.0.2
     - 共有デルタインデックスを同時にクローン化する際に誤った結果が生成される問題を修正しました
     - TiFlashが不完全なデータで再起動に失敗する潜在的な問題を修正
     - 古いdmファイルが自動的に削除されない問題を修正
-    - コンパクションフィルタ機能が有効になっているときに発生する可能性のあるpanicを修正しました
+    - コンパクションフィルター機能が有効になっているときに発生する可能性のあるpanicを修正しました
     - `ExchangeSender`が重複したデータを送信する潜在的な問題を修正
     - TiFlash が非同期コミットからフォールバックしたロックを解決できない問題を修正しました
     - `TIMEZONE`型のキャスト結果に`TIMESTAMP`型が含まれている場合に誤った結果が返される問題を修正しました
@@ -117,7 +117,7 @@ TiDB バージョン: 5.0.2
         - MySQLにデータを複製する際に`SUPER`権限を必要とする`explicit_defaults_for_timestamp`の更新を元に戻す[#1750](https://github.com/pingcap/tiflow/pull/1750)
         - シンクフロー制御をサポートし、メモリオーバーフローのリスクを軽減します[#1840](https://github.com/pingcap/tiflow/pull/1840)
         - テーブルを移動する際にレプリケーションタスクが停止する可能性があるバグを修正[#1828](https://github.com/pingcap/tiflow/pull/1828)
-        - TiCDC チェンジフィード チェックポイントの停滞により TiKV GC セーフポイントがブロックされる問題を修正しました[#1759](https://github.com/pingcap/tiflow/pull/1759)
+        - TiCDC チェンジフィードチェックポイントの停滞により TiKV GC セーフポイントがブロックされる問題を修正しました[#1759](https://github.com/pingcap/tiflow/pull/1759)
 
     - Backup & Restore (BR)
 
@@ -128,5 +128,5 @@ TiDB バージョン: 5.0.2
     - TiDB Lightning
 
         - KVデータ生成時に発生するTiDB Lightning panicの問題を修正[#1127](https://github.com/pingcap/br/pull/1127)
-        - 自動コミットが無効になっていると、TiDB バックエンド モードのTiDB Lightningでデータをロードできない問題を修正しました[#1104](https://github.com/pingcap/br/issues/1104)
+        - 自動コミットが無効になっていると、TiDB バックエンドモードのTiDB Lightningでデータをロードできない問題を修正しました[#1104](https://github.com/pingcap/br/issues/1104)
         - データインポート中にキーの合計サイズがRaftエントリ制限を超えたためにバッチ分割リージョンが失敗するバグを修正[#969](https://github.com/pingcap/br/issues/969)

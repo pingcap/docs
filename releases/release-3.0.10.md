@@ -20,7 +20,7 @@ TiDB Ansible バージョン: 3.0.10
 - `IndexLookUpJoin`が`OtherCondition`を使用して`InnerRange` を構築したときに間違った`Join`結果を修正します [#14599](https://github.com/pingcap/tidb/pull/14599)
 - `tidb_pprof_sql_cpu`設定項目を削除し、 `tidb_pprof_sql_cpu`変数を追加します。 [#14416](https://github.com/pingcap/tidb/pull/14416)
 - ユーザーがグローバル権限を持っている場合にのみすべてのデータベースをクエリできる問題を修正[#14386](https://github.com/pingcap/tidb/pull/14386)
-- `PointGet`操作を実行するときにトランザクション タイムアウトによりデータの可視性が期待どおりに機能しない問題を修正しました [#14480](https://github.com/pingcap/tidb/pull/14480)
+- `PointGet`操作を実行するときにトランザクションタイムアウトによりデータの可視性が期待どおりに機能しない問題を修正しました [#14480](https://github.com/pingcap/tidb/pull/14480)
 - 楽観的トランザクションモードと一致するように、悲観的トランザクションのアクティブ化のタイミングを遅延アクティブ化に変更します。 [#14474](https://github.com/pingcap/tidb/pull/14474)
 - `unixtimestamp`式がテーブルパーティションのタイムゾーンを計算するときに誤ったタイムゾーン結果が返される問題を修正しました。 [#14476](https://github.com/pingcap/tidb/pull/14476)
 - デッドロック検出期間を監視するための`tidb_session_statement_deadlock_detect_duration_seconds`監視項目を追加します[#14484](https://github.com/pingcap/tidb/pull/14484)

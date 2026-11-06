@@ -29,7 +29,7 @@ TiDB バージョン: 5.3.2
 
     - Raftクライアントによるシステムコールを減らしCPU効率を上げる[#11309](https://github.com/tikv/tikv/issues/11309)
     - ヘルスチェックを改善して、利用できないRaftstoreを検出し、TiKV クライアントがリージョンキャッシュを速やかに更新できるようにします[#12398](https://github.com/tikv/tikv/issues/12398)
-    - レイテンシージッタを削減するためにリーダーシップをCDCオブザーバーに移譲する[#12111](https://github.com/tikv/tikv/issues/12111)
+    - レイテンシージッターを削減するためにリーダーシップをCDCオブザーバーに移譲する[#12111](https://github.com/tikv/tikv/issues/12111)
     - モジュールのパフォーマンスの問題を特定するために、 Raftログのガベージコレクションモジュールのメトリックを追加します。 [#11374](https://github.com/tikv/tikv/issues/11374)
 
 - ツール
@@ -87,7 +87,7 @@ TiDB バージョン: 5.3.2
     - PDリーダー移転後に削除したtombstoneストアが再び表示される問題を修正[#4941](https://github.com/tikv/pd/issues/4941)
     - いくつかのコーナーケースにおけるTSOフォールバックのバグを修正[#4884](https://github.com/tikv/pd/issues/4884)
     - 大容量（例えば2T）のストアが存在する場合、完全に割り当てられた小さなストアを検出できず、balance operatorが生成されない問題を修正しました[#4805](https://github.com/tikv/pd/issues/4805)
-    - `SchedulerMaxWaitingOperator`を`1` に設定するとスケジューラが動作しない問題を修正しました [#4946](https://github.com/tikv/pd/issues/4946)
+    - `SchedulerMaxWaitingOperator`を`1` に設定するとスケジューラーが動作しない問題を修正しました [#4946](https://github.com/tikv/pd/issues/4946)
     - ラベル分布にメトリクスの残余ラベルがある問題を修正 [#4825](https://github.com/tikv/pd/issues/4825)
 
 - TiFlash
@@ -126,7 +126,7 @@ TiDB バージョン: 5.3.2
     - Backup & Restore (BR)
 
         - 増分復元後にテーブルにレコードを挿入するときに重複する主キーを修正する[#33596](https://github.com/pingcap/tidb/issues/33596)
-        - BRまたはTiDB Lightningが異常終了した後にスケジューラが再開しない問題を修正[#33546](https://github.com/pingcap/tidb/issues/33546)
+        - BRまたはTiDB Lightningが異常終了した後にスケジューラーが再開しない問題を修正[#33546](https://github.com/pingcap/tidb/issues/33546)
         - BR増分リストアが空のクエリを含むDDLジョブにより誤ってエラーを返すバグを修正しました [#33322](https://github.com/pingcap/tidb/issues/33322)
         - 復元中にリージョンが一致していない場合にBRが十分な回数再試行しない問題を修正[#33419](https://github.com/pingcap/tidb/issues/33419)
         - 復元操作中に回復不能なエラーが発生するとBRが停止するバグを修正[#33200](https://github.com/pingcap/tidb/issues/33200)
@@ -136,7 +136,7 @@ TiDB バージョン: 5.3.2
     - TiCDC
 
         - オーナーの変更によって生じた誤ったメトリクスを修正[#4774](https://github.com/pingcap/tiflow/issues/4774)
-        - ログを書き込む前にREDOログマネージャがログをフラッシュするバグを修正[#5486](https://github.com/pingcap/tiflow/issues/5486)
+        - ログを書き込む前にREDOログマネージャーがログをフラッシュするバグを修正[#5486](https://github.com/pingcap/tiflow/issues/5486)
         - 一部のテーブルがREDOライターによってメンテナンスされていない場合に、resolved tsが速すぎる動きをするバグを修正しました[#5486](https://github.com/pingcap/tiflow/issues/5486)
         - ファイル名の競合によりデータ損失が発生する可能性がある問題を修正するために、REDOログファイル名にUUIDサフィックスを追加します[#5486](https://github.com/pingcap/tiflow/issues/5486)
         - MySQL Sink が間違ったチェックポイントを保存する可能性があるバグを修正しました[#5107](https://github.com/pingcap/tiflow/issues/5107)

@@ -13,7 +13,7 @@ TiDB Ansible バージョン: 2.1.8
 
 ## TiDB {#tidb}
 
-- NULL値のパラメータがある場合、 `GROUP_CONCAT`関数の処理ロジックがMySQLと互換性がない問題を修正しました[#9930](https://github.com/pingcap/tidb/pull/9930)
+- NULL値のパラメーターがある場合、 `GROUP_CONCAT`関数の処理ロジックがMySQLと互換性がない問題を修正しました[#9930](https://github.com/pingcap/tidb/pull/9930)
 - `Distinct`モードの小数値の等価性チェックの問題を修正 [#9931](https://github.com/pingcap/tidb/pull/9931)
 - `SHOW FULL COLUMNS`文の日付、日付時刻、およびタイムスタンプ型の照合順序の互換性の問題を修正しました。
     - [#9938](https://github.com/pingcap/tidb/pull/9938)
@@ -24,7 +24,7 @@ TiDB Ansible バージョン: 2.1.8
     - [#9966](https://github.com/pingcap/tidb/pull/9966)
 - 互換性を向上させるために、 `STR_TO_DATE`関数の`%H`フォーマットをサポートする[#9964](https://github.com/pingcap/tidb/pull/9964)
 - `GROUP_CONCAT`関数が一意インデックスでグループ化されたときに結果が間違っている問題を修正しました [#9969](https://github.com/pingcap/tidb/pull/9969)
-- オプティマイザヒントに一致しないテーブル名が含まれている場合に警告を返す[#9970](https://github.com/pingcap/tidb/pull/9970)
+- オプティマイザーヒントに一致しないテーブル名が含まれている場合に警告を返す[#9970](https://github.com/pingcap/tidb/pull/9970)
 - ログ形式を統一し、分析ツールを使用してログを収集しやすくする統合ログ形式
 - NULL値が多すぎると統計推定が不正確になる問題を修正[#9979](https://github.com/pingcap/tidb/pull/9979)
 - TIMESTAMP型のデフォルト値が境界値の場合にエラーが報告される問題を修正 [#9987](https://github.com/pingcap/tidb/pull/9987)
@@ -51,7 +51,7 @@ TiDB Ansible バージョン: 2.1.8
 ## ツール {#tools}
 
 - Lightning のテーブルインポートの順序を最適化して、インポートプロセス中にクラスター上で`Checksum`と`Analyze`を実行する大きなテーブルの影響を軽減し、 `Checksum`と`Analyze`の成功率を向上させます[#156](https://github.com/pingcap/tidb-lightning/pull/156)
-- KVエンコーダの追加解析作業を回避するために、データソースファイルの内容をTiDBの`types.Datum`に直接解析することで、LightningのエンコードSQLパフォーマンスを50％向上しました。 [#145](https://github.com/pingcap/tidb-lightning/pull/145)
+- KVエンコーダーの追加解析作業を回避するために、データソースファイルの内容をTiDBの`types.Datum`に直接解析することで、LightningのエンコードSQLパフォーマンスを50％向上しました。 [#145](https://github.com/pingcap/tidb-lightning/pull/145)
 - TiDB Binlog Pumpに`storage.sync-log`設定項目を追加して、 Pump でローカルストレージのディスクを非同期にフラッシュすることをサポートします。 [#529](https://github.com/pingcap/tidb-binlog/pull/529)
 - TiDB Binlog PumpとDrainer 間の通信のトラフィック圧縮をサポート [#530](https://github.com/pingcap/tidb-binlog/pull/530)
 - TiDB Binlog Drainerに`syncer.sql-mode`設定項目を追加して、異なる`sql-mode`を使用してDDLクエリを解析できるようにします[#513](https://github.com/pingcap/tidb-binlog/pull/513)

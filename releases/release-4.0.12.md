@@ -90,7 +90,7 @@ TiDB バージョン: 4.0.12
     - TiKVストアをtombstoneとしてマークした後、同じIPアドレスとポートで異なるStoreIDを持つ新しいTiKVストアを開始すると、 `StoreNotMatch`エラーが返され続ける問題を修正しました。 [#23071](https://github.com/pingcap/tidb/pull/23071)
     - `INT`型が`NULL`で`YEAR`と比較される場合は調整しない [#22844](https://github.com/pingcap/tidb/pull/22844)
     - `auto_random`列のテーブルにデータをロードする際に接続が失われる問題を修正しました [#22736](https://github.com/pingcap/tidb/pull/22736)
-    - DDL 操作がキャンセル パスでpanicに遭遇した場合の DDL ハングオーバーの問題を修正しました。 [#23297](https://github.com/pingcap/tidb/pull/23297)
+    - DDL 操作がキャンセルパスでpanicに遭遇した場合の DDL ハングオーバーの問題を修正しました。 [#23297](https://github.com/pingcap/tidb/pull/23297)
     - `YEAR`列と`NULL` を比較する際のインデックススキャンのキー範囲の誤りを修正しました。 [#23104](https://github.com/pingcap/tidb/pull/23104)
     - 正常に作成されたビューが使用できない問題を修正しました [#23083](https://github.com/pingcap/tidb/pull/23083)
 
@@ -98,7 +98,7 @@ TiDB バージョン: 4.0.12
 
     - `IN`式が符号なし/符号付き整数を適切に処理しない問題を修正[#9850](https://github.com/tikv/tikv/pull/9850)
     - 取り込み操作が再入可能ではない問題を修正[#9779](https://github.com/tikv/tikv/pull/9779)
-    - TiKVコプロセッサでJSONを文字列に変換するときにスペースが失われる問題を修正 [#9666](https://github.com/tikv/tikv/pull/9666)
+    - TiKVコプロセッサーでJSONを文字列に変換するときにスペースが失われる問題を修正 [#9666](https://github.com/tikv/tikv/pull/9666)
 
 - PD
 
@@ -121,8 +121,8 @@ TiDB バージョン: 4.0.12
 
         - `resolved ts`イベントの順序が乱れる問題を修正 [#1464](https://github.com/pingcap/tiflow/pull/1464)
         - ネットワークの問題による誤ったテーブルスケジュールによって発生するデータ損失の問題を修正[#1508](https://github.com/pingcap/tiflow/pull/1508)
-        - プロセッサが停止した後にリソースが適時に解放されないバグを修正[#1547](https://github.com/pingcap/tiflow/pull/1547)
-        - トランザクションカウンタが正しく更新されず、データベース接続リークが発生する可能性があるバグを修正しました[#1524](https://github.com/pingcap/tiflow/pull/1524)
+        - プロセッサーが停止した後にリソースが適時に解放されないバグを修正[#1547](https://github.com/pingcap/tiflow/pull/1547)
+        - トランザクションカウンターが正しく更新されず、データベース接続リークが発生する可能性があるバグを修正しました[#1524](https://github.com/pingcap/tiflow/pull/1524)
         - PD にジッターがある場合に複数の所有者が共存し、テーブルが失われる可能性がある問題を修正しました。 [#1540](https://github.com/pingcap/tiflow/pull/1540)
 
     - Backup & Restore (BR)
