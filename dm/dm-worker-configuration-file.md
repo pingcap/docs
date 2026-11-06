@@ -5,11 +5,11 @@ summary: DM-worker の設定ファイルについて学習します。
 
 # DM-worker設定ファイル {#dm-worker-configuration-file}
 
-このドキュメントでは、設定ファイル テンプレートと、このファイル内の各設定パラメータの説明を含む、DM-workerの構成について説明します。
+このドキュメントでは、設定ファイルテンプレートと、このファイル内の各設定パラメーターの説明を含む、DM-workerの構成について説明します。
 
 ## 設定ファイルテンプレート {#configuration-file-template}
 
-以下は、DM-workerの設定ファイル テンプレートです。
+以下は、DM-workerの設定ファイルテンプレートです。
 
 ```toml
 # Worker Configuration.
@@ -34,7 +34,7 @@ ssl-key = "/path/to/key.pem"
 cert-allowed-cn = ["dm"]
 ```
 
-## 設定パラメータ {#configuration-parameters}
+## 設定パラメーター {#configuration-parameters}
 
 ### グローバル {#global}
 
@@ -50,7 +50,7 @@ cert-allowed-cn = ["dm"]
 
 #### `log-file` {#log-file}
 
-- ログファイルのディレクトリを指定します。このパラメータが指定されていない場合、ログは標準出力に出力されます。
+- ログファイルのディレクトリを指定します。このパラメーターが指定されていない場合、ログは標準出力に出力されます。
 
 #### `worker-addr` {#worker-addr}
 
@@ -78,7 +78,7 @@ cert-allowed-cn = ["dm"]
 
 #### `relay-dir` <span class="version-mark">v5.4.0 の新機能</span> {#relay-dir-new-in-v540}
 
-- バインドされた上流データソースでリレーログが有効になっている場合、DM-workerはリレーログをこのディレクトリに保存します。このパラメータは、上流データソースの設定よりも優先されます。
+- バインドされた上流データソースでリレーログが有効になっている場合、DM-workerはリレーログをこのディレクトリに保存します。このパラメーターは、上流データソースの設定よりも優先されます。
 
 #### `ssl-ca` {#ssl-ca}
 

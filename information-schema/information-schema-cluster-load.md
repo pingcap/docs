@@ -5,7 +5,7 @@ summary: "`CLUSTER_LOAD` information_schema テーブルについて学習しま
 
 # CLUSTER_LOAD {#cluster-load}
 
-`CLUSTER_LOAD`テーブルは、TiDB クラスタの各インスタンスが配置されているサーバーの現在の負荷情報を提供します。
+`CLUSTER_LOAD`テーブルは、TiDB クラスターの各インスタンスが配置されているサーバーの現在の負荷情報を提供します。
 
 > **Note:**
 >

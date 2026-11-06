@@ -9,11 +9,11 @@ summary: TiUP Playground を使用してデータ移行環境をすばやくセ�
 
 > **Note:**
 >
-> 本番へのデプロイについては、 [TiUPを使用して DMクラスタをデプロイ](/dm/deploy-a-dm-cluster-using-tiup.md)を参照してください。
+> 本番へのデプロイについては、 [TiUPを使用して DMクラスターをデプロイ](/dm/deploy-a-dm-cluster-using-tiup.md)を参照してください。
 
 ## ステップ1: テスト環境をセットアップする {#step-1-set-up-the-test-environment}
 
-[TiUP](/tiup/tiup-overview.md)はクラスタ運用・保守ツールです。Playground機能を使用すると、開発・テスト用にTiDBデータベースとTiDB DMを備えた一時的なローカル環境を迅速に起動できます。
+[TiUP](/tiup/tiup-overview.md)はクラスター運用・保守ツールです。Playground機能を使用すると、開発・テスト用にTiDBデータベースとTiDB DMを備えた一時的なローカル環境を迅速に起動できます。
 
 1. TiUPをインストールします:
 
@@ -65,7 +65,7 @@ summary: TiUP Playground を使用してデータ移行環境をすばやくセ�
 
 Docker を使用すると、テスト用の MySQL 8.0 インスタンスをすばやくデプロイできます。
 
-1. MySQL 8.0 Docker コンテナを実行します。
+1. MySQL 8.0 Docker コンテナーを実行します。
 
     ```shell
     docker run --name mysql80 \
@@ -123,7 +123,7 @@ macOS では、 [Homebrew](https://brew.sh)を使用して MySQL 8.0 をロー�
     brew install mysql@8.0
     ```
 
-2. MySQL コマンドをシステム パスでアクセスできるようにします。
+2. MySQL コマンドをシステムパスでアクセスできるようにします。
 
     ```shell
     brew link mysql@8.0 --force
@@ -177,7 +177,7 @@ macOS では、 [Homebrew](https://brew.sh)を使用して MySQL 8.0 をロー�
 
 CentOS などのEnterprise Linux ディストリビューションでは、MySQL Yum リポジトリから MySQL 8.0 をインストールできます。
 
-1. [MySQL Yumリポジトリのダウンロードページ](https://dev.mysql.com/downloads/repo/yum)から MySQL Yum リポジトリ パッケージをダウンロードしてインストールします。Linux バージョン 9 以外の場合は、次の URL の`el9` (Enterprise Linux バージョン 9) を置き換え、MySQL バージョン 8.0 の場合は`mysql80`をそのままにする必要があります。
+1. [MySQL Yumリポジトリのダウンロードページ](https://dev.mysql.com/downloads/repo/yum)から MySQL Yum リポジトリパッケージをダウンロードしてインストールします。Linux バージョン 9 以外の場合は、次の URL の`el9` (Enterprise Linux バージョン 9) を置き換え、MySQL バージョン 8.0 の場合は`mysql80`をそのままにする必要があります。
 
     ```shell
     sudo yum install -y https://dev.mysql.com/get/mysql80-community-release-el9-1.noarch.rpm
@@ -404,7 +404,7 @@ Ubuntu では、公式の Ubuntu リポジトリから MySQL をインストー�
 
     <div label="Docker" value="docker">
 
-    Docker コンテナを停止して削除するには:
+    Docker コンテナーを停止して削除するには:
 
     ```shell
     docker stop mysql80

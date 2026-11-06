@@ -91,10 +91,10 @@ OWNER_ADDRESS: 0.0.0.0:4000
     - `done` : 操作は TiDB 所有者ノードで正常に実行されたが、他の TiDB ノードではこの DDL ジョブによって実行された変更がまだ同期されていないことを示します。
 - `COMMENTS` : 診断目的の追加情報が含まれます。
     - `ingest` : [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)で構成された、高速化されたインデックス追加バックフィルのための取り込み（ingest）タスク。
-    - `txn` : [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)が無効になった後のトランザクションベースのインデックス バックフィル。
-    - `txn-merge` : バックフィルが完了すると元のインデックスとマージされる一時インデックスを使用したトランザクション バックフィル。
+    - `txn` : [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)が無効になった後のトランザクションベースのインデックスバックフィル。
+    - `txn-merge` : バックフィルが完了すると元のインデックスとマージされる一時インデックスを使用したトランザクションバックフィル。
     - `DXF` : [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)で構成された Distributed eXecution Framework (DXF) を使用して実行されるタスク。
-    - `service_scope` : [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740)で設定された TiDB ノードのサービス スコープ。
+    - `service_scope` : [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740)で設定された TiDB ノードのサービススコープ。
     - `thread` : バックフィルタスクの同時実行数。初期値は`tidb_ddl_reorg_worker_cnt`で設定できます。[`ADMIN ALTER DDL JOBS`](/sql-statements/sql-statement-admin-alter-ddl.md)を指定することで動的な変更が可能です。
     - `batch_size` : バックフィルタスクのバッチサイズ。初期値は`tidb_ddl_reorg_batch_size`で設定できます。`ADMIN ALTER DDL JOBS`を指定することで動的な変更が可能です。
     - `max_write_speed` : インジェストタスクのインポート時のフロー制御。初期値は`tidb_ddl_reorg_max_write_speed`で設定できます。 `ADMIN ALTER DDL JOBS`による動的な変更がサポートされます。

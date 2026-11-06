@@ -34,7 +34,7 @@ Use "dmctl config [command] --help" for more information about a command.
 config export [--dir directory]
 ```
 
-### パラメータの説明 {#parameter-explanation}
+### パラメーターの説明 {#parameter-explanation}
 
 - `dir` :
     - オプション
@@ -63,7 +63,7 @@ config import [--dir directory]
 >
 > v2.0.2より後のクラスターでは、現在、リレーワーカー関連の設定の自動インポートはサポートされていません。`start-relay`コマンドを使用して手動で[リレーログを開始](/dm/relay-log.md#enable-and-disable-relay-log)を実行できます。
 
-### パラメータの説明 {#parameter-explanation}
+### パラメーターの説明 {#parameter-explanation}
 
 - `dir` :
     - オプション

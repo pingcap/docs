@@ -19,7 +19,7 @@ summary: "`SLOW_QUERY` INFORMATION_SCHEMA テーブルについて学習して�
 
 > **Note:**
 >
-> このテーブルは、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスでは利用できません。
+> このテーブルは、 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスでは利用できません。
 
 <CustomContent platform="tidb">
 
@@ -134,7 +134,7 @@ DESC SLOW_QUERY;
 
 > **Note:**
 >
-> このテーブルは、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスでは利用できません。
+> このテーブルは、 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスでは利用できません。
 
 <CustomContent platform="tidb">
 
@@ -239,7 +239,7 @@ DESC CLUSTER_SLOW_QUERY;
 83 rows in set (0.00 sec)
 ```
 
-クラスタシステムテーブルにクエリを実行する際、TiDBはすべてのノードからデータを取得するのではなく、関連する計算を他のノードにプッシュダウンします。実行計画は以下のとおりです。
+クラスターシステムテーブルにクエリを実行する際、TiDBはすべてのノードからデータを取得するのではなく、関連する計算を他のノードにプッシュダウンします。実行計画は以下のとおりです。
 
 ```sql
 DESC SELECT COUNT(*) FROM CLUSTER_SLOW_QUERY WHERE user = 'u1';

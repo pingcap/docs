@@ -9,8 +9,8 @@ summary: このドキュメントでは、データ移行設定ファイルの�
 
 ## DMプロセス設定ファイル {#dm-process-configuration-files}
 
-- `dm-master.toml` : DM-masterプロセスの実行に関する設定ファイル。DM-masterのトポロジ情報とログが含まれます。詳細については、 [DM-master設定ファイル](/dm/dm-master-configuration-file.md)を参照してください。
-- `dm-worker.toml` : DM-workerプロセスの実行に関する設定ファイル。DM-workerのトポロジ情報とログが含まれます。詳細は[DM-worker設定ファイル](/dm/dm-worker-configuration-file.md)を参照してください。
+- `dm-master.toml` : DM-masterプロセスの実行に関する設定ファイル。DM-masterのトポロジー情報とログが含まれます。詳細については、 [DM-master設定ファイル](/dm/dm-master-configuration-file.md)を参照してください。
+- `dm-worker.toml` : DM-workerプロセスの実行に関する設定ファイル。DM-workerのトポロジー情報とログが含まれます。詳細は[DM-worker設定ファイル](/dm/dm-worker-configuration-file.md)を参照してください。
 - `source.yaml` : MySQLやMariaDBなどの上流データベースの設定。詳細は[上流データベース設定ファイル](/dm/dm-source-configuration-file.md)を参照してください。
 
 ## DM移行タスクの構成 {#dm-migration-task-configuration}
@@ -30,5 +30,5 @@ summary: このドキュメントでは、データ移行設定ファイルの�
 | 概念           | 説明                                                                          | 設定ファイル                                             |
 | :---------- | :-------------------------------------------------------------------------- | :--------------------------------------------------------- |
 | `source-id` | MySQLまたはMariaDBインスタンス、あるいはプライマリ/セカンダリ構造の移行グループを一意に表します。`source-id`の最大長は32です。 | `source.yaml`の`source_id` ;<br/> `task.yaml`の`source-id` |
-| DM-masterID    | DM-masterを一意に表す（ `dm-master.toml`の`master-addr`パラメータによって）                      | `dm-master.toml`の`master-addr`                           |
-| DM-worker ID    | DM-workerを一意に表す（ `dm-worker.toml`の`worker-addr`のパラメータによって）                     | `dm-worker.toml`の`worker-addr`                           |
+| DM-masterID    | DM-masterを一意に表す（ `dm-master.toml`の`master-addr`パラメーターによって）                      | `dm-master.toml`の`master-addr`                           |
+| DM-worker ID    | DM-workerを一意に表す（ `dm-worker.toml`の`worker-addr`のパラメーターによって）                     | `dm-worker.toml`の`worker-addr`                           |

@@ -15,7 +15,7 @@ OpenAPI を有効にするには、次のいずれかの操作を実行します
     openapi = true
     ```
 
-- DM クラスターがTiUPを使用してデプロイされている場合は、トポロジファイルに次の構成を追加します。
+- DM クラスターがTiUPを使用してデプロイされている場合は、トポロジーファイルに次の構成を追加します。
 
     ```yaml
     server_configs:
@@ -25,7 +25,7 @@ OpenAPI を有効にするには、次のいずれかの操作を実行します
 
 > **Note:**
 >
-> - DMはOpenAPI 3.0.0標準に準拠した[仕様書](https://github.com/pingcap/tiflow/blob/release-8.5/dm/openapi/spec/dm.yaml)を提供します。このドキュメントには、すべてのリクエストパラメータと戻り値が含まれています。このドキュメントのyamlをコピーして、 [Swaggerエディター](https://editor.swagger.io/)でプレビューできます。
+> - DMはOpenAPI 3.0.0標準に準拠した[仕様書](https://github.com/pingcap/tiflow/blob/release-8.5/dm/openapi/spec/dm.yaml)を提供します。このドキュメントには、すべてのリクエストパラメーターと戻り値が含まれています。このドキュメントのyamlをコピーして、 [Swaggerエディター](https://editor.swagger.io/)でプレビューできます。
 >
 > - DM-masterノードをデプロイした後、 `http://{master-addr}/api/v1/docs`にアクセスしてドキュメントをオンラインでプレビューできます。
 >

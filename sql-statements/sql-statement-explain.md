@@ -43,7 +43,7 @@ ExplainableStmt ::=
 
 > **Note:**
 >
-> 返される実行計画において、 `IndexJoin`および`Apply`オペレーターのすべてのプローブ側子ノードについて、v6.4.0 以降では`estRows`の意味が v6.4.0 以前と異なります。詳細は[TiDB クエリ実行計画の概要](/explain-overview.md#understand-explain-output)を参照してください。
+> 返される実行計画において、 `IndexJoin`および`Apply`オペレーターのすべてのプローブ側子ノードについて、v6.4.0 以降では`estRows`の意味が v6.4.0 より前と異なります。詳細は[TiDB クエリ実行計画の概要](/explain-overview.md#understand-explain-output)を参照してください。
 
 現在、TiDBの`EXPLAIN`は5つの列（`id`、`estRows`、`task`、`access object`、`operator info`）を出力します。実行計画内の各オペレーターはこれらの属性によって記述され、`EXPLAIN`出力の各行がオペレーターを記述します。各属性の説明は次のとおりです。
 
