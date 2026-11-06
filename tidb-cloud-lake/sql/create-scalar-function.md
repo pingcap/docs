@@ -88,7 +88,7 @@ SELECT calculate_bmi(70.0, 1.75) AS bmi;
 
 ## Python
 
-Python runtime requires {{{ .lake }}} Enterprise. You can install PyPI packages via `PACKAGES` and import stage files via `IMPORTS`.
+You can install PyPI packages via `PACKAGES` and import stage files via `IMPORTS`.
 
 ### Data type mappings (Python)
 

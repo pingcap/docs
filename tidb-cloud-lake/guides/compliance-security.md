@@ -42,7 +42,7 @@ We provide end-to-end encryption for all communication. All customer data flows 
 
 ### Storage Encryption
 
-{{{ .lake }}} Enterprise supports server-side encryption in Object Storage Service (OSS). This feature enables you to enhance data security and privacy by activating server-side encryption for data stored in OSS. You can choose the encryption method that best suits your needs:
+{{{ .lake }}} supports server-side encryption in Object Storage Service (OSS). This feature enables you to enhance data security and privacy by activating server-side encryption for data stored in OSS. You can choose the encryption method that best suits your needs:
 
 - AES-256 encryption
 - Customer-managed keys (CMK)
