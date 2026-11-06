@@ -41,9 +41,12 @@ To use the Alibaba Cloud Management Console to create a VPC interface endpoint, 
     - **Endpoint Service**: select **Other Endpoint Services**.
 5. In the **Endpoint Service Name** field, paste the service name you copied from TiDB Cloud.
 6. Click **Verify**. A green check mark indicates that the service is valid.
-7. Choose the **VPC**, **Security Group**, and **Zone** to associate with the endpoint.
+7. Configure the network settings:
+    - **VPC**: select the VPC where your application is deployed.
+    - **Zone and vSwitch**: select at least two different zones from the **Availability Zone ID** values provided by TiDB Cloud in Step 1. For each selected zone, choose a vSwitch in that zone and in the selected VPC.
+    - **Security Group**: select a security group that allows inbound TCP traffic from your application to the TiDB connection port, which is `4000` by default.
 8. Click **OK** to create the endpoint.
-9. Wait until the endpoint status is **Active** and the connection status is **Connected**.
+9. Wait until the endpoint status becomes **Active**. The connection status might remain **Disconnected** until you complete Step 3. Proceed to Step 3 without waiting for **Connected**.
 
 After creating the interface endpoint, navigate to the **EndPoints** page and select the newly created endpoint.
 
@@ -51,21 +54,23 @@ After creating the interface endpoint, navigate to the **EndPoints** page and se
 
 - In the **Domain name of Endpoint Service** section, copy the **Default Domain Name**. You will use this value later as the *Domain Name*.
 
-    ![AliCloud private endpoint Information](/media/tidb-cloud/private-endpoint/alicloud-private-endpoint-info.png)
+    ![Alibaba Cloud endpoint details showing the Endpoint ID and Default Domain Name](/media/tidb-cloud/private-endpoint/alicloud-private-endpoint-details.jpg)
 
 ### Step 3. Accept the endpoint and create the endpoint connection
 
 1. Return to the **Create Alibaba Cloud Private Endpoint Connection** dialog in the TiDB Cloud console.
 
-2. Paste the *Endpoint Resource ID* and *Domain Name* that you copied earlier into the corresponding fields.
+2. Enter the **Endpoint ID** from Alibaba Cloud in **Private Endpoint Resource ID**, and the **Default Domain Name** in **Private Endpoint Default Domain Name**.
 
-3. Click **Create Private Endpoint Connection** to accept the connection from your private endpoint.
+3. Click **Create** to submit the private endpoint connection request.
 
 ### Step 4. Connect to your {{{ .premium }}} instance
 
 After you have accepted the endpoint connection, you are redirected back to the connection dialog.
 
 1. Wait for the private endpoint connection status to become **Active** (approximately 5 minutes). To check the status, navigate to the **Networking** page by clicking **Settings** > **Networking** in the left navigation pane.
+
+    Return to the Alibaba Cloud console, refresh the endpoint details page, and verify that **Connection Status** becomes **Connected**.
 
 2. In the **Connect With** drop-down list, select your preferred connection method. The corresponding connection string is displayed at the bottom of the dialog.
 
