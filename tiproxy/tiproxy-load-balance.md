@@ -34,7 +34,7 @@ TiProxy v1.0.0 は、TiDB サーバーに対してステータスベースおよ
 トランザクションとBIの両方のワークロードを処理するアプリケーションを考えてみましょう。これらのワークロードが互いに干渉しないようにするには、クラスターを次のように構成します。
 
 1. TiProxy で[`balance.label-name`](/tiproxy/tiproxy-configuration.md#label-name)を`"app"`に設定すると、TiDB サーバーはラベル名`"app"`によって照合され、接続は一致するラベル値を持つ TiDB サーバーにルーティングされます。
-2. 少なくとも 2つの TiProxy インスタンスをデプロイ。トランザクション ワークロードに使用する TiProxy インスタンスを[`labels`](/tiproxy/tiproxy-configuration.md#labels)で`{"app": "Order"}`に設定し、BI ワークロードに使用するインスタンスを[`labels`](/tiproxy/tiproxy-configuration.md#labels)で`{"app": "BI"}`に設定します。
+2. 少なくとも 2つの TiProxy インスタンスをデプロイします。トランザクションワークロードに使用する TiProxy インスタンスを[`labels`](/tiproxy/tiproxy-configuration.md#labels)で`{"app": "Order"}`に設定し、BI ワークロードに使用するインスタンスを[`labels`](/tiproxy/tiproxy-configuration.md#labels)で`{"app": "BI"}`に設定します。
 3. オプション：高可用性を実現するには、少なくとも4つのTiProxyインスタンスを導入し、ワークロードごとに異なる仮想IPアドレスを設定します。例えば、トランザクションワークロード用のTiProxyインスタンス2つを仮想IP `10.0.1.10/24`に設定し、BIワークロード用のインスタンス2つを仮想IP `10.0.1.20/24`に設定します。この機能を使用するには、TiProxy v1.3.1以降が必要です。
 4. TiDB インスタンスを 2つのグループに分割し、それぞれ[`labels`](/tidb-configuration-file.md#labels)を設定します。一方のグループに`"app": "Order"`ラベルを追加し、もう一方のグループに`"app": "BI"`ラベルを追加します。
 5. オプション:ストレージレイヤーの分離の場合は、 [配置ルール](/configure-placement-rules.md)または[リソース管理](/tidb-resource-control-ru-groups.md)を構成します。
@@ -42,7 +42,7 @@ TiProxy v1.0.0 は、TiDB サーバーに対してステータスベースおよ
 
 <img src="https://docs-download.pingcap.com/media/images/docs/tiproxy/tiproxy-balance-label-v2.png" alt="ラベルベースの負荷分散" width="600" />
 
-このトポロジの構成例:
+このトポロジーの構成例:
 
 ```yaml
 component_versions:
@@ -137,8 +137,8 @@ TiProxy は、TiProxy サーバーと TiDB サーバーの場所に基づいて�
 
 このポリシーは、次のシナリオに適しています。
 
-- TiDB クラスターがクラウド内のアベイラビリティゾーン全体にデプロイされている場合、TiProxy と TiDB サーバー間のアベイラビリティゾーン間のトラフィック コストを削減するために、TiProxy は同じアベイラビリティゾーン内の TiDB サーバーへのルーティングリクエストを優先します。
-- TiDB クラスターがデータセンター全体にデプロイされている場合、TiProxy と TiDB サーバー間のネットワークレイテンシーを削減するために、TiProxy は同じデータセンター内の TiDB サーバーへのルーティングリクエストを優先します。
+- TiDB クラスターがクラウド内のアベイラビリティゾーン全体にデプロイされている場合、TiProxy と TiDB サーバー間のアベイラビリティゾーン間のトラフィックコストを削減するために、TiProxy は同じアベイラビリティゾーン内の TiDB サーバーへ優先的にリクエストをルーティングします。
+- TiDB クラスターがデータセンター全体にデプロイされている場合、TiProxy と TiDB サーバー間のネットワークレイテンシーを削減するために、TiProxy は同じデータセンター内の TiDB サーバーへ優先的にリクエストをルーティングします。
 
 デフォルトでは、このポリシーの優先度は、ヘルスベース、メモリベース、CPUベースの負荷分散ポリシーよりも低くなっています。優先度を[`policy`](/tiproxy/tiproxy-configuration.md#policy)から`location`に設定することで、優先度を上げることができます。可用性とパフォーマンスを維持するには、少なくとも3台のTiDBサーバーを同じ場所に配置することを推奨します。
 
@@ -149,7 +149,7 @@ TiProxyは、ラベル`zone`に基づいて自身とTiDBサーバーの場所を
 
 TiDB Operatorを使用してデプロイされたクラスターについては、 [データの高可用性](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-a-tidb-cluster#high-availability-of-data)を参照してください。
 
-以下はクラスタ構成の例です。
+以下はクラスター構成の例です。
 
 ```yaml
 component_versions:

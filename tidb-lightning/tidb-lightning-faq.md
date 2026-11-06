@@ -30,7 +30,7 @@ summary: TiDB Lightningに関するよくある質問 (FAQ) と回答につい�
 
 ## インポートされたデータの整合性を確保するにはどうすればよいですか? {#how-to-ensure-the-integrity-of-the-imported-data}
 
-TiDB Lightningはデフォルトで、ローカルデータソースとインポートされたテーブルのチェックサムを実行します。チェックサムが一致しない場合、プロセスは中止されます。このチェックサム情報はログから読み取ることができます。
+TiDB Lightningはデフォルトで、ローカルデータソースとインポートされたテーブルのチェックサムを実行します。チェックサムが一致しない場合、プロセスは中止されます。このチェックサム情報はログから読み取れます。
 
 ターゲットテーブルで[`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md) SQL コマンドを実行して、インポートされたデータのチェックサムを再計算することもできます。
 
@@ -79,11 +79,11 @@ sql-mode = "STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION"
 
 - 手動デプロイの場合： `tidb-lightning`フォアグラウンドで実行されている場合は、 <kbd>Ctrl</kbd> + <kbd>C</kbd>を押して終了します。それ以外の場合は、 `ps aux | grep tidb-lightning`コマンドを使用してプロセス ID を取得し、 `kill -2 ${PID}`コマンドを使用してプロセスを終了します。
 
-## TiDB Lightning は1 ギガビット ネットワークカードで使用できますか? {#can-tidb-lightning-be-used-with-1-gigabit-network-card}
+## TiDB Lightning は1 ギガビットネットワークカードで使用できますか? {#can-tidb-lightning-be-used-with-1-gigabit-network-card}
 
-TiDB Lightning は、10 ギガビット ネットワークカードで使用するのが最適です。
+TiDB Lightning は、10 ギガビットネットワークカードで使用するのが最適です。
 
-1ギガビットネットワークカードは合計120MB/秒の帯域幅しか提供できず、これをすべてのターゲットTiKVストアで共有する必要があります。TiDB Lightningは、物理インポートモードで1ギガビットネットワークの全帯域幅を簡単に飽和させ、PDに接続できなくなるため、クラスタを停止させる可能性があります。
+1ギガビットネットワークカードは合計120MB/秒の帯域幅しか提供できず、これをすべてのターゲットTiKVストアで共有する必要があります。TiDB Lightningは、物理インポートモードで1ギガビットネットワークの全帯域幅を簡単に飽和させ、PDに接続できなくなるため、クラスターを停止させる可能性があります。
 
 ## TiDB Lightning がターゲット TiKV クラスターにこれほど多くの空き容量を必要とするのはなぜですか? {#why-tidb-lightning-requires-so-much-free-space-in-the-target-tikv-cluster}
 
@@ -94,7 +94,7 @@ TiDB Lightning は、10 ギガビット ネットワークカードで使用す�
 
 ## TiDB Lightningに関連付けられたすべての中間データを完全に破棄するにはどうすればよいですか? {#how-to-completely-destroy-all-intermediate-data-associated-with-tidb-lightning}
 
-1. チェックポイント ファイルを削除します。
+1. チェックポイントファイルを削除します。
 
     ```sh
     tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-remove=all
@@ -108,8 +108,8 @@ TiDB Lightning は、10 ギガビット ネットワークカードで使用す�
 
 4. 残留メタデータをクリーンアップします。以下のいずれかの条件に該当する場合は、メタデータスキーマを手動でクリーンアップする必要があります。
 
-    - TiDB Lightning v5.1.xおよびv5.2.xバージョンの場合、 `tidb-lightning-ctl`コマンドではターゲットクラスタ内のメタデータスキーマがクリーンアップされません。手動でクリーンアップする必要があります。
-    - チェックポイント ファイルを手動で削除した場合は、ダウンストリーム メタデータ スキーマを手動でクリーンアップする必要があります。そうしないと、後続のインポートの正確性が影響を受ける可能性があります。
+    - TiDB Lightning v5.1.xおよびv5.2.xバージョンの場合、 `tidb-lightning-ctl`コマンドではターゲットクラスター内のメタデータスキーマがクリーンアップされません。手動でクリーンアップする必要があります。
+    - チェックポイントファイルを手動で削除した場合は、ダウンストリームメタデータスキーマを手動でクリーンアップする必要があります。そうしないと、後続のインポートの正確性が影響を受ける可能性があります。
 
     メタデータをクリーンアップするには、次のコマンドを使用します。
 
@@ -137,23 +137,23 @@ TiDB Lightning は[SQLの配置ルール](/placement-rules-in-sql.md)と互換�
 
 その理由は次のように説明されます。
 
-SQLにおける配置ルールの目的は、特定のTiKVノードのデータ配置をテーブルレベルまたはパーティションレベルで制御することです。TiDB Lightningは、テキストファイル形式のデータをターゲットのTiDBクラスターにインポートします。データファイルが配置ルールの定義と共にエクスポートされた場合、インポートプロセス中に、 TiDB Lightningは定義に基づいてターゲットクラスター内に対応する配置ルールポリシーを作成する必要があります。ソースクラスターとターゲットクラスターのトポロジが異なる場合、これが問題を引き起こす可能性があります。
+SQLにおける配置ルールの目的は、特定のTiKVノードのデータ配置をテーブルレベルまたはパーティションレベルで制御することです。TiDB Lightningは、テキストファイル形式のデータをターゲットのTiDBクラスターにインポートします。データファイルが配置ルールの定義と共にエクスポートされた場合、インポートプロセス中に、 TiDB Lightningは定義に基づいてターゲットクラスター内に対応する配置ルールポリシーを作成する必要があります。ソースクラスターとターゲットクラスターのトポロジーが異なる場合、これが問題を引き起こす可能性があります。
 
 Suppose the source cluster has the following topology:
 
 ![TiDB Lightning FAQ - source cluster topology](/media/lightning-faq-source-cluster-topology.jpg)
 
-ソース クラスターには次の配置ポリシーがあります。
+ソースクラスターには次の配置ポリシーがあります。
 
 ```sql
 CREATE PLACEMENT POLICY p1 PRIMARY_REGION="us-east" REGIONS="us-east,us-west";
 ```
 
-**状況1：**ターゲットクラスタに3つのレプリカがあり、トポロジがソースクラスタと異なります。このような場合、 TiDB Lightningがターゲットクラスタに配置ポリシーを作成する際にエラーは報告されませんが、ターゲットクラスタのセマンティクスが誤っています。
+**状況1：**ターゲットクラスターに3つのレプリカがあり、トポロジーがソースクラスターと異なります。このような場合、 TiDB Lightningがターゲットクラスターに配置ポリシーを作成する際にエラーは報告されませんが、ターゲットクラスターのセマンティクスが誤っています。
 
 ![TiDB Lightning FAQ - situation 1](/media/lightning-faq-situation-1.jpg)
 
-**状況2：**ターゲットクラスタがフォロワーレプリカを"us-mid"リージョン内の別のTiKVノードに配置しており、トポロジ内に"us-west"リージョンが含まれていない場合。このような場合、ターゲットクラスタで配置ポリシーを作成すると、 TiDB Lightningはエラーを報告します。
+**状況2：**ターゲットクラスターがフォロワーレプリカを"us-mid"リージョン内の別のTiKVノードに配置しており、トポロジー内に"us-west"リージョンが含まれていません。このような場合、ターゲットクラスターで配置ポリシーを作成すると、 TiDB Lightningはエラーを報告します。
 
 ![TiDB Lightning FAQ - situation 2](/media/lightning-faq-situation-2.jpg)
 
@@ -163,9 +163,9 @@ TiDB LightningでSQLの配置ルールを使用するには、データをター
 
 手順は次のとおりです。
 
-1. データ分散トポロジを計画します。
+1. データ分散トポロジーを計画します。
 2. TiKV および PD に必要なラベルを構成します。
-3. 配置ルール ポリシーを作成し、作成したポリシーをターゲットテーブルに適用します。
+3. 配置ルールポリシーを作成し、作成したポリシーをターゲットテーブルに適用します。
 4. TiDB Lightningを使用して、データをターゲットテーブルにインポートします。
 
 ## TiDB LightningとDumplingを使用してスキーマをコピーするにはどうすればよいですか? {#how-can-i-use-tidb-lightning-and-dumpling-to-copy-a-schema}

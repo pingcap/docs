@@ -48,7 +48,7 @@ encoding-format = "json"
 
 ## メッセージの種類 {#message-types}
 
-TiCDC Simpleプロトコルには、次のメッセージ タイプがあります。
+TiCDC Simpleプロトコルには、次のメッセージタイプがあります。
 
 DDL:
 
@@ -234,7 +234,7 @@ TiCDC は、DDL イベントを次の JSON 形式でエンコードします。
 | `version`        | number  | プロトコルのバージョン番号。現在は`1`です。                                                                               |
 | `type`           | string   | DDL イベントタイプ（ `CREATE` 、 `RENAME` 、 `CINDEX` 、 `DINDEX` 、 `ERASE` 、 `TRUNCATE` 、 `ALTER` 、 `QUERY`を含む）。 |
 | `sql`            | string   | DDL文。                                                                                          |
-| `commitTs`       | number  | DDL文の実行がアップストリームで完了したときのコミット タイムスタンプ。                                                          |
+| `commitTs`       | number  | DDL文の実行がアップストリームで完了したときのコミットタイムスタンプ。                                                          |
 | `buildTs`        | number  | TiCDC 内でメッセージが正常にエンコードされたときの UNIX タイムスタンプ。                                                            |
 | `tableSchema`    | object  | テーブルの現在のスキーマ情報。詳細については、 [TableSchemaの定義](#tableschema-definition)を参照してください。                            |
 | `preTableSchema` | object  | DDL文が実行される前のテーブルのスキーマ情報。`CREATE`のDDLイベントを除くすべてのDDLイベントにこのフィールドがあります。                                |
@@ -273,7 +273,7 @@ TiCDC は`INSERT`イベントを次の JSON 形式でエンコードします。
 | `table`         | string   | テーブルの名前。                                        |
 | `tableID`       | number  | テーブルの ID。                                       |
 | `type`          | string   | DML イベントタイプ（`INSERT` 、 `UPDATE` 、 `DELETE`を含む）。 |
-| `commitTs`      | number  | DML文の実行がアップストリームで完了したときのコミット タイムスタンプ。    |
+| `commitTs`      | number  | DML文の実行がアップストリームで完了したときのコミットタイムスタンプ。    |
 | `buildTs`       | number  | TiCDC 内でメッセージが正常にエンコードされたときの UNIX タイムスタンプ。      |
 | `schemaVersion` | number  | DML メッセージがエンコードされるときのテーブルのスキーマバージョン番号。         |
 | `data`          | object  | 挿入されたデータ。フィールド名は列名、フィールド値は列値です。                 |
@@ -318,7 +318,7 @@ TiCDC は`UPDATE`イベントを次の JSON 形式でエンコードします。
 | `table`         | string    | テーブルの名前。                                        |
 | `tableID`       | number   | テーブルの ID。                                       |
 | `type`          | string    | DML イベントタイプ（`INSERT` 、 `UPDATE` 、 `DELETE`を含む）。 |
-| `commitTs`      | number   | DML文の実行がアップストリームで完了したときのコミット タイムスタンプ。    |
+| `commitTs`      | number   | DML文の実行がアップストリームで完了したときのコミットタイムスタンプ。    |
 | `buildTs`       | number   | TiCDC 内でメッセージが正常にエンコードされたときの UNIX タイムスタンプ。      |
 | `schemaVersion` | number   | DML メッセージがエンコードされるときのテーブルのスキーマバージョン番号。         |
 | `data`          | object   | 更新後のデータ。フィールド名は列名、フィールド値は列値です。                  |
@@ -358,7 +358,7 @@ TiCDC は`DELETE`イベントを次の JSON 形式でエンコードします。
 | `table`         | string   | テーブルの名前。                                        |
 | `tableID`       | number  | テーブルの ID。                                       |
 | `type`          | string   | DML イベントタイプ（`INSERT` 、 `UPDATE` 、 `DELETE`を含む）。 |
-| `commitTs`      | number  | DML文の実行がアップストリームで完了したときのコミット タイムスタンプ。    |
+| `commitTs`      | number  | DML文の実行がアップストリームで完了したときのコミットタイムスタンプ。    |
 | `buildTs`       | number  | TiCDC 内でメッセージが正常にエンコードされたときの UNIX タイムスタンプ。      |
 | `schemaVersion` | number  | DML メッセージがエンコードされるときのテーブルのスキーマバージョン番号。         |
 | `old`           | object  | 削除されたデータ。フィールド名は列名、フィールド値は列値です。                 |
@@ -384,7 +384,7 @@ TiCDC は`WATERMARK`イベントを次の JSON 形式でエンコードします
 | ---------- | --- | ------------------------------------------ |
 | `version`  | number  | プロトコルのバージョン番号。現在は`1`です。                    |
 | `type`     | string   | `WATERMARK`のイベントタイプ。                       |
-| `commitTs` | number  | `WATERMARK`のコミット タイムスタンプ。                  |
+| `commitTs` | number  | `WATERMARK`のコミットタイムスタンプ。                  |
 | `buildTs`  | number  | TiCDC 内でメッセージが正常にエンコードされたときの UNIX タイムスタンプ。 |
 
 ### BOOTSTRAP {#bootstrap}
@@ -483,7 +483,7 @@ TiCDC は`BOOTSTRAP`イベントを次の JSON 形式でエンコードします
 ### DML {#dml}
 
 - 生成時間: TiCDC はトランザクションの`commitTs`順序で DML イベントを送信します。
-- 宛先: TiCDC は、ユーザーが設定したディスパッチ ルールに従って、対応するトピックの対応するパーティションに DDL イベントを送信します。
+- 宛先: TiCDC は、ユーザーが設定したディスパッチルールに従って、対応するトピックの対応するパーティションに DDL イベントを送信します。
 
 ### WATERMARK {#watermark}
 
@@ -494,9 +494,9 @@ TiCDC は`BOOTSTRAP`イベントを次の JSON 形式でエンコードします
 
 - 生成時間:
     - 新しい変更フィードを作成した後、テーブルの最初の DML イベントが送信される前に、TiCDC はテーブルスキーマを構築するために`BOOTSTRAP`イベントをダウンストリームに送信します。
-    - さらに、TiCDCは、新しく参加したコンシューマーがテーブルスキーマを構築できるように、定期的に`BOOTSTRAP`イベントを送信します。デフォルトの送信間隔は120秒または10000メッセージごとです。送信間隔は、 `sink`設定でパラメータ`send-bootstrap-interval-in-sec`と`send-bootstrap-in-msg-count`を設定することで調整できます。
+    - さらに、TiCDCは、新しく参加したコンシューマーがテーブルスキーマを構築できるように、定期的に`BOOTSTRAP`イベントを送信します。デフォルトの送信間隔は120秒または10000メッセージごとです。送信間隔は、 `sink`設定でパラメーター`send-bootstrap-interval-in-sec`と`send-bootstrap-in-msg-count`を設定することで調整できます。
     - テーブルが30分以内に新しいDMLメッセージを受信しない場合、そのテーブルは非アクティブとみなされます。TiCDCは、新しいDMLイベントを受信するまで、そのテーブルへの`BOOTSTRAP`の送信を停止します。
-- 送信先: デフォルトでは、TiCDC は対応するトピックのすべてのパーティションに`BOOTSTRAP`イベントを送信します。シンク設定の`send-bootstrap-to-all-partition`パラメータを設定することで、送信戦略を調整できます。
+- 送信先: デフォルトでは、TiCDC は対応するトピックのすべてのパーティションに`BOOTSTRAP`イベントを送信します。シンク設定の`send-bootstrap-to-all-partition`パラメーターを設定することで、送信戦略を調整できます。
 
 ## メッセージの消費方法 {#message-consumption-methods}
 

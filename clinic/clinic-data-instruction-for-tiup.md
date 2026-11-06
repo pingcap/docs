@@ -5,7 +5,7 @@ summary: PingCAP Clinic診断サービスは、 TiUPを使用してTiDBおよび
 
 # PingCAP Clinic診断データ {#pingcap-clinic-diagnostic-data}
 
-このドキュメントでは、 TiUPを使用してデプロイされた TiDB および DM クラスタからPingCAP Clinic診断サービス (PingCAP Clinic) によって収集できる診断データの種類について説明します。また、各データの種類に対応するデータ収集パラメータも示します。[Diagクライアント（Diag）を使用してデータを収集する](/clinic/clinic-user-guide-for-tiup.md)コマンドを実行する際に、収集するデータの種類に応じて必要なパラメータをコマンドに追加できます。
+このドキュメントでは、 TiUPを使用してデプロイされた TiDB および DM クラスターからPingCAP Clinic診断サービス (PingCAP Clinic) によって収集できる診断データの種類について説明します。また、各データの種類に対応するデータ収集パラメーターも示します。[Diagクライアント（Diag）を使用してデータを収集する](/clinic/clinic-user-guide-for-tiup.md)コマンドを実行する際に、収集するデータの種類に応じて必要なパラメーターをコマンドに追加できます。
 
 PingCAP Clinicによって収集された診断データは、クラスターの問題のトラブルシューティングに**のみ**使用されます。
 
@@ -18,16 +18,16 @@ PingCAP Clinicによって収集された診断データは、クラスターの
 
 このセクションでは、 TiUPを使用してデプロイされた TiDB クラスターから[Diag](https://github.com/pingcap/diag)によって収集できる診断データの種類を示します。
 
-### TiDB クラスタ情報 {#tidb-cluster-information}
+### TiDB クラスター情報 {#tidb-cluster-information}
 
-| データ型                 | エクスポートされたファイル  | PingCAP Clinicによるデータ収集パラメータ |
+| データ型                 | エクスポートされたファイル  | PingCAP Clinicによるデータ収集パラメーター |
 | :------------------- | :------------- | :------------------------ |
 | クラスターIDを含むクラスターの基本情報 | `cluster.json` | デフォルトでは、データは実行ごとに収集されます。  |
 | クラスターの詳細情報           | `meta.yaml`    | デフォルトでは、データは実行ごとに収集されます。  |
 
 ### TiDB診断データ {#tidb-diagnostic-data}
 
-| データ型           | エクスポートされたファイル         | PingCAP Clinicによるデータ収集パラメータ |
+| データ型           | エクスポートされたファイル         | PingCAP Clinicによるデータ収集パラメーター |
 | :------------- | :-------------------- | :------------------------ |
 | ログ             | `tidb.log`            | `--include=log`           |
 | エラーログ          | `tidb_stderr.log`     | `--include=log`           |
@@ -38,7 +38,7 @@ PingCAP Clinicによって収集された診断データは、クラスターの
 
 ### TiKV診断データ {#tikv-diagnostic-data}
 
-| データ型           | エクスポートされたファイル     | PingCAP Clinicによるデータ収集パラメータ |
+| データ型           | エクスポートされたファイル     | PingCAP Clinicによるデータ収集パラメーター |
 | :------------- | :---------------- | :------------------------ |
 | ログ             | `tikv.log`        | `--include=log`           |
 | エラーログ          | `tikv_stderr.log` | `--include=log`           |
@@ -47,7 +47,7 @@ PingCAP Clinicによって収集された診断データは、クラスターの
 
 ### PD診断データ {#pd-diagnostic-data}
 
-| データ型                                                                                           | エクスポートされたファイル         | PingCAP Clinicによるデータ収集パラメータ |
+| データ型                                                                                           | エクスポートされたファイル         | PingCAP Clinicによるデータ収集パラメーター |
 | :--------------------------------------------------------------------------------------------- | :-------------------- | :------------------------ |
 | ログ                                                                                             | `pd.log`              | `--include=log`           |
 | エラーログ                                                                                          | `pd_stderr.log`       | `--include=log`           |
@@ -58,7 +58,7 @@ PingCAP Clinicによって収集された診断データは、クラスターの
 
 ### TiFlash診断データ {#tiflash-diagnostic-data}
 
-| データ型           | エクスポートされたファイル                                                     | PingCAP Clinicによるデータ収集パラメータ |
+| データ型           | エクスポートされたファイル                                                     | PingCAP Clinicによるデータ収集パラメーター |
 | :------------- | :---------------------------------------------------------------- | :------------------------ |
 | ログ             | `tiflash.log`                                                     | `--include=log`           |
 | エラーログ          | `tiflash_stderr.log`                                              | `--include=log`           |
@@ -67,7 +67,7 @@ PingCAP Clinicによって収集された診断データは、クラスターの
 
 ### TiCDC診断データ {#ticdc-diagnostic-data}
 
-| データ型           | エクスポートされたファイル                                                             | PingCAP Clinicによるデータ収集パラメータ                         |
+| データ型           | エクスポートされたファイル                                                             | PingCAP Clinicによるデータ収集パラメーター                         |
 | :------------- | :------------------------------------------------------------------------ | :------------------------------------------------ |
 | ログ             | `ticdc.log`                                                               | `--include=log`                                   |
 | エラーログ          | `ticdc_stderr.log`                                                        | `--include=log`                                   |
@@ -76,26 +76,26 @@ PingCAP Clinicによって収集された診断データは、クラスターの
 
 ### Prometheus監視データ {#prometheus-monitoring-data}
 
-| データ型        | エクスポートされたファイル        | PingCAP Clinicによるデータ収集パラメータ |
+| データ型        | エクスポートされたファイル        | PingCAP Clinicによるデータ収集パラメーター |
 | :---------- | :------------------- | :------------------------ |
 | すべての指標データ   | `{metric_name}.json` | `--include=monitor`       |
 | すべてのアラートデータ | `alerts.json`        | `--include=monitor`       |
 
 ### TiDB システム変数 {#tidb-system-variables}
 
-| データ型        | エクスポートされたファイル          | PingCAP Clinicによるデータ収集パラメータ                                                                  |
+| データ型        | エクスポートされたファイル          | PingCAP Clinicによるデータ収集パラメーター                                                                  |
 | :---------- | :--------------------- | :----------------------------------------------------------------------------------------- |
 | TiDB システム変数 | `mysql.tidb.csv`       | `--include=db_vars` (Diag はデフォルトではこのデータタイプを収集しません。このデータタイプを収集する必要がある場合は、データベース資格情報が必要です) |
 |             | `global_variables.csv` | `--include=db_vars` (Diag はデフォルトではこのデータタイプを収集しません)                                        |
 
-### クラスタノードのシステム情報 {#system-information-of-the-cluster-node}
+### クラスターノードのシステム情報 {#system-information-of-the-cluster-node}
 
-| データ型                           | エクスポートされたファイル  | PingCAP Clinicによるデータ収集パラメータ |
+| データ型                           | エクスポートされたファイル  | PingCAP Clinicによるデータ収集パラメーター |
 | :----------------------------- | :------------- | :------------------------ |
 | カーネルログ                         | `dmesg.log`    | `--include=system`        |
 | システムとハードウェアの基本情報               | `insight.json` | `--include=system`        |
 | `/etc/security/limits.conf`の内容 | `limits.conf`  | `--include=system`        |
-| カーネルパラメータのリスト                  | `sysctl.conf`  | `--include=system`        |
+| カーネルパラメーターのリスト                  | `sysctl.conf`  | `--include=system`        |
 | ソケットシステム情報（ `ss`コマンドの出力）       | `ss.txt`       | `--include=system`        |
 
 ## DMクラスター {#dm-clusters}
@@ -104,14 +104,14 @@ PingCAP Clinicによって収集された診断データは、クラスターの
 
 ### DMクラスター情報 {#dm-cluster-information}
 
-| データ型                 | エクスポートされたファイル  | PingCAP Clinicによるデータ収集パラメータ |
+| データ型                 | エクスポートされたファイル  | PingCAP Clinicによるデータ収集パラメーター |
 | :------------------- | :------------- | :------------------------ |
 | クラスターIDを含むクラスターの基本情報 | `cluster.json` | デフォルトでは、データは実行ごとに収集されます。  |
 | クラスターの詳細情報           | `meta.yaml`    | デフォルトでは、データは実行ごとに収集されます。  |
 
 ### dm-master診断データ {#dm-master-diagnostic-data}
 
-| データ型           | エクスポートされたファイル          | PingCAP Clinicによるデータ収集パラメータ |
+| データ型           | エクスポートされたファイル          | PingCAP Clinicによるデータ収集パラメーター |
 | :------------- | :--------------------- | :------------------------ |
 | ログ             | `dm-master.log`        | `--include=log`           |
 | エラーログ          | `dm-master_stderr.log` | `--include=log`           |
@@ -119,7 +119,7 @@ PingCAP Clinicによって収集された診断データは、クラスターの
 
 ### dm-worker診断データ {#dm-worker-diagnostic-data}
 
-| データ型           | エクスポートされたファイル          | PingCAP Clinicによるデータ収集パラメータ |
+| データ型           | エクスポートされたファイル          | PingCAP Clinicによるデータ収集パラメーター |
 | :------------- | :--------------------- | :------------------------ |
 | ログ             | `dm-worker.log`        | `--include=log`           |
 | エラーログ          | `dm-worker_stderr.log` | `--include=log`           |
@@ -127,24 +127,24 @@ PingCAP Clinicによって収集された診断データは、クラスターの
 
 ### Prometheus監視データ {#prometheus-monitoring-data}
 
-| データ型        | エクスポートされたファイル        | PingCAP Clinicによるデータ収集パラメータ |
+| データ型        | エクスポートされたファイル        | PingCAP Clinicによるデータ収集パラメーター |
 | :---------- | :------------------- | :------------------------ |
 | すべての指標データ   | `{metric_name}.json` | `--include=monitor`       |
 | すべてのアラートデータ | `alerts.json`        | `--include=monitor`       |
 
-### クラスタノードのシステム情報 {#system-information-of-the-cluster-node}
+### クラスターノードのシステム情報 {#system-information-of-the-cluster-node}
 
-| データ型                               | エクスポートされたファイル  | PingCAP Clinicによるデータ収集パラメータ |
+| データ型                               | エクスポートされたファイル  | PingCAP Clinicによるデータ収集パラメーター |
 | :--------------------------------- | :------------- | :------------------------ |
 | カーネルログ                             | `dmesg.log`    | `--include=system`        |
 | システムとハードウェアの基本情報                   | `insight.json` | `--include=system`        |
 | `/etc/security/limits.conf`システムの内容 | `limits.conf`  | `--include=system`        |
-| カーネルパラメータのリスト                      | `sysctl.conf`  | `--include=system`        |
+| カーネルパラメーターのリスト                      | `sysctl.conf`  | `--include=system`        |
 | ソケットシステム情報（ `ss`コマンドの出力）           | `ss.txt`       | `--include=system`        |
 
 ### ログファイルの分類 {#log-file-classification}
 
-`--include=log.<type>`パラメータを使用して、収集するログの種類を指定できます。
+`--include=log.<type>`パラメーターを使用して、収集するログの種類を指定できます。
 
 ログの種類:
 

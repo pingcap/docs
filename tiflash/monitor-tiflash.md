@@ -3,7 +3,7 @@ title: Monitor the TiFlash Cluster
 summary: TiFlashの監視項目について学びます。
 ---
 
-# TiFlashクラスタを監視する {#monitor-the-tiflash-cluster}
+# TiFlashクラスターを監視する {#monitor-the-tiflash-cluster}
 
 このドキュメントでは、 TiFlashの監視項目について説明します。
 
@@ -37,14 +37,14 @@ TiFlash には、 **TiFlash-Summary** 、 **TiFlash-Proxy-Summary** 、 **TiFlas
 
 ## Coprocessor {#coprocessor}
 
-- Request QPS: すべてのTiFlashインスタンスによって受信されたコプロセッサリクエストの数。`batch`はバッチリクエストの数です。`batch_cop`はバッチリクエスト内のコプロセッサリクエストの数です。`cop`はコプロセッサ インターフェイスを介して直接送信されたコプロセッサリクエストの数です。`cop_dag`はすべてのコプロセッサリクエスト内の DAG リクエストの数です。`super_batch`はスーパー バッチ機能を有効にするためのリクエストの数です。
+- Request QPS: すべてのTiFlashインスタンスによって受信されたコプロセッサーリクエストの数。`batch`はバッチリクエストの数です。`batch_cop`はバッチリクエスト内のコプロセッサーリクエストの数です。`cop`はコプロセッサーインターフェイスを介して直接送信されたコプロセッサーリクエストの数です。`cop_dag`はすべてのコプロセッサーリクエスト内の DAG リクエストの数です。`super_batch`はスーパーバッチ機能を有効にするためのリクエストの数です。
 - Executor QPS: すべてのTiFlashインスタンスが受信したリクエスト内の各タイプの DAG Executor の数。`table_scan`はテーブルスキャン Executor です。`selection`は選択 Executor です。`aggregation`は集約 Executor です。`top_n`は`TopN` Executor です。`limit`は制限 Executor です。
-- Request Duration: コプロセッサリクエストを処理するすべてのTiFlashインスタンスの合計期間。合計期間は、コプロセッサリクエストを受信してからリクエストへの応答が完了するまでの期間です。
-- Error QPS: コプロセッサリクエストを処理するすべてのTiFlashインスタンスのエラー数。`meet_lock`は読み取りデータがロックされていることを意味します。`region_not_found`はリージョンが存在しないことを意味します。`epoch_not_match`は読み取りリージョンエポックがローカル エポックと一致していないことを意味します。`kv_client_error`はTiKV との通信でエラーが返されたことを意味します。`internal_error`はTiFlashの内部システム エラーです。`other`はその他のタイプのエラーです。
-- Request Handle Duration：すべてのTiFlashインスタンスがコプロセッサリクエストを処理する期間。処理時間は、コプロセッサリクエストの実行開始から完了までです。
+- Request Duration: コプロセッサーリクエストを処理するすべてのTiFlashインスタンスの合計所要時間。合計所要時間は、コプロセッサーリクエストを受信してからリクエストへの応答が完了するまでの時間です。
+- Error QPS: コプロセッサーリクエストを処理するすべてのTiFlashインスタンスのエラー数。`meet_lock`は読み取りデータがロックされていることを意味します。`region_not_found`はリージョンが存在しないことを意味します。`epoch_not_match`は読み取りリージョンエポックがローカルエポックと一致していないことを意味します。`kv_client_error`はTiKV との通信でエラーが返されたことを意味します。`internal_error`はTiFlashの内部システムエラーです。`other`はその他のタイプのエラーです。
+- Request Handle Duration：すべてのTiFlashインスタンスがコプロセッサーリクエストを処理する所要時間。処理時間は、コプロセッサーリクエストの実行開始から完了までです。
 - Response Bytes/Seconds: すべてのTiFlashインスタンスからの応答の合計バイト数。
-- Cop task memory usage: コプロセッサリクエストを処理するすべてのTiFlashインスタンスの合計メモリ使用量。
-- Handling Request Number: コプロセッサリクエストを処理しているすべてのTiFlashインスタンスの総数。リクエストの分類は、Request QPSと同じです。
+- Cop task memory usage: コプロセッサーリクエストを処理するすべてのTiFlashインスタンスの合計メモリ使用量。
+- Handling Request Number: コプロセッサーリクエストを処理しているすべてのTiFlashインスタンスの総数。リクエストの分類は、Request QPSと同じです。
 - Threads of RPC: 各TiFlashインスタンスで使用される RPC スレッドのリアルタイム数。
 - Max Threads of RPC: 各TiFlashインスタンスで最近使用された RPC スレッドの最大数。
 - Threads: 各TiFlashインスタンスで使用されるスレッドのリアルタイム数。
@@ -71,11 +71,11 @@ TiFlash には、 **TiFlash-Summary** 、 **TiFlash-Proxy-Summary** 、 **TiFlas
 - Write Command OPS: すべてのTiFlashインスタンスのストレージレイヤーで 1秒あたりに受信される書き込みリクエストの数。
 - Write Amplification: 各TiFlashインスタンスの書き込み増幅 (実際のディスク書き込みバイト数を論理データの書き込みバイト数で割った値)。`total`はこの開始以降の書き込み増幅で、 `5min`は過去 5分間の書き込み増幅です。
 - Read Tasks OPS: TiFlashインスタンスごとのストレージレイヤーでの 1秒あたりの読み取りタスクの数。
-- Rough Set Filter Rate: ストレージレイヤーの粗セットインデックスによってフィルタされた、過去 1分間に各TiFlashインスタンスによって読み取られたパケット数の割合。
-- Internal Tasks OPS: すべてのTiFlashインスタンスが 1秒あたりに内部データ ソート タスクを実行する回数。
-- Internal Tasks Duration: すべてのTiFlashインスタンスが内部データ ソート タスクに費やした時間。
-- Page GC Tasks OPM: すべてのTiFlashインスタンスが 1分間に Delta データ ソート タスクを実行する回数。
-- Page GC Tasks Duration: Delta データ ソート タスクを実行するためにすべてのTiFlashインスタンスで消費される時間の分布。
+- Rough Set Filter Rate: ストレージレイヤーの粗セットインデックスによってフィルターされた、過去 1分間に各TiFlashインスタンスによって読み取られたパケット数の割合。
+- Internal Tasks OPS: すべてのTiFlashインスタンスが 1秒あたりに内部データソートタスクを実行する回数。
+- Internal Tasks Duration: すべてのTiFlashインスタンスが内部データソートタスクに費やした時間。
+- Page GC Tasks OPM: すべてのTiFlashインスタンスが 1分間に Delta データソートタスクを実行する回数。
+- Page GC Tasks Duration: Delta データソートタスクを実行するためにすべてのTiFlashインスタンスで消費される時間の分布。
 - Disk Write OPS: すべてのTiFlashインスタンスによる 1秒あたりのディスク書き込み数。
 - Disk Read OPS: すべてのTiFlashインスタンスによる 1秒あたりのディスク読み取り数。
 - Write flow: すべてのTiFlashインスタンスによるディスク書き込みのトラフィック。
@@ -95,7 +95,7 @@ TiFlash には、 **TiFlash-Summary** 、 **TiFlash-Proxy-Summary** 、 **TiFlas
 - Write Stall Duration: インスタンスごとの書き込みおよびリージョンデータの削除 (範囲の削除) の停止期間。
 - Write Throughput By Instance：インスタンスごとの書き込みスループット。Raft書き込みコマンドとRaftスナップショットを適用した場合のスループットも含まれます。
 - Write Command OPS By Instance: インスタンスによって受信されたさまざまな種類のコマンドの合計数。
-    - `write block` 、データ ログがRaftを通じて同期されることを意味します。
+    - `write block`は、データログがRaftを通じて同期されることを意味します。
     - `delete_range` 、一部のリージョンがこのインスタンスから削除されるか、このインスタンスに移動されることを意味します。
     - `ingest` 、いくつかのリージョンスナップショットがこのインスタンスに適用されていることを意味します。
 

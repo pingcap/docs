@@ -25,15 +25,15 @@ summary: TiDBのシステムテーブルについて学びましょう。
 - `global_priv` : 証明書に基づく認証情報
 - `role_edges` : ロール間の関係
 
-## クラスタステータスシステムテーブル {#cluster-status-system-tables}
+## クラスターステータスシステムテーブル {#cluster-status-system-tables}
 
 - `tidb`テーブルには、TiDB に関するグローバル情報が含まれています。
 
-    - `bootstrapped` : TiDBクラスタが初期化されているかどうか。この値は読み取り専用であり、変更できません。
+    - `bootstrapped` : TiDBクラスターが初期化されているかどうか。この値は読み取り専用であり、変更できません。
     - `tidb_server_version` : TiDB の初期化時のバージョン情報。この値は読み取り専用であり、変更できません。
-    - `system_tz` : TiDB のシステム タイムゾーン。
+    - `system_tz` : TiDB のシステムタイムゾーン。
     - `new_collation_enabled` : TiDB が[照合順序のための新しいフレームワーク](/character-set-and-collation.md#new-framework-for-collations)を有効にしたかどうか。この値は読み取り専用であり、変更できないことに注意してください。
-    - `cluster_id` （v8.5.6で追加）：TiDBクラスタの一意の識別子。この値は読み取り専用であり、変更できません。
+    - `cluster_id` （v8.5.6で追加）：TiDBクラスターの一意の識別子。この値は読み取り専用であり、変更できません。
 
 ## サーバー側のヘルプシステムテーブル {#server-side-help-system-tables}
 
@@ -103,7 +103,7 @@ summary: TiDBのシステムテーブルについて学びましょう。
 
 ## TiDB分散実行フレームワーク（DXF）に関連するシステムテーブル {#system-tables-related-to-tidb-distributed-execution-framework-dxf}
 
-- `dist_framework_meta` : 分散実行フレームワーク (DXF) タスクスケジューラのメタデータ
+- `dist_framework_meta` : 分散実行フレームワーク (DXF) タスクスケジューラーのメタデータ
 - `tidb_global_task` : 現在の DXF タスクのメタデータ
 - `tidb_global_task_history` : 成功したタスクと失敗したタスクの両方を含む、過去の DXF タスクのメタデータ
 - `tidb_background_subtask` : 現在の DXF サブタスクのメタデータ

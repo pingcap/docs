@@ -1,13 +1,13 @@
 ---
 title: CLI and Configuration Parameters of TiCDC Changefeeds
-summary: TiCDCチェンジフィードのCLIの定義と設定パラメータについて学びましょう。
+summary: TiCDCチェンジフィードのCLIの定義と設定パラメーターについて学びましょう。
 ---
 
-# TiCDC ChangefeedsのCLIと設定パラメータ {#cli-and-configuration-parameters-of-ticdc-changefeeds}
+# TiCDC ChangefeedsのCLIと設定パラメーター {#cli-and-configuration-parameters-of-ticdc-changefeeds}
 
-## 変更フィードCLIパラメータ {#changefeed-cli-parameters}
+## 変更フィードCLIパラメーター {#changefeed-cli-parameters}
 
-このセクションでは、TiCDCチェンジフィードのコマンドラインパラメータについて、レプリケーション（チェンジフィード）タスクの作成方法を示すことで紹介します。
+このセクションでは、TiCDCチェンジフィードのコマンドラインパラメーターについて、レプリケーション（チェンジフィード）タスクの作成方法を示すことで紹介します。
 
 ```shell
 cdc cli changefeed create --server=http://10.0.10.25:8300 --sink-uri="mysql://root:123456@127.0.0.1:3306/" --changefeed-id="simple-replication-task"
@@ -21,27 +21,27 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 
 - `--changefeed-id` : レプリケーションタスクのID。形式は`^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$`正規表現に一致する必要があります。このIDが指定されていない場合、TiCDCは自動的にUUID（バージョン4形式）をIDとして生成します。
 
-- `--sink-uri` : レプリケーションタスクのダウンストリーム アドレス。 `--sink-uri`は、次の形式に従って設定します。現在、このスキームは`mysql` 、 `tidb` 、および`kafka`をサポートしています。
+- `--sink-uri` : レプリケーションタスクのダウンストリームアドレス。 `--sink-uri`は、次の形式に従って設定します。現在、このスキームは`mysql` 、 `tidb` 、および`kafka`をサポートしています。
 
     ```
     [scheme]://[userinfo@][host]:[port][/path]?[query_parameters]
     ```
 
-    シンク URI パラメータに`! * ' ( ) ; : @ & = + $ , / ? % # [ ]`などの特殊文字が含まれている場合は、 [URIエンコーダー](https://www.urlencoder.org/)のように特殊文字をエスケープする必要があります。
+    シンク URI パラメーターに`! * ' ( ) ; : @ & = + $ , / ? % # [ ]`などの特殊文字が含まれている場合は、 [URIエンコーダー](https://www.urlencoder.org/)のように特殊文字をエスケープする必要があります。
 
-- `--start-ts` : 変更フィードの開始TSOを指定します。TiCDCクラスタはこのTSOからデータの取得を開始します。デフォルト値は現在時刻です。
+- `--start-ts` : 変更フィードの開始TSOを指定します。TiCDCクラスターはこのTSOからデータの取得を開始します。デフォルト値は現在時刻です。
 
-- `--target-ts` : 変更フィードの終了TSOを指定します。このTSOに達すると、TiCDCクラスタはデータのプルを停止します。デフォルト値は空で、これはTiCDCが自動的にデータのプルを停止しないことを意味します。
+- `--target-ts` : 変更フィードの終了TSOを指定します。このTSOに達すると、TiCDCクラスターはデータのプルを停止します。デフォルト値は空で、これはTiCDCが自動的にデータのプルを停止しないことを意味します。
 
 - `--config` : 変更フィードの設定ファイルを指定します。
 
-## 変更フィードの設定パラメータ {#changefeed-configuration-parameters}
+## 変更フィードの設定パラメーター {#changefeed-configuration-parameters}
 
 このセクションでは、レプリケーションタスクの設定について説明します。
 
 ### `memory-quota` {#memory-quota}
 
-- シンクマネージャがキャプチャサーバーで使用できるメモリ割り当て量（バイト単位）を指定します。この値を超過した場合、超過した部分はGoランタイムによって再利用されます。
+- シンクマネージャーがキャプチャサーバーで使用できるメモリ割り当て量（バイト単位）を指定します。この値を超過した場合、超過した部分はGoランタイムによって回収されます。
 - デフォルト値: `1073741824` (1 GiB)
 
 ### `case-sensitive` {#case-sensitive}
@@ -90,7 +90,7 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 ### `changefeed-error-stuck-duration` {#changefeed-error-stuck-duration}
 
 - 内部エラーや例外が発生した場合に、チェンジフィードが自動的に再試行できる期間を指定します。
-- 変更フィード内で内部エラーまたは例外が発生し、このパラメータで設定された期間よりも長く継続した場合、変更フィードは失敗状態になります。
+- 変更フィード内で内部エラーまたは例外が発生し、このパラメーターで設定された期間よりも長く継続した場合、変更フィードは失敗状態になります。
 - 変更フィードが障害状態になった場合は、リカバリのために変更フィードを手動で再起動する必要があります。
 - 形式は`"h m s"`です。例えば、 `"1h30m30s"`です。
 - デフォルト値: `"30m"`
@@ -112,13 +112,13 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 
 #### `rules` {#rules}
 
-- フィルタルールを指定します。詳細については、[構文](/table-filter.md#syntax)を参照してください。
+- フィルタールールを指定します。詳細については、[構文](/table-filter.md#syntax)を参照してください。
 
 <!-- Example: `['*.*', '!test.*']` -->
 
 #### filter.event-filters {#filter-event-filters}
 
-詳細については、 [イベントフィルタルール](/ticdc/ticdc-filter.md#event-filter-rules)を参照してください。
+詳細については、 [イベントフィルタールール](/ticdc/ticdc-filter.md#event-filter-rules)を参照してください。
 
 ##### `matcher` {#matcher}
 
@@ -189,9 +189,9 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 
 #### `dispatchers` {#dispatchers}
 
-- changefeed のダウンストリームが MQ シンクの場合、`dispatchers` を使用してイベントディスパッチャを設定できます。v8.5.7 以降、[新しい TiCDC アーキテクチャ](/ticdc/ticdc-architecture.md) では、`dispatchers` を使用してテーブルルーティングを設定し、アップストリームテーブルを特定のダウンストリームデータベース名またはテーブル名にマッピングすることもできます。詳細については、[TiCDC テーブルルーティング](/ticdc/ticdc-table-routing.md) を参照してください。
-- バージョン6.1.0以降、TiDBはパーティションとトピックという2種類のイベントディスパッチャをサポートしています。
-- マッチャーのマッチング構文は、フィルタルールの構文と同じです。
+- changefeed のダウンストリームが MQ シンクの場合、`dispatchers` を使用してイベントディスパッチャーを設定できます。v8.5.7 以降、[新しい TiCDC アーキテクチャ](/ticdc/ticdc-architecture.md) では、`dispatchers` を使用してテーブルルーティングを設定し、アップストリームテーブルを特定のダウンストリームデータベース名またはテーブル名にマッピングすることもできます。詳細については、[TiCDC テーブルルーティング](/ticdc/ticdc-table-routing.md) を参照してください。
+- バージョン6.1.0以降、TiDBはパーティションとトピックという2種類のイベントディスパッチャーをサポートしています。
+- マッチャーのマッチング構文は、フィルタールールの構文と同じです。
 - ダウンストリーム MQ が Pulsar の場合、 `partition`のルーティングルールが`ts` 、 `index-value` 、 `table` 、または`default`にも指定されていない場合、各 Pulsar メッセージは、キーとして設定した文字列を使用してルーティングされます。たとえば、マッチャーのルーティングルールを文字列`code`として指定した場合、そのマッチャーに一致するすべての Pulsar メッセージは`code`をキーとしてルーティングされます。
 
 #### `column-selectors` <span class="version-mark">v7.5.0の新機能</span> {#column-selectors-new-in-v750}
@@ -210,10 +210,10 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 
 #### `delete-only-output-handle-key-columns` <span class="version-mark">v7.2.0の新機能</span> {#delete-only-output-handle-key-columns-new-in-v720}
 
-- DELETEイベントの出力を指定します。このパラメータは、canal-jsonおよびopen-protocolプロトコルでのみ有効です。
-- このパラメータは`force-replicate`と互換性がありません。このパラメータと`force-replicate`の両方が`true`に設定されている場合、TiCDC は変更フィードを作成する際にエラーを報告します。
-- Avroプロトコルはこのパラメータによって制御されず、常に主キー列または一意インデックス列のみを出力します。
-- CSVプロトコルはこのパラメータによって制御されず、常にすべての列を出力します。
+- DELETEイベントの出力を指定します。このパラメーターは、canal-jsonおよびopen-protocolプロトコルでのみ有効です。
+- このパラメーターは`force-replicate`と互換性がありません。このパラメーターと`force-replicate`の両方が`true`に設定されている場合、TiCDC は変更フィードを作成する際にエラーを報告します。
+- Avroプロトコルはこのパラメーターによって制御されず、常に主キー列または一意インデックス列のみを出力します。
+- CSVプロトコルはこのパラメーターによって制御されず、常にすべての列を出力します。
 - デフォルト値： `false`これは、すべての列を出力することを意味します。
 - `true`に設定すると、主キー列または一意インデックス列のみが出力されます。
 
@@ -256,7 +256,7 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 
 #### `date-separator` {#date-separator}
 
-- ファイル ディレクトリで使用される日付区切り文字のタイプを指定します。詳細については、 [データ変更記録](/ticdc/ticdc-sink-to-cloud-storage.md#data-change-records)を参照してください。
+- ファイルディレクトリで使用される日付区切り文字のタイプを指定します。詳細については、 [データ変更記録](/ticdc/ticdc-sink-to-cloud-storage.md#data-change-records)を参照してください。
 - この設定項目は、ダウンストリームがストレージサービスである場合にのみ有効になります。
 - デフォルト値: `day` 、ファイルを日付ごとに分割することを意味します。
 - 値のオプション: `none` 、 `year` 、 `month` 、 `day`
@@ -272,7 +272,7 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 
 - スキーマ情報の出力を無効にするかどうかを制御します。
 - デフォルト値： `false` 。これは、スキーマ情報の出力を有効にすることを意味します。
-- このパラメータは、シンクタイプがMQで、出力プロトコルがDebeziumの場合にのみ有効です。
+- このパラメーターは、シンクタイプがMQで、出力プロトコルがDebeziumの場合にのみ有効です。
 
 #### sink.csv <span class="version-mark">v6.5.0で追加</span> {#sinkcsv-new-in-v650}
 
@@ -306,7 +306,7 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 
 ##### `output-handle-key` {#output-handle-key}
 
-- ハンドルキー情報を出力するかどうかを制御します。この設定パラメータは内部実装専用であるため、設定することは推奨されません。
+- ハンドルキー情報を出力するかどうかを制御します。この設定パラメーターは内部実装専用であるため、設定することは推奨されません。
 - デフォルト値: `false`
 
 ##### `output-old-value` {#output-old-value}
@@ -316,9 +316,9 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 - 有効にすると、データ変更のある列の前に`"is-update"`列が追加されます。この追加された列は、現在の行のデータ変更が`UPDATE`イベントによるものか、元の`INSERT`イベントまたは`DELETE`イベントによるものかを識別するために使用されます。現在の行のデータ変更が`UPDATE`イベントによるものである場合、 `"is-update"`列の値は`true`になります。それ以外の場合は、 `false`になります。
 - デフォルト値: `false`
 
-v8.0.0 以降、TiCDC はSimple メッセージ エンコーディング プロトコルをサポートします。以下は、Simpleプロトコルの設定パラメータです。プロトコルの詳細については、 [TiCDC Simpleプロトコル](/ticdc/ticdc-simple-protocol.md)を参照してください。
+v8.0.0 以降、TiCDC はSimple メッセージエンコーディングプロトコルをサポートします。以下は、Simpleプロトコルの設定パラメーターです。プロトコルの詳細については、 [TiCDC Simpleプロトコル](/ticdc/ticdc-simple-protocol.md)を参照してください。
 
-以下の設定パラメータは、ブートストラップメッセージの送信動作を制御します。
+以下の設定パラメーターは、ブートストラップメッセージの送信動作を制御します。
 
 #### `send-bootstrap-interval-in-sec` {#send-bootstrap-interval-in-sec}
 
@@ -330,7 +330,7 @@ v8.0.0 以降、TiCDC はSimple メッセージ エンコーディング プロ�
 
 - ブートストラップを送信するメッセージ間隔をメッセージ数で制御します。
 - デフォルト値： `10000` 。これは、各テーブルで10000行変更メッセージごとにブートストラップメッセージが送信されることを意味します。
-- ブートストラップ メッセージの送信を無効にする場合は、 [`send-bootstrap-interval-in-sec`](#send-bootstrap-interval-in-sec)と`send-bootstrap-in-msg-count`の両方を`0`に設定してください。
+- ブートストラップメッセージの送信を無効にする場合は、 [`send-bootstrap-interval-in-sec`](#send-bootstrap-interval-in-sec)と`send-bootstrap-in-msg-count`の両方を`0`に設定してください。
 
 #### `send-bootstrap-to-all-partition` {#send-bootstrap-to-all-partition}
 
@@ -442,32 +442,32 @@ REDO ログを使用する場合の変更フィードのレプリケーション
 
 #### `sasl-oauth-client-id` {#sasl-oauth-client-id}
 
-- Kafka SASL OAUTHBEARER認証におけるクライアントIDを指定します。OAUTHBEARER認証を使用する場合は、このパラメータが必須です。
+- Kafka SASL OAUTHBEARER認証におけるクライアントIDを指定します。OAUTHBEARER認証を使用する場合は、このパラメーターが必須です。
 - デフォルト値: `""`
 
 #### `sasl-oauth-client-secret` {#sasl-oauth-client-secret}
 
-- Kafka SASL OAUTHBEARER認証におけるクライアントシークレットを指定します。OAUTHBEARER認証を使用する場合は、このパラメータが必須です。
+- Kafka SASL OAUTHBEARER認証におけるクライアントシークレットを指定します。OAUTHBEARER認証を使用する場合は、このパラメーターが必須です。
 - デフォルト値: `""`
 
 #### `sasl-oauth-token-url` {#sasl-oauth-token-url}
 
-- Kafka SASL OAUTHBEARER認証において、トークンを取得するためのトークンURLを指定します。OAUTHBEARER認証を使用する場合は、このパラメータが必須です。
+- Kafka SASL OAUTHBEARER認証において、トークンを取得するためのトークンURLを指定します。OAUTHBEARER認証を使用する場合は、このパラメーターが必須です。
 - デフォルト値: `""`
 
 #### `sasl-oauth-scopes` {#sasl-oauth-scopes}
 
-- Kafka SASL OAUTHBEARER認証におけるスコープを指定します。OAUTHBEARER認証を使用する場合、このパラメータは省略可能です。
+- Kafka SASL OAUTHBEARER認証におけるスコープを指定します。OAUTHBEARER認証を使用する場合、このパラメーターは省略可能です。
 - デフォルト値: `""`
 
 #### `sasl-oauth-grant-type` {#sasl-oauth-grant-type}
 
-- Kafka SASL OAUTHBEARER認証におけるグラントタイプを指定します。OAUTHBEARER認証を使用する場合、このパラメータは省略可能です。
+- Kafka SASL OAUTHBEARER認証におけるグラントタイプを指定します。OAUTHBEARER認証を使用する場合、このパラメーターは省略可能です。
 - デフォルト値: `"client_credentials"`
 
 #### `sasl-oauth-audience` {#sasl-oauth-audience}
 
-- Kafka SASL OAUTHBEARER認証におけるオーディエンスを指定します。OAUTHBEARER認証を使用する場合、このパラメータは省略可能です。
+- Kafka SASL OAUTHBEARER認証におけるオーディエンスを指定します。OAUTHBEARER認証を使用する場合、このパラメーターは省略可能です。
 - デフォルト値: `""`
 
 <!-- Example: `"kafka"` -->
@@ -493,7 +493,7 @@ token="xxxx"
 
 ### sink.pulsar-config {#sink-pulsar-config}
 
-以下のパラメータは、下流側がPulsarの場合にのみ有効になります。
+以下のパラメーターは、下流側がPulsarの場合にのみ有効になります。
 
 #### `authentication-token` {#authentication-token}
 

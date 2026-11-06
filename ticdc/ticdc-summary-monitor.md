@@ -7,7 +7,7 @@ summary: TiCDC の監視メトリックについて学習します。
 
 v7.0.0以降、 TiUPを使用してGrafanaをデプロイすると、TiCDCサマリーダッシュボードがGrafanaの監視ページに自動的に追加されます。このダッシュボードを通じて、TiCDCサーバーと変更フィードのステータスを迅速に把握できます。
 
-次の画像は、TiCDC サマリー ダッシュボードの監視パネルを示しています。
+次の画像は、TiCDC サマリーダッシュボードの監視パネルを示しています。
 
 ![TiCDC Summary Dashboard - Overview](/media/ticdc/ticdc-summary-monitor.png)
 
@@ -18,7 +18,7 @@ v7.0.0以降、 TiUPを使用してGrafanaをデプロイすると、TiCDCサマ
 - Dataflow: TiCDC 内部モジュールによって処理されるデータ変更の統計。
 - Transaction Sink: ダウンストリーム MySQL または TiDB の書き込みレイテンシー。
 - MQ Sink: ダウンストリーム MQ システムの書き込みレイテンシー。
-- Cloud Storage Sink: ダウンストリーム クラウドストレージの書き込み速度。
+- Cloud Storage Sink: ダウンストリームクラウドストレージの書き込み速度。
 - Redo: Redo 機能が有効な場合の書き込みレイテンシー。
 
 ## Server panel {#server-panel}
@@ -51,19 +51,19 @@ v7.0.0以降、 TiUPを使用してGrafanaをデプロイすると、TiCDCサマ
 
 - **Sorter output events/s**: TiCDCノードのSinkモジュールにSorterモジュールから1秒あたりに出力されるデータ変更の数。Sorterのデータ出力レートはSinkモジュールの影響を受けることに注意してください。したがって、Sorterモジュールの出力レートがPullerモジュールの出力レートよりも低い場合、必ずしもSorterモジュールのソート速度が遅すぎることを意味するわけではありません。まずSinkモジュールに関連するメトリクスを観察し、Sinkモジュールのデータフラッシュに時間がかかり、Sorterモジュールの出力が低下していないかどうかを確認する必要があります。
 
-- **Sorter output event**: TiCDC ノードのソーターモジュールからシンク モジュールに出力されたデータ変更の合計数。
+- **Sorter output event**: TiCDC ノードのソーターモジュールからシンクモジュールに出力されたデータ変更の合計数。
 
 ![TiCDC Summary Dashboard - Mounter metrics](/media/ticdc/ticdc-summary-monitor-dataflow-mounter.png)
 
 - **Mounter output events/s**: TiCDCノードにおいて、マウンターモジュールによって1秒あたりにデコードされたデータ変更の数。上流のデータ変更に多数のフィールドが含まれる場合、マウンターモジュールのデコード速度に影響が出る可能性があります。
 
-- **Mounter output event**: TiCDC ノードのマウンタ モジュールによってデコードされたデータ変更の合計数。
+- **Mounter output event**: TiCDC ノードのマウンターモジュールによってデコードされたデータ変更の合計数。
 
 ![TiCDC Summary Dashboard - Sink metrics](/media/ticdc/ticdc-summary-monitor-dataflow-sink.png)
 
 - **Sink flush rows/s**: TiCDCノードにおいて、シンクモジュールが下流へ1秒あたりに出力するデータ変更の数。この指標は、データ変更が下流へ複製される速度を表します。**Sink flush rows/s**が**Puller output events/s**よりも低い場合、レプリケーションのレイテンシーが増加する可能性があります。
 
-- **Sink flush rows**: シンク モジュールによって TiCDC ノードの下流に出力されたデータ変更の合計数。
+- **Sink flush rows**: シンクモジュールによって TiCDC ノードの下流に出力されたデータ変更の合計数。
 
 ## Transaction Sink panel {#transaction-sink-panel}
 
@@ -81,7 +81,7 @@ v7.0.0以降、 TiUPを使用してGrafanaをデプロイすると、TiCDCサマ
 
 ![TiCDC Summary Dashboard - Transaction Sink metrics](/media/ticdc/ticdc-summary-monitor-mq-sink.png)
 
-- **Worker Send Message Duration Percentile**: TiCDC MQ シンク ワーカーがダウンストリームにデータを送信する際のレイテンシー。
+- **Worker Send Message Duration Percentile**: TiCDC MQ シンクワーカーがダウンストリームにデータを送信する際のレイテンシー。
 - **Kafka Ongoing Bytes**: TiCDC MQ Sink がダウンストリームにデータを送信する速度。
 
 ## Cloud Storage Sink panel {#cloud-storage-sink-panel}

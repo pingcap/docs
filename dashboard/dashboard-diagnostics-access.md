@@ -1,11 +1,11 @@
 ---
 title: TiDB Dashboard Cluster Diagnostic Page
-summary: TiDB Dashboardのクラスタ診断機能は、クラスタの問題を診断し、結果をWebページにまとめます。ダッシュボードまたはブラウザからこのページにアクセスできます。指定した期間の診断レポートと比較レポートを生成します。履歴レポートも利用可能です。
+summary: TiDB Dashboardのクラスター診断機能は、クラスターの問題を診断し、結果をWebページにまとめます。ダッシュボードまたはブラウザーからこのページにアクセスできます。指定した期間の診断レポートと比較レポートを生成します。履歴レポートも利用可能です。
 ---
 
-# TiDB Dashboardのクラスタ診断ページ {#tidb-dashboard-cluster-diagnostics-page}
+# TiDB Dashboardのクラスター診断ページ {#tidb-dashboard-cluster-diagnostics-page}
 
-TiDB Dashboardのクラスタ診断機能は、指定された時間範囲内でクラスタに存在する可能性のある問題を診断し、診断結果とクラスタ関連の負荷監視情報を診断レポートにまとめます。この診断レポートはウェブページ形式で提供されます。ブラウザからページを保存した後、オフラインでページを閲覧したり、このページのリンクを配布したりできます。
+TiDB Dashboardのクラスター診断機能は、指定された時間範囲内でクラスターに存在する可能性のある問題を診断し、診断結果とクラスター関連の負荷監視情報を診断レポートにまとめます。この診断レポートはウェブページ形式で提供されます。ブラウザーからページを保存した後、オフラインでページを閲覧したり、このページのリンクを配布したりできます。
 
 > **Note:**
 >
@@ -15,11 +15,11 @@ TiDB Dashboardのクラスタ診断機能は、指定された時間範囲内で
 
 クラスター診断ページにアクセスするには、次のいずれかの方法を使用できます。
 
-- TiDB Dashboardにログインしたら、左側のナビゲーション メニューで**Cluster Diagnostics**をクリックします。
+- TiDB Dashboardにログインしたら、左側のナビゲーションメニューで**Cluster Diagnostics**をクリックします。
 
     ![Access Cluster Diagnostics page](/media/dashboard/dashboard-diagnostics-access-v650.png)
 
-- ブラウザで`http://127.0.0.1:2379/dashboard/#/diagnose`にアクセスしてください。`127.0.0.1:2379`を実際のPDアドレスとポート番号に置き換えてください。
+- ブラウザーで`http://127.0.0.1:2379/dashboard/#/diagnose`にアクセスしてください。`127.0.0.1:2379`を実際のPDアドレスとポート番号に置き換えてください。
 
 ## 診断レポートを生成する {#generate-diagnostic-report}
 

@@ -41,7 +41,7 @@ summary: TiDB TPC-H 50Gパフォーマンステストでは、OLAPシナリオ�
 
 [tidb-bench/tpch](https://github.com/pingcap/tidb-bench/tree/master/tpch)
 
-### クラスタトポロジー {#cluster-topology}
+### クラスタートポロジー {#cluster-topology}
 
 | マシンIP        | デプロイメントインスタンス |
 | ------------ | ------------- |

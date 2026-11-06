@@ -1,19 +1,19 @@
 ---
 title: TiDB Dashboard Resource Manager Page
-summary: TiDB Dashboardのリソースマネージャページは、クラスタ管理者がリソースグループを作成し、クォータを設定することでリソース分離を実装するのに役立ちます。クラスタキャパシティを推定し、リソース消費量を監視するための方法を提供します。このページには、TiDB Dashboardまたはブラウザからアクセスできます。このページには、Configuration、Estimate Capacity、およびMetricsのセクションがあります。キャパシティ推定方法には、ハードウェアのデプロイと実際のワークロードが含まれます。監視メトリックには、消費されたRUの合計、リソースグループによる消費RU、TiDB CPUクォータと使用量、TiKV CPUクォータと使用量、TiKV IO MBpsが含まれます。
+summary: TiDB Dashboardのリソースマネージャーページは、クラスター管理者がリソースグループを作成し、クォータを設定することでリソース分離を実装するのに役立ちます。クラスターキャパシティを推定し、リソース消費量を監視するための方法を提供します。このページには、TiDB Dashboardまたはブラウザーからアクセスできます。このページには、Configuration、Estimate Capacity、およびMetricsのセクションがあります。キャパシティ推定方法には、ハードウェアのデプロイと実際のワークロードが含まれます。監視メトリックには、消費されたRUの合計、リソースグループによる消費RU、TiDB CPUクォータと使用量、TiKV CPUクォータと使用量、TiKV IO MBpsが含まれます。
 ---
 
 # TiDB Dashboardリソースマネージャーページ {#tidb-dashboard-resource-manager-page}
 
-[リソース管理](/tidb-resource-control-ru-groups.md)機能を使用してリソース分離を実装するには、クラスタ管理者がリソースグループを作成し、各グループにクォータを設定する必要があります。リソースプランニングを行う前に、クラスタ全体のキャパシティを把握しておく必要があります。このドキュメントでは、リソース制御に関する情報を参照することで、リソースプランニング前にクラスタのキャパシティを見積もり、より効果的にリソースを割り当てることができます。
+[リソース管理](/tidb-resource-control-ru-groups.md)機能を使用してリソース分離を実装するには、クラスター管理者がリソースグループを作成し、各グループにクォータを設定できます。リソースプランニングを行う前に、クラスター全体のキャパシティを把握しておく必要があります。このドキュメントでは、リソース制御に関する情報を参照することで、リソースプランニング前にクラスターのキャパシティを見積もり、より効果的にリソースを割り当てることができます。
 
 ## ページにアクセスする {#access-the-page}
 
-リソースマネージャー ページにアクセスするには、次の2つの方法のいずれかを使用できます。
+リソースマネージャーページにアクセスするには、次の2つの方法のいずれかを使用できます。
 
-- TiDB Dashboardにログインしたら、左側のナビゲーション メニューで**Resource Manager**をクリックします。
+- TiDB Dashboardにログインしたら、左側のナビゲーションメニューで**Resource Manager**をクリックします。
 
-- ブラウザで[http://127.0.0.1:2379/dashboard/#/resource_manager](http://127.0.0.1:2379/dashboard/#/resource_manager)にアクセスしてください。`127.0.0.1:2379`を実際のPDインスタンスのアドレスとポートに置き換えてください。
+- ブラウザーで[http://127.0.0.1:2379/dashboard/#/resource_manager](http://127.0.0.1:2379/dashboard/#/resource_manager)にアクセスしてください。`127.0.0.1:2379`を実際のPDインスタンスのアドレスとポートに置き換えてください。
 
 ## リソースマネージャーページ {#resource-manager-page}
 
@@ -21,7 +21,7 @@ summary: TiDB Dashboardのリソースマネージャページは、クラスタ
 
 ![TiDB Dashboard: Resource Manager](/media/dashboard/dashboard-resource-manager-info.png)
 
-リソースマネージャー ページには、次の3つのセクションがあります。
+リソースマネージャーページには、次の3つのセクションがあります。
 
 - Configuration: このセクションには、TiDBの`RESOURCE_GROUPS`テーブルから取得したデータが表示されます。すべてのリソースグループに関する情報が含まれています。詳細については、 [`RESOURCE_GROUPS`](/information-schema/information-schema-resource-groups.md)を参照してください。
 
@@ -38,7 +38,7 @@ summary: TiDB Dashboardのリソースマネージャページは、クラスタ
 
 - [ハードウェアのデプロイに基づいてキャパシティを見積もる](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-hardware-deployment)
 
-    TiDB は次のワークロード タイプを受け入れます。
+    TiDB は次のワークロードタイプを受け入れます。
 
     - `tpcc` : 大量のデータ書き込みを伴うワークロードに適用されます。これは`TPC-C`と同様のワークロードモデルに基づいて推定されます。
     - `oltp_write_only` : 大量のデータ書き込みを伴うワークロードに適用されます。これは`sysbench oltp_write_only`と同様のワークロードモデルに基づいて推定されます。

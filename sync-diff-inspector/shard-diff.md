@@ -1,6 +1,6 @@
 ---
 title: Data Check in the Sharding Scenario
-summary: シャーディング シナリオでのデータチェックについて学習します。
+summary: シャーディングシナリオでのデータチェックについて学習します。
 ---
 
 # シャーディングシナリオにおけるデータチェック {#data-check-in-the-sharding-scenario}
