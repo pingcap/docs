@@ -2180,6 +2180,55 @@ Referenced in:
 - [TiDB 8.2.0 Release Notes](/releases/release-8.2.0.md)
 - [TiDB 5.0 Release Notes](/releases/release-5.0.0.md)
 
+### tidb_exp_embed_cohere_api_key
+
+Referenced in:
+
+- [Cohere Embeddings](/ai/integrations/vector-search-auto-embedding-cohere.md)
+- [System Variables](/system-variables.md#tidb_exp_embed_cohere_api_key)
+
+### tidb_exp_embed_gemini_api_key
+
+Referenced in:
+
+- [Gemini Embeddings](/ai/integrations/vector-search-auto-embedding-gemini.md)
+- [System Variables](/system-variables.md#tidb_exp_embed_gemini_api_key)
+
+### tidb_exp_embed_huggingface_api_key
+
+Referenced in:
+
+- [Hugging Face Embeddings](/ai/integrations/vector-search-auto-embedding-huggingface.md)
+- [System Variables](/system-variables.md#tidb_exp_embed_huggingface_api_key)
+
+### tidb_exp_embed_jina_ai_api_key
+
+Referenced in:
+
+- [Jina AI Embeddings](/ai/integrations/vector-search-auto-embedding-jina-ai.md)
+- [System Variables](/system-variables.md#tidb_exp_embed_jina_ai_api_key)
+
+### tidb_exp_embed_nvidia_nim_api_key
+
+Referenced in:
+
+- [NVIDIA NIM Embeddings](/ai/integrations/vector-search-auto-embedding-nvidia-nim.md)
+- [System Variables](/system-variables.md#tidb_exp_embed_nvidia_nim_api_key)
+
+### tidb_exp_embed_openai_api_base
+
+Referenced in:
+
+- [OpenAI Embeddings](/ai/integrations/vector-search-auto-embedding-openai.md)
+- [System Variables](/system-variables.md#tidb_exp_embed_openai_api_base)
+
+### tidb_exp_embed_openai_api_key
+
+Referenced in:
+
+- [OpenAI Embeddings](/ai/integrations/vector-search-auto-embedding-openai.md)
+- [System Variables](/system-variables.md#tidb_exp_embed_openai_api_key)
+
 ### tidb_expensive_query_time_threshold
 
 Referenced in:
