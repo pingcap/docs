@@ -6,7 +6,7 @@ aliases: ['/docs/dev/mydumper-overview/','/docs/dev/reference/tools/mydumper/','
 
 # Use Dumpling to Export Data
 
-This document introduces the data export tool - [Dumpling](https://github.com/pingcap/tidb/tree/master/dumpling). Dumpling exports data stored in TiDB/MySQL as SQL or CSV data files and can be used to make a logical full backup or export. Dumpling also supports exporting data to Amazon S3.
+This document introduces the data export tool - [Dumpling](https://github.com/pingcap/tidb/tree/master/dumpling). Dumpling exports data stored in TiDB/MySQL as SQL, CSV, or Parquet data files and can be used to make a logical full backup or export. Dumpling also supports exporting data to Amazon S3.
 
 <CustomContent platform="tidb">
 
@@ -50,7 +50,7 @@ TiDB also provides other tools that you can choose to use as needed.
 
 Dumpling has the following advantages:
 
-- Support exporting data in multiple formats, including SQL and CSV.
+- Support exporting data in multiple formats, including SQL, CSV, and Parquet.
 - Support the [table-filter](https://github.com/pingcap/tidb-tools/blob/master/pkg/table-filter/README.md) feature, which makes it easier to filter data.
 - Support exporting data to Amazon S3 cloud storage.
 - More optimizations are made for TiDB:
@@ -151,6 +151,24 @@ In the command above:
 >
 > *Strings* and *keywords* are not distinguished by Dumpling. If the imported data is the Boolean type, the value of `true` is converted to `1` and the value of `false` is converted to `0`.
 
+### Export to Parquet files
+
+Starting from v9.0.0, you can export data to Parquet files by adding the `--filetype parquet` argument.
+
+{{< copyable "shell-regular" >}}
+
+```shell
+tiup dumpling -u root -P 4000 -h 127.0.0.1 -o /tmp/test --filetype parquet -t 8 -F 256MiB
+```
+
+In the command above:
+
+- Dumpling exports table data as Parquet files, and still exports the table schema as SQL files. You can use the exported files as the data source of [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md).
+- You can use the `--parquet-compress` option to specify the compression algorithm for Parquet files. It supports `no-compression`, `snappy`, `gzip`, and `zstd`. The default value is `snappy`. When compression is enabled, the algorithm is added to the file name. For example, with the `snappy` compression, the exported data file is named as `test.t1.000000000.snappy.parquet`.
+- You can use the `--parquet-page-size` option to set the data page size of Parquet files. The default value is `1MiB`.
+- You can use the `--parquet-row-group-size` option to set the row group memory limit of Parquet files. The default value is `120MiB`. Dumpling flushes buffered rows when the accounted in-memory usage of a row group reaches this limit.
+- The `--compress` option is not supported for Parquet files. To compress Parquet files, use the `--parquet-compress` option instead.
+
 ### Compress the exported data files
 
 You can use the `--compress <format>` option to compress the CSV and SQL data and table structure files exported by Dumpling. This parameter supports the following compression algorithms: `gzip`, `snappy`, and `zstd`. The compression is disabled by default.
@@ -158,6 +176,7 @@ You can use the `--compress <format>` option to compress the CSV and SQL data an
 - This option only compresses individual data and table structure files. It cannot compress the entire folder and generate a single compressed package.
 - This option can save disk space, but it also slows down the export speed and increases CPU consumption. Use this option with caution in scenarios where the export speed is critical.
 - For TiDB Lightning v6.5.0 and later versions, you can use compressed files exported by Dumpling as the data source without additional configuration.
+- This option does not apply to Parquet files. To compress Parquet files, use the [`--parquet-compress`](#option-list-of-dumpling) option instead.
 
 > **Note:**
 >
@@ -207,7 +226,7 @@ You can use the `--compress <format>` option to compress the CSV and SQL data an
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
     ```
 
-- `{schema}.{table}.{0001}.{sql|csv}`: The date source file
+- `{schema}.{table}.{0001}.{sql|csv|parquet}`: The data source file. For compressed Parquet files, the file name also contains the compression algorithm, for example, `test.t1.000000000.snappy.parquet`.
 
     {{< copyable "shell-regular" >}}
 
@@ -400,7 +419,7 @@ SET GLOBAL tidb_gc_life_time = '10m';
 | `-m` or `--no-schemas`       | Do not export the schema with only the data exported                                                                                                                                                                                                                                                                               |
 | `-s` or `--statement-size`   | Control the size of the `INSERT` statements; the unit is bytes                                                                                                                                                                                                                                                                     |
 | `-F` or `--filesize`         | The file size of the divided tables. The unit must be specified such as `128B`, `64KiB`, `32MiB`, and `1.5GiB`.                                                                                                                                                                                                                    |
-| `--filetype`                 | Exported file type (csv/sql)                                                                                                                                                                                                                                                                                                       | "sql"                                      |
+| `--filetype`                 | Exported file type (csv/sql/parquet)                                                                                                                                                                                                                                                                                               | "sql"                                      |
 | `-o` or `--output`           | Specify the absolute local file path or [external storage URI](/external-storage-uri.md) for exporting the data.                                                                                                                                                                                                                                                                                                   | "./export-${time}"                         |
 | `-S` or `--sql`              | Export data according to the specified SQL statement. This command does not support concurrent export.                                                                                                                                                                                                                             |
 | `--consistency`              | flush: use FTWRL before the dump <br/> snapshot: dump the TiDB data of a specific snapshot of a TSO <br/> lock: execute `lock tables read` on all tables to be dumped <br/> none: dump without adding locks, which cannot guarantee consistency <br/> auto: use --consistency flush for MySQL; use --consistency snapshot for TiDB | "auto"                                     |
@@ -423,7 +442,10 @@ SET GLOBAL tidb_gc_life_time = '10m';
 | `--status-addr`              | Dumpling's service address, including the address for Prometheus to pull metrics and pprof debugging                                                                                                                                                                                                                               | ":8281"                                    |
 | `--tidb-mem-quota-query`     | The memory limit of exporting SQL statements by a single line of Dumpling command, and the unit is byte. For v4.0.10 or later versions, if you do not set this parameter, TiDB uses the value of the `mem-quota-query` configuration item as the memory limit value by default. For versions earlier than v4.0.10, the parameter value defaults to 32 GB.  | 34359738368 |
 | `--params`                   | Specifies the session variable for the connection of the database to be exported. The required format is `"character_set_client=latin1,character_set_connection=latin1"`                                                                                                                                                           |
-|  `-c` or `--compress` |  Compresses the CSV and SQL data and table structure files exported by Dumpling. It supports the following compression algorithms: `gzip`, `snappy`, and `zstd`.  | "" |
+|  `-c` or `--compress` |  Compresses the CSV and SQL data and table structure files exported by Dumpling. It supports the following compression algorithms: `gzip`, `snappy`, and `zstd`. This option does not apply to Parquet files.  | "" |
+| `--parquet-compress` | The compression algorithm for Parquet files. It supports `no-compression`, `snappy`, `gzip`, and `zstd`. | "snappy" |
+| `--parquet-page-size` | The data page size of Parquet files. The unit must be specified such as `128B`, `64KiB`, `32MiB`, and `1.5GiB`. | 1MiB |
+| `--parquet-row-group-size` | The row group memory limit of Parquet files, which is the flush threshold by accounted in-memory bytes. The unit must be specified such as `128B`, `64KiB`, `32MiB`, and `1.5GiB`. | 120MiB |
 
 ## Output filename template
 
