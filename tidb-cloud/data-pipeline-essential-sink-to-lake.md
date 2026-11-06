@@ -231,75 +231,13 @@ After the export task completes, open the task details and record the **Snapshot
 
 ## Step 3. Create a changefeed for incremental data
 
-Currently, TiDB Cloud Essential does not support creating a cloud-storage sink via TiDB Cloud console, so you need to use the TiDB Cloud API.
+In the TiDB Cloud console, you can create a cloud storage changefeed for your TiDB Cloud Essential instance. For the full procedure, see [Sink to Cloud Storage](/tidb-cloud/changefeed-sink-to-cloud-storage.md). When you configure the changefeed, pay attention to the following settings:
 
-Call the changefeed creation API with the following required fields:
-
-| Field | Required Value |
-|-------|---------------|
-| `sink.cloudStorage.dataFormat.protocol` | `CANAL_JSON` |
-| `sink.cloudStorage.dataFormat.canalJsonConfig.enableTidbExtension` | `true` |
-| `sink.cloudStorage.dataFormat.contentCompatible` | `true` |
-| `startPosition.mode` | `FROM_TSO` |
-| `startPosition.tso` | `<snapshot_tso from the export step>` |
-
-**Request example:**
-
-```shell
-curl -L -X POST 'https://serverless.tidbapi.com/v1beta1/clusters/{clusterId}/changefeeds' \
-  -H 'Content-Type: application/json' \
-  -u '<Public Key>:<Private Key>' --digest \
-  -d '{
-    "displayName": "<changefeed-name>",
-    "sink": {
-      "type": "CLOUD_STORAGE",
-      "cloudStorage": {
-        "storage": {
-          "type": "S3",
-          "s3": {
-            "uri": "s3://<bucket>/<prefix>/incremental/",
-            "authType": "ROLE_ARN",
-            "roleArn": "<role-arn>"
-          }
-        },
-        "dataFormat": {
-          "protocol": "CANAL_JSON",
-          "contentCompatible": true,
-          "canalJsonConfig": {
-            "enableTidbExtension": true
-          }
-        }
-      }
-    },
-    "filter": {
-      "mode": "IGNORE_NOT_SUPPORT_TABLE",
-      "filterRule": ["*.*"]
-    },
-    "startPosition": {
-      "mode": "FROM_TSO",
-      "tso": "<snapshot_tso>"
-    },
-    "rcu": 2
-  }'
-```
-
-> **Note:**
->
-> The changefeed URI must use the `incremental/` sub-path under the same prefix as the export snapshot. The IAM role's permissions (from [3. Expand permissions to cover the full pipeline prefix](#3-expand-permissions-to-cover-the-full-pipeline-prefix)) must cover this path.
->
-> If you are using **Access Key** instead of Role ARN, replace the `s3` block in the request body with:
->
-> ```json
-> "s3": {
->   "uri": "s3://<bucket>/<prefix>/incremental/",
->   "authType": "ACCESS_KEY",
->   "accessKey": {
->     "id": "<access-key-id>",
->     "secret": "<access-key-secret>"
->   }
-> }
-> ```
->
+- **S3 URI**: use the `incremental/` sub-path under the same prefix as the snapshot, for example, `s3://<bucket>/<prefix>/incremental/`.
+- **Bucket Access**: select **AWS Role ARN** and enter the role ARN from [Method 1: Use a Role ARN](#method-1-use-a-role-arn), or select **AWS Access Key** and enter the Access Key ID and Secret Access Key from [Method 2: Use an Access Key](#method-2-use-an-access-key). Make sure the permissions cover the `incremental/` path.
+- **Start Replication Position**: select **Start replication from a specific TSO**, and enter the snapshot TSO recorded in [Step 2. Export full snapshot to Amazon S3](#step-2-export-full-snapshot-to-amazon-s3).
+- **Data Format**: select **Canal-JSON**, and enable both **Enable TiDB Extension** and **Enable Canal Content Compatibility**. These settings produce data in a format that is compatible with the TiDB Cloud Lake integration.
+- **Changefeed Specification**: select a capacity that meets your replication throughput requirements.
 
 ## Step 4. Configure TiDB Cloud Lake
 

@@ -19,7 +19,7 @@ This notification describes the details that you need to know about the maintena
 
 ## Impact
 
-During the maintenance window, [change vCPU and RAM](https://docs.pingcap.com/tidbcloud/scale-tidb-cluster#change-vcpu-and-ram) is disabled and you can not change vCPU and RAM for your Dedicated Clusters. However, you can still change the node number or storage in the Modify Cluster page. Your TiDB cluster will maintain its regular operations for data read and write, ensuring no adverse effects on your online business.
+During the maintenance window, [change vCPU and RAM](https://docs.pingcap.com/tidbcloud/scale-tidb-cluster#change-vcpu-and-ram) is disabled and you can not change vCPU and RAM for your Dedicated Clusters. However, you can still change the node count or storage in the Modify Cluster page. Your TiDB cluster will maintain its regular operations for data read and write, ensuring no adverse effects on your online business.
 
 ### Affected features of TiDB Cloud console UI
 

@@ -15,7 +15,7 @@ To deal with some special occasions, or to handle migration interruptions caused
 
 The internal table schema comes from the following sources:
 
-- For full data migration (`task-mode=all`), the migration task goes through three stages: dump/load/sync, which means full export, full import, and incremental replication. In the dump stage, DM exports the table schema information along with the data and automatically creates the corresponding table in the downstream. In the sync stage, this table schema is used as the starting table scheme for incremental replication.
+- For full data migration (`task-mode=all`), the migration task goes through three stages: dump/load/sync, which means full export, full import, and incremental replication. In the dump stage, DM exports the table schema information along with the data and automatically creates the corresponding table in the downstream. In the sync stage, this table schema is used as the starting table schema for incremental replication.
 - In the sync stage, when DM handles DDL statements such as `ALTER TABLE`, it updates the internal table schema at the same time.
 - If the task is an incremental migration (`task-mode=incremental`), in which the downstream has completed creating the table to be migrated, DM obtains the table schema information from the downstream database. This behavior varies with DM versions.
 
@@ -174,7 +174,7 @@ Save the `CREATE TABLE` statement above as a file (for example, `db_single.t1-sc
 {{< copyable "shell-regular" >}}
 
 ```bash
-operate-schema set -s mysql-replica-01 task_single -d db_single -t t1 db_single.t1-schema.sql
+binlog-schema update -s mysql-replica-01 task_single db_single t1 db_single.t1-schema.sql
 ```
 
 ```

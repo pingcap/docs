@@ -22,7 +22,8 @@
     - [Full-Text Search via SQL](/ai/guides/vector-search-full-text-search-sql.md)
     - [Full-Text Search Example](/ai/guides/fulltext-search-with-pytidb.md)
   - Hybrid Search
-    - [Hybrid Search Guide](/ai/guides/vector-search-hybrid-search.md)
+    - [Hybrid Search via Python](/ai/guides/vector-search-hybrid-search.md)
+    - [Hybrid Search via SQL](/ai/guides/vector-search-hybrid-search-sql.md)
     - [Hybrid Search Example](/ai/guides/hybrid-search-with-pytidb.md)
   - Auto Embeddings
     - [Auto Embedding Guide](/ai/guides/auto-embedding.md)
@@ -39,7 +40,8 @@
   - [Transactions](/ai/guides/transactions.md)
 - Build AI Applications
   - [RAG Example](/ai/guides/rag-with-pytidb.md)
-  - [Conversational Memory Example](/ai/guides/memory-with-pytidb.md)
+  - [Agent Memory Guide](/ai/guides/agent-memory.md)
+  - [Agent Memory Example](/ai/guides/memory-with-pytidb.md)
   - [Text-to-SQL Example](/ai/guides/text2sql-with-pytidb.md)
 - TiDB Cloud CLI
   - [Overview](/ai/ti/ti-overview.md)

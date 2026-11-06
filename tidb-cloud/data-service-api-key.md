@@ -51,8 +51,6 @@ Request quotas are subject to rate limits as follows:
     {"type":"","data":{"columns":[],"rows":[],"result":{"latency":"","row_affect":0,"code":49900007,"row_count":0,"end_ms":0,"limit":0,"message":"API key rate limit exceeded. The limit can be increased up to 1000 requests per minute per API key in TiDB Cloud console. For an increase in quota beyond 1000 rpm, please contact us: https://tidb.support.pingcap.com/","start_ms":0}}}
     ```
 
-- TiDB Cloud Data Service allows up to 100 requests per day for each Chat2Query Data App.
-
 ## API key expiration
 
 By default, API keys never expire. However, for security considerations, you can specify an expiration time for your API key when you [create](#create-an-api-key) or [edit](#edit-an-api-key) the key. 

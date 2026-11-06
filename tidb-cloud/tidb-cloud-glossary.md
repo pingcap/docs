@@ -23,12 +23,6 @@ ACID refers to the four key properties of a transaction: atomicity, consistency,
 
 ## C
 
-### Chat2Query
-
-Chat2Query is an AI-powered feature integrated into SQL Editor that assists users in generating, debugging, or rewriting SQL queries using natural language instructions. For more information, see [Explore your data with AI-assisted SQL Editor](/tidb-cloud/explore-data-with-chat2query.md).
-
-In addition, TiDB Cloud provides a Chat2Query API for {{{ .starter }}} instances hosted on AWS. After it is enabled, TiDB Cloud will automatically create a system Data App called **Chat2Query** and a Chat2Data endpoint in Data Service. You can call this endpoint to let AI generate and execute SQL statements by providing instructions. For more information, see [Get started with Chat2Query API](/tidb-cloud/use-chat2query-api.md).
-
 ### Cluster
 
 In TiDB Cloud, a cluster is a dedicated cloud deployment that includes explicit infrastructure details such as node topology, instance types, storage configuration, and scaling model.
@@ -154,7 +148,7 @@ Currently, only the following types of TiDB Cloud resources support the Recycle 
 
 - TiDB Region
 
-    The basic unit of data in TiDB. TiKV divides the Key-Value space into a series of consecutive Key segments, and each segment is called a Region. The default size limit for each Region is 96 MB and can be configured.
+    The basic unit of data in TiDB. TiKV divides the Key-Value space into a series of consecutive Key segments, and each segment is called a Region. By default, the [estimated size for a newly split Region](https://docs.pingcap.com/tidb/stable/tikv-configuration-file/#region-split-size) is 256 MiB for TiDB v8.4.0 and later versions, and 96 MiB for TiDB versions earlier than v8.4.0.
 
 ### replica
 
@@ -168,8 +162,8 @@ TiDB Cloud measures the capacity of [changefeeds](/tidb-cloud/changefeed-overvie
 
 For {{{ .essential }}} and {{{ .premium }}}, a Request Capacity Unit (RCU) is a unit of measure used to represent the provisioned compute capacity for your {{{ .essential }}} or {{{ .premium }}} instance. One RCU provides a fixed amount of compute resources that can process a certain number of RUs per second. The number of RCUs you provision determines the baseline performance and throughput capacity of your instance. However, the way RCUs are managed differs between {{{ .essential }}} and {{{ .premium }}}:
 
-- {{{ .essential }}} automatically provisions RCUs based on your workload. As your QPS increases, TiDB Cloud dynamically scales up the provisioned RCUs to maintain performance. For more information, see [{{{ .essential }}} Pricing Details](https://www.pingcap.com/tidb-cloud-essential-pricing-details/).
-- {{{ .premium }}} lets you specify the maximum number of RCUs (`RCU_max`) for your workload. TiDB Cloud automatically scales capacity within the range of `0.25 * RCU_max` to `RCU_max` based on real-time demand. For more information, see [Request units and capacity in {{{ .premium }}}](https://docs.pingcap.com/tidbcloud/architecture-concepts/?plan=premium#request-units-and-capacity-in-premium).
+- {{{ .essential }}} instances running on CLOUD.202603.x or later support **Elastic Mode** and **Limited Mode**. In Elastic Mode, the instance uses a fixed Baseline RCU of 2,000 RCUs and scales capacity based on workload demand. In Limited Mode, you configure the maximum RCU. For instances on earlier versions, you configure both the minimum and maximum RCUs. For more information, see [{{{ .essential }}} Pricing Details](https://www.pingcap.com/tidb-cloud-essential-pricing-details/).
+- {{{ .premium }}} supports two capacity modes. In **Elastic Mode**, you configure a Baseline RCU, and TiDB Cloud scales capacity beyond this baseline as workload demand increases. In **Limited Mode**, you configure the maximum number of RCUs (`RCU_max`), and TiDB Cloud automatically scales capacity within the range of `0.25 * RCU_max` to `RCU_max`. For more information, see [Request units and capacity in {{{ .premium }}}](https://docs.pingcap.com/tidbcloud/architecture-concepts/?plan=premium#request-units-and-capacity-in-premium).
 
 ### Request Unit (RU)
 

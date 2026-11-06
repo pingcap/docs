@@ -7,11 +7,7 @@ summary: Learn about backup & restore concepts for TiDB Cloud.
 
 TiDB Cloud Backup & Restore features are designed to safeguard your data and ensure business continuity by enabling you to back up and recover data.
 
-<CustomContent plan="byoc">
-
-With TiDB Cloud BYOC, you can manage backup and restore operations through the TiDB Cloud console, while the data plane runs in your own cloud account. This provides a managed backup and restore experience while keeping your data plane in your cloud environment.
-
-</CustomContent>
+If you are using TiDB Cloud BYOC, you can manage backup and restore operations through the TiDB Cloud console, while the data plane runs in your own cloud account. This provides a managed backup and restore experience while keeping your data plane in your cloud environment.
 
 ## Automatic backup
 
@@ -20,18 +16,18 @@ In TiDB Cloud, snapshot backups are taken automatically by default and stored ac
 For more information, see the following:
 
 - [Automatic backups for {{{ .starter }}} and {{{ .essential }}} instances](/tidb-cloud/backup-and-restore-serverless.md#automatic-backups)
-- [Automatic backups for {{{ .premium }}} <CustomContent plan="byoc">and {{{ .byoc }}} </CustomContent>instances](/tidb-cloud/premium/backup-and-restore-premium.md#automatic-backups)
+- [Automatic backups for {{{ .premium }}} and {{{ .byoc }}} instances](/tidb-cloud/premium/backup-and-restore-premium.md#automatic-backups)
 - [Automatic backups for TiDB Cloud Dedicated clusters](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup)
 
 ## Manual backup
 
 Manual backup enables you to back up your data to a known state as needed, and then restore to that state at any time. You can use a manual backup before high-risk operations such as system upgrades, critical data deletion, or irreversible schema changes.
 
-{{{ .premium }}}<CustomContent plan="byoc">, {{{ .byoc }}},</CustomContent> and TiDB Cloud Dedicated support manual backups. A manual backup provides a controlled restore point and is retained until you explicitly delete it. Manual backups do not support PITR or partial backups, and each restore operation creates a new instance.
+{{{ .premium }}}, {{{ .byoc }}}, and TiDB Cloud Dedicated support manual backups. A manual backup provides a controlled restore point and is retained until you explicitly delete it. Manual backups do not support PITR or partial backups, and each restore operation creates a new instance.
 
 For more information, see the following:
 
-- [Manual backups for {{{ .premium }}}<CustomContent plan="byoc"> and {{{ .byoc }}}</CustomContent> instances](/tidb-cloud/premium/backup-and-restore-premium.md#manual-backups)
+- [Manual backups for {{{ .premium }}} and {{{ .byoc }}} instances](/tidb-cloud/premium/backup-and-restore-premium.md#manual-backups)
 - [Perform a manual backup for TiDB Cloud Dedicated clusters](/tidb-cloud/backup-and-restore.md#perform-a-manual-backup)
 
 ## Dual region backup
@@ -58,4 +54,4 @@ If you want to perform Point-in-time Restore, note the following:
 
 TiDB Cloud supports restoring data from backup snapshots or point-in-time recovery to a new cluster or instance. Restore operations help you recover from accidental data loss, data corruption, or application errors.
 
-For {{{ .premium }}}<CustomContent plan="byoc"> and {{{ .byoc }}}</CustomContent> instances, you can restore data to a new instance. You can restore from automatic backups, manual backups, or supported external cloud storage backups. PITR is supported only for automatic backups and is not supported for manual backups.
+For {{{ .premium }}} and {{{ .byoc }}} instances, you can restore data to a new instance. You can restore from automatic backups, manual backups, or supported external cloud storage backups. PITR is supported only for automatic backups and is not supported for manual backups.

@@ -5,7 +5,7 @@ summary: Learn how to set up a private endpoint for changefeeds.
 
 # Set Up Private Endpoint for Changefeeds
 
-This document describes how to create a private endpoint for changefeeds in your {{{ .premium }}} instances, enabling you to securely stream data to self-hosted Kafka, Amazon MSK Provisioned clusters, or MySQL through private connectivity.
+This document describes how to create a private endpoint for changefeeds in your {{{ .premium }}} or {{{ .byoc }}} instances, enabling you to securely stream data to self-hosted Kafka, Amazon MSK Provisioned clusters, or MySQL through private connectivity.
 
 ## Prerequisites
 
@@ -27,8 +27,8 @@ Private endpoints leverage the **Private Link** technology from cloud providers,
 
 > **Note:**
 >
-> - A private endpoint is an organization-level resource and is not tied to a specific {{{ .premium }}} instance. Private endpoints created within the same organization and in the same region can be shared by multiple instances connecting to the same downstream service, so you do not need to create a separate endpoint for each instance.
-> - Deleting a {{{ .premium }}} instance does not delete its private endpoints. A private endpoint is automatically deleted if it is not used by any instance for 30 days, even if the instances that previously used it remain available. You can also manually delete a private endpoint when it is no longer needed. However, you cannot delete it while it is in use by any instance.
+> - A private endpoint is an organization-level resource and is not tied to a specific {{{ .premium }}} or {{{ .byoc }}} instance. Private endpoints created within the same organization and in the same region can be shared by multiple instances connecting to the same downstream service, so you do not need to create a separate endpoint for each instance.
+> - Deleting a {{{ .premium }}} or {{{ .byoc }}} instance does not delete its private endpoints. A private endpoint is automatically deleted if it is not used by any instance for 30 days, even if the instances that previously used it remain available. You can also manually delete a private endpoint when it is no longer needed. However, you cannot delete it while it is in use by any instance.
 
 <SimpleTab>
 <div label="AWS">
@@ -42,6 +42,8 @@ If your changefeed downstream service is hosted on AWS, collect the following in
 - **Amazon MSK Provisioned**: the ARN of your Amazon MSK Provisioned cluster. To learn about how to create an Amazon MSK Provisioned cluster for changefeeds, see [Set Up an Amazon MSK Provisioned Cluster via AWS PrivateLink](/tidb-cloud/setup-aws-msk-provisioned-private-link-service.md).
 
 </div>
+
+<CustomContent plan="premium">
 
 <CustomContent language="en,zh">
 
@@ -59,13 +61,15 @@ If the Private Endpoint Service is not available for your downstream service, fo
 </div>
 </CustomContent>
 
+</CustomContent>
+
 </SimpleTab>
 
 ## Step 1. Open the Networking page for your instance
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com/).
 
-2. On the [**My TiDB**](https://tidbcloud.com/tidbs) page, click the name of your target {{{ .premium }}} instance to go to its overview page.
+2. On the [**My TiDB**](https://tidbcloud.com/tidbs) page, click the name of your target {{{ .premium }}} or {{{ .byoc }}} instance to go to its overview page.
 
     > **Tip:**
     >
@@ -109,6 +113,8 @@ On AWS, choose a connection type based on the downstream service:
 
 </div>
 
+<CustomContent plan="premium">
+
 <CustomContent language="en,zh">
 
 <div label="Alibaba Cloud">
@@ -127,5 +133,7 @@ On AWS, choose a connection type based on the downstream service:
 8. Click **Create** to validate the configurations and create the private endpoint.
 
 </div>
+</CustomContent>
+
 </CustomContent>
 </SimpleTab>

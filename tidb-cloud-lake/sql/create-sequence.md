@@ -33,11 +33,9 @@ To create a sequence, the user performing the operation or the [current_role](/t
 
 > **Note:**
 >
-> The enable_experimental_sequence_rbac_check settings governs sequence-level access control. It is disabled by default.
-> sequence creation solely requires the user to possess superuser privileges, bypassing detailed RBAC checks.
-> When enabled, granular permission verification is enforced during sequence establishment.
->
-> This is an experimental feature and may be enabled by default in the future.
+> - The `enable_experimental_sequence_rbac_check` setting governs sequence-level access control. It is disabled by default. This is an experimental feature and may be enabled by default in the future.
+> - Sequence creation solely requires the user to possess superuser privileges, bypassing detailed RBAC checks.
+> - When enabled, granular permission verification is enforced during sequence establishment.
 
 ## Examples
 

@@ -25,17 +25,19 @@ For {{{ .essential }}}, you are charged based on the number of provisioned Reque
 
 For {{{ .premium }}}, you are billed based on the actual [Request Capacity Unit (RCU)](/tidb-cloud/tidb-cloud-glossary.md#request-capacity-unit-rcu) consumption and the storage that you actually use, rather than the underlying backend nodes or provisioned disk size. See [{{{ .premium }}} Pricing Details](https://www.pingcap.com/tidb-cloud-premium-pricing-details/).
 
-<CustomContent plan="byoc">
-
 ### Pricing for {{{ .byoc }}} {#pricing-for-byoc}
 
-For pricing information about {{{ .byoc }}}, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+{{{ .byoc}}} costs include infrastructure charges paid directly to your cloud provider, a PingCAP BYOC service fee based on provisioned vCPU capacity, and a separate support fee. BYOC requires the [Enterprise support plan or higher](/tidb-cloud/connected-care-overview.md#connected-care).
 
-</CustomContent>
+For pricing information about {{{ .byoc }}}, [contact Sales](https://www.pingcap.com/contact-us/).
 
 ### Pricing for {{{ .lake }}} {#pricing-for-lake}
 
 For TiDB Cloud Lake, your costs consist of warehouse, storage, and cloud service fees. For details, see [TiDB Cloud Lake Pricing & Billing](https://docs.pingcap.com/tidbcloudlake/pricing-billing/).
+
+### Pricing for TiDB Cloud Filesystem
+
+TiDB Cloud Filesystem uses pay-as-you-go pricing for reads, writes, storage, and internet egress, with a monthly free-tier allowance shared across your organization's file systems and regions. For details, see [TiDB Cloud Filesystem Pricing Details](https://www.pingcap.com/tidb-cloud-filesystem-pricing-details/).
 
 ## Invoices
 
@@ -203,6 +205,10 @@ To view the discount information, perform the following steps:
 
 ## Payment method
 
+> **Note:**
+>
+> Each new TiDB Cloud account comes with a free trial. You do not need to subscribe to an AWS Marketplace free trial or link an AWS billing account to access it.
+
 If you are in the `Organization Owner` or `Organization Billing Manager` role of your organization, you can manage the payment information of TiDB Cloud. Otherwise, skip this section.
 
 <CustomContent language="en,zh">
@@ -303,6 +309,10 @@ If you already have a TiDB Cloud account and you want to pay for the usage via y
 
 <SimpleTab>
 <div label="AWS Marketplace">
+
+> **Note:**
+>
+> Subscribing to a free trial through AWS Marketplace requires creating a new TiDB Cloud account; the trial subscription cannot be linked to an existing account. If you already have a TiDB Cloud account and want to pay through AWS, follow the billing account linking steps below.
 
 To link your TiDB Cloud account to an AWS billing account, take the following steps:
 

@@ -67,7 +67,7 @@ Titan is compatible with RocksDB, so you can directly enable Titan on the existi
 
 > **Warning:**
 >
-> When Titan is disabled, RocksDB cannot read data that has been moved to Titan. If Titan is incorrectly disabled on a TiKV instance with Titan already enabled (mistakenly set `rocksdb.titan.enabled` to `false`), TiKV will fail to start, and the `You have disabled titan when its data directory is not empty` error appears in the TiKV log. To correctly disabled Titan, see [Disable Titan](#disable-titan).
+> When Titan is disabled, RocksDB cannot read data that has been moved to Titan. If Titan is incorrectly disabled on a TiKV instance with Titan already enabled (mistakenly set `rocksdb.titan.enabled` to `false`), TiKV will fail to start, and the `You have disabled titan when its data directory is not empty` error appears in the TiKV log. To correctly disable Titan, see [Disable Titan](#disable-titan).
 
 After Titan is enabled, the existing data stored in RocksDB is not immediately moved to the Titan engine. As new data is written to the TiKV and RocksDB performs compaction, **the values are progressively separated from keys and written to Titan**. Similarly, the data restored through BR snapshot/log, the data converted during scaling, or the data imported by TiDB Lightning Physical Import Mode, is not written directly into Titan. As compaction proceeds, the large values exceeding the default value (`32KB`) of [`min-blob-size`](/tikv-configuration-file.md#min-blob-size) in the processed SST files are separated into Titan. You can monitor the size of files stored in Titan by observing the **TiKV Details > Titan kv > blob file size** panel to estimate the data size.
 

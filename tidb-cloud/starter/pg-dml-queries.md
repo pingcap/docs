@@ -1,0 +1,548 @@
+---
+title: PostgreSQL DML and Queries
+summary: Learn about the PostgreSQL data manipulation and query features supported by PostgreSQL-compatible TiDB Cloud Starter.
+---
+
+# PostgreSQL DML and Queries
+
+PostgreSQL-compatible {{{ .starter }}} supports common PostgreSQL Data Manipulation Language (DML) statements and query features, including `INSERT`, `UPDATE`, `DELETE`, `RETURNING`, upsert, joins, aggregation, window functions, common table expressions (CTEs), subqueries, and set operations.
+
+## Prepare sample tables
+
+Some examples on this page use sample tables. Before running the examples, create the following tables in a test database.
+
+The table definitions on this page differ from those in other examples. If your test database already contains tables with the names shown below, use a separate test database for this page.
+
+```sql
+CREATE TABLE users (
+    id BIGSERIAL PRIMARY KEY,
+    name TEXT NOT NULL,
+    email TEXT CONSTRAINT users_email_key UNIQUE,
+    active BOOLEAN NOT NULL DEFAULT true
+);
+
+CREATE TABLE archived_users (
+    id BIGINT PRIMARY KEY,
+    name TEXT,
+    email TEXT
+);
+
+CREATE TABLE employees (
+    id BIGSERIAL PRIMARY KEY,
+    name TEXT,
+    department TEXT,
+    salary NUMERIC
+);
+
+CREATE TABLE customers (
+    id BIGSERIAL PRIMARY KEY,
+    email TEXT
+);
+
+CREATE TABLE leads (
+    id BIGSERIAL PRIMARY KEY,
+    email TEXT
+);
+
+CREATE TABLE categories (
+    id BIGINT PRIMARY KEY,
+    parent_id BIGINT,
+    name TEXT
+);
+
+CREATE TABLE orders (
+    id BIGSERIAL PRIMARY KEY,
+    user_id BIGINT REFERENCES users(id)
+);
+```
+
+To populate the sample tables used in aggregation, window function, recursive CTE, and set operation examples, run:
+
+```sql
+INSERT INTO employees (name, department, salary) VALUES
+    ('Alice', 'Engineering', 90000),
+    ('Bob', 'Engineering', 85000),
+    ('Charlie', 'Engineering', 95000),
+    ('David', 'Engineering', 88000),
+    ('Emma', 'Engineering', 92000),
+    ('Frank', 'Engineering', 87000),
+    ('Grace', 'Sales', 75000);
+
+INSERT INTO categories (id, parent_id, name) VALUES
+    (1, NULL, 'Electronics'),
+    (2, 1, 'Computers'),
+    (3, 2, 'Laptops');
+
+INSERT INTO customers (email) VALUES
+    ('alice@example.com'),
+    ('bob@example.com');
+
+INSERT INTO leads (email) VALUES
+    ('charlie@example.com'),
+    ('david@example.com');
+```
+
+Run the setup statements once before executing the examples on this page. The `users` table is initially empty so that the `INSERT` examples can populate it without conflicts.
+
+Depending on the data inserted or modified by earlier examples, some queries might return no rows.
+
+## Insert data
+
+Insert a single row:
+
+```sql
+INSERT INTO users (name, email)
+VALUES ('Alice', 'alice@example.com');
+```
+
+Insert multiple rows:
+
+```sql
+INSERT INTO users (name, email)
+VALUES
+    ('Charlie', 'charlie@example.com'),
+    ('Bob', 'bob@example.com');
+```
+
+Insert rows from a query:
+
+```sql
+INSERT INTO archived_users (id, name, email)
+SELECT id, name, email
+FROM users
+WHERE active = false;
+```
+
+### Use `RETURNING`
+
+`INSERT`, `UPDATE`, and `DELETE` support `RETURNING`.
+
+For example:
+
+```sql
+INSERT INTO users (name, email)
+VALUES ('Carol', 'carol@example.com')
+RETURNING id, name, email;
+```
+
+## Upsert with `ON CONFLICT`
+
+Use `INSERT ... ON CONFLICT` to handle unique-key conflicts.
+
+Skip a conflicting row:
+
+```sql
+INSERT INTO users (email, name)
+VALUES ('alice@example.com', 'Alice')
+ON CONFLICT (email) DO NOTHING;
+```
+
+Update the existing row on conflict:
+
+```sql
+INSERT INTO users (email, name)
+VALUES ('alice@example.com', 'Alice Updated')
+ON CONFLICT (email)
+DO UPDATE SET name = excluded.name;
+```
+
+Use a named constraint as the conflict target:
+
+```sql
+INSERT INTO users (email, name)
+VALUES ('alice@example.com', 'Alice')
+ON CONFLICT ON CONSTRAINT users_email_key
+DO UPDATE SET name = excluded.name;
+```
+
+The `excluded` pseudo-table represents the row proposed for insertion.
+
+## Update data
+
+In PostgreSQL-compatible {{{ .starter }}}, `UPDATE` requires the target table to have a primary key. Unlike PostgreSQL, updating a table without a primary key fails with `ERROR: No PK`, even if the `WHERE` condition matches no rows.
+
+If a table already contains data but has no primary key, adding a primary key directly to the populated table is not supported. To enable updates, back up or copy the existing rows to another table, remove the rows from the original table, add a primary key, and then reinsert the data. Ensure that the primary key values are unique and non-null before restoring the rows.
+
+Update rows matching a condition:
+
+```sql
+UPDATE users
+SET active = true
+WHERE name = 'Charlie';
+```
+
+Return the updated rows:
+
+```sql
+UPDATE users
+SET active = true
+WHERE name = 'Charlie'
+RETURNING *;
+```
+
+## Delete data
+
+Delete rows matching a condition:
+
+```sql
+DELETE FROM users
+WHERE name = 'Bob';
+```
+
+Return the deleted rows:
+
+```sql
+DELETE FROM users
+WHERE name = 'Charlie'
+RETURNING *;
+```
+
+## Foreign-key referential actions
+
+Foreign keys support the following `ON DELETE` and `ON UPDATE` actions:
+
+- `CASCADE`
+- `SET NULL`
+- `SET DEFAULT`
+- `RESTRICT`
+- `NO ACTION`
+
+For example:
+
+```sql
+CREATE TABLE orders_with_cascade (
+    id BIGSERIAL PRIMARY KEY,
+    user_id BIGINT REFERENCES users(id) ON DELETE CASCADE
+);
+```
+
+PostgreSQL-compatible {{{ .starter }}} uses `MATCH SIMPLE` semantics by default. If any referencing column is `NULL`, the foreign-key check for that row is skipped.
+
+## Query data
+
+Use `SELECT` to query data:
+
+```sql
+SELECT id, name, email
+FROM users
+WHERE active = true
+ORDER BY name
+LIMIT 10;
+```
+
+## Joins
+
+The following joins and related query patterns are supported:
+
+| Join or query pattern | Supported |
+| --- | --- |
+| `INNER JOIN` | Yes |
+| `LEFT [OUTER] JOIN` | Yes |
+| `RIGHT [OUTER] JOIN` | Yes |
+| `FULL [OUTER] JOIN` | Yes |
+| `CROSS JOIN` | Yes |
+| `LATERAL` subquery | Yes |
+| Semi join using `EXISTS` | Yes |
+| Anti join using `NOT EXISTS` | Yes |
+
+For example:
+
+```sql
+SELECT
+    u.id,
+    u.name,
+    o.id AS order_id
+FROM users AS u
+LEFT JOIN orders AS o
+    ON o.user_id = u.id;
+```
+
+### Lateral joins
+
+`LATERAL` subqueries can reference columns from preceding `FROM` items.
+
+For example:
+
+```sql
+SELECT
+    u.id,
+    u.name,
+    recent.order_id
+FROM users AS u
+LEFT JOIN LATERAL (
+    SELECT o.id AS order_id
+    FROM orders AS o
+    WHERE o.user_id = u.id
+    ORDER BY o.id DESC
+    LIMIT 1
+) AS recent ON true;
+```
+
+## Aggregation
+
+The following aggregation features are supported:
+
+- `GROUP BY`
+- `HAVING`
+- `COUNT(DISTINCT ...)`
+- Aggregate `FILTER`
+- `GROUPING()`
+
+For example:
+
+```sql
+SELECT
+    department,
+    count(*) AS employee_count,
+    avg(salary) AS average_salary
+FROM employees
+GROUP BY department
+HAVING count(*) > 5;
+```
+
+Use `FILTER` to apply a condition to an aggregate:
+
+```sql
+SELECT
+    count(*) AS total,
+    count(*) FILTER (WHERE active = true) AS active_count
+FROM users;
+```
+
+## Window functions
+
+The following ranking window functions are supported:
+
+- `ROW_NUMBER`
+- `RANK`
+- `DENSE_RANK`
+- `NTILE`
+- `PERCENT_RANK`
+- `CUME_DIST`
+
+The following value access functions are supported:
+
+- `LAG`
+- `LEAD`
+- `FIRST_VALUE`
+- `LAST_VALUE`
+- `NTH_VALUE`
+
+For example:
+
+```sql
+SELECT
+    name,
+    department,
+    salary,
+    ROW_NUMBER() OVER (
+        PARTITION BY department
+        ORDER BY salary DESC
+    ) AS rank
+FROM employees;
+```
+
+The following aggregate functions can also be used as window functions:
+
+- `SUM`
+- `AVG`
+- `COUNT`
+- `MIN`
+- `MAX`
+- `STRING_AGG`
+
+For example:
+
+```sql
+SELECT
+    department,
+    name,
+    salary,
+    AVG(salary) OVER (PARTITION BY department) AS department_average
+FROM employees;
+```
+
+## Common table expressions
+
+Non-recursive CTEs are supported:
+
+```sql
+WITH active_users AS (
+    SELECT *
+    FROM users
+    WHERE active = true
+)
+SELECT *
+FROM active_users;
+```
+
+Recursive CTEs are also supported:
+
+```sql
+WITH RECURSIVE category_tree AS (
+    SELECT id, parent_id, name, 1 AS depth
+    FROM categories
+    WHERE parent_id IS NULL
+
+    UNION ALL
+
+    SELECT
+        c.id,
+        c.parent_id,
+        c.name,
+        t.depth + 1
+    FROM categories AS c
+    JOIN category_tree AS t
+        ON c.parent_id = t.id
+)
+SELECT *
+FROM category_tree;
+```
+
+Recursive CTEs are limited to 1,000 iterations.
+
+Use a unique name for each CTE definition in the same `WITH` list. For recursive CTE limits, see [PostgreSQL Limits and Constraints](/tidb-cloud/starter/pg-limits-constraints.md).
+
+### Data-modifying CTEs
+
+Data-modifying CTEs using `INSERT`, `UPDATE`, or `DELETE` with `RETURNING` are supported over the PostgreSQL wire protocol.
+
+For example:
+
+```sql
+WITH inserted AS (
+    INSERT INTO users (name, email)
+    VALUES ('Dave', 'dave@example.com')
+    RETURNING id
+)
+SELECT *
+FROM inserted;
+```
+
+## Subqueries
+
+The following subquery forms are supported:
+
+- Scalar subqueries
+- `EXISTS` and `NOT EXISTS`
+- `IN` and `NOT IN` with a subquery
+- `ANY` and `ALL` with a subquery
+- Array subqueries
+- Correlated subqueries
+
+For example:
+
+```sql
+SELECT u.id, u.name
+FROM users AS u
+WHERE EXISTS (
+    SELECT 1
+    FROM orders AS o
+    WHERE o.user_id = u.id
+);
+```
+
+## Set operations
+
+The following set operations are supported:
+
+| Operation | Supported |
+| --- | --- |
+| `UNION` | Yes |
+| `UNION ALL` | Yes |
+| `INTERSECT` | Yes |
+| `INTERSECT ALL` | Yes |
+| `EXCEPT` | Yes |
+| `EXCEPT ALL` | Yes |
+
+For example:
+
+```sql
+SELECT email
+FROM customers
+
+UNION
+
+SELECT email
+FROM leads;
+```
+
+## DISTINCT and ordering
+
+`SELECT DISTINCT` and `SELECT DISTINCT ON (...)` are supported:
+
+```sql
+SELECT DISTINCT department
+FROM employees;
+```
+
+```sql
+SELECT DISTINCT ON (department)
+    department,
+    name,
+    salary
+FROM employees
+ORDER BY department, salary DESC;
+```
+
+Ordering supports `ASC`, `DESC`, `NULLS FIRST`, and `NULLS LAST`:
+
+```sql
+SELECT id, name
+FROM users
+ORDER BY name ASC NULLS LAST;
+```
+
+## Limit and offset
+
+Use `LIMIT` and `OFFSET` to paginate query results:
+
+```sql
+SELECT id, name
+FROM users
+ORDER BY id
+LIMIT 20
+OFFSET 40;
+```
+
+## Explain a query
+
+`EXPLAIN` and `EXPLAIN ANALYZE` are supported:
+
+```sql
+EXPLAIN
+SELECT *
+FROM users
+WHERE email = 'alice@example.com';
+```
+
+```sql
+EXPLAIN ANALYZE
+SELECT *
+FROM users
+WHERE email = 'alice@example.com';
+```
+
+## Prepared statements
+
+Use `PREPARE`, `EXECUTE`, and `DEALLOCATE` for SQL-level prepared statements:
+
+```sql
+PREPARE find_user (TEXT) AS
+SELECT id, name, email
+FROM users
+WHERE email = $1;
+
+EXECUTE find_user('alice@example.com');
+
+DEALLOCATE find_user;
+```
+
+## Generate a series
+
+The `generate_series()` table function is supported:
+
+```sql
+SELECT *
+FROM generate_series(1, 5);
+```

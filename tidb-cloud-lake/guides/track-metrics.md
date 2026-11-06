@@ -9,7 +9,7 @@ summary: Prometheus offers a robust solution for real-time monitoring, empowerin
 
 > **Note:**
 >
-> Tracking metrics with Prometheus is only available for {{{ .lake }}} users on the Business and Dedicated plans.
+> Tracking metrics with Prometheus is available only on the {{{ .lake }}} **Dedicated plan**. The Business plan does not support this feature.
 
 ## Integrating with Prometheus
 

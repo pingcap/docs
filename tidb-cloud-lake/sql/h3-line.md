@@ -5,7 +5,7 @@ summary: Returns the line of indexes between the given two H3 indexes.
 
 # H3_LINE
 
-Returns the line of indexes between the given two [H3](https://eng.uber.com/h3/) indexes.
+Returns the line of indexes between the given two [H3](https://h3geo.org/) indexes.
 
 ## Syntax
 

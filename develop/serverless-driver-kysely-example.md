@@ -90,7 +90,7 @@ To complete this tutorial, you need the following:
 
 1. Create a table in your {{{ .starter }}} instance and insert some data. 
 
-    You can use [SQL Editor in the TiDB Cloud console](https://docs.pingcap.com/tidbcloud/explore-data-with-chat2query) to execute SQL statements. Here is an example:
+    You can use [SQL Editor in the TiDB Cloud console](https://docs.pingcap.com/tidbcloud/explore-data-with-sql-editor) to execute SQL statements. Here is an example:
 
    ```sql
    CREATE TABLE `test`.`person`  (
@@ -202,7 +202,7 @@ mysql://[username]:[password]@[host]/[database]
 
 1. Create a table in your {{{ .starter }}} instance and insert some data.
 
-    You can use [SQL Editor in the TiDB Cloud console](https://docs.pingcap.com/tidbcloud/explore-data-with-chat2query) to execute SQL statements. Here is an example:
+    You can use [SQL Editor in the TiDB Cloud console](https://docs.pingcap.com/tidbcloud/explore-data-with-sql-editor) to execute SQL statements. Here is an example:
 
    ```sql
    CREATE TABLE `test`.`person`  (

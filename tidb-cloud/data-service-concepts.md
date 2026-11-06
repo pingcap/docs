@@ -23,12 +23,6 @@ An endpoint in [Data Service (PREVIEW)](https://tidbcloud.com/project/data-servi
 
 For more information, see [Manage an Endpoint](/tidb-cloud/data-service-manage-endpoint.md).
 
-## Chat2Query API
-
-In TiDB Cloud, Chat2Query API is a RESTful interface that enables you to generate and execute SQL statements using AI by providing instructions. Then, the API returns the query results for you.
-
-For more information, see [Get Started with Chat2Query API](/tidb-cloud/use-chat2query-api.md).
-
 ## AI integrations
 
 Integrating third-party tools with your Data App enhances your applications with advanced natural language processing and artificial intelligence (AI) capabilities provided by third-party tools. This integration enables your applications to perform more complex tasks and deliver intelligent solutions.

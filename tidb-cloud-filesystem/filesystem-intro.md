@@ -24,9 +24,11 @@ For example, you can use a file system for the following tasks:
 
 TiDB Cloud Filesystem persists in TiDB Cloud independently of the machines and processes that access it. Different authorized environments can therefore access the same files without copying them between machines.
 
-To create and manage file systems and access their files, you can use [TiDB Cloud CLI (`ti`)](/ai/ti/ti-overview.md). You do not need to provision or manage a TiDB database to use TiDB Cloud Filesystem.
+To create and manage file systems, you can use the [TiDB Cloud console](https://tidbcloud.com/) or [TiDB Cloud CLI (`ti`)](/ai/ti/ti-overview.md). You do not need to provision or manage a TiDB database to use TiDB Cloud Filesystem.
 
-You can access and work with file system data in two ways:
+The console also lets you browse files and directories and view their metadata, such as file size and modification time.
+
+To read file contents or modify files and directories, use one of the following methods:
 
 - **Use `ti fs` commands**: upload, download, read, organize, and search files directly from the command line without mounting the file system.
 - **Mount the file system as a local directory**: let applications and tools access file system data through normal local file paths.
@@ -59,6 +61,7 @@ For more information, see [Layers and Checkpoints](/tidb-cloud-filesystem/filesy
 
 Choose the path that matches what you want to do:
 
-- **Create a new file system:** follow [Get Started with TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-quick-start.md).
+- **Create a new file system:** follow [Quick Start via Console](/tidb-cloud-filesystem/filesystem-quick-start-console.md) or [Quick Start via CLI](/tidb-cloud-filesystem/filesystem-quick-start.md).
 - **Use a file system that someone else has shared with you:** see [Access an Existing File System](/tidb-cloud-filesystem/access-filesystem.md).
 - **Check supported regions, platforms, and current limitations:** see [Regions and Limitations](/tidb-cloud-filesystem/filesystem-regions-and-limitations.md).
+- **Integrate a client SDK into your application:** see [SDKs](/tidb-cloud-filesystem/filesystem-sdks.md).

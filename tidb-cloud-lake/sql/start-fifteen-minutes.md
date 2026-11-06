@@ -1,6 +1,6 @@
 ---
 title: TO_START_OF_FIFTEEN_MINUTES
-summary: Rounds down the date with time (timestamp/datetime) to the start of the fifteen-minute interval. ## Syntax.
+summary: Rounds down the date with time (timestamp/datetime) to the start of the fifteen-minute interval.
 ---
 
 # TO_START_OF_FIFTEEN_MINUTES
