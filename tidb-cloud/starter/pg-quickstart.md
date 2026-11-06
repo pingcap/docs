@@ -49,7 +49,7 @@ category: quick start
 PostgreSQL互換 {{{ .starter }}} インスタンスは PostgreSQL ワイヤプロトコルをサポートしているため、ほとんどの PostgreSQL ツール、ドライバー、ORM を使用して接続できます。以下の手順では、例として PostgreSQL CLI クライアント `psql` を使用します。
 
 1. [**My TiDB**](https://tidbcloud.com/tidbs) ページに移動し、対象の {{{ .starter }}} インスタンス名をクリックして概要ページを開きます。
-2. 右上の **Connect** をクリックします。接続パラメータを含む接続ダイアログが表示されます。
+2. 右上の **Connect** をクリックします。接続パラメーターを含む接続ダイアログが表示されます。
 3. 接続ダイアログ内の設定が、ご利用の実行環境と一致していることを確認します。
 4. **Generate Password** をクリックしてランダムなパスワードを作成します。
 5. **Connect With** ドロップダウンリストで、**PostgreSQL CLI** を選択します。

@@ -43,11 +43,11 @@ summary: TiDB Cloudは、 TiDBの優れた機能すべてをクラウドに提�
 
 <LearningPath label="管理" icon="cloud7">
 
-[クラスタを作成する](https://docs.pingcap.com/ja/tidbcloud/create-tidb-cluster-serverless/?plan=starter)
+[クラスターを作成する](https://docs.pingcap.com/ja/tidbcloud/create-tidb-cluster-serverless/?plan=starter)
 
-[クラスタに接続する](https://docs.pingcap.com/ja/tidbcloud/connect-to-tidb-cluster-serverless/?plan=starter)
+[クラスターに接続する](https://docs.pingcap.com/ja/tidbcloud/connect-to-tidb-cluster-serverless/?plan=starter)
 
-[HTAPクラスタを使用する](https://docs.pingcap.com/ja/tidbcloud/tiflash-overview/?plan=starter)
+[HTAPクラスターを使用する](https://docs.pingcap.com/ja/tidbcloud/tiflash-overview/?plan=starter)
 
 [データのバックアップと復元](https://docs.pingcap.com/ja/tidbcloud/backup-and-restore-serverless/?plan=starter)
 

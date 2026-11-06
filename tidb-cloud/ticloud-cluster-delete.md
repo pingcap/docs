@@ -5,7 +5,7 @@ summary: "`ticloud serverless delete` のリファレンス。"
 
 # ticloud serverless delete {#ticloud-serverless-delete}
 
-プロジェクトからTiDB Cloud Starter またはTiDB Cloud Essential インスタンスを削除します。
+プロジェクトから{{{ .starter }}} または{{{ .essential }}} インスタンスを削除します。
 
 ```shell
 ticloud serverless delete [flags]
@@ -19,13 +19,13 @@ ticloud serverless rm [flags]
 
 ## 例 {#examples}
 
-対話型モードでTiDB Cloud Starter またはTiDB Cloud Essential インスタンスを削除します。
+対話型モードで{{{ .starter }}} または{{{ .essential }}} インスタンスを削除します。
 
 ```shell
 ticloud serverless delete
 ```
 
-非対話型モードでTiDB Cloud Starter またはTiDB Cloud Essential インスタンスを削除します。
+非対話型モードで{{{ .starter }}} または{{{ .essential }}} インスタンスを削除します。
 
 ```shell
 ticloud serverless delete --cluster-id <cluster-id>
@@ -38,7 +38,7 @@ ticloud serverless delete --cluster-id <cluster-id>
 | フラグ                  | 説明                    | 必須  | 注記                       |
 | -------------------- | --------------------- | --- | ------------------------ |
 | -c, --cluster-id string | 削除するクラスターの ID を指定します。 | はい  | 非対話型モードでのみ動作します。         |
-|  --force             | 確認なしでTiDB Cloud Starter またはEssential インスタンスを削除します。     | いいえ | 非対話型モードと対話型モードの両方で動作します。 |
+|  --force             | 確認なしで{{{ .starter }}} またはEssential インスタンスを削除します。     | いいえ | 非対話型モードと対話型モードの両方で動作します。 |
 | -h, --help           | このコマンドのヘルプ情報を表示します。   | いいえ | 非対話型モードと対話型モードの両方で動作します。 |
 
 ## 継承されたフラグ {#inherited-flags}

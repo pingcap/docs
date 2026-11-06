@@ -9,7 +9,7 @@ summary: AWS のプライベートエンドポイントを使用して、{{{ .pr
 
 > **Tip:**
 >
-> AWS PrivateLink 経由でTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに接続する方法については、 [AWS PrivateLink経由でTiDB Cloud StarterまたはEssentialに接続します](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)を参照してください。
+> AWS PrivateLink 経由で{{{ .starter }}}または{{{ .essential }}}インスタンスに接続する方法については、 [AWS PrivateLink経由で{{{ .starter }}}またはEssentialに接続します](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)を参照してください。
 
 TiDB Cloudは、 AWS VPC内でホストされているTiDB Cloudサービスへの高度に安全な一方向アクセスを[AWS PrivateLink](https://aws.amazon.com/privatelink)経由でサポートしており、まるでサービスがお客様自身のVPC内にあるかのように動作します。お客様のVPC内にプライベートエンドポイントが公開され、権限があればそのエンドポイント経由でTiDB Cloudサービスへの接続を作成できます。
 

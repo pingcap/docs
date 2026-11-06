@@ -30,7 +30,7 @@ summary: 2024年4月9日に実施されるTiDB Cloud監視機能のメンテナ�
     - クラウドプロバイダー：Google Cloud、リージョン：アイオワ（us-central1）
     - クラウドプロバイダー：Google Cloud、リージョン：台湾（asia-east1）
 
-- TiDB Cloud Starterインスタンス：
+- {{{ .starter }}}インスタンス：
     - クラウドプロバイダー：AWS、リージョン：フランクフルト（eu-central-1）
     - クラウドプロバイダー：AWS、リージョン：オレゴン（us-west-2）
 

@@ -5,7 +5,7 @@ summary: "`ticloud serverless audit-log filter-rule delete` のリファレン�
 
 # ticloud serverless audit-log filter-rule delete {#ticloud-serverless-audit-log-filter-rule-delete}
 
-TiDB Cloud Essential インスタンスの監査ログフィルタールールを削除します。
+{{{ .essential }}} インスタンスの監査ログフィルタールールを削除します。
 
 ```shell
 ticloud serverless audit-log filter-rule delete [flags]

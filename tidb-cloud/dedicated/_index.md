@@ -42,17 +42,17 @@ summary: TiDB Cloudは、TiDBの優れた機能すべてをクラウドに提供
 
 <LearningPath label="管理" icon="cloud7">
 
-[クラスタを作成する](https://docs.pingcap.com/ja/tidbcloud/create-tidb-cluster)
+[クラスターを作成する](https://docs.pingcap.com/ja/tidbcloud/create-tidb-cluster)
 
-[クラスタに接続する](https://docs.pingcap.com/ja/tidbcloud/connect-to-tidb-cluster)
+[クラスターに接続する](https://docs.pingcap.com/ja/tidbcloud/connect-to-tidb-cluster)
 
-[HTAPクラスタを使用する](https://docs.pingcap.com/ja/tidbcloud/tiflash-overview)
+[HTAPクラスターを使用する](https://docs.pingcap.com/ja/tidbcloud/tiflash-overview)
 
 [データのバックアップと復元](https://docs.pingcap.com/ja/tidbcloud/backup-and-restore)
 
-[クラスタのスケール](https://docs.pingcap.com/ja/tidbcloud/scale-tidb-cluster)
+[クラスターのスケール](https://docs.pingcap.com/ja/tidbcloud/scale-tidb-cluster)
 
-[TiDBクラスタを一時停止または再開する](https://docs.pingcap.com/ja/tidbcloud/pause-or-resume-tidb-cluster)
+[TiDBクラスターを一時停止または再開する](https://docs.pingcap.com/ja/tidbcloud/pause-or-resume-tidb-cluster)
 
 [データをストリーミングする](http://docs.pingcap.com/ja/tidbcloud/changefeed-overview)
 

@@ -1,26 +1,26 @@
 ---
-title: Database Audit Logging (PREVIEW) for TiDB Cloud Essential
-summary: TiDB CloudでTiDB Cloud Essentialインスタンスを監査する方法について学びましょう。
+title: Database Audit Logging (PREVIEW) for {{{ .essential }}}
+summary: TiDB Cloudで{{{ .essential }}}インスタンスを監査する方法について学びましょう。
 aliases: ['/ja/tidbcloud/serverless-audit-logging']
 ---
 
-# TiDB Cloud Essentialのデータベース監査ログ機能 (PREVIEW) {#database-audit-logging-beta-for-tidb-cloud-essential}
+# {{{ .essential }}}のデータベース監査ログ機能 (PREVIEW) {#database-audit-logging-beta-for-tidb-cloud-essential}
 
-TiDB Cloud Essentialは、実行されたSQL文など、データベースへのユーザーアクセスアクティビティを記録する監査ログ機能を提供します。
+{{{ .essential }}}は、実行されたSQL文など、データベースへのユーザーアクセスアクティビティを記録する監査ログ機能を提供します。
 
 > **Note:**
 >
-> 現在、データベース監査ログ機能はリクエストに応じてのみ利用可能です。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下隅にある**?**をクリックし、 次に**Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。チケットを作成し、 **Description**フィールドに"Apply for TiDB Cloud Essential database audit logging"と入力して、 **Submit**をクリックします。
+> 現在、データベース監査ログ機能はリクエストに応じてのみ利用可能です。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下隅にある**?**をクリックし、 次に**Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。チケットを作成し、 **Description**フィールドに"Apply for {{{ .essential }}} database audit logging"と入力して、 **Submit**をクリックします。
 
 組織のユーザーアクセスポリシーやその他の情報セキュリティ対策の有効性を評価するには、データベース監査ログを定期的に分析することがセキュリティ上のベストプラクティスです。
 
-監査ログ機能は**デフォルトでは無効になっています**。TiDB Cloud Essentialインスタンスの監査を行うには、監査ログを有効にする必要があります。
+監査ログ機能は**デフォルトでは無効になっています**。{{{ .essential }}}インスタンスの監査を行うには、監査ログを有効にする必要があります。
 
 ## 監査ログの設定 {#audit-logging-configurations}
 
 ### データの秘匿化 {#data-redaction}
 
-TiDB Cloud Essentialは、デフォルトでは監査ログ内の機密データを秘匿化します。以下のSQL文を例に挙げます。
+{{{ .essential }}}は、デフォルトでは監査ログ内の機密データを秘匿化します。以下のSQL文を例に挙げます。
 
 ```sql
 INSERT INTO `test`.`users` (`id`, `name`, `password`) VALUES (1, 'Alice', '123456');
@@ -34,7 +34,7 @@ INSERT INTO `test`.`users` (`id`, `name`, `password`) VALUES ( ... );
 
 ### ログファイルのローテーション {#log-file-rotation}
 
-TiDB Cloud Essentialは、以下のいずれかの条件が満たされた場合に新しい監査ログファイルを生成します。
+{{{ .essential }}}は、以下のいずれかの条件が満たされた場合に新しい監査ログファイルを生成します。
 
 - 現在のログファイルがローテーションサイズ（デフォルトでは100MiB）に達しました。
 - 前回のログ生成から、ローテーション間隔（デフォルトでは1時間）が経過しました。内部スケジューリングメカニズムによっては、ログ生成が数分遅れる場合があります。
@@ -132,7 +132,7 @@ Alibaba Cloud OSSに監査ログを保存するには、以下の情報を提供
 
 ### 監査ログを有効にする {#enable-audit-logging}
 
-TiDB CloudコンソールまたはTiDB Cloud CLIを使用して、 TiDB Cloud Essentialインスタンスの監査ログを有効にできます。
+TiDB CloudコンソールまたはTiDB Cloud CLIを使用して、 {{{ .essential }}}インスタンスの監査ログを有効にできます。
 
 > **Note:**
 >
@@ -147,7 +147,7 @@ TiDB CloudコンソールまたはTiDB Cloud CLIを使用して、 TiDB Cloud Es
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2. 対象のTiDB Cloud Essentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** > **DB Audit Logging**をクリックします。
+2. 対象の{{{ .essential }}}インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** > **DB Audit Logging**をクリックします。
 
 3. **DB Audit Logging**ページで、 **Enable**をクリックします。
 
@@ -172,7 +172,7 @@ ticloud serverless audit-log config update -c <cluster-id> --enabled --cloud-sto
 
 ### 監査ログの編集 {#edit-audit-logging}
 
-TiDB Cloud Essentialインスタンスの監査ログは、有効化後に編集できます。
+{{{ .essential }}}インスタンスの監査ログは、有効化後に編集できます。
 
 <SimpleTab>
 <div label="Console">
@@ -183,7 +183,7 @@ TiDB Cloud Essentialインスタンスの監査ログは、有効化後に編集
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2. 対象のTiDB Cloud Essentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** > **DB Audit Logging**をクリックします。
+2. 対象の{{{ .essential }}}インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** > **DB Audit Logging**をクリックします。
 
 3. **DB Audit Logging**ページで、 **Settings**をクリックします。
 
@@ -204,7 +204,7 @@ ticloud serverless audit-log config update -c <cluster-id> --rotation-size-mib <
 
 ### 監査ログを無効にする {#disable-audit-logging}
 
-TiDB Cloud Essentialインスタンスの監査ログを無効にできます。
+{{{ .essential }}}インスタンスの監査ログを無効にできます。
 
 <SimpleTab>
 <div label="Console">
@@ -215,7 +215,7 @@ TiDB Cloud Essentialインスタンスの監査ログを無効にできます。
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2. 対象のTiDB Cloud Essentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** > **DB Audit Logging**をクリックします。
+2. 対象の{{{ .essential }}}インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** > **DB Audit Logging**をクリックします。
 
 3. **DB Audit Logging**ページで、右上隅の**...**をクリックし、次に**Disable**をクリックします。
 
@@ -251,7 +251,7 @@ ticloud serverless audit-log config update -c <cluster-id> --disabled=true
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2. 対象のTiDB Cloud Essentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** > **DB Audit Logging**をクリックします。
+2. 対象の{{{ .essential }}}インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** > **DB Audit Logging**をクリックします。
 
 3. **DB Audit Logging**ページで、 **Add Filter Rule**をクリックします。
 
@@ -281,7 +281,7 @@ ticloud serverless audit-log filter create --cluster-id <cluster-id> --display-n
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2. 対象のTiDB Cloud Essentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** > **DB Audit Logging**をクリックします。
+2. 対象の{{{ .essential }}}インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** > **DB Audit Logging**をクリックします。
 
 3. **DB Audit Logging**ページで、編集するフィルタールールを見つけ、その行の**...**をクリックしてから、 **Edit**をクリックします。
 
@@ -311,7 +311,7 @@ ticloud serverless audit-log filter update --cluster-id <cluster-id> --filter-ru
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2. 対象のTiDB Cloud Essentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** > **DB Audit Logging**をクリックします。
+2. 対象の{{{ .essential }}}インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** > **DB Audit Logging**をクリックします。
 
 3. **DB Audit Logging**ページで、無効にしたいフィルタールールを見つけ、トグルをオフにしてフィルタールールを無効にします。
 
@@ -339,7 +339,7 @@ ticloud serverless audit-log filter update --cluster-id <cluster-id> --filter-ru
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2. 対象のTiDB Cloud Essentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** > **DB Audit Logging**をクリックします。
+2. 対象の{{{ .essential }}}インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** > **DB Audit Logging**をクリックします。
 
 3. **DB Audit Logging**ページで、削除するフィルタールールを見つけて、 **...**をクリックします。
 
@@ -375,9 +375,9 @@ TiDB Cloudは、監査ログ内の各データベースイベントレコード�
 | `TABLES`                | この監査記録に関連するアクセスされたテーブル。                        |
 | `STATUS_CODE`           | 監査記録のステータスコード。 `1`は成功、 `0`は失敗を意味します。           |
 | `KEYSPACE_NAME`         | 監査レコードのキースペース名。                                |
-| `SERVERLESS_TENANT_ID`  | TiDB Cloud Essentialインスタンスが属するサーバーレステナントのID。   |
-| `SERVERLESS_PROJECT_ID` | TiDB Cloud Essentialインスタンスが属するサーバーレスプロジェクトのID。 |
-| `SERVERLESS_CLUSTER_ID` | 監査レコードが属するサーバーレスTiDB Cloud EssentialインスタンスのID。 |
+| `SERVERLESS_TENANT_ID`  | {{{ .essential }}}インスタンスが属するサーバーレステナントのID。   |
+| `SERVERLESS_PROJECT_ID` | {{{ .essential }}}インスタンスが属するサーバーレスプロジェクトのID。 |
+| `SERVERLESS_CLUSTER_ID` | 監査レコードが属するサーバーレス{{{ .essential }}}インスタンスのID。 |
 | `REASON`                | 監査記録のエラーメッセージ。操作中にエラーが発生した場合にのみ記録されます。         |
 
 ### SQL文情報 {#sql-statement-information}
@@ -422,4 +422,4 @@ TiDB Cloudは、監査ログ内の各データベースイベントレコード�
 
 ## 監査ログの制限 {#audit-logging-limitations}
 
-TiDB Cloud Essential は監査ログの順序を保証しないため、最新のイベントを見つけるにはすべてのログファイルを確認する必要がある場合があります。ログを時系列順に並べ替えるには、監査ログの`TIME`フィールドを使用できます。
+{{{ .essential }}} は監査ログの順序を保証しないため、最新のイベントを見つけるにはすべてのログファイルを確認する必要がある場合があります。ログを時系列順に並べ替えるには、監査ログの`TIME`フィールドを使用できます。

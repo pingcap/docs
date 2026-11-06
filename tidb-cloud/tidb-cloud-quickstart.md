@@ -24,10 +24,10 @@ category: quick start
 
     デフォルトでは[**My TiDB**](https://tidbcloud.com/tidbs)ページが表示されます。
 
-3. 新規サインアップユーザーの場合、 TiDB Cloud は`Cluster0`という名前のデフォルトのTiDB Cloud Starter クラスターを自動的に作成します。
+3. 新規サインアップユーザーの場合、 TiDB Cloud は`Cluster0`という名前のデフォルトの{{{ .starter }}} クラスターを自動的に作成します。
 
     - このデフォルトクラスターでTiDB Cloud機能をすぐに試すには、 [ステップ2: SQL エディターを試す](#step-2-try-sql-editor)に進みます。
-    - 独自に新しいTiDB Cloud Starter クラスターを作成するには、次の手順に従います。
+    - 独自に新しい{{{ .starter }}} クラスターを作成するには、次の手順に従います。
 
         1. **Create Resource**をクリックします。
         2. **Create Resource**ページでは、デフォルトで**Starter**が選択されています。{{{ .starter }}} インスタンスの名前を入力し、クラウドプロバイダーとターゲットリージョンを選択して、 **Create**をクリックします。{{{ .starter }}} インスタンスは約30秒で作成されます。
@@ -36,7 +36,7 @@ category: quick start
 
         > **Note**
         >
-        > - 現在、 TiDB Cloud StarterはAWSで一般公開されており、Alibaba Cloudではパブリックプレビュー中です。このドキュメントの以降の手順では、AWSを例に説明します。
+        > - 現在、 {{{ .starter }}}はAWSで一般公開されており、Alibaba Cloudではパブリックプレビュー中です。このドキュメントの以降の手順では、AWSを例に説明します。
         > - TiDB Cloudはフルマネージドサービスです。PingCAPが基盤となるクラウドインフラストラクチャを運用および管理します。基盤となるリソースには、TiDB Cloudコンソールを通じてのみアクセスできます。
 
         </CustomContent>
@@ -45,14 +45,14 @@ category: quick start
 
         > **Note**
         >
-        > - 現在、 TiDB Cloud StarterはAWSで一般公開されています。このドキュメントの以降の手順では、AWSを例に説明します。
+        > - 現在、 {{{ .starter }}}はAWSで一般公開されています。このドキュメントの以降の手順では、AWSを例に説明します。
         > - TiDB Cloudはフルマネージドサービスです。PingCAPが基盤となるクラウドインフラストラクチャを運用および管理します。基盤となるリソースには、TiDB Cloudコンソールを通じてのみアクセスできます。
 
         </CustomContent>
 
 ## ステップ2: SQL エディターを試す {#step-2-try-sql-editor}
 
-AWS でホストされているTiDB Cloud Starter クラスターでは、 TiDB Cloudコンソールに組み込まれた SQL エディターを使用して、データの価値を最大限に高めることができます。これにより、ローカル SQL クライアントを使用せずに、データベースに対して SQL クエリを実行できます。クエリ結果は表やグラフで直感的に表示され、クエリログも簡単に確認できます。
+AWS でホストされている{{{ .starter }}} クラスターでは、 TiDB Cloudコンソールに組み込まれた SQL エディターを使用して、データの価値を最大限に高めることができます。これにより、ローカル SQL クライアントを使用せずに、データベースに対して SQL クエリを実行できます。クエリ結果は表やグラフで直感的に表示され、クエリログも簡単に確認できます。
 
 1. [**My TiDB**](https://tidbcloud.com/tidbs)ページで、クラスター名をクリックして概要ページに移動し、左側のナビゲーションペインで**SQL Editor**をクリックします。
 
@@ -108,7 +108,7 @@ AWS でホストされているTiDB Cloud Starter クラスターでは、 TiDB 
 
 ## ステップ3: コンソールでガイドツアーを試す {#step-3-try-guided-tour-on-the-console}
 
-TiDB Cloud は、 TiDB Cloudをすぐに使い始めるのに役立つ、丁寧に作成されたサンプルデータセットを含むインタラクティブなチュートリアルを提供しています。AWS でホストされているTiDB Cloud Starter クラスターの場合は、このチュートリアルを試して、 TiDB Cloud を高性能データ分析に使用する方法を学習できます。
+TiDB Cloud は、 TiDB Cloudをすぐに使い始めるのに役立つ、丁寧に作成されたサンプルデータセットを含むインタラクティブなチュートリアルを提供しています。AWS でホストされている{{{ .starter }}} クラスターの場合は、このチュートリアルを試して、 TiDB Cloud を高性能データ分析に使用する方法を学習できます。
 
 1. コンソールの右下隅にある**?**アイコンをクリックし、 **Guided tour of SQL Editor**を選択します。
 2. ツアーで使用する{{{ .starter }}} インスタンスを選択し、 **Import Dataset**をクリックします。インポート処理には約1分かかる場合があります。

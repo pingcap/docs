@@ -32,7 +32,7 @@ PostgreSQL 互換の {{{ .starter }}} では、データベース、スキーマ
 | `pg_roles` | データベースロール。 |
 | `pg_user` | ログインユーザー。 |
 | `pg_auth_members` | ロールメンバーシップ。 |
-| `pg_db_role_setting` | ロールごとのセッションパラメータのデフォルト値。 |
+| `pg_db_role_setting` | ロールごとのセッションパラメーターのデフォルト値。 |
 | `pg_database` | データベース。 |
 | `pg_description` | オブジェクトコメントおよび説明。 |
 | `pg_depend` | オブジェクト依存関係メタデータ。 |
@@ -43,7 +43,7 @@ PostgreSQL 互換の {{{ .starter }}} では、データベース、スキーマ
 | `pg_opclass` | 演算子クラス。 |
 | `pg_policy` | 行レベルセキュリティポリシーのメタデータ。 |
 | `pg_policies` | 読み取り可能な行レベルセキュリティポリシー定義。 |
-| `pg_settings` | ランタイムパラメータ。 |
+| `pg_settings` | ランタイムパラメーター。 |
 | `pg_timezone_names` | タイムゾーン名と UTC オフセット。 |
 | `pg_rewrite` | ビューで使用される書き換えルール。 |
 | `pg_aggregate` | 集計関数メタデータ。 |

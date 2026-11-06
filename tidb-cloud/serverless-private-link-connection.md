@@ -7,25 +7,25 @@ summary: Dataflow のプライベートリンク接続を設定する方法を�
 
 TiDB Cloudの Dataflow サービス（Changefeed や Data Migration (DM) など）は、RDS インスタンスや Kafka クラスターなどの外部リソースへの信頼性の高い接続を必要とします。パブリックエンドポイントもサポートされていますが、プライベートリンク接続は、より高い効率性、より低いレイテンシー、そして強化されたセキュリティを提供する優れた代替手段となります。
 
-プライベートリンク接続により、TiDB Cloud Essentialとターゲットリソース間の直接接続が可能になります。これにより、 TiDB Cloudから他のクラウドプラットフォーム上のデータベースへのデータ移動は完全にプライベートネットワーク境界内に留まり、ネットワーク攻撃対象領域を大幅に削減し、重要なデータフローワークロードの安定したスループットを確保できます。
+プライベートリンク接続により、{{{ .essential }}}とターゲットリソース間の直接接続が可能になります。これにより、 TiDB Cloudから他のクラウドプラットフォーム上のデータベースへのデータ移動は完全にプライベートネットワーク境界内に留まり、ネットワーク攻撃対象領域を大幅に削減し、重要なデータフローワークロードの安定したスループットを確保できます。
 
 ## プライベートリンク接続の種類 {#private-link-connection-types}
 
-データフロー用のプライベートリンク接続は、クラウドプロバイダーとアクセス先のサービスに応じて、さまざまなタイプから選択できます。各タイプは、 TiDB Cloud Essential インスタンスと、同じクラウド環境内の外部リソース（RDS や Kafka など）間の安全でプライベートなネットワークアクセスを可能にします。
+データフロー用のプライベートリンク接続は、クラウドプロバイダーとアクセス先のサービスに応じて、さまざまなタイプから選択できます。各タイプは、 {{{ .essential }}} インスタンスと、同じクラウド環境内の外部リソース（RDS や Kafka など）間の安全でプライベートなネットワークアクセスを可能にします。
 
 ### AWS エンドポイントサービス {#aws-endpoint-service}
 
-このタイプのプライベートリンク接続により、 **AWS**上のTiDB Cloud Essential インスタンスが AWS PrivateLink によって提供される[AWSエンドポイントサービス](https://docs.aws.amazon.com/vpc/latest/privatelink/create-endpoint-service.html)に接続できるようになります。
+このタイプのプライベートリンク接続により、 **AWS**上の{{{ .essential }}} インスタンスが AWS PrivateLink によって提供される[AWSエンドポイントサービス](https://docs.aws.amazon.com/vpc/latest/privatelink/create-endpoint-service.html)に接続できるようになります。
 
 プライベートリンク接続は、エンドポイントサービスに関連付けることで、RDS インスタンスや Kafka サービスなどのさまざまな AWS サービスにアクセスできます。
 
 ### Amazon MSK Provisioned {#amazon-msk-provisioned}
 
-このタイプのプライベートリンク接続により、 **AWS**上のTiDB Cloud Essential インスタンスがプライベートリンクを使用して[Amazon MSK Provisioned](https://docs.aws.amazon.com/msk/latest/developerguide/msk-provisioned.html)に接続できるようになります。
+このタイプのプライベートリンク接続により、 **AWS**上の{{{ .essential }}} インスタンスがプライベートリンクを使用して[Amazon MSK Provisioned](https://docs.aws.amazon.com/msk/latest/developerguide/msk-provisioned.html)に接続できるようになります。
 
 ### Alibaba Cloud エンドポイントサービス {#alibaba-cloud-endpoint-service}
 
-このタイプのプライベートリンク接続により、 **Alibaba Cloud**上のTiDB Cloud Essential インスタンスが Alibaba Cloud PrivateLink を搭載した[Alibaba Cloudエンドポイントサービス](https://www.alibabacloud.com/help/en/privatelink/share-your-service/#51976edba8no7)に接続できるようになります。
+このタイプのプライベートリンク接続により、 **Alibaba Cloud**上の{{{ .essential }}} インスタンスが Alibaba Cloud PrivateLink を搭載した[Alibaba Cloudエンドポイントサービス](https://www.alibabacloud.com/help/en/privatelink/share-your-service/#51976edba8no7)に接続できるようになります。
 
 プライベートリンク接続は、エンドポイントサービスに関連付けることで、RDS インスタンスや Kafka サービスなどのさまざまな Alibaba Cloud サービスにアクセスできます。
 
@@ -35,9 +35,9 @@ TiDB CloudコンソールまたはTiDB Cloud CLI を使用して、AWS Endpoint 
 
 AWS エンドポイントサービスが次の条件を満たしていることを確認します。
 
-- TiDB Cloud Essential インスタンスと同じリージョンに存在します。
+- {{{ .essential }}} インスタンスと同じリージョンに存在します。
 - TiDB Cloudアカウント ID を**Allow principals**リストに追加します。
-- TiDB Cloud Essential インスタンスと重複するアベイラビリティゾーンがあります。
+- {{{ .essential }}} インスタンスと重複するアベイラビリティゾーンがあります。
 
 アカウント ID とアベイラビリティゾーンの情報は、**Create Private Endpoint for External Services**ダイアログの下部で取得するか、次のコマンドを実行して取得できます。
 
@@ -54,7 +54,7 @@ ticloud serverless private-link-connection zones --cluster-id <cluster-id>
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2. 対象の TiDB Cloud Essential インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** > **Networking**をクリックします。
+2. 対象の {{{ .essential }}} インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** > **Networking**をクリックします。
 
 3. **AWS Private Endpoints for External Services**領域で、**Create Private Endpoint for External Services**をクリックします。
 
@@ -66,7 +66,7 @@ ticloud serverless private-link-connection zones --cluster-id <cluster-id>
 4. **Create Private Endpoint for External Services**ダイアログで、必要な情報を入力します。
 
     - **Private Link Connection Name**: プライベートリンク接続の名前を入力します。
-    - **Connection Type**： **AWS Endpoint Service**を選択します。このオプションが表示されない場合は、TiDB Cloud Essential インスタンスがAWS上に作成されていることを確認してください。
+    - **Connection Type**： **AWS Endpoint Service**を選択します。このオプションが表示されない場合は、{{{ .essential }}} インスタンスがAWS上に作成されていることを確認してください。
     - **Endpoint Service Name**: AWS エンドポイントサービス名を入力します (例: `com.amazonaws.vpce.<region>.vpce-svc-xxxxxxxxxxxxxxxxx` )。
 
 5. **Create**をクリックします。
@@ -102,7 +102,7 @@ Amazon MSK Provisioned のプライベートリンク接続を作成する前に
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2. 対象の TiDB Cloud Essential インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** > **Networking**をクリックします。
+2. 対象の {{{ .essential }}} インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** > **Networking**をクリックします。
 
 3. **AWS Private Endpoints for External Services**領域で、**Create Private Endpoint for External Services**をクリックします。
 
@@ -114,7 +114,7 @@ Amazon MSK Provisioned のプライベートリンク接続を作成する前に
 4. **Create Private Endpoint for External Services**ダイアログで、必要な情報を入力します。
 
     - **Private Link Connection Name**: プライベートリンク接続の名前を入力します。
-    - **Connection Type**： **Amazon MSK Provisioned**を選択します。このオプションが表示されない場合は、TiDB Cloud Essential インスタンスがAWS上に作成されていることを確認してください。
+    - **Connection Type**： **Amazon MSK Provisioned**を選択します。このオプションが表示されない場合は、{{{ .essential }}} インスタンスがAWS上に作成されていることを確認してください。
     - **MSK Cluster ARN** : Amazon MSK Provisioned クラスターの ARN を入力します (例: `arn:aws:kafka:us-east-1:385595570414:cluster/<msk-name>/xxxx` )。
 
 5. **Create**をクリックします。
@@ -125,9 +125,9 @@ TiDB CloudコンソールまたはTiDB Cloud CLI を使用して、Alibaba Cloud
 
 Alibaba Cloud エンドポイントサービスが次の条件を満たしていることを確認します。
 
-- TiDB Cloud Essential インスタンスと同じリージョンに存在します。
+- {{{ .essential }}} インスタンスと同じリージョンに存在します。
 - TiDB Cloudアカウント ID を**Service Whitelist**に追加します。
-- TiDB Cloud Essential インスタンスと重複するアベイラビリティゾーンがあります。
+- {{{ .essential }}} インスタンスと重複するアベイラビリティゾーンがあります。
 
 アカウント ID とアベイラビリティゾーンの情報は、**Create Private Endpoint for External Services**ダイアログの下部で取得するか、次のコマンドを実行して取得できます。
 
@@ -144,7 +144,7 @@ ticloud serverless private-link-connection zones --cluster-id <cluster-id>
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2. 対象の TiDB Cloud Essential インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** > **Networking**をクリックします。
+2. 対象の {{{ .essential }}} インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** > **Networking**をクリックします。
 
 3. **Alibaba Cloud Private Endpoints for External Services**領域で、**Create Private Endpoint for External Services**をクリックします。
 
@@ -156,7 +156,7 @@ ticloud serverless private-link-connection zones --cluster-id <cluster-id>
 4. **Create Private Endpoint for External Services**ダイアログで、必要な情報を入力します。
 
     - **Private Link Connection Name**: プライベートリンク接続の名前を入力します。
-    - **Connection Type**： **Alibaba Cloud Endpoint Service**を選択します。このオプションが表示されない場合は、TiDB Cloud Essential インスタンスがAlibaba Cloud上に作成されていることを確認してください。
+    - **Connection Type**： **Alibaba Cloud Endpoint Service**を選択します。このオプションが表示されない場合は、{{{ .essential }}} インスタンスがAlibaba Cloud上に作成されていることを確認してください。
     - **Endpoint Service Name**: Alibaba Cloud エンドポイントサービス名を入力します (例: `com.aliyuncs.privatelink.<region>.epsrv-xxxxxxxxxxxxxxxxx` )。
 
 5. **Create**をクリックします。
@@ -207,7 +207,7 @@ TiDB Cloudコンソールを使用してドメインをプライベートリン�
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2. 対象の TiDB Cloud Essential インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** > **Networking**をクリックします。
+2. 対象の {{{ .essential }}} インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** > **Networking**をクリックします。
 
 3. クラウドプロバイダーの**Private Endpoints for External Services**領域で、対象のプライベートリンク接続を選択し、 **...**をクリックします。
 
@@ -260,7 +260,7 @@ TiDB Cloudコンソールを使用してプライベートリンク接続から�
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2. 対象の TiDB Cloud Essential インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** > **Networking**をクリックします。
+2. 対象の {{{ .essential }}} インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** > **Networking**をクリックします。
 
 3. クラウドプロバイダーの**Private Endpoints for External Services**領域で、対象のプライベートリンク接続を選択し、 **...**をクリックします。
 
@@ -302,7 +302,7 @@ TiDB Cloudコンソールを使用してプライベートリンク接続を削�
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2. 対象の TiDB Cloud Essential インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** > **Networking**をクリックします。
+2. 対象の {{{ .essential }}} インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** > **Networking**をクリックします。
 
 3. クラウドプロバイダーの**Private Endpoints for External Services**領域で、対象のプライベートリンク接続を選択し、 **...**をクリックします。
 

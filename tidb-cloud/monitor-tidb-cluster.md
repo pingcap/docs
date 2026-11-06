@@ -5,17 +5,17 @@ summary: TiDB Cloudリソースの監視方法を学びましょう。
 
 # TiDBを監視する {#monitor-tidb}
 
-このドキュメントでは<CustomContent plan="starter">TiDB Cloud Starterインスタンス</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent><CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent>を監視する方法について説明します。
+このドキュメントでは<CustomContent plan="starter">{{{ .starter }}}インスタンス</CustomContent><CustomContent plan="essential">{{{ .essential }}}インスタンス</CustomContent><CustomContent plan="premium">{{{ .premium }}}インスタンス</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}}クラスター</CustomContent>を監視する方法について説明します。
 
 <CustomContent plan="dedicated">
 
-## クラスタの状態とノードの状態 {#cluster-status-and-node-status}
+## クラスターの状態とノードの状態 {#cluster-status-and-node-status}
 
 各実行中のクラスターの現在のステータスは、クラスターページで確認できます。
 
-### クラスタの状態 {#cluster-status}
+### クラスターの状態 {#cluster-status}
 
-| クラスタの状態  | 説明                               |
+| クラスターの状態  | 説明                               |
 | :------- | :------------------------------- |
 | **Available** | クラスターは正常で、利用可能です。                |
 | **Creating**   | クラスターを作成中です。作成中はクラスターにアクセスできません。 |
@@ -32,7 +32,7 @@ summary: TiDB Cloudリソースの監視方法を学びましょう。
 
 > **Note:**
 >
-> TiDBノードの状態は、 TiDB Cloud Dedicatedクラスタでのみ利用可能です。
+> TiDBノードの状態は、 TiDB Cloud Dedicatedクラスターでのみ利用可能です。
 
 `tidb`で始まるノード名はTiDBノードであり、 `tiproxy`で始まるノード名はTiProxyノードです。
 
@@ -47,7 +47,7 @@ summary: TiDB Cloudリソースの監視方法を学びましょう。
 
 > **Note:**
 >
-> TiKVノードの状態は、 TiDB Cloud Dedicatedクラスタでのみ利用可能です。
+> TiKVノードの状態は、 TiDB Cloud Dedicatedクラスターでのみ利用可能です。
 
 | TiKVノードの状態 | 説明                 |
 | :--------- | :----------------- |
@@ -78,7 +78,7 @@ summary: TiDB Cloudリソースの監視方法を学びましょう。
 
 ## モニタリング指標 {#monitoring-metrics}
 
-TiDB Cloudでは、次のページから、 <CustomContent plan="starter">TiDB Cloud Starterインスタンス</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent><CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent>の一般的に使用されるメトリクスを表示できます。
+TiDB Cloudでは、次のページから、 <CustomContent plan="starter">{{{ .starter }}}インスタンス</CustomContent><CustomContent plan="essential">{{{ .essential }}}インスタンス</CustomContent><CustomContent plan="premium">{{{ .premium }}}インスタンス</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}}クラスター</CustomContent>の一般的に使用されるメトリクスを表示できます。
 
 - **Overview**ページ
 - **Metrics**ページ

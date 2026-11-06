@@ -5,7 +5,7 @@ summary: "`ticloud serverless list` のリファレンス。"
 
 # ticloud serverless list {#ticloud-serverless-list}
 
-プロジェクト内のすべてのTiDB Cloud Starter インスタンスとTiDB Cloud Essential インスタンスを一覧表示します。
+プロジェクト内のすべての{{{ .starter }}} インスタンスと{{{ .essential }}} インスタンスを一覧表示します。
 
 ```shell
 ticloud serverless list [flags]
@@ -19,19 +19,19 @@ ticloud serverless ls [flags]
 
 ## 例 {#examples}
 
-対話型モードですべてのTiDB Cloud Starter およびTiDB Cloud Essential インスタンスを一覧表示します。
+対話型モードですべての{{{ .starter }}} および{{{ .essential }}} インスタンスを一覧表示します。
 
 ```shell
 ticloud serverless list
 ```
 
-指定されたプロジェクト内のすべてのTiDB Cloud Starter およびTiDB Cloud Essential インスタンスを非対話型モードで一覧表示します。
+指定されたプロジェクト内のすべての{{{ .starter }}} および{{{ .essential }}} インスタンスを非対話型モードで一覧表示します。
 
 ```shell
 ticloud serverless list -p <project-id>
 ```
 
-非対話型モードで、指定されたプロジェクト内のすべてのTiDB Cloud Starter およびTiDB Cloud Essential インスタンスを JSON 形式で一覧表示します。
+非対話型モードで、指定されたプロジェクト内のすべての{{{ .starter }}} および{{{ .essential }}} インスタンスを JSON 形式で一覧表示します。
 
 ```shell
 ticloud serverless list -p <project-id> -o json

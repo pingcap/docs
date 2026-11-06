@@ -7,7 +7,7 @@ summary: TiDB クラスターまたはインスタンスの TiDB バージョン
 
 このドキュメントでは、 TiDB Cloudリソースの TiDB バージョンをアップグレードする方法について説明します。
 
-TiDB Cloud は、次の 2つのアップグレード メカニズムを提供します。
+TiDB Cloud は、次の 2つのアップグレードメカニズムを提供します。
 
 - [定期的にアップグレードする](#regularly-upgrade)
 - [アップグレードするにはサポートにお問い合わせください](#contact-support-to-upgrade)
