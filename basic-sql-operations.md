@@ -9,7 +9,7 @@ TiDBはMySQLと互換性があり、ほとんどの場合、MySQLのステート
 
 <CustomContent platform="tidb">
 
-SQLを試したり、TiDBとMySQLクエリの互換性をテストしたりするには、 [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=basic-sql-operations)を試すことができます。また、まずTiDBクラスターをデプロイしてから、その中でSQL文を実行することもできます。
+SQLを試したり、TiDBとMySQLクエリの互換性をテストしたりするには、 [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=basic-sql-operations)を試せます。また、まずTiDBクラスターをデプロイしてから、その中でSQL文を実行することもできます。
 
 </CustomContent>
 
@@ -149,7 +149,7 @@ ALTER TABLE person DROP INDEX person_unique_id;
 
 ## データの挿入、更新、削除 {#insert-update-and-delete-data}
 
-一般的な DML 機能には、テーブル レコードの追加、変更、削除があります。対応するコマンドは`INSERT` 、 `UPDATE` 、 `DELETE` 。
+一般的な DML 機能には、テーブルレコードの追加、変更、削除があります。対応するコマンドは`INSERT` 、 `UPDATE` 、 `DELETE` 。
 
 テーブルにデータを挿入するには、 `INSERT`文を使用します。
 

@@ -34,7 +34,7 @@ TiDB Cloudを簡単に使い始めるためのガイド。
 
 <DocHomeCard href="/ai/vector-search-overview" label="Vector Search (Beta)" icon="cloud-vector-mauve">
 
-TiDB Cloud Starter の Vector Search のネイティブ サポートを調べて、AI アプリケーションを構築します。
+{{{ .starter }}} の Vector Search のネイティブサポートを調べて、AI アプリケーションを構築します。
 
 </DocHomeCard>
 
@@ -104,7 +104,7 @@ TiDB は、MySQL プロトコルおよびMySQL 5.7と MySQL 8.0 の共通機能�
 
 <DocHomeCard href="https://www.pingcap.com/education/" label="Learning Center" icon="global-tidb-education">
 
-適切に設計されたオンライン コースとインストラクター主導のトレーニングを通じて、 TiDB Cloudと TiDB Self-Managed を学習します。
+適切に設計されたオンラインコースとインストラクター主導のトレーニングを通じて、 TiDB Cloudと TiDB Self-Managed を学習します。
 
 </DocHomeCard>
 

@@ -38,8 +38,8 @@ TiKVコンポーネントのステータス概要は、主要な指標が表示�
 - Server is busy: 書き込み停止やチャネル満杯など、TiKV インスタンスが一時的に利用できなくなるイベントが発生したことを示します。通常の場合は`0`となります。
 - Server report failures:サーバーによって報告されたエラーメッセージの数。通常は`0`になります。
 - Raftstore error：各TiKVインスタンスにおけるタイプ別のRaftstoreエラー数
-- Scheduler error: TiKVインスタンスごとに、タイプ別のスケジューラエラーの数
-- Coprocessor error：各TiKVインスタンスにおけるタイプ別のコプロセッサエラー数
+- Scheduler error: TiKVインスタンスごとに、タイプ別のスケジューラーエラーの数
+- Coprocessor error：各TiKVインスタンスにおけるタイプ別のコプロセッサーエラー数
 - gRPC message error：各TiKVインスタンスにおけるタイプ別のgRPCメッセージエラー数
 - Leader drop：TiKVインスタンスごとのドロップされたリーダーの数
 - Leader missing: TiKVインスタンスごとのリーダーが見つからない数
@@ -186,9 +186,9 @@ TiKVコンポーネントのステータス概要は、主要な指標が表示�
 
 ### Flow Control {#flow-control}
 
-- Scheduler flow：各TiKVインスタンスにおけるスケジューラのトラフィックをリアルタイムで表示します。
-- Scheduler discard ratio：各 TiKV インスタンスにおけるスケジューラリクエストの拒否率。この比率が 0 より大きい場合、フロー制御が存在することを示します。 `Compaction pending bytes`がしきい値を超えると、TiKV は超過分に基づいて`Scheduler discard ratio`を線形に増加させます。クライアントは拒否されたリクエストを自動的に再試行します。
-- Throttle duration：L0ファイルが多すぎるためにフロー制御がトリガーされた場合に、スケジューラリクエストの実行がブロックされる期間。このメトリックに値がある場合、フロー制御が存在していることを示します。
+- Scheduler flow：各TiKVインスタンスにおけるスケジューラーのトラフィックをリアルタイムで表示します。
+- Scheduler discard ratio：各 TiKV インスタンスにおけるスケジューラーリクエストの拒否率。この比率が 0 より大きい場合、フロー制御が存在することを示します。 `Compaction pending bytes`がしきい値を超えると、TiKV は超過分に基づいて`Scheduler discard ratio`を線形に増加させます。クライアントは拒否されたリクエストを自動的に再試行します。
+- Throttle duration：L0ファイルが多すぎるためにフロー制御がトリガーされた場合に、スケジューラーリクエストの実行がブロックされる期間。このメトリックに値がある場合、フロー制御が存在していることを示します。
 - Scheduler throttled CF：フロー制御のしきい値に達したときにRocksDBのスロットリングをトリガーするCF。
 - Flow controller actions：フロー制御のしきい値に達したときにRocksDBのスロットリングをトリガーするアクション。
 - Flush/L0 flow：各TiKVインスタンス上のRocksDBの異なるCFにおけるフラッシュとL0コンパクションのトラフィック。
@@ -212,7 +212,7 @@ TiKVコンポーネントのステータス概要は、主要な指標が表示�
 
 - Scheduler stage total：コミットコマンド実行時の、各ステージにおける1秒あたりのコマンド数。短時間で多くのエラーが発生するべきではありません。
 - Scheduler command duration: コミットコマンドの実行に要する時間。 `1s`未満である必要があります。
-- Scheduler latch wait duration: コミット コマンドの実行時にラッチによって発生する待機時間。 `1s`より小さくなければなりません。
+- Scheduler latch wait duration: コミットコマンドの実行時にラッチによって発生する待機時間。 `1s`より小さくなければなりません。
 - Scheduler keys read: コミットコマンドによって読み取られたキーの数
 - Scheduler keys written: コミットコマンドによって書き込まれたキーの数
 - Scheduler scan details: commit コマンド実行時に各 CF のキースキャンの詳細を示します。
@@ -231,14 +231,14 @@ TiKVコンポーネントのステータス概要は、主要な指標が表示�
 - Scheduler keys written: `pessimistic_rollback`コマンドによって書き込まれたキーの数
 - Scheduler scan details: `pessimistic_rollback`コマンドを実行する際の各 CF のキーのスキャン詳細。
 - Scheduler scan details [lock]: `pessimistic_rollback`コマンド実行時のロック CF のキースキャンの詳細
-- Scheduler scan details [write]: `pessimistic_rollback`コマンド実行時の書き込み CF のキー スキャン詳細
-- Scheduler scan details [default]: `pessimistic_rollback`コマンド実行時のデフォルト CF のキー スキャン詳細
+- Scheduler scan details [write]: `pessimistic_rollback`コマンド実行時の書き込み CF のキースキャン詳細
+- Scheduler scan details [default]: `pessimistic_rollback`コマンド実行時のデフォルト CF のキースキャン詳細
 
 ### Scheduler - prewrite {#scheduler---prewrite}
 
 - Scheduler stage total：プリライトコマンド実行時の、各ステージにおける1秒あたりのコマンド数。短時間で多くのエラーが発生するべきではありません。
 - Scheduler command duration: プリライトコマンドの実行に要する時間。 `1s`未満である必要があります。
-- Scheduler latch wait duration: プリライト コマンドの実行時にラッチによって発生する待機時間。 `1s`より小さくなければなりません。
+- Scheduler latch wait duration: プリライトコマンドの実行時にラッチによって発生する待機時間。 `1s`より小さくなければなりません。
 - Scheduler keys read：プリライトコマンドによって読み取られたキーの数
 - Scheduler keys written：プリライトコマンドによって書き込まれたキーの数
 - Scheduler scan details：プリライトコマンド実行時の各CFのキースキャン詳細。
@@ -250,7 +250,7 @@ TiKVコンポーネントのステータス概要は、主要な指標が表示�
 
 - Scheduler stage total：ロールバックコマンド実行時の、各ステージにおける1秒あたりのコマンド数。短時間で多くのエラーが発生するべきではありません。
 - Scheduler command duration: ロールバックコマンドの実行に要する時間。 `1s`未満である必要があります。
-- Scheduler latch wait duration: ロールバック コマンドの実行時にラッチによって発生する待機時間。 `1s`より小さくなければなりません。
+- Scheduler latch wait duration: ロールバックコマンドの実行時にラッチによって発生する待機時間。 `1s`より小さくなければなりません。
 - Scheduler keys read：ロールバックコマンドによって読み取られたキーの数
 - Scheduler keys written: ロールバックコマンドによって書き込まれたキーの数
 - Scheduler scan details: ロールバックコマンド実行時に各CFのキースキャンの詳細を示します。
@@ -270,7 +270,7 @@ TiKVコンポーネントのステータス概要は、主要な指標が表示�
 - TiKV Auto GC SafePoint: TiKV GCセーフポイントの値。セーフポイントは現在のGCタイムスタンプです。
 - GC lifetime：TiDB GCの寿命
 - GC interval：TiDB GCの間隔
-- GC in Compaction Filter: write CFのコンパクションフィルタでフィルタリングされたバージョンの数。
+- GC in Compaction Filter: write CFのコンパクションフィルターでフィルタリングされたバージョンの数。
 
 ### Snapshot {#snapshot}
 
@@ -289,27 +289,27 @@ TiKVコンポーネントのステータス概要は、主要な指標が表示�
 
 ### Coprocessor Overview {#coprocessor-overview}
 
-- Request duration：コプロセッサからのリクエストを受信してから、リクエストの処理が完了するまでの合計時間
+- Request duration：コプロセッサーからのリクエストを受信してから、リクエストの処理が完了するまでの合計時間
 - Total Requests：1秒あたりのリクエストの種類別数
-- Handle duration：コプロセッサリクエストを実際に処理した時間（1分あたり）のヒストグラム
+- Handle duration：コプロセッサーリクエストを実際に処理した時間（1分あたり）のヒストグラム
 - Total Request Errors：コプロセッサーが1秒あたりに発生させたリクエストエラーの数。短時間に多数のエラーが発生するべきではありません。
 - Total KV Cursor Operations: 1秒あたりのタイプ別の KV カーソル操作の合計数。例`select` 、 `index` 、 `analyze_table` 、 `analyze_index` 、 `checksum_table` 、 `checksum_index` 。
 - KV Cursor Operations：1秒あたりのタイプ別KVカーソル操作のヒストグラム
 - Total RocksDB Perf Statistics：RocksDBのパフォーマンスに関する統計情報
-- Total Response Size：コプロセッサ応答の合計サイズ
+- Total Response Size：コプロセッサー応答の合計サイズ
 
 ### Coprocessor Detail {#coprocessor-detail}
 
-- Handle duration：コプロセッサリクエストを実際に処理した時間（1分あたり）のヒストグラム
-- 95% Handle duration by store：TiKVインスタンスごとに、コプロセッサリクエストを処理するのに要する時間（1秒あたり）（P95）
-- Wait duration: コプロセッサリクエストが処理されるのを待っている間に消費される時間。 `10s` (P99.99) 未満である必要があります。
-- 95% Wait duration by store：コプロセッサリクエストが処理待ち状態にある時間（TiKVインスタンスごと、1秒あたり）（P95）
+- Handle duration：コプロセッサーリクエストを実際に処理した時間（1分あたり）のヒストグラム
+- 95% Handle duration by store：TiKVインスタンスごとに、コプロセッサーリクエストを処理するのに要する時間（1秒あたり）（P95）
+- Wait duration: コプロセッサーリクエストが処理されるのを待っている間に消費される時間。 `10s` (P99.99) 未満である必要があります。
+- 95% Wait duration by store：コプロセッサーリクエストが処理待ち状態にある時間（TiKVインスタンスごと、1秒あたり）（P95）
 - Total DAG Requests：1秒あたりのDAGリクエストの総数
 - Total DAG Executors：1秒あたりのDAG実行者の総数
-- Total Ops Details (Table Scan)：コプロセッサでselectスキャンを実行する際の、1秒あたりのRocksDB内部操作数
-- Total Ops Details (Index Scan)：コプロセッサでインデックススキャンを実行する際の、1秒あたりのRocksDB内部操作の数
-- Total Ops Details by CF (Table Scan)：コプロセッサで選択スキャンを実行する際の、各CFにおける1秒あたりのRocksDB内部操作の数
-- Total Ops Details by CF (Index Scan)：コプロセッサでインデックススキャンを実行する際の、各CFにおける1秒あたりのRocksDB内部操作の数
+- Total Ops Details (Table Scan)：コプロセッサーでselectスキャンを実行する際の、1秒あたりのRocksDB内部操作数
+- Total Ops Details (Index Scan)：コプロセッサーでインデックススキャンを実行する際の、1秒あたりのRocksDB内部操作の数
+- Total Ops Details by CF (Table Scan)：コプロセッサーで選択スキャンを実行する際の、各CFにおける1秒あたりのRocksDB内部操作の数
+- Total Ops Details by CF (Index Scan)：コプロセッサーでインデックススキャンを実行する際の、各CFにおける1秒あたりのRocksDB内部操作の数
 
 ### Threads {#threads}
 
@@ -366,7 +366,7 @@ TiKVコンポーネントのステータス概要は、主要な指標が表示�
 - Flow
     - 書き込み: Raft Engineの書き込みトラフィック
     - リライト追加: リライト追加ログのトラフィック
-    - リライト リライト: リライトのトラフィック リライトログ
+    - リライトリライト: リライトのトラフィックリライトログ
 - Write Duration Breakdown (99%)
     - wal: Raft Engine WAL の書き込みレイテンシー
     - 待機: 書き始める前の待ち時間
@@ -386,7 +386,7 @@ TiKVコンポーネントのステータス概要は、主要な指標が表示�
 - Blob file size：Titan Blobファイルの合計サイズ
 - Live blob size：有効なブロブレコードの合計サイズ
 - Blob cache hit：Titanブロックキャッシュのヒット率
-- Iter touched blob file count：単一のイテレータに関係するブロブファイルの数
+- Iter touched blob file count：単一のイテレーターに関係するブロブファイルの数
 - Blob file discardable ratio distribution：BLOBファイルのBLOBレコード障害率分布
 - Blob key size：Titanブロブキーのサイズ
 - Blob value size：Titan Blob値のサイズ
@@ -416,7 +416,7 @@ TiKVコンポーネントのステータス概要は、主要な指標が表示�
 
 - Ops: 列ファミリーの1秒あたりの操作数
 - Read MBps：RocksDBとインメモリエンジンにおける読み取りトラフィックの総バイト数
-- Coprocessor Handle duration：コプロセッサリクエストの処理に要する時間
+- Coprocessor Handle duration：コプロセッサーリクエストの処理に要する時間
 - Region Cache Hit：リージョンキャッシュからデータが正常に取得された回数
 - Region Cache Hit Rate：リージョンキャッシュのヒット率
 - Region Cache Miss Reason：リージョンキャッシュからデータが取得されない理由
@@ -432,7 +432,7 @@ TiKVコンポーネントのステータス概要は、主要な指標が表示�
 - 99% In-memory engine write duration per server：インメモリエンジンにおけるTiKVサーバーごとの書き込み時間の99パーセンタイル値
 - Prepare for write duration：インメモリエンジンで書き込み操作を準備するのに要する時間
 - 99% In-memory engine prepare for write duration per server：インメモリエンジンにおけるTiKVサーバーごとの書き込み操作準備に要した時間の99パーセンタイル値
-- Iterator operations：イテレータ操作の種類数
+- Iterator operations：イテレーター操作の種類数
 - Seek duration：シーク操作に要する時間
 - Oldest Auto GC SafePoint：メモリ内エンジンにキャッシュされたリージョンの最古の自動GCセーフポイント
 - Newest Auto GC SafePoint：メモリ内エンジンにキャッシュされたリージョン用の最新の自動GCセーフポイント
@@ -441,8 +441,8 @@ TiKVコンポーネントのステータス概要は、主要な指標が表示�
 
 ### Pessimistic Locking {#pessimistic-locking}
 
-- Lock Manager Thread CPU：ロックマネージャスレッドのCPU使用率
-- Lock Manager Handled tasks：ロックマネージャが処理したタスクの数
+- Lock Manager Thread CPU：ロックマネージャースレッドのCPU使用率
+- Lock Manager Handled tasks：ロックマネージャーが処理したタスクの数
 - Waiter lifetime duration：トランザクションがロックを解除するまでの待機時間
 - Wait table：待機テーブルの状態情報。ロックの数や、ロックを待っているトランザクションの数などが含まれます。
 - Deadlock detect duration：デッドロックを検出するのに要した時間
@@ -561,7 +561,7 @@ TiKVコンポーネントのステータス概要は、主要な指標が表示�
 - Apply Time： Raftストアにデータを書き込むのに費やされた時間。
 - Raft Store Memory Usage： Raftストアのメモリ使用量。
 
-### 共通パラメータの説明 {#explanation-of-common-parameters}
+### 共通パラメーターの説明 {#explanation-of-common-parameters}
 
 #### gRPC Message Type {#grpc-message-type}
 
@@ -597,7 +597,7 @@ TiKVコンポーネントのステータス概要は、主要な指標が表示�
 
 ## TiKV-FastTuneダッシュボード {#tikv-fasttune-dashboard}
 
-TiKVのパフォーマンスに関する問題（QPSジッター、レイテンシージッター、レイテンシー増加傾向など）が発生した場合は、 **TiKV-FastTune**ダッシュボードを確認してください。このダッシュボードには、特にクラスタ内の書き込みワークロードが中規模または大規模の場合に、診断に役立つ一連のパネルが含まれています。
+TiKVのパフォーマンスに関する問題（QPSジッター、レイテンシージッター、レイテンシー増加傾向など）が発生した場合は、 **TiKV-FastTune**ダッシュボードを確認してください。このダッシュボードには、特にクラスター内の書き込みワークロードが中規模または大規模の場合に、診断に役立つ一連のパネルが含まれています。
 
 書き込み関連のパフォーマンス問題が発生した場合は、まずTiDB関連のダッシュボードを確認してください。ストレージ側に問題がある場合は、 **TiKV-FastTune**ページを開き、すべてのパネルを確認してください。
 

@@ -81,13 +81,13 @@ TiDB Self-Managed では、スロークエリログのトリガー動作は `tid
 
 <CustomContent platform="tidb">
 
-TiDB Self-Managed は、`tidb_slow_log_rules` に対して `SESSION` ルールと `GLOBAL` ルールの両方をサポートします。1 つのセッションでは、2 つのスコープをまたいで最大 20 個の有効なルールを持つことができます。`SESSION` ルールは `Conn_ID` をサポートせず、このフィールドをサポートするのは `GLOBAL` ルールのみです。
+TiDB Self-Managed は、`tidb_slow_log_rules` に対して `SESSION` ルールと `GLOBAL` ルールの両方をサポートします。1 つのセッションでは、2 つのスコープをまたいで最大 20 個の有効なルールを持てます。`SESSION` ルールは `Conn_ID` をサポートせず、このフィールドをサポートするのは `GLOBAL` ルールのみです。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud" plan="dedicated">
 
-TiDB Cloud Dedicated は、`tidb_slow_log_rules` に対して `SESSION` ルールと `GLOBAL` ルールの両方をサポートします。1 つのセッションでは、2 つのスコープをまたいで最大 20 個の有効なルールを持つことができます。`SESSION` ルールは `Conn_ID` をサポートせず、このフィールドをサポートするのは `GLOBAL` ルールのみです。
+TiDB Cloud Dedicated は、`tidb_slow_log_rules` に対して `SESSION` ルールと `GLOBAL` ルールの両方をサポートします。1 つのセッションでは、2 つのスコープをまたいで最大 20 個の有効なルールを持てます。`SESSION` ルールは `Conn_ID` をサポートせず、このフィールドをサポートするのは `GLOBAL` ルールのみです。
 
 </CustomContent>
 

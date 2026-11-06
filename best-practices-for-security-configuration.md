@@ -5,7 +5,7 @@ summary: 潜在的なセキュリティリスクを軽減するために、TiDB 
 
 # TiDBセキュリティ設定のベストプラクティス {#best-practices-for-tidb-security-configuration}
 
-TiDBのセキュリティは、データの整合性と機密性を保護するために不可欠です。このドキュメントでは、導入時にTiDBクラスタを安全に構成するためのガイドラインを示します。これらのベストプラクティスに従うことで、潜在的なセキュリティリスクを効果的に軽減し、データ侵害を防ぎ、TiDBデータベースシステムの継続的かつ安定した信頼性の高い運用を確保できます。
+TiDBのセキュリティは、データの整合性と機密性を保護するために不可欠です。このドキュメントでは、導入時にTiDBクラスターを安全に構成するためのガイドラインを示します。これらのベストプラクティスに従うことで、潜在的なセキュリティリスクを効果的に軽減し、データ侵害を防ぎ、TiDBデータベースシステムの継続的かつ安定した信頼性の高い運用を確保できます。
 
 > **Note:**
 >
@@ -13,14 +13,14 @@ TiDBのセキュリティは、データの整合性と機密性を保護する�
 
 ## ルートユーザーの初期パスワードを設定する {#set-the-initial-password-for-the-root-user}
 
-デフォルトでは、新規作成されたTiDBクラスタのrootユーザーにはパスワードが設定されていないため、潜在的なセキュリティリスクが生じます。パスワードが設定されていない場合、誰でもrootユーザーとしてTiDBデータベースにログインを試みることができ、データにアクセスして変更される可能性があります。
+デフォルトでは、新規作成されたTiDBクラスターのrootユーザーにはパスワードが設定されていないため、潜在的なセキュリティリスクが生じます。パスワードが設定されていない場合、誰でもrootユーザーとしてTiDBデータベースにログインを試みることができ、データにアクセスして変更される可能性があります。
 
 このリスクを回避するには、デプロイメント中にルートパスワードを設定することをお勧めします。
 
-- TiUPを使用したデプロイメントの場合は、 [TiUPを使用して TiDBクラスタをデプロイ](/production-deployment-using-tiup.md#step-7-start-a-tidb-cluster)を参照して、ルートユーザーのランダム パスワードを生成します。
+- TiUPを使用したデプロイメントの場合は、 [TiUPを使用して TiDBクラスターをデプロイ](/production-deployment-using-tiup.md#step-7-start-a-tidb-cluster)を参照して、ルートユーザーのランダムパスワードを生成します。
 - TiDB Operatorを使用したデプロイメントの場合は、 [初期アカウントとパスワードを設定する](https://docs.pingcap.com/tidb-in-kubernetes/stable/initialize-a-cluster#set-initial-account-and-password)を参照して root パスワードを設定してください。
 
-[`--initialize-secure`](/command-line-flags-for-tidb-configuration.md#--initialize-secure)オプションを使用して、初期ルートユーザーのネットワーク アクセスを制限することもできます。
+[`--initialize-secure`](/command-line-flags-for-tidb-configuration.md#--initialize-secure)オプションを使用して、初期ルートユーザーのネットワークアクセスを制限することもできます。
 
 ## パスワードの複雑さのチェックを有効にする {#enable-password-complexity-checks}
 
@@ -64,7 +64,7 @@ TiDB Dashboardは、デフォルトでは信頼できるユーザー向けに設
 
 ## 内部ポートを保護する {#protect-internal-ports}
 
-TiDBのインストールには、デフォルトでコンポーネント間通信用の特権インターフェースがいくつか含まれています。これらのポートは主に内部通信用であるため、通常、ユーザーがアクセスできるようにする必要はありません。これらのポートをパブリックネットワークに公開すると、攻撃対象領域が拡大し、最小権限の原則に違反し、セキュリティ脆弱性のリスクが高まります。次の表は、TiDBクラスタのデフォルトのリスニングポートを示しています。
+TiDBのインストールには、デフォルトでコンポーネント間通信用の特権インターフェースがいくつか含まれています。これらのポートは主に内部通信用であるため、通常、ユーザーがアクセスできるようにする必要はありません。これらのポートをパブリックネットワークに公開すると、攻撃対象領域が拡大し、最小権限の原則に違反し、セキュリティ脆弱性のリスクが高まります。次の表は、TiDBクラスターのデフォルトのリスニングポートを示しています。
 
 | コンポーネント              | デフォルトポート | プロトコル      |
 | --------------- | -------- | ---------- |
@@ -121,6 +121,6 @@ TiDB Dashboardにアクセスする必要がある場合は、 [リバースプ�
 
 ## サードパーティのMySQL脆弱性スキャナーからの誤検知を解決する {#resolving-false-positives-from-third-party-mysql-vulnerability-scanners}
 
-ほとんどの脆弱性スキャナーは、MySQLの脆弱性をバージョン情報に基づいて検出します。TiDBはMySQLプロトコルと互換性がありますが、MySQL自体は互換性がないため、バージョンベースの脆弱性スキャンは誤検知につながる可能性があります。脆弱性スキャンは原則に基づく評価に重点を置くことをお勧めします。コンプライアンススキャンツールが特定のMySQLバージョンを要求する場合は、 [サーバーのバージョン番号を変更する](/faq/high-reliability-faq.md#does-tidb-support-modifying-the-mysql-version-string-of-the-server-to-a-specific-one-that-is-required-by-the-security-vulnerability-scanning-tool)を使用して要件を満たすことができます。
+ほとんどの脆弱性スキャナーは、MySQLの脆弱性をバージョン情報に基づいて検出します。TiDBはMySQLプロトコルと互換性がありますが、MySQL自体は互換性がないため、バージョンベースの脆弱性スキャンは誤検知につながる可能性があります。脆弱性スキャンは原則に基づく評価に重点を置くことをお勧めします。コンプライアンススキャンツールが特定のMySQLバージョンを要求する場合は、 [サーバーのバージョン番号を変更する](/faq/high-reliability-faq.md#does-tidb-support-modifying-the-mysql-version-string-of-the-server-to-a-specific-one-that-is-required-by-the-security-vulnerability-scanning-tool)を使用して要件を満たせます。
 
 サーバーのバージョン番号を変更することで、脆弱性スキャナーによる誤検知を回避できます。[`server-version`](/tidb-configuration-file.md#server-version)の値は、TiDB ノードが現在の TiDB バージョンを確認するために使用されます。TiDB クラスターをアップグレードする前に、予期しない動作を回避するために、 `server-version`の値が空であるか、実際の TiDB バージョンであることを確認してください。

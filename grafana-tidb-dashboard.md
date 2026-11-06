@@ -35,7 +35,7 @@ TiDB ダッシュボードに表示される主要なメトリックを理解す
 
 - Duration 80/95/99/999 By Instance: 各 TiDB インスタンスでの SQL 文の実行時間の統計 (異なるパーセンタイル)
 - Failed Query OPM Detail: 各 TiDB インスタンスで 1分あたりに SQL文を実行したときに発生したエラーに応じたエラーの種類 (構文エラーや主キーの競合など) の統計
-- Internal SQL OPS: TiDBクラスタ全体で1秒あたりに実行された内部SQL文の数。内部SQL文は内部的に実行され、通常はユーザーのSQL文または内部的にスケジュールされたタスクによってトリガーされます。
+- Internal SQL OPS: TiDBクラスター全体で1秒あたりに実行された内部SQL文の数。内部SQL文は内部的に実行され、通常はユーザーのSQL文または内部的にスケジュールされたタスクによってトリガーされます。
 
 ### Server {#server}
 
@@ -43,7 +43,7 @@ TiDB ダッシュボードに表示される主要なメトリックを理解す
 - Memory Usage: 各 TiDB インスタンスのメモリ使用量の統計。プロセスが占有するメモリと、ヒープ上でGolangによって適用されるメモリに分かれています。
 - CPU Usage: 各TiDBインスタンスのCPU使用率の統計
 - Connection Count: 各 TiDB インスタンスに接続されているクライアントの数
-- Open FD Count: 各TiDBインスタンスのオープンファイルディスクリプタの統計
+- Open FD Count: 各TiDBインスタンスのオープンファイルディスクリプターの統計
 - Disconnection Count: 各 TiDB インスタンスから切断されたクライアントの数
 - Events OPM: "start"、"close"、"graceful-shutdown"、"kill"、"hang"などの主要なイベントの統計
 - Goroutine Count: 各 TiDB インスタンス上の Goroutine の数
@@ -146,7 +146,7 @@ TiDB ダッシュボードに表示される主要なメトリックを理解す
 
 - Load Schema Duration: TiDBがTiKVからスキーマを取得するのにかかる時間
 - Load Schema OPS: TiDBがTiKVから1秒あたりに取得するスキーマの統計
-- Schema Lease Error OPM: スキーマ リース エラーには、 `change`と`outdate` 2つのタイプがあります。 `change`は、スキーマが変更されたことを意味し、 `outdate`は、スキーマを更新できないことを意味します。これはより重大なエラーであり、アラートをトリガーします。
+- Schema Lease Error OPM: スキーマリースエラーには、 `change`と`outdate` 2つのタイプがあります。 `change`は、スキーマが変更されたことを意味し、 `outdate`は、スキーマを更新できないことを意味します。これはより重大なエラーであり、アラートをトリガーします。
 - Load Privilege OPS: TiDBがTiKVから1秒あたりに取得した権限情報の件数の統計
 
 ### DDL {#ddl}
