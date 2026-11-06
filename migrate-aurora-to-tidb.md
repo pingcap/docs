@@ -18,6 +18,7 @@ The whole migration has two processes:
 - [Install Dumpling and TiDB Lightning](/migration-tools.md). If you want to create the corresponding tables manually on the target side, do not install Dumpling.
 - [Get the upstream database privileges required by Dumpling](/dumpling-overview.md#required-privileges).
 - [Get the target database privileges required for TiDB Lightning](/tidb-lightning/tidb-lightning-faq.md#what-are-the-privilege-requirements-for-the-target-database).
+- If you want to replicate incremental data with DM, enable binary logging on the Aurora cluster, set `binlog_format=ROW`, and retain the required binlogs long enough for the full migration. For details, see [Setting up binary log replication for Aurora MySQL](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Replication.MySQL.SettingUp.html) and [DM precheck](/dm/dm-precheck.md).
 
 ## Import full data to TiDB
 
@@ -91,7 +92,13 @@ This section describes how to export an Amazon Aurora snapshot to Amazon S3 and 
 
 #### 2.1 Export an Amazon Aurora snapshot to Amazon S3
 
-1. Get the name and location of the Amazon Aurora binlog for subsequent incremental migration. In Amazon Aurora, run the `SHOW MASTER STATUS` command and record the current binlog position:
+1. Before you record the binlog position, make sure that binary logging is enabled on the Aurora cluster and that `binlog_format=ROW` is in effect for DM. If you changed the cluster parameter group, make sure that the change has taken effect on the writer instance before you continue. To prevent Aurora from purging the required binlogs before DM starts, set and verify a binlog retention period that covers the snapshot export, the TiDB Lightning import, and any expected delay before the incremental replication starts. For example:
+
+    ```sql
+    CALL mysql.rds_set_configuration('binlog retention hours', 144);
+    ```
+
+    Then, in Amazon Aurora, run the `SHOW MASTER STATUS` command and record the current binlog position:
 
     ```sql
     SHOW MASTER STATUS;
@@ -108,7 +115,7 @@ This section describes how to export an Amazon Aurora snapshot to Amazon S3 and 
     1 row in set (0.012 sec)
     ```
 
-2. Export the Amazon Aurora snapshot. For detailed steps, refer to [Exporting DB snapshot data to Amazon S3](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_ExportSnapshot.html). After you obtain the binlog position, export the snapshot within 5 minutes. Otherwise, the recorded binlog position might be outdated and thus cause data conflict during the incremental replication.
+2. Export the Amazon Aurora snapshot. For detailed steps, refer to [Exporting DB snapshot data to Amazon S3](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_ExportSnapshot.html). Make sure that the snapshot you export and the recorded binlog position represent the same starting point for incremental replication. Because Aurora exports data from the snapshot itself rather than from the time when the export task starts, do not use the export start time as the synchronization point. If you export an existing snapshot, use the binlog position that matches that snapshot; otherwise, create a new snapshot for this migration and export that snapshot.
 
 #### 2.2 Create the TiDB Lightning configuration file for the data file
 
