@@ -23,11 +23,11 @@ summary: 手動プロファイリングを使用すると、TiDB、TiKV、PD、 
 
     > TiKV およびTiFlashインスタンスの CPU オーバーヘッドは、現在 ARMアーキテクチャではサポートされていません。
 
-- ヒープ: TiDB、TiKV、PDインスタンス上の各内部関数のメモリ消費量
+- Heap: TiDB、TiKV、PDインスタンス上の各内部関数のメモリ消費量
 
     > TiDBはv7.5以降、TiKVヒーププロファイルをサポートしています。TiDB Dashboardの実行環境にはPerl実行環境が必要です。Perl実行環境がない場合、エラーが発生します。
 
-- ミューテックス: TiDBおよびPDインスタンス上のミューテックスの競合状態
+- Mutex: TiDBおよびPDインスタンス上のミューテックスの競合状態
 
 - Goroutine: TiDB および PD インスタンス上のすべての Goroutine の実行状態と呼び出しスタック
 
