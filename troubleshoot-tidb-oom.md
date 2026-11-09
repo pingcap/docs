@@ -14,9 +14,9 @@ summary: TiDB OOM (メモリ不足) の問題を診断して解決する方法�
 - クライアント側で次のエラーが報告されます: `SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server during query` 。
 
 - Grafana ダッシュボードには次の内容が表示されます。
-    - **TiDB** > **Server** > **メモリ使用量**では、 `process/heapInUse`メトリックが上昇し続け、しきい値に達した後、突然 0 に低下することが示されています。
-    - **TiDB** > **Server** > **稼働時間**が突然ゼロに低下します。
-    - **TiDB-Runtime** > **メモリ使用量**では、 `estimate-inuse`メトリックが上昇し続けていることがわかります。
+    - **TiDB** > **Server** > **Memory Usage**では、 `process/heapInUse`メトリックが上昇し続け、しきい値に達した後、突然 0 に低下することが示されています。
+    - **TiDB** > **Server** > **Uptime**が突然ゼロに低下します。
+    - **TiDB-Runtime** > **Memory Usage**では、 `estimate-inuse`メトリックが上昇し続けていることがわかります。
 
 - `tidb.log`を確認すると、次のログエントリが見つかります。
     - OOMに関するアラーム: `[WARN] [memory_usage_alarm.go:139] ["tidb-server has the risk of OOM because of memory usage exceeds alarm ratio. Running SQLs and heap profile will be recorded in record path"]` 。詳細については、 [`memory-usage-alarm-ratio`](/system-variables.md#tidb_memory_usage_alarm_ratio)を参照してください。
