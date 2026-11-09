@@ -15,7 +15,7 @@ System tables are organized in the `system` schema and can be queried using stan
 
 | Table                                                             | Description                                                                                       |
 |-------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
-| [system.tables](/tidb-cloud-lake/sql/system-tables.md)                                 | Provides metadata information for all tables including properties, creation time, size, and more. |
+| [system.tables](/tidb-cloud-lake/sql/system-tables-sql.md)                                 | Provides metadata information for all tables including properties, creation time, size, and more. |
 | [system.tables_with_history](/tidb-cloud-lake/sql/system-tables-with-history.md)       | Provides historical metadata information for tables, including dropped tables.                    |
 | [system.databases](/tidb-cloud-lake/sql/system-databases.md)                           | Contains information about all databases in the system.                                           |
 | [system.views](/tidb-cloud-lake/sql/system-views.md)                                   | Contains information about all views in the system.                                               |

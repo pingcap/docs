@@ -21,7 +21,7 @@ REFRESH VIRTUAL COLUMN FOR <table>
 
 ## Examples
 
-This example refreshes virtual columns for a table named 'test':
+This example refreshes virtual columns for a table named `test`:
 
 ```sql
 CREATE TABLE test(id int, val variant);

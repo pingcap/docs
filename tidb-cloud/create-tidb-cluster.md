@@ -69,6 +69,10 @@ If you are in the `Organization Owner` or the `Project Owner` role, you can crea
     >
     > The cluster creation time can vary by region and might take longer than 30 minutes. If the process takes significantly longer than expected, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
+> **Note:**
+>
+> For a newly created TiDB Cloud Dedicated cluster, the public endpoint is disabled by default. If you need to connect to the cluster over the public internet, enable the public endpoint after the cluster is created. For more information, see [Connect to TiDB Cloud Dedicated via Public Connection](/tidb-cloud/connect-via-standard-connection.md).
+
 ## Step 2. Set the root password
 
 After your TiDB Cloud Dedicated cluster is created, take the following steps to set the root password:

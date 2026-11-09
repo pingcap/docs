@@ -5,9 +5,7 @@ summary: Learn about how to unload NDJSON files.
 
 # Unloading NDJSON File
 
-## Unloading TSV File
-
-Syntax:
+## Syntax
 
 ```sql
 COPY INTO { internalStage | externalStage | externalLocation }

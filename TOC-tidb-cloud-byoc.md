@@ -7,8 +7,7 @@
 
 - Why TiDB Cloud
   - [Introduction](/tidb-cloud/tidb-cloud-intro.md)
-  - [BYOC Features](/tidb-cloud/byoc/byoc-features.md)
-  - [Cloud Plan Features](/tidb-cloud/features.md)
+  - [Features](/tidb-cloud/features.md)
   - [MySQL Compatibility](/mysql-compatibility.md)
 - Get Started
   - [Try Out TiDB Cloud](/tidb-cloud/tidb-cloud-quickstart.md)
@@ -29,7 +28,6 @@
 ## GUIDES
 
 - [Select Your Plan](/tidb-cloud/select-cluster-tier.md)
-- [Manage TiDB Cloud Resources and Projects](/tidb-cloud/manage-projects-and-resources.md)
 - Deploy BYOC
   - [Onboarding Overview](/tidb-cloud/byoc/byoc-onboarding-overview.md)
   - [Prepare AWS Environment](/tidb-cloud/byoc/byoc-prepare-environment-aws.md)
@@ -40,10 +38,12 @@
   - [Joint Validation](/tidb-cloud/byoc/joint-validation.md)
   - [Security Hardening](/tidb-cloud/byoc/security-hardening.md)
   - [Multi-Region Deployment](/tidb-cloud/byoc/multi-region-deployment.md)
-- Manage Resources
+- Manage Resources and Projects
+  - [Overview](/tidb-cloud/manage-projects-and-resources.md)
   - Resource Pools
     - [Create a Resource Pool](/tidb-cloud/byoc/create-resource-pool-byoc.md)
     - [Manage Resource Pools](/tidb-cloud/byoc/manage-resource-pools-byoc.md)
+    - [Pause or Resume a Resource Pool](/tidb-cloud/byoc/pause-or-resume-byoc-resource-pool.md)
 - Manage Instances
   - [Create a {{{ .byoc }}} Instance](/tidb-cloud/byoc/create-tidb-instance-byoc.md)
   - Connect to Your {{{ .byoc }}} Instance
@@ -121,13 +121,13 @@
     - [TiKV Follower Read](/follower-read.md)
     - [Coprocessor Cache](/coprocessor-cache.md)
     - [Tune TiFlash Performance](/tiflash/tune-tiflash-performance.md)
-  - [Delete a {{{ .premium }}} Instance](/tidb-cloud/premium/delete-tidb-instance.md)
+  - [Delete a {{{ .byoc }}} Instance](/tidb-cloud/premium/delete-tidb-instance.md)
 - Migrate or Import Data
   - [Overview](/tidb-cloud/tidb-cloud-migration-overview.md)
   - Migrate Data into TiDB Cloud
     - [Migrate Existing and Incremental Data Using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md)
     - [Migrate Incremental Data Using Data Migration](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md)
-    - [Migrate from TiDB Self-Managed to TiDB Cloud Premium](/tidb-cloud/premium/migrate-from-op-tidb-premium.md)
+    - [Migrate from TiDB Self-Managed to TiDB Cloud BYOC](/tidb-cloud/premium/migrate-from-op-tidb-premium.md)
     - [Migrate and Merge MySQL Shards of Large Datasets](/tidb-cloud/migrate-sql-shards.md)
     - [Migrate from Amazon RDS for Oracle Using AWS DMS](/tidb-cloud/migrate-from-oracle-using-aws-dms.md)
   - Import Data into TiDB Cloud
@@ -149,6 +149,7 @@
   - [Data Pipeline](/tidb-cloud/data-pipeline.md)
   - [To MySQL Sink](/tidb-cloud/changefeed-sink-to-mysql.md)
   - [To Kafka Sink](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
+  - [To Cloud Storage](/tidb-cloud/changefeed-sink-to-cloud-storage.md)
   - [To TiDB Cloud Lake](/tidb-cloud/data-pipeline-sink-to-lake.md)
   - Reference
     - [Set Up Self-Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md)

@@ -1,11 +1,11 @@
 ---
 title: LEAST_IGNORE_NULLS
-summary: Returns the maximum value from a set of values, ignoring any NULL values.
+summary: Returns the minimum value from a set of values, ignoring any NULL values.
 ---
 
 # LEAST_IGNORE_NULLS
 
-Returns the maximum value from a set of values, ignoring any NULL values.
+Returns the minimum value from a set of values, ignoring any NULL values.
 
 See also: [LEAST](/tidb-cloud-lake/sql/least.md)
 

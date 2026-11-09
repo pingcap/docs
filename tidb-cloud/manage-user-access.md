@@ -141,8 +141,8 @@ At the project level, TiDB Cloud defines four roles, in which `Project Owner` ca
 | Restore an instance or cluster from a backup as a new resource. | ✅ | ❌ | ❌ | ❌ |
 | Manage [Data Service](/tidb-cloud/data-service-overview.md) for data read-only operations such as using or creating endpoints to read data. | ✅ | ✅ | ✅ | ❌ |
 | Manage [Data Service](/tidb-cloud/data-service-overview.md) for data read and write operations. | ✅ | ✅ | ❌ | ❌ |
-| View resource data using [SQL Editor](/tidb-cloud/explore-data-with-chat2query.md), if supported by the resource type. | ✅ | ✅ | ✅ | ❌ |
-| Modify and delete resource data using [SQL Editor](/tidb-cloud/explore-data-with-chat2query.md), if supported by the resource type. | ✅ | ✅ | ❌ | ❌ |
+| View resource data using [SQL Editor](/tidb-cloud/explore-data-with-sql-editor.md), if supported by the resource type. | ✅ | ✅ | ✅ | ❌ |
+| Modify and delete resource data using [SQL Editor](/tidb-cloud/explore-data-with-sql-editor.md), if supported by the resource type. | ✅ | ✅ | ❌ | ❌ |
 | Manage [changefeeds](/tidb-cloud/changefeed-overview.md). | ✅ | ✅ | ✅ | ❌ |
 | Review and reset resource passwords, if supported by the resource type. | ✅ | ❌ | ❌ | ❌ |
 | View resource overview, backup records, metrics, events, and [changefeeds](/tidb-cloud/changefeed-overview.md) in the project. | ✅ | ✅ | ✅ | ✅ |
@@ -161,8 +161,8 @@ TiDB X instances support instance-level roles so that you can grant access to a 
 | Permission  | `Instance Manager` | `TiDB X Instance Data Access Read-Write` | `TiDB X Instance Data Access Read-Only` | `TiDB X Instance Viewer` |
 |---|---|---|---|---|
 | Manage instance operations, such as instance creation, modification, and deletion. | ✅ | ❌ | ❌ | ❌ |
-| View and modify instance data using [SQL Editor](/tidb-cloud/explore-data-with-chat2query.md). | ✅ | ✅ | ❌ | ❌ |
-| View instance data using [SQL Editor](/tidb-cloud/explore-data-with-chat2query.md). | ✅ | ✅ | ✅ | ❌ |
+| View and modify instance data using [SQL Editor](/tidb-cloud/explore-data-with-sql-editor.md). | ✅ | ✅ | ❌ | ❌ |
+| View instance data using [SQL Editor](/tidb-cloud/explore-data-with-sql-editor.md). | ✅ | ✅ | ✅ | ❌ |
 | Manage instance-scoped roles. | ✅ | ❌ | ❌ | ❌ |
 | View backup records of the TiDB X instance. | ✅ | ❌ | ❌ | ✅ |
 | Restore the TiDB X instance from backups. | ✅ | ❌ | ❌ | ❌ |

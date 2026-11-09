@@ -144,7 +144,7 @@ For example, you can import a network container that is not created by Terraform
 
 1. Add an import block for the new `tidbcloud_dedicated_network_container` resource.
 
-    Add the following import block to your `.tf` file, replace `example` with a desired resource name, and replace `${id}` with the format of `cluster_id,network_container_id`:
+    Add the following import block to your `.tf` file, replace `example` with a desired resource name, and replace `${id}` with the network container ID:
 
     ```
     import {
@@ -172,8 +172,8 @@ For example, you can import a network container that is not created by Terraform
     Then, run `terraform apply` to import your infrastructure. After applying, the example output is as follows: 
 
     ```shell
-    tidbcloud_dedicated_network_container.example: Importing... [id=10423692645683000000,example]
-    tidbcloud_dedicated_network_container.example: Import complete [id=10423692645683000000,example]
+    tidbcloud_dedicated_network_container.example: Importing... [id=1934235512696000000]
+    tidbcloud_dedicated_network_container.example: Import complete [id=1934235512696000000]
 
     Apply complete! Resources: 1 imported, 0 added, 0 changed, 0 destroyed.
     ```

@@ -1,6 +1,6 @@
 ---
 title: FUSE_STATISTIC
-summary: note This function is deprecated. Use SHOW STATISTICS instead to view table statistics..
+summary: This function is deprecated. Use SHOW STATISTICS instead to view table statistics.
 ---
 
 # FUSE_STATISTIC

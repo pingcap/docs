@@ -7,7 +7,7 @@ summary: Learn how to access an existing file system from your current machine, 
 
 In TiDB Cloud Filesystem, you can access an existing file system using either a locally stored token or a token provided for another machine or environment:
 
-- If you created the file system or imported its token on the current machine, TiDB Cloud CLI (`ti`) can use the stored token.
+- If you created the file system with TiDB Cloud CLI (`ti`) or imported its token on the current machine, the CLI can use the stored token.
 - If you are working from another machine, CI job, or agent environment, provide a file system token and region for that environment.
 
 ## Prerequisites

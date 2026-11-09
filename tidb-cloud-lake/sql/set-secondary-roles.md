@@ -22,7 +22,7 @@ SET SECONDARY ROLES { ALL | NONE }
 
 ## Examples
 
-This example shows how secondary roles work and how to active/deactivate them.
+This example shows how secondary roles work and how to activate/deactivate them.
 
 1. Creating roles as user root.
 

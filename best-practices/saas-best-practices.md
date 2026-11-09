@@ -77,7 +77,7 @@ By adding appropriate filter conditions to the preceding SQL statements, memory 
 In SaaS multi-tenant scenarios, each user usually connects to TiDB to operate data in their own tenant (database). To support a high number of connections:
 
 * Increase the TiDB configuration item [`token-limit`](/tidb-configuration-file.md#token-limit) (`1000` by default) to support more concurrent requests.
-* The memory usage of TiDB is roughly linear with the number of connections. In actual tests, 200,000 idle connections increase TiDB memory usage by about 30 GiB. It is recommended to increase TiDB memory specifications based on actual connection numbers.
+* The memory usage of TiDB is roughly linear with the number of connections. In actual tests, 200,000 idle connections increase TiDB memory usage by about 30 GiB. It is recommended to increase TiDB memory specifications based on the actual number of connections.
 * If you use `PREPARED` statements, each connection maintains a session-level Prepared Plan Cache. If the `DEALLOCATE` statement is not executed for a long time, the cache might accumulate too many plans, increasing memory usage. In actual tests, 400,000 execution plans involving `IndexRangeScan` consume approximately 5 GiB of memory. It is recommended to increase memory specifications accordingly.
 
 ## Use stale read carefully

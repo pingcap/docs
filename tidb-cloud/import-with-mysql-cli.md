@@ -22,7 +22,7 @@ Connect to your TiDB Cloud Dedicated cluster.
 
 2. In the left navigation pane, click **Settings** > **Networking**.
 
-3. On the **Networking** page, click **Add IP Address** in the **IP Access List** area.
+3. On the **Networking** page, select the target TiDB node group in the upper-right corner if your cluster has multiple [node groups](/tidb-cloud/tidb-node-group-overview.md), enable **Public Endpoint** if it is disabled, and then click **Add IP Address**.
 
 4. In the dialog, choose **Allow access from anywhere**, and then click **Confirm**.
 

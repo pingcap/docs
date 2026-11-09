@@ -1,11 +1,11 @@
 ---
 title: MAP_CAT
-summary: Returns the concatenatation of two MAPs.
+summary: Returns the concatenation of two MAPs.
 ---
 
 # MAP_CAT
 
-Returns the concatenatation of two MAPs.
+Returns the concatenation of two MAPs.
 
 ## Syntax
 

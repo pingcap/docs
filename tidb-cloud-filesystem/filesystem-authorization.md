@@ -43,7 +43,7 @@ These credentials are not interchangeable. TiDB Cloud API credentials manage the
 
 TiDB Cloud API credentials consist of a public and private API key pair. Their permissions are determined by the associated TiDB Cloud account.
 
-Use TiDB Cloud API credentials for resource-level operations such as creating, listing, describing, and deleting file systems. They are also required to generate owner tokens.
+Use TiDB Cloud API credentials for CLI operations such as creating, listing, describing, and deleting file systems. They are also required to generate additional owner tokens with the CLI.
 
 Keep these credentials in a trusted administrative or automation environment rather than distributing them to applications or agents that only need access to file system data.
 

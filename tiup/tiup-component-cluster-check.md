@@ -1,6 +1,6 @@
 ---
 title: tiup cluster check
-summary: TiUP Cluster provides a `check` command to ensure hardware and software environments meet production requirements. It checks OS version, CPU support, time synchronization, system limits, and more. Options include automatic repair and enabling checks for CPU core number, memory size, and disk performance. Use `tiup cluster check <topology.yml | cluster-name> [flags]` command to perform checks. Use `--apply` to attempt automatic repair. Use `-N, --node` and `-R, --role` to specify nodes and roles to check. Use `--enable-cpu`, `--enable-disk`, and `--enable-mem` to enable specific checks.
+summary: TiUP Cluster provides a `check` command to ensure hardware and software environments meet production requirements. It checks OS version, CPU support, time synchronization, system limits, and more. Options include automatic repair and enabling checks for CPU core count, memory size, and disk performance. Use `tiup cluster check <topology.yml | cluster-name> [flags]` command to perform checks. Use `--apply` to attempt automatic repair. Use `-N, --node` and `-R, --role` to specify nodes and roles to check. Use `--enable-cpu`, `--enable-disk`, and `--enable-mem` to enable specific checks.
 ---
 
 # tiup cluster check
@@ -102,13 +102,13 @@ Check if the ports defined in the topology (including the auto-completion defaul
 >
 > The port usage check assumes that a cluster is not started yet. If a cluster is already deployed and started, the port usage check on the cluster fails because the ports must be in use in this case.
 
-### CPU core number
+### CPU core count
 
 Check the CPU information of the target machine. For a production cluster, it is recommended that the number of the CPU logical core is greater than or equal to 16.
 
 > **Note:**
 >
-> CPU core number is not checked by default. To enable the check, you need to add the `-enable-cpu` option to the command.
+> CPU core count is not checked by default. To enable the check, you need to add the `-enable-cpu` option to the command.
 
 ### Memory size
 
@@ -208,7 +208,7 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 
 ### --enable-cpu
 
-- Enables the check of CPU core number.
+- Enables the check of CPU core count.
 - Data type: `BOOLEAN`
 - This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
 

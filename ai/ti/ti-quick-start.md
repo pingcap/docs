@@ -7,7 +7,7 @@ summary: Install and configure TiDB Cloud CLI, then create and use a file system
 
 [TiDB Cloud CLI (`ti`)](https://github.com/tidbcloud/ti-cli) is a command-line tool for managing [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier/?plan=starter#starter) instances and [file systems in TiDB Cloud Filesystem](/ai/ti/ti-overview.md#tidb-cloud-filesystem). It supports both interactive use and automation, with JSON as the default output format for commands.
 
-This guide walks you through installing and configuring TiDB Cloud CLI (`ti`), and then completing a basic workflow with TiDB Cloud Starter or TiDB Cloud Filesystem. For an overview of the CLI, its capabilities, and supported workflows, see [TiDB Cloud Command Line Interface Overview](/ai/ti/ti-overview.md).
+This guide walks you through installing and configuring TiDB Cloud CLI (`ti`), and then completing a basic workflow with TiDB Cloud Starter or TiDB Cloud Filesystem. For an overview of the CLI, its capabilities, and supported workflows, see [TiDB Cloud CLI (`ti`) Overview](/ai/ti/ti-overview.md).
 
 > **Note:**
 >
@@ -130,7 +130,7 @@ The following example shows how you can create a file system in one environment 
 2. In the environment where you want to use the file system, set the owner token from the previous step as `TI_FS_TOKEN`, and then mount the file system to a local path as follows. This environment can be the same machine where you created the file system, another machine, or an AI agent sandbox.
 
     ```bash
-    # export TI_FS_TOKEN="<owner-token>" # If you are continuing on a different environment as step 1, pass in the TI_FS_TOKEN you get from step 1 here.
+    # export TI_FS_TOKEN="<owner-token>" # If you are continuing in a different environment from step 1, pass in the TI_FS_TOKEN you get from step 1 here.
     mkdir ~/mnt-test
     ti fs mount-file-system --mount-path ~/mnt-test --region aws-us-west-2
     echo 'Hello from TiDB Cloud Filesystem' >> ~/mnt-test/hello.txt
@@ -186,7 +186,7 @@ The following example shows how you can create a file system in one environment 
 
 ## What's next
 
-- Read the [TiDB Cloud Command Line Interface Overview](/ai/ti/ti-overview.md) to understand what `ti` manages and when to use it.
+- Read the [TiDB Cloud CLI (`ti`) Overview](/ai/ti/ti-overview.md) to understand what `ti` manages and when to use it.
 - Follow the task guides to manage [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier/?plan=starter#starter) or [TiDB Cloud Filesystem](/tidb-cloud-filesystem/manage-filesystem-resources.md).
 - Explore the [TiDB Cloud CLI Command Reference](/ai/ti/reference/ti-cli-reference.md) for command groups, global options, and shared CLI behavior.
 - Learn about [TiDB Cloud CLI Configuration and Credentials](/ai/ti/reference/ti-configuration-and-credentials.md) to set up multiple profiles or non-interactive authentication.

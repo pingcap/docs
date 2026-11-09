@@ -5,7 +5,7 @@ summary: Returns an array containing the longitude and latitude coordinates of t
 
 # H3_TO_GEO_BOUNDARY
 
-Returns an array containing the longitude and latitude coordinates of the vertices of the hexagon corresponding to the [H3](https://eng.uber.com/h3/) index.
+Returns an array containing the longitude and latitude coordinates of the vertices of the hexagon corresponding to the [H3](https://h3geo.org/) index.
 
 ## Syntax
 

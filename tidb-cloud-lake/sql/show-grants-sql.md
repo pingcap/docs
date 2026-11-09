@@ -54,7 +54,7 @@ SELECT grants FROM show_grants('role', 'b') ORDER BY object_id;
 └──────────────────────────────────────────────────────┘
 ```
 
-If you grant role `b` to role `a` and check the grants on role `a` again, you can see than the `SELECT` privilege on `t2` is now included in role `a`:
+If you grant role `b` to role `a` and check the grants on role `a` again, you can see that the `SELECT` privilege on `t2` is now included in role `a`:
 
 ```sql
 GRANT ROLE b TO ROLE a;

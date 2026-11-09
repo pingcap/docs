@@ -1,6 +1,6 @@
 ---
 title: TiDB 3.0.9 Release Notes
-summary: TiDB 3.0.9 was released on January 14, 2020. It includes fixes for known issues and new features. Some improvements were made to Executor, Server, DDL, Planner, TiKV, PD, Tools, and TiDB Ansible. Notable changes include support for system variables, monitoring metrics, and optimizations for transaction execution latency. Additionally, support for using backlash in the location label name and automatically creating directories for TiDB Lightning deployment was added.
+summary: TiDB 3.0.9 was released on January 14, 2020. It includes fixes for known issues and new features. Some improvements were made to Executor, Server, DDL, Planner, TiKV, PD, Tools, and TiDB Ansible. Notable changes include support for system variables, monitoring metrics, and optimizations for transaction execution latency. Additionally, support for using slash in the location label name and automatically creating directories for TiDB Lightning deployment was added.
 aliases: ['/tidb/dev/release-3.0.9/','/tidb/v3.0/release-3.0.9','/docs/dev/releases/release-3.0.9/','/docs/dev/releases/3.0.9/','/tidb/v5.4/release-3.0.9','/tidb/v6.1/release-3.0.9','/tidb/v6.5/release-3.0.9','/tidb/v7.1/release-3.0.9','/tidb/v7.5/release-3.0.9','/tidb/v8.1/release-3.0.9']
 ---
 
@@ -46,7 +46,7 @@ TiDB Ansible version: 3.0.9
 
 ## PD
 
-+ Support using backlash `/` in the location label name [#2083](https://github.com/pingcap/pd/pull/2083)
++ Support using slash `/` in the location label name [#2083](https://github.com/pingcap/pd/pull/2083)
 + Fix the incorrect statistics because the tombstone store is mistakenly included by the label counter [#2067](https://github.com/pingcap/pd/pull/2067)
 
 ## Tools

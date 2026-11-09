@@ -9,7 +9,7 @@ summary: Different teams need different parts of the same data. Traditional solu
 
 Different teams need different parts of the same data. Traditional solutions copy data multiple times - expensive and hard to maintain.
 
-{{{ .lake }}}'s **[ATTACH TABLE](/tidb-cloud-lake/sql/attach-table.md)** solves this elegantly: create multiple "views" of the same data without copying it. This leverages {{{ .lake }}}'s **true compute-storage separation** - whether using cloud storage or on-premise object storage: **store once, access everywhere**.
+{{{ .lake }}}'s **[ATTACH TABLE](/tidb-cloud-lake/sql/attach-table.md)** solves this elegantly: create multiple "views" of the same data without copying it. This leverages {{{ .lake }}}'s **true compute-storage separation**: **store once, access everywhere**.
 
 Think of ATTACH TABLE like computer shortcuts - they point to the original file without duplicating it.
 
@@ -139,4 +139,4 @@ Query: SELECT product, SUM(amount) FROM marketing_view GROUP BY product
 
 Multiple {{{ .lake }}} clusters can execute this flow simultaneously without coordination - true compute-storage separation in action.
 
-ATTACH TABLE represents a fundamental shift: **from copying data for each use case to one copy with many views**. Whether in cloud or on-premise environments, {{{ .lake }}}'s architecture enables powerful, efficient data sharing while maintaining enterprise-grade consistency and security.
+ATTACH TABLE represents a fundamental shift: **from copying data for each use case to one copy with many views**. {{{ .lake }}}'s architecture enables powerful, efficient data sharing while maintaining enterprise-grade consistency and security.

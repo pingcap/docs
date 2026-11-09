@@ -145,7 +145,7 @@ After kicking off the workload, you can observe the system using the following m
 - The commonly used metrics of the cluster can be found on the cluster overview page, including Total QPS, Latency, Connections, TiFlash Request QPS, TiFlash Request Duration, TiFlash Storage Size, TiKV Storage Size, TiDB CPU, TiKV CPU, TiKV IO Read, and TiKV IO Write. See [Monitor a TiDB Cluster](/tidb-cloud/monitor-tidb-cluster.md).
 - Navigate to the [**Diagnosis**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page) page of your cluster, and then check the **SQL Statement** tab, where you can observe SQL execution and easily locate performance problems without querying the system tables. See [Statement Analysis](/tidb-cloud/tune-performance.md#statement-analysis).
 - Navigate to the [**Diagnosis**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page) page of your cluster, and then check the **Key Visualizer** tab, where you can view TiDB data access patterns and data hotspots. See [Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer).
-- You can also integrate these metrics to your own Datadog and Prometheus. See [Third-Party Monitoring Integrations](/tidb-cloud/third-party-monitoring-integrations.md).
+- You can also send these metrics to Datadog, Prometheus, or New Relic. See [Third-Party Monitoring Integrations](/tidb-cloud/third-party-monitoring-integrations.md).
 
 Now it is time for evaluating the test results.
 

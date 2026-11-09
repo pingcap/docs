@@ -87,7 +87,6 @@ SET GLOBAL data_retention_time_in_days = 2;
 
 | Edition                                  | Default Retention | Max. Retention   |
 | ---------------------------------------- | ----------------- | ---------------- |
-| {{{ .lake }}} Community & Enterprise Editions | 1 day (24 hours)  | 90 days          |
 | {{{ .lake }}} (Personal)                | 1 day (24 hours)  | 1 day (24 hours) |
 | {{{ .lake }}} (Business)                | 1 day (24 hours)  | 90 days          |
 

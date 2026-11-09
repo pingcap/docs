@@ -571,7 +571,7 @@ curl -X 'GET' \
 
 ## Start the relay-log feature for data sources
 
-This API is an asynchronous interface. If the request is successful, the status code of the returned body is 200. To learn about its latest status, You can [get the information of a data source](#get-the-information-of-a-data-source).
+This API is an asynchronous interface. If the request is successful, the status code of the returned body is 200. To learn about its latest status, you can [get the information of a data source](#get-the-information-of-a-data-source).
 
 ### Request URI
 
@@ -598,7 +598,7 @@ curl -X 'POST' \
 
 ## Stop the relay-log feature for data sources
 
-This API is an asynchronous interface. If the request is successful, the status code of the returned body is 200. To learn about its latest status, You can [get the information of a data source](#get-the-information-of-a-data-source).
+This API is an asynchronous interface. If the request is successful, the status code of the returned body is 200. To learn about its latest status, you can [get the information of a data source](#get-the-information-of-a-data-source).
 
 ### Request URI
 
@@ -622,7 +622,7 @@ curl -X 'POST' \
 
 ## Purge relay log files that are no longer required
 
-This API is an asynchronous interface. If the request is successful, the status code of the returned body is 200. To learn about its latest status, You can [get the information of a data source](#get-the-information-of-a-data-source).
+This API is an asynchronous interface. If the request is successful, the status code of the returned body is 200. To learn about its latest status, you can [get the information of a data source](#get-the-information-of-a-data-source).
 
 ### Request URI
 
@@ -645,7 +645,7 @@ curl -X 'POST' \
 
 ## Change the bindings between the data source and DM-workers
 
-This API is an asynchronous interface. If the request is successful, the status code of the returned body is 200. To learn about its latest status, You can [get the information of a DM-worker node](#get-the-information-of-a-dm-worker-node).
+This API is an asynchronous interface. If the request is successful, the status code of the returned body is 200. To learn about its latest status, you can [get the information of a DM-worker node](#get-the-information-of-a-dm-worker-node).
 
 ### Request URI
 
@@ -1286,7 +1286,7 @@ curl -X 'PUT' \
 
 ## Start a replication task
 
-This API is an asynchronous interface. If the request is successful, the status code of the returned body is 204. To learn the latest status of a task, You can [get the information of a replication task](#get-the-information-of-a-replication-task).
+This API is an asynchronous interface. If the request is successful, the status code of the returned body is 204. To learn the latest status of a task, you can [get the information of a replication task](#get-the-information-of-a-replication-task).
 
 ### Request URI
 
@@ -1304,7 +1304,7 @@ curl -X 'POST' \
 
 ## Stop a replication task
 
-This API is an asynchronous interface. If the request is successful, the status code of the returned body is 200. To learn the latest status of a task, You can [get the information of a replication task](#get-the-information-of-a-replication-task).
+This API is an asynchronous interface. If the request is successful, the status code of the returned body is 200. To learn the latest status of a task, you can [get the information of a replication task](#get-the-information-of-a-replication-task).
 
 ### Request URI
 

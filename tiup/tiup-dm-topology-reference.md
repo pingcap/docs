@@ -19,7 +19,7 @@ A topology configuration file for DM cluster deployment using TiUP might contain
 - [worker_servers](#worker_servers): the configuration of the DM-worker instance. The configuration specifies the machines to which the worker service of the DM component is deployed.
 - [monitoring_servers](#monitoring_servers): specifies the machines to which the Prometheus instances are deployed. TiUP supports deploying multiple Prometheus instances but only the first instance is used.
 - [grafana_servers](#grafana_servers): the configuration of the Grafana instances. The configuration specifies the machines to which the Grafana instances are deployed.
-- [alertmanager_servers](#alertmanager_servers): the configuration of the Alertemanager instances. The configuration specifies the machines to which the Alertmanager instances are deployed.
+- [alertmanager_servers](#alertmanager_servers): the configuration of the Alertmanager instances. The configuration specifies the machines to which the Alertmanager instances are deployed.
 
 ### `global`
 
@@ -285,7 +285,7 @@ grafana_servers:
 - `host`: specifies the machine to deploy to. The field value is an IP address and is mandatory.
 - `ssh_port`: specifies the SSH port to connect to the target machine for operations. If the field is not specified, the `ssh_port` in the `global` section is used.
 - `web_port`: specify the port on which Alertmanager provides web services. The default value is "9093".
-- `cluster_port`: Specify the communication port between one Alertmanger and other Alertmanager. The default value is "9094".
+- `cluster_port`: Specify the communication port between one Alertmanager and other Alertmanager. The default value is "9094".
 - `deploy_dir`: specifies the deployment directory. If the field is not specified, or specified as a relative directory, the deployment directory is generated according to the `deploy_dir` configuration in the `global` section.
 - `data_dir`: specifies the data directory. If the field is not specified, or specified as a relative directory, the data directory is generated according to the `data_dir` configuration in the `global` section.
 - `log_dir`: specifies the log directory. If the field is not specified, or specified as a relative directory, the log directory is generated according to the `log_dir` configuration in the `global` section.

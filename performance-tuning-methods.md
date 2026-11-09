@@ -364,7 +364,7 @@ In TiDB, there is a [typical processing flow](/sql-optimization-concepts.md) fro
 
 SQL processing in TiDB consists of four phases, `get token`, `parse`, `compile`, and `execute`.
 
-- `get token`: Usually only a few microseconds and can be ignored. The token is limited only when the number of connections to a single TiDB instance reaches the [token-limit](/tidb-configuration-file.md) limit.
+- `get token`: Usually only a few microseconds and can be ignored. When the number of sessions executing requests concurrently on a single TiDB instance reaches [`token-limit`](/tidb-configuration-file.md#token-limit), subsequent requests wait until a token becomes available.
 - `parse`: The query statements are parsed into abstract syntax tree (AST).
 - `compile`: Execution plans are compiled based on the AST from the `parse` phase and statistics. The `compile` phase contains logical optimization and physical optimization. Logical optimization optimizes query plans by rules, such as column pruning based on relational algebra. Physical optimization estimates the cost of the execution plans by statistics by a cost-based optimizer and selects a physical execution plan with the lowest cost.
 - `execute`: The time consumption to execute a SQL statement. TiDB first waits for the globally unique timestamp TSO. Then the executor constructs the TiKV API request based on the Key range of the operator in the execution plan and distributes it to TiKV. `execute` time includes the TSO wait time, the KV request time, and the time spent by TiDB executor in processing data.
