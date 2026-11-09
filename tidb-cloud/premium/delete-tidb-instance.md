@@ -45,4 +45,4 @@ summary: "{{{ .premium }}}または{{{ .byoc }}}インスタンスを削除す�
 
     </CustomContent>
 
-    ごみ箱から {{{ .premium }}} または {{{ .byoc }}} インスタンスを復元する場合は、[ごみ箱から復元](/tidb-cloud/premium/backup-and-restore-premium.md#restore-from-recycle-bin)を参照してください。
+    ごみ箱から {{{ .premium }}} または {{{ .byoc }}} インスタンスを復元する場合は、[Recycle Bin から復元](/tidb-cloud/premium/backup-and-restore-premium.md#restore-from-recycle-bin)を参照してください。
