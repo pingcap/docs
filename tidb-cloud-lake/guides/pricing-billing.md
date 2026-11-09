@@ -48,6 +48,8 @@ Storage usage is measured in binary units, where 1 GiB is 2^30 bytes and 1 TiB i
 | Alibaba Cloud  | Japan (Tokyo)            | ap-northeast-1 | $0.020                  |
 | Alibaba Cloud  | Singapore                | ap-southeast-1 | $0.020                  |
 
+In addition to the storage capacity, storage costs also include the read and write requests that {{{ .lake }}} sends to the object storage service. Request prices are also based on the object storage request pricing of the cloud provider and region where your organization is deployed.
+
 ### Cloud Service Pricing
 
 The cloud service fee currently includes fees for the API requests. Each time you run a SQL query with {{{ .lake }}}, a REST API request is sent to the `lake-query` through the {{{ .lake }}} HTTP handler. In the Personal Edition, you are billed $1 for every 10,000 API requests, while in the Business Edition, the cost is $2 for every 10,000 API requests.
