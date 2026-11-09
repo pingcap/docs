@@ -61,7 +61,7 @@ summary: TiDB Dashboardのリソースマネージャーページは、クラス
 
     - 時間枠内のワークロードが低すぎる場合、または`resource_manager_resource_unit`と`process_cpu_usage`監視データが欠落している場合は、エラーが報告されます`Error 1105 (HY000): The workload in selected time window is too low, with which TiDB is unable to reach a capacity estimation; please select another time window with higher workload, or calibrate resource by hardware instead`また、TiKVはmacOSのCPU使用率を監視しないため、実際のワークロードに基づくキャパシティ推定をサポートしておらず、このエラーも報告されます。
 
-    [Metrics](#metrics)セクションの**CPU 使用率**を使用して適切な時間範囲を選択できます。
+    [Metrics](#metrics)セクションの**CPU Usage**を使用して適切な時間範囲を選択できます。
 
 > **Note:**
 >
@@ -74,9 +74,9 @@ summary: TiDB Dashboardのリソースマネージャーページは、クラス
 - **Total RU Consumed**: リアルタイムでカウントされたリクエストユニットの合計消費量。
 - **RU Consumed by Resource Groups**: リソースグループによってリアルタイムで消費されたリクエストユニットの数。
 - TiDB
-    - CPU クォータ: TiDB の最大 CPU 使用量。
-    - CPU 使用率: すべての TiDB インスタンスの合計 CPU 使用率。
+    - CPU Quota: TiDB の最大 CPU 使用量。
+    - CPU Usage: すべての TiDB インスタンスの合計 CPU 使用率。
 - TiKV
-    - CPU クォータ: TiKV の最大 CPU 使用量。
-    - CPU 使用率: すべての TiKV インスタンスの合計 CPU 使用率。
+    - CPU Quota: TiKV の最大 CPU 使用量。
+    - CPU Usage: すべての TiKV インスタンスの合計 CPU 使用率。
     - IO MBps: すべての TiKV インスタンスの合計 I/O スループット。
