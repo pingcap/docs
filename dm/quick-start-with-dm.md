@@ -187,8 +187,10 @@ On Enterprise Linux distributions like CentOS, you can install MySQL 8.0 from th
 2. Install MySQL:
 
     ```shell
-    sudo yum install -y mysql-community-server --nogpgcheck
+    sudo yum install -y mysql-community-server
     ```
+
+    If the installer reports a GPG signature verification error, follow the [MySQL Yum repository documentation](https://dev.mysql.com/doc/mysql-yum-repo-quick-guide/en/) to update the repository configuration or import the official GPG key. Do not bypass the error by disabling signature verification.
 
 3. Start MySQL:
 

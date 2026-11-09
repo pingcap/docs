@@ -159,14 +159,17 @@ Some operations in TiDB require writing temporary files to the server, so it is 
     >
     > If DDL operations on large objects exist in your application, it is highly recommended to configure an independent large file system for [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630).
 
+    The following example assumes that TiDB runs as the `tidb` user and group. If you use a different account, replace the user and group in the commands accordingly.
+
     ```shell
-    sudo mkdir -p /data/tidb-deploy/tempdir
+    sudo install -d -o tidb -g tidb -m 700 /data/tidb-deploy/tempdir
     ```
 
-    If the `/data/tidb-deploy/tempdir` directory already exists, make sure the write permission is granted.
+    If the `/data/tidb-deploy/tempdir` directory already exists, grant ownership to the user that runs TiDB and remove access for other users:
 
     ```shell
-    sudo chmod -R 777 /data/tidb-deploy/tempdir
+    sudo chown -R tidb:tidb /data/tidb-deploy/tempdir
+    sudo chmod -R u=rwX,go= /data/tidb-deploy/tempdir
     ```
 
     > **Note:**
