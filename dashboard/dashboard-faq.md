@@ -56,7 +56,7 @@ Prometheusインスタンスをデプロイしてもこの問題が引き続き�
 
 ### `required component NgMonitoring is not started`というエラーが表示されます {#a-required-component-ngmonitoring-is-not-started-error-is-shown}
 
-NgMonitoringは、TiDB v5.4.0以降のバージョンに組み込まれた高度な監視コンポーネントで、**継続的プロファイリング**や**Top SQL**などのTiDB Dashboard機能をサポートします。TiUPの新しいバージョンを使用してクラスターをデプロイまたはアップグレードすると、NgMonitoringが自動的にデプロイされます。TiDB Operatorを使用してデプロイされたクラスターの場合は、 [継続的プロファイリングを有効にする](https://docs.pingcap.com/tidb-in-kubernetes/v1.6/access-dashboard/#enable-continuous-profiling)を参照してNgMonitoringを手動でデプロイできます。
+NgMonitoringは、TiDB v5.4.0以降のバージョンに組み込まれた高度な監視コンポーネントで、**Continuous Profiling**や**Top SQL**などのTiDB Dashboard機能をサポートします。TiUPの新しいバージョンを使用してクラスターをデプロイまたはアップグレードすると、NgMonitoringが自動的にデプロイされます。TiDB Operatorを使用してデプロイされたクラスターの場合は、 [継続的プロファイリングを有効にする](https://docs.pingcap.com/tidb-in-kubernetes/v1.6/access-dashboard/#enable-continuous-profiling)を参照してNgMonitoringを手動でデプロイできます。
 
 Web ページに`required component NgMonitoring is not started`が表示されている場合は、次のようにしてデプロイメントの問題をトラブルシューティングできます。
 
@@ -133,10 +133,10 @@ tiup update playground
 
 1. TiDB Dashboard ページを開きます。
 
-2. 開発者ツールを開きます。ブラウザーによって開発者ツールの開き方が異なります。**メニューバー**をクリックした後、以下の手順に従ってください。
+2. 開発者ツールを開きます。ブラウザーによって開発者ツールの開き方が異なります。**Menu Bar**をクリックした後、以下の手順に従ってください。
 
-    - Firefox:**メニュー** > **Web 開発** > **ツールの切り替え**、または**ツール** > **Web 開発** > **ツールの切り替え**。
-    - Chrome:**その他のツール** > **開発者ツール**。
+    - Firefox:**Menu** > **Web Developer** > **Toggle Tools**、または**Tools** > **Web Developer** > **Toggle Tools**。
+    - Chrome:**More tools** > **Developer tools**。
     - Safari:**Develop** > **Show Web Inspector**。**Develop**メニューが表示されない場合は、 **Safari** > **Preferences** > **Advanced**に移動し、**Show Develop menu in menu bar**チェックボックスをオンにします。
 
     次の例では、Chrome が使用されています。
