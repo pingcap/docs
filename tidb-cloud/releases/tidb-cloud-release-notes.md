@@ -652,9 +652,9 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 - **TiDB Cloud Essential**
 
-    - [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)でごみ箱機能が利用可能になりました。ごみ箱には、有効なバックアップが存在する削除済みTiDB Cloudリソースのデータが保存されます。
+    - [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)で Recycle Bin 機能が利用可能になりました。Recycle Bin には、有効なバックアップが存在する削除済みTiDB Cloudリソースのデータが保存されます。
 
-        バックアップが存在するTiDB Cloud Essentialインスタンスが削除されると、そのバックアップファイルはごみ箱に移動されます。自動バックアップによって作成されたバックアップファイルは、指定された期間、ごみ箱に保持されます。データ損失を防ぐため、保持期間が終了する前に、新しいTiDB Cloud Essentialインスタンスにデータを復元してください。なお、 TiDB Cloud Essentialインスタンス**にバックアップがない**場合、削除されたインスタンスはごみ箱に表示されません。
+        バックアップが存在するTiDB Cloud Essentialインスタンスが削除されると、そのバックアップファイルは Recycle Bin に移動されます。自動バックアップによって作成されたバックアップファイルは、指定された期間、Recycle Bin に保持されます。データ損失を防ぐため、保持期間が終了する前に、新しいTiDB Cloud Essentialインスタンスにデータを復元してください。なお、 TiDB Cloud Essentialインスタンス**にバックアップがない**場合、削除されたインスタンスは Recycle Bin に表示されません。
 
         詳細については、 [バックアップと復元](/tidb-cloud/backup-and-restore-serverless.md#restore-from-recycle-bin)を参照してください。
 
