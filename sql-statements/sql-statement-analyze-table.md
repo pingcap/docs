@@ -25,7 +25,7 @@ AnalyzeOptionList ::=
 AnalyzeOption ( ',' AnalyzeOption )*
 
 AnalyzeOption ::=
-( NUM ( 'BUCKETS' | 'TOPN' | ( 'CMSKETCH' ( 'DEPTH' | 'WIDTH' ) ) | 'SAMPLES' ) ) | ( FLOATNUM 'SAMPLERATE' ) | ( 'DEFAULT' ( 'BUCKETS' | 'TOPN' | 'SAMPLES' | 'SAMPLERATE' ) )
+( NUM ( 'BUCKETS' | 'TOPN' | ( 'CMSKETCH' ( 'DEPTH' | 'WIDTH' ) ) | 'SAMPLES' ) ) | ( FLOATNUM ( 'SAMPLERATE' | 'NDVRATE' ) ) | ( 'DEFAULT' ( 'BUCKETS' | 'TOPN' | 'SAMPLES' | 'SAMPLERATE' | 'NDVRATE' ) )
 
 AnalyzeColumnOption ::=
 ( 'ALL COLUMNS' | 'PREDICATE COLUMNS' | 'COLUMNS' ColumnNameList )

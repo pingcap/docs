@@ -1193,6 +1193,24 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Range: `[1, 128]`. Before v8.4.0, the value range is `[1, 18446744073709551615]`.
 - For manual and auto `ANALYZE`, this variable controls the concurrency for saving `ANALYZE` results, including writing TopN and histograms to system tables.
 
+### tidb_analyze_sampled_ndv_threshold <span class="version-mark">New in v9.0.0</span>
+
+> **Note:**
+>
+> - For a newly deployed TiDB cluster, the default value of this variable is `100000000`.
+> - If you upgrade your TiDB cluster from a version earlier than v9.0.0 to v9.0.0 or later, TiDB sets this variable to `0`. This value keeps the original behavior.
+> - Before you set this variable to a value larger than `0`, make sure that you upgrade all TiDB and TiKV instances in the cluster. TiDB versions earlier than v9.0.0 cannot read the statistics that TiDB creates when sampling-based NDV collection is enabled.
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Integer
+- Default value: `100000000`
+- Range: `[0, 9223372036854775807]`
+- This variable sets a row count limit for sampling-based NDV collection. If a table or partition has more rows than this limit, `ANALYZE` estimates the number of distinct values (NDV) from a sample of rows. Otherwise, `ANALYZE` uses all rows to estimate NDV.
+- TiDB compares this value with the row count of each non-partitioned table and each partition. For more information, see [Sampling-based NDV collection](/statistics.md#sampling-based-ndv-collection).
+- The value `0` disables sampling-based NDV collection. In this case, `ANALYZE` uses all rows to estimate NDV. If an `ANALYZE` statement specifies an `NDVRATE` value less than `1`, TiDB returns an error.
+
 ### tidb_analyze_version <span class="version-mark">New in v5.1.0</span>
 
 > **Warning:**
