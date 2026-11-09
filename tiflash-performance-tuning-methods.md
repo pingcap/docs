@@ -76,7 +76,7 @@ summary: パフォーマンス概要ダッシュボードにTiFlashメトリッ�
     - TiFlashリソース、特に IO リソースが過負荷になっています。
     - TiKV とTiFlashの間にネットワークのボトルネックがあります。
 
-- Raft Batch Read Index Duration: すべてのTiFlashインスタンスのレイテンシーは`read_index` 。この指標が高すぎる場合、 TiFlashと TiKV 間のやり取りが遅いことを示しています。考えられる原因は以下のとおりです。
+- Raft Batch Read Index Duration: すべてのTiFlashインスタンスの`read_index`のレイテンシー。この指標が高すぎる場合、 TiFlashと TiKV 間のやり取りが遅いことを示しています。考えられる原因は以下のとおりです。
 
     - TiFlashリソースが過負荷になっています。
     - TiKV リソースが過負荷になっています。
