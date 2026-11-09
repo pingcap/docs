@@ -874,6 +874,13 @@ Referenced in:
 - [TiDB 8.2.0 Release Notes](/releases/release-8.2.0.md)
 - [TiDB 7.2.0 Release Notes](/releases/release-7.2.0.md)
 
+### tidb_analyze_store_batch_size
+
+Referenced in:
+
+- [Introduction to Statistics](/statistics.md)
+- [System Variables](/system-variables.md#tidb_analyze_store_batch_size-new-in-v900)
+
 ### tidb_analyze_version
 
 Referenced in:
