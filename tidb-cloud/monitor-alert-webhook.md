@@ -15,7 +15,7 @@ TiDB Cloud provides you with an easy way to subscribe to alert notifications via
 
 - The subscribing via webhook feature is only available for organizations that subscribe to the **Enterprise** or **Premium** support plan.
 
-- You need a webhook URL from the platform where you want to receive alert notifications on (for example, Telegram, Microsoft Teams, or your own on-call system that accepts HTTP POST requests with a JSON payload). Currently, TiDB Cloud does not support customizing the request headers or the payload format.
+- You need a webhook URL from the platform where you want to receive alert notifications on (for example, Telegram, Microsoft Teams, or your own on-call system that accepts HTTP POST requests with a JSON payload). Currently, TiDB Cloud does not support customizing the request headers or the payload format. For the payload format, see [Webhook payload](#webhook-payload).
 
 <CustomContent plan="dedicated">
 
@@ -94,6 +94,80 @@ Alternatively, you can also click **Subscribe** in the upper-right corner of the
 </CustomContent>
 
 If an alert condition remains unchanged, the alert sends notifications every three hours.
+
+## Webhook payload
+
+TiDB Cloud sends each alert notification to your webhook URL as an HTTP `POST` request with a JSON body. The payload is compatible with the [Alertmanager webhook format](https://prometheus.io/docs/alerting/latest/configuration/#webhook_config).
+
+### Endpoint requirements
+
+- The webhook URL must use `http` or `https`, be accessible from the public internet, and contain no more than 255 characters.
+- The webhook URL cannot contain a username or password.
+- The endpoint must return a `2xx` status code within 15 seconds. Redirects are not followed.
+
+### Payload fields
+
+| Field | Type | Description |
+|:---|:---|:---|
+| `receiver` | String | The receiver name. The value is always `webhook`. |
+| `status` | String | The alert status. Valid values are `firing` and `resolved`. |
+| `alerts` | Array | The alert list. Each request contains exactly one alert. |
+| `alerts[].status` | String | The alert status. Same as `status`. |
+| `alerts[].labels.cluster` | String | The name of the cluster or instance. |
+| `alerts[].labels.severity` | String | The alert severity, such as `critical`, `warning`, or `info`. |
+| `alerts[].labels.project` | String | The name of the project. Only available for TiDB Cloud Dedicated clusters. |
+| `alerts[].annotations.alertname` | String | The alert title. |
+| `alerts[].annotations.message` | String | The alert details. The value might contain HTML tags. |
+| `alerts[].startsAt` | String | The time when the alert is triggered, in RFC 3339 format. |
+| `alerts[].endsAt` | String | The time when the alert is resolved, in RFC 3339 format. Only available when `status` is `resolved`. |
+| `groupKey` | String | The identifier of the alert. Notifications of the same alert share the same value. Optional. |
+| `groupLabels` | Object | The same as `alerts[].labels`, without `project`. |
+| `commonLabels` | Object | The same as `alerts[].labels`, without `project`. |
+| `commonAnnotations` | Object | The same as `alerts[].annotations`, without `message`. |
+| `dryRun` | Boolean | Whether the request is a connection test. Only available in test notifications, with the value `true`. |
+
+### Payload example
+
+```json
+{
+  "receiver": "webhook",
+  "status": "firing",
+  "alerts": [
+    {
+      "status": "firing",
+      "labels": {
+        "cluster": "Cluster0",
+        "severity": "warning",
+        "project": "default project"
+      },
+      "annotations": {
+        "alertname": "Total TiKV CPU usage is too high",
+        "message": "The total CPU usage of TiKV nodes in cluster Cluster0 has exceeded 80% for 10 minutes."
+      },
+      "startsAt": "2026-10-10T08:00:00Z"
+    }
+  ],
+  "groupKey": "a1b2c3d4e5f60718",
+  "groupLabels": {
+    "cluster": "Cluster0",
+    "severity": "warning"
+  },
+  "commonLabels": {
+    "cluster": "Cluster0",
+    "severity": "warning"
+  },
+  "commonAnnotations": {
+    "alertname": "Total TiKV CPU usage is too high"
+  }
+}
+```
+
+### Notification behavior
+
+- When an alert is triggered, TiDB Cloud sends a notification with `status` set to `firing`. If the alert condition remains unchanged, the notification is sent again every three hours.
+- When an alert is resolved, TiDB Cloud sends a notification with `status` set to `resolved`.
+- If a request fails due to a network error, or the endpoint returns `429` or `5xx`, TiDB Cloud retries the request up to two times. Your endpoint might receive the same notification more than once.
+- When you save a webhook subscriber, TiDB Cloud sends a test notification with `dryRun` set to `true`. The subscriber is saved only if the test succeeds.
 
 ## Unsubscribe from alert notifications
 
