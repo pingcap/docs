@@ -116,10 +116,10 @@ TiKVコンポーネントのステータス概要は、主要な指標が表示�
     - count: 1秒あたりに処理された準備完了操作の数
     - has_ready_region: 1秒あたりに準備完了状態にあるリージョンの数
     - pending_region: 準備完了状態かどうかを確認しているリージョンの1秒あたりの操作数。このメトリックはv3.0.0以降非推奨です。
-    - メッセージ: 準備完了操作が1秒あたりに含むメッセージの数
-    - 追加: 準備完了操作が1秒あたりに含むRaftログエントリの数
+    - message: 準備完了操作が1秒あたりに含むメッセージの数
+    - append: 準備完了操作が1秒あたりに含むRaftログエントリの数
     - commit: 準備完了操作が1秒あたりにコミットするRaftログエントリの数
-    - スナップショット: 準備完了操作が1秒あたりに保持するスナップショットの数
+    - snapshot: 準備完了操作が1秒あたりに保持するスナップショットの数
 - 0.99 Duration of Raft store events：Raftstoreイベントにかかる時間（P99）
 - Process ready duration： Raftでプロセスが準備完了になるまでにかかる時間
 - Process ready duration per server：TiKVインスタンスごとに、 Raftでピアプロセスが準備完了になるまでにかかる時間。2秒未満（P99.99）である必要があります。
@@ -364,12 +364,12 @@ TiKVコンポーネントのステータス概要は、主要な指標が表示�
     - read_message: Raft Engineによる1秒あたりのRaftメタデータ読み取り操作の数
 - Write duration： Raft Engineによる書き込み操作にかかる時間。この時間は、これらのデータの書き込みに関わるディスクI/Oのレイテンシーの合計値にほぼ相当します。
 - Flow
-    - 書き込み: Raft Engineの書き込みトラフィック
-    - リライト追加: リライト追加ログのトラフィック
-    - リライトリライト: リライトのトラフィックリライトログ
+    - write: Raft Engineの書き込みトラフィック
+    - rewrite append: リライト追加ログのトラフィック
+    - rewrite rewrite: リライトのトラフィックリライトログ
 - Write Duration Breakdown (99%)
     - wal: Raft Engine WAL の書き込みレイテンシー
-    - 待機: 書き始める前の待ち時間
+    - wait: 書き始める前の待ち時間
     - apply:メモリにデータを適用するのにかかる時間
 - Bytes/Written: Raft Engineが毎回書き込むバイト数
 - WAL Duration Breakdown (P99%): Raft Engine WAL 作成の各段階に要した時間
