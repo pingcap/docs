@@ -1,6 +1,6 @@
 ---
 title: ti exec
-summary: Run remote commands on TiDB Cloud Filesystem, preserve workspace files, select execution options, and handle failures safely.
+summary: Run remote commands against a TiDB Cloud Filesystem, preserve workspace files, select execution options, and handle failures safely.
 ---
 
 # ti exec
@@ -9,11 +9,11 @@ summary: Run remote commands on TiDB Cloud Filesystem, preserve workspace files,
 
 > **Note:**
 >
-> Runtime is available only in AWS Oregon (`us-west-2`) and AWS N. Virginia (`us-east-1`). Use `aws-us-west-2` or `aws-us-east-1` as the CLI region code. You need a Runtime-enabled Filesystem in one of these regions. Support in the CLI does not enable Runtime on a server.
+> Runtime is available only in AWS Oregon (`us-west-2`) and AWS N. Virginia (`us-east-1`). Use `aws-us-west-2` or `aws-us-east-1` as the CLI region code. You need a Runtime-enabled Filesystem in one of these regions. CLI support for `ti exec` does not enable Runtime on the server.
 
 > **Warning:**
 >
-> Preview validation is incomplete. Cancellation in the current test environment can return an unknown outcome (`255`) without confirming whether the command has stopped. Verify the result before deciding whether to run the command again.
+> Validation of the preview `ti exec` feature is incomplete. Cancellation in the current test environment can return an unknown outcome (`255`) without confirming whether the command has stopped. Verify the result before deciding whether to run the command again.
 
 ## Prerequisites
 
@@ -24,7 +24,7 @@ summary: Run remote commands on TiDB Cloud Filesystem, preserve workspace files,
 
 ### Upgrade an existing installation
 
-Before upgrading, stop writers and unmount any Filesystem or Vault mounts. On macOS or Linux with a ti-owned installation, update to the latest release and verify the version:
+Before upgrading, stop writers and unmount any Filesystem or Vault mounts. On macOS or Linux with a user-owned installation of `ti`, update to the latest release and verify the version:
 
 ```bash
 ti update
@@ -43,7 +43,7 @@ ti exec [options] 'shell command line'
 
 Put `ti` options before the remote command. Arguments after it, including `--help`, belong to the remote command. A single shell command line is interpreted by `/bin/sh -c`; multiple arguments are passed directly.
 
-The server selects the execution backend. Supported commands can run in a lightweight shell executor without starting a sandbox. Unsupported commands use a sandbox before execution begins. Shell syntax alone does not determine the backend. A command that has started is never retried on another backend after failure.
+The server selects the execution backend. Commands supported by the lightweight shell executor can run without starting a sandbox. Other commands use a sandbox before execution begins. Shell syntax alone does not determine the backend. A command that has started is never retried on another backend after failure.
 
 The Filesystem is available at `/workspace`. Files outside `/workspace` are temporary. `--fresh` starts a new sandbox while keeping Filesystem data. `-w` chooses a working directory; it does not restrict access to that directory.
 
