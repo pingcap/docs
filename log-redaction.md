@@ -5,13 +5,13 @@ summary: Learn the log redaction in TiDB components.
 
 # Log Redaction
 
-When TiDB provides detailed log information, it might print sensitive data (for example, user data) in the log, which causes data security risks. To avoid such risks, each component provides a configuration item that redacts user data values. Starting from v8.5.9, log redaction is enabled by default. For an existing TiDB cluster, upgrading to v8.5.9 or a later version keeps the stored value of [`tidb_redact_log`](/system-variables.md#tidb_redact_log).
+TiDB components can write sensitive user data to logs. Starting from v8.5.9, supported components enable log redaction by default. Existing TiDB clusters retain the stored value of [`tidb_redact_log`](/system-variables.md#tidb_redact_log) after an upgrade. TiCDC log redaction is supported only in the [TiCDC new architecture](/ticdc/ticdc-architecture.md).
 
 ## Log redaction in TiDB side
 
 Starting from v8.5.9, a new cluster sets [`tidb_redact_log`](/system-variables.md#tidb_redact_log) to `ON` by default, so user data in TiDB logs is replaced with `?`. For an existing cluster, the upgrade keeps the value already stored in the cluster. Before v8.5.9, the default value is `OFF`.
 
-To enable log redaction, set `tidb_redact_log` to `ON` or `MARKER`. To disable log redaction, set it to `OFF`.
+To hide user data in logs, set `tidb_redact_log` to `ON`. To mark user data while retaining its original values, set it to `MARKER`. To disable log redaction, set it to `OFF`.
 
 You can use the `set` syntax to set the global variable `tidb_redact_log`:
 
@@ -85,7 +85,7 @@ Starting from v8.5.9, [`security.redact-info-log`](/ticdc/ticdc-server-config.md
 
 ## Log redaction in TiDB Lightning
 
-Starting from v8.5.9, [`security.redact-info-log`](/tidb-lightning/tidb-lightning-configuration.md#redact-info-log) defaults to `true`. TiDB Lightning then replaces sensitive information in logs with `?`. Set it to `false`, or pass `--redact-info-log=false`, to disable log redaction. An explicit command-line value overrides the configuration file. Before v8.5.9, the default value is `false`.
+Starting from v8.5.9, [`security.redact-info-log`](/tidb-lightning/tidb-lightning-configuration.md#redact-info-log) defaults to `true`. TiDB Lightning then replaces sensitive information in logs with `?`. Set it to `false`, or pass `--redact-info-log=false`, to disable log redaction. Starting from v8.5.9, an explicit command-line value overrides the configuration file. In v8.5.8 and earlier versions, `--redact-info-log=false` leaves `redact-info-log = true` in the configuration file unchanged, so set `redact-info-log = false` in the configuration file to disable log redaction. Before v8.5.9, the default value is `false`.
 
 ## Log redaction in DM-worker side
 
@@ -93,4 +93,4 @@ Starting from v8.5.9, [`redact-info-log`](/dm/dm-worker-configuration-file.md#re
 
 ## Log redaction in sync-diff-inspector
 
-Starting from v8.5.9, the top-level configuration item `redact-info-log` and the `--redact-info-log` flag default to `true`. sync-diff-inspector then replaces sensitive log fields with `?`, including SQL statements and their arguments, row values, chunk and histogram bounds, configuration dumps, column metadata, and comparison errors. Queries sent to the database, checkpoints, and generated fix SQL keep the original values. Set `redact-info-log` to `false`, or pass `--redact-info-log=false`, to disable log redaction. An explicit command-line value overrides the configuration file. If the configuration file has a syntax error, pass `--redact-info-log=false` on the command line to show the parsing error details. For more information, see [sync-diff-inspector User Guide](/sync-diff-inspector/sync-diff-inspector-overview.md#log-redaction-new-in-v859-and-v900).
+Starting from v8.5.9, the top-level configuration item `redact-info-log` and the `--redact-info-log` flag default to `true`. sync-diff-inspector then replaces sensitive log fields with `?`, including SQL statements and their arguments, row values, chunk and histogram bounds, configuration dumps, column metadata, and comparison errors. Queries sent to the database, checkpoints, and generated fix SQL keep the original values. Console and report errors still include connection addresses and file paths. Other annotations and data-bearing messages are replaced with `details redacted`. Set `redact-info-log` to `false`, or pass `--redact-info-log=false`, to disable log redaction. An explicit command-line value overrides the configuration file. If the configuration file has a syntax error, pass `--redact-info-log=false` on the command line to show the parsing error details. For more information, see [sync-diff-inspector User Guide](/sync-diff-inspector/sync-diff-inspector-overview.md#log-redaction-new-in-v859-and-v900).

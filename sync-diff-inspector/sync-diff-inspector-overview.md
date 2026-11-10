@@ -201,7 +201,7 @@ collation = ""
 
 Starting from v8.5.9, sync-diff-inspector enables log redaction by default. Set the top-level configuration item `redact-info-log` to `false`, or pass `--redact-info-log=false`, to disable it. An explicit command-line value overrides the configuration file.
 
-When log redaction is enabled, sync-diff-inspector replaces sensitive log fields with `?`. This includes SQL statements and their arguments, row values, chunk and histogram bounds, configuration dumps, column metadata, and comparison errors. SQL text can contain literals from a configured `range`, and column definitions can contain default values, generated expressions, and enum or set literals. Queries sent to the database, checkpoints, and generated fix SQL keep the original values.
+When log redaction is enabled, sync-diff-inspector replaces sensitive log fields with `?`. This includes SQL statements and their arguments, row values, chunk and histogram bounds, configuration dumps, column metadata, and comparison errors. SQL text can contain literals from a configured `range`, and column definitions can contain default values, generated expressions, and enum or set literals. Queries sent to the database, checkpoints, and generated fix SQL keep the original values. Console and report errors still include connection addresses and file paths. Other annotations and data-bearing messages are replaced with `details redacted`.
 
 If the configuration file has a syntax error, sync-diff-inspector cannot read `redact-info-log` from that file. Pass `--redact-info-log=false` on the command line to show the details of a configuration parsing error.
 
