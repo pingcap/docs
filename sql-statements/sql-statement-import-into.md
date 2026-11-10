@@ -115,7 +115,7 @@ It specifies the storage location of the data file, which can be an Amazon S3 or
 
 - Amazon S3 or GCS URI path: for URI configuration details, see [URI Formats of External Storage Services](/external-storage-uri.md).
 
-- TiDB local file path: it must be an absolute path, and the file extension must be `.csv`, `.sql`, or `.parquet`. Make sure that the files corresponding to this path are stored on the TiDB node connected by the current user, and the user has the `FILE` privilege.
+- TiDB local file path: it must be an absolute path, and its final suffix must be `.csv`, `.sql`, `.parquet`, `.gz`, `.gzip`, `.zstd`, `.zst`, or `.snappy` (case-insensitive). Make sure that the files corresponding to this path are stored on the TiDB node connected by the current user, and the user has the `FILE` privilege.
 
 > **Note:**
 >
@@ -132,7 +132,29 @@ In the `fileLocation` parameter, you can specify a single file, or use the `*` a
 
 ### Format
 
-The `IMPORT INTO` statement supports three data file formats: `CSV`, `SQL`, and `PARQUET`. If not specified, the default format is `CSV`.
+The `IMPORT INTO` statement supports three data file formats: `CSV`, `SQL`, and `PARQUET`. When you specify the `FORMAT` clause, TiDB uses that format for parsing instead of detecting it from the file extension. For TiDB local file paths, the final suffix validation described above still applies.
+
+<CustomContent platform="tidb">
+
+Starting from v8.5.7, if you omit `FORMAT`, TiDB automatically detects the format from the `.csv`, `.sql`, or `.parquet` file extension. Detection is case-insensitive. For compressed files, TiDB ignores the `.gz`, `.gzip`, `.zstd`, `.zst`, or `.snappy` compression suffix before detecting the data file format. If the remaining file name has no extension or an unrecognized extension, TiDB treats the file as `CSV`.
+
+For a TiDB local file path, the final suffix validation described above runs before format detection. A local path without a supported final suffix is rejected instead of falling back to `CSV`.
+
+In v8.5.6 and earlier versions, TiDB treats the file as `CSV` when you omit `FORMAT`.
+
+After upgrading to v8.5.7 or later, if an existing import relies on CSV parsing for a file whose name indicates another supported format, specify `FORMAT 'CSV'` to preserve the earlier behavior.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+If you omit `FORMAT`, TiDB automatically detects the format from the `.csv`, `.sql`, or `.parquet` file extension. Detection is case-insensitive. For compressed files, TiDB ignores the `.gz`, `.gzip`, `.zstd`, `.zst`, or `.snappy` compression suffix before detecting the data file format. If the remaining file name has no extension or an unrecognized extension, TiDB treats the file as `CSV`.
+
+</CustomContent>
+
+> **Note:**
+>
+> For wildcard paths, when `FORMAT` is omitted, TiDB detects the format from an arbitrary matched file and applies that format to every matched file. Make sure that all matched files use the same data file format. If any matched file uses another format, the import can fail during parsing. Use separate `IMPORT INTO` statements for different formats.
 
 ### WithOptions
 
