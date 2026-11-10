@@ -391,7 +391,7 @@ Before you use DM to migrate data from upstream to downstream, a precheck helps 
 
 ### Step 2. Replicate data
 
-For a test or development environment, follow the [Quick Start Guide for TiDB Data Migration](/dm/quick-start-with-dm.md) to replicate your data from MariaDB to TiDB. For production deployments, see [Deploy a DM Cluster Using TiUP](/dm/deploy-a-dm-cluster-using-tiup.md).
+For a test or development environment, follow the [Quick Start Guide for TiDB Data Migration](/dm/quick-start-with-dm.md) to replicate your data from MariaDB to TiDB. For production deployments, see [Deploy a DM Cluster Using TiUP](/dm/deploy-a-dm-cluster-using-tiup.md). After deployment, follow [Migrate Data Using Data Migration](/dm/migrate-data-using-dm.md) to create a source and configure and start a migration task.
 
 Note that it is not required to first copy the initial data as you would do with MariaDB to MariaDB replication, DM will do this for you.
 
