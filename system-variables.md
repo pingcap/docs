@@ -5775,10 +5775,11 @@ SHOW WARNINGS;
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Enumeration
-- Default value: `OFF`
+- Default value: `ON`
 - Possible values: `OFF`, `ON`, `MARKER`
 - This variable controls whether to hide the user information in the SQL statement being recorded into the TiDB log and slow log.
-- The default value is `OFF`, which means that the user information is not processed in any way.
+- For new clusters of v8.5.9 or later versions, the default value is `ON`. For existing clusters that upgrade from versions earlier than v8.5.9, the persisted value of this variable stays unchanged. Before v8.5.9, the default value is `OFF`.
+- When you set the variable to `OFF`, the user information is not processed in any way.
 - When you set the variable to `ON`, the user information is hidden. For example, if the executed SQL statement is `INSERT INTO t VALUES (1,2)`, the statement is recorded as `INSERT INTO t VALUES (?,?)` in the log.
 - When you set the variable to `MARKER`, the user information is wrapped in `‹ ›`. For example, if the executed SQL statement is `INSERT INTO t VALUES (1,2)`, the statement is recorded as `INSERT INTO t VALUES (‹1›,‹2›)` in the log. If user data contains `‹` or `›`, `‹` is escaped as `‹‹`, and `›` is escaped as `››`. Based on the marked logs, you can decide whether to desensitize the marked information when the logs are displayed.
 

@@ -515,7 +515,7 @@ Configure security related settings.
 ##### `redact_info_log` <span class="version-mark">New in v5.0</span>
 
 - Controls whether to enable log redaction.
-- Default value: `false`
+- Default value: Before v8.5.9, the default value is `false`. Starting from v8.5.9, the default value is `true`. If this item is omitted, log redaction is enabled, including after an upgrade. To keep logs unredacted, set this item to `false` or `"off"`.
 - Value options: `true`, `false`, `"on"`, `"off"`, and `"marker"`. The `"on"`, `"off"`, and `"marker"` options are introduced in v8.2.0.
 - If the configuration item is set to `false` or `"off"`, log redaction is disabled.
 - If the configuration item is set to `true` or `"on"`, all user data in the log is replaced by `?`.
@@ -595,7 +595,7 @@ The parameters in `tiflash-learner.toml` are basically the same as those in TiKV
 ##### `redact-info-log` <span class="version-mark">New in v5.0</span>
 
 - Controls whether to enable log redaction.
-- Default value: `false`
+- Default value: Before v8.5.9, the default value is `false`. Starting from v8.5.9, the default value is `true`. If this item is omitted, log redaction is enabled, including after an upgrade. To keep logs unredacted, set this item to `false` or `"off"`.
 - Value options: `true`, `false`, `"on"`, `"off"`, and `"marker"`. The `"on"`, `"off"`, and `"marker"` options are introduced in v8.3.0.
 - If the configuration item is set to `false` or `"off"`, log redaction is disabled.
 - If the configuration item is set to `true` or `"on"`, all user data in the log is replaced by `?`.

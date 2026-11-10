@@ -115,7 +115,7 @@ TiDB Lightning has two configuration classes: "global" and "task", and they have
 
 ### security
 
-The `security` section specifies certificates and keys for TLS connections within the cluster.
+The `security` section specifies certificates and keys for TLS connections within the cluster, and controls log redaction.
 
 #### `ca-path`
 
@@ -134,6 +134,13 @@ The `security` section specifies certificates and keys for TLS connections withi
 - Specifies the private key of this service.
 
 <!-- Example: `"/path/to/lightning.key"` -->
+
+#### `redact-info-log`
+
+- Controls whether to redact sensitive information in TiDB Lightning logs. When the value is `true`, sensitive information is replaced with `?`.
+- Default value: Before v8.5.9, the default value is `false`. Starting from v8.5.9, the default value is `true`.
+- Value options: `false`, `true`
+- You can also set this item with the `--redact-info-log` command-line flag. An explicit command-line value overrides the configuration file.
 
 ### checkpoint
 
