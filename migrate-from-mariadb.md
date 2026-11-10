@@ -352,7 +352,7 @@ Perform the following steps to migrate data from MariaDB to TiDB:
     tiup dumpling --port 3306 --host 127.0.0.1 --user root --password secret -F 256MB  -o /data/backup
     ```
 
-3. Restore the data by using the `tiup tidb-lightning` command. For more information about how to configure TiDB Lightning and how to run it, see [Get Started with TiDB Lightning](/get-started-with-tidb-lightning.md).
+3. Restore the data by using the `tiup tidb-lightning` command. For a test or trial environment, see [Get Started with TiDB Lightning](/get-started-with-tidb-lightning.md). For production migration planning and configuration, see [Migrate Large Datasets from MySQL to TiDB](/migrate-large-mysql-to-tidb.md).
 
 4. Migrate user accounts and permissions. For more information about how to migrate your users and permissions, see [Export users and grants](#export-users-and-grants).
 
@@ -374,19 +374,24 @@ To use DM, you need to deploy a set of DM services either with a [TiUP cluster](
 
 Enable binlog on MariaDB and set `binlog_format=ROW`, `binlog_row_image=FULL`, and `binlog_legacy_event_pos=ON`. Also set `binlog_annotate_row_events=OFF` and `log_bin_compress=OFF`.
 
-You also need an account with the `SUPER` permission or with the `BINLOG MONITOR` and `REPLICATION MASTER ADMIN` permissions. This account also needs read permission for the schemas you are going to migrate.
+You also need an account with the privileges required by your MariaDB version. For the version-specific privilege requirements, see [Upstream database user privileges](/dm/dm-worker-intro.md#upstream-database-user-privileges) in *DM-worker Introduction*. The account also needs read permission for the schemas you are going to migrate.
 
-If you are not using an account with the `SUPER` permission, then you might have to add the following to the DM configuration, because TiDB does not yet know how to check for MariaDB specific permissions.
+Because MariaDB reports some privileges differently from MySQL, `dmctl check-task` might report privilege errors even when the account has the required privileges. For DM v8.5.6, if the precheck returns `[code=26005] fail to check synchronization configuration` for the replication privilege, dump privilege, or dump connection number check, add only the following items to the task configuration file:
 
 ```yaml
-ignore-checking-items: ["replication_privilege"]
+ignore-checking-items:
+  - replication_privilege
+  - dump_privilege
+  - conn_number
 ```
 
-Before you use DM to migrate data from upstream to downstream, a precheck helps detect errors in the upstream database configurations and ensures that the migration goes smoothly. For more information, see [Migration Task Precheck](/dm/dm-precheck.md)
+Before using this workaround, manually verify the corresponding privileges and connection limit.
+
+Before you use DM to migrate data from upstream to downstream, a precheck helps detect errors in the upstream database configurations and ensures that the migration goes smoothly. For more information, see [Migration Task Precheck](/dm/dm-precheck.md).
 
 ### Step 2. Replicate data
 
-Follow the [Quick Start Guide for TiDB Data Migration](/dm/quick-start-with-dm.md) to replicate your data from MariaDB to TiDB.
+For a test or development environment, follow the [Quick Start Guide for TiDB Data Migration](/dm/quick-start-with-dm.md) to replicate your data from MariaDB to TiDB. For production deployments, see [Deploy a DM Cluster Using TiUP](/dm/deploy-a-dm-cluster-using-tiup.md).
 
 Note that it is not required to first copy the initial data as you would do with MariaDB to MariaDB replication, DM will do this for you.
 
