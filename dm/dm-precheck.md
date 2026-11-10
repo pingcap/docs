@@ -162,6 +162,7 @@ Prechecks can find potential risks in your environments. It is not recommended t
 | :-------------------------- | :------------ |
 | `dump_privilege`            | Checks the dump privilege of the user in the upstream MySQL instance. |
 | `replication_privilege`     | Checks the replication privilege of the user in the upstream MySQL instance. |
+| `conn_number`               | Checks whether the upstream and downstream databases have enough available connections for the migration. |
 | `version`                   | Checks the version of the upstream database. |
 | `server_id`                 | Checks whether server_id is configured in the upstream database. |
 | `binlog_enable`             | Checks whether binlog is enabled in the upstream database. |
