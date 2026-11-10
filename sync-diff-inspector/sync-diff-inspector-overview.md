@@ -96,9 +96,10 @@ Below is the description of a complete configuration file:
 # The number of goroutines created to check data. The number of connections between sync-diff-inspector and upstream/downstream databases is slightly greater than this value.
 check-thread-count = 4
 
-# Controls whether to redact sensitive information in logs. Starting from v8.5.9, the default value is true.
-# Set it to false to show the original values. An explicit --redact-info-log flag overrides this setting.
-redact-info-log = true
+# Starting from v8.5.9, log redaction is enabled by default.
+# For v8.5.9 and later, set this to false to disable redaction. An explicit --redact-info-log=false flag overrides this setting.
+# Versions earlier than v8.5.9 do not recognize this key, so keep it commented out unless you use v8.5.9 or later.
+# redact-info-log = true
 
 # If enabled, SQL statements is exported to fix inconsistent tables.
 export-fix-sql = true
