@@ -76,7 +76,7 @@ In versions earlier than v8.5.6, DM creates foreign key constraints in the downs
       - conn_number
     ```
 
-    Before using this workaround, manually verify the corresponding privileges and connection limit. For more information, see [Upstream database user privileges](/dm/dm-worker-intro.md#upstream-database-user-privileges) in *DM-worker Introduction* and [DM precheck](/dm/dm-precheck.md).
+    Before using this workaround, manually verify the corresponding privileges and connection limit. For more information, see [Upstream database user privileges](/dm/dm-worker-intro.md#upstream-database-user-privileges) and [DM precheck](/dm/dm-precheck.md).
 
 ## Target databases
 

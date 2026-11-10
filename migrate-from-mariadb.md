@@ -374,7 +374,7 @@ To use DM, you need to deploy a set of DM services either with a [TiUP cluster](
 
 Enable binlog on MariaDB and set `binlog_format=ROW`, `binlog_row_image=FULL`, and `binlog_legacy_event_pos=ON`. Also set `binlog_annotate_row_events=OFF` and `log_bin_compress=OFF`.
 
-You also need an account with the privileges required by your MariaDB version. For the version-specific privilege requirements, see [Upstream database user privileges](/dm/dm-worker-intro.md#upstream-database-user-privileges) in *DM-worker Introduction*. The account also needs read permission for the schemas you are going to migrate.
+You also need an account with the privileges required by your MariaDB version. For the version-specific privilege requirements, see [Upstream database user privileges](/dm/dm-worker-intro.md#upstream-database-user-privileges). The account also needs read permission for the schemas you are going to migrate.
 
 Because MariaDB reports some privileges differently from MySQL, `dmctl check-task` might report privilege errors even when the account has the required privileges. For DM v8.5.6, if the precheck returns `[code=26005] fail to check synchronization configuration` for the replication privilege, dump privilege, or dump connection number check, add only the following items to the task configuration file:
 
