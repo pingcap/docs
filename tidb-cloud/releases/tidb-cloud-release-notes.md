@@ -14,6 +14,8 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - TiDB Cloud now supports IP allowlists for API keys. Organization owners can specify allowed IPv4 addresses or CIDR ranges for each API key in the TiDB Cloud console. After an allowlist is configured, the API key can be used to send control plane API requests only from the specified IP addresses, reducing the risk of unauthorized use.
 
+    For more information, see [API key management](https://docs.pingcap.com/tidbcloud/api/v1beta/#section/Authentication/API-key-management).
+
 ## November 6, 2026
 
 **API changes**
