@@ -32,7 +32,9 @@ ti --version
 ti exec --help
 ```
 
-The updater replaces both `ti` and its companion. On Windows, rerun the PowerShell installer; in-place self-update is unsupported. For installation steps, see [Install TiDB Cloud CLI](/ai/ti/reference/ti-install-configure-update.md#install-tidb-cloud-cli).
+When `ti update` installs a different `ti` version, it also replaces the `ti-drive9` companion. If `ti` is already at the requested version, the updater does not refresh the companion. To refresh an outdated companion on macOS or Linux, rerun the shell installer; use `--install-dir` to retain a custom installation directory.
+
+On Windows, rerun the PowerShell installer; in-place self-update is unsupported. For installation steps, see [Install TiDB Cloud CLI](/ai/ti/reference/ti-install-configure-update.md#install-tidb-cloud-cli).
 
 ## Syntax and execution
 
