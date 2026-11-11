@@ -20,6 +20,8 @@ on:
       - release-3.0
       - i18n-zh-release-8.5
 
+permissions: {}
+
 jobs:
   trigger:
     if: github.repository == 'pingcap/docs'
@@ -47,6 +49,7 @@ jobs:
             -f "inputs[branch]=$SOURCE_BRANCH"
 
       - name: trigger docs-staging nextgen workflow
+        if: ${{ !cancelled() }}
         env:
           GH_TOKEN: ${{ secrets.DOCS_STAGING }}
           SOURCE_BRANCH: ${{ github.ref_name }}
