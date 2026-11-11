@@ -1199,7 +1199,6 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 >
 > - For a newly deployed TiDB cluster, the default value of this variable is `100000000`.
 > - If you upgrade your TiDB cluster from a version earlier than v9.0.0 to v9.0.0 or later, TiDB sets this variable to `0`. This value keeps the original behavior.
-> - Before you set this variable to a value larger than `0`, make sure that you upgrade all TiDB and TiKV instances in the cluster. TiDB versions earlier than v9.0.0 cannot read the statistics that TiDB creates when sampling-based NDV collection is enabled.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
