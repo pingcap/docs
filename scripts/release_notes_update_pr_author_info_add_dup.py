@@ -3,7 +3,7 @@
 # 2. Add the history duplicated release notes based on issue links and author info. The duplicate release notes in the same series will be not added. For example, if you are working on v6.5.4 release notes, the notes from other v6.5.x with the same issue number will not be counted and added as duplicated notes.
 # 3. Make a copy of the patch release note template file and write the duplicated release notes to the copy.
 
-# Before running this script, you need to get a GitHub personal access token (https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) and save it in a text file.
+# Before running this script, export a GitHub personal access token as GITHUB_TOKEN or GH_TOKEN.
 
 # -*- coding: utf-8 -*-
 
@@ -20,8 +20,9 @@ release_note_excel = r'/Users/userid/Downloads/download_tirelease_tmp_patch_6.5.
 ext_path = r'/Users/userid/Documents/GitHub/mygithubid/docs-cn/releases'  # Specifies the path of the existing release notes
 template_file = r'/Users/userid/Documents/GitHub/mygithubid/docs/resources/doc-templates/patch_release_note_template_zh.md' # Specifies the path of the release note template file
 
-with open("/Users/userid/Documents/PingCAP/Python_scripts/GitHub/gh_token2.txt", "r") as f: # Read the GitHub personal access token from the token.txt file
-    access_token = f.read().strip()
+access_token = os.environ.get("GITHUB_TOKEN") or os.environ.get("GH_TOKEN")
+if not access_token:
+    raise RuntimeError("Set GITHUB_TOKEN or GH_TOKEN before running this script.")
 
 # Get the issue info of the existing release notes
 def store_exst_rn(ext_path, version):
