@@ -25,6 +25,7 @@ jobs:
   sync-docs:
     runs-on: ubuntu-latest
     if: >
+      github.repository == 'pingcap/docs' &&
       contains(fromJson('["lilin90","qiancai","seominjea1942"]'), github.actor) &&
       contains(fromJson('["lilin90","qiancai","seominjea1942"]'), github.triggering_actor)
 
