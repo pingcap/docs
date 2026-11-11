@@ -7,13 +7,21 @@ summary: Learn about the compatibility of TiDB with MySQL, and the unsupported a
 
 <CustomContent platform="tidb">
 
+<<<<<<< HEAD
 TiDB is highly compatible with the MySQL protocol and the common features and syntax of MySQL 5.7 and MySQL 8.0. The ecosystem tools for MySQL (PHPMyAdmin, Navicat, MySQL Workbench, DBeaver and [more](/develop/dev-guide-third-party-support.md#gui)) and the MySQL client can be used for TiDB.
+=======
+TiDB is highly compatible with the MySQL protocol and the common features and syntax of MySQL 8.x. The ecosystem tools for MySQL (phpMyAdmin, Navicat, MySQL Workbench, DBeaver and [more](/develop/dev-guide-third-party-support.md#gui)) and the MySQL client can be used for TiDB.
+>>>>>>> e593e501e5 (Unify the notation of product names and common terms across the docs (#24605))
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
+<<<<<<< HEAD
 TiDB is highly compatible with the MySQL protocol and the common features and syntax of MySQL 5.7 and MySQL 8.0. The ecosystem tools for MySQL (PHPMyAdmin, Navicat, MySQL Workbench, DBeaver and [more](https://docs.pingcap.com/tidb/stable/dev-guide-third-party-support#gui)) and the MySQL client can be used for TiDB.
+=======
+TiDB is highly compatible with the MySQL protocol and the common features and syntax of MySQL 8.x. The ecosystem tools for MySQL (phpMyAdmin, Navicat, MySQL Workbench, DBeaver and [more](https://docs.pingcap.com/tidb/stable/dev-guide-third-party-support#gui)) and the MySQL client can be used for TiDB.
+>>>>>>> e593e501e5 (Unify the notation of product names and common terms across the docs (#24605))
 
 </CustomContent>
 

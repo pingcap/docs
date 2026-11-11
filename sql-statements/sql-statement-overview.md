@@ -202,6 +202,7 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 
 <CustomContent platform="tidb">
 
+<<<<<<< HEAD
 | SQL Statement | Description |
 |---------------|-------------|
 | [`SHOW BUILTINS`](/sql-statements/sql-statement-show-builtins.md) | Lists builtin functions. |
@@ -211,11 +212,23 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | [`SHOW STATUS`](/sql-statements/sql-statement-show-status.md) | Included for [compatibility with MySQL](/mysql-compatibility.md). TiDB uses [Prometheus and Grafana](/tidb-monitoring-framework.md) for centralized metrics collection instead of `SHOW STATUS` for most metrics. |
 | [`SHOW VARIABLES`](/sql-statements/sql-statement-show-variables.md) | Shows system variables. |
 | [`SHOW WARNINGS`](/sql-statements/sql-statement-show-warnings.md) | Shows warnings and notes from previously executed statements. |
+=======
+| SQL Statement                                                               | Description                                                                                                                                                                                                       |
+| --------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`SHOW BUILTINS`](/sql-statements/sql-statement-show-builtins.md)           | Lists built-in functions.                                                                                                                                                                                          |
+| [`SHOW CHARACTER SET`](/sql-statements/sql-statement-show-character-set.md) | Lists character sets.                                                                                                                                                                                             |
+| [`SHOW COLLATIONS`](/sql-statements/sql-statement-show-collation.md)        | Lists collations.                                                                                                                                                                                                 |
+| [`SHOW ERRORS`](/sql-statements/sql-statement-show-errors.md)               | Shows errors from previously executed statements.                                                                                                                                                                 |
+| [`SHOW STATUS`](/sql-statements/sql-statement-show-status.md)               | Included for [compatibility with MySQL](/mysql-compatibility.md). TiDB uses [Prometheus and Grafana](/tidb-monitoring-framework.md) for centralized metrics collection instead of `SHOW STATUS` for most metrics. |
+| [`SHOW VARIABLES`](/sql-statements/sql-statement-show-variables.md)         | Shows system variables.                                                                                                                                                                                           |
+| [`SHOW WARNINGS`](/sql-statements/sql-statement-show-warnings.md)           | Shows warnings and notes from previously executed statements.                                                                                                                                                     |
+>>>>>>> e593e501e5 (Unify the notation of product names and common terms across the docs (#24605))
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
+<<<<<<< HEAD
 | SQL Statement | Description |
 |---------------|-------------|
 | [`SHOW BUILTINS`](/sql-statements/sql-statement-show-builtins.md) | Lists builtin functions. |
@@ -225,6 +238,17 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | [`SHOW STATUS`](/sql-statements/sql-statement-show-status.md) | Included for [compatibility with MySQL](/mysql-compatibility.md). TiDB Cloud provides [Monitoring](/tidb-cloud/monitor-tidb-cluster.md) for centralized metrics collection instead of `SHOW STATUS` for most metrics. |
 | [`SHOW VARIABLES`](/sql-statements/sql-statement-show-variables.md) | Shows system variables. |
 | [`SHOW WARNINGS`](/sql-statements/sql-statement-show-warnings.md) | Shows warnings and notes from previously executed statements. |
+=======
+| SQL Statement                                                               | Description                                                                                                                                                                                                           |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`SHOW BUILTINS`](/sql-statements/sql-statement-show-builtins.md)           | Lists built-in functions.                                                                                                                                                                                              |
+| [`SHOW CHARACTER SET`](/sql-statements/sql-statement-show-character-set.md) | Lists character sets.                                                                                                                                                                                                 |
+| [`SHOW COLLATIONS`](/sql-statements/sql-statement-show-collation.md)        | Lists collations.                                                                                                                                                                                                     |
+| [`SHOW ERRORS`](/sql-statements/sql-statement-show-errors.md)               | Shows errors from previously executed statements.                                                                                                                                                                     |
+| [`SHOW STATUS`](/sql-statements/sql-statement-show-status.md)               | Included for [compatibility with MySQL](/mysql-compatibility.md). TiDB Cloud provides [Monitoring](/tidb-cloud/monitor-tidb-cluster.md) for centralized metrics collection instead of `SHOW STATUS` for most metrics. |
+| [`SHOW VARIABLES`](/sql-statements/sql-statement-show-variables.md)         | Shows system variables.                                                                                                                                                                                               |
+| [`SHOW WARNINGS`](/sql-statements/sql-statement-show-warnings.md)           | Shows warnings and notes from previously executed statements.                                                                                                                                                         |
+>>>>>>> e593e501e5 (Unify the notation of product names and common terms across the docs (#24605))
 
 </CustomContent>
 

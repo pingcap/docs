@@ -20,12 +20,12 @@ On May 16, 2018, TiDB 2.0.1 is released. Compared with TiDB 2.0.0 (GA), this rel
 - Fix a compatibility issue of the `UNION` statement
 - Fix a compatibility issue when inserting data of `TIME` type
 - Fix a goroutine leak issue caused by `copIteratorTaskSender` in some conditions
-- Add an option for TiDB to control the behaviour of Binlog failure
+- Add an option for TiDB to control the behavior of Binlog failure
 - Refactor the `Coprocessor` slow log to distinguish between the scenario of tasks with long processing time and long waiting time
 - Log nothing when meeting MySQL protocol handshake error, to avoid too many logs caused by the load balancer Keep Alive mechanism
 - Refine the "Out of range value for column" error message
 - Fix a bug when there is a subquery in an `Update` statement
-- Change the behaviour of handling `SIGTERM`, and do not wait for all queries to terminate anymore
+- Change the behavior of handling `SIGTERM`, and do not wait for all queries to terminate anymore
 
 ## PD
 
