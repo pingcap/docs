@@ -69,6 +69,8 @@ If multiple matching load balancers are listed, use their VPC IDs and deployment
 
 Your Grafana environment must be able to resolve the metrics endpoint DNS name and access the endpoint over HTTPS on TCP port `443`.
 
+Keep the metrics endpoint accessible only from trusted monitoring environments. Configure security groups and network connectivity to allow only the required monitoring traffic, and do not expose the endpoint to the public internet.
+
 ### Same VPC
 
 If Grafana and the BYOC observability (O11Y) endpoint are in the same VPC:

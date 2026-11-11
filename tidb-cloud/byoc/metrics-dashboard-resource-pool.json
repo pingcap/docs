@@ -2826,30 +2826,6 @@
           "uid": "${DS_PROMETHEUS}"
         },
         "definition": "label_values(up{component=\"pd\"},sharedpool_id)",
-        "error": {
-          "config": {
-            "data": {
-              "end": "1793957903",
-              "match[]": "up{component=\"pd\"}",
-              "start": "1793956103"
-            },
-            "headers": {
-              "Content-Type": "application/x-www-form-urlencoded",
-              "X-Grafana-Org-Id": 1
-            },
-            "hideFromInspector": true,
-            "method": "POST",
-            "retry": 0,
-            "showErrorAlert": false,
-            "url": "api/datasources/284/resources/api/v1/series"
-          },
-          "data": {
-            "Message": "User: arn:aws:sts::863857863875:assumed-role/tidbcloud-o11y-apigw-role/kong-plugin-session-assume is not authorized to perform: execute-api:Invoke on resource: arn:aws:execute-api:ap-northeast-1:********3875:6tdtl0p326/tidbcloud/POST/ds/internal/v2/metrics/multitenant/api/v1/series with an explicit deny in an identity-based policy"
-          },
-          "message": "Query error: 403 ",
-          "status": 403,
-          "statusText": ""
-        },
         "hide": 0,
         "includeAll": false,
         "label": "Resource Pool ID",
