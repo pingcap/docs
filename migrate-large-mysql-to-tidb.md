@@ -250,7 +250,7 @@ If the import fails, refer to [TiDB Lightning FAQ](/tidb-lightning/tidb-lightnin
     #     safe-mode: true # If this field is set to true, DM changes INSERT of the data source to REPLACE for the target database, and changes UPDATE of the data source to DELETE and REPLACE for the target database. This is to ensure that when the table schema contains a primary key or unique index, DML statements can be imported repeatedly. In the first minute of starting or resuming an incremental replication task, DM automatically enables the safe mode.
     ```
 
-    The example above uses the binlog file and position recorded in Step 1 because the `metadata` file shows an empty `GTID` field. If GTID is enabled in the upstream MySQL, set `enable-gtid` to `true`, comment out `binlog-name` and `binlog-pos`, and configure `binlog-gtid` instead.
+    The example above uses the binlog file and position recorded in Step 1 because the `metadata` file shows an empty `GTID` field. If GTID is enabled in the upstream MySQL and you need GTID mode—for example, because a primary/secondary switch is required—set `enable-gtid` to `true`, comment out `binlog-name` and `binlog-pos`, and configure `binlog-gtid` instead.
 
     The YAML above is the minimum configuration required for the migration task. For more configuration items, refer to [DM Advanced Task Configuration File](/dm/task-configuration-file-full.md).
 
