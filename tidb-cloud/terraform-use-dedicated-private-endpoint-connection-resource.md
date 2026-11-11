@@ -148,6 +148,10 @@ The following example shows how to create a TiDB Cloud Dedicated private endpoin
 
 For a TiDB Cloud Dedicated private endpoint connection that is not managed by Terraform, you can start managing it with Terraform by importing it.
 
+> **Note:**
+>
+> The `import` block and the `-generate-config-out` option used in the following steps require Terraform v1.5.0 or later.
+
 1. Add an import block for the new `tidbcloud_dedicated_private_endpoint_connection` resource.
 
     Add the following import block to your `.tf` file, replace `example` with a desired resource name, and replace `${id}` with the format of `cluster_id,node_group_id,private_endpoint_connection_id`:
