@@ -26,7 +26,7 @@ This document describes how to perform the full migration using Dumpling and TiD
 **Disk space**:
 
 - Dumpling requires a disk space that can store the whole data source (or to store all upstream tables to be exported). SSD is recommended. To calculate the required space, see [Downstream storage space requirements](/tidb-lightning/tidb-lightning-requirements.md#storage-space-of-the-target-database).
-- During the import, TiDB Lightning needs temporary space to store the sorted key-value pairs. The disk space should be enough to hold the largest single table from the data source.
+- During the import, TiDB Lightning needs temporary space to store the sorted key-value pairs. The available space should be greater than the size of the data to be imported.
 - If the full data volume is large, you can increase the binlog storage time in the upstream. This is to ensure that the binlogs are not lost during the incremental replication.
 
 **Note**: It is difficult to calculate the exact data volume exported by Dumpling from MySQL, but you can estimate the data volume by using the following SQL statement to summarize the `DATA_LENGTH` field in the `information_schema.tables` table:
@@ -180,8 +180,10 @@ If the import fails, refer to [TiDB Lightning FAQ](/tidb-lightning/tidb-lightnin
     # Must be unique.
     source-id: "mysql-01"
 
-    # Configures whether DM-worker uses the global transaction identifier (GTID) to pull binlogs. To enable this mode, the upstream MySQL must also enable GTID. If the upstream MySQL service is configured to switch master between different nodes automatically, GTID mode is required.
-    enable-gtid: true
+    # Configures whether DM-worker uses the global transaction identifier (GTID) to pull binlogs.
+    # Set this option to `true` only if GTID is enabled in the upstream MySQL and you want to start replication from a GTID set.
+    # If the upstream MySQL service is configured to switch master between different nodes automatically, GTID mode is required.
+    enable-gtid: false
 
     from:
       host: "${host}"           # e.g.: 172.16.10.81
@@ -225,7 +227,11 @@ If the import fails, refer to [TiDB Lightning FAQ](/tidb-lightning/tidb-lightnin
     # Use block and allow lists to specify the tables to be replicated.
     block-allow-list:                    # The collection of filtering rules that matches the tables in the source database instance. If the DM version is earlier than v2.0.0-beta.2, use black-white-list.
       bw-rule-1:                         # The block-allow-list configuration item ID.
-        do-dbs: ["${db-name}"]           # Name of databases to be replicated.
+        do-tables:                       # Tables to be replicated.
+        - db-name: "my_db1"
+          tbl-name: "table1"
+        - db-name: "my_db1"
+          tbl-name: "table2"
 
     # Configures the data source.
     mysql-instances:
@@ -233,9 +239,9 @@ If the import fails, refer to [TiDB Lightning FAQ](/tidb-lightning/tidb-lightnin
         block-allow-list: "bw-rule-1"    # You can use the block-allow-list configuration above.
         # syncer-config-name: "global"    # You can use the syncers incremental data configuration below.
         meta:                            # The position where the binlog replication starts when `task-mode` is `incremental` and the downstream database checkpoint does not exist. If the checkpoint exists, the checkpoint is used. If neither the `meta` configuration item nor the downstream database checkpoint exists, the migration starts from the latest binlog position of the upstream.
-          # binlog-name: "mysql-bin.000004"  # The binlog position recorded in "Step 1. Export all data from MySQL". If the upstream database service is configured to switch master between different nodes automatically, GTID mode is required.
-          # binlog-pos: 109227
-          binlog-gtid: "09bec856-ba95-11ea-850a-58f2b4af5188:1-9"
+          binlog-name: "mysql-bin.000004"  # The binlog file recorded in "Step 1. Export all data from MySQL". Use `binlog-name` + `binlog-pos` when GTID is not enabled in the upstream.
+          binlog-pos: 109227
+          # binlog-gtid: "09bec856-ba95-11ea-850a-58f2b4af5188:1-9"  # Use `binlog-gtid` instead if the upstream uses GTID mode.
 
     # (Optional) If you need to incrementally replicate data that has already been migrated in the full data migration, you need to enable the safe mode to avoid the incremental data replication error.
     # This scenario is common in the following case: the full migration data does not belong to the data source's consistency snapshot, and after that, DM starts to replicate incremental data from a position earlier than the full migration.
@@ -243,6 +249,8 @@ If the import fails, refer to [TiDB Lightning FAQ](/tidb-lightning/tidb-lightnin
     #   global:           # Configuration name.
     #     safe-mode: true # If this field is set to true, DM changes INSERT of the data source to REPLACE for the target database, and changes UPDATE of the data source to DELETE and REPLACE for the target database. This is to ensure that when the table schema contains a primary key or unique index, DML statements can be imported repeatedly. In the first minute of starting or resuming an incremental replication task, DM automatically enables the safe mode.
     ```
+
+    The example above uses the binlog file and position recorded in Step 1 because the `metadata` file shows an empty `GTID` field. If GTID is enabled in the upstream MySQL, set `enable-gtid` to `true`, comment out `binlog-name` and `binlog-pos`, and configure `binlog-gtid` instead.
 
     The YAML above is the minimum configuration required for the migration task. For more configuration items, refer to [DM Advanced Task Configuration File](/dm/task-configuration-file-full.md).
 
