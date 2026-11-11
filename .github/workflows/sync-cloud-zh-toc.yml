@@ -13,7 +13,10 @@ env:
 
 jobs:
   sync-toc:
-    if: github.repository == 'pingcap/docs'
+    if: >
+      github.repository == 'pingcap/docs' &&
+      contains(fromJson('["lilin90","qiancai","seominjea1942"]'), github.actor) &&
+      contains(fromJson('["lilin90","qiancai","seominjea1942"]'), github.triggering_actor)
     runs-on: ubuntu-latest
 
     steps:
@@ -25,12 +28,15 @@ jobs:
           token: ${{ github.token }}
 
       - name: Copy script from main branch (temporary)
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           mkdir -p temp_scripts
-          curl -H "Authorization: Bearer ${{ github.token }}" \
-               -H "Accept: application/vnd.github.v3.raw" \
-               -L "https://api.github.com/repos/${{ github.repository }}/contents/scripts/sync-en-cloud-toc-changes-to-zh.py" \
-               -o temp_scripts/sync-en-cloud-toc-changes-to-zh.py
+          gh api \
+            --method GET \
+            "repos/${{ github.repository }}/contents/scripts/sync-en-cloud-toc-changes-to-zh.py" \
+            -H "Accept: application/vnd.github.raw+json" \
+            > temp_scripts/sync-en-cloud-toc-changes-to-zh.py
 
       - uses: actions/setup-python@v6
         name: Setup Python 3.11
