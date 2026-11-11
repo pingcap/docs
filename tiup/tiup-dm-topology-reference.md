@@ -37,7 +37,7 @@ The `global` section corresponds to the cluster's global configuration and has t
     - If the absolute path `data_dir` is configured at the instance level, the actual data directory is the `data_dir` configured for the instance.
     - For each instance, if `data_dir` is not configured, the default value is `<global.data_dir>`.
     - If `data_dir` is set to a relative path, the component data is stored in `<deploy_dir>/<data_dir>`. For the construction rules of `<deploy_dir>`, see the construction rules of the `deploy_dir` field.
-- `log_dir`: the data directory. The default value is "log". The construction rules are as follows.
+- `log_dir`: the log directory. The default value is "log". The construction rules are as follows.
     - If the absolute path of `log_dir` is configured at the instance level, the actual log directory is the `log_dir` configured for the instance.
     - For each instance, if `log_dir` is not configured by the user, the default value is `<global.log_dir>`.
     - If `log_dir` is a relative path, the component logs will be stored in `<deploy_dir>/<log_dir>`. For the construction rules of `<deploy_dir>`, see the construction rules of the `deploy_dir` field.
@@ -140,7 +140,7 @@ master_servers:
 
 ## `worker_servers`
 
-`worker_servers` specifies the machines to which the master node of the DM component is deployed. You can also specify the service configuration on each machine. `worker_servers` is an array. Each array element contains the following fields:
+`worker_servers` specifies the machines to which the worker node of the DM component is deployed. You can also specify the service configuration on each machine. `worker_servers` is an array. Each array element contains the following fields:
 
 - `host`: specifies the machine to deploy to. The field value is an IP address and is mandatory.
 - `ssh_port`: specifies the SSH port to connect to the target machine for operations. If the field is not specified, the `ssh_port` in the `global` section is used.
