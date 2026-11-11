@@ -145,8 +145,8 @@ Both templates use the Prometheus data source configured in Step 4.
 
 | Dashboard | Description | Download |
 |:---|:---|:---|
-| Instance dashboard | Displays metrics for individual BYOC instances. Use the **Instance ID** filter to select the instance to monitor. | [Instance dashboard JSON](https://github.com/pingcap/docs/blob/release-8.5/tidb-cloud/byoc/metrics-dashboard-instance.json) |
-| Resource Pool dashboard | Displays resource pool metrics. Use the **Resource Pool ID** filter to select the resource pool to monitor. | [Resource Pool dashboard JSON](https://github.com/pingcap/docs/blob/release-8.5/tidb-cloud/byoc/metrics-dashboard-resource-pool.json) |
+| Instance dashboard | Displays metrics for individual BYOC instances. Use the **Instance ID** filter to select the instance to monitor. | [Instance dashboard JSON](https://github.com/pingcap/docs/tree/release-8.5/tidb-cloud/byoc/metrics-dashboard-instance.json) |
+| Resource Pool dashboard | Displays resource pool metrics. Use the **Resource Pool ID** filter to select the resource pool to monitor. | [Resource Pool dashboard JSON](https://github.com/pingcap/docs/tree/release-8.5/tidb-cloud/byoc/metrics-dashboard-resource-pool.json) |
 
 To import a dashboard:
 
