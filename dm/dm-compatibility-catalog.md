@@ -67,7 +67,16 @@ In versions earlier than v8.5.6, DM creates foreign key constraints in the downs
 ### MariaDB notes
 
 - For MariaDB **10.5.11 and later**, the DM **precheck fails** due to privilege name changes (for example, `BINLOG MONITOR`, `REPLICATION SLAVE ADMIN`, `REPLICATION MASTER ADMIN`). The error appears as `[code=26005] fail to check synchronization configuration` in the replication privilege, dump privilege, and dump connection number checkers.
-- You can **bypass the precheck** by adding `ignore-checking-items: ["all"]` in the DM task. See [DM precheck](/dm/dm-precheck.md) for details.
+- For DM v8.5.6, bypass only the affected prechecks by adding the following items to the DM task:
+
+    ```yaml
+    ignore-checking-items:
+      - replication_privilege
+      - dump_privilege
+      - conn_number
+    ```
+
+    Before using this workaround, manually verify the corresponding privileges and connection limit. For more information, see [Upstream database user privileges](/dm/dm-worker-intro.md#upstream-database-user-privileges) and [DM precheck](/dm/dm-precheck.md).
 
 ## Target databases
 
