@@ -834,9 +834,7 @@ The default value is `4`.
 
 #### `tidb_analyze_store_batch_size`
 
-Starting from v9.0.0, TiDB can send the Region tasks for the same TiKV node in a batch. Each request contains one Region task and a maximum of `tidb_analyze_store_batch_size` other Region tasks. The default value is `4`. The value `0` disables batch requests.
-
-TiKV runs the Region tasks in a batch one after the other. Then TiKV merges their results before it sends them to TiDB. As a result, this variable does not change the concurrency of TiKV Region scans. But it decreases the number of requests and the network traffic between TiDB and TiKV.
+Starting from v9.0.0, this variable controls the batch size of the Coprocessor requests that `ANALYZE` sends to TiKV. A batch decreases the number of requests and the network traffic between TiDB and TiKV. The default value is `4`. The value `0` disables batch requests.
 
 ## See also
 

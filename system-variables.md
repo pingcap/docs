@@ -1290,12 +1290,10 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Type: Integer
 - Default value: `4`
 - Range: `[0, 8]`
-- This variable controls the batch size of the Coprocessor requests that `ANALYZE` sends to TiKV. TiDB puts the Region tasks for the same TiKV node into groups. Each request contains one Region task and a maximum of `tidb_analyze_store_batch_size` other Region tasks.
-- For example, if the value is `4`, one request contains a maximum of 5 Region tasks. The value `0` disables batch requests.
-- TiKV merges the statistics of the Region tasks in a batch before it sends them to TiDB. This decreases the network traffic, and the memory and CPU usage of TiDB.
-- TiKV runs the Region tasks in a batch one after the other. As a result, this variable does not change the concurrency of Region scans. [`tidb_analyze_distsql_scan_concurrency`](#tidb_analyze_distsql_scan_concurrency-new-in-v760) controls that concurrency. But a larger value makes each request take more time, and can increase the TiKV memory usage.
+- This variable controls the batch size of the Coprocessor requests that `ANALYZE` sends to TiKV. TiDB sends the Region tasks for the same TiKV node in a batch. The value `0` disables batch requests.
+- A batch decreases the network traffic, and the memory and CPU usage of TiDB. But a larger value makes each request take more time, and can increase the TiKV memory usage.
+- This variable does not change the concurrency of Region scans, which [`tidb_analyze_distsql_scan_concurrency`](#tidb_analyze_distsql_scan_concurrency-new-in-v760) controls.
 - Manual `ANALYZE` uses the session value of this variable. Automatic `ANALYZE` uses the global value.
-- This variable does not affect [`tidb_store_batch_size`](#tidb_store_batch_size). [`tidb_store_batch_size`](#tidb_store_batch_size) does not affect this variable.
 
 ### tidb_auto_analyze_concurrency <span class="version-mark">New in v8.4.0</span>
 
