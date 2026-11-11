@@ -221,7 +221,7 @@ After you export data from the TiDB Self-Managed cluster to Amazon S3, you need 
 
     The following is an example template for the JSON policy. Replace the placeholders as follows:
 
-    - `<Your customized directory>`: the path to the folder in the S3 bucket where the data files to be imported are located.
+    - `<Your customized directory>`: the bucket name and the path to the folder containing the data files, followed by `/*`. For example, use `my-bucket/mydata/*`, or `my-bucket/*` for all objects in the bucket.
     - `<Your S3 bucket ARN>`: the ARN of the S3 bucket. You can click the **Copy ARN** button on the S3 bucket **Overview** page to get it.
     - `<Your AWS KMS ARN>`: the ARN of the S3 bucket KMS key. You can get it from **S3 bucket** > **Properties** > **Default encryption** > **AWS KMS Key ARN**. For more information, see the [Amazon S3 documentation](https://docs.aws.amazon.com/AmazonS3/latest/userguide/viewing-bucket-key-settings.html).
 
