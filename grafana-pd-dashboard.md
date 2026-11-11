@@ -115,7 +115,7 @@ The following is the description of PD Dashboard metrics items:
 ## gRPC
 
 - Completed commands rate: The rate per command type at which gRPC commands are completed
-- 99% Completed commands duration: The rate per command type at which gRPC commands are completed (P99)
+- 99% Completed commands duration: The time consumed for completing gRPC commands per command type (P99)
 
 ![PD Dashboard - gRPC metrics](/media/pd-dashboard-grpc-v2.png)
 
