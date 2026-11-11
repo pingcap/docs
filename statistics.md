@@ -48,7 +48,7 @@ To avoid the situation that modifying data on a small table frequently triggers 
 
 > **Note:**
 >
-> Currently, the automatic update does not record the configuration items input at manual `ANALYZE`. Therefore, when you use the [`WITH`](/sql-statements/sql-statement-analyze-table.md) syntax to control the collecting behavior of `ANALYZE`, you need to manually set scheduled tasks to collect statistics.
+> When you use the [`WITH`](/sql-statements/sql-statement-analyze-table.md) syntax to control the collecting behavior of `ANALYZE`, the automatic update uses your configurations only if the [`ANALYZE` configuration persistence](#persist-analyze-configurations) feature is enabled. If this feature is disabled, you need to manually set scheduled tasks to collect statistics.
 
 ### Manual collection
 
