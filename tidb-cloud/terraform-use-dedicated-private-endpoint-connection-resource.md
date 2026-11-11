@@ -1,6 +1,6 @@
 ---
 title: Use `tidbcloud_dedicated_private_endpoint_connection` Resource
-summary: Learn how to use the `tidbcloud_dedicated_private_endpoint_connection` resource to create and modify a TiDB Cloud Dedicated private endpoint connection.
+summary: Learn how to use the `tidbcloud_dedicated_private_endpoint_connection` resource to create and manage a TiDB Cloud Dedicated private endpoint connection.
 ---
 
 # Use the `tidbcloud_dedicated_private_endpoint_connection` Resource
