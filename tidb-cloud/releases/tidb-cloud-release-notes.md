@@ -8,6 +8,14 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes','/ai/v
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2026.
 
+## November 10, 2026
+
+**Console changes**
+
+- TiDB Cloud now supports IP allow lists for API keys. Organization owners can specify allowed IPv4 addresses or CIDR ranges for each API key in the TiDB Cloud console. After an allow list is configured, the API key can be used to send control plane API requests only from the specified IP addresses, reducing the risk of unauthorized use.
+
+    For more information, see [API key management](https://docs.pingcap.com/tidbcloud/api/v1beta2/#section/Authentication/API-key-management).
+
 ## November 6, 2026
 
 **API changes**
