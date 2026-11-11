@@ -299,7 +299,12 @@ To see the NDV rate of an `ANALYZE` job, examine the `Job_info` column in the ou
 
 - The estimated NDV can be smaller or larger than the actual NDV. This error can change execution plans.
 - The largest error occurs for a column in which almost all values are different. For such a column, the estimated NDV can be approximately `sqrt(1 / NDV rate)` times smaller than the actual NDV. For example, if the NDV rate is `0.05`, the estimated NDV can be approximately 4.47 times smaller.
-- For a column with a single-column unique index that is not a prefix index, and for that index, TiDB does not use GEE. TiDB uses the number of non-NULL rows as the NDV.
+- If the schema makes sure that the non-NULL values are unique, TiDB does not estimate the NDV from the sample. TiDB uses the number of non-NULL rows as the NDV. This rule applies to the following columns and indexes:
+
+    - The column of a clustered integer primary key.
+    - A primary key or unique index that has no prefix column and is not a [partial index](/sql-statements/sql-statement-create-index.md#partial-indexes). If the index has more than one column, all its columns must be `NOT NULL`.
+    - The column of such an index, if the index has only one column.
+
 - TiKV also uses the sample to estimate the NULL count and the total size of each column.
 - Multi-valued indexes always use all rows to estimate NDV. Indexes that contain virtual generated columns or prefix columns also always use all rows to estimate NDV.
 - For a partitioned table, TiDB calculates a separate NDV rate for each partition from the row count of that partition. TiDB can merge the statistics of partitions with different NDV rates into global statistics.
