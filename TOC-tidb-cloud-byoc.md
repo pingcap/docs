@@ -68,7 +68,7 @@
     - [Built-in Metrics](/tidb-cloud/premium/built-in-monitoring-premium.md)
     - [Statement Insight](/tidb-cloud/statement-insight.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
     - [Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md)
-    - [Integrate TiDB Cloud BYOC with Prometheus and Grafana](/tidb-cloud/byoc/metrics-integration.md)
+    - [Integrate with Prometheus and Grafana](/tidb-cloud/byoc/metrics-integration.md)
     - Subscribe to Alert Notifications
       - [Subscribe via Email](/tidb-cloud/monitor-alert-email.md)
       - [Subscribe via Slack](/tidb-cloud/monitor-alert-slack.md)
