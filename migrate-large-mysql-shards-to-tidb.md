@@ -347,7 +347,7 @@ mysql-instances:
 #    safe-mode: true
 ```
 
-The example above uses the binlog file and position recorded in each `metadata` file. If GTID is enabled in an upstream MySQL instance, set `enable-gtid` to `true` for that source, comment out `binlog-name` and `binlog-pos`, and configure `binlog-gtid` instead.
+If GTID is enabled in an upstream MySQL instance and that source needs GTID mode—for example, because a primary/secondary switch is required—set `enable-gtid` to `true` for that source, comment out `binlog-name` and `binlog-pos`, and configure `binlog-gtid` instead.
 
 For more configurations, see [DM Advanced Task Configuration File](/dm/task-configuration-file-full.md).
 
