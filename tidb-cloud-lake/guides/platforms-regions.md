@@ -15,6 +15,7 @@ summary: 了解 TiDB Cloud Lake 支持的云平台和 Region。
 | AWS            | Asia Pacific (Singapore) | ap-southeast-1 |
 | AWS            | Asia Pacific (Mumbai)    | ap-south-1     |
 | Alibaba Cloud  | Japan (Tokyo)            | ap-northeast-1 |
+| Alibaba Cloud  | Singapore                | ap-southeast-1 |
 
 > **注意：**
 >

@@ -43,6 +43,7 @@
   - 资源池
     - [创建资源池](/tidb-cloud/byoc/create-resource-pool-byoc.md)
     - [管理资源池](/tidb-cloud/byoc/manage-resource-pools-byoc.md)
+    - [暂停或恢复资源池](/tidb-cloud/byoc/pause-or-resume-byoc-resource-pool.md)
 - 管理实例
   - [创建 {{{ .byoc }}} 实例](/tidb-cloud/byoc/create-tidb-instance-byoc.md)
   - 连接到你的 {{{ .byoc }}} 实例

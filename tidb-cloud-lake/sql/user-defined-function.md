@@ -28,7 +28,6 @@ summary: "{{{ .lake }}} 中的用户定义函数（UDF）允许你创建适合�
 | **返回类型** | 单个值 | 单个值 | 单个值 | 表/结果集 |
 | **语言** | SQL 表达式 | Python/JavaScript | JavaScript/Python 运行时 | SQL 查询 |
 | **性能** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
-| **需要企业版** | 否 | 仅 Python runtime 需要 | 仅 Python runtime 需要 | 否 |
 | **包支持** | 否 | Python：是（PACKAGES） | Python：是（PACKAGES） | 否 |
 | **最适合** | 数学计算<br/>字符串操作<br/>数据格式化 | 高级算法<br/>外部库<br/>控制流逻辑 | 需要脚本逻辑的自定义聚合 | 复杂查询<br/>多行结果<br/>数据转换 |
 

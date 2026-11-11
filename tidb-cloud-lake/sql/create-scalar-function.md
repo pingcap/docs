@@ -88,7 +88,7 @@ SELECT calculate_bmi(70.0, 1.75) AS bmi;
 
 ## Python {#python}
 
-Python 运行时需要 {{{ .lake }}} Enterprise。你可以通过 `PACKAGES` 安装 PyPI 包，并通过 `IMPORTS` 导入 stage 文件。
+你可以通过 `PACKAGES` 安装 PyPI 包，并通过 `IMPORTS` 导入 stage 文件。
 
 ### 数据类型映射（Python） {#data-type-mappings-python}
 

@@ -42,7 +42,7 @@ summary: "{{{ .lake }}} 以安全为核心构建，通过多层安全防护、�
 
 ### 存储加密 {#storage-encryption}
 
-{{{ .lake }}} Enterprise 支持在 Object Storage Service (OSS) 中进行服务端加密。此功能支持您为存储在 OSS 中的数据启用服务端加密，从而增强数据安全性和隐私保护。您可以选择最适合自身需求的加密方式：
+{{{ .lake }}} 支持在 Object Storage Service (OSS) 中进行服务端加密。此功能支持您为存储在 OSS 中的数据启用服务端加密，从而增强数据安全性和隐私保护。您可以选择最适合自身需求的加密方式：
 
 - AES-256 加密
 - 客户管理密钥 (CMK)
