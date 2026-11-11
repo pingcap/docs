@@ -4,7 +4,7 @@ summary: TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスのバ
 aliases: ['/ja/tidbcloud/restore-deleted-tidb-cluster']
 ---
 
-# TiDB Cloud StarterまたはEssentialデータのバックアップと復元 {#back-up-and-restore--starter--or-essential-data} <!--Corresponding EN commit: 570751a86a27cbfb6aab6e47f7d27587321e065c-->
+# TiDB Cloud StarterまたはEssentialデータのバックアップと復元 {#back-up-and-restore--starter--or-essential-data}
 
 このドキュメントでは、TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンス上のデータのバックアップと復元方法について説明します。
 

@@ -16,11 +16,17 @@ summary: TiDB から MySQL 互換データベースにデータを移行する�
 
 1. TiDB クラスターをアップストリームにデプロイ。
 
-    TiUP Playgroundを使用してTiDBクラスターをデプロイ。詳細については、 [TiUPを使用してオンライン TiDBクラスターをデプロイおよび管理](/tiup/tiup-cluster.md)を参照してください。
+    TiUP Playgroundを使用してTiDBクラスターをデプロイ。詳細については、 [ローカルTiDBクラスターを迅速にデプロイ](/tiup/tiup-playground.md)を参照してください。
+
+    [TiCDC](/ticdc/ticdc-overview.md) は、アップストリーム TiDB クラスターからダウンストリームの MySQL 互換データベースに増分データ変更をレプリケートします。次の例では、TiCDC の `gc-ttl` を `172800` 秒（48 時間）に設定しています。フルデータのエクスポート、インポート、および増分レプリケーションが追いつくまでに必要な時間をカバーする値を選択してください。詳細については、[ステップ2 の GC に関する警告](#step-2-migrate-full-data)を参照してください。
 
     ```shell
+    # Create the TiCDC configuration file
+    cat > ticdc.toml <<'EOF'
+    gc-ttl = 172800
+    EOF
     # Create a TiDB cluster
-    tiup playground --db 1 --pd 1 --kv 1 --tiflash 0 --ticdc 1
+    tiup playground --db 1 --pd 1 --kv 1 --tiflash 0 --ticdc 1 --ticdc.config ticdc.toml
     # View cluster status
     tiup status
     ```
@@ -83,6 +89,10 @@ summary: TiDB から MySQL 互換データベースにデータを移行する�
     1 row in set (0.00 sec)
     ```
 
+    > **Note:**
+    >
+    > TiCDC の `gc-ttl` のデフォルト値は 24 時間です。後続の[増分レプリケーションタスク](#step-3-migrate-incremental-data)のレプリケーション遅延が `gc-ttl` を超えると、タスクは `ErrGCTTLExceeded` で失敗する可能性があります。長時間の移行では、[ステップ1. 環境を設定する](#step-1-set-up-the-environment) に示すように、TiCDC を起動する前により大きな値を設定してください。詳細については、[TiCDC の `gc-ttl` とは何ですか](/ticdc/ticdc-faq.md#what-is-gc-ttl-in-ticdc)を参照してください。
+
 2. データをバックアップします。
 
     1. Dumplingを使用して SQL 形式でデータをエクスポートします。
@@ -113,7 +123,7 @@ summary: TiDB から MySQL 互換データベースにデータを移行する�
     Dumplingによってエクスポートされた完全なデータを MySQL にインポートするには、次のコマンドを実行します。
 
     ```shell
-    myloader -h 127.0.0.1 -P 3306 -d ./dumpling_output/
+    myloader -h 127.0.0.1 -P 3306 -u root -p my-secret-pw -d ./dumpling_output/
     ```
 
 4. (オプション) データを検証します。
@@ -140,7 +150,7 @@ summary: TiDB から MySQL 互換データベースにデータを移行する�
             host = "127.0.0.1" # Replace the value with the IP address of your downstream cluster
             port = 3306
             user = "root"
-            password = ""
+            password = "my-secret-pw"
     ######################### Task config #########################
     [task]
             output-dir = "./output"
@@ -157,11 +167,19 @@ summary: TiDB から MySQL 互換データベースにデータを移行する�
 
 2. 変更フィードを作成します。
 
+    > **Note:**
+    >
+    > 変更フィードを作成する前に、レプリケートする各テーブルに少なくとも 1 つの[有効なインデックス](/ticdc/ticdc-overview.md#valid-index)があることを確認してください。つまり、主キー、またはすべてのカラムが `NOT NULL` として定義され、仮想生成カラムを含まない一意インデックスです。デフォルトでは、TiCDC は有効なインデックスを持たないテーブルのデータ変更をレプリケートしません。後から有効なインデックスを追加すると、それ以降のデータ変更はレプリケートできますが、以前にスキップされた変更は復元されません。詳細については、[DDL レプリケーションルール](/ticdc/ticdc-ddl.md#ddl-allow-list)を参照してください。
+    >
+    > 有効なインデックスを持たないテーブルについては、有効なインデックスを追加することを推奨します。あるいは、変更フィード設定ファイルの先頭で、任意の `[section]` ヘッダーより前に [`force-replicate = true`](/ticdc/ticdc-changefeed-config.md#force-replicate) を追加し、変更フィード作成時に `--config` を使用してそのファイルを渡すこともできます。このオプションはデータ整合性を保証せず、重複データを引き起こす可能性があります。
+
     アップストリームクラスターで次のコマンドを実行して、アップストリームクラスターからダウンストリームクラスターへの変更フィードを作成します。
 
     ```shell
-    tiup cdc:v<CLUSTER_VERSION> cli changefeed create --server=http://127.0.0.1:8300 --sink-uri="mysql://root:@127.0.0.1:3306" --changefeed-id="upstream-to-downstream" --start-ts="434217889191428107"
+    tiup cdc:v<CLUSTER_VERSION> cli changefeed create --server=http://127.0.0.1:8300 --sink-uri="mysql://root:***@127.0.0.1:3306" --changefeed-id="upstream-to-downstream" --start-ts="434217889191428107"
     ```
+
+    `***` を、[ステップ1. 環境を設定する](#step-1-set-up-the-environment) で設定したダウンストリーム MySQL root アカウントのパスワードに置き換えてください。Docker の例では、`my-secret-pw` を使用します。
 
     このコマンドのパラメーターは次のとおりです。
 
@@ -174,7 +192,7 @@ summary: TiDB から MySQL 互換データベースにデータを移行する�
 
 3. GC を有効にします。
 
-    TiCDCを用いた増分移行では、GCは複製された履歴データのみを削除します。そのため、変更フィードを作成した後、以下のコマンドを実行してGCを有効にする必要があります。詳細は[TiCDCガベージコレクション（GC）セーフポイントの完全な動作は何ですか？](/ticdc/ticdc-faq.md#what-is-the-complete-behavior-of-ticdc-garbage-collection-gc-safepoint)を参照してください。
+    TiCDCを用いた増分移行では、GCは複製された履歴データのみを削除します。そのため、変更フィードを作成した後、以下のコマンドを実行してGCを有効にする必要があります。詳細については[TiCDCガベージコレクション(GC) セーフポイントの完全な動作は何ですか?](/ticdc/ticdc-faq.md#what-is-the-complete-behavior-of-ticdc-garbage-collection-gc-safepoint)を参照してください。
 
     GC を有効にするには、次のコマンドを実行します。
 
@@ -203,7 +221,7 @@ summary: TiDB から MySQL 互換データベースにデータを移行する�
 
 ## ステップ4. サービスの移行 {#step-4-migrate-services}
 
-チェンジフィードを作成すると、上流クラスターに書き込まれたデータは、低レイテンシーで下流クラスターに複製されます。読み取りトラフィックを下流クラスターに徐々に移行できます。一定期間、読み取りトラフィックを観察してください。下流クラスターが安定している場合は、以下の手順で書き込みトラフィックも下流クラスターに移行できます。
+チェンジフィードを作成すると、TiCDC は対象に含まれるアップストリームテーブルからダウンストリームクラスターに変更をレプリケートします。増分レプリケーションが追いつくまで待ってから、読み取りトラフィックをダウンストリームクラスターに徐々に移行してください。書き込みトラフィックがダウンストリームクラスターに移行されるまでは、アップストリームクラスターへの新しい書き込みがレプリケートされるまでにまだ時間がかかるため、ダウンストリームクラスターのクエリ結果は一時的にアップストリームクラスターより遅れる可能性があります。一定期間、読み取りトラフィックを観察してください。下流クラスターが安定している場合は、以下の手順で書き込みトラフィックも下流クラスターに移行できます。
 
 1. アップストリームクラスターの書き込みサービスを停止します。変更フィードを停止する前に、アップストリームのすべてのデータがダウンストリームに複製されていることを確認してください。
 

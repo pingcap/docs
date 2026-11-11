@@ -25,7 +25,7 @@ DM のタスク設定ファイルで、以下に示すように、グローバ�
 ## ********* Basic configuration *********
 name: test                      # The name of the task. Should be globally unique.
 task-mode: all                  # The task mode. Can be set to `full`, `incremental`, or `all`.
-shard-mode: "pessimistic"       # The shard merge mode. Optional modes are `pessimistic` and `optimistic`. The `pessimistic` mode is used by default. After understanding the principles and restrictions of the "optimistic" mode, you can set it to the "optimistic" mode.
+shard-mode: ""                  # オプション。デフォルト値は "" で、シャーディング DDL の調整を無効にします。シャードマージタスクで DM がシャードテーブル間のスキーマ変更を調整する必要がある場合にのみ、このパラメータを "pessimistic" に設定します。原理と制限を理解したうえで、"optimistic" を使用することもできます。
 meta-schema: "dm_meta"          # The downstream database that stores the `meta` information.
 online-ddl: true                # Enable online-ddl support on DM to support automatic processing of "gh-ost" and "pt-osc" for the upstream database.
 ```
@@ -50,9 +50,9 @@ DM のワークフロー:
 
 - ゴースト テーブルに適用された DDL を記録します。
 
-- ゴースト テーブルからのみデータを複製します。
+- 実テーブルの DML イベントを複製し、ゴースト テーブルの DML イベントは無視します。
 
-- 下流に記録された DDL を適用します。
+- アップストリームでゴースト テーブルの名前が変更されて実テーブルが置き換えられたときに、記録された DDL をダウンストリームの実テーブルに適用します。
 
 ![dm-online-ddl](/media/dm/dm-online-ddl.png)
 

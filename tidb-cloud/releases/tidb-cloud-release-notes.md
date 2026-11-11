@@ -8,6 +8,24 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 このページには、2026年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリースノートが掲載されています。
 
+## 2026年11月10日 {#november-10-2026}
+
+**コンソールの変更**
+
+- TiDB Cloud で API キーの IP 許可リストがサポートされるようになりました。組織オーナーは、TiDB Cloud コンソールで各 API キーに対して許可する IPv4 アドレスまたは CIDR 範囲を指定できます。許可リストを設定すると、その API キーは指定された IP アドレスからのみコントロールプレーン API リクエストの送信に使用できるようになり、不正使用のリスクを低減できます。
+
+    詳細については、[API key management](https://docs.pingcap.com/tidbcloud/api/v1beta2/#section/Authentication/API-key-management) を参照してください.
+
+## 2026年11月6日 {#november-6-2026}
+
+**API の変更**
+
+- **TiDB Cloud Essential**
+
+    - [TiDB Cloud API v1beta2](https://docs.pingcap.com/tidbcloud/api/v1beta2/) で、TiDB バージョン `CLOUD.202603.x` 以降を実行する TiDB Cloud Essential インスタンスの管理がサポートされるようになりました。
+
+        TiDB v8.5.3 以前を実行する TiDB Cloud Essential インスタンスについては、代わりに [v1beta1 API](https://docs.pingcap.com/tidbcloud/api/v1beta1/serverless/) を使用してください。
+
 ## 2026年10月27日 {#october-27-2026}
 
 **一般的な変更**
@@ -198,7 +216,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
         これらのエンドポイントを使用すると、Apache Kafka、MySQL、Amazon S3、Alibaba Cloud OSS などのダウンストリームシステムへのリアルタイムデータレプリケーションのために、changefeed の作成、一覧表示、取得、削除、一時停止、再開、スケールを行えます。
 
-        詳細については、[Changefeed API v1beta2 Reference](https://docs.pingcap.com/tidbcloud/api/v1beta2/premium/#tag/Changefeed) を参照してください。
+        詳細については、[Changefeed API v1beta2 Reference](https://docs.pingcap.com/tidbcloud/api/v1beta2/#tag/Changefeed) を参照してください。
 
 ## 2026年9月1日 {#september-1-2026}
 
@@ -568,8 +586,8 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
     - [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium)向けに以下のバックアップAPIエンドポイントを導入し、組織内のアクティブなインスタンスと削除されたインスタンスの両方を一元的に管理できるようにします。
 
-        - [バックアップの一覧を表示](https://docs.pingcap.com/tidbcloud/api/v1beta2/premium/#tag/Backup/operation/BackupService_ListBackups): 組織内のアクティブなTiDB Cloud Premiumインスタンスと削除済み（ごみ箱内）インスタンスの両方のバックアップを一覧表示します。
-        - [バックアップを削除する](https://docs.pingcap.com/tidbcloud/api/v1beta2/premium/#tag/Backup/operation/BackupService_DeleteBackup): `backupId`によって組織内の特定のバックアップを削除します。
+        - [バックアップの一覧を表示](https://docs.pingcap.com/tidbcloud/api/v1beta2/#tag/Backup/operation/BackupService_ListBackups): 組織内のアクティブなTiDB Cloud Premiumインスタンスと削除済み（ごみ箱内）インスタンスの両方のバックアップを一覧表示します。
+        - [バックアップを削除する](https://docs.pingcap.com/tidbcloud/api/v1beta2/#tag/Backup/operation/BackupService_DeleteBackup): `backupId`によって組織内の特定のバックアップを削除します。
 
 ## 2026年6月2日 {#june-2-2026}
 
@@ -730,7 +748,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
     - **Backup**： TiDB Cloud Premiumインスタンスのバックアップを管理します。バックアップベースのリストア機能も含まれます。
     - **Region**： TiDB Cloud Premiumインスタンスを作成するために利用可能なリージョンを取得します。
 
-    詳細については、 [TiDB Cloud Premium API](https://docs.pingcap.com/tidbcloud/api/v1beta2/premium/)を参照してください。
+    詳細については、 [TiDB Cloud Premium API](https://docs.pingcap.com/tidbcloud/api/v1beta2/)を参照してください。
 
 ## 2026年4月14日 {#april-14-2026}
 

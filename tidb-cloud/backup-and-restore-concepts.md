@@ -3,7 +3,7 @@ title: Backup & Restore
 summary: TiDB Cloudのバックアップと復元に関する概念について学びましょう。
 ---
 
-# バックアップと復元 {#backup-x26-restore} <!--Corresponding EN commit: 570751a86a27cbfb6aab6e47f7d27587321e065c-->
+# バックアップと復元 {#backup-x26-restore}
 
 TiDB Cloudバックアップ＆リストア機能は、データのバックアップと復元を可能にすることで、お客様のデータを保護し、事業継続性を確保するように設計されています。
 

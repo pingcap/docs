@@ -107,6 +107,12 @@ summary: TiCDC で使用される CLI と設定パラメータについて学習
 
 <!-- Example: `["username_1", "username_2"]` -->
 
+#### `redact-info-log` <span class="version-mark">v8.5.6 の新機能</span> {#redact-info-log-new-in-v856}
+
+- ログの秘匿化を制御します。このパラメータは [TiCDC の新しいアーキテクチャ](/ticdc/ticdc-architecture.md) でのみサポートされます。
+- デフォルト値: `false`。この場合、ログの秘匿化は無効になります
+- 値を `true` に設定すると、ログ内の機密値が `?` に置き換えられます。`"marker"` に設定すると、元の値を保持したまま、機密値が `‹` と `›` で囲まれます。
+
 ### `capture-session-ttl` {#capture-session-ttl}
 
 - TiCDCとetcdサービス間のセッション期間を指定します。このパラメータはオプションです。
