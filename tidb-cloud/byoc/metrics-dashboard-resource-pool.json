@@ -21,7 +21,7 @@
       }
     ]
   },
-  "description": "Customer-deliverable BYOC Dedicated shared/resource-pool dashboard. Select Resource Pool ID. Shared components and resource-pool-level panels use tidb_cluster_id with the Resource Pool ID value; Changefeed/TiCDC panels use sharedpool_id.",
+  "description": "Metrics dashboard for TiDB Cloud BYOC resource pools.",
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
@@ -48,7 +48,7 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "Average TiDB-to-TiKV KV request duration by request type.\n\nClinic source: Dedicated metrics .docx; [UserScope]TiDB-Cluster-Clinic.json\n\nDelivery scope label: tidb_cluster_id=\"$tidb_cluster\".\n\nDashboard scope: Resource Pool ID. This metric is also available at resource-pool level.",
+      "description": "Average TiDB-to-TiKV KV request duration by request type.\n\nDashboard scope: Resource Pool ID. This metric is also available at resource-pool level.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -140,7 +140,7 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "Average TiKV gRPC request duration by message type.\n\nClinic source: Dedicated metrics .docx; [SharedScope]TiKV-Details-Cluster-Clinic.json\n\nDelivery scope label: tidb_cluster_id=\"$tidb_cluster\".\n\nNote: Delivery query follows clinic source and does not filter by store label.\n\nDashboard scope: Resource Pool ID.",
+      "description": "Average TiKV gRPC request duration by message type.\n\nDashboard scope: Resource Pool ID.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -232,7 +232,7 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "Average and P99 PD TSO wait/RPC duration from PD client metrics.\n\nClinic source: Dedicated metrics .docx; PD-Cluster-Clinic.json\n\nDelivery scope label: tidb_cluster_id=\"$tidb_cluster\".\n\nDashboard scope: Resource Pool ID. This metric is also available at resource-pool level.",
+      "description": "Average and P99 PD TSO wait/RPC duration from PD client metrics.\n\nDashboard scope: Resource Pool ID. This metric is also available at resource-pool level.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -357,7 +357,7 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "Average and P99 storage async write duration from TiKV raft/storage metrics.\n\nClinic source: Dedicated metrics .docx; [SharedScope]TiKV-Details-Cluster-Clinic.json\n\nDelivery scope label: tidb_cluster_id=\"$tidb_cluster\".\n\nDashboard scope: Resource Pool ID.",
+      "description": "Average and P99 storage async write duration from TiKV raft/storage metrics.\n\nDashboard scope: Resource Pool ID.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -460,7 +460,7 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "Average and P99 store duration from TiKV raft/storage metrics.\n\nClinic source: Dedicated metrics .docx; [SharedScope]TiKV-Details-Cluster-Clinic.json\n\nDelivery scope label: tidb_cluster_id=\"$tidb_cluster\".\n\nDashboard scope: Resource Pool ID.",
+      "description": "Average and P99 store duration from TiKV raft/storage metrics.\n\nDashboard scope: Resource Pool ID.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -563,7 +563,7 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "Average and P99 apply duration from TiKV raft/storage metrics.\n\nClinic source: Dedicated metrics .docx; [SharedScope]TiKV-Details-Cluster-Clinic.json\n\nDelivery scope label: tidb_cluster_id=\"$tidb_cluster\".\n\nDashboard scope: Resource Pool ID.",
+      "description": "Average and P99 apply duration from TiKV raft/storage metrics.\n\nDashboard scope: Resource Pool ID.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -666,7 +666,7 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "Average and P99 apply log duration from TiKV raft/storage metrics.\n\nClinic source: Dedicated metrics .docx; [SharedScope]TiKV-Details-Cluster-Clinic.json\n\nDelivery scope label: tidb_cluster_id=\"$tidb_cluster\".\n\nDashboard scope: Resource Pool ID.",
+      "description": "Average and P99 apply log duration from TiKV raft/storage metrics.\n\nDashboard scope: Resource Pool ID.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -768,7 +768,7 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "Average and P99 commit log duration from TiKV raft/storage metrics.\n\nClinic source: Dedicated metrics .docx; [SharedScope]TiKV-Details-Cluster-Clinic.json\n\nDelivery scope label: tidb_cluster_id=\"$tidb_cluster\".\n\nDashboard scope: Resource Pool ID.",
+      "description": "Average and P99 commit log duration from TiKV raft/storage metrics.\n\nDashboard scope: Resource Pool ID.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -883,7 +883,7 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "Region and bucket count by TiKV instance.\n\nClinic source: Dedicated metrics .docx; [SharedScope]TiKV-Details-Cluster-Clinic.json\n\nDelivery scope label: tidb_cluster_id=\"$tidb_cluster\".\n\nDashboard scope: Resource Pool ID.",
+      "description": "Region and bucket count by TiKV instance.\n\nDashboard scope: Resource Pool ID.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -985,7 +985,7 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "Leader region count by TiKV instance.\n\nClinic source: Dedicated metrics .docx; [SharedScope]TiKV-Details-Cluster-Clinic.json\n\nDelivery scope label: tidb_cluster_id=\"$tidb_cluster\".\n\nDashboard scope: Resource Pool ID.",
+      "description": "Leader region count by TiKV instance.\n\nDashboard scope: Resource Pool ID.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1076,7 +1076,7 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "TiKV capacity, used, and available storage by instance.\n\nClinic source: Dedicated metrics .docx; [SharedScope]TiKV-Details-Cluster-Clinic.json\n\nDelivery scope label: tidb_cluster_id=\"$tidb_cluster\".\n\nDashboard scope: Resource Pool ID.",
+      "description": "TiKV capacity, used, and available storage by instance.\n\nDashboard scope: Resource Pool ID.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1189,7 +1189,7 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "TiKV disk IO bytes per second by instance and operation.\n\nClinic source: Dedicated metrics .docx; [SharedScope]TiKV-Details-Cluster-Clinic.json\n\nDelivery scope label: tidb_cluster_id=\"$tidb_cluster\".\n\nDashboard scope: Resource Pool ID.",
+      "description": "TiKV disk IO bytes per second by instance and operation.\n\nDashboard scope: Resource Pool ID.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1315,7 +1315,7 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "TiKV process uptime by instance.\n\nClinic source: Dedicated metrics .docx; [SharedScope]TiKV-Details-Cluster-Clinic.json\n\nDelivery scope label: tidb_cluster_id=\"$tidb_cluster\".\n\nDashboard scope: Resource Pool ID.",
+      "description": "TiKV process uptime by instance.\n\nDashboard scope: Resource Pool ID.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1406,7 +1406,7 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "TiKV process CPU usage and CPU quota reference.\n\nClinic source: [SharedScope]TiKV-Details-Cluster-Clinic.json\n\nNote: Clinic source uses process CPU counters rather than node CPU counters.\n\nDelivery scope label: tidb_cluster_id=\"$tidb_cluster\".\n\nDashboard scope: Resource Pool ID.",
+      "description": "TiKV process CPU usage and CPU quota reference.\n\nDashboard scope: Resource Pool ID.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1508,7 +1508,7 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "TiKV process resident memory and memory quota by instance.\n\nClinic source: [SharedScope]TiKV-Details-Cluster-Clinic.json\n\nNote: Clinic source uses process resident memory rather than node memory.\n\nDelivery scope label: tidb_cluster_id=\"$tidb_cluster\".\n\nDashboard scope: Resource Pool ID.",
+      "description": "TiKV process resident memory and memory quota by instance.\n\nDashboard scope: Resource Pool ID.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1623,7 +1623,7 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "TiFlash uptime by instance.\n\nClinic source: Dedicated metrics .docx; [SharedScope]TiFlash-Summary-Cluster-Clinic.json\n\nDelivery scope label: tidb_cluster_id=\"$tidb_cluster\".\n\nDashboard scope: Resource Pool ID.",
+      "description": "TiFlash uptime by instance.\n\nDashboard scope: Resource Pool ID.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1714,7 +1714,7 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "TiFlash process CPU usage and logical CPU reference.\n\nClinic source: Performance-Overview-Cluster-Clinic.json; [SharedScope]TiFlash-Summary-Cluster-Clinic.json\n\nDelivery scope label: tidb_cluster_id=\"$tidb_cluster\".\n\nDashboard scope: Resource Pool ID.",
+      "description": "TiFlash process CPU usage and logical CPU reference.\n\nDashboard scope: Resource Pool ID.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1816,7 +1816,7 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "TiFlash proxy process resident memory by instance.\n\nClinic source: Performance-Overview-Cluster-Clinic.json; [SharedScope]TiFlash-Summary-Cluster-Clinic.json\n\nNote: Clinic source uses tiflash proxy process resident memory rather than node memory.\n\nDelivery scope label: tidb_cluster_id=\"$tidb_cluster\".\n\nDashboard scope: Resource Pool ID.",
+      "description": "TiFlash proxy process resident memory by instance.\n\nDashboard scope: Resource Pool ID.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1919,7 +1919,7 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "TiFlash capacity, used, and available storage by instance.\n\nClinic source: Dedicated metrics .docx; [SharedScope]TiFlash-Summary-Cluster-Clinic.json\n\nDelivery scope label: tidb_cluster_id=\"$tidb_cluster\".\n\nDashboard scope: Resource Pool ID.",
+      "description": "TiFlash capacity, used, and available storage by instance.\n\nDashboard scope: Resource Pool ID.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -2045,7 +2045,7 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "PD process uptime by instance.\n\nClinic source: Dedicated metrics .docx; PD-Cluster-Clinic.json\n\nDelivery scope label: tidb_cluster_id=\"$tidb_cluster\".\n\nDashboard scope: Resource Pool ID.",
+      "description": "PD process uptime by instance.\n\nDashboard scope: Resource Pool ID.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -2136,7 +2136,7 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "PD process CPU usage by instance.\n\nClinic source: Performance-Overview-Cluster-Clinic.json; PD-Cluster-Clinic.json\n\nNote: Clinic source uses process CPU counters rather than node CPU counters.\n\nDelivery scope label: tidb_cluster_id=\"$tidb_cluster\".\n\nDashboard scope: Resource Pool ID.",
+      "description": "PD process CPU usage by instance.\n\nDashboard scope: Resource Pool ID.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -2239,7 +2239,7 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "PD process resident memory by instance.\n\nClinic source: Performance-Overview-Cluster-Clinic.json; PD-Cluster-Clinic.json\n\nNote: Clinic source uses process resident memory rather than node memory.\n\nDelivery scope label: tidb_cluster_id=\"$tidb_cluster\".\n\nDashboard scope: Resource Pool ID.",
+      "description": "PD process resident memory by instance.\n\nDashboard scope: Resource Pool ID.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -2355,7 +2355,7 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "TiCDC owner checkpoint-ts lag by keyspace/changefeed.\n\nDelivery scope label: sharedpool_id=\"$resource_pool\" (Resource Pool ID).\n\nDashboard scope: Resource Pool ID.",
+      "description": "TiCDC owner checkpoint-ts lag by keyspace/changefeed.\n\nDashboard scope: Resource Pool ID.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -2446,7 +2446,7 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "TiCDC owner resolved-ts lag by keyspace/changefeed.\n\nDelivery scope label: sharedpool_id=\"$resource_pool\" (Resource Pool ID).\n\nDashboard scope: Resource Pool ID.",
+      "description": "TiCDC owner resolved-ts lag by keyspace/changefeed.\n\nDashboard scope: Resource Pool ID.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -2537,7 +2537,7 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "TiCDC sink DML event rows per second.\n\nClinic source: Prometheus-TiCDC-New-Arch-Clinic.json; [UserScope]Prometheus-TiCDC-New-Arch-Clinic.json\n\nDelivery scope label: sharedpool_id=\"$resource_pool\" (Resource Pool ID).\n\nDashboard scope: Resource Pool ID.",
+      "description": "TiCDC sink DML event rows per second.\n\nDashboard scope: Resource Pool ID.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -2628,7 +2628,7 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "TiCDC sink write bytes per second.\n\nClinic source: Prometheus-TiCDC-New-Arch-Clinic.json; [UserScope]Prometheus-TiCDC-New-Arch-Clinic.json\n\nDelivery scope label: sharedpool_id=\"$resource_pool\" (Resource Pool ID).\n\nDashboard scope: Resource Pool ID.",
+      "description": "TiCDC sink write bytes per second.\n\nDashboard scope: Resource Pool ID.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -2719,7 +2719,7 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "TiCDC owner status by namespace/changefeed.\n\nClinic source: Prometheus-TiCDC-New-Arch-Clinic.json; [UserScope]Prometheus-TiCDC-New-Arch-Clinic.json\n\nDelivery scope label: sharedpool_id=\"$resource_pool\" (Resource Pool ID).\n\nDashboard scope: Resource Pool ID.",
+      "description": "TiCDC owner status by namespace/changefeed.\n\nDashboard scope: Resource Pool ID.",
       "fieldConfig": {
         "defaults": {
           "color": {

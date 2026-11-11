@@ -21,7 +21,7 @@
       }
     ]
   },
-  "description": "Customer-deliverable BYOC Dedicated user/instance dashboard. Select Instance ID / TiDB Cluster ID. PromQL filters use tidb_cluster_id with the Instance ID value. TiProxy panels are included here as user-level metrics.",
+  "description": "Metrics dashboard for TiDB Cloud BYOC instances.",
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
@@ -45,7 +45,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "description": "Database time consumed by TiDB SQL handling, excluding internal SQL.\n\nClinic source: Dedicated metrics .docx; [UserScope]Performance-Overview-Cluster-Clinic.json\n\nDelivery scope label: tidb_cluster_id=\"$tidb_cluster\".\n\nDashboard scope: Instance ID / TiDB Cluster ID.",
+      "description": "Database time consumed by TiDB SQL handling, excluding internal SQL.\n\nDashboard scope: Instance ID / TiDB Cluster ID.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -147,7 +147,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "description": "SQL statements executed per second.\n\nClinic source: Dedicated metrics .docx; [UserScope]Performance-Overview-Cluster-Clinic.json\n\nDelivery scope label: tidb_cluster_id=\"$tidb_cluster\".\n\nDashboard scope: Instance ID / TiDB Cluster ID.",
+      "description": "SQL statements executed per second.\n\nDashboard scope: Instance ID / TiDB Cluster ID.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -249,7 +249,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "description": "Average and P99 SQL handle duration, excluding internal SQL.\n\nClinic source: Dedicated metrics .docx; [UserScope]Performance-Overview-Cluster-Clinic.json\n\nDelivery scope label: tidb_cluster_id=\"$tidb_cluster\".\n\nDashboard scope: Instance ID / TiDB Cluster ID.",
+      "description": "Average and P99 SQL handle duration, excluding internal SQL.\n\nDashboard scope: Instance ID / TiDB Cluster ID.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -373,7 +373,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "description": "TiDB SQL execution errors per second.\n\nClinic source: Dedicated metrics .docx; [UserScope]Performance-Overview-Cluster-Clinic.json\n\nDelivery scope label: tidb_cluster_id=\"$tidb_cluster\".\n\nDashboard scope: Instance ID / TiDB Cluster ID.",
+      "description": "TiDB SQL execution errors per second.\n\nDashboard scope: Instance ID / TiDB Cluster ID.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -475,7 +475,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "description": "TiDB command throughput by command type.\n\nClinic source: Dedicated metrics .docx; [UserScope]Performance-Overview-Cluster-Clinic.json\n\nDelivery scope label: tidb_cluster_id=\"$tidb_cluster\".\n\nDashboard scope: Instance ID / TiDB Cluster ID.",
+      "description": "TiDB command throughput by command type.\n\nDashboard scope: Instance ID / TiDB Cluster ID.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -566,7 +566,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "description": "Plan cache hit and miss operations per second.\n\nClinic source: Dedicated metrics .docx; [UserScope]Performance-Overview-Cluster-Clinic.json\n\nDelivery scope label: tidb_cluster_id=\"$tidb_cluster\".\n\nDashboard scope: Instance ID / TiDB Cluster ID.",
+      "description": "Plan cache hit and miss operations per second.\n\nDashboard scope: Instance ID / TiDB Cluster ID.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -668,7 +668,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "description": "Transactions per second by transaction type and mode.\n\nClinic source: Dedicated metrics .docx; [UserScope]Performance-Overview-Cluster-Clinic.json\n\nDelivery scope label: tidb_cluster_id=\"$tidb_cluster\".\n\nDashboard scope: Instance ID / TiDB Cluster ID.",
+      "description": "Transactions per second by transaction type and mode.\n\nDashboard scope: Instance ID / TiDB Cluster ID.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -759,7 +759,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "description": "Average and P99 transaction duration by transaction mode.\n\nClinic source: Dedicated metrics .docx; [UserScope]Performance-Overview-Cluster-Clinic.json\n\nDelivery scope label: tidb_cluster_id=\"$tidb_cluster\".\n\nDashboard scope: Instance ID / TiDB Cluster ID.",
+      "description": "Average and P99 transaction duration by transaction mode.\n\nDashboard scope: Instance ID / TiDB Cluster ID.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -861,7 +861,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "description": "Total and active TiDB connections.\n\nClinic source: Dedicated metrics .docx; [UserScope]Performance-Overview-Cluster-Clinic.json\n\nDelivery scope label: tidb_cluster_id=\"$tidb_cluster\".\n\nDashboard scope: Instance ID / TiDB Cluster ID.",
+      "description": "Total and active TiDB connections.\n\nDashboard scope: Instance ID / TiDB Cluster ID.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -963,7 +963,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "description": "TiDB disconnection counter by result and instance.\n\nClinic source: Dedicated metrics .docx; [UserScope]Performance-Overview-Cluster-Clinic.json\n\nDelivery scope label: tidb_cluster_id=\"$tidb_cluster\".\n\nDashboard scope: Instance ID / TiDB Cluster ID.",
+      "description": "TiDB disconnection counter by result and instance.\n\nDashboard scope: Instance ID / TiDB Cluster ID.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -1040,7 +1040,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "sum(rate(tidb_server_disconnection_total{tidb_cluster_id=\"$tidb_cluster\",result=\"ok\"})) by (instance, result)",
+              "expr": "sum(rate(tidb_server_disconnection_total{tidb_cluster_id=\"$tidb_cluster\",result=\"ok\"}[$__rate_interval])) by (instance, result)",
               "legendFormat": "{{instance}} {{result}}",
               "range": true,
               "refId": "A"
@@ -1068,7 +1068,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "description": "Average idle connection duration inside and outside transactions.\n\nClinic source: Dedicated metrics .docx; [UserScope]TiDB-Cluster-Clinic.json\n\nDelivery scope label: tidb_cluster_id=\"$tidb_cluster\".\n\nDashboard scope: Instance ID / TiDB Cluster ID.",
+      "description": "Average idle connection duration inside and outside transactions.\n\nDashboard scope: Instance ID / TiDB Cluster ID.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -1170,7 +1170,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "description": "Average and P99 TiDB get-token duration.\n\nClinic source: Dedicated metrics .docx; [UserScope]TiDB-Cluster-Clinic.json\n\nDelivery scope label: tidb_cluster_id=\"$tidb_cluster\".\n\nDashboard scope: Instance ID / TiDB Cluster ID.",
+      "description": "Average and P99 TiDB get-token duration.\n\nDashboard scope: Instance ID / TiDB Cluster ID.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -1272,7 +1272,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "description": "Average, P95, and P99 SQL parse duration for general SQL.\n\nClinic source: Dedicated metrics .docx; [UserScope]Performance-Overview-Cluster-Clinic.json\n\nDelivery scope label: tidb_cluster_id=\"$tidb_cluster\".\n\nDashboard scope: Instance ID / TiDB Cluster ID.",
+      "description": "Average, P95, and P99 SQL parse duration for general SQL.\n\nDashboard scope: Instance ID / TiDB Cluster ID.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -1385,7 +1385,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "description": "Average, P95, and P99 SQL compile duration for general SQL.\n\nClinic source: Dedicated metrics .docx; [UserScope]Performance-Overview-Cluster-Clinic.json\n\nDelivery scope label: tidb_cluster_id=\"$tidb_cluster\".\n\nDashboard scope: Instance ID / TiDB Cluster ID.",
+      "description": "Average, P95, and P99 SQL compile duration for general SQL.\n\nDashboard scope: Instance ID / TiDB Cluster ID.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -1498,7 +1498,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "description": "Average, P95, and P99 SQL execute duration for general SQL.\n\nClinic source: Dedicated metrics .docx; [UserScope]Performance-Overview-Cluster-Clinic.json\n\nDelivery scope label: tidb_cluster_id=\"$tidb_cluster\".\n\nDashboard scope: Instance ID / TiDB Cluster ID.",
+      "description": "Average, P95, and P99 SQL execute duration for general SQL.\n\nDashboard scope: Instance ID / TiDB Cluster ID.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -1611,7 +1611,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "description": "Affected rows per second, total and by SQL type.\n\nClinic source: Dedicated metrics .docx; [UserScope]TiDB-Cluster-Clinic.json\n\nDelivery scope label: tidb_cluster_id=\"$tidb_cluster\".\n\nDashboard scope: Instance ID / TiDB Cluster ID.",
+      "description": "Affected rows per second, total and by SQL type.\n\nDashboard scope: Instance ID / TiDB Cluster ID.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -1727,7 +1727,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "description": "Average TiDB-to-TiKV KV request duration by request type.\n\nClinic source: Dedicated metrics .docx; [UserScope]TiDB-Cluster-Clinic.json\n\nDelivery scope label: tidb_cluster_id=\"$tidb_cluster\".\n\nDashboard scope: Instance ID / TiDB Cluster ID.",
+      "description": "Average TiDB-to-TiKV KV request duration by request type.\n\nDashboard scope: Instance ID / TiDB Cluster ID.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -1818,7 +1818,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "description": "Average and P99 PD TSO wait/RPC duration from PD client metrics.\n\nClinic source: Dedicated metrics .docx; PD-Cluster-Clinic.json\n\nDelivery scope label: tidb_cluster_id=\"$tidb_cluster\".\n\nDashboard scope: Instance ID / TiDB Cluster ID.",
+      "description": "Average and P99 PD TSO wait/RPC duration from PD client metrics.\n\nDashboard scope: Instance ID / TiDB Cluster ID.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -1956,7 +1956,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "description": "TiDB process uptime by instance.\n\nClinic source: Dedicated metrics .docx; [UserScope]TiDB-Cluster-Clinic.json\n\nDelivery scope label: tidb_cluster_id=\"$tidb_cluster\".\n\nDashboard scope: Instance ID / TiDB Cluster ID.",
+      "description": "TiDB process uptime by instance.\n\nDashboard scope: Instance ID / TiDB Cluster ID.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -2047,7 +2047,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "description": "TiDB process CPU usage and maxprocs reference.\n\nClinic source: [UserScope]Performance-Overview-Cluster-Clinic.json; [UserScope]TiDB-Cluster-Clinic.json\n\nDelivery scope label: tidb_cluster_id=\"$tidb_cluster\".\n\nDashboard scope: Instance ID / TiDB Cluster ID.",
+      "description": "TiDB process CPU usage and maxprocs reference.\n\nDashboard scope: Instance ID / TiDB Cluster ID.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -2149,7 +2149,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "description": "TiDB process resident memory by instance.\n\nClinic source: [UserScope]Performance-Overview-Cluster-Clinic.json; [UserScope]TiDB-Cluster-Clinic.json\n\nNote: Clinic source uses process resident memory rather than node memory.\n\nDelivery scope label: tidb_cluster_id=\"$tidb_cluster\".\n\nDashboard scope: Instance ID / TiDB Cluster ID.",
+      "description": "TiDB process resident memory by instance.\n\nDashboard scope: Instance ID / TiDB Cluster ID.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -2266,7 +2266,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "description": "TiProxy CPU usage normalized by maxprocs.\n\nClinic source: Dedicated metrics .docx; [SharedScope]TiProxy-Summary-Cluster-Clinic.json\n\nDelivery scope label: tidb_cluster_id=\"$tidb_cluster\".\n\nDashboard scope: Instance ID / TiDB Cluster ID.",
+      "description": "TiProxy CPU usage normalized by maxprocs.\n\nDashboard scope: Instance ID / TiDB Cluster ID.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -2369,7 +2369,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "description": "TiProxy connection count by instance.\n\nClinic source: Dedicated metrics .docx; [SharedScope]TiProxy-Summary-Cluster-Clinic.json\n\nDelivery scope label: tidb_cluster_id=\"$tidb_cluster\".\n\nIncludes both per-instance and total connection count.\n\nDashboard scope: Instance ID / TiDB Cluster ID.",
+      "description": "TiProxy connection count by instance.\n\nIncludes both per-instance and total connection count.\n\nDashboard scope: Instance ID / TiDB Cluster ID.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -2471,7 +2471,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "description": "TiProxy inbound plus outbound traffic throughput by instance.\n\nClinic source: Dedicated metrics .docx; [SharedScope]TiProxy-Summary-Cluster-Clinic.json\n\nDelivery scope label: tidb_cluster_id=\"$tidb_cluster\".\n\nDashboard scope: Instance ID / TiDB Cluster ID.",
+      "description": "TiProxy inbound plus outbound traffic throughput by instance.\n\nDashboard scope: Instance ID / TiDB Cluster ID.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -2562,7 +2562,7 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "description": "Successful TiProxy session migration events by reason.\n\nClinic source: Dedicated metrics .docx; [SharedScope]TiProxy-Summary-Cluster-Clinic.json\n\nDelivery scope label: tidb_cluster_id=\"$tidb_cluster\".\n\nDashboard scope: Instance ID / TiDB Cluster ID.",
+      "description": "Successful TiProxy session migration events by reason.\n\nDashboard scope: Instance ID / TiDB Cluster ID.",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -2670,7 +2670,7 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "Resource group read/write request units per second from clinic _sum counters.\n\nClinic source: [UserScope]TiDB-Resource-Control-Cluster-Clinic.json\n\nNote: Clinic uses resource_manager_resource_unit_*_request_unit_sum counters.\n\nDelivery scope label: tidb_cluster_id=\"$tidb_cluster\".\n\nDashboard scope: Instance ID / TiDB Cluster ID.",
+      "description": "Resource group read/write request units per second from _sum counters.\n\nDashboard scope: Instance ID / TiDB Cluster ID.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -2773,7 +2773,7 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "Resource group read/write request units per second from clinic _sum counters.\n\nClinic source: [UserScope]TiDB-Resource-Control-Cluster-Clinic.json\n\nNote: Clinic uses resource_manager_resource_unit_*_request_unit_sum counters.\n\nDelivery scope label: tidb_cluster_id=\"$tidb_cluster\".\n\nDashboard scope: Instance ID / TiDB Cluster ID.",
+      "description": "Used row-based and columnar storage size in bytes for the selected instance.\n\nDashboard scope: Instance ID / TiDB Cluster ID.",
       "fieldConfig": {
         "defaults": {
           "color": {
