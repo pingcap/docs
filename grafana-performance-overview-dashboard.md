@@ -94,6 +94,12 @@ Generally, `tso - request` divided by `tso - cmd` is the average size of TSO req
 - CPU-Quota: Maximum number of CPU cores that a TiKV instance can use among all TiKV instances
 - Mem-Max: Maximum memory usage among all TiKV instances
 
+### PD CPU/Memory
+
+- CPU-Max: Maximum CPU utilization among all PD instances
+- CPU-Quota: Maximum number of CPU cores that a PD instance can use among all PD instances
+- Mem-Max: Maximum memory usage among all PD instances
+
 ### Duration
 
 - Duration: Execution time
