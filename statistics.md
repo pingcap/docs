@@ -256,7 +256,7 @@ The NDV rate is the fraction of rows that TiKV uses to estimate NDV. The [`tidb_
 
 - If `tidb_analyze_sampled_ndv_threshold` is `0`, `ANALYZE` uses all rows to estimate NDV.
 - If the table or partition has `tidb_analyze_sampled_ndv_threshold` rows or fewer, `ANALYZE` uses all rows to estimate NDV.
-- If the table or partition has more rows, the NDV rate is `max(0.05, tidb_analyze_sampled_ndv_threshold / row_count)`. As a result, the NDV sample contains approximately `tidb_analyze_sampled_ndv_threshold` rows, but the NDV rate is never less than `0.05`.
+- If the table or partition has more rows, the NDV rate is `max(0.05, tidb_analyze_sampled_ndv_threshold / row_count)`. As a result, the NDV sample contains approximately `tidb_analyze_sampled_ndv_threshold` rows or 5% of the rows, whichever is larger.
 
 TiDB uses the row count from the statistics of the table. Sometimes this row count is less than one fifth of the approximate row count in PD, for example, after a data import. In this case, TiDB uses the approximate row count from PD.
 
