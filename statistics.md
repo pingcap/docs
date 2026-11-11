@@ -266,7 +266,7 @@ A change to `tidb_analyze_sampled_ndv_threshold` has an effect on a table or par
 
 #### Specify the NDV rate
 
-To set the NDV rate manually, use the `WITH FLOAT_NUM NDVRATE` option. The range of the value is `(0, 1]`. For example:
+By default, TiDB calculates the NDV rate from the current row count in each `ANALYZE` operation. To set the NDV rate manually, use the `WITH FLOAT_NUM NDVRATE` option. The range of the value is `(0, 1]`. For example:
 
 ```sql
 ANALYZE TABLE t WITH 0.1 NDVRATE;
@@ -282,7 +282,7 @@ The `NDVRATE` option has the following behaviors:
     - If a statement specifies an `NDVRATE` value less than its `SAMPLERATE` value, TiDB returns an error.
     - In other cases, if the NDV rate is too small for the sampling rate or for the number of samples, TiDB increases the NDV rate and returns a note.
 
-If [`tidb_persist_analyze_options`](/system-variables.md#tidb_persist_analyze_options-new-in-v540) is `ON`, TiDB persists the `NDVRATE` value, the same as other [`ANALYZE` configurations](#persist-analyze-configurations). Then automatic `ANALYZE` uses the persisted value. Manual `ANALYZE` statements that do not specify `NDVRATE` also use this value. To clear the persisted value, use `WITH DEFAULT NDVRATE`. If no `NDVRATE` value is persisted, TiDB calculates the NDV rate again in each `ANALYZE` operation.
+If [`tidb_persist_analyze_options`](/system-variables.md#tidb_persist_analyze_options-new-in-v540) is `ON`, TiDB persists the `NDVRATE` value that you specify, the same as other [`ANALYZE` configurations](#persist-analyze-configurations). Subsequent automatic `ANALYZE` operations, and manual `ANALYZE` statements that do not specify `NDVRATE`, use the persisted value. To clear the persisted value and use the calculated NDV rate again, use `WITH DEFAULT NDVRATE`.
 
 To see the NDV rate of an `ANALYZE` job, examine the `Job_info` column in the output of [`SHOW ANALYZE STATUS`](/sql-statements/sql-statement-show-analyze-status.md). If the job uses an NDV rate, this column shows the rate, for example, `0.05 ndvrate`.
 
