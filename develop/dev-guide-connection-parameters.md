@@ -272,7 +272,7 @@ INSERT INTO `t` (`a`) VALUES (11) ON DUPLICATE KEY UPDATE `a` = 11;
 INSERT INTO `t` (`a`) VALUES (12) ON DUPLICATE KEY UPDATE `a` = 12;
 ```
 
-The above `INSERT` statements cannot be rewritten into one statement. But if you change the three statements into the following ones:
+The above `INSERT` statements cannot be rewritten into one statement. But if you change the three statements as follows, they meet the rewrite requirement:
 
 ```sql
 INSERT INTO `t` (`a`) VALUES (10) ON DUPLICATE KEY UPDATE `a` = VALUES(`a`);
@@ -280,7 +280,7 @@ INSERT INTO `t` (`a`) VALUES (11) ON DUPLICATE KEY UPDATE `a` = VALUES(`a`);
 INSERT INTO `t` (`a`) VALUES (12) ON DUPLICATE KEY UPDATE `a` = VALUES(`a`);
 ```
 
-Then they meet the rewrite requirement. The above `INSERT` statements will be rewritten into the following one statement:
+The above `INSERT` statements will be rewritten into the following one statement:
 
 ```sql
 INSERT INTO `t` (`a`) VALUES (10), (11), (12) ON DUPLICATE KEY UPDATE a = VALUES(`a`);
