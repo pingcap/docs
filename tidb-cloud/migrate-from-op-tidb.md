@@ -225,7 +225,7 @@ After you export data from the TiDB Self-Managed cluster to Amazon S3, you need 
     - `<Your S3 bucket ARN>`: the ARN of the S3 bucket. You can click the **Copy ARN** button on the S3 bucket **Overview** page to get it.
     - `<Your AWS KMS ARN>`: the ARN of the S3 bucket KMS key. You can get it from **S3 bucket** > **Properties** > **Default encryption** > **AWS KMS Key ARN**. For more information, see the [Amazon S3 documentation](https://docs.aws.amazon.com/AmazonS3/latest/userguide/viewing-bucket-key-settings.html).
 
-    The last statement (`kms:Decrypt`) is required only if you have enabled SSE-KMS for the S3 bucket. Otherwise, remove it.
+    The last statement (`kms:Decrypt`) is required only if you have enabled SSE-KMS for the S3 bucket. Otherwise, remove it and the comma after the preceding statement.
 
     ```json
     {
