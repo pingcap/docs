@@ -91,7 +91,7 @@ Do the following to import data from a CSV file:
 3. Use the following command to import data from the CSV file:
 
     ```bash
-    mysql --comments --connect-timeout 150 -u '<your_username>' -h <your_host> -P 4000 -D test --ssl-mode=VERIFY_IDENTITY --ssl-ca=<your_ca_path> -p<your_password> -e "LOAD DATA LOCAL INFILE '<your_csv_path>' INTO TABLE products
+    mysql --comments --connect-timeout 150 -u '<your_username>' -h <your_host> -P 4000 -D test --ssl-mode=VERIFY_IDENTITY --ssl-ca=<your_ca_path> -p<your_password> --local-infile -e "LOAD DATA LOCAL INFILE '<your_csv_path>' INTO TABLE products
     FIELDS TERMINATED BY ','
     LINES TERMINATED BY '\n'
     IGNORE 1 LINES (product_id, product_name, price);"
