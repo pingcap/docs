@@ -122,7 +122,7 @@ The following is the description of PD Dashboard metrics items:
 ## etcd
 
 - Handle transactions count: The rate at which etcd handles transactions
-- 99% Handle transactions duration: The transaction handling rate (P99)
+- 99% Handle transactions duration: The time consumed for handling etcd transactions (P99)
 - 99% WAL fsync duration: The time consumed for writing WAL into the persistent storage. It is less than `1s` (P99)
 - 99% Peer round trip time seconds: The network latency for etcd (P99) | The value is less than `1s`
 - etcd disk WAL fsync rate: The rate of writing WAL into the persistent storage
