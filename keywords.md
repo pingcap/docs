@@ -83,6 +83,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - AS (R)
 - ASC (R)
 - ASCII
+- ASYNC
 - ATTRIBUTE
 - ATTRIBUTES
 - AUTO
@@ -163,6 +164,8 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - COMMIT
 - COMMITTED
 - COMPACT
+- COMPARE
+- COMPLETE
 - COMPRESSED
 - COMPRESSION
 - COMPRESSION_LEVEL
@@ -218,6 +221,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - DELAY_KEY_WRITE
 - DELAYED (R)
 - DELETE (R)
+- DELTA
 - DENSE_RANK (R-Window)
 - DEPENDENCY
 - DEPTH
@@ -513,6 +517,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - OUT (R)
 - OUTER (R)
 - OUTFILE (R)
+- OUTPUT
 - OVER (R-Window)
 
 <a id="P" class="letter" href="#P">P</a>
@@ -535,6 +540,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - PER_DB
 - PER_TABLE
 - PESSIMISTIC
+- PLACE
 - PLUGINS
 - POINT
 - POLICY
@@ -602,7 +608,9 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - RESTORE
 - RESTORES
 - RESTRICT (R)
+- RESULT
 - RESUME
+- RETURN
 - RETURNING
 - REUSE
 - REVERSE
@@ -795,6 +803,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - VARYING (R)
 - VECTOR
 - VIEW
+- VIEWS
 - VIRTUAL (R)
 - VISIBLE
 
