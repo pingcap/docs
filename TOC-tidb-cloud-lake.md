@@ -114,6 +114,7 @@
   - [集計インデックス](/tidb-cloud-lake/guides/aggregating-index.md)
   - [フルテキストインデックス](/tidb-cloud-lake/guides/full-text-index.md)
   - [Ngram インデックス](/tidb-cloud-lake/guides/ngram-index.md)
+  - [Fuse テーブルのパーティショニング](/tidb-cloud-lake/guides/partition-by.md)
   - [クエリ結果キャッシュ](/tidb-cloud-lake/guides/query-result-cache.md)
 - セキュリティと信頼性
   - [概要](/tidb-cloud-lake/guides/security-reliability.md)
@@ -1141,9 +1142,10 @@
       - [VECTOR_NORM](/tidb-cloud-lake/sql/vector-norm.md)
       - [ベクトル関数](/tidb-cloud-lake/sql/vector-functions.md)
     - ハッシュ関数
+      - [概要](/tidb-cloud-lake/sql/hash-functions.md)
       - [BLAKE3](/tidb-cloud-lake/sql/blake.md)
+      - [BUCKET](/tidb-cloud-lake/sql/bucket.md)
       - [CITY64WITHSEED](/tidb-cloud-lake/sql/city-withseed.md)
-      - [ハッシュ関数](/tidb-cloud-lake/sql/hash-functions.md)
       - [MD5](/tidb-cloud-lake/sql/md.md)
       - [SHA](/tidb-cloud-lake/sql/sha.md)
       - [SHA1](/tidb-cloud-lake/sql/sha-sql.md)

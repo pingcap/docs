@@ -27,11 +27,14 @@ TiDB Lightning が遅くなる理由はいくつかあります。
 
 TiDB Lightningは、データソースを256MB程度の複数のファイルに分割し、並列処理することで最適に動作します。各ファイルのサイズが大きすぎると、 TiDB Lightningが応答しない場合があります。
 
-データソースが CSV であり、すべての CSV ファイルに改行制御文字 (U+000A および U+000D) を含むフィールドがない場合は、"strict format"をオンにして、 TiDB Lightning が大きなファイルを自動的に分割するようにできます。
+データソースが CSV であり、すべての CSV ファイルに改行制御文字 (U+000A および U+000D) を含むフィールドがない場合は、"strict format"をオンにして、 TiDB Lightning が大きなファイルを自動的に分割するようにできます。`strict-format` を有効にする場合は、ソースファイル内の行末記号に一致する空でない値に `mydumper.csv.terminator` も設定する必要があります。
 
 ```toml
 [mydumper]
 strict-format = true
+
+[mydumper.csv]
+terminator = "\n" # ファイル内の実際の行末記号に応じて、"\n"、"\r"、または "\r\n" に設定します。
 ```
 
 **原因 4** : TiDB Lightning が古すぎます。

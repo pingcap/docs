@@ -78,7 +78,7 @@ DM がダウンストリームテーブルスキーマを使用してアップ�
     | パラメータ               | 説明                                                                                                               |
     | :------------------ | :--------------------------------------------------------------------------------------------------------------- |
     | `--master-addr`      | dmctl が接続されるクラスター内の任意の DM-masterノードの`${advertise-addr}`を指定します。`${advertise-addr}`は 、DM-masterが外部にアドバタイズするアドレスを示します。 |
-    | `binlog-schema set` | スキーマ情報を手動で設定します。                                                                                                 |
+    | `binlog-schema update` | スキーマ情報を手動で更新します。                                                                                                 |
     | `-s`                | ソースを指定します。`${source-id}`は MySQL データのソース ID を示します。                                                               |
     | `${task-name}`      | データ移行タスクの`task.yaml`設定ファイルで定義されている移行タスクの名前を指定します。                                                                |
     | `${database-name}`  | データベースを指定します。`${database-name}`はアップストリーム データベースの名前を示します。                                                        |
@@ -90,7 +90,7 @@ DM がダウンストリームテーブルスキーマを使用してアップ�
     {{< copyable "shell-regular" >}}
 
     ```
-    tiup dmctl --master-addr 172.16.10.71:8261 binlog-schema update -s mysql-01 task-test -d log -t message log.message.sql
+    tiup dmctl --master-addr 172.16.10.71:8261 binlog-schema update -s mysql-01 task-test log messages log.messages.sql
     ```
 
 3. 一時停止状態の移行タスクを再開するには、 `resume-task`コマンドを使用します。

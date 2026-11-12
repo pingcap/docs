@@ -4,7 +4,7 @@ summary: TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスのバ
 aliases: ['/ja/tidbcloud/restore-deleted-tidb-cluster']
 ---
 
-# TiDB Cloud StarterまたはEssentialデータのバックアップと復元 {#back-up-and-restore--starter--or-essential-data}
+# TiDB Cloud StarterまたはEssentialデータのバックアップと復元 {#back-up-and-restore--starter--or-essential-data} <!--Corresponding EN commit: 570751a86a27cbfb6aab6e47f7d27587321e065c-->
 
 このドキュメントでは、TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンス上のデータのバックアップと復元方法について説明します。
 
@@ -67,6 +67,37 @@ TiDB Cloud Essentialインスタンスのバックアップ時間を設定する
 
 4. **Confirm**をクリックしてください。
 
+## 手動バックアップ {#manual-backups}
+
+TiDBバージョン `CLOUD.202603.x` 以降の {{{ .essential }}} インスタンスでは、重要なデータ削除や元に戻せないスキーマ変更などの高リスクな操作の前に、手動バックアップを作成できます。
+
+> **Note:**
+>
+> - {{{ .essential }}} インスタンスのTiDBバージョンは、TiDB Cloudコンソールの概要ページで確認できます。
+> - TiDBバージョン `v8.5.3` 以前の {{{ .essential }}} インスタンスおよび {{{ .starter }}} では、手動バックアップはサポートされていません。
+
+### 保持と削除 {#retention-and-deletion}
+
+手動バックアップは、明示的に削除するまで保持されます。自動バックアップの保持設定は手動バックアップには適用されません。{{{ .essential }}} インスタンスを削除すると、その手動バックアップは Recycle Bin に移動し、手動で削除するまでそこに保持されます。Recycle Bin 内のバックアップは、削除されるまで引き続き課金対象となります。詳細については、[TiDB Cloudリソースを削除する](/tidb-cloud/delete-tidb-cluster.md) を参照してください。
+
+### コンソールで手動バックアップを作成する {#create-a-manual-backup-in-the-console}
+
+1. {{{ .essential }}} インスタンスの [**Backup**](#view-the-backup-page) ページに移動します。
+
+2. 右上隅の **...** をクリックし、**Manual Backup** をクリックします。
+
+3. 操作を確認します。バックアップが **Backup List** に表示されます。
+
+4. [スナップショット復元](#restore-to-a-new-instance) に使用する前に、バックアップが正常に完了するまで待ちます。
+
+### 手動バックアップを削除する {#delete-a-manual-backup}
+
+1. {{{ .essential }}} インスタンスの [**Backup**](#view-the-backup-page) ページに移動します。インスタンスが削除されている場合は、[Recycle Bin](#restore-from-recycle-bin) でそのバックアップを探します。
+
+2. 削除したい手動バックアップを見つけて、その行の **...** をクリックし、**Delete** をクリックします。
+
+3. 削除を確認します。削除されたバックアップは、データの復元には使用できなくなります。
+
 ## 復元する {#restore}
 
 TiDB Cloudは、偶発的なデータ損失や破損が発生した場合にデータを復旧するための復元機能を提供します。
@@ -75,12 +106,14 @@ TiDB Cloudは、偶発的なデータ損失や破損が発生した場合にデ�
 
 TiDB Cloudは、 TiDB Cloud StarterまたはEssentialインスタンスのスナップショット復元と特定時点への復元をサポートしています。
 
-- **Snapshot Restore**：特定のバックアップスナップショットからTiDB Cloud StarterまたはEssentialインスタンスを復元します。
+- **Snapshot Restore**：特定のバックアップスナップショットからデータを新しいTiDB Cloud StarterまたはEssentialインスタンスに復元します。TiDBバージョン `CLOUD.202603.x` 以降の {{{ .essential }}} インスタンスでは、自動バックアップまたは手動バックアップのいずれからでも復元できます。
 
 - **Point-in-Time Restore（PREVIEW）** ： TiDB Cloud Essentialインスタンスを特定の時点の状態に復元します。
 
     - TiDB Cloud Starterインスタンス：サポートされていません。
     - TiDB Cloud Essentialインスタンス：バックアップ保持期間内の任意の時点に復元できますが、 TiDB Cloud Essentialインスタンスの作成時刻より前、または現在時刻の1分前より後には復元できません。
+
+    特定時点への復元は自動バックアップに適用され、手動バックアップではサポートされていません。
 
 ### 復元先 {#restore-destination}
 
@@ -112,7 +145,7 @@ TiDB Cloudは、新しいTiDB Cloud StarterまたはEssentialインスタンス�
     選択したバックアップスナップショットから復元するには、次の手順を実行します。
 
     1. **Snapshot Restore**をクリックします。
-    2. 復元元のバックアップスナップショットを選択してください。
+    2. 復元元のバックアップスナップショットを選択してください。{{{ .essential }}} インスタンスの手動バックアップを復元するには、完了済みの手動バックアップを選択します。
 
     </div>
      <div label="Point-in-Time Restore">
@@ -155,7 +188,7 @@ TiDB Cloudは、新しいTiDB Cloud StarterまたはEssentialインスタンス�
 
 2. **Recycle Bin**ページで、 **Essential**タブをクリックすると、 TiDB Cloud Essentialインスタンスのごみ箱に移動します。
 
-3. 復元したいTiDB Cloud Essentialインスタンスを見つけて、 **>**ボタンをクリックして、そのインスタンスで使用可能なバックアップを展開します。
+3. 復元したいTiDB Cloud Essentialインスタンスを見つけて、 **>**ボタンをクリックして、そのインスタンスで使用可能なバックアップを展開します。TiDBバージョン `CLOUD.202603.x` 以降のインスタンスでは、この一覧に手動バックアップが含まれる場合があります。手動バックアップは、明示的に削除するまで引き続き利用できます。
 
     > **Note:**
     >
@@ -168,5 +201,6 @@ TiDB Cloudは、新しいTiDB Cloud StarterまたはEssentialインスタンス�
 ## 制限事項 {#limitations}
 
 - TiFlashレプリカが有効になっている場合、データの再構築がTiFlash内で行われるため、復元後一定期間は利用できなくなります。
-- TiDB Cloud StarterおよびTiDB Cloud Essentialインスタンスでは、手動バックアップはサポートされていません。
+- TiDB Cloud Starterインスタンスでは、手動バックアップはサポートされていません。TiDB Cloud Essentialインスタンスでは、手動バックアップにはTiDBバージョン `CLOUD.202603.x` 以降が必要です。
+- 手動バックアップでは、特定時点への復元や、テーブルレベルまたはデータベースレベルのバックアップなどの部分バックアップはサポートされていません。復元のたびに新しいインスタンスが作成されるため、既存のインスタンスへの手動バックアップの復元はサポートされていません。
 - TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスで、1 TiBを超えるデータが含まれている場合、デフォルトでは新しいインスタンスへの復元はサポートされません。より大規模なデータセットに関するサポートが必要な場合は[TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
