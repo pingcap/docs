@@ -14,3 +14,12 @@ gen
 /node_modules/
 tmp/
 .lycheecache
+
+# Local credentials
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+credentials.json
+service-account*.json

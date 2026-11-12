@@ -1,7 +1,10 @@
 # This script collects data from docs-cn, docs, and docs-tidb-operator,
 # and write data to Google Sheets.
+# Before running this script, set GITHUB_USERNAME, GITHUB_TOKEN or GH_TOKEN,
+# and GOOGLE_APPLICATION_CREDENTIALS in the environment.
 
 import gspread
+import os
 from oauth2client.service_account import ServiceAccountCredentials
 import requests
 from datetime import datetime
@@ -26,8 +29,14 @@ url_docs_tidb_operator_merged = 'https://api.github.com/search/issues?q=is:pr%20
 url_docs_tidb_operator_updated = 'https://api.github.com/search/issues?q=is:pr%20repo:pingcap/docs-tidb-operator%20-author:ti-chi-bot%20updated:' + now_4d + '..' + now_date + '&per_page=100'
 
 
-username = '<your GitHub username>'
-token = '<your GitHub token>'
+username = os.environ.get('GITHUB_USERNAME')
+token = os.environ.get('GITHUB_TOKEN') or os.environ.get('GH_TOKEN')
+credentials_file = os.environ.get('GOOGLE_APPLICATION_CREDENTIALS')
+if not username or not token or not credentials_file:
+    raise RuntimeError(
+        'Set GITHUB_USERNAME, GITHUB_TOKEN or GH_TOKEN, and '
+        'GOOGLE_APPLICATION_CREDENTIALS before running this script.'
+    )
 
 
 # Get PR counts and PR list
@@ -125,7 +134,7 @@ if __name__ == '__main__':
     print('********************************************')
 
     scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
-    credentials = ServiceAccountCredentials.from_json_keyfile_name('<your personal Google Sheets API key in a JSON file>', scope)
+    credentials = ServiceAccountCredentials.from_json_keyfile_name(credentials_file, scope)
     gc = gspread.authorize(credentials)
     time_row = now_4d + ' to ' + now_date
 

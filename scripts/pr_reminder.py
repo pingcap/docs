@@ -1,4 +1,4 @@
-import sys
+import os
 import requests
 from lxml import etree
 from datetime import datetime
@@ -145,8 +145,10 @@ if __name__ == "__main__":
     #        file.write(report)
     # print(report)
 
-    # Get bot webhook from the environment variables
-    URL = sys.argv[1]
+    # Get the bot webhook from the environment.
+    URL = os.environ.get("BOT_WEBHOOK_URL")
+    if not URL:
+        raise RuntimeError("Set BOT_WEBHOOK_URL before running this script.")
 
     d = Template("""{
         "msg_type": "post",
