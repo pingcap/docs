@@ -264,7 +264,7 @@ TiDB Lightningは、入力ファイルのサイズが256MiB程度に均一であ
 strict-format = true
 
 [mydumper.csv]
-terminator = "\n" # ファイル内の実際の行末記号に応じて、"\n"、"\r"、または"\r\n"に設定します。
+terminator = "\n" # Set it to "\n", "\r", or "\r\n", depending on the actual line terminator in your files.
 ```
 
 厳密なCSVファイルでは、各フィールドは1行のみに収まります。つまり、次のいずれかの条件を満たす必要があります。
