@@ -29,6 +29,7 @@ Check the instance capacity of your organization before launch, because it limit
 
 - By default, each organization can create up to five free {{{ .starter }}} instances. The first five instances in an organization receive a free usage quota.
 - After you add a credit card and set a monthly spending limit, a paid organization can create up to 100 {{{ .starter }}} instances and branches in total. Each branch counts as a separate instance.
+- After an organization has five free instances, creating another instance without a spending limit fails with a quota error. Set a spending limit when you create the instance, for example, with `--monthly-spending-limit-usd-cents`.
 - By default, each organization can create a maximum of five branches across all instances.
 - If your platform needs more instances or branches, apply for the [Instance Capacity Plan](/tidb-cloud/select-cluster-tier.md#instance-capacity-plan). You receive an email notification after the application is approved. Apply early so that approval does not block your launch.
 
@@ -87,6 +88,15 @@ ti db format-db-connection-string \
   --format env
 ```
 
+The read-write user that `create-db-sql-users` creates has the built-in read-write role, which can change data and create tables in every database of the instance. To limit an application to its own database, use the administrative user to create a dedicated user and grant privileges on that database only:
+
+```sql
+CREATE USER '<prefix>.app' IDENTIFIED BY '<password>';
+GRANT SELECT, INSERT, UPDATE, DELETE ON app_db.* TO '<prefix>.app';
+```
+
+Run these statements from your provisioning service over a database connection, so that the password does not appear in shell history or process listings.
+
 Store generated credentials in a secret manager and inject them into the application at startup. Do not commit them to the application code that you generate for end users. For more information about users and roles, see [Manage Database Users and Roles](/tidb-cloud/configure-sql-users.md).
 
 ## Step 6. Configure connections
@@ -112,7 +122,7 @@ The first five {{{ .starter }}} instances in an organization each receive a mont
 ## Step 8. Plan backups, branches, and deletion
 
 - Automatic backup retention is one day for a free instance. For an instance with a spending limit greater than 0, you can set retention from 1 to 30 days, with a default of 14 days. Set retention based on how long you need to recover from application mistakes. For more information, see [Back Up and Restore {{{ .starter }}} Data](/tidb-cloud/backup-and-restore-serverless.md).
-- Use [branches](/tidb-cloud/branch-overview.md) to test schema changes for one application without affecting its production data. Branches are intended for short-term development and functional testing, not performance testing.
+- Use [branches](/tidb-cloud/branch-overview.md) to test schema changes for one application without affecting its production data. Branches are intended for short-term development and functional testing, not performance testing. A branch has its own user name prefix, so connect to it with user names that use the branch prefix.
 - A deleted {{{ .starter }}} instance cannot be restored. When a user deletes an application, keep the instance for a grace period, and [export its data](/tidb-cloud/serverless-export.md) if you might need it later. Then delete the instance:
 
     ```shell
