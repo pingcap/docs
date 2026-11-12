@@ -80,6 +80,6 @@ Compare `IA_EXEC_COUNT` with `EXEC_COUNT` in the statement summary tables to get
 
 ## Where can I see the IA cache hit rate?
 
-In the Cloud Console, go to **Monitoring** > **Metrics** > **Instance Overview** and open the **IA Cache Performance** panel group. It includes the cache hit rate, the cache miss rate, the remote read segment count and volume, and the remote read wait time.
+In the Cloud Console, go to **Monitoring** > **Metrics** > **Instance Overview**. The IA panels on this tab are **IA Cache Hit Rate**, **IA Remote Read Segment**, and **IA Remote Read Throughput**.
 
 A yellow indicator appears when the hit rate drops below 85%. If the cluster has no IA tables, the panels show **No IA data**.
