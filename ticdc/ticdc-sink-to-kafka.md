@@ -280,7 +280,7 @@ Topic 式の形式は`[prefix]{schema}[middle][{table}][suffix]`です。
 
 DDLメッセージ内のSQLテキストは、再フォーマットまたは再構築される場合があります。新しいアーキテクチャでは、単一テーブルの`ALTER TABLE ... RENAME`文は、データベース名とテーブル名を完全修飾した`RENAME TABLE`文に書き換えられます。このアーキテクチャが複数テーブルの`RENAME TABLE`文を分割する場合、分割後の各SQL文はセミコロンで終わります。コンシューマーは、解析時にこれらのSQL形式をサポートする必要があります。
 
-複数テーブルの rename を分割しても、元のアップストリームDDL文のアトミック性は保証されません。テーブル名を入れ替える場合、コンシューマーは関連するすべての rename 手順を正しい順序で処理する必要があります。詳細については、[テーブル名の変更に関するDDLレプリケーションの考慮事項](/ticdc/ticdc-ddl.md#ddl-replication-considerations-for-renaming-tables)および[DDL SQL テキストの処理](/ticdc/ticdc-ddl.md#handling-of-ddl-sql-text)を参照してください。
+複数テーブルの名前変更を分割しても、元のアップストリームDDL文のアトミック性は保証されません。テーブル名を入れ替える場合、コンシューマーは関連するすべての名前変更ステップを正しい順序で処理する必要があります。詳細については、[テーブル名の変更に関するDDLレプリケーションの考慮事項](/ticdc/ticdc-ddl.md#ddl-replication-considerations-for-renaming-tables)および[DDL SQL テキストの処理](/ticdc/ticdc-ddl.md#handling-of-ddl-sql-text)を参照してください。
 
 ### パーティションディスパッチャー {#partition-dispatchers}
 
