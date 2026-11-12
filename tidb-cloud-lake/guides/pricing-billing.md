@@ -84,7 +84,7 @@ Warehouse のサイズとは、同時に処理できるクエリの最大数を�
 
 ## 例 2 {#example-2}
 
-**利用シナリオ:** あるユーザーが AWS の US East (N. Virginia) リージョンで XSmall Warehouse (Business) を使用して、{{{ .lake }}} に継続的にデータをインポートしています。Warehouse は 1 TiB (1,024 GiB) のストレージで 24 時間稼働し、1 分ごとのデータロード (load) に Task service を使用しています。API 呼び出し数の見積もりは 50,000 回です。
+**利用シナリオ:** あるユーザーが AWS の US East (N. Virginia) リージョンで XSmall Warehouse (Business) を使用して、{{{ .lake }}} に継続的にデータをインポートしています。Warehouse は 1 TiB (1,024 GiB) のストレージで 24 時間稼働し、1 分ごとのデータロードに Task service を使用しています。API 呼び出し数の見積もりは 50,000 回です。
 
 | コスト | 計算式 | 金額 |
 |------|---------|--------|
