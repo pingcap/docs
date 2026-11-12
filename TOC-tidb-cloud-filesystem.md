@@ -8,6 +8,7 @@
 - [Introduction](/tidb-cloud-filesystem/filesystem-intro.md)
 - [Quick Start via Console](/tidb-cloud-filesystem/filesystem-quick-start-console.md)
 - [Quick Start via CLI](/tidb-cloud-filesystem/filesystem-quick-start.md)
+- [Onboarding Best Practices](/tidb-cloud-filesystem/filesystem-onboarding-best-practices.md)
 - Key Concepts
   - [Authorization](/tidb-cloud-filesystem/filesystem-authorization.md)
   - [Layers and Checkpoints](/tidb-cloud-filesystem/filesystem-layers-checkpoints.md)
