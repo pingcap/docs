@@ -299,10 +299,12 @@ target-database:              # The target database instance
 # Use block-allow-list to configure only the exported tables that require sync:
 block-allow-list:             # The set of filter rules on matching tables in the data sources, to decide which tables need to migrate and which not. Use the black-white-list if the DM version is earlier than or equal to v2.0.0-beta.2.
   bw-rule-1:                  # The ID of the block and allow list rule.
+    do-dbs: ["my_db1"]
     do-tables:
     - db-name: "my_db1"
       tbl-name: "table[1-2]"  # Replicate only `table1` and `table2` from `my_db1`.
   bw-rule-2:
+    do-dbs: ["my_db2"]
     do-tables:
     - db-name: "my_db2"
       tbl-name: "table[3-4]"  # Replicate only `table3` and `table4` from `my_db2`.
