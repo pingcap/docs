@@ -28,7 +28,7 @@ summary: 云原生身份委派（AWS IAM Role、Azure Managed Identity、Google 
 
    <https://us-east-2.console.aws.amazon.com/iam/home?region=us-east-2#/policies>
 
-   点击 `Create policy`，选择 `Custom trust policy`，然后输入用于 S3 存储桶访问的策略文档：
+   点击 `Create policy`。在 `Policy editor` 部分，点击 `JSON`，然后输入用于 S3 存储桶访问的策略文档：
 
    ```json
    {
@@ -48,7 +48,7 @@ summary: 云原生身份委派（AWS IAM Role、Azure Managed Identity、Google 
    }
    ```
 
-   点击 `Next`，输入策略名称：`lake-test`，然后点击 `Create policy`
+   点击 `Next`，输入策略名称：`lake-test`，然后点击 `Create policy`。
 
 3. 前往 AWS Console：
 

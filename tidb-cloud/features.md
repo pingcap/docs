@@ -189,7 +189,7 @@ summary: 了解不同 TiDB Cloud 套餐的功能支持状态。
   <tr>
     <td>手动备份</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
-    <td style="text-align:center; font-size: 14px;">❌</td>
+    <td style="text-align:center;">✅<br/><span style="font-size: 14px;">(TiDB 版本：<code>CLOUD.202603.x</code> 或更高版本)</span></td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>

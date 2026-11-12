@@ -67,6 +67,37 @@ TiDB Cloud Starter 实例和 TiDB Cloud Essential 实例的自动备份设置有
 
 4. 点击 **Confirm**。
 
+## 手动备份 {#manual-backups}
+
+对于 TiDB 版本为 `CLOUD.202603.x` 或更高版本的 {{{ .essential }}} 实例，你可以在高风险操作（例如关键数据删除或不可逆的数据库模式变更）之前创建手动备份。
+
+> **注意：**
+>
+> - 你可以在 TiDB Cloud 控制台中 {{{ .essential }}} 实例的概览页面查看其 TiDB 版本。
+> - TiDB 版本为 `v8.5.3` 或更早版本的 {{{ .essential }}} 实例以及 {{{ .starter }}} 不支持手动备份。
+
+### 保留和删除 {#retention-and-deletion}
+
+手动备份会一直保留，直到你显式删除它们。自动备份保留设置不适用于手动备份。如果你删除了一个 {{{ .essential }}} 实例，其手动备份会移至回收站，并一直保留在那里，直到你手动删除它们。回收站中的备份在删除前会持续产生费用。更多信息，请参见 [删除 TiDB Cloud 资源](/tidb-cloud/delete-tidb-cluster.md)。
+
+### 在控制台中创建手动备份 {#create-a-manual-backup-in-the-console}
+
+1. 进入你的 {{{ .essential }}} 实例的 [**Backup**](#view-the-backup-page) 页面。
+
+2. 在右上角，点击 **...**，然后点击 **Manual Backup**。
+
+3. 确认操作。备份会显示在 **Backup List** 中。
+
+4. 等待备份成功完成后，再将其用于[快照恢复](#restore-to-a-new-instance)。
+
+### 删除手动备份 {#delete-a-manual-backup}
+
+1. 进入你的 {{{ .essential }}} 实例的 [**Backup**](#view-the-backup-page) 页面。如果该实例已被删除，请在[回收站](#restore-from-recycle-bin)中找到其备份。
+
+2. 找到你要删除的手动备份，点击其所在行中的 **...**，然后点击 **Delete**。
+
+3. 确认删除。已删除的备份将无法再用于恢复你的数据。
+
 ## 恢复
 
 TiDB Cloud 提供恢复功能，帮助你在数据意外丢失或损坏时进行数据恢复。
@@ -75,12 +106,14 @@ TiDB Cloud 提供恢复功能，帮助你在数据意外丢失或损坏时进行
 
 TiDB Cloud 支持对你的 TiDB Cloud Starter 或 Essential 实例进行快照恢复和时间点恢复。
 
-- **Snapshot Restore**：从指定的备份快照恢复你的 TiDB Cloud Starter 或 Essential 实例。
+- **Snapshot Restore**：将指定备份快照中的数据恢复到新的 TiDB Cloud Starter 或 Essential 实例。对于 TiDB 版本为 `CLOUD.202603.x` 或更高版本的 {{{ .essential }}} 实例，你可以从自动备份或手动备份进行恢复。
 
 - **Point-in-Time Restore (PREVIEW)**：将你的 TiDB Cloud Essential 实例恢复到指定的时间点。
 
     - TiDB Cloud Starter 实例：不支持。
     - TiDB Cloud Essential 实例：可以恢复到备份保留期内的任意时间，但不能早于 TiDB Cloud Essential 实例创建时间，也不能晚于当前时间前 1 分钟。
+
+    时间点恢复适用于自动备份，不支持手动备份。
 
 ### 恢复目标
 
@@ -112,7 +145,7 @@ TiDB Cloud 支持将数据恢复到新的 TiDB Cloud Starter 或 Essential 实�
     要从选定的备份快照恢复，请执行以下步骤：
 
     1. 点击 **Snapshot Restore**。
-    2. 选择你要恢复的备份快照。
+    2. 选择你要恢复的备份快照。要恢复 {{{ .essential }}} 实例的手动备份，请选择已完成的手动备份。
 
     </div>
     <div label="Point-in-Time Restore">
@@ -154,7 +187,7 @@ TiDB Cloud 支持将数据恢复到新的 TiDB Cloud Starter 或 Essential 实�
 
 2. 在 **Recycle Bin** 页面上，点击 **Essential** 页签，进入 {{{ .essential }}} 实例的回收站。
 
-3. 找到你要恢复的 {{{ .essential }}} 实例，然后点击 **>** 按钮以展开该实例的可用备份。
+3. 找到你要恢复的 {{{ .essential }}} 实例，然后点击 **>** 按钮以展开该实例的可用备份。对于 TiDB 版本为 `CLOUD.202603.x` 或更高版本的实例，此列表可能包含手动备份。手动备份会一直可用，直到你显式删除它们。
 
     > **注意：**
     >
@@ -167,5 +200,6 @@ TiDB Cloud 支持将数据恢复到新的 TiDB Cloud Starter 或 Essential 实�
 ## 限制
 
 - 如果启用了 TiFlash 副本，恢复后的一段时间内 TiFlash 将不可用，因为数据需要在 TiFlash 中重建。
-- TiDB Cloud Starter 和 TiDB Cloud Essential 实例不支持手动备份。
+- TiDB Cloud Starter 实例不支持手动备份。对于 TiDB Cloud Essential 实例，手动备份要求 TiDB 版本为 `CLOUD.202603.x` 或更高版本。
+- 手动备份不支持时间点恢复或部分备份，例如表级别或数据库级别备份。每次恢复都会创建一个新实例；不支持将手动备份恢复到现有实例。
 - 默认情况下，数据量超过 1 TiB 的 TiDB Cloud Starter 或 TiDB Cloud Essential 实例不支持恢复到新实例。如需处理更大数据集，请联系 [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) 获取帮助。

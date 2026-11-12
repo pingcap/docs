@@ -23,10 +23,13 @@ TiDB Cloud 的备份与恢复功能旨在保护你的数据安全，并通过支
 
 手动备份使你能够根据需要将数据备份到某个已知状态，并可在任何时候恢复到该状态。你可以在执行高风险操作（如系统升级、关键数据删除或不可逆的 schema 变更）之前使用手动备份。
 
-{{{ .premium }}}、{{{ .byoc }}} 和 TiDB Cloud Dedicated 支持手动备份。手动备份可提供一个可控的恢复点，并会一直保留，直到你显式将其删除。手动备份不支持 PITR 或部分备份，并且每次恢复操作都会创建一个新的实例。
+对于 TiDB 版本为 `CLOUD.202603.x` 或更高版本的 {{{ .essential }}} 实例、{{{ .premium }}} 和 {{{ .byoc }}} 实例，以及 TiDB Cloud Dedicated 集群，你可以创建手动备份。
+
+手动备份可提供一个可控的恢复点，并会一直保留，直到你显式将其删除。手动备份不支持 PITR 或部分备份，并且每次恢复操作都会创建一个新的实例或集群。
 
 更多信息，请参见以下内容：
 
+- [{{{ .essential }}} 实例的手动备份](/tidb-cloud/backup-and-restore-serverless.md#manual-backups)
 - [{{{ .premium }}} 和 {{{ .byoc }}} 实例的手动备份](/tidb-cloud/premium/backup-and-restore-premium.md#manual-backups)
 - [为 TiDB Cloud Dedicated 集群执行手动备份](/tidb-cloud/backup-and-restore.md#perform-a-manual-backup)
 
@@ -54,4 +57,5 @@ TiDB Cloud 的备份与恢复功能旨在保护你的数据安全，并通过支
 
 TiDB Cloud 支持通过备份快照或时间点恢复将数据恢复到新的集群或实例。恢复操作可帮助你从意外数据丢失、数据损坏或应用程序错误中进行恢复。
 
-对于 {{{ .premium }}} 和 {{{ .byoc }}} 实例，你可以将数据恢复到新的实例。你可以从自动备份、手动备份或受支持的外部云存储备份进行恢复。PITR 仅支持自动备份，不支持手动备份。
+- 对于 {{{ .essential }}} 实例，你可以将自动备份恢复到新的实例。对于 TiDB 版本为 `CLOUD.202603.x` 或更高版本的实例，你还可以恢复手动备份。要恢复手动备份，请使用快照恢复。PITR 仅支持自动备份。更多信息，请参见 [恢复模式](/tidb-cloud/backup-and-restore-serverless.md#restore-mode)。
+- 对于 {{{ .premium }}} 和 {{{ .byoc }}} 实例，你可以将数据恢复到新的实例。你可以从自动备份、手动备份或受支持的外部云存储备份进行恢复。PITR 仅支持自动备份，不支持手动备份。

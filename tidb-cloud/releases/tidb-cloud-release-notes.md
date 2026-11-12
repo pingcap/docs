@@ -8,6 +8,24 @@ aliases: ['/zh/tidbcloud/supported-tidb-versions','/zh/tidbcloud/release-notes',
 
 本页面列出了 [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) 在 2026 年的发布说明。
 
+## 2026 年 11 月 10 日 {#november-10-2026}
+
+**控制台变更**
+
+- TiDB Cloud 现已支持为 API 密钥配置 IP 允许列表。组织所有者可以在 TiDB Cloud 控制台中为每个 API 密钥指定允许的 IPv4 地址或 CIDR 范围。配置允许列表后，该 API 密钥只能从指定的 IP 地址发送控制面 API 请求，从而降低未经授权使用的风险。
+
+    更多信息，请参阅 [API key management](https://docs.pingcap.com/tidbcloud/api/v1beta2/#section/Authentication/API-key-management)。
+
+## 2026 年 11 月 6 日 {#november-6-2026}
+
+**API 变更**
+
+- **TiDB Cloud Essential**
+
+    - [TiDB Cloud API v1beta2](https://docs.pingcap.com/tidbcloud/api/v1beta2/) 现已支持管理运行 TiDB 版本 `CLOUD.202603.x` 或更高版本的 TiDB Cloud Essential 实例。
+
+        对于运行 TiDB v8.5.3 或更早版本的 TiDB Cloud Essential 实例，请改用 [v1beta1 API](https://docs.pingcap.com/tidbcloud/api/v1beta1/serverless/)。
+
 ## 2026 年 10 月 27 日 {#october-27-2026}
 
 **常规变更**
@@ -198,7 +216,7 @@ aliases: ['/zh/tidbcloud/supported-tidb-versions','/zh/tidbcloud/release-notes',
 
         你可以使用这些端点创建、列出、获取、删除、暂停、恢复和扩展 changefeed，以便将实时数据复制到下游系统，包括 Apache Kafka、MySQL、Amazon S3 和 Alibaba Cloud OSS。
 
-        更多信息，请参阅 [Changefeed API v1beta2 Reference](https://docs.pingcap.com/tidbcloud/api/v1beta2/premium/#tag/Changefeed)。
+        更多信息，请参阅 [Changefeed API v1beta2 Reference](https://docs.pingcap.com/tidbcloud/api/v1beta2/#tag/Changefeed)。
 
 ## 2026 年 9 月 1 日 {#september-1-2026}
 
@@ -568,8 +586,8 @@ aliases: ['/zh/tidbcloud/supported-tidb-versions','/zh/tidbcloud/release-notes',
 
     - 为 [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium) 引入以下备份 API 端点，以便对组织内的活动实例和已删除实例进行统一管理。
 
-        - [List backups](https://docs.pingcap.com/tidbcloud/api/v1beta2/premium/#tag/Backup/operation/BackupService_ListBackups)：列出组织内活动和已删除的 TiDB Cloud Premium 实例（位于回收站中）的备份。
-        - [Delete a backup](https://docs.pingcap.com/tidbcloud/api/v1beta2/premium/#tag/Backup/operation/BackupService_DeleteBackup)：通过 `backupId` 删除组织内的特定备份。
+        - [List backups](https://docs.pingcap.com/tidbcloud/api/v1beta2/#tag/Backup/operation/BackupService_ListBackups)：列出组织内活动和已删除的 TiDB Cloud Premium 实例（位于回收站中）的备份。
+        - [Delete a backup](https://docs.pingcap.com/tidbcloud/api/v1beta2/#tag/Backup/operation/BackupService_DeleteBackup)：通过 `backupId` 删除组织内的特定备份。
 
 ## 2026 年 6 月 2 日
 
@@ -730,7 +748,7 @@ aliases: ['/zh/tidbcloud/supported-tidb-versions','/zh/tidbcloud/release-notes',
     - **Backup**：管理 TiDB Cloud Premium 实例的备份，包括基于备份的恢复。
     - **Region**：获取可用于创建 TiDB Cloud Premium 实例的区域。
 
-  更多信息，请参见 [TiDB Cloud Premium API](https://docs.pingcap.com/tidbcloud/api/v1beta2/premium/)。
+  更多信息，请参见 [TiDB Cloud Premium API](https://docs.pingcap.com/tidbcloud/api/v1beta2/)。
 
 ## 2026 年 4 月 14 日
 
