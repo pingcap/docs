@@ -51,7 +51,7 @@ tiup bench tpcc -H 172.16.5.140,172.16.5.141 -P 4000 -D tpcc --warehouses 1000 -
 
 マシン構成によっては、この読み込み処理に数時間かかる場合があります。クラスターサイズが小さい場合は、テストに`WAREHOUSE`というより小さい値を使用できます。
 
-データがロードされた後、 `tiup bench tpcc -H 172.16.5.140 -P 4000 -D tpcc --warehouses 4 check`コマンドを実行してデータの正確性を検証できます。
+データがロードされた後、 `tiup bench tpcc -H 172.16.5.140 -P 4000 -D tpcc --warehouses 1000 check`コマンドを実行してデータの正確性を検証できます。
 
 ## テストを実行する {#run-the-test}
 
@@ -82,12 +82,12 @@ tiup bench tpcc -H 172.16.5.140,172.16.5.141 -P 4000 -D tpcc --warehouses 1000 -
 [Summary] STOCK_LEVEL - Takes(s): 487.6, Count: 41, TPM: 5.0, Sum(ms): 9318, Avg(ms): 227, 90th(ms): 512, 99th(ms): 1000, 99.9th(ms): 1000
 ```
 
-テストが完了したら、 `tiup bench tpcc -H 172.16.5.140 -P 4000 -D tpcc --warehouses 4 check`コマンドを実行してデータの正確性を検証できます。
+テストが完了したら、 `tiup bench tpcc -H 172.16.5.140 -P 4000 -D tpcc --warehouses 1000 check`コマンドを実行してデータの正確性を検証できます。
 
 ## テストデータをクリーンアップする {#clean-up-test-data}
 
 テストデータをクリーンアップするには、次のコマンドを実行します。
 
 ```shell
-tiup bench tpcc -H 172.16.5.140 -P 4000 -D tpcc --warehouses 4 cleanup
+tiup bench tpcc -H 172.16.5.140 -P 4000 -D tpcc --warehouses 1000 cleanup
 ```
