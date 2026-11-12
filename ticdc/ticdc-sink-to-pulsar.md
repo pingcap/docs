@@ -319,7 +319,7 @@ dispatchers = [
 
 DDLメッセージ内のSQLテキストは、再フォーマットまたは再構築される場合があります。新しいアーキテクチャでは、単一テーブルの`ALTER TABLE ... RENAME`文は、完全修飾されたデータベース名とテーブル名を含む`RENAME TABLE`文に書き換えられます。このアーキテクチャが複数テーブルの`RENAME TABLE`文を分割する場合、結果として得られる各SQL文はセミコロンで終わります。コンシューマーは、解析時にこれらのSQL形式をサポートする必要があります。
 
-複数テーブルのrenameを分割しても、元のアップストリームDDL文のアトミック性は保証されません。テーブル名を入れ替える場合、コンシューマーは関連するすべてのrenameステップを正しい順序で処理する必要があります。詳細については、[テーブル名の変更に関するDDLレプリケーションの考慮事項](/ticdc/ticdc-ddl.md#ddl-replication-considerations-for-renaming-tables)および[DDL SQL テキストの処理](/ticdc/ticdc-ddl.md#handling-of-ddl-sql-text)を参照してください.
+複数テーブルのrenameを分割しても、元のアップストリームDDL文のアトミック性は保証されません。テーブル名を入れ替える場合、コンシューマーは関連するすべてのrenameステップを正しい順序で処理する必要があります。詳細については、[テーブル名の変更に関するDDLレプリケーションの考慮事項](/ticdc/ticdc-ddl.md#ddl-replication-considerations-for-renaming-tables)および[DDL SQL テキストの処理](/ticdc/ticdc-ddl.md#handling-of-ddl-sql-text)を参照してください。
 
 ### パーティションディスパッチャ {#partition-dispatcher}
 
