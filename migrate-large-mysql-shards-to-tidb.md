@@ -152,7 +152,7 @@ CREATE TABLE `my_db`.`table5` (
 
 > **Note:**
 >
-> If `my_db.table5` has a checkpoint error, run `tidb-lightning-ctl --config tidb-lightning.toml --checkpoint-error-destroy='`my_db`.`table5`'`. TiDB Lightning then drops `my_db.table5` and resets its checkpoint. If you need to keep the manually adjusted downstream schema in this walkthrough, recreate the table definition before retrying the import.
+> If `my_db.table5` has a checkpoint error, run ``tidb-lightning-ctl --config tidb-lightning.toml --checkpoint-error-destroy='`my_db`.`table5`'``. TiDB Lightning then drops `my_db.table5` and resets its checkpoint. If you need to keep the manually adjusted downstream schema in this walkthrough, recreate the table definition before retrying the import.
 
 ### Start the migration task
 
