@@ -77,4 +77,4 @@ TiFlash側でログの秘匿化を有効にするには、tiflash-serverの[`sec
 >
 > TiCDC v8.5.6 以降、ログ秘匿化は [TiCDC の新しいアーキテクチャ](/ticdc/ticdc-architecture.md) でのみサポートされます。
 
-TiCDC でログ秘匿化を有効にするには、TiCDC サーバー設定ファイルで [`security.redact-info-log`](/ticdc/ticdc-server-config.md#redact-info-log-new-in-v856) を `true` に設定します。このパラメータのデフォルト値は `false` で、ログ秘匿化が無効であることを意味します。`true` に設定すると、TiCDC はログ内の機密値を `?` に置き換えます。あるいは、`"marker"` に設定すると、元の値を保持したまま、機密値を `‹` と `›` で囲みます。
+TiCDC でログ秘匿化を有効にするには、TiCDC サーバー設定ファイルで [`security.redact-info-log`](/ticdc/ticdc-server-config.md#redact-info-log-new-in-v856) を `true` に設定します。このパラメータのデフォルト値は `false` で、ログ秘匿化が無効であることを意味します。`true` に設定すると、TiCDC はログ内の機密値を `?` に置き換えます。あるいは、`"marker"` に設定すると、機密値を元の値のまま残し、`‹` と `›` で囲みます。
