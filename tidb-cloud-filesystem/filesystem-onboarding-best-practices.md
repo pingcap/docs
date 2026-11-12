@@ -148,6 +148,7 @@ ti fs list-files --path /workspaces/<workspace-id>
 Follow these practices:
 
 - Do not copy the `~/.ti/` directory, an owner token, or TiDB Cloud API keys into a workspace runtime.
+- The owner token that `create-file-system` returns does not expire. Store it in a secret manager. If another backend component needs owner access, generate a separate owner token with a TTL, such as `ti fs generate-file-system-token --file-system-id <file-system-id> --token-name <component-name> --ttl 720h`, so that you can rotate and revoke it independently.
 - Choose a TTL that matches the expected session length, and issue a new token when a session continues. A scoped token can be refreshed with [`refresh-file-system-token`](/ai/ti/reference/ti-fs-refresh-file-system-token.md), but refreshing does not broaden its permissions.
 - Revoke the tokens of a workspace when it ends with [`delete-file-system-token`](/ai/ti/reference/ti-fs-delete-file-system-token.md). Revoking an owner token does not revoke the scoped tokens that it created.
 - `ti fs check-file-system` checks the root of the file system, so it reports a failure for a token that is limited to a directory even when the token works. To check a scoped token, list its allowed path instead.
@@ -191,9 +192,9 @@ For more information, see [Finish safely](/tidb-cloud-filesystem/filesystem-moun
 
 Without a credit card, each organization can create one file system per region, and each file system can store up to 2,000 files and 2 GiB of data, with a maximum single file size of 500 MiB. When a file system reaches its storage or file count limit, existing files remain readable, but new writes are rejected.
 
-- Before launch, estimate peak storage, file count, and maximum file size for each file system, and set its usage limits with headroom. For more information, see [Manage Usage Limits](/tidb-cloud-filesystem/manage-filesystem-limits.md).
+- Before launch, estimate peak storage, file count, and maximum file size for each file system, and set its usage limits with headroom. To check the current limits and usage of a file system, run `ti fs describe-file-system --file-system-id <file-system-id>` and review the `quota` field. For more information, see [Manage Usage Limits](/tidb-cloud-filesystem/manage-filesystem-limits.md).
 - Review [TiDB Cloud Filesystem pricing](https://www.pingcap.com/tidb-cloud-filesystem-pricing-details/) for reads, writes, storage, and internet egress.
-- Run a periodic job that compares file systems or workspace directories with the workspaces in your application, and removes those that no longer have an owner. Deleting a file system permanently removes its data, so unmount clients and confirm ownership first.
+- Run a periodic job that compares file systems or workspace directories with the workspaces in your application, and removes those that no longer have an owner. Deleting a file system permanently removes its data, so unmount clients and confirm ownership first. Tokens for the file system stop working as soon as deletion starts. Deleting a file system that contains data can take some time to finish, and `ti fs list-file-systems` shows its status as `deleting` until then.
 
 ## Step 8. Run a pre-launch check
 
