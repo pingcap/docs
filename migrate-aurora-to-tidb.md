@@ -22,7 +22,7 @@ summary: DBスナップショットを使用して、Amazon AuroraからTiDBへ�
 
 ### ステップ1. スキーマファイルのエクスポートとインポート {#step-1-export-and-import-the-schema-file}
 
-このセクションでは、Amazon Auroraからスキーマファイルをエクスポートし、TiDB にインポートする方法について説明します。対象データベースにテーブルを手動で作成している場合は、この手順をスキップできます。
+このセクションでは、Amazon Auroraからスキーマファイルをエクスポートし、TiDB にインポートする方法について説明します。ターゲットデータベースにテーブルを手動で作成している場合は、この手順をスキップできます。
 
 #### 1.1 Amazon Auroraからスキーマファイルをエクスポートする {#1-1-export-the-schema-file-from-amazon-aurora}
 
