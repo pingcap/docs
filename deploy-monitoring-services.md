@@ -136,13 +136,14 @@ Start the Prometheus service:
 ```bash
 $ ./prometheus \
     --config.file="./prometheus.yml" \
-    --web.listen-address=":9090" \
-    --web.external-url="http://192.168.199.113:9090/" \
-    --web.enable-admin-api \
+    --web.listen-address="127.0.0.1:9090" \
+    --web.external-url="http://127.0.0.1:9090/" \
     --log.level="info" \
     --storage.tsdb.path="./data.metrics" \
     --storage.tsdb.retention="15d" &
 ```
+
+This example listens only on the loopback address and leaves the Prometheus admin API disabled. Because Grafana and Prometheus are both deployed on Node1, Grafana can access Prometheus locally. If Prometheus must be accessed from another machine, set `--web.external-url` to the HTTPS URL exposed by the reverse proxy and ensure that its path prefix matches the proxy configuration. Do not bind Prometheus directly to all network interfaces. Expose it through a trusted management network and a reverse proxy that provides TLS and authentication, and restrict source addresses with a firewall or security group.
 
 ### Step 4: Start Grafana on Node1
 
@@ -168,8 +169,8 @@ domain = 192.168.199.113
 [analytics]
 check_for_updates = true
 [security]
-admin_user = admin
-admin_password = admin
+admin_user = <grafana-admin-user>
+admin_password = """<grafana-strong-password>"""
 [snapshots]
 [users]
 [auth.anonymous]
@@ -196,6 +197,10 @@ url = https://grafana.net
 
 ```
 
+Before starting Grafana, replace `<grafana-admin-user>` and `<grafana-strong-password>` with a custom administrator username and a unique strong password. The example wraps the password in triple double quotation marks so that `#` and `;` are treated as password characters rather than comments. Grafana expands `${NAME}`, `$__env{NAME}`, and `$__file{PATH}` in configuration values, even inside triple double quotation marks, so do not use these expressions in the password. Do not use `admin` as the password or commit the actual password to version control. `admin_user` and `admin_password` take effect only when the administrator account is created on the first startup. For an existing Grafana instance, change the password in Grafana.
+
+After editing the file, run `chmod 600 conf/grafana.ini` as the same operating system user that starts Grafana. This ensures that only that user can read or modify the configuration file containing the administrator password.
+
 Start the Grafana service:
 
 {{< copyable "shell-regular" >}}
@@ -214,12 +219,12 @@ This section describes how to configure Grafana.
 1. Log in to the Grafana Web interface.
 
     - Default address: [http://localhost:3000](http://localhost:3000)
-    - Default account: admin
-    - Default password: admin
+    - Administrator account: for the first sign-in to a new instance, use the `<grafana-admin-user>` value configured in `[security]`. For an existing instance, use its current administrator account.
+    - Administrator password: for the first sign-in to a new instance, use the `<grafana-strong-password>` value configured in `[security]`. For an existing instance, use its current administrator password.
 
     > **Note:**
     >
-    > For the **Change Password** step, you can choose **Skip**.
+    > If Grafana prompts you to complete the **Change Password** step, set a new unique strong password. Do not choose **Skip**.
 
 2. In the Grafana sidebar menu, click **Data Source** within the **Configuration**.
 
