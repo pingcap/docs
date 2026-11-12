@@ -159,7 +159,9 @@ Some operations in TiDB require writing temporary files to the server, so it is 
     >
     > If DDL operations on large objects exist in your application, it is highly recommended to configure an independent large file system for [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630).
 
-    The following example assumes that TiDB runs as the `tidb` user and group. If you use a different account, replace the user and group in the commands accordingly.
+    The following example assumes that TiDB runs as the `tidb` user and group, and that the user and group already exist on each target TiDB node. If you use a different account, replace the user and group in the commands accordingly, and make sure they match `global.user` and `global.group` in the topology configuration.
+
+    If you rely on TiUP to automatically create the account for running TiDB, run the following command to create the directory and configure its permissions after `tiup cluster deploy` completes and before you run `tiup cluster start` for the first time:
 
     ```shell
     sudo install -d -o tidb -g tidb -m 700 /data/tidb-deploy/tempdir
