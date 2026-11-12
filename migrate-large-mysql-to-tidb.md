@@ -228,6 +228,7 @@ If the import fails, refer to [TiDB Lightning FAQ](/tidb-lightning/tidb-lightnin
     # Use block and allow lists to specify the tables to be replicated.
     block-allow-list:                    # The collection of filtering rules that matches the tables in the source database instance. If the DM version is earlier than v2.0.0-beta.2, use black-white-list.
       bw-rule-1:                         # The block-allow-list configuration item ID.
+        do-dbs: ["my_db1"]
         do-tables:                       # Tables to be replicated.
         - db-name: "my_db1"
           tbl-name: "table1"
