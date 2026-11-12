@@ -13,11 +13,11 @@ summary: Run remote commands against a TiDB Cloud Filesystem, preserve workspace
 
 > **Warning:**
 >
-> Validation of the preview `ti exec` feature is incomplete. Cancellation in the current test environment can return an unknown outcome (`255`) without confirming whether the command has stopped. Verify the result before deciding whether to run the command again.
+> Validation of the preview `ti exec` feature is incomplete. A timeout or cancellation request can return an unknown outcome (`255`) without confirming whether the command has stopped. Verify the result before deciding whether to run the command again.
 
 ## Prerequisites
 
-- Install TiDB Cloud CLI **v0.2.11 or later** with its `ti-drive9` companion. Earlier `ti` releases do not include `ti exec`. Run `ti --version` to check your installed version.
+- Install TiDB Cloud CLI **v0.2.11 or later** with an up-to-date `ti-drive9` companion. Earlier `ti` releases do not include `ti exec`. Run `ti --version` to check your installed version.
 - [Create a Filesystem](/ai/ti/reference/ti-fs-create-file-system.md) in a supported region and retain its ID and owner token.
 - Use a locally stored token for that ID, or set `TI_FS_TOKEN` in your environment. Prefer the environment variable over `--fs-token` to avoid exposing it in arguments. A delegated Vault token cannot run commands. Path-scoped tokens cannot mount a sandbox.
 - `ti exec --help` checks only that the local command exists. It does not verify the companion or remote Runtime. Both must support exec.
@@ -102,7 +102,19 @@ Inside a matching local FUSE mount, omitting `-w` uploads pending local writes a
 
 ## Failures and limitations
 
+A completed command returns its exact exit status. With an up-to-date `ti-drive9` companion, interpret the following statuses together with the error message:
+
+| Exit status | Meaning |
+| --- | --- |
+| `124` | The command timed out and was stopped. |
+| `125` | The executor failed. Output or writes might be partial. |
+| `126` | The command is not executable. |
+| `127` | The command was not found. |
+| `130` | Cancellation before execution, confirmed cancellation, or detachment after a second Ctrl-C. This status alone does not prove that a remote command stopped. |
+| `255` | The outcome is unknown. This can also occur after a timeout or cancellation request. |
+
+Commands can themselves return these numbers, so the exit status alone does not identify the cause.
+
 - Remote stdin and interactive terminals are unsupported. `--output`, `--query`, and `--dry-run` are unsupported.
-- A completed command returns its exact exit status. Timeout is `124`; confirmed cancellation is `130`; an unknown outcome is `255`. Commands can themselves return these numbers, so also read the error message.
 - Press Ctrl-C once to request cancellation and wait for confirmation. Pressing it again detaches; the command might still be running.
 - If the outcome is unknown, inspect the Filesystem before deciding whether to run the command again. Disconnection or a missing execution record does not prove that execution stopped. `ti exec` never retries automatically.
