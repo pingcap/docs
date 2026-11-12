@@ -6,7 +6,7 @@ aliases: ['/docs/dev/sql-statements/sql-statement-show-builtins/']
 
 # SHOW BUILTINS
 
-`SHOW BUILTINS` is used to list all supported builtin functions in TiDB.
+`SHOW BUILTINS` is used to list all supported built-in functions in TiDB.
 
 ## Synopsis
 

@@ -244,7 +244,7 @@ Some fields in the returned result are described as follows:
                 - `firstPos`: The starting position of the sharding DDL statement.
                 - `synced`: The upstream sharded table whose executed sharding DDL statement has been read by the `Sync` unit.
                 - `unsynced`: The upstream table that has not executed this sharding DDL statement. If any upstream tables have not finished replication, `blockingDDLs` is empty.
-            - `synced`: Whether the incremental replication catches up with the upstream and has the same binlog position as that in the upstream. The save point is not refreshed in real time in the `Sync` background, so `false` of `synced` does not always mean a replication delay exits.
+            - `synced`: Whether the incremental replication catches up with the upstream and has the same binlog position as that in the upstream. The save point is not refreshed in real time in the `Sync` background, so `false` of `synced` does not always mean a replication delay exists.
             - `totalRows`: The total number of rows that are replicated in this subtask.
             - `totalRps`: The number of rows that are replicated in this subtask per second.
             - `recentRps`: The number of rows that are replicated in this subtask in the last second.

@@ -28,7 +28,7 @@ TiKV currently does not exclude encryption keys and user data from core dumps. I
 
 TiKV tracks encrypted data files using the absolute path of the files. As a result, once encryption is turned on for a TiKV node, the user should not change data file paths configuration such as `storage.data-dir`, `raftstore.raftdb-path`, `rocksdb.wal-dir` and `raftdb.wal-dir`.
 
-SM4 encryption is only supported in v6.3.0 and later versions of TiKV. TiKV versions earlier than v6.3.0 only support AES encryption. SM4 encryption affects performance. In the worst-case scenario, it might cause a ​50% to 80% throughput degradation. However, a sufficiently large [`storage.block-cache`](/tikv-configuration-file.md#storageblock-cache) can significantly mitigate this impact, reducing the throughput degradation to around 10%.
+SM4 encryption is only supported in v6.3.0 and later versions of TiKV. TiKV versions earlier than v6.3.0 only support AES encryption. SM4 encryption affects performance. In the worst-case scenario, it might cause a 50% to 80% throughput degradation. However, a sufficiently large [`storage.block-cache`](/tikv-configuration-file.md#storageblock-cache) can significantly mitigate this impact, reducing the throughput degradation to around 10%.
 
 ### TiFlash
 
@@ -270,7 +270,7 @@ To monitor encryption at rest, if you deploy TiKV with Grafana, you can look at 
 * Encryption initialized: 1 if encryption is initialized during TiKV startup, 0 otherwise. In case of master key rotation, after encryption is initialized, TiKV do not need access to the previous master key.
 * Encryption data keys: number of existing data keys. The number is bumped by 1 after each time data key rotation happened. Use this metrics to monitor if data key rotation works as expected.
 * Encrypted files: number of encrypted data files currently exists. Compare this number to existing data files in the data directory to estimate portion of data being encrypted, when turning on encryption for a previously unencrypted cluster.
-* Encryption meta file size: size of the encryption meta data files.
+* Encryption meta file size: size of the encryption metadata files.
 * Read/Write encryption meta duration: the extra overhead to operate on metadata for encryption.
 
 For debugging, the `tikv-ctl` command can be used to dump encryption metadata such as encryption method and data key id used to encryption the file, as well as list of data keys. Since the operation can expose sensitive data, it is not recommended to use in production. Please refer to [TiKV Control](/tikv-control.md#dump-encryption-metadata) document.

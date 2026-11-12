@@ -93,7 +93,7 @@ When updating the configuration files, pay attention to the following:
 | `data_source/cluster.json`     | When updating this file, make sure that you have access to the linked {{{ .starter }}} instances or {{{ .dedicated }}} clusters. You can get the ID of your {{{ .starter }}} instance or {{{ .dedicated }}} cluster from its URL. For example, if the URL is `https://tidbcloud.com/tidbs/1234567891234567890/overview?orgId=<organization-id>`, the ID is `1234567891234567890`. |
 | `http_endpoints/config.json`     | When modifying the endpoints, make sure that you follow the rules described in [HTTP endpoint configuration](/tidb-cloud/data-service-app-config-files.md#http-endpoint-configuration).   |
 | `http_endpoints/sql/method-<endpoint-path>.sql`| To add or remove SQL files in the `http_endpoints/sql` directory, you need to update the corresponding endpoint configurations as well. |
-| `datapp_config.json` | Do not change the `app_id` field in this file unless your `dataapp_config.json` file is copied from another Data App and you want to update it to the ID of your current Data App. Otherwise, the deployment triggered by this modification will fail. |
+| `dataapp_config.json` | Do not change the `app_id` field in this file unless your `dataapp_config.json` file is copied from another Data App and you want to update it to the ID of your current Data App. Otherwise, the deployment triggered by this modification will fail. |
 
 For more information about the field configuration in these files, see [Data App configuration files](/tidb-cloud/data-service-app-config-files.md).
 
@@ -120,7 +120,7 @@ To import configurations of an existing Data App to a new Data App, take the fol
 2. On the [**Data Service**](https://tidbcloud.com/project/data-service) page of your project, [create a new Data App](/tidb-cloud/data-service-manage-data-app.md#create-a-data-app) without connecting to GitHub.
 3. [Connect your new Data App to GitHub](#step-1-connect-your-data-app-to-github) with **Auto Sync & Deployment** enabled. When you specify the target repository, branch, and directory for your new Data App, use your new path with the copied configuration files.
 4. Get the ID and name of your new Data App. You can click the name of your new Data App in the left pane and get the App ID and name in the **Data App Properties** area of the right pane.
-5. In your new path on GitHub, update the `app_id` and `app_name` in the `datapp_config.json` file to the ID and name you get, and then push the changes.
+5. In your new path on GitHub, update the `app_id` and `app_name` in the `dataapp_config.json` file to the ID and name you get, and then push the changes.
 
     After the file changes are pushed to GitHub, TiDB Cloud will automatically deploy your new Data App with the latest changes.
 

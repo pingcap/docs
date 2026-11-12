@@ -128,7 +128,7 @@ You can compress the exported Parquet data using the following algorithms:
 
 When exporting data to the Parquet format, the data conversion between TiDB and Parquet is as follows:
 
-| TiDB data type | Parquest primitive type | Parquet logical type                         |
+| TiDB data type | Parquet primitive type | Parquet logical type                         |
 |----------------------------|-------------------------|----------------------------------------------|
 | VARCHAR                    | BYTE_ARRAY              | String(UTF8)                                 |
 | TIME                       | BYTE_ARRAY              | String(UTF8)                                 |

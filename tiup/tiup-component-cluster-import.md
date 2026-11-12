@@ -38,7 +38,7 @@ tiup cluster import [flags]
 
 - Specifies the path of the Ansible configuration file.
 - Data type: `STRING`
-- The option is enabled by default with `. /ansible.cfg` (the default value) passed in.
+- The option is enabled by default with `./ansible.cfg` (the default value) passed in.
 
 ### --inventory
 
@@ -50,7 +50,7 @@ tiup cluster import [flags]
 
 - Controls whether to disable the backup of files in the directory where TiDB Ansible is located.
 - Data type: `BOOLEAN`
-- This option is disabled by default with the `false` value. After a successful import, everything in the directory specified by the `-dir` option is backed up to the `${TIUP_HOME}/.tiup/storage/cluster/clusters/{cluster-name}/ansible-backup` directory. If there are multiple inventory files (when multiple clusters are deployed) in this directory, it is recommended to enable this option. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
+- This option is disabled by default with the `false` value. After a successful import, everything in the directory specified by the `--dir` option is backed up to the `${TIUP_HOME}/.tiup/storage/cluster/clusters/{cluster-name}/ansible-backup` directory. If there are multiple inventory files (when multiple clusters are deployed) in this directory, it is recommended to enable this option. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
 
 ### --rename
 

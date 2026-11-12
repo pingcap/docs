@@ -1,19 +1,20 @@
 # This script can create an empty PR in your target repo based on your specified source language PR.
 # Before running this script:
-# 1. Get a GitHub personal access token (https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) and save it in a text file.
+# 1. Export a GitHub personal access token as GITHUB_TOKEN or GH_TOKEN.
 # 2. Ensure that you have forked your target repo because the changes in the new PR will be committed to your forked repository first.
 
-import requests
 import base64
+import os
 import re
+import requests
 
 source_pr_url = "https://github.com/pingcap/docs-cn/pull/13895" # update this URL to your PR link
 my_github_id = "qiancai" # update this ID to your GitHub ID
-my_github_token_file_path = r"/Users/grcai/Documents/PingCAP/Python_scripts/GitHub/gh_token5.txt"
 
-# Read the GitHub personal access token from your local file.
-with open(my_github_token_file_path, "r") as f:
-    access_token = f.read().strip()
+# Read the GitHub personal access token from the process environment.
+access_token = os.environ.get("GITHUB_TOKEN") or os.environ.get("GH_TOKEN")
+if not access_token:
+    raise RuntimeError("Set GITHUB_TOKEN or GH_TOKEN before running this script.")
 
 # For getting the information about the source language PR
 def get_pr_info(pr_url):

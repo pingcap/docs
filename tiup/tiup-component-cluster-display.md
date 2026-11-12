@@ -27,11 +27,11 @@ tiup cluster display <cluster-name> [flags]
 
 - Specifies the node to display. If this option is not specified, all nodes are displayed. The value of this option is a comma-separated list of node IDs. If you are not sure about the ID of a node, you can skip this option in the command to show the IDs and status of all nodes in the output.
 - Data type: `STRINGS`
-- If this option is not specified in the command, all nodes are checked by default.
+- If this option is not specified in the command, all nodes are displayed by default.
 
 > **Note:**
 >
-> If the `-R, --role` option is specified at the same time, only the service nodes that match both the specifications of `-N, --node` and `-R, --role` are checked.
+> If the `-R, --role` option is specified at the same time, only the service nodes that match both the specifications of `-N, --node` and `-R, --role` are displayed.
 
 ### -R, --role
 

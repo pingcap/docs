@@ -144,11 +144,13 @@ The target TiKV cluster must have enough disk space to store the imported data. 
 
     If you import data from S3, pass the SecretKey and AccessKey that have access to the S3 storage path as environment variables to the TiDB Lightning node. You can also read the credentials from `~/.aws/credentials`.
 
+    It is recommended to use the same version of TiDB Lightning as the target TiDB cluster. Replace `<version>` with the version of your target TiDB cluster.
+
     ```shell
     #!/bin/bash
     export AWS_ACCESS_KEY_ID=${access_key}
     export AWS_SECRET_ACCESS_KEY=${secret_key}
-    nohup tiup tidb-lightning -config tidb-lightning.toml > nohup.out 2>&1 &
+    nohup tiup tidb-lightning:<version> -config tidb-lightning.toml > nohup.out 2>&1 &
     ```
 
     Then use the script to start TiDB Lightning.

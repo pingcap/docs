@@ -43,7 +43,7 @@ Make sure that DNS hostnames and DNS resolution are both enabled in your AWS VPC
 
 ## Set up a private endpoint connection and connect to your cluster
 
-To connect to your TiDB Cloud Dedicated cluster via a private endpoint, complete the follow these steps:
+To connect to your TiDB Cloud Dedicated cluster via a private endpoint, complete the following steps:
 
 1. [Select a TiDB cluster](#step-1-select-a-tidb-cluster)
 2. [Create an AWS interface endpoint](#step-2-create-an-aws-interface-endpoint)
@@ -207,6 +207,6 @@ The possible statuses of a private endpoint service are explained as follows:
 
 ### I cannot connect to a TiDB cluster via a private endpoint after enabling private DNS. Why?
 
-You might need to properly set the security group for your VPC endpoint in the AWS Management Console. Go to **VPC** > **Endpoints**. To do so, go to **VPC** > **Endpoints**, right-click your VPC endpoint, and select **Manage security groups**. Ensure that the selected security group allows inbound access from your EC2 instances on port `4000` or a customer-defined port.
+You might need to properly set the security group for your VPC endpoint in the AWS Management Console. To do so, go to **VPC** > **Endpoints**, right-click your VPC endpoint, and select **Manage security groups**. Ensure that the selected security group allows inbound access from your EC2 instances on port `4000` or a customer-defined port.
 
 ![Manage security groups](/media/tidb-cloud/private-endpoint/manage-security-groups.png)

@@ -64,7 +64,7 @@ TiDB version: 4.0.11
 
         - Create tables in parallel to improve import performance [#502](https://github.com/pingcap/tidb-lightning/pull/502)
         - Skip splitting Regions to improve import performance if the engine's total size is smaller than the Region size [#524](https://github.com/pingcap/tidb-lightning/pull/524)
-        - Add a import progress bar and optimize the accuracy of restore progress [#506](https://github.com/pingcap/tidb-lightning/pull/506)
+        - Add an import progress bar and optimize the accuracy of restore progress [#506](https://github.com/pingcap/tidb-lightning/pull/506)
 
 ## Bug Fixes
 

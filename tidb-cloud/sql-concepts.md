@@ -5,7 +5,7 @@ summary: Learn about SQL concepts for TiDB.
 
 # SQL
 
-TiDB is highly compatible with the MySQL protocol and the common features and syntax of MySQL 8.x. The ecosystem tools for MySQL (PHPMyAdmin, Navicat, MySQL Workbench, DBeaver and [more](/develop/dev-guide-third-party-support.md#gui)) and the MySQL client can be used for TiDB.
+TiDB is highly compatible with the MySQL protocol and the common features and syntax of MySQL 8.x. The ecosystem tools for MySQL (phpMyAdmin, Navicat, MySQL Workbench, DBeaver and [more](/develop/dev-guide-third-party-support.md#gui)) and the MySQL client can be used for TiDB.
 
 However, some features of MySQL are not supported in TiDB. This could be because there is now a better way to solve the problem (such as the use of JSON instead of XML functions) or a lack of current demand versus effort required (such as stored procedures and functions). Additionally, some features might be difficult to implement in a distributed system. For more information, see [MySQL Compatibility](/mysql-compatibility.md).
 
@@ -55,7 +55,7 @@ For more information, see [AUTO_INCREMENT](/auto-increment.md).
 
 ### AUTO_RANDOM
 
-`AUTO_RANDOM` is a column attribute that is used to automatically assign values to a `BIGINT` column. Values assigned automatically are random and unique. Since the value of `AUTO_RANDOM` is random and unique, `AUTO_RANDOM` is often used in place of [`AUTO_INCREMENT`](/auto-increment.md) to avoid write hotspots in a single storage node caused by TiDB assigning consecutive IDs.
+`AUTO_RANDOM` is a column attribute that is used to automatically assign values to a `BIGINT` column. Values assigned automatically are random and unique.
 
 Since the value of `AUTO_RANDOM` is random and unique, `AUTO_RANDOM` is often used in place of [`AUTO_INCREMENT`](/auto-increment.md) to avoid write hotspots in a single storage node caused by TiDB assigning consecutive IDs. If the current `AUTO_INCREMENT` column is a primary key and the type is `BIGINT`, you can execute the `ALTER TABLE t MODIFY COLUMN id BIGINT AUTO_RANDOM(5);` statement to switch from `AUTO_INCREMENT` to `AUTO_RANDOM`.
 

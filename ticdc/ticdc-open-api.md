@@ -125,7 +125,7 @@ Compared to the optional parameters for creating a replication task using the `c
 | `ignore_ineligible_table` | `BOOLEAN` type. Determines whether to ignore the tables that cannot be replicated. (Optional) |
 | `filter_rules` | `STRING` type array. The rules for table schema filtering. (Optional) |
 | `ignore_txn_start_ts` | `UINT64` type array. Ignores the transaction of a specified start_ts. (Optional) |
-| `mounter_worker_num` | `INT` type. The mounter thread number. (Optional) |
+| `mounter_worker_num` | `INT` type. The number of mounter threads. (Optional) |
 | `sink_config` | The configuration parameters of sink. (Optional) |
 
 The meaning and format of `changefeed_id`, `start_ts`, `target_ts`, and `sink_uri` are the same as those described in the [Use `cdc cli` to create a replication task](/ticdc/ticdc-manage-changefeed.md#create-a-replication-task) document. For the detailed description of these parameters, see this document. Note that when you specify the certificate path in `sink_uri`, make sure you have uploaded the corresponding certificate to the corresponding TiCDC server.
@@ -233,7 +233,7 @@ Currently, only the following configuration can be modified via the API.
 | `sink_uri` | `STRING` type. The downstream address of the replication task. (Optional) |
 | `filter_rules` | `STRING` type array. The rules for table schema filtering. (Optional) |
 | `ignore_txn_start_ts` | `UINT64` type array. Ignores the transaction of a specified start_ts. (Optional) |
-| `mounter_worker_num` | `INT` type. The mounter thread number. (Optional) |
+| `mounter_worker_num` | `INT` type. The number of mounter threads. (Optional) |
 | `sink_config` | The configuration parameters of sink. (Optional) |
 
 The meanings of the above parameters are the same as those in the [Create a replication task](#create-a-replication-task) section. See that section for details.
@@ -460,7 +460,7 @@ This API is a synchronous interface. If the request is successful, the detailed 
 
 ### Example
 
-The following request queries the detailed information of a subtask whose `changefeed_id` is `test` and `capture_id` is `561c3784-77f0-4863-ad52-65a3436db6af`. A subtask can be indentifed by `changefeed_id` and `capture_id`.
+The following request queries the detailed information of a subtask whose `changefeed_id` is `test` and `capture_id` is `561c3784-77f0-4863-ad52-65a3436db6af`. A subtask can be identified by `changefeed_id` and `capture_id`.
 
 {{< copyable "shell-regular" >}}
 

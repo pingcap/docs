@@ -20,7 +20,7 @@ TiDB Ansible version: 3.0.6
     - Fix the issue that quotes are incorrectly handled for SQL binding [#13117](https://github.com/pingcap/tidb/pull/13117)
     - Optimize the `select max(_tidb_rowid) from t` scenario to avoid full table scans [#13095](https://github.com/pingcap/tidb/pull/13095)
     - Fix the issue that the query result is incorrect when the query statement contains a variable assignment expression [#13231](https://github.com/pingcap/tidb/pull/13231)
-    - Fix the issue that the result is incorrect when the `UPDATE` statement contains both a sub-query and a generated column; fix the `UPDATE` statement execution error when this statement contains two same-named tables from different source databases [#13350](https://github.com/pingcap/tidb/pull/13350)
+    - Fix the issue that the result is incorrect when the `UPDATE` statement contains both a subquery and a generated column; fix the `UPDATE` statement execution error when this statement contains two same-named tables from different source databases [#13350](https://github.com/pingcap/tidb/pull/13350)
     - Support `_tidb_rowid` for point queries [#13416](https://github.com/pingcap/tidb/pull/13416)
     - Fix the issue that the generated query execution plan is incorrect, caused by incorrect usage of partitioned table statistics [#13628](https://github.com/pingcap/tidb/pull/13628)
 + SQL Execution Engine

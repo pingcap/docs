@@ -24,10 +24,14 @@ Currently, the `SHOW ANALYZE STATUS` statement returns the following columns:
 | `Job_info`       | A brief description of the `ANALYZE` subtask. It shows the `ANALYZE` scope, such as columns, indexes, or global statistics merge, and might include the effective options used, such as `buckets`, `topn`, `samplerate`, or `samples`. |
 | `Processed_rows` | The number of rows that have been analyzed |
 | `Start_time`     | The time at which the task starts |
+| `End_time`       | The time at which the task ends |
 | `State`          | The state of a task, including `pending`, `running`, `finished`, and `failed` |
 | `Fail_reason`    | The reason why the task fails. If the execution is successful, the value is `NULL`. |
 | `Instance`       | The TiDB instance that executes the task |
-| `Process_id`     | The process ID that executes the task |
+| `Process_ID`     | The process ID that executes the task |
+| `Remaining_seconds` | The estimated time (in seconds) remaining for the task to complete |
+| `Progress`       | The progress of the task |
+| `Estimated_total_rows` | The total rows that need to be analyzed by the task |
 
 ## Synopsis
 

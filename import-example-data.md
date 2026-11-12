@@ -68,8 +68,8 @@ You can import the system data into TiDB using the following method.
     password = "very_secret"
     ```
 
-4. Run the following command.
+4. Run the following command. It is recommended to use the same version of TiDB Lightning as the target TiDB cluster. Replace `<version>` with the version of your target TiDB cluster.
 
     ```shell
-    tiup tidb-lightning -c tidb-lightning.toml
+    tiup tidb-lightning:<version> -c tidb-lightning.toml
     ```

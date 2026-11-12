@@ -24,7 +24,10 @@ env:
 jobs:
   sync-docs:
     runs-on: ubuntu-latest
-    if: contains(fromJson('["hfxsd","likidu","lilin90","Oreoxmt","qiancai"]'), github.actor)
+    if: >
+      github.repository == 'pingcap/docs' &&
+      contains(fromJson('["lilin90","qiancai","seominjea1942"]'), github.actor) &&
+      contains(fromJson('["lilin90","qiancai","seominjea1942"]'), github.triggering_actor)
 
     steps:
       - name: Checkout current repository
@@ -38,7 +41,7 @@ jobs:
         uses: actions/checkout@v6
         with:
           repository: "qiancai/ai-markdown-translator"
-          ref: "main"
+          ref: "c52e9188383f8a2d7056a072da63310e8346a001" # main
           path: "ai-markdown-translator"
           persist-credentials: false
 

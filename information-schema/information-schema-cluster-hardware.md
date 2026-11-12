@@ -43,8 +43,8 @@ Field description:
     * `memory`: The hardware name is memory.
     * `disk`: The disk name.
     * `net`: The network card name.
-* `NAME`: The different information names of the hardware. For example, cpu has two information names: `cpu-logical-cores` and `cpu-physical-cores`, which respectively mean logical core numbers and physical core numbers.
-* `VALUE`: The value of the corresponding hardware information, such as the disk volume and CPU core numbers.
+* `NAME`: The different information names of the hardware. For example, cpu has two information names: `cpu-logical-cores` and `cpu-physical-cores`, which respectively mean the number of logical cores and the number of physical cores.
+* `VALUE`: The value of the corresponding hardware information, such as the disk volume and the number of CPU cores.
 
 The following example shows how to query the CPU information using the `CLUSTER_HARDWARE` table:
 

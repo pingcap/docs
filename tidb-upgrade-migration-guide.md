@@ -13,7 +13,7 @@ This document describes how to migrate and upgrade a TiDB cluster (also known as
 
 The core workflow for migration and upgrade is as follows:
 
-1. **Pre-check risks**: verify cluster status and solution feasibility.
+1. **Precheck risks**: verify cluster status and solution feasibility.
 2. **Prepare the new cluster**: create a new cluster from a full backup of the old cluster and upgrade it to the target version.
 3. **Replicate incremental data**: establish a forward data replication channel using TiCDC.
 4. **Switch and verify**: perform multi-dimensional verification, switch business traffic to the new cluster, and set up a TiCDC reverse replication channel.

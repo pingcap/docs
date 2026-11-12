@@ -11,7 +11,7 @@ This document uses an example to walk through the whole procedure of such kind o
 
 If the data size of the MySQL shards is less than 1 TiB, you can follow the procedure described in [Migrate and Merge MySQL Shards of Small Datasets to TiDB](/migrate-small-mysql-shards-to-tidb.md), which supports both full and incremental migration and the steps are easier.
 
-The example in this document assumes that you have two databases, `my_db1` and `my_db2`. You use Dumpling to export two tables `table1` and `table2` from `my_db1`, and two tables `table3` and `table4` from `my_db2`, respectively. After that, you use TiDB Lightning to import and merge the four exported tables into the same `table5` from `mydb` in the target TiDB.
+The example in this document assumes that you have two databases, `my_db1` and `my_db2`. You use Dumpling to export two tables `table1` and `table2` from `my_db1`, and two tables `table3` and `table4` from `my_db2`, respectively. After that, you use TiDB Lightning to import and merge the four exported tables into `my_db.table5` in the target TiDB cluster.
 
 In this document, you can migrate data following this procedure:
 
@@ -20,7 +20,7 @@ In this document, you can migrate data following this procedure:
     - Export `table1` and `table2` from `my_db1`
     - Export `table3` and `table4` from `my_db2`
 
-2. Start TiDB Lightning to migrate data to `mydb.table5` in TiDB.
+2. Start TiDB Lightning to migrate data to `my_db.table5` in TiDB.
 
 3. (Optional) Use TiDB DM to perform incremental replication.
 
@@ -134,12 +134,13 @@ For more information, see [TiDB Lightning Checkpoints](/tidb-lightning/tidb-ligh
 
 ### Create a target schema
 
-Create `mydb.table5` at downstream.
+Create `my_db.table5` downstream.
 
 {{< copyable "sql" >}}
 
 ```sql
-CREATE TABLE `table5` (
+CREATE DATABASE IF NOT EXISTS `my_db`;
+CREATE TABLE `my_db`.`table5` (
   `id` bigint NOT NULL,
   `sid` bigint NOT NULL,
   `pid` bigint NOT NULL,

@@ -276,7 +276,7 @@ The following table shows the detailed representation information.
 | Carriage return              | [13]       | `\r`                    |
 | Printable characters        | [32, 127]   | Literal character (such as `A`) |
 | Ampersand                   | [38]        | `\u0026`                |
-| Less-than sign              | [60]        | `\u0038`                |
+| Less-than sign              | [60]        | `\u003C`                |
 | Greater-than sign           | [62]        | `\u003E`                |
 | Extended control characters | [128, 159]  | Literal character   |
 | ISO 8859-1 (Latin-1)        | [160, 255]  | Literal character   |

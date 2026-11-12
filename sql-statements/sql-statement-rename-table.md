@@ -130,7 +130,7 @@ Query OK, 0 rows affected (0.04 sec)
 
 ```sql
 CREATE TABLE t1_new(id int PRIMARY KEY, n CHAR(0));
-````
+```
 
 ```
 Query OK, 0 rows affected (0.04 sec)

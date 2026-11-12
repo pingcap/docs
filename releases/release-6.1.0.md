@@ -398,7 +398,7 @@ In 6.1.0, the key new features or improvements are as follows:
 
     - Fix the wrong status code of `not leader` [#4797](https://github.com/tikv/pd/issues/4797)
     - Fix a bug of TSO fallback in some corner cases [#4884](https://github.com/tikv/pd/issues/4884)
-    - Fix the issue that a removed tombstone store appears again after the PD leader transfer ​​[#4941](https://github.com/tikv/pd/issues/4941)
+    - Fix the issue that a removed tombstone store appears again after the PD leader transfer [#4941](https://github.com/tikv/pd/issues/4941)
     - Fix the issue that scheduling cannot start immediately after the PD leader transfer [#4769](https://github.com/tikv/pd/issues/4769)
 
 + TiDB Dashboard

@@ -137,7 +137,7 @@ Refer to [5 PD issues](#5-pd-issues).
 
     - The data volume of a single `UPDATE/DELETE` query is too large. See [case-882](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case882.md) in Chinese.
 
-    - The SQL contains multiple sub-queries connected by `Union`. See [case-1828](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case1828.md) in Chinese.
+    - The SQL contains multiple subqueries connected by `Union`. See [case-1828](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case1828.md) in Chinese.
 
 For more information about troubleshooting OOM, see [Troubleshoot TiDB OOM Issues](/troubleshoot-tidb-oom.md).
 
@@ -181,7 +181,7 @@ For more information about troubleshooting OOM, see [Troubleshoot TiDB OOM Issue
 
         The multiplication of `Decimal` does not have this issue, because the out-of-bounds is bypassed, and the precision is set to the maximum precision limit.
 
-    - Solution: You can bypass this issue by manually adding `Cast(xx as decimal(a, b))`, in which `a` and `b` are the target precisions.
+    - Solution: You can bypass this issue by manually adding `Cast(xx as decimal(a, b))`, in which `a` is the target precision and `b` is the target scale.
 
 ### 3.5 Slow query issues
 
@@ -455,7 +455,7 @@ Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV**
         - If there is a quota on CPU (for example, limited by Kubernetes settings), TiDB Lightning might not be able to read this out. In this case, `region-concurrency` must also be manually reduced.
 
     - Every additional index introduces a new KV pair for each row. If there are N indices, the actual size to be imported would be approximately (N+1) times the size of the [Dumpling](/dumpling-overview.md) output. If the indices are negligible, you may first remove them from the schema, and add them back via `CREATE INDEX` after the import is complete.
-    - The version of TiDB Lightning is old. Try the latest version, which might improve the import speed.
+    - The version of TiDB Lightning is old. A newer TiDB Lightning version might improve import performance. When upgrading, it is recommended to use a TiDB Lightning version that matches the target TiDB cluster version.
 
 - 6.2.3 `checksum failed: checksum mismatched remote vs local`.
 

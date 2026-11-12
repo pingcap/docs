@@ -328,7 +328,7 @@ Configuration items related to scheduling
 ### `max-snapshot-count`
 
 + Controls the maximum number of snapshots that a single store receives or sends at the same time. PD schedulers depend on this configuration to prevent the resources used for normal traffic from being preempted.
-+ Default value value: `64`
++ Default value: `64`
 
 ### `max-pending-peer-count`
 

@@ -20,10 +20,10 @@ This document introduces how to use DM in an elegant and efficient way, and how 
 | Performance item  | Limitation |
 | ----------------- | :--------: |
 |  Max work nodes              |  1000           |
-|  Max task number             |  600            |
+|  Max number of tasks         |  600            |
 |  Max QPS                     |  30k QPS/worker |
 |  Max Binlog throughput       |  20 MB/s/worker |
-|  Table number limit per task |  Unlimited      |
+|  Max number of tables per task |  Unlimited      |
 
 - DM supports managing 1000 work nodes simultaneously, and the maximum number of tasks is 600. To ensure the high availability of work nodes, you should reserve some work nodes as standby nodes. The recommended number of standby nodes is 20% to 50% of the number of the work nodes that have running migration tasks.
 - A single work node can theoretically support replication QPS of up to 30K QPS/worker. It varies for different schemas and workloads. The ability to handle upstream binlogs is up to 20 MB/s/worker.
@@ -145,7 +145,7 @@ The following table describes the recommended deployment plans for DM-master and
 
 | Scenario | DM-master deployment | DM-worker deployment |
 | :--- | :--- | :--- |
-| <li>Small dataset (less than 1 TiB)</li><li>One-time data migration</li> | Deploy 1 DM-master node | Deploy 1~N DM-worker nodes according to the number of upstream data sources. Generally, 1 DM-worker node is recommended. |
+| <li>Small dataset (less than 1 TiB)</li><li>One-time data migration</li> | Deploy 1 DM-master node | Deploy 1 to N DM-worker nodes, where N is the number of upstream data sources. Generally, 1 DM-worker node is recommended. |
 | <li>Large dataset (more than 1 TiB) and migrating and merging MySQL shards</li><li>One-time data migration</li> | It is recommended to deploy 3 DM-master nodes to ensure the availability of the DM cluster during long-time data migration. | Deploy DM-worker nodes according to the number of data sources or migration tasks. Besides working DM-worker nodes, it is recommended to deploy 1~3 idle DM-worker nodes. |
 | Long-term data replication | It is necessary to deploy 3 DM-master nodes. If you deploy DM-master nodes on the cloud, try to deploy them in different availability zones (AZ). | Deploy DM-worker nodes according to the number of data sources or migration tasks. It is necessary to deploy 1.5~2 times the number of DM-worker nodes that are actually needed. |
 

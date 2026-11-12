@@ -101,7 +101,7 @@ For a {{{ .starter }}} or Essential instance, take the following steps to obtain
     import os
 
     # Copy your connection string from the TiDB Cloud console.
-    # Connection string format: "mysql+pymysql://<USER>:<PASSWORD>@<HOST>:4000/<DB>?ssl_ca=/etc/ssl/cert.pem&ssl_verify_cert=true&ssl_verify_identity=true"
+    # Connection string format: "mysql+pymysql://<USER>:<PASSWORD>@<HOST>:4000/<DATABASE_NAME>?ssl_ca=/etc/ssl/cert.pem&ssl_verify_cert=true&ssl_verify_identity=true"
     tidb_connection_string = getpass.getpass("TiDB Connection String:")
     os.environ["OPENAI_API_KEY"] = getpass.getpass("OpenAI API Key:")
     ```
@@ -118,7 +118,7 @@ To configure the environment variables, run the following code. You will be prom
 import getpass
 import os
 
-# Connection string format: "mysql+pymysql://<USER>:<PASSWORD>@<HOST>:4000/<DB>?ssl_ca=/etc/ssl/cert.pem&ssl_verify_cert=true&ssl_verify_identity=true"
+# Connection string format: "mysql+pymysql://<USER>:<PASSWORD>@<HOST>:4000/<DATABASE_NAME>?ssl_ca=/etc/ssl/cert.pem&ssl_verify_cert=true&ssl_verify_identity=true"
 tidb_connection_string = getpass.getpass("TiDB Connection String:")
 os.environ["OPENAI_API_KEY"] = getpass.getpass("OpenAI API Key:")
 ```
@@ -138,7 +138,7 @@ The following are descriptions for each parameter:
 - `<PASSWORD>`: The password to connect to TiDB.
 - `<HOST>`: The host of the TiDB cluster.
 - `<PORT>`: The port of the TiDB cluster.
-- `<DATABASE>`: The name of the database you want to connect to.
+- `<DATABASE_NAME>`: The name of the database you want to connect to.
 
 </div>
 

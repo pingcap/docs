@@ -1862,6 +1862,16 @@ Assume that you have a cluster with 4 TiDB nodes and multiple TiKV nodes. In thi
 - This variable is renamed from the variable [`tidb_ddl_version`](https://docs-archive.pingcap.com/tidb/v7.6/system-variables#tidb_ddl_version-new-in-v760) that is introduced in v7.6.0. Starting from v8.0.0, `tidb_ddl_version` no longer takes effect.
 - Starting from TiDB v8.5.0, the accelerated table creation feature is enabled by default for newly created clusters, with `tidb_enable_fast_create_table` set to `ON`. For clusters upgraded from v8.4.0 or earlier versions, the default value of `tidb_enable_fast_create_table` remains unchanged.
 
+### tidb_opt_selectivity_factor <span class="version-mark">New in v9.0.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Type: Float
+- Range: `[0, 1]`
+- Default value: `0.8`
+- This variable specifies the default selectivity for the TiDB optimizer. In some cases where the optimizer cannot deduce the selectivity of a predicate from statistics, the optimizer uses this default selectivity value instead. It is **NOT** recommended that you modify this value.
+
 ### tidb_default_string_match_selectivity <span class="version-mark">New in v6.2.0</span>
 
 - Scope: SESSION | GLOBAL
@@ -2719,7 +2729,7 @@ Assume that you have a cluster with 4 TiDB nodes and multiple TiKV nodes. In thi
 ### tidb_enable_point_get_cache
 
 - Scope: SESSION
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): YES
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Boolean
 - Default value: `OFF`
 - When you set the table lock type of [`LOCK TABLES`](/sql-statements/sql-statement-lock-tables-and-unlock-tables.md) to `READ`, setting this variable to `ON` enables caching of point query results, reducing the overhead of repeated queries and improving point query performance.
@@ -2799,7 +2809,7 @@ Assume that you have a cluster with 4 TiDB nodes and multiple TiKV nodes. In thi
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `ON`
 - Type: Boolean
-- This variable is a switch for [the resource control feature](/tidb-resource-control-ru-groups.md). When this variable is set to `ON`, the TiDB cluster can isolate application resources based on resource groups.
+- This variable controls whether to enable [the resource control feature](/tidb-resource-control-ru-groups.md). When this variable is set to `ON`, the TiDB cluster can isolate application resources based on resource groups.
 
 ### tidb_enable_reuse_chunk <span class="version-mark">New in v6.4.0</span>
 
@@ -4696,7 +4706,7 @@ mysql> desc select count(distinct a) from test.t;
 - Default value: `0`
 - Range: `[0, 2147483647]`
 - This variable is used to control the selection of the TiDB Join Reorder algorithm. When the number of nodes participating in Join Reorder is greater than this threshold, TiDB selects the greedy algorithm, and when it is less than this threshold, TiDB selects the dynamic programming algorithm.
-- Currently, for OLTP queries, it is recommended to keep the default value. For OLAP queries, it is recommended to set the variable value to 10~15 to get better connection orders in OLAP scenarios.
+- Currently, for OLTP queries, it is recommended to keep the default value. For OLAP queries, it is recommended to set the variable value to 10~15 to get better join orders in OLAP scenarios.
 
 ### tidb_opt_join_reorder_through_sel <span class="version-mark">New in v8.5.6 and v9.0.0</span>
 
@@ -5095,7 +5105,7 @@ EXPLAIN FORMAT='brief' SELECT COUNT(1) FROM t WHERE a = 1 AND b IS NOT NULL;
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Default value: `67108864` (64 MiB)
-- Scope: `[0, 9223372036854775807]`
+- Range: `[0, 9223372036854775807]`
 - Unit: Bytes
 - This variable is used to set the upper limit of memory usage for the optimizer to build scan ranges. When the variable value is `0`, there is no memory limit for building scan ranges. If building exact scan ranges consumes memory that exceeds the limit, the optimizer uses more relaxed scan ranges (such as `[[NULL,+inf]]`). If the execution plan does not use exact scan ranges, you can increase the value of this variable to let the optimizer build exact scan ranges.
 
@@ -5266,7 +5276,7 @@ SHOW WARNINGS;
 ### tidb_opt_tiflash_concurrency_factor
 
 - Scope: SESSION | GLOBAL
-- Persists to cluster: YES
+- Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Float
 - Range: `[0, 2147483647]`
@@ -7310,7 +7320,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Type: Integer
 - Default value: `1`
 - Range: `[0, 2147483647]` for TiDB Self-Managed and [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated), `[1, 2147483647]` for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)
-- This variable is a check item in the password complexity check. It checks whether the password contains sufficient numbers. This variable takes effect only when [`validate_password.enable`](#password_reuse_interval-new-in-v650) is enabled and [`validate_password.policy`](#validate_passwordpolicy-new-in-v650) is set to `1` (MEDIUM) or larger.
+- This variable is a check item in the password complexity check. It checks whether the password contains sufficient numbers. This variable takes effect only when [`validate_password.enable`](#validate_passwordenable-new-in-v650) is enabled and [`validate_password.policy`](#validate_passwordpolicy-new-in-v650) is set to `1` (MEDIUM) or larger.
 
 ### validate_password.policy <span class="version-mark">New in v6.5.0</span>
 
@@ -7320,7 +7330,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Type: Enumeration
 - Default value: `1`
 - Value options: `0`, `1`, and `2` for TiDB Self-Managed and [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated); `1` and `2` for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)
-- This variable controls the policy for the password complexity check. This variable takes effect only when [`validate_password.enable`](#password_reuse_interval-new-in-v650) is enabled. The value of this variable determines whether other `validate-password` variables take effect in the password complexity check, except for `validate_password.check_user_name`.
+- This variable controls the policy for the password complexity check. This variable takes effect only when [`validate_password.enable`](#validate_passwordenable-new-in-v650) is enabled. The value of this variable determines whether other `validate-password` variables take effect in the password complexity check, except for `validate_password.check_user_name`.
 - This value of this variable can be `0`, `1`, or `2` (corresponds to LOW, MEDIUM, or STRONG). Different policy levels have different checks:
     - 0 or LOW: password length.
     - 1 or MEDIUM: password length, uppercase and lowercase letters, numbers, and special characters.
@@ -7334,7 +7344,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Type: Integer
 - Default value: `1`
 - Range: `[0, 2147483647]` for TiDB Self-Managed and [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated), `[1, 2147483647]` for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)
-- This variable is a check item in the password complexity check. It checks whether the password contains sufficient special characters. This variable takes effect only when [`validate_password.enable`](#password_reuse_interval-new-in-v650) is enabled and [`validate_password.policy`](#validate_passwordpolicy-new-in-v650) is set to `1` (MEDIUM) or larger.
+- This variable is a check item in the password complexity check. It checks whether the password contains sufficient special characters. This variable takes effect only when [`validate_password.enable`](#validate_passwordenable-new-in-v650) is enabled and [`validate_password.policy`](#validate_passwordpolicy-new-in-v650) is set to `1` (MEDIUM) or larger.
 
 ### version
 

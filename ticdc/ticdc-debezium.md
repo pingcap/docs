@@ -769,7 +769,7 @@ The key fields of the preceding JSON data are explained as follows:
 
 | Field      | Type   | Description                                            |
 |:----------|:-------|:-------------------------------------------------------|
-| `payload.op`        | String | The type of the change event. `"m"` indicates an watermark event.  |
+| `payload.op`        | String | The type of the change event. `"m"` indicates a watermark event.  |
 | `payload.ts_ms`     | Number | The timestamp (in milliseconds) when TiCDC generates this message. |
 | `payload.source.commit_ts`     | Number  | The `CommitTs` value of the event.      |
 | `payload.source.db`     | String   | The name of the database where the event occurs.    |
@@ -795,7 +795,7 @@ The data format mapping in the TiCDC Debezium message basically follows the [Deb
 
 - Debezium FLOAT data convert `"5.61"` to `"5.610000133514404"`, but TiCDC does not.
 
-- TiCDC print the wrong `flen` with the FLOAT [tidb#57060](https://github.com/pingcap/tidb/issues/57060).
+- TiCDC prints the wrong `flen` with the FLOAT [tidb#57060](https://github.com/pingcap/tidb/issues/57060).
 
 - Debezium converts `charsetName` to `"utf8mb4"` when the column collation is `"utf8_unicode_ci"` and the character set is null, but TiCDC does not.
 
