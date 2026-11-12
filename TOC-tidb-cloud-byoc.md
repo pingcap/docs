@@ -172,10 +172,9 @@
     - [Alibaba Cloud のプライベートエンドポイント経由で接続する](/tidb-cloud/premium/connect-to-premium-via-alibaba-cloud-private-endpoint.md)
     - [TiDB Cloud への TLS 接続](/tidb-cloud/premium/tidb-cloud-tls-connect-to-premium.md)
   - 監査管理
-  - 請求
     - [データベース監査ログ](/tidb-cloud/premium/tidb-cloud-auditing-premium.md)
     - [コンソール監査ログ](/tidb-cloud/tidb-cloud-console-auditing.md)
-- 統合
+- 請求
   - [請求書](/tidb-cloud/tidb-cloud-billing.md#invoices)
   - [請求明細](/tidb-cloud/tidb-cloud-billing.md#billing-details)
   - [コストエクスプローラー](/tidb-cloud/tidb-cloud-billing.md#cost-explorer)
@@ -198,10 +197,10 @@
 
 ## リファレンス
 
-- SQL 言語の構造と構文
+- SQL リファレンス
   - [TiDB で SQL を学ぶ](/basic-sql-operations.md)
-  - 属性
-    - SQL ステートメント
+  - SQL 言語の構造と構文
+    - 属性
       - [AUTO_INCREMENT](/auto-increment.md)
       - [AUTO_RANDOM](/auto-random.md)
       - [_tidb_rowid](/tidb-rowid.md)
@@ -212,7 +211,7 @@
     - [ユーザー定義変数](/user-defined-variables.md)
     - [式の構文](/expression-syntax.md)
     - [コメント構文](/comment-syntax.md)
-  - `ALTER TABLE`
+  - SQL ステートメント
     - [概要](/sql-statements/sql-statement-overview.md)
     - [`ADMIN`](/sql-statements/sql-statement-admin.md)
     - [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)
@@ -226,7 +225,7 @@
     - [`ALTER DATABASE`](/sql-statements/sql-statement-alter-database.md)
     - [`ALTER INSTANCE`](/sql-statements/sql-statement-alter-instance.md)
     - [`ALTER SEQUENCE`](/sql-statements/sql-statement-alter-sequence.md)
-    - データ型
+    - `ALTER TABLE`
       - [概要](/sql-statements/sql-statement-alter-table.md)
       - [`ADD COLUMN`](/sql-statements/sql-statement-add-column.md)
       - [`ADD INDEX`](/sql-statements/sql-statement-add-index.md)
@@ -341,14 +340,14 @@
     - [`UPDATE`](/sql-statements/sql-statement-update.md)
     - [`USE`](/sql-statements/sql-statement-use.md)
     - [`WITH`](/sql-statements/sql-statement-with.md)
-  - 関数と演算子
+  - データ型
     - [概要](/data-type-overview.md)
     - [デフォルト値](/data-type-default-values.md)
     - [数値型](/data-type-numeric.md)
     - [日付と時刻の型](/data-type-date-and-time.md)
     - [文字列型](/data-type-string.md)
     - [JSON 型](/data-type-json.md)
-  - JSON 関数
+  - 関数と演算子
     - [概要](/functions-and-operators/functions-and-operators-overview.md)
     - [式評価における型変換](/functions-and-operators/type-conversion-in-expression-evaluation.md)
     - [演算子](/functions-and-operators/operators.md)
@@ -361,7 +360,7 @@
     - [暗号化および圧縮関数](/functions-and-operators/encryption-and-compression-functions.md)
     - [ロック関数](/functions-and-operators/locking-functions.md)
     - [情報関数](/functions-and-operators/information-functions.md)
-    - トランザクション
+    - JSON 関数
       - [概要](/functions-and-operators/json-functions.md)
       - [JSON を作成する関数](/functions-and-operators/json-functions/json-functions-create.md)
       - [JSON を検索する関数](/functions-and-operators/json-functions/json-functions-search.md)
@@ -384,7 +383,7 @@
   - [生成カラム](/generated-columns.md)
   - [SQL モード](/sql-mode.md)
   - [テーブル属性](/table-attributes.md)
-  - 文字セットと照合順序
+  - トランザクション
     - [概要](/transaction-overview.md)
     - [分離レベル](/transaction-isolation-levels.md)
     - [楽観的トランザクション](/optimistic-transaction.md)
@@ -395,21 +394,21 @@
   - [一時テーブル](/temporary-tables.md)
   - [キャッシュテーブル](/cached-tables.md)
   - [FOREIGN KEY 制約](/foreign-key.md)
-  - 履歴データの読み取り
+  - 文字セットと照合順序
     - [概要](/character-set-and-collation.md)
     - [GBK](/character-set-gbk.md)
-  - ステイル読み取りを使用する（推奨）
-    - システムテーブル
+  - 履歴データの読み取り
+    - ステイル読み取りを使用する（推奨）
       - [ステイル読み取りの使用シナリオ](/stale-read.md)
       - [`As OF TIMESTAMP` を使用してステイル読み取りを実行する](/as-of-timestamp.md)
       - [`tidb_read_staleness` を使用してステイル読み取りを実行する](/tidb-read-staleness.md)
       - [`tidb_external_ts` を使用してステイル読み取りを実行する](/tidb-external-ts.md)
     - [`tidb_snapshot` システム変数を使用する](/read-historical-data.md)
-  - `mysql` スキーマ
-    - INFORMATION_SCHEMA
+  - システムテーブル
+    - `mysql` スキーマ
       - [概要](/mysql-schema/mysql-schema.md)
       - [`user`](/mysql-schema/mysql-schema-user.md)
-    - PERFORMANCE_SCHEMA
+    - INFORMATION_SCHEMA
       - [概要](/information-schema/information-schema.md)
       - [`ANALYZE_STATUS`](/information-schema/information-schema-analyze-status.md)
       - [`CHECK_CONSTRAINTS`](/information-schema/information-schema-check-constraints.md)
@@ -449,30 +448,30 @@
       - [`USER_PRIVILEGES`](/information-schema/information-schema-user-privileges.md)
       - [`VARIABLES_INFO`](/information-schema/information-schema-variables-info.md)
       - [`VIEWS`](/information-schema/information-schema-views.md)
-    - SYS
+    - PERFORMANCE_SCHEMA
       - [概要](/performance-schema/performance-schema.md)
       - [`SESSION_CONNECT_ATTRS`](/performance-schema/performance-schema-session-connect-attrs.md)
-    - 一般リファレンス
+    - SYS
       - [概要](/sys-schema/sys-schema.md)
       - [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)
   - [メタデータロック](/metadata-lock.md)
   - [TiDB 高速テーブル作成](/accelerated-table-creation.md)
-- TiDB Classic アーキテクチャ
-  - ストレージエンジン
+- 一般リファレンス
+  - TiDB Classic アーキテクチャ
     - [概要](/tidb-architecture.md)
     - [ストレージ](/tidb-storage.md)
     - [コンピューティング](/tidb-computing.md)
     - [スケジューリング](/tidb-scheduling.md)
     - [TSO](/tso.md)
   - [TiDB X アーキテクチャ](/tidb-cloud/tidb-x-architecture.md)
-  - TiKV
-    - TiFlash
+  - ストレージエンジン
+    - TiKV
       - [TiKV の概要](/tikv-overview.md)
       - [RocksDB の概要](/storage-engine/rocksdb-overview.md)
-    - TiDB Cloud Partner Web Console
+    - TiFlash
       - [TiFlash の概要](/tiflash/tiflash-overview.md)
       - [ディスクへのスピル](/tiflash/tiflash-spill-disk.md)
-  - サポートプラン
+  - TiDB Cloud Partner Web Console
     - [TiDB Cloud パートナー](/tidb-cloud/tidb-cloud-partners.md)
     - [MSP Customer](/tidb-cloud/managed-service-provider-customer.md)
     - [販売代理店の顧客](/tidb-cloud/cppo-customer.md)
@@ -484,24 +483,24 @@
   - [外部ストレージサービスの URI 形式](/external-storage-uri.md)
   - [データとインデックスの不整合のトラブルシューティング](/troubleshoot-data-inconsistency-errors.md)
   - [通知](/tidb-cloud/notifications.md)
-- Connected Care サポートサービスの機能
+- サポートプラン
   - [Connected Care の概要](/tidb-cloud/connected-care-overview.md)
   - [Connected Care の詳細](/tidb-cloud/connected-care-detail.md)
-  - Connected: TiDB Cloud アラートの IM サブスクリプション
+  - Connected Care サポートサービスの機能
     - [Connected: IM の AI Chat](/tidb-cloud/connected-ai-chat-in-im.md)
-    - Connected: IM チケット作成と更新サブスクリプション
+    - Connected: TiDB Cloud アラートの IM サブスクリプション
       - [Slack で購読する](/tidb-cloud/monitor-alert-slack.md)
       - [Zoom で購読する](/tidb-cloud/monitor-alert-zoom.md)
       - [Flashduty 経由で購読する](/tidb-cloud/monitor-alert-flashduty.md)
       - [PagerDuty 経由で購読する](/tidb-cloud/monitor-alert-pagerduty.md)
-    - Connected: サポートチケット向け IM インタラクション
+    - Connected: IM チケット作成と更新サブスクリプション
       - [Slack 経由でチケットを作成し、チケットの更新を購読する](/tidb-cloud/connected-slack-ticket-creation.md)
       - [Lark 経由でチケットを作成し、チケットの更新を購読する](/tidb-cloud/connected-lark-ticket-creation.md)
-    - FAQ
+    - Connected: サポートチケット向け IM インタラクション
       - [Slack 経由でサポートチケットを操作する](/tidb-cloud/connected-slack-ticket-interaction.md)
       - [Lark 経由でサポートチケットを操作する](/tidb-cloud/connected-lark-ticket-interaction.md)
   - [サポートを受ける](/tidb-cloud/tidb-cloud-support.md)
-- FAQs
+- FAQ
   - [TiDB Cloud FAQ](/tidb-cloud/tidb-cloud-faq.md)
 - [用語集](/tidb-cloud/tidb-cloud-glossary.md)
 
