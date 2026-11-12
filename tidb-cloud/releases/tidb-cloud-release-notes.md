@@ -14,7 +14,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 - TiDB Cloud で API キーの IP 許可リストがサポートされるようになりました。組織オーナーは、TiDB Cloud コンソールで各 API キーに対して許可する IPv4 アドレスまたは CIDR 範囲を指定できます。許可リストを設定すると、その API キーは指定された IP アドレスからのみコントロールプレーン API リクエストの送信に使用できるようになり、不正使用のリスクを低減できます。
 
-    詳細については、[API key management](https://docs.pingcap.com/tidbcloud/api/v1beta2/#section/Authentication/API-key-management) を参照してください.
+    詳細については、[APIキー管理](https://docs.pingcap.com/tidbcloud/api/v1beta2/#section/Authentication/API-key-management) を参照してください。
 
 ## 2026年11月6日 {#november-6-2026}
 
