@@ -140,7 +140,7 @@ When the application uses the Query interface, TiDB cannot use the execution pla
 The application uses the following connection configuration. Compared with Scenario 2, the value of the JDBC parameter `useServerPrepStmts` is modified to `true`, indicating that the Prepared Statement interface is enabled.
 
 ```
-useServerPrepStmts=true&useConfigs=maxPerformance"
+useServerPrepStmts=true&useConfigs=maxPerformance
 ```
 
 ### Performance analysis
