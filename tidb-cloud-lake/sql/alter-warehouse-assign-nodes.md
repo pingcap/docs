@@ -3,13 +3,9 @@ title: ALTER WAREHOUSE ASSIGN NODES
 summary: "{{{ .lake }}} の Warehouse 内のクラスターにノードを割り当てるための ALTER WAREHOUSE ASSIGN NODES コマンドの使用方法を学びます。"
 ---
 
-# ALTER WAREHOUSE ASSIGN NODES
+# ALTER WAREHOUSE ASSIGN NODES <!--Corresponding EN commit: e193d27f71bd790a28465eacb9c1b5141db672a8-->
 
 Warehouse 内の 1 つ以上のクラスターにノードを割り当てます。
-
-> **Note:**
->
-> このコマンドを使用するには、システム管理のサポートとエンタープライズライセンスが必要です。
 
 ## 構文 {#syntax}
 
@@ -27,7 +23,7 @@ ALTER WAREHOUSE <warehouse_name> ASSIGN NODES
 |-----------|-------------|
 | `<warehouse_name>` | 対象の Warehouse。 |
 | `<node_count>` | 割り当てるノード数。 |
-| `FROM '<node_group>'` | オプションのノードグループセレクター。 |
+| `FROM '<node_group>'` | 任意のノードグループセレクター。 |
 | `<cluster_name>` | Warehouse 内の対象クラスター。 |
 
 ## 例 {#example}

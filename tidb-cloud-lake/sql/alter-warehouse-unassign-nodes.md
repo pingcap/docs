@@ -1,15 +1,11 @@
 ---
 title: ALTER WAREHOUSE UNASSIGN NODES
-summary: "{{{ .lake }}} の Warehouse 内のクラスターから割り当て済みノードを削除するための ALTER WAREHOUSE UNASSIGN NODES コマンドの使用方法を学びます。"
+summary: "{{{ .lake }}} の Warehouse 内のクラスターから割り当て済みノードを削除するための ALTER WAREHOUSE UNASSIGN NODES コマンドの使い方を学びます。"
 ---
 
-# ALTER WAREHOUSE UNASSIGN NODES
+# ALTER WAREHOUSE UNASSIGN NODES <!--Corresponding EN commit: e193d27f71bd790a28465eacb9c1b5141db672a8-->
 
-Warehouse 内の 1 つ以上のクラスターから割り当て済みノードを削除します。
-
-> **Note:**
->
-> このコマンドを使用するには、システム管理のサポートとエンタープライズライセンスが必要です。
+Warehouse 内の 1 つ以上のクラスターから、割り当て済みノードを削除します。
 
 ## 構文 {#syntax}
 
@@ -27,7 +23,7 @@ ALTER WAREHOUSE <warehouse_name> UNASSIGN NODES
 |-----------|-------------|
 | `<warehouse_name>` | 対象の Warehouse。 |
 | `<node_count>` | 削除するノード数。 |
-| `FROM '<node_group>'` | オプションのノードグループセレクター。 |
+| `FROM '<node_group>'` | 任意のノードグループセレクター。 |
 | `<cluster_name>` | Warehouse 内の対象クラスター。 |
 
 ## 例 {#example}

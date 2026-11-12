@@ -3,13 +3,9 @@ title: VACUUM VIRTUAL COLUMN
 summary: テーブルの古い仮想カラムファイルを削除します。
 ---
 
-# VACUUM VIRTUAL COLUMN
+# VACUUM VIRTUAL COLUMN <!--Corresponding EN commit: e193d27f71bd790a28465eacb9c1b5141db672a8-->
 
 テーブルの古い仮想カラムファイルを削除します。
-
-> **Note:**
->
-> このコマンドを使用するには、仮想カラムのエンタープライズ機能が必要です。
 
 ## 構文 {#syntax}
 
