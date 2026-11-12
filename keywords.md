@@ -84,6 +84,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - ASCII
 - ATTRIBUTE
 - ATTRIBUTES
+- AUTO
 - AUTO_ID_CACHE
 - AUTO_INCREMENT
 - AUTO_RANDOM
