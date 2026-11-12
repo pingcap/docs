@@ -168,9 +168,9 @@ If you observe an increasing miss rate of **Stale Read OPS** as follows:
 
 ![Example: Stale Read OPS](/media/stale-read/example-ops.png)
 
-You can first check the **Max Resolved TS gap** and **Min Resolved TS Region** metrics in the [**TiKV-Details** > **Resolved-TS** dashboard](/grafana-tikv-dashboard.md#resolved-ts):
+You can first check the **Max gap of resolved-ts** and **Min Resolved TS Region** metrics in the [**TiKV-Details** > **Resolved-TS** dashboard](/grafana-tikv-dashboard.md#resolved-ts):
 
-![Example: Max Resolved TS gap](/media/stale-read/example-ts-gap.png)
+![Example: Max gap of resolved-ts](/media/stale-read/example-ts-gap.png)
 
 From the preceding metrics, you can find that Region `3121` and some other Regions have not updated their resolved-ts in time.
 
