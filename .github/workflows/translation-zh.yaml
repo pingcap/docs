@@ -97,13 +97,13 @@ jobs:
               ;;
           esac
 
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         name: Checkout docs target branch
         with:
           ref: ${{ env.CN_CLOUD_BRANCH }}
           path: docs
 
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         name: Checkout docs source branch
         with:
           repository: ${{ env.SOURCE_REPO }}
@@ -112,7 +112,7 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         name: Checkout docs terms branch
         with:
           repository: ${{ env.SOURCE_REPO }}
@@ -120,7 +120,7 @@ jobs:
           path: docs-terms
           persist-credentials: false
 
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         name: Checkout ai-markdown-translator
         with:
           repository: ${{ env.AI_TRANSLATOR_REPO }}
@@ -128,7 +128,7 @@ jobs:
           path: ai-markdown-translator
           persist-credentials: false
 
-      - uses: actions/setup-python@v6
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         name: Setup Python
         with:
           python-version: "3.9"
@@ -271,7 +271,7 @@ jobs:
 
       - name: Create PR
         if: steps.changes.outputs.has_changes == 'true'
-        uses: peter-evans/create-pull-request@v8
+        uses: peter-evans/create-pull-request@3ffccacd46053766916f087ce41d627c0b8cf2d1 # v8
         with:
           path: docs
           token: ${{ github.token }}

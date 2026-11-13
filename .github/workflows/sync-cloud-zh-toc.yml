@@ -15,30 +15,29 @@ jobs:
   sync-toc:
     if: >
       github.repository == 'pingcap/docs' &&
+      github.ref == 'refs/heads/master' &&
       contains(fromJson('["lilin90","qiancai","seominjea1942"]'), github.actor) &&
       contains(fromJson('["lilin90","qiancai","seominjea1942"]'), github.triggering_actor)
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         name: Checkout ZH branch
         with:
           ref: "${{ env.ZH_BRANCH }}"
           path: "docs"
           token: ${{ github.token }}
 
-      - name: Copy script from main branch (temporary)
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          mkdir -p temp_scripts
-          gh api \
-            --method GET \
-            "repos/${{ github.repository }}/contents/scripts/sync-en-cloud-toc-changes-to-zh.py" \
-            -H "Accept: application/vnd.github.raw+json" \
-            > temp_scripts/sync-en-cloud-toc-changes-to-zh.py
+      - name: Check out the TOC sync script at the workflow commit
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ github.workflow_sha }}
+          path: workflow-source
+          sparse-checkout: scripts/sync-en-cloud-toc-changes-to-zh.py
+          sparse-checkout-cone-mode: false
+          persist-credentials: false
 
-      - uses: actions/setup-python@v6
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         name: Setup Python 3.11
         with:
           python-version: '3.11'
@@ -54,18 +53,11 @@ jobs:
           git config user.email github-actions@github.com
 
       - name: Run TOC sync script
+        working-directory: docs
         env:
           GEMINI_API_TOKEN: ${{ secrets.GEMINI_API_TOKEN }}
           GITHUB_TOKEN: ${{ github.token }}
-        run: |
-          cp temp_scripts/sync-en-cloud-toc-changes-to-zh.py docs/
-          cd docs
-          python sync-en-cloud-toc-changes-to-zh.py
-          rm sync-en-cloud-toc-changes-to-zh.py # Remove the script file so it won't be included in PR
-
-      - name: Clean up temporary files
-        run: |
-          rm -rf temp_scripts
+        run: python ../workflow-source/scripts/sync-en-cloud-toc-changes-to-zh.py
 
       - name: Check for changes
         id: check_changes
@@ -86,7 +78,7 @@ jobs:
 
       - name: Create PR
         if: steps.check_changes.outputs.changes == 'true'
-        uses: peter-evans/create-pull-request@v8
+        uses: peter-evans/create-pull-request@3ffccacd46053766916f087ce41d627c0b8cf2d1 # v8
         with:
           path: "docs"
           token: ${{ github.token }}
