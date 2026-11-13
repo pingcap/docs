@@ -25,7 +25,7 @@ DM のタスク設定ファイルで、以下に示すように、グローバ�
 ## ********* Basic configuration *********
 name: test                      # The name of the task. Should be globally unique.
 task-mode: all                  # The task mode. Can be set to `full`, `incremental`, or `all`.
-shard-mode: "pessimistic"       # The shard merge mode. Optional modes are `pessimistic` and `optimistic`. The `pessimistic` mode is used by default. After understanding the principles and restrictions of the "optimistic" mode, you can set it to the "optimistic" mode.
+shard-mode: ""                  # Optional. The default value is "", which disables sharding DDL coordination. Set this parameter to "pessimistic" only if you need DM to coordinate schema changes across sharded tables in a shard merge task. You can also use "optimistic" after understanding its principles and restrictions.
 meta-schema: "dm_meta"          # The downstream database that stores the `meta` information.
 online-ddl: true                # Enable online-ddl support on DM to support automatic processing of "gh-ost" and "pt-osc" for the upstream database.
 ```
@@ -36,31 +36,31 @@ DM で online-ddl を有効にすると、gh-ost または pt-osc を複製す�
 
 gh-ost または pt-osc のワークフロー:
 
-- DDL 実テーブルのテーブルスキーマに従ってゴースト テーブルを作成します。
+- DDL 実テーブルのテーブルスキーマに従ってゴーストテーブルを作成します。
 
-- ゴースト テーブルに DDL を適用します。
+- ゴーストテーブルに DDL を適用します。
 
-- DDL 実テーブルのデータをゴースト テーブルに複製します。
+- DDL 実テーブルのデータをゴーストテーブルに複製します。
 
-- 2 つのテーブル間でデータの一貫性が保たれたら、名前変更ステートメントを使用して実際のテーブルをゴースト テーブルに置き換えます。
+- 2 つのテーブル間でデータの一貫性が保たれたら、名前変更ステートメントを使用して実際のテーブルをゴーストテーブルに置き換えます。
 
 DM のワークフロー:
 
-- 下流のゴースト テーブルの作成をスキップします。
+- 下流のゴーストテーブルの作成をスキップします。
 
-- ゴースト テーブルに適用された DDL を記録します。
+- ゴーストテーブルに適用された DDL を記録します。
 
-- ゴースト テーブルからのみデータを複製します。
+- 実テーブルの DML イベントを複製し、ゴーストテーブルの DML イベントは無視します。
 
-- 下流に記録された DDL を適用します。
+- アップストリームでゴーストテーブルの名前が変更されて実テーブルが置き換えられたときに、記録された DDL をダウンストリームの実テーブルに適用します。
 
 ![dm-online-ddl](/media/dm/dm-online-ddl.png)
 
 ワークフローの変更により、次のような利点がもたらされます。
 
-- ダウンストリーム TiDB はゴースト テーブルを作成して複製する必要がないため、ストレージスペースとネットワーク転送のオーバーヘッドが節約されます。
+- ダウンストリーム TiDB はゴーストテーブルを作成して複製する必要がないため、ストレージスペースとネットワーク転送のオーバーヘッドが節約されます。
 
-- シャードテーブルからデータを移行およびマージする場合、レプリケーションの正確性を確保するために、シャード ゴースト テーブルごとに RENAME 操作は無視されます。
+- シャードテーブルからデータを移行およびマージする場合、レプリケーションの正確性を確保するために、シャード ゴーストテーブルごとに RENAME 操作は無視されます。
 
 ## 参照 {#see-also}
 

@@ -23,7 +23,13 @@ tiup cluster display tidb-test
 
 ### TiDB Dashboardを使用する {#use-tidb-dashboard}
 
-1. `${pd-ip}:${pd-port}/dashboard`で TiDB Dashboardにログインします。ユーザー名とパスワードは TiDB `root`ユーザーと同じです。`root`パスワードを変更した場合は、変更後のパスワードを入力してください。デフォルトではパスワードは空です。
+1. TiDB `root`アカウントとその現在のパスワードを使用して、`${pd-ip}:${pd-port}/dashboard`で TiDB Dashboardにログインします。
+
+    > **Note:**
+    >
+    > `--init` を使用してクラスターを初期化した場合、TiUP は初期 root パスワードを生成します。それ以外の場合、初期パスワードは空です。
+    >
+    > パスワードを変更した場合は、更新後のパスワードを使用してください。`--init` なしでクラスターを再起動しても、既存のパスワードはリセットされません。
 
     ![TiDB-Dashboard](/media/tiup/tidb-dashboard.png)
 
@@ -45,7 +51,13 @@ tiup cluster display tidb-test
 >
 > データベースにログインする前に、MySQL クライアントをインストールしてください。
 
-次のコマンドを実行してデータベースにログインします。
+root パスワードを使用してログインするには、次のコマンドを実行し、プロンプトが表示されたらパスワードを入力します。推奨される[安全な起動方法](/production-deployment-using-tiup.md#step-7-start-a-tidb-cluster)（`tiup cluster start tidb-test --init`）を使用した場合は、その後パスワードを変更していない限り、TiUP コマンドの出力に表示されたパスワードを使用します。
+
+```shell
+mysql -u root -p -h ${tidb_server_host_IP_address} -P 4000
+```
+
+クラスターが最初に `--init` なしで起動され、root パスワードが設定されていない場合は、`-p` を省略します。
 
 ```shell
 mysql -u root -h ${tidb_server_host_IP_address} -P 4000

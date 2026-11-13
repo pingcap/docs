@@ -310,12 +310,16 @@ dispatchers = [
 
 たとえば、 `matcher = ['test.*'], topic = "{schema}_{table}"`のような`dispatchers`構成の場合、DDL イベントは次のように送信されます。
 
-- DDLイベントが単一のテーブルのみに関係する場合、DDLイベントはそのまま適切なトピックにディスパッチされます。例えば、DDLイベント`DROP TABLE test.table1`の場合、イベントは`test_table1`という名前のトピックにディスパッチされます。
+- DDLイベントが単一のテーブルのみに関係する場合、DDLイベントは適切なトピックにディスパッチされます。例えば、DDLイベント`DROP TABLE test.table1`の場合、イベントは`test_table1`という名前のトピックにディスパッチされます。
 
 - DDLイベントが複数のテーブルに関係する場合（ `RENAME TABLE` 、 `DROP TABLE` 、 `DROP VIEW`のいずれも複数のテーブルに関係する可能性があります）、単一のDDLイベントは複数のイベントに分割され、適切なトピックにディスパッチされます。例えば、DDLイベント`RENAME TABLE test.table1 TO test.table10, test.table2 TO test.table20`の場合、処理は次のようになります。
 
     - `RENAME TABLE test.table1 TO test.table10`の DDL イベントを`test_table1`という名前のトピックにディスパッチします。
     - `RENAME TABLE test.table2 TO test.table20`の DDL イベントを`test_table2`という名前のトピックにディスパッチします。
+
+DDLメッセージ内のSQLテキストは、再フォーマットまたは再構築される場合があります。新しいアーキテクチャでは、単一テーブルの`ALTER TABLE ... RENAME`文は、完全修飾されたデータベース名とテーブル名を含む`RENAME TABLE`文に書き換えられます。このアーキテクチャが複数テーブルの`RENAME TABLE`文を分割する場合、結果として得られる各SQL文はセミコロンで終わります。コンシューマーは、解析時にこれらのSQL形式をサポートする必要があります。
+
+複数テーブルの名前変更を分割しても、元のアップストリームDDL文のアトミック性は保証されません。テーブル名を入れ替える場合、コンシューマーは関連するすべての名前変更ステップを正しい順序で処理する必要があります。詳細については、[テーブル名の変更に関するDDLレプリケーションの考慮事項](/ticdc/ticdc-ddl.md#ddl-replication-considerations-for-renaming-tables)および[DDL SQL テキストの処理](/ticdc/ticdc-ddl.md#handling-of-ddl-sql-text)を参照してください。
 
 ### パーティションディスパッチャー {#partition-dispatcher}
 

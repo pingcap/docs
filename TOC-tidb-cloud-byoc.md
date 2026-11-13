@@ -43,6 +43,7 @@
   - リソースプール
     - [リソースプールを作成する](/tidb-cloud/byoc/create-resource-pool-byoc.md)
     - [リソースプールを管理する](/tidb-cloud/byoc/manage-resource-pools-byoc.md)
+    - [リソースプールを一時停止または再開する](/tidb-cloud/byoc/pause-or-resume-byoc-resource-pool.md)
 - インスタンスを管理
   - [{{{ .byoc }}} インスタンスを作成する](/tidb-cloud/byoc/create-tidb-instance-byoc.md)
   - {{{ .byoc }}} インスタンスに接続する

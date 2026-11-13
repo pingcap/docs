@@ -11,7 +11,7 @@ summary: DumplingとTiDB Lightningを使用して、MySQLからTiDBへ大規模�
 
 MySQL シャードのデータサイズが 1 TiB 未満の場合は、[小規模データセットのMySQLシャードをTiDBに移行およびマージする](/migrate-small-mysql-shards-to-tidb.md)で説明されている手順に従えます。この手順では、完全移行と増分移行の両方がサポートされており、手順がより簡単です。
 
-このドキュメントの例では、 `my_db1`と`my_db2`の 2つのデータベースがあることを前提としています。Dumplingを使用して`my_db1`から 2つのテーブル`table1`と`table2`を、 `my_db2`から 2つのテーブル`table3`と`table4`をそれぞれエクスポートします。その後、 TiDB Lightning を使用して、エクスポートされた 4つのテーブルをターゲット TiDB の`mydb`にある同じ`table5`にインポートしてマージします。
+このドキュメントの例では、 `my_db1`と`my_db2`の 2つのデータベースがあることを前提としています。Dumplingを使用して`my_db1`から 2つのテーブル`table1`と`table2`を、 `my_db2`から 2つのテーブル`table3`と`table4`をそれぞれエクスポートします。その後、 TiDB Lightning を使用して、エクスポートされた 4つのテーブルをターゲット TiDB クラスターの`my_db.table5`にインポートしてマージします。
 
 このドキュメントでは、以下の手順に従ってデータを移行する方法を説明します。
 
@@ -20,7 +20,7 @@ MySQL シャードのデータサイズが 1 TiB 未満の場合は、[小規模
     - `table1`から`table2`と`my_db1`をエクスポートします。
     - `table3`から`table4`と`my_db2`をエクスポートします。
 
-2. TiDB Lightning を起動して、データを TiDB の`mydb.table5`に移行します。
+2. TiDB Lightning を起動して、データを TiDB の`my_db.table5`に移行します。
 
 3. （オプション）TiDB DMを使用して増分レプリケーションを実行します。
 
@@ -126,10 +126,11 @@ TiDB Lightningタスクが回復不能なエラー（データ破損など）に
 
 ### ターゲットスキーマを作成する {#create-a-target-schema}
 
-ターゲットで`mydb.table5`を作成します。
+ターゲットで`my_db.table5`を作成します。
 
 ```sql
-CREATE TABLE `table5` (
+CREATE DATABASE IF NOT EXISTS `my_db`;
+CREATE TABLE `my_db`.`table5` (
   `id` bigint NOT NULL,
   `sid` bigint NOT NULL,
   `pid` bigint NOT NULL,
