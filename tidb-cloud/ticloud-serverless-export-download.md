@@ -5,7 +5,7 @@ summary: "`ticloud serverless export download` のリファレンス。"
 
 # ticloud serverless export download {#ticloud-serverless-export-download}
 
-TiDB Cloud Starter またはTiDB Cloud Essential インスタンスからエクスポートされたデータをローカルストレージにダウンロードします。
+{{{ .starter }}} または{{{ .essential }}} インスタンスからエクスポートされたデータをローカルストレージにダウンロードします。
 
 ```shell
 ticloud serverless export download [flags]

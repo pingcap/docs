@@ -5,7 +5,7 @@ summary: "`ticloud serverless branch list` のリファレンス。"
 
 # ticloud serverless branch list {#ticloud-serverless-branch-list}
 
-TiDB Cloud Starter またはTiDB Cloud Essential インスタンスのすべてのブランチを一覧表示します。
+{{{ .starter }}} または{{{ .essential }}} インスタンスのすべてのブランチを一覧表示します。
 
 ```shell
 ticloud serverless branch list <cluster-id> [flags]
@@ -19,19 +19,19 @@ ticloud serverless branch ls <cluster-id> [flags]
 
 ## 例 {#examples}
 
-対話型モードでTiDB Cloud Starter またはTiDB Cloud Essential インスタンスのすべてのブランチを一覧表示します。
+対話型モードで{{{ .starter }}} または{{{ .essential }}} インスタンスのすべてのブランチを一覧表示します。
 
 ```shell
 ticloud serverless branch list
 ```
 
-非対話型モードで、特定のTiDB Cloud Starter またはTiDB Cloud Essential インスタンスのすべてのブランチを一覧表示します。
+非対話型モードで、特定の{{{ .starter }}} または{{{ .essential }}} インスタンスのすべてのブランチを一覧表示します。
 
 ```shell
 ticloud serverless branch list -c <cluster-id>
 ```
 
-特定のTiDB Cloud Starter またはTiDB Cloud Essential インスタンスのすべてのブランチを JSON 形式で一覧表示します。
+特定の{{{ .starter }}} または{{{ .essential }}} インスタンスのすべてのブランチを JSON 形式で一覧表示します。
 
 ```shell
 ticloud serverless branch list <cluster-id> -o json

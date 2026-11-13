@@ -1,17 +1,17 @@
 ---
 title: Use `tidbcloud_serverless_export` Resource
-summary: "`tidbcloud_serverless_export` リソースを使用して、 TiDB Cloud Starter またはTiDB Cloud Essential インスタンスのデータエクスポートタスクを作成および変更する方法を学習します。"
+summary: "`tidbcloud_serverless_export` リソースを使用して、 {{{ .starter }}} または{{{ .essential }}} インスタンスのデータエクスポートタスクを作成および変更する方法を学習します。"
 ---
 
 # `tidbcloud_serverless_export`リソースを使用する {#use-tidbcloud-serverless-export-resource}
 
-このドキュメントでは、 `tidbcloud_serverless_export`リソースを使用して、TiDB Cloud Starter またはTiDB Cloud Essential インスタンスのデータエクスポートタスクを管理する方法について説明します。
+このドキュメントでは、 `tidbcloud_serverless_export`リソースを使用して、{{{ .starter }}} または{{{ .essential }}} インスタンスのデータエクスポートタスクを管理する方法について説明します。
 
 `tidbcloud_serverless_export`リソースの機能は次のとおりです。
 
-- TiDB Cloud Starter またはTiDB Cloud Essential インスタンスのデータエクスポートタスクを作成します。
-- TiDB Cloud Starter またはTiDB Cloud Essential インスタンスのデータエクスポートタスクをインポートします。
-- TiDB Cloud Starter またはTiDB Cloud Essential インスタンスのデータエクスポートタスクを削除します。
+- {{{ .starter }}} または{{{ .essential }}} インスタンスのデータエクスポートタスクを作成します。
+- {{{ .starter }}} または{{{ .essential }}} インスタンスのデータエクスポートタスクをインポートします。
+- {{{ .starter }}} または{{{ .essential }}} インスタンスのデータエクスポートタスクを削除します。
 
 > **Note:**
 >
@@ -20,11 +20,11 @@ summary: "`tidbcloud_serverless_export` リソースを使用して、 TiDB Clou
 ## 前提条件 {#prerequisites}
 
 - [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0以降。
-- [TiDB Cloud StarterまたはEssentialインスタンスを作成する](/tidb-cloud/create-tidb-cluster-serverless.md) 。
+- [{{{ .starter }}}またはEssentialインスタンスを作成する](/tidb-cloud/create-tidb-cluster-serverless.md) 。
 
-## TiDB Cloud Starter またはTiDB Cloud Essential インスタンスのデータエクスポートタスクを作成する {#create-a-data-export-task-for-a-tidb-cloud-starter-or-tidb-cloud-essential-instance}
+## {{{ .starter }}} または{{{ .essential }}} インスタンスのデータエクスポートタスクを作成する {#create-a-data-export-task-for-a-tidb-cloud-starter-or-tidb-cloud-essential-instance}
 
-`tidbcloud_serverless_export`リソースを使用して、 TiDB Cloud Starter またはTiDB Cloud Essential インスタンスのデータエクスポートタスクを作成できます。
+`tidbcloud_serverless_export`リソースを使用して、 {{{ .starter }}} または{{{ .essential }}} インスタンスのデータエクスポートタスクを作成できます。
 
 1. エクスポート用のディレクトリを作成してそこに入ります。
 
@@ -115,7 +115,7 @@ summary: "`tidbcloud_serverless_export` リソースを使用して、 TiDB Clou
     Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
     ```
 
-    この例では、 `tidbcloud_serverless_export.example`リソースがTiDB Cloud Starter またはTiDB Cloud Essential インスタンス全体からデータをエクスポートするエクスポートタスクを作成します。
+    この例では、 `tidbcloud_serverless_export.example`リソースが{{{ .starter }}} または{{{ .essential }}} インスタンス全体からデータをエクスポートするエクスポートタスクを作成します。
 
     このリソースは同期されていません。`terraform refresh`を使用すると最新の状態を取得できます。
 
@@ -142,9 +142,9 @@ summary: "`tidbcloud_serverless_export` リソースを使用して、 TiDB Clou
     }
     ```
 
-## TiDB Cloud Starter またはTiDB Cloud Essential インスタンスのデータエクスポートタスクをインポートする {#import-a-data-export-task-for-a-tidb-cloud-starter-or-tidb-cloud-essential-instance}
+## {{{ .starter }}} または{{{ .essential }}} インスタンスのデータエクスポートタスクをインポートする {#import-a-data-export-task-for-a-tidb-cloud-starter-or-tidb-cloud-essential-instance}
 
-TiDB Cloud Starter またはTiDB Cloud Essential インスタンスのデータエクスポートタスクが Terraform によって管理されていない場合は、インポートすることで Terraform 管理下に置けます。
+{{{ .starter }}} または{{{ .essential }}} インスタンスのデータエクスポートタスクが Terraform によって管理されていない場合は、インポートすることで Terraform 管理下に置けます。
 
 1. 新しい`tidbcloud_serverless_export`リソースのインポートブロックを追加します。
 
@@ -182,9 +182,9 @@ TiDB Cloud Starter またはTiDB Cloud Essential インスタンスのデータ�
 
 これで、インポートしたエクスポートを Terraform で管理できるようになりました。
 
-## TiDB Cloud Starter またはTiDB Cloud Essential インスタンスのデータエクスポートタスクを削除する {#delete-a-data-export-task-for-a-tidb-cloud-starter-or-tidb-cloud-essential-instance}
+## {{{ .starter }}} または{{{ .essential }}} インスタンスのデータエクスポートタスクを削除する {#delete-a-data-export-task-for-a-tidb-cloud-starter-or-tidb-cloud-essential-instance}
 
-TiDB Cloud Starter またはTiDB Cloud Essential インスタンスのデータエクスポートタスクを削除するには、 `tidbcloud_serverless_export`リソースの構成を削除してから、 `terraform apply`コマンドを使用してリソースを破棄します。
+{{{ .starter }}} または{{{ .essential }}} インスタンスのデータエクスポートタスクを削除するには、 `tidbcloud_serverless_export`リソースの構成を削除してから、 `terraform apply`コマンドを使用してリソースを破棄します。
 
 ```shell
 $ terraform apply

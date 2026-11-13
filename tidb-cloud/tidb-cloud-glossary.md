@@ -111,12 +111,12 @@ TiDB Cloudアカウント (任意の数の複数のメンバーアカウント�
 
 TiDB Cloudでは、プロジェクトを使用してTiDBリソースをグループ化および管理できます。
 
-- TiDB Xインスタンス（ TiDB Cloud Starter、 Essential、Premiumインスタンスを含む）の場合、プロジェクトはオプションです。つまり、これらのインスタンスをプロジェクトにグループ化することも、組織レベルで管理することもできます。
-- TiDB Cloud Dedicatedクラスターの場合、プロジェクトが必要です。
+- TiDB Xインスタンス（ {{{ .starter }}}、 Essential、Premiumインスタンスを含む）の場合、プロジェクトはオプションです。つまり、これらのインスタンスをプロジェクトにグループ化することも、組織レベルで管理することもできます。
+- {{{ .dedicated }}}クラスターの場合、プロジェクトが必要です。
 
 プロジェクトの機能はプロジェクトの種類によって異なります。現在、プロジェクトには以下の3種類があります。
 
-- **TiDB Dedicatedプロジェクト**：このプロジェクトタイプは、 TiDB Cloud Dedicatedクラスターでのみ使用されます。RBAC、ネットワーク、メンテナンス、アラート購読、暗号化アクセスなど、 TiDB Cloud Dedicatedクラスターの設定をプロジェクトごとに個別に管理できます。
+- **TiDB Dedicatedプロジェクト**：このプロジェクトタイプは、 {{{ .dedicated }}}クラスターでのみ使用されます。RBAC、ネットワーク、メンテナンス、アラート購読、暗号化アクセスなど、 {{{ .dedicated }}}クラスターの設定をプロジェクトごとに個別に管理できます。
 - **TiDB X プロジェクト**: このプロジェクトタイプは TiDB X インスタンスでのみ使用されます。プロジェクトごとに TiDB X インスタンスの RBAC を管理できます。TiDB X プロジェクトは [**My TiDB**](https://tidbcloud.com/tidbs) ページでプロジェクトを作成する際のデフォルトのプロジェクトタイプです。
 - **TiDB X 仮想プロジェクト**: このプロジェクトは仮想プロジェクトであり、管理機能は提供しません。これは、どのプロジェクトにも属さない TiDB X インスタンスの仮想コンテナーとして機能するため、これらのインスタンスには、プロジェクト ID を使用して TiDB Cloud API 経由でアクセスできます。各組織には一意の仮想プロジェクト ID があります。この ID は、TiDB Cloud API の [List all accessible projects](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Project/operation/ListProjects) エンドポイントから取得できます。
 
@@ -128,17 +128,17 @@ TiDB Cloudでは、プロジェクトを使用してTiDBリソースをグルー
 
 ## R {#r}
 
-### ごみ箱 {#recycle-bin}
+### Recycle Bin {#recycle-bin}
 
 有効なバックアップがある削除済み[TiDB Cloudリソース](#tidb-cloud-resource)のデータが保存される場所。
 
-バックアップされたTiDB Cloudリソースが削除されると、その既存のバックアップファイルはごみ箱に移動されます。自動バックアップからのバックアップファイルについては、ごみ箱に指定された期間保持されます。バックアップの保持期間は**Backup Setting**で設定でき、デフォルトは 7 日です。手動バックアップからのバックアップファイルには有効期限はありません。データ損失を防ぐため、新しいTiDB Cloudリソースにデータを速やかに復元してください。なお、 TiDB Cloudリソース**にバックアップがない**場合、削除されたリソースはごみ箱に表示されません。
+バックアップされたTiDB Cloudリソースが削除されると、その既存のバックアップファイルは Recycle Bin に移動されます。自動バックアップからのバックアップファイルについては、Recycle Bin に指定された期間保持されます。バックアップの保持期間は**Backup Setting**で設定でき、デフォルトは 7 日です。手動バックアップからのバックアップファイルには有効期限はありません。データ損失を防ぐため、新しいTiDB Cloudリソースにデータを速やかに復元してください。なお、 TiDB Cloudリソース**にバックアップがない**場合、削除されたリソースは Recycle Bin に表示されません。
 
-現在、ごみ箱機能をサポートしているTiDB Cloudリソースの種類は以下のとおりです。
+現在、Recycle Bin 機能をサポートしているTiDB Cloudリソースの種類は以下のとおりです。
 
-- TiDB Cloud Essentialインスタンス
-- TiDB Cloud Premiumインスタンス
-- TiDB Cloud Dedicatedクラスター
+- {{{ .essential }}}インスタンス
+- {{{ .premium }}}インスタンス
+- {{{ .dedicated }}}クラスター
 
 ### リージョン {#region}
 
@@ -160,18 +160,18 @@ TiDB Cloud は、[変更フィード](/tidb-cloud/changefeed-overview.md)のキ�
 
 ### リクエストキャパシティユニット（RCU） {#request-capacity-unit-rcu}
 
-TiDB Cloud EssentialおよびTiDB Cloud Premium では、リクエストキャパシティユニット (RCU) は、 TiDB Cloud EssentialまたはTiDB Cloud Premium インスタンスにプロビジョニングされたコンピューティングキャパシティを表す単位です。1 RCU は、1秒あたり一定数の RU を処理できる固定量のコンピューティングリソースを提供します。プロビジョニングする RCU の数によって、インスタンスのベースラインパフォーマンスとスループットキャパシティが決まります。ただし、RCU の管理方法は、 TiDB Cloud EssentialとTiDB Cloud Premium で異なります。
+{{{ .essential }}}および{{{ .premium }}} では、リクエストキャパシティユニット (RCU) は、 {{{ .essential }}}または{{{ .premium }}} インスタンスにプロビジョニングされたコンピューティングキャパシティを表す単位です。1 RCU は、1秒あたり一定数の RU を処理できる固定量のコンピューティングリソースを提供します。プロビジョニングする RCU の数によって、インスタンスのベースラインパフォーマンスとスループットキャパシティが決まります。ただし、RCU の管理方法は、 {{{ .essential }}}と{{{ .premium }}} で異なります。
 
-- CLOUD.202603.x 以降で実行される TiDB Cloud Essential インスタンスは、**Elastic Mode** と **Limited Mode** をサポートします。Elastic Mode では、インスタンスは 2,000 RCU の固定ベースライン RCU を使用し、ワークロードの需要に基づいてキャパシティをスケーリングします。Limited Mode では、最大 RCU を設定します。以前のバージョンのインスタンスでは、最小 RCU と最大 RCU の両方を設定します。詳細については、 [TiDB Cloud Essential の価格詳細](https://www.pingcap.com/tidb-cloud-essential-pricing-details/)を参照してください。
-- TiDB Cloud Premium は 2 つのキャパシティモードをサポートします。**Elastic Mode** では、ベースライン RCU を設定し、ワークロードの需要が増加すると、TiDB Cloud はこのベースラインを超えてキャパシティをスケーリングします。**Limited Mode** では、RCU の最大数 (`RCU_max`) を設定し、TiDB Cloud は `0.25 * RCU_max` から `RCU_max` の範囲内でキャパシティを自動的にスケーリングします。詳細については、 [TiDB Cloud Premiumのリクエストユニットとキャパシティ](https://docs.pingcap.com/tidbcloud/architecture-concepts/?plan=premium#request-units-and-capacity-in-premium)を参照してください。
+- CLOUD.202603.x 以降で実行される {{{ .essential }}} インスタンスは、**Elastic Mode** と **Limited Mode** をサポートします。Elastic Mode では、インスタンスは 2,000 RCU の固定ベースライン RCU を使用し、ワークロードの需要に基づいてキャパシティをスケーリングします。Limited Mode では、最大 RCU を設定します。以前のバージョンのインスタンスでは、最小 RCU と最大 RCU の両方を設定します。詳細については、 [{{{ .essential }}} の価格詳細](https://www.pingcap.com/tidb-cloud-essential-pricing-details/)を参照してください。
+- {{{ .premium }}} は 2 つのキャパシティモードをサポートします。**Elastic Mode** では、ベースライン RCU を設定し、ワークロードの需要が増加すると、TiDB Cloud はこのベースラインを超えてキャパシティをスケーリングします。**Limited Mode** では、RCU の最大数 (`RCU_max`) を設定し、TiDB Cloud は `0.25 * RCU_max` から `RCU_max` の範囲内でキャパシティを自動的にスケーリングします。詳細については、 [{{{ .premium }}}のリクエストユニットとキャパシティ](https://docs.pingcap.com/tidbcloud/architecture-concepts/?plan=premium#request-units-and-capacity-in-premium)を参照してください。
 
 ### リクエストユニット（RU） {#request-unit-ru}
 
-TiDB Cloud Starter、 Essential、およびPremiumプランでは、リクエストユニット（RU）は、データベースへの単一のリクエストによって消費されるリソース量を表す単位です。リクエストによって消費されるRUの量は、操作の種類や取得または変更されるデータの量など、さまざまな要因によって異なります。ただし、これらのプランの課金モデルは異なります。
+{{{ .starter }}}、 Essential、およびPremiumプランでは、リクエストユニット（RU）は、データベースへの単一のリクエストによって消費されるリソース量を表す単位です。リクエストによって消費されるRUの量は、操作の種類や取得または変更されるデータの量など、さまざまな要因によって異なります。ただし、これらのプランの課金モデルは異なります。
 
-- TiDB Cloud Starter は、消費された RU の合計数に基づいて請求されます。詳細については、 [TiDB Cloud Starterの料金詳細](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)を参照してください。
-- TiDB Cloud Essentialは、プロビジョニングされた[リクエストキャパシティユニット（RCU）](#request-capacity-unit-rcu)の数に基づいて請求されます。 1つの RCU は、1秒あたり特定の数の RU を処理できる固定量のコンピューティングリソースを提供します。詳細については、 [TiDB Cloud Essential の価格詳細](https://www.pingcap.com/tidb-cloud-essential-pricing-details/)を参照してください。
-- TiDB Cloud Premium は、ワークロードによって消費された実際のリクエストキャパシティユニット (RCU) に基づいて請求されます。 TiDB Cloudは1秒あたりの平均 RU を毎分計算し、その平均値を[リクエストキャパシティユニット（RCU）](#request-capacity-unit-rcu)として請求に使用します。詳細については、 [TiDB Cloud Premiumのリクエストユニットとキャパシティ](https://docs.pingcap.com/tidbcloud/architecture-concepts/?plan=premium#request-units-and-capacity-in-premium)を参照してください。
+- {{{ .starter }}} は、消費された RU の合計数に基づいて請求されます。詳細については、 [{{{ .starter }}}の料金詳細](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)を参照してください。
+- {{{ .essential }}}は、プロビジョニングされた[リクエストキャパシティユニット（RCU）](#request-capacity-unit-rcu)の数に基づいて請求されます。 1つの RCU は、1秒あたり特定の数の RU を処理できる固定量のコンピューティングリソースを提供します。詳細については、 [{{{ .essential }}} の価格詳細](https://www.pingcap.com/tidb-cloud-essential-pricing-details/)を参照してください。
+- {{{ .premium }}} は、ワークロードによって消費された実際のリクエストキャパシティユニット (RCU) に基づいて請求されます。 TiDB Cloudは1秒あたりの平均 RU を毎分計算し、その平均値を[リクエストキャパシティユニット（RCU）](#request-capacity-unit-rcu)として請求に使用します。詳細については、 [{{{ .premium }}}のリクエストユニットとキャパシティ](https://docs.pingcap.com/tidbcloud/architecture-concepts/?plan=premium#request-units-and-capacity-in-premium)を参照してください。
 
 TiDB Cloud Dedicatedおよび TiDB Self-Managedの場合、リクエストユニット (RU) はシステムリソースの消費を表すリソース抽象化ユニットであり、これには現在 CPU、IOPS、および IO 帯域幅のメトリクスが含まれます。これは、**請求目的ではなく**、データベースリクエストによって消費されるリソースを制限、分離、管理するためにリソース制御機能によって使用されます。詳細については、[リソース制御を使用して、リソースグループの制限とフロー制御を実現する](/tidb-resource-control-ru-groups.md)を参照してください。
 
@@ -179,7 +179,7 @@ TiDB Cloud Dedicatedおよび TiDB Self-Managedの場合、リクエストユニ
 
 ### 支出限度額 {#spending-limit}
 
-支出限度額は、特定のワークロードに対して1か月あたりに費やせる最大金額を指します。これは、TiDB Cloud Starterインスタンスの予算を設定できるコスト管理メカニズムです。 [支出限度額](/tidb-cloud/manage-serverless-spend-limit.md)が0に設定されている場合、 TiDB Cloud Starterインスタンスは無料のままです。支出限度額が0より大きい場合は、クレジットカードを追加する必要があります。
+支出限度額は、特定のワークロードに対して1か月あたりに費やせる最大金額を指します。これは、{{{ .starter }}}インスタンスの予算を設定できるコスト管理メカニズムです。 [支出限度額](/tidb-cloud/manage-serverless-spend-limit.md)が0に設定されている場合、 {{{ .starter }}}インスタンスは無料のままです。支出限度額が0より大きい場合は、クレジットカードを追加する必要があります。
 
 ## T {#t}
 
@@ -189,26 +189,26 @@ TiDB Cloudでは、クラスターはクラウド上に専用デプロイされ�
 
 ### TiDBノード {#tidb-node}
 
-トランザクションストアまたは分析ストアから返されたクエリのデータを集約するコンピューティングノード。TiDBノードの数を増やすと、TiDB Cloud Dedicatedクラスターが処理できる同時クエリの数が増加します。
+トランザクションストアまたは分析ストアから返されたクエリのデータを集約するコンピューティングノード。TiDBノードの数を増やすと、{{{ .dedicated }}}クラスターが処理できる同時クエリの数が増加します。
 
 ### TiDB Cloudリソース {#tidb-cloud-resource}
 
 TiDB Cloudリソースとは、管理可能なTiDB Cloudデプロイメント単位のことです。以下のいずれかになります。
 
-- TiDB Xインスタンス（ [TiDB Xアーキテクチャ](/tidb-cloud/tidb-x-architecture.md)上に構築されたサービス指向のTiDB Cloud製品）、例えばTiDB Cloud Starter、 Essential、またはPremiumインスタンスなど。
-- TiDB Cloud Dedicatedクラスター
+- TiDB Xインスタンス（ [TiDB Xアーキテクチャ](/tidb-cloud/tidb-x-architecture.md)上に構築されたサービス指向のTiDB Cloud製品）、例えば{{{ .starter }}}、 Essential、またはPremiumインスタンスなど。
+- {{{ .dedicated }}}クラスター
 
 ### TiDB X {#tidb-x}
 
 TiDB Xは、クラウドネイティブなオブジェクトストレージをTiDBの基盤とする、新しい分散SQLアーキテクチャです。コンピューティングとストレージを分離することで、TiDBはワークロードパターン、ビジネスサイクル、データ特性にリアルタイムで適応し、インテリジェントなスケーリングを実現します。
 
-TiDB Xアーキテクチャは、 TiDB Cloud Starter、 Essential、および Premium で利用できるようになりました。詳細については、 [TiDB Xのご紹介：AI時代の分散SQLのための新たな基盤](https://www.pingcap.com/blog/introducing-tidb-x-a-new-foundation-distributed-sql-ai-era/)および[PingCAPがSCaiLEサミット2025でTiDB Xと新たなAI機能を発表](https://www.pingcap.com/press-release/pingcap-launches-tidb-x-new-ai-capabilities/)を参照してください。
+TiDB Xアーキテクチャは、 {{{ .starter }}}、 Essential、および Premium で利用できるようになりました。詳細については、 [TiDB Xのご紹介：AI時代の分散SQLのための新たな基盤](https://www.pingcap.com/blog/introducing-tidb-x-a-new-foundation-distributed-sql-ai-era/)および[PingCAPがSCaiLEサミット2025でTiDB Xと新たなAI機能を発表](https://www.pingcap.com/press-release/pingcap-launches-tidb-x-new-ai-capabilities/)を参照してください。
 
 ### TiDB Xインスタンス {#tidb-x-instance}
 
 TiDB Xインスタンスは、 [TiDB Xアーキテクチャ](/tidb-cloud/tidb-x-architecture.md)上に構築されたサービス指向のTiDB Cloudサービスです。基盤となるクラスタートポロジーの管理や理解は不要です。
 
-TiDB Cloudのプランのうち、 TiDB Cloud Starter、 Essential、およびPremiumはTiDB Xアーキテクチャを使用しています。したがって、「TiDB Xインスタンス」という表現は、 TiDB Cloud Starter、 Essential、またはPremiumインスタンスを指します。
+TiDB Cloudのプランのうち、 {{{ .starter }}}、 Essential、およびPremiumはTiDB Xアーキテクチャを使用しています。したがって、「TiDB Xインスタンス」という表現は、 {{{ .starter }}}、 Essential、またはPremiumインスタンスを指します。
 
 ### TiFlashノード {#tiflash-node}
 

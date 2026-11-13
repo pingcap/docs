@@ -11,16 +11,16 @@ summary: データアプリのOpenAPI仕様を使用してクライアントコ�
 
 Next.jsでOpenAPI仕様を使用する前に、以下のものが用意されていることを確認してください。
 
-- [TiDB Cloud Starterインスタンス](/tidb-cloud/create-tidb-cluster-serverless.md)または[TiDB Cloud Dedicatedクラスター](/tidb-cloud/create-tidb-cluster.md)。
+- [{{{ .starter }}}インスタンス](/tidb-cloud/create-tidb-cluster-serverless.md)または[{{{ .dedicated }}}クラスター](/tidb-cloud/create-tidb-cluster.md)。
 - [Node.js](https://nodejs.org/en/download)
 - [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 - [yarn](https://yarnpkg.com/getting-started/install)
 
-このドキュメントでは、例としてTiDB Cloud Starterインスタンスを使用します。
+このドキュメントでは、例として{{{ .starter }}}インスタンスを使用します。
 
 ## ステップ1. データの準備 {#step-1-prepare-data}
 
-まず、 TiDB Cloud StarterインスタンスまたはTiDB Cloud Dedicatedクラスターにテーブル`test.repository`を作成し、サンプルデータを挿入します。以下の例では、デモンストレーション用のデータとして、PingCAP が開発したオープンソースプロジェクトをいくつか挿入します。
+まず、 {{{ .starter }}}インスタンスまたは{{{ .dedicated }}}クラスターにテーブル`test.repository`を作成し、サンプルデータを挿入します。以下の例では、デモンストレーション用のデータとして、PingCAP が開発したオープンソースプロジェクトをいくつか挿入します。
 
 SQL文を実行するには、 [TiDB Cloudコンソール](https://tidbcloud.com)の[SQLエディター](/tidb-cloud/explore-data-with-sql-editor.md)を使用できます。
 
@@ -45,7 +45,7 @@ VALUES ('tidb', 'https://github.com/pingcap/tidb'),
 
 ## ステップ2. データアプリを作成する {#step-2-create-a-data-app}
 
-データ挿入後、 [TiDB Cloudコンソール](https://tidbcloud.com)の[**Data Service**](https://tidbcloud.com/project/data-service)ページに移動します。 TiDB Cloud StarterインスタンスまたはTiDB Cloud Dedicatedクラスターにリンクするデータアプリを作成し、データアプリの API キーを作成してから、データアプリに`GET /repositories`エンドポイントを作成します。このエンドポイントに対応する SQL文は次のとおりです。これは`test.repository`テーブルからすべての行を取得します。
+データ挿入後、 [TiDB Cloudコンソール](https://tidbcloud.com)の[**Data Service**](https://tidbcloud.com/project/data-service)ページに移動します。 {{{ .starter }}}インスタンスまたは{{{ .dedicated }}}クラスターにリンクするデータアプリを作成し、データアプリの API キーを作成してから、データアプリに`GET /repositories`エンドポイントを作成します。このエンドポイントに対応する SQL文は次のとおりです。これは`test.repository`テーブルからすべての行を取得します。
 
 ```sql
 SELECT * FROM test.repository;
@@ -182,7 +182,7 @@ SELECT * FROM test.repository;
 
     > **Note:**
     >
-    > データアプリにリンクされているTiDB Cloud StarterインスタンスまたはTiDB Cloud Dedicatedクラスターが異なるリージョンでホストされている場合、ダウンロードした OpenAPI 仕様ファイルの`servers`セクションに複数の項目が表示されます。この場合、 `config`オブジェクトのエンドポイントパスを次のように構成する必要があります。
+    > データアプリにリンクされている{{{ .starter }}}インスタンスまたは{{{ .dedicated }}}クラスターが異なるリージョンでホストされている場合、ダウンロードした OpenAPI 仕様ファイルの`servers`セクションに複数の項目が表示されます。この場合、 `config`オブジェクトのエンドポイントパスを次のように構成する必要があります。
     >
     > ```js
     > const config = new Configuration({

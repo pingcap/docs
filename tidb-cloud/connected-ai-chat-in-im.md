@@ -1,6 +1,6 @@
 ---
 title: "Connected: AI chat in IM"
-summary: インスタント メッセージ (IM) の AI チャットに関する詳細情報を紹介します。
+summary: インスタントメッセージ (IM) の AI チャットに関する詳細情報を紹介します。
 ---
 
 # Connected: IMでのAIチャット {#connected-ai-chat-in-im}

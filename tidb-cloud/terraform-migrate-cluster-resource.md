@@ -43,7 +43,7 @@ terraform state rm ${your_target_cluster_resource}
 
 ## ステップ4. 新しいクラスターリソースのインポートブロックを追加する {#step-4-add-an-import-block-for-the-new-cluster-resource}
 
-- ターゲットがTiDB Cloud Starter インスタンスの場合は、次のインポートブロックを`.tf`ファイルに追加し、 `example`を目的のリソース名に置き換え、`${id}`を[ステップ1](#step-1-identify-the-tidbcloud_cluster-resource-to-migrate)から取得したクラスター ID に置き換えます。
+- ターゲットが{{{ .starter }}} インスタンスの場合は、次のインポートブロックを`.tf`ファイルに追加し、 `example`を目的のリソース名に置き換え、`${id}`を[ステップ1](#step-1-identify-the-tidbcloud_cluster-resource-to-migrate)から取得したクラスター ID に置き換えます。
 
     ```
     # TiDB Cloud Starter

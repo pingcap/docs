@@ -31,7 +31,7 @@ ticloud serverless import list
 ticloud serverless import list --cluster-id <cluster-id>
 ```
 
-指定されたTiDB Cloud Starter またはEssential インスタンスのインポートタスクを JSON 形式で一覧表示します。
+指定された{{{ .starter }}} またはEssential インスタンスのインポートタスクを JSON 形式で一覧表示します。
 
 ```shell
 ticloud serverless import list --cluster-id <cluster-id> --output json

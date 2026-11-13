@@ -5,7 +5,7 @@ summary: "`ticloud serverless audit-log filter-rule list` のリファレンス�
 
 # ticloud serverless audit-log filter-rule list {#ticloud-serverless-audit-log-filter-rule-list}
 
-TiDB Cloud Essential インスタンスの監査ログフィルタールールを一覧表示します。
+{{{ .essential }}} インスタンスの監査ログフィルタールールを一覧表示します。
 
 ```shell
 ticloud serverless audit-log filter-rule list [flags]

@@ -1,20 +1,20 @@
 ---
 title: Use the `tidbcloud_serverless_cluster` Resource
-summary: "`tidbcloud_serverless_cluster` リソースを使用してTiDB Cloud Essential インスタンスを作成および変更する方法を学習します。"
+summary: "`tidbcloud_serverless_cluster` リソースを使用して{{{ .essential }}} インスタンスを作成および変更する方法を学習します。"
 ---
 
 # `tidbcloud_serverless_cluster`リソースを使用する {#use-the-tidbcloud-serverless-cluster-resource}
 
-このドキュメントでは、 `tidbcloud_serverless_cluster`リソースを使用して[TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)インスタンスを管理する方法について説明します。
+このドキュメントでは、 `tidbcloud_serverless_cluster`リソースを使用して[{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential)インスタンスを管理する方法について説明します。
 
 また、 `tidbcloud_projects`データソースを使用して必要な情報を取得する方法も学習します。
 
 `tidbcloud_serverless_cluster`リソースの機能は次のとおりです。
 
-- TiDB Cloud Essential インスタンスを作成します。
-- TiDB Cloud Essential インスタンスを変更します。
-- TiDB Cloud Essential インスタンスをインポートします。
-- TiDB Cloud Essential インスタンスを削除します。
+- {{{ .essential }}} インスタンスを作成します。
+- {{{ .essential }}} インスタンスを変更します。
+- {{{ .essential }}} インスタンスをインポートします。
+- {{{ .essential }}} インスタンスを削除します。
 
 ## 前提条件 {#prerequisites}
 
@@ -22,7 +22,7 @@ summary: "`tidbcloud_serverless_cluster` リソースを使用してTiDB Cloud E
 
 ## `tidbcloud_projects`データソースを使用してプロジェクト ID を取得する {#get-project-ids-using-the-tidbcloud-projects-data-source}
 
-各TiDB Cloud Essentialインスタンスはプロジェクトに属します。TiDB Cloud Essentialインスタンスを作成する前に、TiDB Cloud Essentialインスタンスを作成するプロジェクトのIDを取得する必要があります。`project_id`が指定されていない場合は、デフォルトのプロジェクトが使用されます。
+各{{{ .essential }}}インスタンスはプロジェクトに属します。{{{ .essential }}}インスタンスを作成する前に、{{{ .essential }}}インスタンスを作成するプロジェクトのIDを取得する必要があります。`project_id`が指定されていない場合は、デフォルトのプロジェクトが使用されます。
 
 利用可能なすべてのプロジェクトに関する情報を取得するには、次のように`tidbcloud_projects`データソースを使用します。
 
@@ -119,11 +119,11 @@ summary: "`tidbcloud_serverless_cluster` リソースを使用してTiDB Cloud E
 
 これで、出力から利用可能なすべてのプロジェクトを取得できます。必要なプロジェクトIDを1つコピーしてください。
 
-## TiDB Cloud Essential インスタンスを作成する {#create-a-tidb-cloud-essential-instance}
+## {{{ .essential }}} インスタンスを作成する {#create-a-tidb-cloud-essential-instance}
 
-`tidbcloud_serverless_cluster`リソースを使用して、 TiDB Cloud Essential インスタンスを作成できます。
+`tidbcloud_serverless_cluster`リソースを使用して、 {{{ .essential }}} インスタンスを作成できます。
 
-1. TiDB Cloud Essentialインスタンスのディレクトリを作成してそこに入ります。
+1. {{{ .essential }}}インスタンスのディレクトリを作成してそこに入ります。
 
 2. `cluster.tf`ファイルを作成します。
 
@@ -160,7 +160,7 @@ summary: "`tidbcloud_serverless_cluster` リソースを使用してTiDB Cloud E
 
     - `tidbcloud_serverless_cluster`リソースを使用するには、リソースタイプを`tidbcloud_serverless_cluster`に設定します。
     - リソース名は必要に応じて定義できます。例： `example` 。
-    - リソースの詳細は、プロジェクトIDと[`tidbcloud_serverless_cluster`仕様](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/serverless_cluster)に応じて設定できます。TiDB Cloud Essentialインスタンスを作成するには、リソース詳細で`auto_scaling`属性を指定する必要があります。
+    - リソースの詳細は、プロジェクトIDと[`tidbcloud_serverless_cluster`仕様](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/serverless_cluster)に応じて設定できます。{{{ .essential }}}インスタンスを作成するには、リソース詳細で`auto_scaling`属性を指定する必要があります。
 
 3. `terraform apply`コマンドを実行します。リソースを適用する場合は`terraform apply --auto-approve`の使用は推奨されません。
 
@@ -291,16 +291,16 @@ summary: "`tidbcloud_serverless_cluster` リソースを使用してTiDB Cloud E
     }
     ```
 
-## TiDB Cloud Essential インスタンスを変更する {#modify-a-tidb-cloud-essential-instance}
+## {{{ .essential }}} インスタンスを変更する {#modify-a-tidb-cloud-essential-instance}
 
-TiDB Cloud Essential インスタンスでは、Terraform を使用してリソースを管理できます。変更可能な引数は次のとおりです。
+{{{ .essential }}} インスタンスでは、Terraform を使用してリソースを管理できます。変更可能な引数は次のとおりです。
 
-- `display_name` : TiDB Cloud Essentialインスタンスの表示名。
-- `auto_scaling` : TiDB Cloud Essentialインスタンスの自動スケーリング構成。
+- `display_name` : {{{ .essential }}}インスタンスの表示名。
+- `auto_scaling` : {{{ .essential }}}インスタンスの自動スケーリング構成。
 - `endpoints.public.disabled` : パブリックエンドポイントを無効にするかどうか。
 - `automated_backup_policy.start_time` : 自動バックアップが開始される時点の UTC 時刻 ( `HH:mm`形式)。
 
-TiDB Cloud Essentialインスタンスを変更するには、 `tidbcloud_serverless_cluster`のリソースの設定を変更し、 `terraform apply`コマンドを使用して変更を適用します。例えば、 `display_name`と`auto_scaling`を次のように変更できます。
+{{{ .essential }}}インスタンスを変更するには、 `tidbcloud_serverless_cluster`のリソースの設定を変更し、 `terraform apply`コマンドを使用して変更を適用します。例えば、 `display_name`と`auto_scaling`を次のように変更できます。
 
 ```
 resource "tidbcloud_serverless_cluster" "example" {
@@ -423,9 +423,9 @@ resource "tidbcloud_serverless_cluster" "example" {
 }
 ```
 
-## TiDB Cloud Essential インスタンスをインポートする {#import-a-tidb-cloud-essential-instance}
+## {{{ .essential }}} インスタンスをインポートする {#import-a-tidb-cloud-essential-instance}
 
-Terraform によって管理されていないTiDB Cloud Essential インスタンスの場合は、インポートすることで Terraform の管理下に置けます。
+Terraform によって管理されていない{{{ .essential }}} インスタンスの場合は、インポートすることで Terraform の管理下に置けます。
 
 1. 新しい`tidbcloud_serverless_cluster`リソースのインポートブロックを追加します。
 
@@ -461,11 +461,11 @@ Terraform によって管理されていないTiDB Cloud Essential インスタ�
     Apply complete! Resources: 1 imported, 0 added, 0 changed, 0 destroyed.
     ```
 
-これで、インポートしたTiDB Cloud Essentialインスタンスを Terraform で管理できるようになりました。
+これで、インポートした{{{ .essential }}}インスタンスを Terraform で管理できるようになりました。
 
-## TiDB Cloud Essential インスタンスを削除する {#delete-a-tidb-cloud-essential-instance}
+## {{{ .essential }}} インスタンスを削除する {#delete-a-tidb-cloud-essential-instance}
 
-TiDB Cloud Essential インスタンスを削除するには、 `tidbcloud_serverless_cluster`リソースの構成を削除し、 `terraform apply`コマンドを使用してリソースを破棄します。
+{{{ .essential }}} インスタンスを削除するには、 `tidbcloud_serverless_cluster`リソースの構成を削除し、 `terraform apply`コマンドを使用してリソースを破棄します。
 
 ```shell
 $ terraform apply

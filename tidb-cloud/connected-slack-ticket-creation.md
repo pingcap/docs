@@ -5,7 +5,7 @@ summary: Slack チケットの作成と更新サブスクリプションに関�
 
 # Slack でチケットを作成し、チケットの更新を購読する {#create-tickets-and-subscribe-to-ticket-updates-in-slack}
 
-**Enterprise** [サポートプラン](/tidb-cloud/connected-care-detail.md)に加入している顧客向けに、 TiDB Cloud は[Slack](https://slack.com/)で**PingCAP Support Bot**と呼ばれるチケット ボットを提供し、迅速なチケット作成をサポートします。
+**Enterprise** [サポートプラン](/tidb-cloud/connected-care-detail.md)に加入している顧客向けに、 TiDB Cloud は[Slack](https://slack.com/)で**PingCAP Support Bot**と呼ばれるチケットボットを提供し、迅速なチケット作成をサポートします。
 
 > **Note:**
 >
