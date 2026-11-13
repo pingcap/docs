@@ -109,7 +109,7 @@ gh-ost で主に使用される SQL文とそれに対応する DM の操作は�
 
 > **Note:**
 >
-> gh-ost の具体的なSQL文は、実行時に使用するパラメータによって異なります。このドキュメントでは主要なSQL文のみを記載しています。詳細については、 [gh-ost ドキュメント](https://github.com/github/gh-ost#gh-ost)を参照してください。
+> gh-ost の具体的なSQL文は、実行時に使用するパラメーターによって異なります。このドキュメントでは主要なSQL文のみを記載しています。詳細については、 [gh-ost ドキュメント](https://github.com/github/gh-ost#gh-ost)を参照してください。
 
 ## オンラインスキーマ変更: pt {#online-schema-change-pt}
 
@@ -210,7 +210,7 @@ pt-osc で主に使用される SQL 文とそれに対応する DM の操作は�
 
 > **Note:**
 >
-> pt-osc の具体的なSQL文は、実行時に使用するパラメータによって異なります。このドキュメントでは主要なSQL文のみを記載しています。詳細については、 [pt-osc ドキュメント](https://www.percona.com/doc/percona-toolkit/2.2/pt-online-schema-change.html)を参照してください。
+> pt-osc の具体的なSQL文は、実行時に使用するパラメーターによって異なります。このドキュメントでは主要なSQL文のみを記載しています。詳細については、 [pt-osc ドキュメント](https://www.percona.com/doc/percona-toolkit/2.2/pt-online-schema-change.html)を参照してください。
 
 ## その他のオンラインスキーマ変更ツール {#other-online-schema-change-tools}
 
@@ -220,7 +220,7 @@ pt-osc で主に使用される SQL 文とそれに対応する DM の操作は�
 
 バージョン2.0.7以降、DMは改良されたオンラインスキーマ変更ツールを試験的にサポートしています。DMタスク設定で`online-ddl=true`を設定し、 `shadow-table-rules`と`trash-table-rules`を設定することで、変更された一時テーブルを正規表現で照合できます。
 
-たとえば、 `ghost table`の名前が`_{origin_table}_pcnew` 、 `trash table`の名前が`_{origin_table}_pcold`であるカスタマイズされた pt-osc を使用する場合、次のようにカスタム ルールを設定できます。
+たとえば、 `ghost table`の名前が`_{origin_table}_pcnew` 、 `trash table`の名前が`_{origin_table}_pcold`であるカスタマイズされた pt-osc を使用する場合、次のようにカスタムルールを設定できます。
 
 ```yaml
 online-ddl: true

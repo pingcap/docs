@@ -9,7 +9,7 @@ summary: "`RESOURCE_GROUPS` information_schema テーブルについて学習し
 
 > **Note:**
 >
-> このテーブルは、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスでは利用できません。
+> このテーブルは、 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスでは利用できません。
 
 ```sql
 USE information_schema;
@@ -85,4 +85,4 @@ SELECT * FROM information_schema.resource_groups WHERE NAME = 'rg1'; -- View the
 
 > **Note:**
 >
-> TiDB はクラスタ初期化時に`default`リソースグループを自動的に作成します。このリソースグループの`RU_PER_SEC`のデフォルト値は`UNLIMITED` ( `INT`型の最大値、つまり`2147483647`に相当) で、 `BURSTABLE`モードです。どのリソースグループにもバインドされていないすべてのリクエストは、自動的にこの`default`リソースグループにバインドされます。別のリソースグループの新しい構成を作成する場合は、必要に応じて`default`リソースグループの構成を変更することをお勧めします。
+> TiDB はクラスター初期化時に`default`リソースグループを自動的に作成します。このリソースグループの`RU_PER_SEC`のデフォルト値は`UNLIMITED` ( `INT`型の最大値、つまり`2147483647`に相当) で、 `BURSTABLE`モードです。どのリソースグループにもバインドされていないすべてのリクエストは、自動的にこの`default`リソースグループにバインドされます。別のリソースグループの新しい構成を作成する場合は、必要に応じて`default`リソースグループの構成を変更することをお勧めします。

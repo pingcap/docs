@@ -11,7 +11,7 @@ summary: TiDBデータベースにおけるDISTRIBUTE TABLEの使用方法の概
 
 > **Note:**
 >
-> この機能は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスではご利用いただけません。
+> この機能は、 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスではご利用いただけません。
 
 `DISTRIBUTE TABLE`文は、指定されたテーブルのリージョンを再分配および再スケジュールし、テーブルレベルでバランスの取れた分散を実現します。このステートメントを実行することで、リージョンが少数のTiFlashまたは TiKV ノードに集中するのを防ぎ、テーブル内のリージョンの分散が不均一になる問題を解決できます。
 
@@ -28,13 +28,13 @@ PartitionNameList ::=
     "PARTITION" "(" PartitionName ("," PartitionName)* ")"
 ```
 
-## パラメータの説明 {#parameter-description}
+## パラメーターの説明 {#parameter-description}
 
 `DISTRIBUTE TABLE`文を使用してテーブル内のリージョンを再分配する場合、バランスの取れた分配のために、ストレージエンジン ( TiFlashや TiKV など) とさまざまなRaftロール (Leader、Learner、Voterなど) を指定できます。
 
 - `RULE` : バランス調整とスケジュールを行うRaftロールのリージョンを指定します。オプションの値は`"leader-scatter"` 、 `"peer-scatter"` 、および`"learner-scatter"`です。
 - `ENGINE` :ストレージエンジンを指定します。オプションの値は`"tikv"`と`"tiflash"`です。
-- `TIMEOUT` : スキャッタ操作のタイムアウト制限を指定します。PD がこの時間内にスキャッタを完了しない場合、スキャッタタスクは自動的に終了します。このパラメーターが指定されていない場合、デフォルト値は`"30m"`です。
+- `TIMEOUT` : スキャッター操作のタイムアウト制限を指定します。PD がこの時間内にスキャッターを完了しない場合、スキャッタータスクは自動的に終了します。このパラメーターが指定されていない場合、デフォルト値は`"30m"`です。
 
 ## 例 {#examples}
 
@@ -110,7 +110,7 @@ DISTRIBUTE TABLE t4 PARTITION (p1, p2) RULE = "learner-scatter" ENGINE="tiflash"
 
 ## 注記 {#notes}
 
-`DISTRIBUTE TABLE`文を実行してテーブルのリージョンを再分配すると、リージョンの分配結果が PD ホットスポット スケジューラの影響を受ける可能性があります。再分配後、このテーブルのリージョンの分配は時間の経過とともに再び不均衡になる可能性があります。
+`DISTRIBUTE TABLE`文を実行してテーブルのリージョンを再分配すると、リージョンの分配結果が PD ホットスポットスケジューラーの影響を受ける可能性があります。再分配後、このテーブルのリージョンの分配は時間の経過とともに再び不均衡になる可能性があります。
 
 ## MySQLとの互換性 {#mysql-compatibility}
 

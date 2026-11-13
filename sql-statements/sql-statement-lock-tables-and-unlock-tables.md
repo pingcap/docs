@@ -23,7 +23,7 @@ TiDBでは、クライアントセッションがテーブルロックを取得�
 >
 > - TiDB Self-Managed の場合、テーブルロック機能を有効にするには、すべての TiDB インスタンスの設定ファイルで[`enable-table-lock`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#enable-table-lock-new-in-v400)を`true`に設定する必要があります。
 > - TiDB Cloud Dedicated の場合、テーブルロック機能を有効にするには、 [TiDB Cloudサポート](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)に連絡して[`enable-table-lock`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#enable-table-lock-new-in-v400)を`true`に設定する必要があります。
-> - [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)の場合、 [`enable-table-lock`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#enable-table-lock-new-in-v400)を`true`に設定することはサポートされていません。
+> - [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)の場合、 [`enable-table-lock`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#enable-table-lock-new-in-v400)を`true`に設定することはサポートされていません。
 
 ## 概要 {#synopsis}
 
@@ -48,7 +48,7 @@ LockType
 
 - このロックを保持しているセッションはテーブルを読み取ることはできますが、書き込むことはできません。
 - 複数のセッションが同時に同じテーブルから`READ`ロックを取得できます。
-- 他のセッションは、 `READ`ロックを明示的に取得せずにテーブルを読み取ることができます。
+- 他のセッションは、 `READ`ロックを明示的に取得せずにテーブルを読み取れます。
 
 `READ LOCAL`ロックは MySQL との構文互換性のためだけのものであり、サポートされていません。
 
@@ -104,7 +104,7 @@ ERROR 1066 (42000): Not unique table/alias: 't'
 
 - TiDBでは、セッションAが既にテーブルロックを保持している場合、セッションBがそのテーブルに書き込みを試みるとエラーが返されます。MySQLでは、セッションBの書き込みリクエストはセッションAがテーブルロックを解放するまでブロックされ、他のセッションからのテーブルロックリクエストは現在のセッションが`WRITE`ロックを解放するまでブロックされます。
 - TiDBでは、 `LOCK TABLES`文に必要なロックが別のセッションによって保持されている場合、 `LOCK TABLES`の文は待機する必要があり、この文の実行時にエラーが返されます。MySQLでは、この文はロックが取得されるまでブロックされます。
-- TiDBでは、 `LOCK TABLES`文はクラスタ全体で有効です。MySQLでは、この文は現在のMySQLサーバーでのみ有効であり、NDBクラスタとは互換性がありません。
+- TiDBでは、 `LOCK TABLES`文はクラスター全体で有効です。MySQLでは、この文は現在のMySQLサーバーでのみ有効であり、NDBクラスターとは互換性がありません。
 
 ### テーブルロックの解除 {#table-lock-release}
 

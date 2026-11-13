@@ -35,7 +35,7 @@ DESC cluster_log;
 
 - `TIME` : ログを出力した時刻。
 - `TYPE` : インスタンスタイプ。オプションの値は`tidb` 、 `pd` 、 `tikv`です。
-- `INSTANCE` : インスタンスのサービス アドレス。
+- `INSTANCE` : インスタンスのサービスアドレス。
 - `LEVEL` : ログレベル。
 - `MESSAGE` : ログの内容。
 

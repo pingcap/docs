@@ -18,19 +18,19 @@ ADMIN ALTER DDL JOBS 101 THREAD = 8;
 - `101` : DDL ジョブの ID を示します。この ID は、 [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md)を実行することで取得できます。
 - `THREAD` : DDL ジョブの同時実行数を示します。システム変数[`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt)を使用して初期値を構成できます。
 
-`ADMIN ALTER DDL JOBS`文でサポートされている DDL ジョブ タイプには、 `ADD INDEX` 、 `MODIFY COLUMN` 、および`REORGANIZE PARTITION`が含まれます。その他の DDL ジョブ タイプの場合、 `ADMIN ALTER DDL JOBS`を実行すると`unsupported DDL operation`エラーが返されます。
+`ADMIN ALTER DDL JOBS`文でサポートされている DDL ジョブタイプには、 `ADD INDEX` 、 `MODIFY COLUMN` 、および`REORGANIZE PARTITION`が含まれます。その他の DDL ジョブタイプの場合、 `ADMIN ALTER DDL JOBS`を実行すると`unsupported DDL operation`エラーが返されます。
 
-現在、 `ADMIN ALTER DDL JOBS`を実行することで、単一の DDL ジョブのパラメータのみを変更できます。複数の DDL ジョブ ID のパラメータを同時に変更することはサポートされていません。
+現在、 `ADMIN ALTER DDL JOBS`を実行することで、単一の DDL ジョブのパラメーターのみを変更できます。複数の DDL ジョブ ID のパラメーターを同時に変更することはサポートされていません。
 
-以下は、さまざまなDDLジョブでサポートされているパラメータと、それに対応するシステム変数です。
+以下は、さまざまなDDLジョブでサポートされているパラメーターと、それに対応するシステム変数です。
 
 - `ADD INDEX` :
 
     - `THREAD` : DDL ジョブの同時実行数。初期値は`tidb_ddl_reorg_worker_cnt`で設定されます。
     - `BATCH_SIZE` : バッチサイズ。初期値は[`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size)で設定されます。
-    - `MAX_WRITE_SPEED` : 各 TiKV にインデックス レコードをインポートするための最大帯域幅制限。初期値は[`tidb_ddl_reorg_max_write_speed`](/system-variables.md#tidb_ddl_reorg_max_write_speed-new-in-v6512-v755-and-v850)によって設定されます。
+    - `MAX_WRITE_SPEED` : 各 TiKV にインデックスレコードをインポートするための最大帯域幅制限。初期値は[`tidb_ddl_reorg_max_write_speed`](/system-variables.md#tidb_ddl_reorg_max_write_speed-new-in-v6512-v755-and-v850)によって設定されます。
 
-    TiDB バージョン v8.5.5 より前のバージョンでは、上記のパラメータは[`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)が無効になった後に送信され実行されている`ADD INDEX`ジョブに対してのみ機能することに注意してください。
+    TiDB バージョン v8.5.5 より前のバージョンでは、上記のパラメーターは[`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)が無効になった後に送信され実行されている`ADD INDEX`ジョブに対してのみ機能することに注意してください。
 
 <CustomContent platform="tidb-cloud" plan="premium">
 
@@ -48,7 +48,7 @@ ADMIN ALTER DDL JOBS 101 THREAD = 8;
     - `THREAD` : DDL ジョブの同時実行数。初期値は`tidb_ddl_reorg_worker_cnt`で設定されます。
     - `BATCH_SIZE` : バッチサイズ。初期値は`tidb_ddl_reorg_batch_size`で設定されます。
 
-前述のパラメータの値の範囲は、対応するシステム変数の値の範囲と一致しています。
+前述のパラメーターの値の範囲は、対応するシステム変数の値の範囲と一致しています。
 
 `ADMIN ALTER DDL JOBS`は、実行中の DDL ジョブに対してのみ有効です。DDL ジョブが存在しない場合、または既に完了している場合は、このステートメントを実行すると`ddl job is not running`エラーが返されます。
 
@@ -61,7 +61,7 @@ ADMIN ALTER DDL JOBS 101 MAX_WRITE_SPEED = '200MiB';
 ADMIN ALTER DDL JOBS 101 THREAD = 8, BATCH_SIZE = 256;
 ```
 
-特定の DDL ジョブの現在のパラメータ値を表示するには、 `ADMIN SHOW DDL JOBS`を実行します。結果は`COMMENTS`列に表示されます。
+特定の DDL ジョブの現在のパラメーター値を表示するには、 `ADMIN SHOW DDL JOBS`を実行します。結果は`COMMENTS`列に表示されます。
 
 ```sql
 ADMIN SHOW DDL JOBS 1;
