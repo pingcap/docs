@@ -32,7 +32,7 @@ SETTINGS 句は、次の SQL 文で使用できます。
 
 ## 例 {#examples}
 
-この例では、SETTINGS 句を使用して SELECT クエリ内の timezone パラメータを調整し、`now()` の表示結果に影響を与える方法を示します。
+この例では、SETTINGS 句を使用して SELECT クエリ内の timezone パラメーターを調整し、`now()` の表示結果に影響を与える方法を示します。
 
 ```sql
 -- When no timezone is set, {{{ .lake }}} defaults to UTC, so now() returns the current UTC timestamp

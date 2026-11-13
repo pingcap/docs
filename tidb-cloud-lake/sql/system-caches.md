@@ -13,8 +13,8 @@ summary: "{{{ .lake }}} で管理されるさまざまなキャッシュの概�
 |-----------|--------------------------------------------------------------------------|
 | node      | ノード名                                                            |
 | name      | キャッシュ名（`system$set_cache_capacity` の最初のパラメーターと同じ）  |
-| num_items | キャッシュされたエントリー数                                                 |
-| size      | キャッシュされたエントリーのサイズ（`unit` に応じて件数またはバイト数）              |
+| num_items | キャッシュされたエントリ数                                                 |
+| size      | キャッシュされたエントリのサイズ（`unit` に応じて件数またはバイト数）              |
 | capacity  | 最大容量（`unit` に応じて件数またはバイト数）                    |
 | unit      | `size` と `capacity` の単位: `count` または `bytes`                       |
 | access    | キャッシュアクセスの総数                                           |
@@ -31,8 +31,8 @@ summary: "{{{ .lake }}} で管理されるさまざまなキャッシュの概�
 | memory_cache_segment_statistics              | セグメントレベルの統計情報                           | bytes | |
 | memory_cache_column_oriented_segment_info    | カラム指向セグメントのメタデータ                   | bytes | |
 | disk_cache_column_data                       | ディスク上のカラムデータキャッシュ                          | bytes | `system$set_cache_capacity` では調整できません |
-| memory_cache_bloom_index_filter              | ブルームフィルターデータ                                  | bytes | ブロックごと・カラムごとに 1 エントリーです。メモリ使用量は小さめです。ポイントルックアップのワークロードではヒット率を監視してください。 |
-| memory_cache_bloom_index_file_meta_data      | ブルームフィルターのメタデータ                              | count | 各テーブルは、そのテーブルが持つブロック数と同数までエントリーをキャッシュできます。メモリ使用量は小さめです。ポイントルックアップのワークロードではヒット率を監視してください。 |
+| memory_cache_bloom_index_filter              | ブルームフィルターデータ                                  | bytes | ブロックごと・カラムごとに 1 エントリです。メモリ使用量は小さめです。ポイントルックアップのワークロードではヒット率を監視してください。 |
+| memory_cache_bloom_index_file_meta_data      | ブルームフィルターのメタデータ                              | count | 各テーブルは、そのテーブルが持つブロック数と同数までエントリをキャッシュできます。メモリ使用量は小さめです。ポイントルックアップのワークロードではヒット率を監視してください。 |
 | memory_cache_inverted_index_file_meta_data   | 転置インデックスのメタデータ                            | count | |
 | memory_cache_inverted_index_file             | 転置インデックスデータ                                | bytes | |
 | memory_cache_vector_index_file_meta_data     | ベクトルインデックスのメタデータ                              | count | |

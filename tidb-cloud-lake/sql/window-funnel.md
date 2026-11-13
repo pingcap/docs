@@ -24,7 +24,7 @@ WINDOW_FUNNEL( <window> )( <timestamp>, <cond1>, <cond2>, ..., <condN> )
 - `<timestamp>` — タイムスタンプを含むカラム名です。サポートされるデータ型: 整数型および datetime 型。
 - `<cond>` — イベントチェーンを表す条件またはデータです。`Boolean` データ型である必要があります。
 
-**パラメータ**
+**パラメーター**
 
 - `<window>` — スライディングウィンドウの長さで、最初の条件と最後の条件の間の時間間隔です。`window` の単位は `timestamp` 自体に依存し、状況によって異なります。`timestamp of cond1 <= timestamp of cond2 <= ... <= timestamp of condN <= timestamp of cond1 + window` という式によって決定されます。
 

@@ -19,9 +19,9 @@ summary: ネストされた JSON または配列データを表形式に変換�
 )
 ```
 
-## パラメータ {#parameters}
+## パラメーター {#parameters}
 
-| パラメータ | 説明 | デフォルト |
+| パラメーター | 説明 | デフォルト |
 |-----------|-------------|---------|
 | `INPUT` | フラット化する JSON または配列データ | 必須 |
 | `PATH` | フラット化する配列/オブジェクトへのパス | なし |
@@ -66,7 +66,7 @@ SELECT * FROM FLATTEN(
 | 1   | address   | address   | NULL  | {"city":"New York"}  | {original JSON}      |
 ```
 
-### PATH パラメータの使用 {#using-path-parameter}
+### PATH パラメーターの使用 {#using-path-parameter}
 
 ```sql
 -- Flatten only the languages array by specifying the PATH
