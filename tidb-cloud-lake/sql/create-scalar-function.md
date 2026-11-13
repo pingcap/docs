@@ -88,7 +88,7 @@ SELECT calculate_bmi(70.0, 1.75) AS bmi;
 
 ## Python {#python}
 
-Python ランタイムには {{{ .lake }}} Enterprise が必要です。`PACKAGES` を使用して PyPI パッケージをインストールでき、`IMPORTS` を使用して stage ファイルをインポートできます。
+`PACKAGES` を使用して PyPI パッケージをインストールでき、`IMPORTS` を使用して stage ファイルをインポートできます。
 
 ### データ型マッピング（Python） {#data-type-mappings-python}
 

@@ -13,9 +13,9 @@ TiDBは、クラスタのクエリと操作、データレプリケーション�
 
 | API                                       | 説明                                                                           |
 | ----------------------------------------- | ---------------------------------------------------------------------------- |
-| [v1beta2](/api/tidb-cloud-api-v1beta2.md) | TiDB Cloud Premiumインスタンスを管理します。                                              |
-| [v1beta1](/api/tidb-cloud-api-v1beta1.md) | TiDB Cloud Starter、 Essential、およびDedicatedクラスタに加え、課金、Data Service、 IAMリソースを管理します。 |
-| [v1beta](/api/tidb-cloud-api-v1beta.md)   | TiDB Cloudのプロジェクト、クラスター、バックアップ、インポート、およびリストアを管理します。                          |
+| [v1beta2](/api/tidb-cloud-api-v1beta2.md) | TiDB Cloud Essentialインスタンス（TiDBバージョン`CLOUD.202603.x`以降で実行）およびTiDB Cloud Premiumインスタンスを管理します。                                              |
+| [v1beta1](/api/tidb-cloud-api-v1beta1.md) | TiDB Cloud Essentialインスタンス（TiDB v8.5.3以前で実行）、TiDB Cloud Starterインスタンス、およびTiDB Cloud Dedicatedクラスターに加え、課金、Data Service、 IAMリソースを管理します。 |
+| [v1beta](/api/tidb-cloud-api-v1beta.md)   | TiDB Cloud Dedicatedのプロジェクト、クラスター、バックアップ、インポート、およびリストアを管理します。                          |
 
 ## TiDB Self-Managed API {#tidb-self-managed-api}
 

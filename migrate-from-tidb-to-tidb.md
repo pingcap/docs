@@ -214,7 +214,7 @@ summary: ある TiDB クラスターから別の TiDB クラスターにデー�
 
 1. TiCDCをデプロイ。
 
-    完全データ移行が完了したら、増分データをレプリケーションするためのTiCDCをデプロイして設定します。本番環境では、 [TiCDCをデプロイ](/ticdc/deploy-ticdc.md)の手順に従ってTiCDCをデプロイしてください。このドキュメントでは、テストクラスターの作成時にTiCDCノードが起動済みであるため、TiCDCのデプロイ手順をスキップして、変更フィードの設定に進むことができます。
+    完全データ移行が完了したら、増分データをレプリケートするためのTiCDCをデプロイして設定します。本番環境では、 [TiCDCをデプロイ](/ticdc/deploy-ticdc.md)の手順に従ってTiCDCをデプロイしてください。このドキュメントでは、テストクラスターの作成時にTiCDCノードが起動済みであるため、TiCDCのデプロイ手順をスキップして、変更フィードの設定に進むことができます。
 
 2. 変更フィードを作成します。
 
@@ -235,7 +235,7 @@ summary: ある TiDB クラスターから別の TiDB クラスターにデー�
 
 3. GC を有効にします。
 
-    TiCDCを用いた増分移行では、GCは複製された履歴データのみを削除します。そのため、変更フィードを作成した後、以下のコマンドを実行してGCを有効にする必要があります。詳細は[TiCDCガベージコレクション(GC) セーフポイントの完全な動作は何ですか?](/ticdc/ticdc-faq.md#what-is-the-complete-behavior-of-ticdc-garbage-collection-gc-safepoint)を参照してください。
+    TiCDCを用いた増分移行では、GCは複製された履歴データのみを削除します。そのため、変更フィードを作成した後、以下のコマンドを実行してGCを有効にする必要があります。詳細については、[TiCDCガベージコレクション(GC) セーフポイントの完全な動作は何ですか?](/ticdc/ticdc-faq.md#what-is-the-complete-behavior-of-ticdc-garbage-collection-gc-safepoint)を参照してください。
 
     GC を有効にするには、次のコマンドを実行します。
 
@@ -293,7 +293,7 @@ summary: ある TiDB クラスターから別の TiDB クラスターにデー�
 2. ダウンストリームからアップストリームへのチェンジフィードを作成します。アップストリームとダウンストリームのデータは一致しており、クラスターに新しいデータが書き込まれていないため、デフォルト設定を使用するには`start-ts`を指定しないでください。
 
     ```shell
-    tiup cdc cli changefeed create --server=http://172.16.6.125:8300 --sink-uri="mysql://root:@172.16.6.122:4000" --changefeed-id="downstream -to-upstream"
+    tiup cdc cli changefeed create --server=http://172.16.6.125:8300 --sink-uri="mysql://root:@172.16.6.122:4000" --changefeed-id="downstream-to-upstream"
     ```
 
 3. 書き込みサービスを下流クラスターに移行した後、しばらく観察します。下流クラスターが安定している場合は、上流クラスターを破棄できます。
