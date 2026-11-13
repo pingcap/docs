@@ -32,7 +32,7 @@ TiDB バージョン: 5.3.4
     - TiFlash からクエリされたときに`avg()`関数が`ERROR 1105 (HY000): other error for mpp stream: Could not convert to the target type - -value is out of range.`を返す問題を修正しました [#29952](https://github.com/pingcap/tidb/issues/29952)
     - `HashJoinExec` を使用すると`ERROR 1105 (HY000): close of nil channel`が返される問題を修正 [#30289](https://github.com/pingcap/tidb/issues/30289)
     - 論理演算をクエリするときに TiKV とTiFlash が異なる結果を返す問題を修正[#37258](https://github.com/pingcap/tidb/issues/37258)
-    - DMLエグゼキュータを使用した`EXPLAIN ANALYZE`文がトランザクションコミットが完了する前に結果を返す可能性がある問題を修正しました[#37373](https://github.com/pingcap/tidb/issues/37373)
+    - DMLエグゼキューターを使用した`EXPLAIN ANALYZE`文がトランザクションコミットが完了する前に結果を返す可能性がある問題を修正しました[#37373](https://github.com/pingcap/tidb/issues/37373)
     - 多数のリージョンをマージした後にリージョンキャッシュが適切にクリアされない問題を修正[#37174](https://github.com/pingcap/tidb/issues/37174)
     - 特定のシナリオで`EXECUTE`文が予期しないエラーをスローする可能性がある問題を修正しました[#37187](https://github.com/pingcap/tidb/issues/37187)
     - `ORDER BY`句に相関サブクエリが含まれている場合に`GROUP CONCAT`と`ORDER BY`が失敗する可能性がある問題を修正しました [#18216](https://github.com/pingcap/tidb/issues/18216)

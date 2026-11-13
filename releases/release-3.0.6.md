@@ -1,6 +1,6 @@
 ---
 title: TiDB 3.0.6 Release Notes
-summary: "TiDB 3.0.6は、さまざまな修正と最適化を伴い、2019年11月28日にリリースされました。このリリースには、SQLオプティマイザ、SQL実行エンジン、サーバー、DDL、TiKV、PD、TiDB Binlog、およびTiDB Lightningの改善が含まれています。修正には、ウィンドウ関数ASTの問題、`STREAM AGG()`のプッシュダウン、SQLバインディングの引用符の処理などが含まれます。TiKVの改善には、正確な`lock_manager`、`innodb_lock_wait_timeout`のサポート、`tikv-ctl`を使用したGC I/O制限の動的な変更が含まれます。PDの機能強化には、クライアントログレベルの引き下げと、タイムスタンプ生成のための警告ログが含まれます。TiDB BinlogとTiDB Lightningにも修正と改善が加えられました。"
+summary: "TiDB 3.0.6は、さまざまな修正と最適化を伴い、2019年11月28日にリリースされました。このリリースには、SQLオプティマイザー、SQL実行エンジン、サーバー、DDL、TiKV、PD、TiDB Binlog、およびTiDB Lightningの改善が含まれています。修正には、ウィンドウ関数ASTの問題、`STREAM AGG()`のプッシュダウン、SQLバインディングの引用符の処理などが含まれます。TiKVの改善には、正確な`lock_manager`、`innodb_lock_wait_timeout`のサポート、`tikv-ctl`を使用したGC I/O制限の動的な変更が含まれます。PDの機能強化には、クライアントログレベルの引き下げと、タイムスタンプ生成のための警告ログが含まれます。TiDB BinlogとTiDB Lightningにも修正と改善が加えられました。"
 ---
 
 # TiDB 3.0.6 リリースノート {#tidb-3-0-6-release-notes}
@@ -13,7 +13,7 @@ TiDB Ansible バージョン: 3.0.6
 
 ## TiDB {#tidb}
 
-- SQLオプティマイザ
+- SQLオプティマイザー
     - ウィンドウ関数 AST が SQL テキストを復元した後に結果が正しくない (たとえば、 `over w`が誤って`over (w)` に復元される) 問題を修正しました。 [#12933](https://github.com/pingcap/tidb/pull/12933)
     - `STREAM AGG()`を`doubleRead`にプッシュダウンする問題を修正 [#12690](https://github.com/pingcap/tidb/pull/12690)
     - SQLバインディングで引用符が正しく処理されない問題を修正 [#13117](https://github.com/pingcap/tidb/pull/13117)
@@ -46,7 +46,7 @@ TiDB Ansible バージョン: 3.0.6
     - 認識されない設定オプションに対して警告ログを出力して構成をチェックする TiDB の動作を変更します。 [#13272](https://github.com/pingcap/tidb/pull/13272)
     - `/info/all`インターフェースを介してすべての TiDB ノードのbinlogステータスの取得をサポート [#13187](https://github.com/pingcap/tidb/pull/13187)
     - TiDB が接続を切断したときに goroutine がリークする可能性がある問題を修正[#13251](https://github.com/pingcap/tidb/pull/13251)
-    - 悲観的トランザクションで`innodb_lock_wait_timeout`パラメータを動作させて、悲観的ロックのロック待機タイムアウトを制御する [#13165](https://github.com/pingcap/tidb/pull/13165)
+    - 悲観的トランザクションで`innodb_lock_wait_timeout`パラメーターを動作させて、悲観的ロックのロック待機タイムアウトを制御する [#13165](https://github.com/pingcap/tidb/pull/13165)
     - 悲観的トランザクションクエリが強制終了されたときに、他のトランザクションが不必要に待機するのを防ぐために、悲観的トランザクション TTL の更新を停止します[#13046](https://github.com/pingcap/tidb/pull/13046)
 - DDL
     - TiDB の`SHOW CREATE VIEW`の実行結果が MySQL 結果と一致しない問題を修正しました [#12912](https://github.com/pingcap/tidb/pull/12912)
@@ -83,7 +83,7 @@ TiDB Ansible バージョン: 3.0.6
 
 ## PD {#pd}
 
-- 各フィルターに`ActOn`ディメンションを追加して、各スケジューラとチェッカーがフィルターの影響を受けることを示します。また、使用されていない2つのフィルター（`disconnectFilter`と`rejectLeaderFilter`）を削除します。 [#1911](https://github.com/pingcap/pd/pull/1911)
+- 各フィルターに`ActOn`ディメンションを追加して、各スケジューラーとチェッカーがフィルターの影響を受けることを示します。また、使用されていない2つのフィルター（`disconnectFilter`と`rejectLeaderFilter`）を削除します。 [#1911](https://github.com/pingcap/pd/pull/1911)
 - PD でタイムスタンプを生成するのに 5 ミリ秒以上かかる場合は警告ログを出力します。 [#1867](https://github.com/pingcap/pd/pull/1867)
 - 利用できないエンドポイントをクライアントに渡すときにクライアントのログレベルを下げる [#1856](https://github.com/pingcap/pd/pull/1856)
 - gRPCメッセージパッケージが`region_syncer`レプリケーションプロセスで最大サイズを超える可能性がある問題を修正 [#1952](https://github.com/pingcap/pd/pull/1952)

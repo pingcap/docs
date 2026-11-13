@@ -1,11 +1,11 @@
 ---
 title: TiDB 3.0 Beta Release Notes
-summary: 2019年1月19日にリリースされたTiDB 3.0ベータ版は、安定性、SQLオプティマイザ、統計、実行エンジンに重点を置いています。新機能には、ビュー、ウィンドウ関数、レンジパーティショニング、ハッシュパーティショニングのサポートが含まれます。SQLオプティマイザは、トランザクションにおけるインデックス結合のサポート、定数伝播の最適化、DO文におけるサブクエリのサポートなど、さまざまな最適化によって強化されました。SQLエグゼキューターも最適化され、パフォーマンスが向上しました。権限管理、サーバー、互換性、DDLがすべて改善されました。TiDB Lightningは単一テーブルのバッチインポートをサポートするようになり、PDとTiKVにもさまざまな機能強化と新機能が追加されました。
+summary: 2019年1月19日にリリースされたTiDB 3.0ベータ版は、安定性、SQLオプティマイザー、統計、実行エンジンに重点を置いています。新機能には、ビュー、ウィンドウ関数、レンジパーティショニング、ハッシュパーティショニングのサポートが含まれます。SQLオプティマイザーは、トランザクションにおけるインデックス結合のサポート、定数伝播の最適化、DO文におけるサブクエリのサポートなど、さまざまな最適化によって強化されました。SQLエグゼキューターも最適化され、パフォーマンスが向上しました。権限管理、サーバー、互換性、DDLがすべて改善されました。TiDB Lightningは単一テーブルのバッチインポートをサポートするようになり、PDとTiKVにもさまざまな機能強化と新機能が追加されました。
 ---
 
 # TiDB 3.0 ベータ版リリースノート {#tidb-3-0-beta-release-notes}
 
-2019年1月19日、TiDB 3.0 Betaがリリースされました。対応するTiDB Ansible 3.0 Betaもリリースされました。TiDB 3.0 BetaはTiDB 2.1をベースに構築されており、安定性、SQLオプティマイザ、統計、実行エンジンに重点が置かれています。
+2019年1月19日、TiDB 3.0 Betaがリリースされました。対応するTiDB Ansible 3.0 Betaもリリースされました。TiDB 3.0 BetaはTiDB 2.1をベースに構築されており、安定性、SQLオプティマイザー、統計、実行エンジンに重点が置かれています。
 
 ## TiDB {#tidb}
 
@@ -14,19 +14,19 @@ summary: 2019年1月19日にリリースされたTiDB 3.0ベータ版は、安�
     - ウィンドウ関数をサポート
     - レンジパーティショニングをサポート
     - ハッシュパーティショニングをサポート
-- SQLオプティマイザ
+- SQLオプティマイザー
     - `AggregationElimination` の最適化ルールを再サポート [#7676](https://github.com/pingcap/tidb/pull/7676)
     - `NOT EXISTS`サブクエリを最適化し、Anti Semi Join に変換する [#7842](https://github.com/pingcap/tidb/pull/7842)
-    - 新しいCascadesオプティマイザをサポートするために、変数`tidb_enable_cascades_planner`を追加します。現在、Cascadesオプティマイザはまだ完全に実装されておらず、デフォルトではオフになっています[#7879](https://github.com/pingcap/tidb/pull/7879)
+    - 新しいCascadesオプティマイザーをサポートするために、変数`tidb_enable_cascades_planner`を追加します。現在、Cascadesオプティマイザーはまだ完全に実装されておらず、デフォルトではオフになっています[#7879](https://github.com/pingcap/tidb/pull/7879)
     - トランザクションのインデックス結合の使用をサポート [#7877](https://github.com/pingcap/tidb/pull/7877)
     - 外部結合の定数伝播を最適化し、結合結果の外部テーブルに関連するフィルタリング条件を外部結合を介して外部テーブルにプッシュダウンできるようにすることで、外部結合の無駄な計算を減らし、実行パフォーマンスを向上させます[#7794](https://github.com/pingcap/tidb/pull/7794)
     - 射影除去の最適化ルールを集計除去の後の位置に調整し、冗長な`Project`演算子を回避する [#7909](https://github.com/pingcap/tidb/pull/7909)
-    - `IFNULL`関数を最適化し、入力パラメータに NULL 以外の属性がある場合はこの関数を削除します[#7924](https://github.com/pingcap/tidb/pull/7924)
-    - `_tidb_rowid`構築クエリの範囲をサポートし、テーブル全体のスキャンを回避してクラスタのストレスを軽減します[#8047](https://github.com/pingcap/tidb/pull/8047)
+    - `IFNULL`関数を最適化し、入力パラメーターに NULL 以外の属性がある場合はこの関数を削除します[#7924](https://github.com/pingcap/tidb/pull/7924)
+    - `_tidb_rowid`構築クエリの範囲をサポートし、テーブル全体のスキャンを回避してクラスターのストレスを軽減します[#8047](https://github.com/pingcap/tidb/pull/8047)
     - `IN`サブクエリを最適化して集計後に内部結合を実行し、この最適化ルールを有効にしてデフォルトで開くかどうかを制御する`tidb_opt_insubq_to_join_and_agg`変数を追加します[#7531](https://github.com/pingcap/tidb/pull/7531)
     - `DO`文でのサブクエリの使用をサポート [#8343](https://github.com/pingcap/tidb/pull/8343)
     - 不要なテーブルスキャンと結合操作を削減し、実行パフォーマンスを向上させるために、外部結合除去の最適化ルールを追加します[#8021](https://github.com/pingcap/tidb/pull/8021)
-    - `TIDB_INLJ`オプティマイザヒントの動作を変更し、オプティマイザがヒントで指定されたテーブルをインデックス結合の内部テーブルとして使用するようにします。 [#8243](https://github.com/pingcap/tidb/pull/8243)
+    - `TIDB_INLJ`オプティマイザーヒントの動作を変更し、オプティマイザーがヒントで指定されたテーブルをインデックス結合の内部テーブルとして使用するようにします。 [#8243](https://github.com/pingcap/tidb/pull/8243)
     - `Prepare`文の実行プランキャッシュが有効になったときに使用できるように、 `PointGet`を広い範囲で使用します[#8108](https://github.com/pingcap/tidb/pull/8108)
     - 複数のテーブルを結合する際の結合順序の選択を最適化するために貪欲アルゴリズム`Join Reorder`を導入する[#8394](https://github.com/pingcap/tidb/pull/8394)
     - ビューをサポート[#8757](https://github.com/pingcap/tidb/pull/8757)
@@ -34,7 +34,7 @@ summary: 2019年1月19日にリリースされたTiDB 3.0ベータ版は、安�
     - `TIDB_INLJ`が有効になっていない場合にクライアントに警告を返し、ユーザビリティを向上させる[#9037](https://github.com/pingcap/tidb/pull/9037)
     - フィルタリング条件とテーブル統計に基づいてフィルタリングされたデータの統計を推測する機能をサポート[#7921](https://github.com/pingcap/tidb/pull/7921)
     - レンジパーティションのパーティションプルーニング最適化ルールの改善 [#8885](https://github.com/pingcap/tidb/pull/8885)
-- SQLエグゼキュータ
+- SQLエグゼキューター
     - 空の`ON`条件をサポートするために`Merge Join`演算子を最適化する [#9037](https://github.com/pingcap/tidb/pull/9037)
     - ログを最適化し、 `EXECUTE`文を実行するときに使用されるユーザー変数を出力します。 [#7684](https://github.com/pingcap/tidb/pull/7684)
     - `COMMIT`文のスロークエリ情報を出力するためにログを最適化します [#7951](https://github.com/pingcap/tidb/pull/7951)
@@ -49,7 +49,7 @@ summary: 2019年1月19日にリリースされたTiDB 3.0ベータ版は、安�
     - クエリプランキャッシュを最適化して、 `DELETE` / `UPDATE` / `INSERT`のクエリプランがキャッシュされることを保証する[#8107](https://github.com/pingcap/tidb/pull/8107)
     - クエリプランキャッシュを最適化して、 `DEALLOCATE`文を実行するときに対応するプランを削除します。 [#8332](https://github.com/pingcap/tidb/pull/8332)
     - クエリプランキャッシュを最適化し、メモリ使用量を制限することで、過剰なプランをキャッシュすることによって引き起こされる TiDB OOM の問題を回避します[#8339](https://github.com/pingcap/tidb/pull/8339)
-    - `Prepare`文を最適化して、 `ORDER BY` / `GROUP BY` / `LIMIT`句の`?`プレースホルダの使用をサポートする [#8206](https://github.com/pingcap/tidb/pull/8206)
+    - `Prepare`文を最適化して、 `ORDER BY` / `GROUP BY` / `LIMIT`句の`?`プレースホルダーの使用をサポートする [#8206](https://github.com/pingcap/tidb/pull/8206)
 - 権限管理
     - `ANALYZE`文の権限チェックを追加する [#8486](https://github.com/pingcap/tidb/pull/8486)
     - `USE`文の権限チェックを追加する [#8414](https://github.com/pingcap/tidb/pull/8418)
@@ -86,10 +86,10 @@ summary: 2019年1月19日にリリースされたTiDB 3.0ベータ版は、安�
 ## PD {#pd}
 
 - リージョンメタデータを個別に格納するために`RegionStorage`を追加[#1237](https://github.com/pingcap/pd/pull/1237)
-- シャッフルホットリージョンスケジューラを追加 [#1361](https://github.com/pingcap/pd/pull/1361)
-- スケジュールパラメータ関連のメトリックを追加する [#1406](https://github.com/pingcap/pd/pull/1406)
+- シャッフルホットリージョンスケジューラーを追加 [#1361](https://github.com/pingcap/pd/pull/1361)
+- スケジュールパラメーター関連のメトリックを追加する [#1406](https://github.com/pingcap/pd/pull/1406)
 - クラスターラベル関連のメトリクスを追加する [#1402](https://github.com/pingcap/pd/pull/1402)
-- インポートデータシミュレータを追加する [#1263](https://github.com/pingcap/pd/pull/1263)
+- インポートデータシミュレーターを追加する [#1263](https://github.com/pingcap/pd/pull/1263)
 - リーダー選出に関する`Watch`の問題を修正[#1396](https://github.com/pingcap/pd/pull/1396)
 
 ## TiKV {#tikv}

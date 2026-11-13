@@ -83,7 +83,7 @@ TiDB バージョン: 5.0.3
     - `Limit` を使用してパーティションテーブルをクエリしたときに返される誤った値を修正しました [#24636](https://github.com/pingcap/tidb/issues/24636)
     - `IFNULL`が`ENUM`または`SET`タイプの列に正しく反映されない問題を修正 [#24944](https://github.com/pingcap/tidb/issues/24944)
     - 結合サブクエリの`count`を`first_row`に変更することで発生する誤った結果を修正しました [#24865](https://github.com/pingcap/tidb/issues/24865)
-    - `ParallelApply`が`TopN`オペレーターの下で使用された場合に発生するクエリ ハングの問題を修正しました [#24930](https://github.com/pingcap/tidb/issues/24930)
+    - `ParallelApply`が`TopN`オペレーターの下で使用された場合に発生するクエリハングの問題を修正しました [#24930](https://github.com/pingcap/tidb/issues/24930)
     - マルチカラムプレフィックスインデックスを使用してSQL文を実行したときに予想よりも多くの結果が返される問題を修正[#24356](https://github.com/pingcap/tidb/issues/24356)
     - `<=>`演算子が正しく機能しない問題を修正[#24477](https://github.com/pingcap/tidb/issues/24477)
     - 並列`Apply`オペレーターのデータ競合問題を修正 [#23280](https://github.com/pingcap/tidb/issues/23280)
@@ -98,17 +98,17 @@ TiDB バージョン: 5.0.3
 - TiKV
 
     - 間違った`tikv_raftstore_hibernated_peer_state`指標を修正する[#10330](https://github.com/tikv/tikv/issues/10330)
-    - コプロセッサの関数`json_unquote()`の間違った引数の型を修正 [#10176](https://github.com/tikv/tikv/issues/10176)
+    - コプロセッサーの関数`json_unquote()`の間違った引数の型を修正 [#10176](https://github.com/tikv/tikv/issues/10176)
     - 場合によってはACIDの破壊を避けるために、正常なシャットダウン中にコールバックのクリアをスキップする[#10353](https://github.com/tikv/tikv/issues/10353) [#10307](https://github.com/tikv/tikv/issues/10307)
     - Leaderのレプリカ読み取りで読み取りインデックスが共有されるバグを修正しました [#10347](https://github.com/tikv/tikv/issues/10347)
     - `DOUBLE`を`DOUBLE` に変換する間違った関数を修正 [#25200](https://github.com/pingcap/tidb/issues/25200)
 
 - PD
 
-    - スケジューラの起動後にTTL設定をロードするときに発生するデータ競合の問題を修正しました[#3771](https://github.com/tikv/pd/issues/3771)
+    - スケジューラーの起動後にTTL設定をロードするときに発生するデータ競合の問題を修正しました[#3771](https://github.com/tikv/pd/issues/3771)
     - TiDBの`TIKV_REGION_PEERS`テーブルの`is_learner`フィールドが正しくないというバグを修正しました[#3372](https://github.com/tikv/pd/issues/3372) [#24293](https://github.com/pingcap/tidb/issues/24293)
     - ゾーン内のすべての TiKV ノードがオフラインまたはダウンしている場合、PD が他のゾーンへのレプリカをスケジュールしない問題を修正[#3705](https://github.com/tikv/pd/issues/3705)
-    - スキャッタリージョンスケジューラを追加した後にPDがpanicになる可能性がある問題を修正[#3762](https://github.com/tikv/pd/pull/3762)
+    - スキャッターリージョンスケジューラーを追加した後にPDがpanicになる可能性がある問題を修正[#3762](https://github.com/tikv/pd/pull/3762)
 
 - TiFlash
 
@@ -131,7 +131,7 @@ TiDB バージョン: 5.0.3
         - TiCDCが`/proc/meminfo` の読み取りに失敗した場合に発生するpanic問題を修正しました [#2024](https://github.com/pingcap/tiflow/pull/2024)
         - TiCDC のランタイムメモリ消費を削減する[#2012](https://github.com/pingcap/tiflow/pull/2012) [#1958](https://github.com/pingcap/tiflow/pull/1958)
         - resolved ts の計算が遅れることによって TiCDCサーバーのpanicを引き起こす可能性があるバグを修正しました。 [#1576](https://github.com/pingcap/tiflow/issues/1576)
-        - プロセッサの潜在的なデッドロック問題を修正 [#2142](https://github.com/pingcap/tiflow/pull/2142)
+        - プロセッサーの潜在的なデッドロック問題を修正 [#2142](https://github.com/pingcap/tiflow/pull/2142)
 
     - Backup & Restore (BR)
 

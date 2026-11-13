@@ -1,6 +1,6 @@
 ---
 title: TiDB 3.0.8 Release Notes
-summary: "TiDB 3.0.8は2019年12月31日にリリースされました。SQLオプティマイザ、SQL実行エンジン、DDL、サーバー、トランザクション、モニター、TiKV、PD、TiDB Ansibleに関する様々な修正と改善が含まれています。主な変更点としては、SQLバインディングプランの修正、エラーメッセージの最適化、証明書ベースの認証のサポートなどが挙げられます。`tidb_txn_mode`変数のデフォルト値が`\"pessimistic\"`に更新されました。PDではパフォーマンスの最適化とバグ修正も行われました。TiDB Ansibleでは、様々なロジックの最適化とアップグレードが行われました。"
+summary: "TiDB 3.0.8は2019年12月31日にリリースされました。SQLオプティマイザー、SQL実行エンジン、DDL、サーバー、トランザクション、モニター、TiKV、PD、TiDB Ansibleに関する様々な修正と改善が含まれています。主な変更点としては、SQLバインディングプランの修正、エラーメッセージの最適化、証明書ベースの認証のサポートなどが挙げられます。`tidb_txn_mode`変数のデフォルト値が`\"pessimistic\"`に更新されました。PDではパフォーマンスの最適化とバグ修正も行われました。TiDB Ansibleでは、様々なロジックの最適化とアップグレードが行われました。"
 ---
 
 # TiDB 3.0.8 リリースノート {#tidb-3-0-8-release-notes}
@@ -13,7 +13,7 @@ TiDB Ansible バージョン: 3.0.8
 
 ## TiDB {#tidb}
 
-- SQLオプティマイザ
+- SQLオプティマイザー
     - タイミングの悪いキャッシュ更新によって発生した間違ったSQLバインディングプランを修正[#13891](https://github.com/pingcap/tidb/pull/13891)
     - SQL文にシンボルリストが含まれている場合にSQLバインディングが無効になる可能性がある問題を修正しました [#14004](https://github.com/pingcap/tidb/pull/14004)
     - SQL文が`;` で終わるためSQLバインディングを作成または削除できない問題を修正しました [#14113](https://github.com/pingcap/tidb/pull/14113)
@@ -27,7 +27,7 @@ TiDB Ansible バージョン: 3.0.8
     - TiDBが`group by item` を誤って計算するため、 `OUTER JOIN`の実行でエラーが報告される可能性がある問題を修正しました。 [#14014](https://github.com/pingcap/tidb/pull/14014)
     - 範囲を超えるデータがレンジパーティションテーブルに書き込まれたときにエラーメッセージが不正確になる問題を修正[#14107](https://github.com/pingcap/tidb/pull/14107)
     - MySQL 8では`PadCharToFullLength`がすぐに破棄されることを考慮して、特殊なケースで予期しないクエリ結果を回避するために[PR #10124](https://github.com/pingcap/tidb/pull/10124)を元に戻し、 `PadCharToFullLength`の効果をキャンセルします[#14157](https://github.com/pingcap/tidb/pull/14157)
-    - `ExplainExec` の保証されていない`close()`呼び出しによって発生する`EXPLAIN ANALYZE`文の実行時のゴルーチン リークの問題を修正しました。 [#14226](https://github.com/pingcap/tidb/pull/14226)
+    - `ExplainExec` の保証されていない`close()`呼び出しによって発生する`EXPLAIN ANALYZE`文の実行時のゴルーチンリークの問題を修正しました。 [#14226](https://github.com/pingcap/tidb/pull/14226)
 - DDL
     - `change column`のエラーメッセージ出力`modify column`最適化して理解しやすくする[#13796](https://github.com/pingcap/tidb/pull/13796)
     - パーティションテーブルのリージョン分割をサポートするために`SPLIT PARTITION TABLE`構文を追加します [#13929](https://github.com/pingcap/tidb/pull/13929)
@@ -37,7 +37,7 @@ TiDB Ansible バージョン: 3.0.8
 - サーバー
     - ステートメントサマリーの改善:
         - SQL文をより詳細に分析できるように多数のSQLメトリックフィールドを追加します[#14151](https://github.com/pingcap/tidb/pull/14151) [#14168](https://github.com/pingcap/tidb/pull/14168)
-        - `stmt-summary.refresh-interval`パラメータを追加して、古いデータを`events_statements_summary_by_digest`テーブルから`events_statements_summary_by_digest_history`テーブルに移動するかどうかを制御します (デフォルトの間隔: 30分) [#14161](https://github.com/pingcap/tidb/pull/14161)
+        - `stmt-summary.refresh-interval`パラメーターを追加して、古いデータを`events_statements_summary_by_digest`テーブルから`events_statements_summary_by_digest_history`テーブルに移動するかどうかを制御します (デフォルトの間隔: 30分) [#14161](https://github.com/pingcap/tidb/pull/14161)
         - `events_statements_summary_by_digest` の古いデータを保存するための`events_statements_summary_by_digest_history`テーブルを追加します。 [#14166](https://github.com/pingcap/tidb/pull/14166)
     - RBAC関連の内部SQL文実行時にbinlogが誤って出力される問題を修正[#13890](https://github.com/pingcap/tidb/pull/13890)
     - TiDBサーバーのバージョンを変更する機能を制御するための`server-version`設定項目を追加します [#13906](https://github.com/pingcap/tidb/pull/13906)
@@ -66,7 +66,7 @@ TiDB Ansible バージョン: 3.0.8
     - 新しいクラスターが作成されたときに、 `tidb_txn_mode`変数のデフォルト値を`""`から`"pessimistic"`に更新します[#14171](https://github.com/pingcap/tidb/pull/14171)
     - トランザクションが再試行されたときに単一のステートメントのロック待機時間がリセットされないため、悲観的トランザクションのロック待機時間が長すぎる問題を修正しました[#13990](https://github.com/pingcap/tidb/pull/13990)
     - 悲観的トランザクションモードで未変更データがロック解除されるため、誤ったデータが読み取られる可能性がある問題を修正しました。 [#14050](https://github.com/pingcap/tidb/pull/14050)
-    - mocktikv で事前書き込みを実行するときにトランザクション タイプが区別されないため、挿入値の制限チェックが繰り返される問題を修正しました。 [#14175](https://github.com/pingcap/tidb/pull/14175)
+    - mocktikv で事前書き込みを実行するときにトランザクションタイプが区別されないため、挿入値の制限チェックが繰り返される問題を修正しました。 [#14175](https://github.com/pingcap/tidb/pull/14175)
     - `session.TxnState`が`Invalid`のときにトランザクションが正しく処理されないためpanicを修正 [#13988](https://github.com/pingcap/tidb/pull/13988)
     - mocktikvの`ErrConfclit`構造に`ConflictCommitTS` が含まれていない問題を修正しました [#14080](https://github.com/pingcap/tidb/pull/14080)
     - TiDBがロックを解決した後にロックタイムアウトを正しくチェックしないため、トランザクションがブロックされる問題を修正しました。 [#14083](https://github.com/pingcap/tidb/pull/14083)
@@ -82,9 +82,9 @@ TiDB Ansible バージョン: 3.0.8
     - `destroy`メッセージを`peerfsm`に繰り返し送信し、 `peerfsm`が複数回破棄されることによって引き起こされるpanicを修正[#6297](https://github.com/tikv/tikv/pull/6297)
     - デフォルト値`split-region-on-table`を`true`から`false`に更新して、デフォルトでテーブルごとにリージョンを分割しないようにします[#6253](https://github.com/tikv/tikv/pull/6253)
 - エンジン
-    - 極端な状況でRocksDBイテレータエラーが正しく処理されないため、空のデータが返される可能性がある問題を修正しました[#6326](https://github.com/tikv/tikv/pull/6326)
+    - 極端な状況でRocksDBイテレーターエラーが正しく処理されないため、空のデータが返される可能性がある問題を修正しました[#6326](https://github.com/tikv/tikv/pull/6326)
 - トランザクション
-    - 悲観的ロックが誤ってクリーンアップされたために、TiKV がキーにデータを書き込むことができず、GC がブロックされる問題を修正しました[#6354](https://github.com/tikv/tikv/pull/6354)
+    - 悲観的ロックが誤ってクリーンアップされたために、TiKV がキーにデータを書き込めず、GC がブロックされる問題を修正しました[#6354](https://github.com/tikv/tikv/pull/6354)
     - ロック競合が深刻なシナリオでのパフォーマンスを向上させるために悲観的ロック待機メカニズムを最適化します[#6296](https://github.com/tikv/tikv/pull/6296)
 - デフォルト値`tikv_alloc`を`tikv_alloc/default`から`jemalloc`に更新します[#6206](https://github.com/tikv/tikv/pull/6206)
 

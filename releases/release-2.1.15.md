@@ -15,7 +15,7 @@ TiDB Ansible バージョン: 2.1.15
 
 - `DATE_ADD`関数がマイクロ秒を扱う際に誤ったアライメントにより間違った結果を返す問題を修正[#11289](https://github.com/pingcap/tidb/pull/11289)
 - 文字列列の空の値を`FLOAT`または`INT`と比較するとエラーが報告される問題を修正しました[#11279](https://github.com/pingcap/tidb/pull/11279)
-- パラメータが`NULL`のときに`INSERT`関数が`NULL`値を正しく返さない問題を修正しました [#11249](https://github.com/pingcap/tidb/pull/11249)
+- パラメーターが`NULL`のときに`INSERT`関数が`NULL`値を正しく返さない問題を修正しました [#11249](https://github.com/pingcap/tidb/pull/11249)
 - 非文字列型で長さ`0` をインデックスするときにエラーが発生する問題を修正 [#11215](https://github.com/pingcap/tidb/pull/11215)
 - SQL文を使用してテーブルのリージョン分布を照会するための`SHOW TABLE REGIONS`文を追加します。 [#11238](https://github.com/pingcap/tidb/pull/11238)
 - `SELECT`サブクエリルールを最適化するために射影除去が使用されるため、 `UPDATE … SELECT`文を使用するとエラーが報告される問題を修正しました。 [#11254](https://github.com/pingcap/tidb/pull/11254)

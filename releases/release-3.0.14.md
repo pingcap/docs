@@ -40,7 +40,7 @@ TiDB バージョン: 3.0.14
     - クライアントに TLS の使用を強制する`require-secure-transport`起動オプションをサポートする [#15415](https://github.com/pingcap/tidb/pull/15415)
     - TLS が設定されている場合に TiDB コンポーネント間の HTTP 通信をサポートする[#15419](https://github.com/pingcap/tidb/pull/15419)
     - 現在のトランザクションの`start_ts`情報を`information_schema.processlist`テーブルに追加します [#16160](https://github.com/pingcap/tidb/pull/16160)
-    - クラスタ間の通信に使用されるTLS証明書情報の自動再読み込みをサポート[#15162](https://github.com/pingcap/tidb/pull/15162)
+    - クラスター間の通信に使用されるTLS証明書情報の自動再読み込みをサポート[#15162](https://github.com/pingcap/tidb/pull/15162)
     - パーティションプルーニングを再構築することで、パーティションテーブルの読み取りパフォーマンスが向上します。 [#15628](https://github.com/pingcap/tidb/pull/15628)
     - `range`パーティションテーブルのパーティション式として`floor(unix_timestamp(a))`が使用される場合のパーティションプルーニング機能をサポートします。 [#16521](https://github.com/pingcap/tidb/pull/16521)
     - `view`を含み、かつ`view`を更新しない`update`文の実行を許可 [#16787](https://github.com/pingcap/tidb/pull/16787)
@@ -61,7 +61,7 @@ TiDB バージョン: 3.0.14
 
     - TiDB Lightning
 
-        - tidb-lightning-ctl の`fetch-mode`サブコマンドを使用して TiKV クラスター モードの印刷をサポート [#287](https://github.com/pingcap/tidb-lightning/pull/287)
+        - tidb-lightning-ctl の`fetch-mode`サブコマンドを使用して TiKV クラスターモードの印刷をサポート [#287](https://github.com/pingcap/tidb-lightning/pull/287)
 
 ## バグ修正 {#bug-fixes}
 
@@ -94,7 +94,7 @@ TiDB バージョン: 3.0.14
     - ハッシュパーティションテーブルでパーティション選択アルゴリズムが有効にならない問題を修正 [#16070](https://github.com/pingcap/tidb/pull/16070)
     - MVCCシリーズのHTTP APIがパーティションテーブルをサポートしない問題を修正[#16191](https://github.com/pingcap/tidb/pull/16191)
     - `UNION`文のエラー処理を`SELECT`の文のエラー処理と一貫性を保つ[#16137](https://github.com/pingcap/tidb/pull/16137)
-    - `VALUES`関数のパラメータ型が`bit(n)` の場合に不正な動作が発生する問題を修正しました [#15486](https://github.com/pingcap/tidb/pull/15486)
+    - `VALUES`関数のパラメーター型が`bit(n)` の場合に不正な動作が発生する問題を修正しました [#15486](https://github.com/pingcap/tidb/pull/15486)
     - `view`列名が長すぎる場合、TiDBの処理ロジックがMySQLと矛盾する問題を修正しました。この場合、システムは自動的に短い列名を生成します[#14873](https://github.com/pingcap/tidb/pull/14873)
     - `(not not col)`が誤って`col` として最適化される問題を修正 [#16094](https://github.com/pingcap/tidb/pull/16094)
     - `IndexLookupJoin`プランで構築された内部テーブルの`range`が正しくない問題を修正 [#15753](https://github.com/pingcap/tidb/pull/15753)
