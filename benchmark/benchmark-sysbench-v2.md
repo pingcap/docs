@@ -3,7 +3,7 @@ title: TiDB Sysbench Performance Test Report -- v2.0.0 vs. v1.0.0
 summary: TiDB 2.0 GAは、`Select`および`Insert`テストにおいてTiDB 1.0 GAを上回り、`Select`クエリのパフォーマンスが10%向上し、`Insert`クエリのパフォーマンスもわずかに向上しました。ただし、両バージョンのOLTPパフォーマンスはほぼ同等です。
 ---
 
-# TiDB Sysbench パフォーマンス テスト レポート - v2.0.0 と v1.0.0 の比較 {#tidb-sysbench-performance-test-report-v2-0-0-vs-v1-0-0}
+# TiDB Sysbench パフォーマンステストレポート - v2.0.0 と v1.0.0 の比較 {#tidb-sysbench-performance-test-report-v2-0-0-vs-v1-0-0}
 
 ## テスト目的 {#test-purpose}
 
@@ -48,7 +48,7 @@ IDCマシン
 | TiKV | 7ed4f6a91f92cad5cd5323aaebe7d9f04b77cc79 |
 |  PD  | 2c8e7d7e33b38e457169ce5dfb2f461fced82d65 |
 
-### TiKVパラメータ設定 {#tikv-parameter-configuration}
+### TiKVパラメーター設定 {#tikv-parameter-configuration}
 
 - バージョン1.0.8
 
@@ -67,7 +67,7 @@ IDCマシン
     use-delete-range: false
     ```
 
-### クラスタトポロジー {#cluster-topology}
+### クラスタートポロジー {#cluster-topology}
 
 | マシンIP       | デプロイメントインスタンス            |
 | ----------- | ------------------------ |

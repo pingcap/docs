@@ -1,6 +1,6 @@
 ---
 title: Deploy TiDB Dashboard
-summary: TiDB Dashboardは、v4.0以降のPDに組み込まれています。追加のデプロイメントは不要です。Kubernetes上に独立してデプロイすることも可能です。複数のPDインスタンスがデプロイされている場合、ダッシュボードを提供するのは1つだけです。`tiup cluster display`コマンドを使用して、ダッシュボードの機能を確認してください。ダッシュボードの無効化と有効化は`tiup ctl`コマンドを使用して行うことができます。
+summary: TiDB Dashboardは、v4.0以降のPDに組み込まれています。追加のデプロイメントは不要です。Kubernetes上に独立してデプロイすることも可能です。複数のPDインスタンスがデプロイされている場合、ダッシュボードを提供するのは1つだけです。`tiup cluster display`コマンドを使用して、ダッシュボードを提供しているインスタンスを確認してください。ダッシュボードの無効化と有効化は`tiup ctl`コマンドを使用して行えます。
 ---
 
 # TiDB Dashboardをデプロイ {#deploy-tidb-dashboard}
@@ -27,7 +27,7 @@ TiDB Dashboard UIは、v4.0以降のバージョンのPDコンポーネントに
 
 PDインスタンスが初めて実行される際、インスタンスは自動的に相互にネゴシエーションを行い、TiDB Dashboardを提供するインスタンスを1つ選択します。TiDB Dashboardは他のPDインスタンスでは実行されません。PDインスタンスが再起動されたり、新しいPDインスタンスが追加された場合でも、TiDB Dashboardサービスは選択されたPDインスタンスによって常に提供されます。ただし、TiDB Dashboardを提供するPDインスタンスがクラスターから削除（スケールイン）された場合は、再ネゴシエーションが行われます。このネゴシエーションプロセスではユーザーの介入は必要ありません。
 
-TiDB Dashboardを提供していないPDインスタンスにアクセスすると、ブラウザが自動的にリダイレクトされ、TiDB Dashboardを提供するPDインスタンスへのアクセスが誘導されます。これにより、通常通りサービスにアクセスできるようになります。このプロセスは、以下の図に示されています。
+TiDB Dashboardを提供していないPDインスタンスにアクセスすると、ブラウザーが自動的にリダイレクトされ、TiDB Dashboardを提供するPDインスタンスへのアクセスが誘導されます。これにより、通常通りサービスにアクセスできるようになります。このプロセスは、以下の図に示されています。
 
 ![Process Schematic](/media/dashboard/dashboard-ops-multiple-pd.png)
 
@@ -53,7 +53,7 @@ http://192.168.0.123:2379/dashboard/
 >
 > この機能は、 `tiup cluster`デプロイメントツールの新しいバージョン (v1.0.3 以降) でのみ使用できます。
 >
-> <details><summary>TiUPクラスタのアップグレード</summary>
+> <details><summary>TiUPクラスターのアップグレード</summary>
 >
 > ```bash
 > tiup update --self
@@ -99,7 +99,7 @@ TiDB Dashboardを無効にすると、どの PD インスタンスが TiDB Dashb
 Error: TiDB Dashboard is disabled
 ```
 
-ブラウザ経由で任意の PD インスタンスの TiDB Dashboard アドレスにアクセスしても失敗します。
+ブラウザー経由で任意の PD インスタンスの TiDB Dashboard アドレスにアクセスしても失敗します。
 
 ```
 Dashboard is not started.
@@ -113,7 +113,7 @@ TiUPを使用してデプロイされた実行中のクラスターの場合は�
 tiup ctl:v<CLUSTER_VERSION> pd -u http://127.0.0.1:2379 config set dashboard-address auto
 ```
 
-上記のコマンドを実行した後、 `tiup cluster display`コマンドを使用して、PD によって自動的にネゴシエートされた TiDB Dashboard インスタンス アドレスを表示できます ( `CLUSTER_NAME`をクラスター名に置き換えます)。
+上記のコマンドを実行した後、 `tiup cluster display`コマンドを使用して、PD によって自動的にネゴシエートされた TiDB Dashboard インスタンスアドレスを表示できます ( `CLUSTER_NAME`をクラスター名に置き換えます)。
 
 ```bash
 tiup cluster display CLUSTER_NAME --dashboard

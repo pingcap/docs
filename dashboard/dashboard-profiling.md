@@ -1,6 +1,6 @@
 ---
 title: TiDB Dashboard Instance Profiling - Manual Profiling
-summary: 手動プロファイリングを使用すると、TiDB、TiKV、PD、 TiFlashインスタンスの現在のパフォーマンスデータをオンデマンドで収集できます。エキスパートはCPUやメモリなどのリソース消費量の詳細を分析し、進行中のパフォーマンス問題を特定できます。このページには、TiDB Dashboardまたはブラウザからアクセスできます。対象インスタンスを選択してプロファイリングを開始し、必要に応じて期間を変更します。リアルタイムの進行状況を確認し、プロファイリング完了後にパフォーマンスデータをダウンロードできます。詳細な操作については、プロファイリング履歴を確認します。
+summary: 手動プロファイリングを使用すると、TiDB、TiKV、PD、 TiFlashインスタンスの現在のパフォーマンスデータをオンデマンドで収集できます。エキスパートはCPUやメモリなどのリソース消費量の詳細を分析し、進行中のパフォーマンス問題を特定できます。このページには、TiDB Dashboardまたはブラウザーからアクセスできます。対象インスタンスを選択してプロファイリングを開始し、必要に応じて期間を変更します。リアルタイムの進行状況を確認し、プロファイリング完了後にパフォーマンスデータをダウンロードできます。詳細な操作については、プロファイリング履歴を確認します。
 ---
 
 # TiDB Dashboardインスタンスプロファイリング - 手動プロファイリング {#tidb-dashboard-instance-profiling-manual-profiling}
@@ -23,27 +23,27 @@ summary: 手動プロファイリングを使用すると、TiDB、TiKV、PD、 
 
     > TiKV およびTiFlashインスタンスの CPU オーバーヘッドは、現在 ARMアーキテクチャではサポートされていません。
 
-- ヒープ: TiDB、TiKV、PDインスタンス上の各内部関数のメモリ消費量
+- Heap: TiDB、TiKV、PDインスタンス上の各内部関数のメモリ消費量
 
     > TiDBはv7.5以降、TiKVヒーププロファイルをサポートしています。TiDB Dashboardの実行環境にはPerl実行環境が必要です。Perl実行環境がない場合、エラーが発生します。
 
-- ミューテックス: TiDBおよびPDインスタンス上のミューテックスの競合状態
+- Mutex: TiDBおよびPDインスタンス上のミューテックスの競合状態
 
 - Goroutine: TiDB および PD インスタンス上のすべての Goroutine の実行状態と呼び出しスタック
 
 ## ページにアクセスする {#access-the-page}
 
-次のいずれかの方法でインスタンスプロファイリング ページにアクセスできます。
+次のいずれかの方法でインスタンスプロファイリングページにアクセスできます。
 
 - TiDB Dashboardにログインしたら、左側のナビゲーションメニューで**Advanced Debugging** > **Profiling Instances** > **Manual Profiling**をクリックします。
 
     ![Access instance profiling page](/media/dashboard/dashboard-profiling-access.png)
 
-- ブラウザで[http://127.0.0.1:2379/dashboard/#/instance_profiling](http://127.0.0.1:2379/dashboard/#/instance_profiling)にアクセスしてください。`127.0.0.1:2379`を実際のPDインスタンスのアドレスとポートに置き換えてください。
+- ブラウザーで[http://127.0.0.1:2379/dashboard/#/instance_profiling](http://127.0.0.1:2379/dashboard/#/instance_profiling)にアクセスしてください。`127.0.0.1:2379`を実際のPDインスタンスのアドレスとポートに置き換えてください。
 
 ## プロファイリングを開始 {#start-profiling}
 
-インスタンスプロファイリング ページで、少なくとも 1つのターゲットインスタンスを選択し、 **Start Profiling**をクリックしてインスタンスプロファイリングを開始します。
+インスタンスプロファイリングページで、少なくとも 1つのターゲットインスタンスを選択し、 **Start Profiling**をクリックしてインスタンスプロファイリングを開始します。
 
 ![Start instance profiling](/media/dashboard/dashboard-profiling-start.png)
 
@@ -75,4 +75,4 @@ summary: 手動プロファイリングを使用すると、TiDB、TiKV、PD、 
 
 ![View profiling history](/media/dashboard/dashboard-profiling-history.png)
 
-プロファイリング ステータス ページでの詳細な操作については、 [プロファイリングステータスを表示する](#view-profiling-status)を参照してください。
+プロファイリングステータスページでの詳細な操作については、 [プロファイリングステータスを表示する](#view-profiling-status)を参照してください。

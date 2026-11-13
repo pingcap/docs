@@ -57,9 +57,9 @@ target-schema = "test_2"       # The name of the schema in the target database
 target-table = "t_2"           # The name of the target table
 ```
 
-## テーブルルータの初期化といくつかの例 {#the-initialization-of-table-routers-and-some-examples}
+## テーブルルーターの初期化といくつかの例 {#the-initialization-of-table-routers-and-some-examples}
 
-### テーブルルータの初期化 {#the-initialization-of-table-routers}
+### テーブルルーターの初期化 {#the-initialization-of-table-routers}
 
 - ルール内に`schema.table`という名前のテーブル`target-schema/target-table`が存在する場合、sync-diff-inspector の動作は次のようになります。
 
@@ -78,7 +78,7 @@ target-table = "t_2"           # The name of the target table
     - アップストリームにスキーマ`schema`があり、ルールがスキーマに一致する場合、sync-diff-inspector は何も行いません。
     - アップストリームにスキーマ`schema`が存在するものの、それに一致するルールがない場合、sync-diff-inspector はテーブルルーターに新しいルール`schema -> _no__exists__db_`を追加します。その後、sync-diff-inspector はテーブル`schema`をテーブル`_no__exists__db_`として扱います。
 
-- ルールに`target-schema.target-table`が存在しない場合は、テーブル ルーターが大文字と小文字を区別しないため、sync-diff-inspector は`target-schema.target-table`から`target-schema.target-table`に一致するルールを追加して大文字と小文字を区別しないようにします。
+- ルールに`target-schema.target-table`が存在しない場合は、テーブルルーターが大文字と小文字を区別しないため、sync-diff-inspector は`target-schema.target-table`から`target-schema.target-table`に一致するルールを追加して大文字と小文字を区別しないようにします。
 
 ### 例 {#examples}
 

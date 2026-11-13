@@ -18,7 +18,7 @@ summary: このドキュメントでは、ログバックアップの監視、�
 ### 監視構成 {#monitoring-configuration}
 
 - TiUPを使用してデプロイされたクラスターの場合、Prometheus は監視メトリックを自動的に収集します。
-- 手動でデプロイされたクラスターの場合は、 [TiDBクラスタ監視のデプロイ](/deploy-monitoring-services.md)の手順に従って、Prometheus 設定ファイルの`scrape_configs`セクションに TiKV 関連のジョブを追加します。
+- 手動でデプロイされたクラスターの場合は、 [TiDBクラスター監視のデプロイ](/deploy-monitoring-services.md)の手順に従って、Prometheus 設定ファイルの`scrape_configs`セクションに TiKV 関連のジョブを追加します。
 
 ### Grafanaの設定 {#grafana-configuration}
 
@@ -30,14 +30,14 @@ summary: このドキュメントでは、ログバックアップの監視、�
 | メトリクス                                                  | タイプ    | 説明                                                                                                                                         |
 | ------------------------------------------------------ | ------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
 | **tikv_log_backup_internal_actor_acting_duration_sec** | ヒストグラム | すべての内部メッセージとイベントを処理する期間。<br/> `message :: TaskType`                                                                                        |
-| **tikv_log_backup_initial_scan_reason**                | カウンタ   | 初期スキャンがトリガーされた理由の統計。主な理由は、リーダーの交代またはリージョンバージョンの変更です。<br/> `reason :: {"leader-changed", "region-changed", "retry"}`                        |
+| **tikv_log_backup_initial_scan_reason**                | カウンター   | 初期スキャンがトリガーされた理由の統計。主な理由は、リーダーの交代またはリージョンバージョンの変更です。<br/> `reason :: {"leader-changed", "region-changed", "retry"}`                        |
 | **tikv_log_backup_event_handle_duration_sec**          | ヒストグラム | KVイベントの処理時間`tikv_log_backup_on_event_duration_seconds`と比較すると、この指標には内部変換の期間も含まれます。<br/> `stage :: {"to_stream_event", "save_to_temp_file"}` |
-| **tikv_log_backup_handle_kv_batch**                    | ヒストグラム | Raftstoreによって送信された KV ペア バッチのサイズのリージョンレベルの統計。                                                                                                 |
-| **tikv_log_backup_initial_scan_disk_read**             | カウンタ   | 初期スキャン中にディスクから読み取られたデータのサイズ。Linuxでは、この情報はprocfsから取得され、ブロックデバイスから実際に読み取られたデータのサイズです。このメトリックには、設定項目`initial-scan-rate-limit`が適用されます。          |
+| **tikv_log_backup_handle_kv_batch**                    | ヒストグラム | Raftstoreによって送信された KV ペアバッチのサイズのリージョンレベルの統計。                                                                                                 |
+| **tikv_log_backup_initial_scan_disk_read**             | カウンター   | 初期スキャン中にディスクから読み取られたデータのサイズ。Linuxでは、この情報はprocfsから取得され、ブロックデバイスから実際に読み取られたデータのサイズです。このメトリックには、設定項目`initial-scan-rate-limit`が適用されます。          |
 | **tikv_log_backup_incremental_scan_bytes**             | ヒストグラム | 初期スキャン中に実際に生成されたKVペアのサイズ。圧縮とリードアンプリフィケーションのため、この値は`tikv_log_backup_initial_scan_disk_read`と異なる場合があります。                                     |
-| **tikv_log_backup_skip_kv_count**                      | カウンタ   | バックアップに役立たないため、ログバックアップ中にスキップされるRaftイベントの数。                                                                                               |
-| **tikv_log_backup_errors**                             | カウンタ   | ログバックアップ中に再試行または無視できるエラー。<br/> `type :: ErrorType`                                                                                        |
-| **tikv_log_backup_fatal_errors**                       | カウンタ   | ログバックアップ中に再試行または無視できないエラー。このタイプのエラーが発生すると、ログバックアップは一時停止されます。<br/> `type :: ErrorType`                                                      |
+| **tikv_log_backup_skip_kv_count**                      | カウンター   | バックアップに役立たないため、ログバックアップ中にスキップされるRaftイベントの数。                                                                                               |
+| **tikv_log_backup_errors**                             | カウンター   | ログバックアップ中に再試行または無視できるエラー。<br/> `type :: ErrorType`                                                                                        |
+| **tikv_log_backup_fatal_errors**                       | カウンター   | ログバックアップ中に再試行または無視できないエラー。このタイプのエラーが発生すると、ログバックアップは一時停止されます。<br/> `type :: ErrorType`                                                      |
 | **tikv_log_backup_heap_memory**                        | ゲージ    | ログバックアップ中の初期スキャンで検出された、消費されていないイベントによって占有されているメモリ。                                                                                        |
 | **tikv_log_backup_on_event_duration_seconds**          | ヒストグラム | KV イベントを一時ファイルに保存する期間。<br/> `stage :: {"write_to_tempfile", "syscall_write"}`                                                              |
 | **tikv_log_backup_store_checkpoint_ts**                | ゲージ    | ストアレベルのcheckpoint TSは非推奨です。現在のストアによって登録されたGCセーフポイントに近いです。<br/> `task :: string`                                                               |
@@ -45,9 +45,9 @@ summary: このドキュメントでは、ログバックアップの監視、�
 | **tikv_log_backup_flush_duration_sec**                 | ヒストグラム | ローカルの一時ファイルを外部ストレージに移動する時間。<br/> `stage :: {"generate_metadata", "save_files", "clear_temp_files"}`                                      |
 | **tikv_log_backup_flush_file_size**                    | ヒストグラム | バックアップ中に生成されたファイルのサイズの統計。                                                                                                                  |
 | **tikv_log_backup_initial_scan_duration_sec**          | ヒストグラム | 初期スキャンの全体的な所要時間の統計。                                                                                                                        |
-| **tikv_log_backup_skip_retry_observe**                 | カウンタ   | ログバックアップ中に無視できるエラーの統計、または再試行がスキップされる理由。<br/> `reason :: {"region-absent", "not-leader", "stale-command"}`                                 |
-| **tikv_log_backup_initial_scan_operations**            | カウンタ   | 初期スキャン中の RocksDB 関連操作の統計。<br/> `cf :: {"default", "write", "lock"}, op :: RocksDBOP`                                                       |
-| **tikv_log_backup_enabled**                            | カウンタ   | ログバックアップを有効にするかどうか。値が`0`より大きい場合、ログバックアップは有効になります。                                                                                          |
+| **tikv_log_backup_skip_retry_observe**                 | カウンター   | ログバックアップ中に無視できるエラーの統計、または再試行がスキップされる理由。<br/> `reason :: {"region-absent", "not-leader", "stale-command"}`                                 |
+| **tikv_log_backup_initial_scan_operations**            | カウンター   | 初期スキャン中の RocksDB 関連操作の統計。<br/> `cf :: {"default", "write", "lock"}, op :: RocksDBOP`                                                       |
+| **tikv_log_backup_enabled**                            | カウンター   | ログバックアップを有効にするかどうか。値が`0`より大きい場合、ログバックアップは有効になります。                                                                                          |
 | **tikv_log_backup_observed_region**                    | ゲージ    | リッスンされているリージョンの数。                                                                                                                          |
 | **tikv_log_backup_task_status**                        | ゲージ    | ログバックアップタスクのステータス。`0`は実行中、 `1`は一時停止中、 `2`はエラーを意味します。<br/> `task :: string`                                                                |
 | **tikv_log_backup_pending_initial_scan**               | ゲージ    | 保留中の初期スキャンの統計。<br/> `stage :: {"queuing", "executing"}`                                                                                    |
@@ -61,8 +61,8 @@ summary: このドキュメントでは、ログバックアップの監視、�
 PITR でアラート項目を構成するには、次の手順に従います。
 
 1. Prometheusが配置されているノードのアラートルール用の設定ファイル（例： `pitr.rules.yml` ）を作成します。このファイルには、 [Prometheusのドキュメント](https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/) 、以下の推奨アラート項目、および設定サンプルに従ってアラートルールを記述します。
-2. Prometheus 設定ファイルの`rule_files`フィールドに、アラートルール ファイルのパスを追加します。
-3. Prometheusプロセスにシグナル`SIGHUP`を送信するか（ `kill -HUP pid` ）、HTTPリクエスト`POST`を`http://prometheus-addr/-/reload`に送信します（HTTPリクエストを送信する前に、Prometheusの起動時にパラメータ`--web.enable-lifecycle`を追加します）。
+2. Prometheus 設定ファイルの`rule_files`フィールドに、アラートルールファイルのパスを追加します。
+3. Prometheusプロセスにシグナル`SIGHUP`を送信するか（ `kill -HUP pid` ）、HTTPリクエスト`POST`を`http://prometheus-addr/-/reload`に送信します（HTTPリクエストを送信する前に、Prometheusの起動時にパラメーター`--web.enable-lifecycle`を追加します）。
 
 推奨されるアラート項目は次のとおりです。
 

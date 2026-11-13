@@ -3,11 +3,11 @@ title: TiDB Sysbench Performance Test Report -- v2.1 vs. v2.0
 summary: TiDB 2.1は`Point Select`テストにおいてTiDB 2.0を上回り、クエリパフォーマンスが50%向上しました。ただし、`Update Non-Index`テストと`Update Index`テストでは、両バージョンのパフォーマンスはほぼ同等でした。このテストは、2018年9月に中国北京で、特定のテスト環境と構成を使用して実施されました。
 ---
 
-# TiDB Sysbench パフォーマンス テスト レポート - v2.1 と v2.0 の比較 {#tidb-sysbench-performance-test-report-v2-1-vs-v2-0}
+# TiDB Sysbench パフォーマンステストレポート - v2.1 と v2.0 の比較 {#tidb-sysbench-performance-test-report-v2-1-vs-v2-0}
 
 ## テスト目的 {#test-purpose}
 
-このテストは、ワーキング セットがメモリ内に収まる OLTP における TiDB 2.1 と TiDB 2.0 のパフォーマンスを比較することを目的としています。
+このテストは、ワーキングセットがメモリ内に収まる OLTP における TiDB 2.1 と TiDB 2.0 のパフォーマンスを比較することを目的としています。
 
 ## テストバージョン、時間、場所 {#test-version-time-and-place}
 
@@ -52,11 +52,11 @@ Sysbenchを使用して、**各テーブルに10,000,000行が含まれる16個�
 | TiKV | 57c83dc4ebc93d38d77dc8f7d66db224760766cc |
 |  PD  | b64716707b7279a4ae822be767085ff17b5f3fea |
 
-### TiDBパラメータ設定 {#tidb-parameter-configuration}
+### TiDBパラメーター設定 {#tidb-parameter-configuration}
 
 デフォルトの TiDB 構成は、v2.1 と v2.0 の両方で使用されます。
 
-### TiKVパラメータ設定 {#tikv-parameter-configuration}
+### TiKVパラメーター設定 {#tikv-parameter-configuration}
 
 次の TiKV 構成は、v2.1 と v2.0 の両方で使用されます。
 
@@ -73,7 +73,7 @@ block-cache-size = "60GB"
 block-cache-size = "20GB"
 ```
 
-### クラスタトポロジー {#cluster-topology}
+### クラスタートポロジー {#cluster-topology}
 
 |     マシンIP    |     デプロイメントインスタンス    |
 | :----------: | :------------------: |

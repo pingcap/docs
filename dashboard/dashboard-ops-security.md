@@ -47,7 +47,7 @@ TiDB DashboardはPDクライアントポート（デフォルトは[http://IP:23
 
 テスト環境では、外部アクセス用に TiDB Dashboard ポートを開くようにファイアウォールを構成する必要がある場合があります。
 
-複数のPDインスタンスがデプロイされている場合、TiDB Dashboardは実際に1つのPDインスタンスのみで実行され、他のPDインスタンスにアクセスするとブラウザのリダイレクトが発生します。そのため、ファイアウォールに正しいIPアドレスが設定されていることを確認する必要があります。このメカニズムの詳細については、 [複数のPDインスタンスを使用したデプロイメント](/dashboard/dashboard-ops-deploy.md#deployment-with-multiple-pd-instances)を参照してください。
+複数のPDインスタンスがデプロイされている場合、TiDB Dashboardは実際に1つのPDインスタンスのみで実行され、他のPDインスタンスにアクセスするとブラウザーのリダイレクトが発生します。そのため、ファイアウォールに正しいIPアドレスが設定されていることを確認する必要があります。このメカニズムの詳細については、 [複数のPDインスタンスを使用したデプロイメント](/dashboard/dashboard-ops-deploy.md#deployment-with-multiple-pd-instances)を参照してください。
 
 TiUPデプロイメントツールを使用する場合、次のコマンドを実行すると、実際に TiDB Dashboardを実行している PD インスタンスのアドレスを表示できます ( `CLUSTER_NAME`をクラスター名に置き換えます)。
 
@@ -61,7 +61,7 @@ tiup cluster display CLUSTER_NAME --dashboard
 >
 > この機能は、 `tiup cluster`デプロイメントツールの新しいバージョン (v1.0.3 以降) でのみ使用できます。
 >
-> <details><summary>TiUPクラスタのアップグレード</summary>
+> <details><summary>TiUPクラスターのアップグレード</summary>
 >
 > ```bash
 > tiup update --self

@@ -27,7 +27,7 @@ summary: TiProxy のコマンドライン起動フラグについて学習しま
 
 ## TiProxy コントロール {#tiproxy-control}
 
-このセクションでは、クライアント プログラム`tiproxyctl`のインストール方法、構文、オプション、およびコマンドについて説明します。
+このセクションでは、クライアントプログラム`tiproxyctl`のインストール方法、構文、オプション、およびコマンドについて説明します。
 
 ### TiProxyコントロールをインストールする {#install-tiproxy-control}
 

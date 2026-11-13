@@ -16,7 +16,7 @@ summary: TiDB概要ページには、クラスターのQPS、レイテンシー�
 
 ## ページにアクセスする {#access-the-page}
 
-TiDB Dashboardにログインすると、デフォルトで概要ページが表示されます。または、左側のナビゲーション メニューで**Overview**をクリックしてこのページにアクセスすることもできます。
+TiDB Dashboardにログインすると、デフォルトで概要ページが表示されます。または、左側のナビゲーションメニューで**Overview**をクリックしてこのページにアクセスすることもできます。
 
 ![Enter overview page](/media/dashboard/dashboard-overview-access-v650.png)
 
@@ -42,7 +42,7 @@ TiDB Dashboardにログインすると、デフォルトで概要ページが表
 
 ## Top SQL Statements {#top-sql-statements}
 
-この領域には、最近の期間にクラスター全体で最も実行時間が長かった10種類のSQL文が表示されます。クエリパラメータは異なるが構造が同じSQL文は、同じSQLタイプに分類され、同じ行に表示されます。
+この領域には、最近の期間にクラスター全体で最も実行時間が長かった10種類のSQL文が表示されます。クエリパラメーターは異なるが構造が同じSQL文は、同じSQLタイプに分類され、同じ行に表示されます。
 
 ![Top SQL](/media/dashboard/dashboard-overview-top-statements.png)
 
@@ -58,7 +58,7 @@ TiDB Dashboardにログインすると、デフォルトで概要ページが表
 
 ![Recent slow queries](/media/dashboard/dashboard-overview-slow-query.png)
 
-デフォルトでは、実行時間が300ミリ秒を超えるSQLクエリはスロークエリとしてカウントされ、テーブルに表示されます。このしきい値は、 [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold)変数または[`instance.tidb_slow_log_threshold`](/tidb-configuration-file.md#tidb_slow_log_threshold) TiDBパラメータを変更することで変更できます。
+デフォルトでは、実行時間が300ミリ秒を超えるSQLクエリはスロークエリとしてカウントされ、テーブルに表示されます。このしきい値は、 [tidb_slow_log_threshold](/system-variables.md#tidb_slow_log_threshold)変数または[instance.tidb_slow_log_threshold](/tidb-configuration-file.md#tidb_slow_log_threshold) TiDBパラメーターを変更することで変更できます。
 
 この領域に表示される内容は、より詳細な[スロークエリページ](/dashboard/dashboard-slow-query.md)内容と一致しています。 **Recent Slow Queries**というタイトルをクリックすると、完全なリストが表示されます。この表の列の詳細については、 [スロークエリページ](/dashboard/dashboard-slow-query.md)をご覧ください。
 
@@ -74,10 +74,10 @@ TiDB Dashboardにログインすると、デフォルトで概要ページが表
 
 上の画像のステータスは次のように説明されます。
 
-- 稼働中: インスタンスは正常に実行されています (オフラインストレージインスタンスを含む)。
-- ダウン: ネットワーク切断やプロセスクラッシュなど、インスタンスが異常な状態で動作しています。
+- Up: インスタンスは正常に実行されています (オフラインストレージインスタンスを含む)。
+- Down: ネットワーク切断やプロセスクラッシュなど、インスタンスが異常な状態で動作しています。
 
-**Instance**のタイトルをクリックすると、各インスタンスの詳細な実行ステータスを示す[クラスタ情報ページ](/dashboard/dashboard-cluster-info.md)が表示されます。
+**Instance**のタイトルをクリックすると、各インスタンスの詳細な実行ステータスを示す[クラスター情報ページ](/dashboard/dashboard-cluster-info.md)が表示されます。
 
 ## 監視と警告 {#monitor-and-alert}
 
