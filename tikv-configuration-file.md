@@ -2244,7 +2244,7 @@ Configuration items related to security.
 + If the configuration item is set to `false` or `"off"`, log redaction is disabled.
 + If the configuration item is set to `true` or `"on"`, all user data in the log is replaced by `?`.
 + If the configuration item is set to `"marker"`, all user data in the log is wrapped in `‹ ›`. If user data contains `‹` or `›`, `‹` is escaped as `‹‹`, and `›` is escaped as `››`. Based on the marked logs, you can decide whether to desensitize the marked information when the logs are displayed.
-+ Default value: `false`
++ Default value: Before v8.5.9, the default value is `false`. Starting from v8.5.9, the default value is `true`. If this item is omitted, log redaction is enabled, including after an upgrade. To keep logs unredacted, set this item to `false` or `"off"`.
 + For details on how to use it, see [Log redaction in TiKV side](/log-redaction.md#log-redaction-in-tikv-side).
 
 ## security.encryption

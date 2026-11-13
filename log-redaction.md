@@ -5,11 +5,13 @@ summary: Learn the log redaction in TiDB components.
 
 # Log Redaction
 
-When TiDB provides detailed log information, it might print sensitive data (for example, user data) in the log, which causes data security risks. To avoid such risks, each component (TiDB, TiKV, and PD) provides a configuration item that enables log redaction to shield user data values.
+TiDB components can write sensitive user data to logs. Starting from v8.5.9, supported components enable log redaction by default. Existing TiDB clusters retain the stored value of [`tidb_redact_log`](/system-variables.md#tidb_redact_log) after an upgrade. TiCDC log redaction is supported only in the [TiCDC new architecture](/ticdc/ticdc-architecture.md).
 
 ## Log redaction in TiDB side
 
-To enable log redaction in the TiDB side, set the value of [`global.tidb_redact_log`](/system-variables.md#tidb_redact_log) to `ON` or `MARKER`. This configuration value defaults to `OFF`, which means that log redaction is disabled.
+Starting from v8.5.9, a new cluster sets [`tidb_redact_log`](/system-variables.md#tidb_redact_log) to `ON` by default, so user data in TiDB logs is replaced with `?`. For an existing cluster, the upgrade keeps the value already stored in the cluster. Before v8.5.9, the default value is `OFF`.
+
+To hide user data in logs, set `tidb_redact_log` to `ON`. To mark user data while retaining its original values, set it to `MARKER`. To disable log redaction, set it to `OFF`.
 
 You can use the `set` syntax to set the global variable `tidb_redact_log`:
 
@@ -61,15 +63,17 @@ As you can see from the preceding error log, after you set `tidb_redact_log` to 
 
 ## Log redaction in TiKV side
 
-To enable log redaction in the TiKV side, set the value of [`security.redact-info-log`](/tikv-configuration-file.md#redact-info-log-new-in-v408) to `true` or `"marker"`. This configuration value defaults to `false`, which means that log redaction is disabled.
+Starting from v8.5.9, [`security.redact-info-log`](/tikv-configuration-file.md#redact-info-log-new-in-v408) defaults to `true`. If this item is omitted, TiKV redacts user data in logs, including after an upgrade. Set it to `false` or `"off"` to disable log redaction, or set it to `"marker"` to enclose sensitive values in `‹` and `›` while preserving their original values. Before v8.5.9, the default value is `false`.
 
 ## Log redaction in PD side
 
-To enable log redaction in the PD side, set the value of [`security.redact-info-log`](/pd-configuration-file.md#redact-info-log-new-in-v50) to `true` or `"marker"`. This configuration value defaults to `false`, which means that log redaction is disabled.
+Starting from v8.5.9, [`security.redact-info-log`](/pd-configuration-file.md#redact-info-log-new-in-v50) defaults to `true`. If this item is omitted, PD redacts user data in logs, including after an upgrade. Set it to `false` to disable log redaction, or set it to `"marker"` to enclose sensitive values in `‹` and `›` while preserving their original values. Before v8.5.9, the default value is `false`.
+
+The TSO and Scheduling services use the same default for [`security.redact-info-log`](/tso-configuration-file.md#redact-info-log) and [`security.redact-info-log`](/scheduling-configuration-file.md#redact-info-log).
 
 ## Log redaction in TiFlash side
 
-To enable log redaction in the TiFlash side, set both the [`security.redact_info_log`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file) value in tiflash-server and the [`security.redact-info-log`](/tiflash/tiflash-configuration.md#configure-the-tiflash-learnertoml-file) value in tiflash-learner to `true` or `"marker"`. Both configuration values default to `false`, which means that log redaction is disabled.
+Starting from v8.5.9, both the [`security.redact_info_log`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file) value in tiflash-server and the [`security.redact-info-log`](/tiflash/tiflash-configuration.md#configure-the-tiflash-learnertoml-file) value in tiflash-learner default to `true`. If either item is omitted, that component redacts user data in its logs, including after an upgrade. Set an item to `false` or `"off"` to disable log redaction for that component, or set it to `"marker"` to enclose sensitive values in `‹` and `›` while preserving their original values. Before v8.5.9, both default values are `false`.
 
 ## Log redaction in TiCDC
 
@@ -77,8 +81,16 @@ To enable log redaction in the TiFlash side, set both the [`security.redact_info
 >
 > Starting from TiCDC v8.5.6, log redaction is supported only in the [TiCDC new architecture](/ticdc/ticdc-architecture.md).
 
-To enable log redaction in TiCDC, set [`security.redact-info-log`](/ticdc/ticdc-server-config.md#redact-info-log-new-in-v856) to `true` in the TiCDC server configuration file. This parameter defaults to `false`, which means that log redaction is disabled. When you set it to `true`, TiCDC replaces sensitive values in logs with `?`. Alternatively, set it to `"marker"` to enclose sensitive values in `‹` and `›` while preserving their original values.
+Starting from v8.5.9, [`security.redact-info-log`](/ticdc/ticdc-server-config.md#redact-info-log-new-in-v856) defaults to `true` when it is not set. TiCDC then replaces sensitive values in logs with `?`. Set it to `false` to disable log redaction, or set it to `"marker"` to enclose sensitive values in `‹` and `›` while preserving their original values. Before v8.5.9, the default value is `false`.
+
+## Log redaction in TiDB Lightning
+
+Starting from v8.5.9, [`security.redact-info-log`](/tidb-lightning/tidb-lightning-configuration.md#redact-info-log) defaults to `true`. TiDB Lightning then replaces sensitive information in logs with `?`. Set it to `false`, or pass `--redact-info-log=false`, to disable log redaction. Starting from v8.5.9, an explicit command-line value overrides the configuration file. In v8.5.8 and earlier versions, `--redact-info-log=false` leaves `redact-info-log = true` in the configuration file unchanged, so set `redact-info-log = false` in the configuration file to disable log redaction. Before v8.5.9, the default value is `false`.
 
 ## Log redaction in DM-worker side
 
-To enable log redaction in the DM-worker side, set the value of [`log.redact-info-log`](/dm/dm-worker-configuration-file.md#redact-info-log-new-in-v900) to `true`. This configuration value defaults to `false`, which means that log redaction is disabled.
+Starting from v8.5.9, [`redact-info-log`](/dm/dm-worker-configuration-file.md#redact-info-log-new-in-v859-and-v900) defaults to `true`. DM-worker then replaces sensitive information in logs, including detailed query arguments, with `?`. Set it to `false`, or pass `--redact-info-log=false`, to disable log redaction. An explicit command-line value overrides the configuration file. This configuration item and flag are introduced in v8.5.9 and v9.0.0.
+
+## Log redaction in sync-diff-inspector
+
+Starting from v8.5.9, the top-level configuration item `redact-info-log` and the `--redact-info-log` flag default to `true`. sync-diff-inspector then replaces sensitive log fields with `?`, including SQL statements and their arguments, row values, chunk and histogram bounds, configuration dumps, column metadata, and comparison errors. Queries sent to the database, checkpoints, and generated fix SQL keep the original values. Console and report errors still include connection addresses and file paths. Other annotations and data-bearing messages are replaced with `details redacted`. Set `redact-info-log` to `false`, or pass `--redact-info-log=false`, to disable log redaction. An explicit command-line value overrides the configuration file. If the configuration file has a syntax error, pass `--redact-info-log=false` on the command line to show the parsing error details. For more information, see [sync-diff-inspector User Guide](/sync-diff-inspector/sync-diff-inspector-overview.md#log-redaction-new-in-v859-and-v900).

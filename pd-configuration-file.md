@@ -215,7 +215,7 @@ Configuration items related to security
 
 + Controls whether to enable log redaction in the PD log
 + Optional value: `false`, `true`, `"marker"`
-+ Default value: `false`
++ Default value: Before v8.5.9, the default value is `false`. Starting from v8.5.9, the default value is `true`. If this item is omitted, log redaction is enabled, including after an upgrade. To keep logs unredacted, set this item to `false`.
 + For details on how to use it, see [Log redaction in PD side](/log-redaction.md#log-redaction-in-pd-side).
 
 ## `log`

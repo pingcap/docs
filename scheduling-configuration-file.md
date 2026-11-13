@@ -71,7 +71,7 @@ Configuration items related to security
 
 - Controls whether to enable log redaction in Scheduling node logs.
 - When you set the configuration value to `true`, user data is redacted in Scheduling node logs.
-- Default value: `false`
+- Default value: Before v8.5.9, the default value is `false`. Starting from v8.5.9, the default value is `true`. If this item is omitted, log redaction is enabled, including after an upgrade. To keep logs unredacted, set this item to `false`.
 
 ## log
 

@@ -328,7 +328,7 @@ Unless otherwise noted, the fields in the following table follow the general mat
 
 * [`tidb_query_log_max_len`](/system-variables.md#tidb_query_log_max_len): sets the maximum length of the SQL statement recorded in the slow query log. The default value is 4096 (byte).
 
-* [`tidb_redact_log`](/system-variables.md#tidb_redact_log): controls whether user data in SQL statements recorded in the slow query log is redacted and replaced with `?`. The default value is `0`, which means this feature is disabled.
+* [`tidb_redact_log`](/system-variables.md#tidb_redact_log): controls whether user data in SQL statements recorded in the slow query log is redacted and replaced with `?`. For new clusters of v8.5.9 or later versions, the default value is `ON`. For existing clusters that upgrade from versions earlier than v8.5.9, the persisted value stays unchanged. Before v8.5.9, the default value is `OFF`.
 
 * [`tidb_enable_collect_execution_info`](/system-variables.md#tidb_enable_collect_execution_info): controls whether to record the physical execution information of each operator in the execution plan. The default value is `1`. This feature impacts the performance by approximately 3%. After enabling this feature, you can view the `Plan` information as follows:
 
