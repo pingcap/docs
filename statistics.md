@@ -48,7 +48,7 @@ To avoid the situation that modifying data on a small table frequently triggers 
 
 > **Note:**
 >
-> Currently, the automatic update does not record the configuration items input at manual `ANALYZE`. Therefore, when you use the [`WITH`](/sql-statements/sql-statement-analyze-table.md) syntax to control the collecting behavior of `ANALYZE`, you need to manually set scheduled tasks to collect statistics.
+> When you use the [`WITH`](/sql-statements/sql-statement-analyze-table.md) syntax to control the collecting behavior of `ANALYZE`, the automatic update uses your configurations only if the [`ANALYZE` configuration persistence](#persist-analyze-configurations) feature is enabled. If this feature is disabled, you need to manually set scheduled tasks to collect statistics.
 
 ### Manual collection
 
@@ -59,7 +59,7 @@ You can perform full collection using the following syntax.
 + To collect statistics of all the tables in `TableNameList`:
 
     ```sql
-    ANALYZE TABLE TableNameList [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
+    ANALYZE TABLE TableNameList [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE]|[WITH FLOATNUM NDVRATE];
     ```
 
 + `WITH NUM BUCKETS` specifies the maximum number of buckets in the generated histogram.
@@ -68,6 +68,7 @@ You can perform full collection using the following syntax.
 + `WITH NUM CMSKETCH WIDTH` specifies the width of the CM Sketch.
 + `WITH NUM SAMPLES` specifies the number of samples.
 + `WITH FLOAT_NUM SAMPLERATE` specifies the sampling rate.
++ `WITH FLOAT_NUM NDVRATE` specifies the fraction of rows that TiKV uses to estimate the number of distinct values (NDV) for large tables. For more information, see [Sampling-based NDV collection](#sampling-based-ndv-collection).
 
 `WITH NUM SAMPLES` and `WITH FLOAT_NUM SAMPLERATE` correspond to two different algorithms of collecting samples.
 
@@ -226,10 +227,11 @@ In dynamic pruning mode, the `ANALYZE` configurations of partitions and tables s
 >
 > - The execution time of `ANALYZE TABLE` in TiDB might be longer than that in MySQL or InnoDB. In InnoDB, only a small number of pages are sampled, while by default in TiDB a comprehensive set of statistics are completely rebuilt.
 
-TiDB provides two options to improve the performance of statistics collection:
+TiDB provides the following options to improve the performance of statistics collection:
 
 - Collecting statistics on a subset of the columns. See [Collecting statistics on some columns](#collect-statistics-on-some-columns).
 - Sampling.
+- Sampling-based NDV collection for large tables. See [Sampling-based NDV collection](#sampling-based-ndv-collection).
 
 ### Statistics sampling
 
@@ -245,6 +247,56 @@ The current sampling rate is calculated based on an adaptive algorithm. When you
 > **Note:**
 >
 > Normally, `STATS_META` is more credible than `APPROXIMATE_KEYS`. However, when the result of `STATS_META` is much smaller than the result of `APPROXIMATE_KEYS`, it is recommended that you use `APPROXIMATE_KEYS` to calculate the sampling rate.
+
+### Sampling-based NDV collection
+
+Starting from v9.0.0, TiDB can estimate the number of distinct values (NDV) of columns and indexes from a sample of rows. This feature decreases the TiKV CPU usage when `ANALYZE` collects statistics on large tables. TiKV still scans all rows. As a result, this feature does not decrease the I/O of `ANALYZE`.
+
+The NDV rate is the fraction of rows that TiKV uses to estimate NDV. The [`tidb_analyze_sampled_ndv_threshold`](/system-variables.md#tidb_analyze_sampled_ndv_threshold-new-in-v900) system variable controls when `ANALYZE` uses an NDV rate less than `1`. TiDB applies the following rules to each non-partitioned table and to each partition:
+
+- If `tidb_analyze_sampled_ndv_threshold` is `0`, `ANALYZE` uses all rows to estimate NDV.
+- If the table or partition has `tidb_analyze_sampled_ndv_threshold` rows or fewer, `ANALYZE` uses all rows to estimate NDV.
+- If the table or partition has more rows, the NDV rate is `max(0.05, tidb_analyze_sampled_ndv_threshold / row_count)`. As a result, the NDV sample contains approximately `tidb_analyze_sampled_ndv_threshold` rows or 5% of the rows, whichever is larger.
+
+TiDB uses the row count from the statistics of the table. Sometimes this row count is less than one fifth of the approximate row count in PD, for example, after a data import. In this case, TiDB uses the approximate row count from PD.
+
+For a newly deployed cluster, the default value of `tidb_analyze_sampled_ndv_threshold` is `100000000` (100 million rows). For a cluster that you upgrade from a version earlier than v9.0.0, the value is `0`. This value disables the feature.
+
+A change to `tidb_analyze_sampled_ndv_threshold` has an effect on a table or partition only at its next `ANALYZE`. If you set this variable to `0`, TiDB keeps the existing sampled statistics until it analyzes each table or partition again.
+
+#### Specify the NDV rate
+
+By default, TiDB calculates the NDV rate from the current row count in each `ANALYZE` operation. To set the NDV rate manually, use the `WITH FLOAT_NUM NDVRATE` option. The range of the value is `(0, 1]`. For example:
+
+```sql
+ANALYZE TABLE t WITH 0.1 NDVRATE;
+```
+
+The `NDVRATE` option has the following behaviors:
+
+- `NDVRATE` replaces only the calculated NDV rate. If a table or partition has `tidb_analyze_sampled_ndv_threshold` rows or fewer, `ANALYZE` still uses all rows. If no table or partition in the statement has more rows than this value, TiDB returns a warning.
+- If you specify `WITH 1 NDVRATE`, `ANALYZE` uses all rows to estimate NDV.
+- If `tidb_analyze_sampled_ndv_threshold` is `0` and the statement specifies an `NDVRATE` value less than `1`, TiDB returns an error.
+- TiDB builds histograms and Top-N from the rows in the NDV sample. As a result, the NDV rate must be equal to or larger than the sampling rate:
+
+    - If a statement specifies an `NDVRATE` value less than its `SAMPLERATE` value, TiDB returns an error.
+    - In other cases, if the NDV rate is too small for the sampling rate or for the number of samples, TiDB increases the NDV rate and returns a note.
+
+If [`tidb_persist_analyze_options`](/system-variables.md#tidb_persist_analyze_options-new-in-v540) is `ON`, TiDB persists the `NDVRATE` value that you specify, the same as other [`ANALYZE` configurations](#persist-analyze-configurations). Subsequent automatic `ANALYZE` operations, and manual `ANALYZE` statements that do not specify `NDVRATE`, use the persisted value. To clear the persisted value and use the calculated NDV rate again, use `WITH DEFAULT NDVRATE`.
+
+To see the NDV rate of an `ANALYZE` job, examine the `Job_info` column in the output of [`SHOW ANALYZE STATUS`](/sql-statements/sql-statement-show-analyze-status.md). If the job uses an NDV rate, this column shows the rate, for example, `0.05 ndvrate`.
+
+#### Limitations
+
+- The estimated NDV can be smaller or larger than the actual NDV. This error can change execution plans.
+- The largest error occurs for a column in which almost all values are different. For such a column, the estimated NDV can be approximately `sqrt(1 / NDV rate)` times smaller than the actual NDV. For example, if the NDV rate is `0.05`, the estimated NDV can be approximately 4.47 times smaller.
+- If the schema makes sure that the non-NULL values are unique, TiDB does not estimate the NDV from the sample. TiDB uses the number of non-NULL rows as the NDV. This rule applies to the following columns and indexes:
+
+    - The column of a clustered integer primary key.
+    - A primary key or unique index that has no prefix column and is not a [partial index](/sql-statements/sql-statement-create-index.md#partial-indexes). If the index has more than one column, all its columns must be `NOT NULL`.
+    - The column of such an index, if the index has only one column.
+
+- Multi-valued indexes always use all rows to estimate NDV. Indexes that contain virtual generated columns or prefix columns also always use all rows to estimate NDV.
 
 ### The memory quota for collecting statistics
 
@@ -275,6 +327,7 @@ The following are the `ANALYZE` configurations that support persistence:
 | The number of Top-N  | `WITH NUM TOPN` |
 | The number of samples | `WITH NUM SAMPLES` |
 | The sampling rate | `WITH FLOATNUM SAMPLERATE` |
+| The NDV rate | `WITH FLOATNUM NDVRATE` |
 | The `ANALYZE` column type | AnalyzeColumnOption ::= ( 'ALL COLUMNS' \| 'PREDICATE COLUMNS' \| 'COLUMNS' ColumnNameList ) |
 | The `ANALYZE` column | ColumnNameList ::= Identifier ( ',' Identifier )* |
 
@@ -297,7 +350,7 @@ You can use this feature to record the persistence configurations specified in t
 To query the configuration persisted on a specific table used for auto analyze operations, you can use the following SQL statement:
 
 ```sql
-SELECT sample_num, sample_rate, buckets, topn, column_choice, column_ids FROM mysql.analyze_options opt JOIN information_schema.tables tbl ON opt.table_id = tbl.tidb_table_id WHERE tbl.table_schema = '{db_name}' AND tbl.table_name = '{table_name}';
+SELECT sample_num, sample_rate, buckets, topn, column_choice, column_ids, ndv_rate FROM mysql.analyze_options opt JOIN information_schema.tables tbl ON opt.table_id = tbl.tidb_table_id WHERE tbl.table_schema = '{db_name}' AND tbl.table_name = '{table_name}';
 ```
 
 TiDB will overwrite the previously recorded persistent configuration using the new configurations specified by the latest `ANALYZE` statement. For example, if you run `ANALYZE TABLE t WITH 200 TOPN;`, it will set the top 200 values in the `ANALYZE` statement. Subsequently, executing `ANALYZE TABLE t WITH 0.1 SAMPLERATE;` will set both the top 200 values and a sampling rate of 0.1 for auto `ANALYZE` statements, similar to `ANALYZE TABLE t WITH 200 TOPN, 0.1 SAMPLERATE;`.
@@ -778,6 +831,10 @@ This variable controls the following aspects of `ANALYZE` concurrency:
 - The concurrency of scanning Regions for special indexes (indexes generated from virtual columns).
 
 The default value is `4`.
+
+#### `tidb_analyze_store_batch_size`
+
+Starting from v9.0.0, this variable controls the batch size of the Coprocessor requests that `ANALYZE` sends to TiKV. A batch decreases the number of requests and the network traffic between TiDB and TiKV. The default value is `4`. The value `0` disables batch requests.
 
 ## See also
 

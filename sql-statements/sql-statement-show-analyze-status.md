@@ -21,7 +21,7 @@ Currently, the `SHOW ANALYZE STATUS` statement returns the following columns:
 | `Table_schema`   | The database name |
 | `Table_name`     | The table name |
 | `Partition_name` | The partition name |
-| `Job_info`       | A brief description of the `ANALYZE` subtask. It shows the `ANALYZE` scope, such as columns, indexes, or global statistics merge, and might include the effective options used, such as `buckets`, `topn`, `samplerate`, or `samples`. |
+| `Job_info`       | A brief description of the `ANALYZE` subtask. It shows the `ANALYZE` scope, such as columns, indexes, or global statistics merge, and might include the effective options used, such as `buckets`, `topn`, `samplerate`, `samples`, or `ndvrate`. |
 | `Processed_rows` | The number of rows that have been analyzed |
 | `Start_time`     | The time at which the task starts |
 | `End_time`       | The time at which the task ends |
