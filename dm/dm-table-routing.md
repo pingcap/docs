@@ -179,7 +179,7 @@ mysql> select * from test.t;
 >
 > If any of the following errors occur, source information of sharded tables and schemas might fail to be written to the merged table.
 
-- `c-table` is not in the last three columns:
+- `c_table` is not in the last three columns:
 
 ```sql
 CREATE TABLE `test`.`t` (
@@ -190,7 +190,7 @@ CREATE TABLE `test`.`t` (
 );
 ```
 
-- `c-source` is absent:
+- `c_source` is absent:
 
 ```sql
 CREATE TABLE `test`.`t` (
