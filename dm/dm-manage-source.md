@@ -98,7 +98,7 @@ The following is an example of the returned result:
 >
 > The `config` command is only supported in DM v6.0 and later versions. For earlier versions, you must use the `get-config` command.
 
-If you know the `source-id`, you can run `dmctl --master-addr <master-addr> config source <source-id>` to get the data source configuration.
+If you know the `source-id`, you can run `dmctl --master-addr <master-addr> config source <source-id>` to get the data source configuration. To print the YAML with line breaks or save it to a file, pipe the output to `jq -r '.cfg'`, for example, `dmctl --master-addr <master-addr> config source <source-id> | jq -r '.cfg' > source.yaml`. Before DM v6.0, use `get-config source <source-id>` instead of `config source <source-id>`.
 
 {{< copyable "" >}}
 
