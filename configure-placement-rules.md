@@ -39,22 +39,22 @@ TiDBバージョン5.0以降では、配置ルール機能はデフォルトで�
 | `Count`           | `int` 、正の整数       | レプリカの数。                            |
 | `LabelConstraint` | `[]Constraint`    | ラベルに基づいてノードをフィルタリングします。            |
 | `LocationLabels`  | `[]string`        | 物理的な分離に使用されます。                     |
-| `IsolationLevel`  | `string`          | 最小の物理的分離レベルを設定するために使用              |
+| `IsolationLevel`  | `string`          | 最低限の物理的分離レベルを設定するために使用されます。      |
 
 `LabelConstraint`は`notIn` `notExists` `in` `exists`のプリミティブに基づいてラベルをフィルタリングします。これらの4つのプリミティブの意味は次のとおりです。
 
 - `in` : 指定されたキーのラベル値が指定されたリストに含まれます。
 - `notIn` : 指定されたキーのラベル値は、指定されたリストに含まれていません。
-- `exists` : 指定されたラベル キーが含まれます。
-- `notExists` : 指定されたラベル キーは含まれません。
+- `exists` : 指定されたラベルキーが含まれます。
+- `notExists` : 指定されたラベルキーは含まれません。
 
-`LocationLabels`の意味と機能は、v4.0 以前のバージョンと同じです。例えば、 `[zone,rack,host]`をデプロイし、3 層トポロジを定義しているとします。クラスターには複数のゾーン（アベイラビリティゾーン）があり、各ゾーンには複数のラックがあり、各ラックには複数のホストがあります。スケジュールを実行する際、PD はまずリージョンのピアを異なるゾーンに配置しようとします。この試行が失敗した場合（レプリカは 3つあるがゾーンは合計2つしかない場合など）、PD はこれらのレプリカを異なるラックに配置することを保証します。ラック数が分離を保証するのに十分でない場合、PD はホストレベルの分離を試みます。
+`LocationLabels`の意味と機能は、v4.0 より前のバージョンと同じです。例えば、 `[zone,rack,host]`をデプロイし、3 層トポロジーを定義しているとします。クラスターには複数のゾーン（アベイラビリティゾーン）があり、各ゾーンには複数のラックがあり、各ラックには複数のホストがあります。スケジュールを実行する際、PD はまずリージョンのピアを異なるゾーンに配置しようとします。この試行が失敗した場合（レプリカは 3つあるがゾーンは合計2つしかない場合など）、PD はこれらのレプリカを異なるラックに配置することを保証します。ラック数が分離を保証するのに十分でない場合、PD はホストレベルの分離を試みます。
 
-`IsolationLevel`の意味と機能については[クラスタトポロジ構成](/schedule-replicas-by-topology-labels.md)で詳しく説明します。例えば、 `LocationLabels`を含む3層トポロジを定義する`[zone,rack,host]`をデプロイし、 `IsolationLevel`を`zone`に設定した場合、PDはスケジューリング中に各リージョンのすべてのピアが異なるゾーンに配置されるように保証します。 `IsolationLevel`の最小分離レベル制限を満たすことができない場合（例えば、レプリカが3つ設定されているが、データゾーンが合計で2つしかない場合）、PDはこの制限を満たすために調整を試みません。デフォルト値`IsolationLevel`は空の文字列であり、無効であることを意味します。
+`IsolationLevel`の意味と機能については[クラスタートポロジー構成](/schedule-replicas-by-topology-labels.md)で詳しく説明します。例えば、 `LocationLabels`を含む3層トポロジーを定義する`[zone,rack,host]`をデプロイし、 `IsolationLevel`を`zone`に設定した場合、PDはスケジューリング中に各リージョンのすべてのピアが異なるゾーンに配置されるように保証します。 `IsolationLevel`で指定した最低限の分離レベルを満たせない場合（例えば、レプリカが3つ設定されているが、データゾーンが合計で2つしかない場合）、PDはこの制限を満たすために調整を試みません。`IsolationLevel`のデフォルト値は空の文字列であり、無効であることを意味します。
 
 ### ルールグループのフィールド {#fields-of-the-rule-group}
 
-次の表は、ルール グループ内の各フィールドの説明を示しています。
+次の表は、ルールグループ内の各フィールドの説明を示しています。
 
 | フィールド名     | 種類と制限            | 説明                                |
 | :--------- | :--------------- | :-------------------------------- |
@@ -101,7 +101,7 @@ PD は、 `max-replicas` 、 `location-labels` 、および`isolation-level`構�
 > **Note:**
 >
 > - 配置ルールが有効で複数のルールが存在する場合、以前に設定されたルール`max-replicas` 、 `location-labels` 、および`isolation-level`は適用されなくなります。レプリカポリシーを調整するには、配置ルールに関連するインターフェースを使用してください。
-> - 配置ルールが有効になっていて、デフォルト ルールが 1つだけ存在する場合、 `max-replicas` 、 `location-labels` 、または`isolation-level`が変更されると、TiDB はこのデフォルト ルールを自動的に更新します。
+> - 配置ルールが有効になっていて、デフォルトルールが 1つだけ存在する場合、 `max-replicas` 、 `location-labels` 、または`isolation-level`が変更されると、TiDB はこのデフォルトルールを自動的に更新します。
 
 ### 配置ルールを無効にする {#disable-placement-rules}
 
@@ -121,7 +121,7 @@ pd-ctl config placement-rules disable
 >
 > ルールの変更はPDのスケジューリングにリアルタイムで影響します。ルール設定が不適切だと、レプリカ数が減少し、システムの高可用性に影響を与える可能性があります。
 
-pd-ctl は、システム内のルールを表示するために次のメソッドの使用をサポートしており、出力は JSON 形式のルールまたはルール リストです。
+pd-ctl は、システム内のルールを表示するために次のメソッドの使用をサポートしており、出力は JSON 形式のルールまたはルールリストです。
 
 - すべてのルールのリストを表示するには:
 
@@ -141,7 +141,7 @@ pd-ctl は、システム内のルールを表示するために次のメソッ�
     pd-ctl config placement-rules show --group=pd --id=default
     ```
 
-- リージョンに一致するルール リストを表示するには:
+- リージョンに一致するルールリストを表示するには:
 
     ```bash
     pd-ctl config placement-rules show --region=2
@@ -195,25 +195,25 @@ Success!
 
 ### pd-ctlを使用してルールグループを構成する {#use-pd-ctl-to-configure-rule-groups}
 
-- すべてのルール グループのリストを表示するには:
+- すべてのルールグループのリストを表示するには:
 
     ```bash
     pd-ctl config placement-rules rule-group show
     ```
 
-- 特定の ID のルール グループを表示するには:
+- 特定の ID のルールグループを表示するには:
 
     ```bash
     pd-ctl config placement-rules rule-group show pd
     ```
 
-- ルール グループの`index`と`override`属性を設定するには:
+- ルールグループの`index`と`override`属性を設定するには:
 
     ```bash
     pd-ctl config placement-rules rule-group set pd 100 true
     ```
 
-- ルール グループの構成を削除するには (グループ内にルールがある場合はデフォルトのグループ構成を使用します)。
+- ルールグループの構成を削除するには (グループ内にルールがある場合はデフォルトのグループ構成を使用します)。
 
     ```bash
     pd-ctl config placement-rules rule-group delete pd
@@ -221,9 +221,9 @@ Success!
 
 ### pd-ctl を使用してグループとグループ内のルールを一括更新する {#use-pd-ctl-to-batch-update-groups-and-rules-in-groups}
 
-ルール グループとグループ内のすべてのルールを同時に表示および変更するには、サブコマンド`rule-bundle`を実行します。
+ルールグループとグループ内のすべてのルールを同時に表示および変更するには、サブコマンド`rule-bundle`を実行します。
 
-このサブコマンドでは、 `get {group_id}`を使用してグループを照会し、出力結果にはルール グループとグループのルールがネストされた形式で表示されます。
+このサブコマンドでは、 `get {group_id}`を使用してグループを照会し、出力結果にはルールグループとグループのルールがネストされた形式で表示されます。
 
 ```bash
 pd-ctl config placement-rules rule-bundle get pd
@@ -306,7 +306,7 @@ table ttt ranges: (NOTE: key range might be changed after DDL)
 
 このセクションでは、配置ルールの一般的な使用シナリオを紹介します。
 
-### シナリオ 1: 通常のテーブルに 3つのレプリカを使用し、メタデータに 5つのレプリカを使用してクラスタの耐障害性を向上させる {#scenario-1-use-three-replicas-for-normal-tables-and-five-replicas-for-the-metadata-to-improve-cluster-disaster-tolerance}
+### シナリオ 1: 通常のテーブルに 3つのレプリカを使用し、メタデータに 5つのレプリカを使用してクラスターの耐障害性を向上させる {#scenario-1-use-three-replicas-for-normal-tables-and-five-replicas-for-the-metadata-to-improve-cluster-disaster-tolerance}
 
 キーの範囲をメタデータの範囲に制限するルールを追加し、`count`の値を`5`に設定するだけです。このルールの例を以下に示します。
 
@@ -429,7 +429,7 @@ table ttt ranges: (NOTE: key range might be changed after DDL)
 }
 ```
 
-ルール グループ:
+ルールグループ:
 
 ```json
 {

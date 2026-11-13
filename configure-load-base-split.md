@@ -28,7 +28,7 @@ Load Base Splitによって分割されたリージョンは、すぐにはマ�
 
 ## 使用法 {#usage}
 
-ロード ベース分割機能は現在、次のパラメータによって制御されています。
+ロードベース分割機能は現在、次のパラメーターによって制御されています。
 
 - [`split.qps-threshold`](/tikv-configuration-file.md#qps-threshold) :リージョンがホットスポットと判断されるQPSのしきい値。4GB [`region-split-size`](/tikv-configuration-file.md#region-split-size)の場合はデフォルト値は1秒あたり`3000` 、それ以外の場合はデフォルト値は`7000`です。
 - [`split.byte-threshold`](/tikv-configuration-file.md#byte-threshold-new-in-v50) : (v5.0で導入)リージョンがホットスポットとして識別されるトラフィックしきい値。単位はバイトです`region-split-size`が4GB未満の場合はデフォルト値は30MiB/秒、それ以外の場合は100MiB/秒です。
@@ -40,9 +40,9 @@ Load Base Splitによって分割されたリージョンは、すぐにはマ�
 - トラフィックが`split.byte-threshold`を超えています。
 - 統合読み取りプール内の CPU 使用率が`split.region-cpu-overload-threshold-ratio`を超えています。
 
-ロードベーススプリットはデフォルトで有効になっていますが、パラメータがかなり高い値に設定されています。この機能を無効にするには、 `split.qps-threshold`と`split.byte-threshold`十分に高い値に設定し、同時に`split.region-cpu-overload-threshold-ratio`を`0`に設定してください。
+ロードベーススプリットはデフォルトで有効になっていますが、パラメーターは比較的高い値に設定されています。この機能を無効にするには、 `split.qps-threshold`と`split.byte-threshold`を十分に高い値に設定し、同時に`split.region-cpu-overload-threshold-ratio`を`0`に設定してください。
 
-パラメータを変更するには、次の2つの方法のいずれかを実行します。
+パラメーターを変更するには、次の2つの方法のいずれかを実行します。
 
 - SQL文を使用します。
 

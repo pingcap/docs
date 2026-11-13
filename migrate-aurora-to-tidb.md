@@ -28,7 +28,7 @@ summary: DBスナップショットを使用して、Amazon AuroraからTiDBへ�
 
 Amazon Auroraのスナップショットファイルには DDL文が含まれていないため、 Dumplingを使用してスキーマをエクスポートし、 TiDB Lightningを使用してターゲットデータベースにスキーマを作成する必要があります。
 
-次のコマンドを実行して、 Dumplingを使用してスキーマをエクスポートします。このコマンドには`--filter`パラメータが含まれており、目的のテーブルスキーマのみをエクスポートできます。パラメータの詳細については、 [Dumplingのオプション一覧](/dumpling-overview.md#option-list-of-dumpling)を参照してください。
+次のコマンドを実行して、 Dumplingを使用してスキーマをエクスポートします。このコマンドには`--filter`パラメーターが含まれており、目的のテーブルスキーマのみをエクスポートできます。パラメーターの詳細については、 [Dumplingのオプション一覧](/dumpling-overview.md#option-list-of-dumpling)を参照してください。
 
 ```shell
 export AWS_ACCESS_KEY_ID=${access_key}
@@ -203,11 +203,11 @@ TiDBクラスターでTLSを有効にする必要がある場合は、 [TiDB Lig
     tiup dmctl --master-addr ${advertise-addr} operate-source create source1.yaml
     ```
 
-    上記のコマンドで使用されるパラメータは、以下のように説明されます。
+    上記のコマンドで使用されるパラメーターは、以下のように説明されます。
 
-    | パラメータ                   | 説明                                                                          |
+    | パラメーター                   | 説明                                                                          |
     | ----------------------- | --------------------------------------------------------------------------- |
-    | `--master-addr`         | `{advertise-addr}`が接続されるクラスタ内の任意の DM-master の`dmctl` (例: 172.16.10.71:8261) |
+    | `--master-addr`         | `{advertise-addr}`が接続されるクラスター内の任意の DM-master の`dmctl` (例: 172.16.10.71:8261) |
     | `operate-source create` | データソースをDMクラスターにロードします。                                                      |
 
 ### ステップ2：移行タスクを作成する {#step-2-create-the-migration-task}
@@ -269,11 +269,11 @@ tiup dmctl --master-addr ${advertise-addr} check-task task1.yaml
 tiup dmctl --master-addr ${advertise-addr} start-task task1.yaml
 ```
 
-上記のコマンドで使用されるパラメータは、以下のように説明されます。
+上記のコマンドで使用されるパラメーターは、以下のように説明されます。
 
-| パラメータ           | 説明                                                                          |
+| パラメーター           | 説明                                                                          |
 | --------------- | --------------------------------------------------------------------------- |
-| `--master-addr` | `{advertise-addr}`が接続されるクラスタ内の任意の DM-master の`dmctl` (例: 172.16.10.71:8261) |
+| `--master-addr` | `{advertise-addr}`が接続されるクラスター内の任意の DM-master の`dmctl` (例: 172.16.10.71:8261) |
 | `start-task`    | 移行タスクを開始します。                                                                |
 
 タスクの開始に失敗した場合は、プロンプトメッセージを確認し、設定を修正してください。その後、上記のコマンドを再度実行してタスクを開始できます。
@@ -298,13 +298,13 @@ TiUPを使用してDMをデプロイした際に、Prometheus、Alertmanager、�
 
 DMが実行されている間、DM-worker、DM-master、およびdmctlは関連情報をログに出力します。これらのコンポーネントのログディレクトリは以下のとおりです。
 
-- DM-master: DM-master プロセスパラメータ`--log-file`で指定されます。TiUPを使用して DM をデプロイする場合、ログディレクトリはデフォルトで`/dm-deploy/dm-master-8261/log/`になります。
-- DM-worker: DM-worker プロセスパラメータ`--log-file`で指定されます。TiUPを使用して DM をデプロイする場合、ログディレクトリはデフォルトで`/dm-deploy/dm-worker-8262/log/`になります。
+- DM-master: DM-master プロセスパラメーター`--log-file`で指定されます。TiUPを使用して DM をデプロイする場合、ログディレクトリはデフォルトで`/dm-deploy/dm-master-8261/log/`になります。
+- DM-worker: DM-worker プロセスパラメーター`--log-file`で指定されます。TiUPを使用して DM をデプロイする場合、ログディレクトリはデフォルトで`/dm-deploy/dm-worker-8262/log/`になります。
 
 ## 次は？ {#what-s-next}
 
 - [移行タスクを一時停止する](/dm/dm-pause-task.md)。
 - [移行タスクを再開する](/dm/dm-resume-task.md)。
 - [移行タスクを停止します](/dm/dm-stop-task.md)。
-- [クラスタデータソースとタスク構成のエクスポートとインポート](/dm/dm-export-import-config.md)。
+- [クラスターデータソースとタスク構成のエクスポートとインポート](/dm/dm-export-import-config.md)。
 - [失敗したDDL文を処理する](/dm/handle-failed-ddl-statements.md)。

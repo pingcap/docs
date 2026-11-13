@@ -23,16 +23,16 @@ URI の基本的な形式は次のとおりです。
 
     - `access-key` : アクセスキーを指定します。
     - `secret-access-key` : 秘密アクセスキーを指定します。
-    - `session-token` : 一時セッショントークンを指定します。BRはv7.6.0以降でこのパラメータをサポートしています。
+    - `session-token` : 一時セッショントークンを指定します。BRはv7.6.0以降でこのパラメーターをサポートしています。
     - `use-accelerate-endpoint` : Amazon S3 の高速エンドポイントを使用するかどうかを指定します (デフォルトは`false` )。
     - `endpoint` : S3 互換サービスのカスタムエンドポイントの URL を指定します (例: `<https://s3.example.com/>` )。
-    - `force-path-style` : 仮想ホスト スタイルのアクセスではなく、パス スタイルのアクセスを使用します (デフォルトは`true` )。
+    - `force-path-style` : 仮想ホストスタイルのアクセスではなく、パススタイルのアクセスを使用します (デフォルトは`true` )。
     - `storage-class` : アップロードされたオブジェクトのストレージクラスを指定します (たとえば、 `STANDARD`または`STANDARD_IA` )。
     - `sse` : アップロードされたオブジェクトの暗号化に使用されるサーバー側暗号化アルゴリズムを指定します (値のオプション: 空、 `AES256` 、または`aws:kms` )。
     - `sse-kms-key-id` : `sse` `aws:kms`に設定されている場合は KMS ID を指定します。
     - `acl` : アップロードされたオブジェクトの既定 ACL を指定します (たとえば、 `private`または`authenticated-read` )。
-    - `role-arn` : 指定された[IAMロール](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)を使用してサードパーティの Amazon S3 データにアクセスする必要がある場合、 `arn:aws:iam::888888888888:role/my-role`などの`role-arn` URL クエリパラメータで、対応する[Amazon リソースネーム (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) IAMロールを指定できます。IAMを使用してサードパーティの Amazon S3 データにアクセスする方法の詳細については、 [AWSドキュメント](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_third-party.html)を参照してください。BRはv7.6.0 以降でこのパラメータをサポートしています。
-    - `external-id` : サードパーティから Amazon S3 データにアクセスする場合、正しい[外部ID](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html)を指定して[IAMロール](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)を引き受けることが必要になる場合があります。この場合、この`external-id` URL クエリパラメータを使用して外部 ID を指定し、 IAMロールを引き受けることができることを確認できます。外部 ID は、Amazon S3 データにアクセスするためにIAMロール ARN と一緒にサードパーティによって提供される任意の文字列です。IAMロールを引き受ける際に外部 ID を指定するかどうかは任意です。つまり、サードパーティがIAMロールに外部 ID を必要としない場合は、このパラメータを指定せずにIAMロールを引き受け、対応する Amazon S3 データにアクセスできます。
+    - `role-arn` : 指定された[IAMロール](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)を使用してサードパーティの Amazon S3 データにアクセスする必要がある場合、 `arn:aws:iam::888888888888:role/my-role`などの`role-arn` URL クエリパラメーターで、対応する[Amazon リソースネーム (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) IAMロールを指定できます。IAMを使用してサードパーティの Amazon S3 データにアクセスする方法の詳細については、 [AWSドキュメント](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_third-party.html)を参照してください。BRはv7.6.0 以降でこのパラメーターをサポートしています。
+    - `external-id` : サードパーティから Amazon S3 データにアクセスする場合、正しい[外部ID](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html)を指定して[IAMロール](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)を引き受けることが必要になる場合があります。この場合、この`external-id` URL クエリパラメーターを使用して外部 ID を指定し、 IAMロールを引き受けることができることを確認できます。外部 ID は、Amazon S3 データにアクセスするためにIAMロール ARN と一緒にサードパーティによって提供される任意の文字列です。IAMロールを引き受ける際に外部 ID を指定するかどうかは任意です。つまり、サードパーティがIAMロールに外部 ID を必要としない場合は、このパラメーターを指定せずにIAMロールを引き受け、対応する Amazon S3 データにアクセスできます。
 
 以下は、 TiDB LightningおよびBRの Amazon S3 URI の例です。この例では、特定のファイルパス`testfolder`を指定する必要があります。
 
@@ -62,13 +62,13 @@ tiup cdc:v7.5.0 cli changefeed create \
 
     - `secret-access-key` : 秘密アクセスキーを指定します。
 
-    - `session-token` : 一時セッション トークンを指定します。
+    - `session-token` : 一時セッショントークンを指定します。
 
     - `use-accelerate-endpoint` : Amazon S3 の高速エンドポイントを使用するかどうかを指定します (デフォルトは`false` )。
 
     - `endpoint` : S3 互換サービスのカスタムエンドポイントの URL を指定します (例: `<https://s3.example.com/>` )。
 
-    - `force-path-style` : 仮想ホスト スタイルのアクセスではなく、パス スタイルのアクセスを使用します (デフォルトは`true` )。
+    - `force-path-style` : 仮想ホストスタイルのアクセスではなく、パススタイルのアクセスを使用します (デフォルトは`true` )。
 
     - `storage-class` : アップロードされたオブジェクトのストレージクラスを指定します (たとえば、 `STANDARD`または`STANDARD_IA` )。
 
@@ -78,7 +78,7 @@ tiup cdc:v7.5.0 cli changefeed create \
 
     - `acl` : アップロードされたオブジェクトの既定 ACL を指定します (たとえば、 `private`または`authenticated-read` )。
 
-    - `role-arn` : TiDB Cloud が特定の[IAMロール](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)を使用して Amazon S3 データにアクセスできるようにするには、 `role-arn` URL クエリパラメータにロールの[Amazon リソースネーム (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)を指定します。例: `arn:aws:iam::888888888888:role/my-role` 。
+    - `role-arn` : TiDB Cloud が特定の[IAMロール](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)を使用して Amazon S3 データにアクセスできるようにするには、 `role-arn` URL クエリパラメーターにロールの[Amazon リソースネーム (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)を指定します。例: `arn:aws:iam::888888888888:role/my-role` 。
 
         > **Note:**
         >
@@ -102,7 +102,7 @@ s3://external/testfolder?access-key=${access-key}&secret-access-key=${secret-acc
 - `host` : `bucket name`
 - `parameters` :
 
-    - `credentials-file` : 移行ツール ノード上の資格情報 JSON ファイルへのパスを指定します。
+    - `credentials-file` : 移行ツールノード上の資格情報 JSON ファイルへのパスを指定します。
     - `storage-class` : アップロードされたオブジェクトのストレージクラスを指定します（例： `STANDARD`または`COLDLINE` ）
     - `predefined-acl` : アップロードされたオブジェクトの定義済みACLを指定します（たとえば、 `private`または`project-private` ）
 

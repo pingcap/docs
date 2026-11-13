@@ -36,7 +36,7 @@ TiDBはv8.5 LTSにおいて、様々なオペレーティングシステムとCP
 
 - **互換性のあるプラットフォーム**: 以下の組み合わせでは、TiDBをコンパイル、ビルド、およびデプロイでき、OLTP、OLAP、およびデータツールをサポートします。これらの組み合わせは、リリースごとの体系的なテストマトリクスには含まれていません。互換性は、ビルド、デプロイ検証、およびTiDBユーザーによる使用を通じて確認されています。これらのプラットフォームで本番デプロイを行う場合は、サブスクリプションでのサポート範囲を確認するために {{{ .company }}} にお問い合わせください。
 
-    <table><thead><tr><th>オペレーティングシステム</th><th>サポートされているCPUアーキテクチャ</th></tr></thead><tbody><tr><td>macOS 12 (Monterey) 以降</td><td><ul><li>x86_64</li><li> ARM 64</li></ul></td></tr><tr><td> Oracle Enterprise Linux 8以降</td><td>x86_64</td></tr><tr><td> Ubuntu LTS 20.04以降</td><td>x86_64</td></tr><tr><td> CentOS Stream 8</td><td><ul><li> x86_64</li><li> ARM 64</li></ul></td></tr><tr><td> Debian 10 (Buster) 以降</td><td>x86_64</td></tr><tr><td> Fedora 38以降</td><td>x86_64</td></tr><tr><td> openSUSE Leap v15.5以降（Tumbleweedを除く）</td><td> x86_64</td></tr><tr><td> SUSE Linux Enterprise Server 15</td><td> x86_64</td></tr></tbody></table>
+    <table><thead><tr><th>オペレーティングシステム</th><th>サポートされているCPUアーキテクチャ</th></tr></thead><tbody><tr><td>macOS 12 (Monterey) 以降</td><td><ul><li>x86_64</li><li> ARM 64</li></ul></td></tr><tr><td> Oracle Enterprise Linux 8以降</td><td>x86_64</td></tr><tr><td> Ubuntu LTS 20.04以降</td><td>x86_64</td></tr><tr><td> CentOS Stream 8</td><td><ul><li> x86_64</li><li> ARM 64</li></ul></td></tr><tr><td> Debian 10 (Buster) 以降</td><td>x86_64</td></tr><tr><td> Fedora 38以降</td><td>x86_64</td></tr><tr><td> openSUSE Leap v15.5より後（Tumbleweedを除く）</td><td> x86_64</td></tr><tr><td> SUSE Linux Enterprise Server 15</td><td> x86_64</td></tr></tbody></table>
 
     > **Note:**
     >

@@ -16,7 +16,7 @@ VitessのバックエンドはMySQLベースであるため、VitessからTiDB�
 1. 既存のデータをインポートするには、 DumplingとTiDB Lightning を使用します。
 2. DM を使用して増分データをインポートします。
 
-これらのツールに加えて、 [Vitess用Debeziumコネクタ](https://debezium.io/documentation/reference/connectors/vitess.html)も使用できます。このコネクタを使用すると、 [Kafka Connect](https://kafka.apache.org/documentation/#connect)または[Apache Flink](https://nightlies.apache.org/flink/flink-docs-stable/)を使用して、Vitess から TiDB に変更をストリーミングできます。
+これらのツールに加えて、 [Vitess用Debeziumコネクター](https://debezium.io/documentation/reference/connectors/vitess.html)も使用できます。このコネクターを使用すると、 [Kafka Connect](https://kafka.apache.org/documentation/#connect)または[Apache Flink](https://nightlies.apache.org/flink/flink-docs-stable/)を使用して、Vitess から TiDB に変更をストリーミングできます。
 
 VitessとTiDBはどちらもMySQLプロトコルとSQL方言をサポートしているため、アプリケーションレベルでの変更は小さくなると予想されます。ただし、シャーディングやその他の実装固有の側面を直接管理するタスクでは、変更が大きくなる可能性があります。VitessからTiDBへのデータ移行を容易にするために、TiDBはVitessのHASH関数と互換性のある文字列のハッシュを返す[`VITESS_HASH()`](/functions-and-operators/tidb-functions.md)関数を導入しています。
 

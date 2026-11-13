@@ -5,17 +5,17 @@ summary: このドキュメントでは、 Follower Readの使用と実装につ
 
 # Follower Read {#follower-read}
 
-TiDBでは、高可用性とデータの安全性を確保するために、TiKVは各リージョンに複数のレプリカを保存します。そのうちの1つがリーダー、残りはフォロワーです。デフォルトでは、すべての読み取りおよび書き込みリクエストはリーダーによって処理されます。Follower Read機能により、TiDBは強力な一貫性を維持しながら、リージョンのフォロワーレプリカからデータを読み取ることができます。これにより、リーダーの読み取りワークロードが軽減され、クラスター全体の読み取りスループットが向上します。
+TiDBでは、高可用性とデータの安全性を確保するために、TiKVは各リージョンに複数のレプリカを保存します。そのうちの1つがリーダー、残りはフォロワーです。デフォルトでは、すべての読み取りおよび書き込みリクエストはリーダーによって処理されます。Follower Read機能により、TiDBは強力な一貫性を維持しながら、リージョンのフォロワーレプリカからデータを読み取れます。これにより、リーダーの読み取りワークロードが軽減され、クラスター全体の読み取りスループットが向上します。
 
 <CustomContent platform="tidb">
 
-Follower Read を実行する際、TiDBはトポロジ情報に基づいて適切なレプリカを選択します。具体的には、TiDBは`zone`ラベルを使用してローカルレプリカを識別します。つまり、TiDBノードの`zone`ラベルがターゲットTiKVノードの3ラベルと同じ場合、TiDBはそのレプリカをローカルレプリカと見なします。詳細については、 [トポロジラベルによるレプリカのスケジュール](/schedule-replicas-by-topology-labels.md)を参照してください。
+Follower Read を実行する際、TiDBはトポロジー情報に基づいて適切なレプリカを選択します。具体的には、TiDBは`zone`ラベルを使用してローカルレプリカを識別します。つまり、TiDBノードの`zone`ラベルがターゲットTiKVノードのラベルと同じ場合、TiDBはそのレプリカをローカルレプリカと見なします。詳細については、 [トポロジーラベルによるレプリカのスケジュール](/schedule-replicas-by-topology-labels.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Follower Read を実行する際、TiDB はトポロジ情報に基づいて適切なレプリカを選択します。具体的には、TiDB はラベル`zone`を用いてローカルレプリカを識別します。TiDB ノードのラベル`zone`がターゲット TiKV ノードのラベルと同じ場合、TiDB はそのレプリカをローカルレプリカと見なします。ラベル`zone`はTiDB Cloudで自動的に設定されます。
+Follower Read を実行する際、TiDB はトポロジー情報に基づいて適切なレプリカを選択します。具体的には、TiDB はラベル`zone`を用いてローカルレプリカを識別します。TiDB ノードのラベル`zone`がターゲット TiKV ノードのラベルと同じ場合、TiDB はそのレプリカをローカルレプリカと見なします。ラベル`zone`はTiDB Cloudで自動的に設定されます。
 
 </CustomContent>
 
@@ -88,11 +88,11 @@ set [session | global] tidb_replica_read = '<target value>';
 
 > **Note:**
 >
-> `tidb_replica_read`を`closest-replicas`または`closest-adaptive`に設定した場合、指定された構成に従ってレプリカがアベイラビリティゾーン全体に分散されるようにするには、PD に`location-labels`を設定し、TiDB と TiKV に[トポロジラベルによるレプリカのスケジュール](/schedule-replicas-by-topology-labels.md)に従って正しい`labels`を設定する必要があります。TiDB は、同じアベイラビリティゾーン内の TiKV ノードを一致させるために`zone`ラベルに依存するため、PD の`location-labels`に`zone`ラベルが含まれ、各 TiDB および TiKV ノードの構成に`zone`が含まれていることを確認する必要があります。クラスターがTiDB Operatorを使用してデプロイされている場合は、 [データの高可用性](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-a-tidb-cluster#high-availability-of-data)を参照してください。
+> `tidb_replica_read`を`closest-replicas`または`closest-adaptive`に設定した場合、指定された構成に従ってレプリカがアベイラビリティゾーン全体に分散されるようにするには、PD に`location-labels`を設定し、TiDB と TiKV に[トポロジーラベルによるレプリカのスケジュール](/schedule-replicas-by-topology-labels.md)に従って正しい`labels`を設定する必要があります。TiDB は、同じアベイラビリティゾーン内の TiKV ノードを一致させるために`zone`ラベルに依存するため、PD の`location-labels`に`zone`ラベルが含まれ、各 TiDB および TiKV ノードの構成に`zone`が含まれていることを確認する必要があります。クラスターがTiDB Operatorを使用してデプロイされている場合は、 [データの高可用性](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-a-tidb-cluster#high-availability-of-data)を参照してください。
 >
 > TiDB v7.5.0 以前のバージョンの場合:
 >
-> - `tidb_replica_read`から`follower`に設定し、フォロワー レプリカまたはラーナーレプリカが利用できない場合、TiDB はエラーを返します。
+> - `tidb_replica_read`から`follower`に設定し、フォロワーレプリカまたはラーナーレプリカが利用できない場合、TiDB はエラーを返します。
 > - `tidb_replica_read`から`learner`に設定し、ラーナーレプリカが利用できない場合は、TiDB はエラーを返します。
 
 </CustomContent>
