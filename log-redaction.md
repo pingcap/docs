@@ -70,3 +70,11 @@ PD側でログの秘匿化を有効にするには、 [`security.redact-info-log
 ## TiFlash側でのログの秘匿化 {#log-redaction-in-tiflash-side}
 
 TiFlash側でログの秘匿化を有効にするには、tiflash-serverの[`security.redact_info_log`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)値とtiflash-learnerの[`security.redact-info-log`](/tiflash/tiflash-configuration.md#configure-the-tiflash-learnertoml-file)値の両方を`true`または`"marker"`に設定します。両方の設定値はデフォルトで`false`に設定されており、ログの秘匿化が無効になっていることを意味します。
+
+## TiCDC でのログ秘匿化 {#log-redaction-in-ticdc}
+
+> **Note:**
+>
+> TiCDC v8.5.6 以降、ログ秘匿化は [TiCDC の新しいアーキテクチャ](/ticdc/ticdc-architecture.md) でのみサポートされます。
+
+TiCDC でログ秘匿化を有効にするには、TiCDC サーバー設定ファイルで [`security.redact-info-log`](/ticdc/ticdc-server-config.md#redact-info-log-new-in-v856) を `true` に設定します。このパラメータのデフォルト値は `false` で、ログ秘匿化が無効であることを意味します。`true` に設定すると、TiCDC はログ内の機密値を `?` に置き換えます。あるいは、`"marker"` に設定すると、機密値を元の値のまま残し、`‹` と `›` で囲みます。

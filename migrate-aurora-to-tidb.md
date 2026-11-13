@@ -22,7 +22,7 @@ summary: DBスナップショットを使用して、Amazon AuroraからTiDBへ�
 
 ### ステップ1. スキーマファイルのエクスポートとインポート {#step-1-export-and-import-the-schema-file}
 
-このセクションでは、Amazon Auroraからスキーマファイルをエクスポートし、TiDB にインポートする方法について説明します。対象データベースにテーブルを手動で作成している場合は、この手順をスキップできます。
+このセクションでは、Amazon Auroraからスキーマファイルをエクスポートし、TiDB にインポートする方法について説明します。ターゲットデータベースにテーブルを手動で作成している場合は、この手順をスキップできます。
 
 #### 1.1 Amazon Auroraからスキーマファイルをエクスポートする {#1-1-export-the-schema-file-from-amazon-aurora}
 
@@ -260,13 +260,13 @@ mysql-instances:
 移行作業を開始する前に、エラーの可能性を減らすため、 `check-task`コマンドを実行して、構成が DM の要件を満たしていることを確認することをお勧めします。
 
 ```shell
-tiup dmctl --master-addr ${advertise-addr} check-task task.yaml
+tiup dmctl --master-addr ${advertise-addr} check-task task1.yaml
 ```
 
 その後、 `tiup dmctl`を実行して移行タスクを開始します。
 
 ```shell
-tiup dmctl --master-addr ${advertise-addr} start-task task.yaml
+tiup dmctl --master-addr ${advertise-addr} start-task task1.yaml
 ```
 
 上記のコマンドで使用されるパラメーターは、以下のように説明されます。
