@@ -39,14 +39,3 @@ summary: "{{{ .lake }}} 为我们的 {{{ .lake }}} 用户和客户提供全面�
 > 请注意，只有 Business 和 Dedicated 客户在支持事件上享有服务级别协议（SLA）。如果你使用的是 Personal 版本，虽然我们会尽快回答你的问题，但也建议你同时查看我们的社区资源：
 >
 > - [{{{ .lake }}} Community Slack Channel](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=tidbcloud)
-
-## 企业支持 {#enterprise-support}
-
-对于具有关键任务部署需求的客户，我们的 Dedicated 版本提供增强型支持选项，包括：
-
-- 所有严重级别问题的优先响应时间
-- 专属支持工程师
-- 主动监控和问题解决
-- 定期健康检查和优化建议
-
-联系[销售团队](https://www.pingcap.com/contact-us/)以了解有关企业支持服务的更多信息。

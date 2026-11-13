@@ -7,10 +7,6 @@ summary: 删除表中已过时的虚拟列文件。
 
 删除表中已过时的虚拟列文件。
 
-> **Note:**
->
-> 此命令需要 virtual column 企业版功能。
-
 ## 语法 {#syntax}
 
 ```sql

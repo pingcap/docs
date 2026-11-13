@@ -18,15 +18,3 @@ summary: "{{{ .lake }}} 主要通过**多种索引技术**来加速查询性能�
 | [**聚合索引**](/tidb-cloud-lake/guides/aggregating-index.md) | 预计算并存储常见聚合结果 | 当你的分析负载经常在大型数据集上运行 SUM、COUNT、AVG 查询时 |
 | [**全文索引**](/tidb-cloud-lake/guides/full-text-index.md) | 提供极快的语义文本搜索能力 | 当你需要高级文本搜索功能（如相关性评分和模糊匹配）时 |
 | [**Ngram 索引**](/tidb-cloud-lake/guides/ngram-index.md) | 加速带有通配符的模式匹配 | 当你的查询在大型文本列上使用带通配符的 LIKE 运算符时（尤其是 '%keyword%'） |
-
-## 功能可用性 {#feature-availability}
-
-| 功能 | 社区版 | 企业版 | 云版 |
-|---------|-----------|------------|-------|
-| cluster key | ✅ | ✅ | ✅ |
-| 表分区 | ✅ | ✅ | ✅ |
-| 查询结果缓存 | ✅ | ✅ | ✅ |
-| 虚拟列 | ❌ | ✅ | ✅ |
-| 聚合索引 | ✅ | ✅ | ✅ |
-| 全文索引 | ✅ | ✅ | ✅ |
-| Ngram 索引 | ✅ | ✅ | ✅ |
