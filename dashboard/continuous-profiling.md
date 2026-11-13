@@ -28,9 +28,9 @@ summary: TiDB Dashboardの継続的プロファイリングにより、専門家
 
 - CPU: TiDB、TiKV、 TiFlash、PDインスタンスの各内部関数のCPUオーバーヘッド
 
-- ヒープ: TiDB、TiKV、PDインスタンス上の各内部関数のメモリ消費量
+- Heap: TiDB、TiKV、PDインスタンス上の各内部関数のメモリ消費量
 
-- ミューテックス: TiDBおよびPDインスタンス上のミューテックスの競合状態
+- Mutex: TiDBおよびPDインスタンス上のミューテックスの競合状態
 
 - Goroutine: TiDB および PD インスタンス上のすべての Goroutine の実行状態と呼び出しスタック
 

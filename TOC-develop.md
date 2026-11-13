@@ -5,7 +5,7 @@
 
 ## クイックスタート
 
-- [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)
+- [{{{ .starter }}}インスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)
 - [TiDBの基本](/develop/dev-guide-tidb-basics.md)
 - [TiDBにおけるCRUD SQL](/develop/dev-guide-tidb-crud-sql.md)
 

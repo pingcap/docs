@@ -1,15 +1,15 @@
 ---
 title: TiFlash Deployment Topology
-summary: 最小限の TiDB トポロジに基づくTiFlashの展開トポロジについて学習します。
+summary: 最小限の TiDB トポロジーに基づくTiFlashの展開トポロジーについて学習します。
 ---
 
-# TiFlash展開トポロジ {#tiflash-deployment-topology}
+# TiFlash展開トポロジー {#tiflash-deployment-topology}
 
-このドキュメントでは、最小限の TiDB トポロジに基づく[TiFlash](/tiflash/tiflash-overview.md)のデプロイメント トポロジについて説明します。
+このドキュメントでは、最小限の TiDB トポロジーに基づく[TiFlash](/tiflash/tiflash-overview.md)のデプロイメントトポロジーについて説明します。
 
-TiFlashは列指向型ストレージエンジンであり、徐々に標準的なクラスタトポロジーになりつつあります。リアルタイムHTAPアプリケーションに適しています。
+TiFlashは列指向型ストレージエンジンであり、徐々に標準的なクラスタートポロジーになりつつあります。リアルタイムHTAPアプリケーションに適しています。
 
-## トポロジ情報 {#topology-information}
+## トポロジー情報 {#topology-information}
 
 | インスタンス             | 数 | 物理マシン構成                           | IP                                   | 設定                 |
 | :------------- | :--- | :-------------------------------- | :----------------------------------- | :------------------------- |
@@ -23,20 +23,20 @@ TiFlashは列指向型ストレージエンジンであり、徐々に標準的�
 >
 > インスタンスのIPアドレスは例としてのみ示されています。実際の導入では、IPアドレスを実際のIPアドレスに置き換えてください。
 
-### トポロジテンプレート {#topology-templates}
+### トポロジーテンプレート {#topology-templates}
 
-- [TiFlashトポロジのシンプルなテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/simple-tiflash.yaml)
-- [TiFlashトポロジの複雑なテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/complex-tiflash.yaml)
+- [TiFlashトポロジーのシンプルなテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/simple-tiflash.yaml)
+- [TiFlashトポロジーの複雑なテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/complex-tiflash.yaml)
 
-上記の TiDB クラスター トポロジファイルの設定項目の詳細については、 [TiUPを使用して TiDB をデプロイするためのトポロジ設定ファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
+上記の TiDB クラスタートポロジーファイルの設定項目の詳細については、 [TiUPを使用して TiDB をデプロイするためのトポロジー設定ファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
 
-### 主なパラメータ {#key-parameters}
+### 主なパラメーター {#key-parameters}
 
 - PD の[配置ルール](/configure-placement-rules.md)機能を有効にするには、構成テンプレートの`replication.enable-placement-rules`の値を`true`に設定します。
 - `tiflash_servers`のインスタンスレベル`"-host"`構成では、ドメイン名ではなく IP のみがサポートされます。
-- TiFlashパラメータの詳細な説明については、 [TiFlash設定](/tiflash/tiflash-configuration.md)を参照してください。
+- TiFlashパラメーターの詳細な説明については、 [TiFlash設定](/tiflash/tiflash-configuration.md)を参照してください。
 
 > **Note:**
 >
-> - 設定ファイルに`tidb`ユーザーを手動で作成する必要はありません。TiUPクラスタコンポーネントは、ターゲットマシンに`tidb`ユーザーを自動的に作成します。ユーザーをカスタマイズすることも、制御マシンと同じユーザーを維持することもできます。
-> - デプロイメントディレクトリを相対パスとして構成すると、クラスターはユーザーのホーム ディレクトリにデプロイされます。
+> - 設定ファイルに`tidb`ユーザーを手動で作成する必要はありません。TiUPクラスターコンポーネントは、ターゲットマシンに`tidb`ユーザーを自動的に作成します。ユーザーをカスタマイズすることも、制御マシンと同じユーザーを維持することもできます。
+> - デプロイメントディレクトリを相対パスとして構成すると、クラスターはユーザーのホームディレクトリにデプロイされます。

@@ -5,7 +5,7 @@ summary: TiDB HTAPをすぐに使い始める方法を学びます。
 
 # TiDB HTAPのクイックスタート {#quick-start-with-tidb-htap}
 
-このガイドでは、TiDB のハイブリッドトランザクションおよび分析処理 (HTAP) のワンストップ ソリューションを最も簡単に使い始める方法について説明します。
+このガイドでは、TiDB のハイブリッドトランザクションおよび分析処理 (HTAP) のワンストップソリューションを最も簡単に使い始める方法について説明します。
 
 > **Note:**
 >
@@ -16,7 +16,7 @@ summary: TiDB HTAPをすぐに使い始める方法を学びます。
 TiDB HTAP を使用する前に、 [TiKV](/tikv-overview.md) 、TiDB オンライントランザクション処理 (OLTP) 用の行ベースのストレージエンジン、および[TiFlash](/tiflash/tiflash-overview.md) 、TiDB オンライン分析処理 (OLAP) 用の列指向のストレージに関する基本的な知識が必要です。
 
 - HTAPのストレージエンジン：HTAPでは、行ベースストレージエンジンと列指向ストレージエンジンが共存します。どちらのストレージエンジンもデータを自動的に複製し、強力な一貫性を維持できます。行ベースストレージエンジンはOLTPパフォーマンスを最適化し、列指向ストレージエンジンはOLAPパフォーマンスを最適化します。
-- HTAP のデータ一貫性: 分散型トランザクション キーバリューデータベースである TiKV は、 ACID準拠のトランザクション インターフェイスを提供し、 [Raftコンセンサスアルゴリズム](https://raft.github.io/raft.pdf)の実装により複数のレプリカ間のデータ一貫性と高可用性を保証します。TiKV の列指向ストレージ拡張機能であるTiFlash は、 Raft Learnerコンセンサス アルゴリズムに従って TiKV からデータをリアルタイムで複製し、TiKV とTiFlash間でデータの強力な一貫性を保証します。
+- HTAP のデータ一貫性: 分散型トランザクションキーバリューデータベースである TiKV は、 ACID準拠のトランザクションインターフェイスを提供し、 [Raftコンセンサスアルゴリズム](https://raft.github.io/raft.pdf)の実装により複数のレプリカ間のデータ一貫性と高可用性を保証します。TiKV の列指向ストレージ拡張機能であるTiFlash は、 Raft Learnerコンセンサスアルゴリズムに従って TiKV からデータをリアルタイムで複製し、TiKV とTiFlash間でデータの強力な一貫性を保証します。
 - HTAP のデータ分離: HTAP リソース分離の問題を解決するために、必要に応じて TiKV とTiFlash を異なるマシンにデプロイできます。
 - MPPコンピューティングエンジン： [MPP](/tiflash/use-tiflash-mpp-mode.md#control-whether-to-select-the-mpp-mode)は、TiDB 5.0以降TiFlashエンジンによって提供される分散コンピューティングフレームワークであり、ノード間のデータ交換を可能にし、高性能かつ高スループットのSQLアルゴリズムを提供します。MPPモードでは、分析クエリの実行時間を大幅に短縮できます。
 
@@ -26,7 +26,7 @@ TiDB HTAP を使用する前に、 [TiKV](/tikv-overview.md) 、TiDB オンラ�
 
 ### ステップ1. ローカルテスト環境をデプロイ {#step-1-deploy-a-local-test-environment}
 
-TiDB HTAPを使用する前に、 [TiDB Self-Managedのクイックスタート](/quick-start-with-tidb.md)の手順に従ってローカル テスト環境を準備し、次のコマンドを実行して TiDB クラスターをデプロイします。
+TiDB HTAPを使用する前に、 [TiDB Self-Managedのクイックスタート](/quick-start-with-tidb.md)の手順に従ってローカルテスト環境を準備し、次のコマンドを実行して TiDB クラスターをデプロイします。
 
 ```shell
 tiup playground
@@ -155,7 +155,7 @@ SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = 'test' and
 
 もう一度[ステップ3](#step-3-query-data-with-the-row-based-storage-engine)の SQL 文を実行すると、 TiDB HTAPのパフォーマンスを確認できます。
 
-TiFlashレプリカを持つテーブルの場合、TiDBオプティマイザはコスト見積もりに基づいてTiFlashレプリカを使用するかどうかを自動的に決定します。TiFlashが選択されているかどうかを確認するには、 `desc`または`explain analyze`文を使用します。例：
+TiFlashレプリカを持つテーブルの場合、TiDBオプティマイザーはコスト見積もりに基づいてTiFlashレプリカを使用するかどうかを自動的に決定します。TiFlashが選択されているかどうかを確認するには、 `desc`または`explain analyze`文を使用します。例：
 
 ```sql
 USE test;

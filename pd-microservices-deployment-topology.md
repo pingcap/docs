@@ -1,13 +1,13 @@
 ---
 title: PD Microservice Deployment Topology
-summary: 最小限の TiDB トポロジに基づく PD マイクロサービスのデプロイメント トポロジを学習します。
+summary: 最小限の TiDB トポロジーに基づく PD マイクロサービスのデプロイメントトポロジーを学習します。
 ---
 
-# PDマイクロサービスデプロイメントトポロジ {#pd-microservice-deployment-topology}
+# PDマイクロサービスデプロイメントトポロジー {#pd-microservice-deployment-topology}
 
-このドキュメントでは、最小限の TiDB トポロジに基づく[PDマイクロサービス](/pd-microservices.md)のデプロイメント トポロジについて説明します。
+このドキュメントでは、最小限の TiDB トポロジーに基づく[PDマイクロサービス](/pd-microservices.md)のデプロイメントトポロジーについて説明します。
 
-## トポロジ情報 {#topology-information}
+## トポロジー情報 {#topology-information}
 
 | インスタンス             | 数 | 物理マシン構成                        | IP                                      | 設定                 |
 | :------------- | :--- | :----------------------------- | :-------------------------------------- | :------------------------- |
@@ -22,9 +22,9 @@ summary: 最小限の TiDB トポロジに基づく PD マイクロサービス�
 >
 > インスタンスのIPアドレスは例としてのみ示されています。実際の導入では、IPアドレスを実際のIPアドレスに置き換えてください。
 
-### トポロジテンプレート {#topology-template}
+### トポロジーテンプレート {#topology-template}
 
-<details><summary>PDマイクロサービストポロジのシンプルなテンプレート</summary>
+<details><summary>PDマイクロサービストポロジーのシンプルなテンプレート</summary>
 
 ```yaml
 # # Global variables are applied to all deployments and used as the default value of
@@ -80,9 +80,9 @@ grafana_servers:
 
 </details>
 
-前述の TiDB クラスター トポロジファイルの設定項目の詳細については、 [TiUPを使用して TiDB をデプロイするためのトポロジ設定ファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
+前述の TiDB クラスタートポロジーファイルの設定項目の詳細については、 [TiUPを使用して TiDB をデプロイするためのトポロジー設定ファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
 
-### 主なパラメータ {#key-parameters}
+### 主なパラメーター {#key-parameters}
 
 - `tso_servers`のインスタンスのレベル`host`構成では、ドメイン名ではなく IP アドレスのみがサポートされます。
 - TSO 設定項目の詳細については、 [TSO 設定ファイル](/tso-configuration-file.md)を参照してください。
@@ -92,4 +92,4 @@ grafana_servers:
 > **Note:**
 >
 > - 設定ファイルに`tidb`ユーザーを手動で作成する必要はありません。TiUPTiUPコンポーネントは、ターゲットマシンに`tidb`ユーザーを自動的に作成します。ユーザーをカスタマイズすることも、制御マシンと同じユーザーを維持することもできます。
-> - デプロイメントディレクトリを相対パスとして構成すると、クラスターはユーザーのホーム ディレクトリにデプロイされます。
+> - デプロイメントディレクトリを相対パスとして構成すると、クラスターはユーザーのホームディレクトリにデプロイされます。

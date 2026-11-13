@@ -9,7 +9,7 @@ summary: TiKV のステイル読み取りと safe-ts の原則を紹介し、 �
 
 ## ステイル読み取りとsafe-tsの概要 {#overview-of-stale-read-and-safe-ts}
 
-[ステイル読み取り](/stale-read.md) 、TiDB が TiDB に保存されているデータの履歴バージョンを読み取るために適用するメカニズムです。TiKV では、 ステイル読み取り は[safe-ts](/#what-is-safe-ts)に依存します。リージョンピアへの読み取りリクエストのタイムスタンプ (ts) がそのリージョンの safe-ts 以下であれば、TiDB はピアからデータを安全に読み取ることができます。TiKV は、safe-ts が常に[resolved-ts](#what-is-resolved-ts)以下であることを保証することで、この安全性保証を実装しています。
+[ステイル読み取り](/stale-read.md)は、TiDB が TiDB に保存されているデータの履歴バージョンを読み取るために適用するメカニズムです。TiKV では、 ステイル読み取り は[safe-ts](/#what-is-safe-ts)に依存します。リージョンピアへの読み取りリクエストのタイムスタンプ (ts) がそのリージョンの safe-ts 以下であれば、TiDB はピアからデータを安全に読み取れます。TiKV は、safe-ts が常に[resolved-ts](#what-is-resolved-ts)以下であることを保証することで、この安全性保証を実装しています。
 
 ## safe-tsとresolved-tsを理解する {#understand-safe-ts-and-resolved-ts}
 
@@ -31,7 +31,7 @@ resolved-ts は、この値より小さいタイムスタンプを持つすべ�
 
 ### resolved-tsの維持 {#the-maintenance-of-resolved-ts}
 
-リージョンリーダーは、resolved-ts を管理するためにリゾルバを使用します。このリゾルバは、 Raft適用時に変更ログを受信することで、LOCK CF（カラムファミリー）内のロックを追跡します。初期化されると、リゾルバはリージョン全体をスキャンしてロックを追跡します。
+リージョンリーダーは、resolved-ts を管理するためにリゾルバーを使用します。このリゾルバーは、 Raft適用時に変更ログを受信することで、LOCK CF（カラムファミリー）内のロックを追跡します。初期化されると、リゾルバーはリージョン全体をスキャンしてロックを追跡します。
 
 ## ステイル読み取りの問題を診断する {#diagnose-stale-read-issues}
 
@@ -65,7 +65,7 @@ resolved-ts は、この値より小さいタイムスタンプを持つすべ�
 
 ### `tikv-ctl`を使用して診断する {#use-tikv-ctl-to-diagnose}
 
-`tikv-ctl`はリゾルバと`RegionReadProgress`の最新の詳細情報を提供します。詳細については[リージョンの`RegionReadProgress`の状態を取得する](/tikv-control.md#get-the-state-of-a-regions-regionreadprogress)を参照してください。
+`tikv-ctl`はリゾルバーと`RegionReadProgress`の最新の詳細情報を提供します。詳細については[リージョンの`RegionReadProgress`の状態を取得する](/tikv-control.md#get-the-state-of-a-regions-regionreadprogress)を参照してください。
 
 次に例を示します。
 
@@ -98,7 +98,7 @@ Resolver:
 
 - ロックがresolved-tsをブロックしているかどうか。
 - 適用インデックスが小さすぎて safe-ts を更新できないかどうか。
-- フォロワー ピアが存在する場合に、リーダーが十分に更新されたresolved-tsを送信しているかどうか。
+- フォロワーピアが存在する場合に、リーダーが十分に更新されたresolved-tsを送信しているかどうか。
 
 ### ログを使用して診断する {#use-logs-to-diagnose}
 
@@ -206,7 +206,7 @@ Resolver:
     stopped: false,
 ```
 
-ここで注目すべき点は、リゾルバの`applied_index` `tracked index`と等しいことです。したがって、リゾルバがこの問題の根本原因であると思われます。また、このリージョンに480000個のロックを残すトランザクションが1つあることもわかります。これが原因である可能性があります。
+ここで注目すべき点は、リゾルバーの`applied_index`が`tracked index`と等しいことです。したがって、リゾルバーがこの問題の根本原因であると思われます。また、このリージョンに480000個のロックを残すトランザクションが1つあることもわかります。これが原因である可能性があります。
 
 正確なトランザクションと一部のロックのキーを取得するには、TiKVログを確認し、 grep `locks with`を実行します。出力は次のようになります。
 

@@ -10,7 +10,7 @@ summary: TiCDC を使用して TiDB データを Apache Kafka および Apache F
 1. TiCDC が組み込まれた TiDB クラスターを迅速にデプロイし、Kafka クラスターと Flink クラスターを作成します。
 2. TiDB から Kafka にデータを複製する変更フィードを作成します。
 3. go-tpc を使用して TiDB にデータを書き込みます。
-4. Kafka コンソール コンシューマー上のデータを観察し、データが指定された Kafka トピックに複製されていることを確認します。
+4. Kafka コンソールコンシューマー上のデータを観察し、データが指定された Kafka トピックに複製されていることを確認します。
 5. (オプション) Kafka データを消費するように Flink クラスターを構成します。
 
 上記の手順はラボ環境で実行されています。これらの手順を参考に、本番環境にクラスターをデプロイすることもできます。
@@ -90,7 +90,7 @@ summary: TiCDC を使用して TiDB データを Apache Kafka および Apache F
 
 1. サービスのワークロードをシミュレートします。
 
-    ラボ環境で変更ログを生成するには、go-tpc を使用して TiDB クラスターにデータを書き込むことができます。具体的には、以下のコマンドを実行してTiUP bench を使用し、データベース`tpcc`を作成し、この新しいデータベースにデータを書き込みます。
+    ラボ環境で変更ログを生成するには、go-tpc を使用して TiDB クラスターにデータを書き込めます。具体的には、以下のコマンドを実行してTiUP bench を使用し、データベース`tpcc`を作成し、この新しいデータベースにデータを書き込みます。
 
     ```shell
     tiup bench tpcc -H 127.0.0.1 -P 4000 -D tpcc --warehouses 4 prepare
@@ -111,12 +111,12 @@ summary: TiCDC を使用して TiDB データを Apache Kafka および Apache F
 
 ## （オプション）ステップ4. Kafkaデータを消費するようにFlinkを構成する {#optional-step-4-configure-flink-to-consume-kafka-data}
 
-1. Flink Kafka コネクタをインストールします。
+1. Flink Kafka コネクターをインストールします。
 
-    Flinkエコシステムでは、Kafkaデータの取り込みとFlinkへのデータ出力にFlink Kafkaコネクタが使用されます。ただし、Flink Kafkaコネクタは自動的にインストールされません。使用するには、Flinkをインストールした後、Flink Kafkaコネクタとその依存関係をFlinkインストールディレクトリに追加してください。具体的には、以下のjarファイルをFlinkインストールディレクトリの`lib`ディレクトリにダウンロードしてください。すでにFlinkクラスターを実行している場合は、再起動して新しいプラグインをロードしてください。
+    Flinkエコシステムでは、Kafkaデータの取り込みとFlinkへのデータ出力にFlink Kafkaコネクターが使用されます。ただし、Flink Kafkaコネクターは自動的にインストールされません。使用するには、Flinkをインストールした後、Flink Kafkaコネクターとその依存関係をFlinkインストールディレクトリに追加してください。具体的には、以下のjarファイルをFlinkインストールディレクトリの`lib`ディレクトリにダウンロードしてください。すでにFlinkクラスターを実行している場合は、再起動して新しいプラグインをロードしてください。
 
     - [flink-connector-kafka-1.15.0.jar](https://repo.maven.apache.org/maven2/org/apache/flink/flink-connector-kafka/1.15.0/flink-connector-kafka-1.15.0.jar)
-    - [flink-sql-コネクタ-kafka-1.15.0.jar](https://repo.maven.apache.org/maven2/org/apache/flink/flink-sql-connector-kafka/1.15.0/flink-sql-connector-kafka-1.15.0.jar)
+    - [flink-sql-connector-kafka-1.15.0.jar](https://repo.maven.apache.org/maven2/org/apache/flink/flink-sql-connector-kafka/1.15.0/flink-sql-connector-kafka-1.15.0.jar)
     - [kafka-clients-3.2.0.jar](https://repo.maven.apache.org/maven2/org/apache/kafka/kafka-clients/3.2.0/kafka-clients-3.2.0.jar)
 
 2. テーブルを作成します。
