@@ -36,7 +36,7 @@ TiDBのトランザクション実装では、MVCC（Multiple Version Concurrenc
 > - データサイズが非常に大きい（1 TB 超）。
 > - Dumpling はPD に直接接続できません。たとえば、 TiDB クラスターはTiDB Cloud上、またはDumplingとは分離された Kubernetes 上にあります。
 >
-> このようなシナリオでは、エクスポート プロセス中の GC によるエクスポートの失敗を回避するために、事前に GC 時間を手動で延長する必要があります。
+> このようなシナリオでは、エクスポートプロセス中の GC によるエクスポートの失敗を回避するために、事前に GC 時間を手動で延長する必要があります。
 >
 > 詳細については[TiDB GC時間を手動で設定する](/dumpling-overview.md#manually-set-the-tidb-gc-time)を参照してください。
 

@@ -1,24 +1,24 @@
 ---
 title: Topology Configuration File for TiDB Deployment Using TiUP
-summary: TiUPは、トポロジファイルを使用してTiDBのクラスタートポロジをデプロイまたは変更します。また、Prometheus、Grafana、Alertmanagerなどの監視サーバーもデプロイします。トポロジファイルには、グローバル設定、監視サービス、コンポーネントバージョンなどのセクションが含まれています。各セクションでは、対応するサービスがデプロイされるマシンとその設定を指定します。
+summary: TiUPは、トポロジーファイルを使用してTiDBのクラスタートポロジーをデプロイまたは変更します。また、Prometheus、Grafana、Alertmanagerなどの監視サーバーもデプロイします。トポロジーファイルには、グローバル設定、監視サービス、コンポーネントバージョンなどのセクションが含まれています。各セクションでは、対応するサービスがデプロイされるマシンとその設定を指定します。
 ---
 
-# TiUPを使用した TiDB デプロイメントのトポロジ設定ファイル {#topology-configuration-file-for-tidb-deployment-using-tiup}
+# TiUPを使用した TiDB デプロイメントのトポロジー設定ファイル {#topology-configuration-file-for-tidb-deployment-using-tiup}
 
-TiUPを使用して TiDB をデプロイまたは拡張するには、クラスター トポロジを記述するトポロジファイル ( [サンプル](https://github.com/pingcap/tiup/blob/master/embed/examples/cluster/topology.example.yaml) ) を提供する必要があります。
+TiUPを使用して TiDB をデプロイまたは拡張するには、クラスタートポロジーを記述するトポロジーファイル ( [サンプル](https://github.com/pingcap/tiup/blob/master/embed/examples/cluster/topology.example.yaml) ) を提供する必要があります。
 
-同様に、クラスタートポロジを変更するには、トポロジファイルに変更を加える必要があります。違いは、クラスターのデプロイ後は、トポロジファイル内のフィールドの一部しか変更できないことです。このドキュメントでは、トポロジファイルの各セクションと各セクション内の各フィールドについて説明します。
+同様に、クラスタートポロジーを変更するには、トポロジーファイルに変更を加える必要があります。違いは、クラスターのデプロイ後は、トポロジーファイル内のフィールドの一部しか変更できないことです。このドキュメントでは、トポロジーファイルの各セクションと各セクション内の各フィールドについて説明します。
 
 TiUPを使用して TiDB クラスターをデプロイすると、Prometheus、Grafana、Alertmanager などの監視サーバーもTiUPによってデプロイされます。また、このクラスターをスケールアウトすると、 TiUP は新しいノードを監視スコープに追加します。上記の監視サーバーの設定をカスタマイズするには、 [監視サーバーの構成をカスタマイズする](/tiup/customized-montior-in-tiup-environment.md)の手順に従ってください。
 
 ## ファイル構造 {#file-structure}
 
-TiUPを使用した TiDB デプロイメントのトポロジ設定ファイルには、次のセクションが含まれる場合があります。
+TiUPを使用した TiDB デプロイメントのトポロジー設定ファイルには、次のセクションが含まれる場合があります。
 
 - [global](#global) : クラスターのグローバル設定。一部の設定項目はデフォルト値を使用しますが、インスタンスごとに個別に設定できます。
 - [monitored](#monitored) : 監視サービス（blackbox_exporterと`node_exporter`）の設定。各マシンに`node_exporter`と`blackbox_exporter`がデプロイされています。
 - [server_configs](#server_configs) : コンポーネントのグローバル設定。各コンポーネントを個別に設定できます。インスタンスに同じ名前の設定項目がある場合は、インスタンスの設定項目が有効になります。
-- [component_versions](#component_versions) : コンポーネントバージョン。コンポーネントがクラスタバージョンを使用しない場合に設定します。このセクションはtiup-cluster v1.14.0で導入されました。
+- [component_versions](#component_versions) : コンポーネントバージョン。コンポーネントがクラスターバージョンを使用しない場合に設定します。このセクションはtiup-cluster v1.14.0で導入されました。
 - [pd_servers](#pd_servers) : PDインスタンスの構成。この構成では、PDコンポーネントがデプロイされるマシンを指定します。
 - [tidb_servers](#tidb_servers) : TiDBインスタンスの構成。この構成では、TiDBコンポーネントがデプロイされるマシンを指定します。
 - [tikv_servers](#tikv_servers) : TiKVインスタンスの構成。この構成では、TiKVコンポーネントがデプロイされるマシンを指定します。
@@ -40,11 +40,11 @@ TiUPを使用した TiDB デプロイメントのトポロジ設定ファイル�
 
 - `group` : ユーザーが所属するユーザーグループ。ユーザー作成時に指定されます。デフォルト値は`<user>`フィールドの値です。指定されたグループが存在しない場合は、自動的に作成されます。
 
-- `systemd_mode` : クラスタのデプロイメント時にターゲットマシンで使用される`systemd`モードを指定します。デフォルト値は`system`です。 `user`に設定すると、ターゲットマシンでsudo権限は不要になり、 [TiUP no-sudo モード](/tiup/tiup-cluster-no-sudo-mode.md)が使用されます。
+- `systemd_mode` : クラスターのデプロイメント時にターゲットマシンで使用される`systemd`モードを指定します。デフォルト値は`system`です。 `user`に設定すると、ターゲットマシンでsudo権限は不要になり、 [TiUP no-sudo モード](/tiup/tiup-cluster-no-sudo-mode.md)が使用されます。
 
 - `ssh_port` : 操作のためにターゲットマシンに接続するためのSSHポートを指定します。デフォルト値は`22`です。
 
-- `enable_tls` : クラスタでTLSを有効にするかどうかを指定します。TLSを有効にすると、生成されたTLS証明書はコンポーネント間またはクライアントとコンポーネント間の接続に使用する必要があります。デフォルト値は`false`です。
+- `enable_tls` : クラスターでTLSを有効にするかどうかを指定します。TLSを有効にすると、生成されたTLS証明書はコンポーネント間またはクライアントとコンポーネント間の接続に使用する必要があります。デフォルト値は`false`です。
 
 - `listen_host` : デフォルトのリスニングIPアドレスを指定します。空の場合、各インスタンスは、 `host`フィールドに`:`が含まれているかどうかに基づいて、自動的に`::`または`0.0.0.0`に設定します。このフィールドはtiup-cluster v1.14.0で導入されました。
 
@@ -470,7 +470,7 @@ tiproxy_servers:
       labels: { zone: "zone2" }
 ```
 
-その他の構成例については、 [TiProxy 展開トポロジ](/tiproxy/tiproxy-deployment-topology.md)を参照してください。
+その他の構成例については、 [TiProxy 展開トポロジー](/tiproxy/tiproxy-deployment-topology.md)を参照してください。
 
 ### `kvcdc_servers` {#kvcdc_servers}
 
@@ -550,7 +550,7 @@ kvcdc_servers:
 
 - `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`global`の`resource_control`の内容とマージされます（2つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、systemd設定ファイルが生成され、 `host`で指定されたマシンに送信されます。`resource_control`の設定ルールは、 `global`の`resource_control`の内容と同じです。
 
-- `ticdc_cluster_id` : サービスに対応するTiCDCクラスタIDを指定します。このフィールドが指定されていない場合、サービスはデフォルトのTiCDCクラスタに参加します。このフィールドはTiDB v6.3.0以降のバージョンでのみ有効です。
+- `ticdc_cluster_id` : サービスに対応するTiCDCクラスターIDを指定します。このフィールドが指定されていない場合、サービスはデフォルトのTiCDCクラスターに参加します。このフィールドはTiDB v6.3.0以降のバージョンでのみ有効です。
 
 上記のフィールドについては、デプロイメント後にこれらの構成済みフィールドを変更できません。
 
@@ -671,11 +671,11 @@ scheduling_servers:
 
 - `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`global`の`resource_control`の内容とマージされます（2つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、systemd設定ファイルが生成され、 `host`で指定されたマシンに送信されます。`resource_control`の設定ルールは、 `global`の`resource_control`の内容と同じです。
 
-- `additional_args` : TiUP v1.15.0で導入されたこのフィールドは、Prometheusの実行に必要な追加パラメータを設定します。このフィールドは配列であり、配列の各要素はPrometheusの実行パラメータです。例えば、Prometheusのホットリロード機能を有効にするには、このフィールドを`--web.enable-lifecycle`に設定します。
+- `additional_args` : TiUP v1.15.0で導入されたこのフィールドは、Prometheusの実行に必要な追加パラメーターを設定します。このフィールドは配列であり、配列の各要素はPrometheusの実行パラメーターです。例えば、Prometheusのホットリロード機能を有効にするには、このフィールドを`--web.enable-lifecycle`に設定します。
 
 - `external_labels` : TiUP v1.17.0で導入されたこのフィールドは、Prometheus グローバル `external_labels` をキーと値のペアとして設定します。このフィールドを使用して、Prometheus `remote_write`、federation、および alerting を通じて伝播される安定したメタデータを付加します。TiUP は `cluster` ラベルと `monitor` ラベルを予約し、自動的に管理するため、このフィールドで設定してはいけません。`__` で始まるラベル名も予約されています。さらに、すべてのラベル名は Prometheus のラベル命名規則に準拠する必要があります。このフィールドをサポートしない以前のバージョンの TiUP がトポロジーファイルを読み取ると、TiUP はこのフィールドを無視するのではなく、トポロジーの解析に失敗します。
 
-- `additional_scrape_conf` : カスタマイズされたPrometheusスクレイプ設定。TiDBクラスターをデプロイ、スケールアウト、スケールイン、またはリロードすると、 TiUPは`additional_scrape_conf`フィールドの内容をPrometheus設定ファイルの対応するパラメータに追加します。詳細については、 [Prometheusのスクレイプ設定をカスタマイズする](/tiup/customized-montior-in-tiup-environment.md#customize-prometheus-scrape-configuration)を参照してください。
+- `additional_scrape_conf` : カスタマイズされたPrometheusスクレイプ設定。TiDBクラスターをデプロイ、スケールアウト、スケールイン、またはリロードすると、 TiUPは`additional_scrape_conf`フィールドの内容をPrometheus設定ファイルの対応するパラメーターに追加します。詳細については、 [Prometheusのスクレイプ設定をカスタマイズする](/tiup/customized-montior-in-tiup-environment.md#customize-prometheus-scrape-configuration)を参照してください。
 
 上記のフィールドについては、デプロイメント後にこれらの構成済みフィールドを変更できません。
 
@@ -731,7 +731,7 @@ monitoring_servers:
 
 - `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`値になります。
 
-- `username` : Grafana ログイン インターフェース上のユーザー名。
+- `username` : Grafana ログインインターフェース上のユーザー名。
 
 - `password` : Grafanaに対応するパスワード。
 
@@ -745,7 +745,7 @@ monitoring_servers:
 >
 > `dashboard_dir`フィールドが`grafana_servers`に設定されている場合、クラスターの名前を変更する`tiup cluster rename`コマンドを実行した後、次の操作を実行する必要があります。
 >
-> 1. ローカル ダッシュボード ディレクトリ内の`*.json`ファイルについては、 `datasource`フィールドの値を新しいクラスター名に更新します ( `datasource`はクラスター名に基づいて命名されているため)。
+> 1. ローカルダッシュボードディレクトリ内の`*.json`ファイルについては、 `datasource`フィールドの値を新しいクラスター名に更新します ( `datasource`はクラスター名に基づいて命名されているため)。
 > 2. `tiup cluster reload -R grafana`コマンドを実行します。
 
 上記のフィールドについては、デプロイメント後にこれらの構成済みフィールドを変更できません。

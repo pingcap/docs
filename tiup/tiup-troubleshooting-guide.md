@@ -25,7 +25,7 @@ TiUPはミラーサーバーから最新のコンポーネントリストを毎�
 
 CDNサーバーのキャッシュ時間が短いため、新しいチェックサムファイルがコンポーネントパッケージと一致しない可能性があります。5分後に再度ダウンロードをお試しください。それでも新しいチェックサムファイルがコンポーネントパッケージと一致しない場合は、問題を[ここ](https://github.com/pingcap/tiup/issues)で報告してください。
 
-## TiUPクラスタコンポーネントのトラブルシューティング {#troubleshoot-tiup-cluster-component}
+## TiUPクラスターコンポーネントのトラブルシューティング {#troubleshoot-tiup-cluster-component}
 
 ### デプロイ中に`unable to authenticate, attempted methods [none publickey]`が表示されます {#unable-to-authenticate-attempted-methods-none-publickey-is-prompted-during-deployment}
 
@@ -35,9 +35,9 @@ CDNサーバーのキャッシュ時間が短いため、新しいチェック�
 
 - `-i`フラグが指定されていない場合、 TiUP は秘密鍵のパスを自動的に検出しない可能性があります。`-i`を使用して秘密鍵のパスを明示的に指定することをお勧めします。
 - フラグ`-i`が指定されている場合、 TiUPは指定された秘密鍵を使用してリモートホストにログインできない可能性があります。`ssh -i identity_file user@remote`コマンドを手動で実行することで確認できます。
-- リモートホストへのログインにパスワードを使用する場合は、フラグ`-p`を指定して正しいログイン パスワードを入力したことを確認してください。
+- リモートホストへのログインにパスワードを使用する場合は、フラグ`-p`を指定して正しいログインパスワードを入力したことを確認してください。
 
-### TiUPクラスタコンポーネントを使用したクラスタのアップグレードプロセスが中断されます {#the-process-of-upgrading-the-cluster-using-the-tiup-cluster-component-is-interrupted}
+### TiUPクラスターコンポーネントを使用したクラスターのアップグレードプロセスが中断されます {#the-process-of-upgrading-the-cluster-using-the-tiup-cluster-component-is-interrupted}
 
 誤用を避けるため、 TiUPクラスターコンポーネントは指定されたノードのアップグレードをサポートしていません。そのため、アップグレードが失敗した後は、アップグレードプロセス中のべき等操作を含むアップグレード操作を再度実行する必要があります。
 
@@ -53,4 +53,4 @@ CDNサーバーのキャッシュ時間が短いため、新しいチェック�
 
 ### アップグレード中に、 `node_exporter-9100.service/blackbox_exporter-9115.service`が存在しないことがわかる {#during-the-upgrade-you-find-that-node-exporter-9100-service-blackbox-exporter-9115-service-does-not-exist}
 
-以前にTiDB Ansibleからクラスタを移行し、エクスポーターがTiDB Ansibleにデプロイされていない場合、この状況が発生する可能性があります。この問題を解決するには、当面の間、他のノードから新しいノードに不足しているファイルを手動でコピーしてください。TiUPチームは、移行プロセス中に不足しているコンポーネントを補完します。
+以前にTiDB Ansibleからクラスターを移行し、エクスポーターがTiDB Ansibleにデプロイされていない場合、この状況が発生する可能性があります。この問題を解決するには、当面の間、他のノードから新しいノードに不足しているファイルを手動でコピーしてください。TiUPチームは、移行プロセス中に不足しているコンポーネントを補完します。

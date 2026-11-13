@@ -1,11 +1,11 @@
 ---
 title: TiUP DM
-summary: TiUP DMは、DMクラスタの管理（デプロイ、起動、停止、破棄、スケーリング、アップグレード、設定パラメータの管理など）に使用されます。SSH、タイムアウト、確認のスキップ、バージョン情報の表示、ヘルプ情報などのオプションをサポートしています。サポートされるコマンドは、import、template、deploy、list、display、start、stop、restart、scale-in、scale-out、upgrade、prune、edit-config、reload、patch、destroy、audit、replay、enable、disable、helpです。
+summary: TiUP DMは、DMクラスターの管理（デプロイ、起動、停止、破棄、スケーリング、アップグレード、設定パラメーターの管理など）に使用されます。SSH、タイムアウト、確認のスキップ、バージョン情報の表示、ヘルプ情報などのオプションをサポートしています。サポートされるコマンドは、import、template、deploy、list、display、start、stop、restart、scale-in、scale-out、upgrade、prune、edit-config、reload、patch、destroy、audit、replay、enable、disable、helpです。
 ---
 
 # TiUP DM {#tiup-dm}
 
-TiDBクラスタの管理に使用される[TiUPクラスタ](/tiup/tiup-component-cluster.md)と同様に、 TiUP DMはDMクラスタの管理に使用されます。TiUP DMコンポーネントを使用すると、DMクラスタのデプロイ、起動、停止、破棄、エラスティックスケーリング、DMクラスタのアップグレード、DMクラスタの設定パラメータの管理など、DMクラスタの日常的な運用および保守タスクを実行できます。
+TiDBクラスターの管理に使用される[TiUPクラスター](/tiup/tiup-component-cluster.md)と同様に、 TiUP DMはDMクラスターの管理に使用されます。TiUP DMコンポーネントを使用すると、DMクラスターのデプロイ、起動、停止、破棄、エラスティックスケーリング、DMクラスターのアップグレード、DMクラスターの設定パラメーターの管理など、DMクラスターの日常的な運用および保守タスクを実行できます。
 
 ## 構文 {#syntax}
 
@@ -19,7 +19,7 @@ tiup dm [command] [flags]
 
 ### --ssh {#ssh}
 
-- コマンド実行のためにリモート エンド (TiDB サービスがデプロイされているマシン) に接続する SSH クライアントを指定します。
+- コマンド実行のためにリモートエンド (TiDB サービスがデプロイされているマシン) に接続する SSH クライアントを指定します。
 
 - データ型: `STRING`
 
@@ -64,8 +64,8 @@ tiup dm [command] [flags]
 ## コマンドリスト {#command-list}
 
 - [import](/tiup/tiup-component-dm-import.md) : DM-Ansible によってデプロイされた DM v1.0 クラスターをインポートします。
-- [template](/tiup/tiup-component-dm-template.md) : トポロジテンプレートを出力します。
-- [deploy](/tiup/tiup-component-dm-deploy.md) : 指定されたトポロジに基づいてクラスターをデプロイします。
+- [template](/tiup/tiup-component-dm-template.md) : トポロジーテンプレートを出力します。
+- [deploy](/tiup/tiup-component-dm-deploy.md) : 指定されたトポロジーに基づいてクラスターをデプロイします。
 - [list](/tiup/tiup-component-dm-list.md) : デプロイされたクラスターのリストを照会します。
 - [display](/tiup/tiup-component-dm-display.md) : 指定されたクラスターのステータスを表示します。
 - [start](/tiup/tiup-component-dm-start.md) : 指定されたクラスターを起動します。
@@ -81,8 +81,8 @@ tiup dm [command] [flags]
 - [destroy](/tiup/tiup-component-dm-destroy.md) : 指定されたクラスターを破棄します。
 - [audit](/tiup/tiup-component-dm-audit.md) : 指定されたクラスターの操作監査ログを照会します。
 - [replay](/tiup/tiup-component-dm-replay.md) : 指定されたコマンドを再生する
-- [enable](/tiup/tiup-component-dm-enable.md) : マシンの再起動後にクラスター サービスを自動的に有効化します。
-- [disable](/tiup/tiup-component-dm-disable.md) : マシンの再起動後にクラスター サービスの自動有効化を無効にします。
+- [enable](/tiup/tiup-component-dm-enable.md) : マシンの再起動後にクラスターサービスを自動的に有効化します。
+- [disable](/tiup/tiup-component-dm-disable.md) : マシンの再起動後にクラスターサービスの自動有効化を無効にします。
 - [help](/tiup/tiup-component-dm-help.md) : ヘルプ情報を出力します。
 
 [&lt;&lt; 前のページに戻る - TiUP参照コンポーネントリスト](/tiup/tiup-reference.md#component-list)

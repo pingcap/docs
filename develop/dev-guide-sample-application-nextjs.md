@@ -6,7 +6,7 @@ aliases: ['/ja/tidb/stable/dev-guide-sample-application-nextjs/','/ja/tidb/dev/d
 
 # Next.jsでmysql2を使用してTiDBに接続する {#connect-to-tidb-with-mysql2-in-next-js}
 
-TiDBはMySQL互換のデータベースであり、 [mysql2](https://github.com/sidorares/node-mysql2)はNode.jsで広く使われているオープンソースのドライバです。
+TiDBはMySQL互換のデータベースであり、 [mysql2](https://github.com/sidorares/node-mysql2)はNode.jsで広く使われているオープンソースのドライバーです。
 
 このチュートリアルでは、Next.jsでTiDBとmysql2を使用して以下のタスクを実行する方法を学びます。
 
@@ -24,12 +24,12 @@ TiDBはMySQL互換のデータベースであり、 [mysql2](https://github.com/
 
 - [Node.js **18**](https://nodejs.org/en/download/)以降。
 - [Git](https://git-scm.com/downloads) 。
-- TiDBクラスタ。
+- TiDBクラスター。
 
-**TiDBクラスタをお持ちでない場合は、以下の手順で作成できます。**
+**TiDBクラスターをお持ちでない場合は、以下の手順で作成できます。**
 
 - (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
-- [ローカルテスト用のTiDB Self-Managedクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスタをデプロイ](/production-deployment-using-tiup.md)
+- [ローカルテスト用のTiDB Self-Managedクラスターをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスターをデプロイ](/production-deployment-using-tiup.md)
 
 ## サンプルアプリを実行してTiDBに接続する {#run-the-sample-app-to-connect-to-tidb}
 
@@ -192,7 +192,7 @@ npm install
     TIDB_ENABLE_SSL='false'
     ```
 
-    `{}`内のプレースホルダーを、 **Connect**ウィンドウで取得した値に置き換えてください。TiDB をローカルで実行している場合、デフォルトのホスト アドレスは`127.0.0.1`で、パスワードは空欄です。
+    `{}`内のプレースホルダーを、 **Connect**ウィンドウで取得した値に置き換えてください。TiDB をローカルで実行している場合、デフォルトのホストアドレスは`127.0.0.1`で、パスワードは空欄です。
 
 3. `.env`ファイルを保存します。
 
@@ -208,7 +208,7 @@ npm install
     npm run dev
     ```
 
-2. ブラウザを開いて`http://localhost:3000`にアクセスしてください。（実際のポート番号は端末で確認してください。デフォルトは`3000`です。）
+2. ブラウザーを開いて`http://localhost:3000`にアクセスしてください。（実際のポート番号は端末で確認してください。デフォルトは`3000`です。）
 
 3. サンプルコードを実行するには、 **RUN SQL**をクリックしてください。
 

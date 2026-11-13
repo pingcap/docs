@@ -24,7 +24,7 @@ aliases: ['/ja/tidb/stable/dev-guide-delete-data/','/ja/tidb/dev/dev-guide-delet
 DELETE FROM {table} WHERE {filter}
 ```
 
-|   パラメータ名   |     説明     |
+|   パラメーター名   |     説明     |
 | :--------: | :--------: |
 |  `{table}` |    テーブル名   |
 | `{filter}` | フィルターの適合条件 |
@@ -180,7 +180,7 @@ TiDB は`DELETE`文を実行した直後にデータを削除するわけでは�
 
 ### 統計情報を更新する {#update-statistical-information}
 
-TiDBは[統計情報](/statistics.md)を使用してインデックスの選択を決定します。大量のデータが削除された後、インデックスが正しく選択されないリスクが高くなります。[手動収集](/statistics.md#manual-collection)を使用して統計情報を更新できます。これにより、TiDB オプティマイザはSQLパフォーマンス最適化のためのより正確な統計情報を取得できます。
+TiDBは[統計情報](/statistics.md)を使用してインデックスの選択を決定します。大量のデータが削除された後、インデックスが正しく選択されないリスクが高くなります。[手動収集](/statistics.md#manual-collection)を使用して統計情報を更新できます。これにより、TiDB オプティマイザーはSQLパフォーマンス最適化のためのより正確な統計情報を取得できます。
 
 ## 一括削除 {#bulk-delete}
 
@@ -368,7 +368,7 @@ with connection:
 BATCH ON {shard_column} LIMIT {batch_size} {delete_statement};
 ```
 
-|        パラメータ名        |         説明         |
+|        パラメーター名        |         説明         |
 | :------------------: | :----------------: |
 |   `{shard_column}`   | バッチを分割するために使用される列。 |
 |    `{batch_size}`    |   各バッチのサイズを制御する。   |

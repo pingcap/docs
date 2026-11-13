@@ -8,7 +8,7 @@ aliases: ['/ja/tidb/stable/dev-guide-sample-application-ruby-rails/','/ja/tidb/d
 
 TiDBはMySQL互換のデータベースであり、 [Rails](https://github.com/rails/rails)は Rubyで書かれた人気のWebアプリケーションフレームワークであり、 [ActiveRecord ORM](https://github.com/rails/rails/tree/main/activerecord)はRailsにおけるオブジェクトリレーショナルマッピングです。
 
-このチュートリアルでは、TiDBとRailsを使用して以下のタスクを実行する方法を学ぶことができます。
+このチュートリアルでは、TiDBとRailsを使用して以下のタスクを実行する方法を学べます。
 
 - 環境をセットアップしてください。
 - Railsを使用してTiDBに接続します。
@@ -25,12 +25,12 @@ TiDBはMySQL互換のデータベースであり、 [Rails](https://github.com/r
 - [Ruby](https://www.ruby-lang.org/en/)>= 3.0 がマシンにインストールされている
 - あなたのマシンにインストールされている[Bundler](https://bundler.io/)
 - お使いのマシンに[Git](https://git-scm.com/downloads)がインストールされています
-- TiDBクラスタが稼働中
+- TiDBクラスターが稼働中
 
-**TiDBクラスタをお持ちでない場合は、以下の手順で作成できます。**
+**TiDBクラスターをお持ちでない場合は、以下の手順で作成できます。**
 
 - (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
-- [ローカルテスト用のTiDB Self-Managedクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスタをデプロイ](/production-deployment-using-tiup.md)
+- [ローカルテスト用のTiDB Self-Managedクラスターをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスターをデプロイ](/production-deployment-using-tiup.md)
 
 ## サンプルアプリを実行してTiDBに接続する {#run-the-sample-app-to-connect-to-tidb}
 
@@ -92,7 +92,7 @@ bundle add mysql2 dotenv
 
     > **Note**
     >
-    > [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)の場合、パブリックエンドポイントを使用する際には、 `ssl_mode=verify_identity`クエリパラメータを使用して TLS 接続を有効にする**必要があります**。
+    > [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)の場合、パブリックエンドポイントを使用する際には、 `ssl_mode=verify_identity`クエリパラメーターを使用して TLS 接続を有効にする**必要があります**。
 
 7. `.env`ファイルを保存します。
 
@@ -124,7 +124,7 @@ bundle add mysql2 dotenv
     cp .env.example .env
     ```
 
-8. `.env`ファイルを編集し、 `DATABASE_URL`環境変数を以下のように設定し、接続ダイアログで対応するプレースホルダー`{}`を接続パラメータに置き換えます。
+8. `.env`ファイルを編集し、 `DATABASE_URL`環境変数を以下のように設定し、接続ダイアログで対応するプレースホルダー`{}`を接続パラメーターに置き換えます。
 
     ```dotenv
     DATABASE_URL='mysql2://{user}:{password}@{host}:{port}/{database_name}'
@@ -135,15 +135,15 @@ bundle add mysql2 dotenv
 </div>
 <div label="TiDB Cloud Dedicated">
 
-1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスタの名前をクリックして概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動します。
 
 2. 右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
 3. 接続ダイアログで、 **Connection Type**ドロップダウンリストから**Public**を選択し、 **CA cert**をクリックしてCA証明書をダウンロードします。
 
-    IP アクセス リストを設定していない場合は、最初の接続の前に、 **Configure IP Access List**をクリックするか、[IP アクセス リストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)の手順に従って設定します。
+    IP アクセスリストを設定していない場合は、最初の接続の前に、 **Configure IP Access List**をクリックするか、[IP アクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)の手順に従って設定します。
 
-    TiDB Cloud Dedicated は、**Public**接続タイプに加えて、**Private Endpoint**および**VPC Peering**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスタに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)を参照してください。
+    TiDB Cloud Dedicated は、**Public**接続タイプに加えて、**Private Endpoint**および**VPC Peering**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスターに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)を参照してください。
 
 4. `.env.example`をコピーして`.env`に名前を変更するには、次のコマンドを実行します。
 
@@ -151,7 +151,7 @@ bundle add mysql2 dotenv
     cp .env.example .env
     ```
 
-5. `.env`ファイルを編集し、 `DATABASE_URL`環境変数を次のように設定し、接続ダイアログから接続文字列をコピーして変数の値として設定し、 `sslca`クエリパラメータを接続ダイアログからダウンロードした CA 証明書のファイルパスに設定します。
+5. `.env`ファイルを編集し、 `DATABASE_URL`環境変数を次のように設定し、接続ダイアログから接続文字列をコピーして変数の値として設定し、 `sslca`クエリパラメーターを接続ダイアログからダウンロードした CA 証明書のファイルパスに設定します。
 
     ```dotenv
     DATABASE_URL='mysql2://{user}:{password}@{host}:{port}/{database}?ssl_mode=verify_identity&sslca=/path/to/ca.pem'
@@ -161,7 +161,7 @@ bundle add mysql2 dotenv
     >
     > TiDB Cloud Dedicatedへの接続にパブリックエンドポイントを使用する場合は、TLS接続を有効にすることをお勧めします。
     >
-    > TLS接続を有効にするには、 `ssl_mode`クエリパラメータの値を`verify_identity`に変更し、 `sslca`の値を接続ダイアログからダウンロードしたCA証明書のファイルパスに変更してください。
+    > TLS接続を有効にするには、 `ssl_mode`クエリパラメーターの値を`verify_identity`に変更し、 `sslca`の値を接続ダイアログからダウンロードしたCA証明書のファイルパスに変更してください。
 
 6. `.env`ファイルを保存します。
 
@@ -251,7 +251,7 @@ production:
 
 > **Note**
 >
-> [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)の場合、パブリックエンドポイントを使用する際には、`DATABASE_URL`で`ssl_mode`クエリパラメータを`verify_identity`に設定して TLS 接続を有効にする必要がありますが、mysql2 gem が特定の順序で既存の CA 証明書を検索してファイルが見つかるまで検索するため、 `DATABASE_URL`を介して SSL CA 証明書を指定する必要は**ありません**。
+> [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)の場合、パブリックエンドポイントを使用する際には、`DATABASE_URL`で`ssl_mode`クエリパラメーターを`verify_identity`に設定して TLS 接続を有効にする必要がありますが、mysql2 gem が特定の順序で既存の CA 証明書を検索してファイルが見つかるまで検索するため、 `DATABASE_URL`を介して SSL CA 証明書を指定する必要は**ありません**。
 
 ### データを挿入する {#insert-data}
 
@@ -300,7 +300,7 @@ player.destroy
 1. /etc/ssl/certs/ca-certificates.crt # Debian / Ubuntu / Gentoo / Arch / Slackware
 2. /etc/pki/tls/certs/ca-bundle.crt # RedHat / Fedora / CentOS / Mageia / Vercel / Netlify
 3. /etc/ssl/ca-bundle.pem # OpenSUSE
-4. /etc/ssl/cert.pem # MacOS / Alpine (Dockerコンテナ)
+4. /etc/ssl/cert.pem # MacOS / Alpine (Dockerコンテナー)
 
 CA証明書のパスを手動で指定することも可能ですが、異なるマシンや環境によってCA証明書の保存場所が異なる場合があるため、複数の環境にデプロイするシナリオでは、この方法は大きな不便をもたらす可能性があります。そのため、 `sslca`を`nil`に設定することで、柔軟性と異なる環境へのデプロイの容易性を確保できます。
 

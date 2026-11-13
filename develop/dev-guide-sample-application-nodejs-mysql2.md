@@ -6,9 +6,9 @@ aliases: ['/ja/tidb/stable/dev-guide-sample-application-nodejs-mysql2/','/ja/tid
 
 # node-mysql2を使用してTiDBに接続する {#connect-to-tidb-with-node-mysql2}
 
-TiDBはMySQL互換のデータベースであり、 [node-mysql2](https://github.com/sidorares/node-mysql2)はNode.js用の高速な[mysqljs/mysql](https://github.com/mysqljs/mysql)互換MySQLドライバです。
+TiDBはMySQL互換のデータベースであり、 [node-mysql2](https://github.com/sidorares/node-mysql2)はNode.js用の高速な[mysqljs/mysql](https://github.com/mysqljs/mysql)互換MySQLドライバーです。
 
-このチュートリアルでは、TiDBとnode-mysql2を使用して以下のタスクを実行する方法を学ぶことができます。
+このチュートリアルでは、TiDBとnode-mysql2を使用して以下のタスクを実行する方法を学べます。
 
 - 環境をセットアップしてください。
 - node-mysql2を使用してTiDBに接続します。
@@ -24,12 +24,12 @@ TiDBはMySQL互換のデータベースであり、 [node-mysql2](https://github
 
 - お使いのコンピューターに[Node.js](https://nodejs.org/en) &gt;= 16.xがインストールされていること。
 - お使いのマシンに[Git](https://git-scm.com/downloads)がインストールされています。
-- TiDBクラスタが稼働中です。
+- TiDBクラスターが稼働中です。
 
-**TiDBクラスタをお持ちでない場合は、以下の手順で作成できます。**
+**TiDBクラスターをお持ちでない場合は、以下の手順で作成できます。**
 
 - (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
-- [ローカルテスト用のTiDB Self-Managedクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスタをデプロイ](/production-deployment-using-tiup.md)
+- [ローカルテスト用のTiDB Self-Managedクラスターをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスターをデプロイ](/production-deployment-using-tiup.md)
 
 ## サンプルアプリを実行してTiDBに接続する {#run-the-sample-app-to-connect-to-tidb}
 
@@ -88,7 +88,7 @@ npm install mysql2 dotenv --save
     cp .env.example .env
     ```
 
-6. `.env`ファイルを編集し、環境変数を以下のように設定し、接続ダイアログ上の対応するプレースホルダー`{}`を接続パラメータに置き換えます。
+6. `.env`ファイルを編集し、環境変数を以下のように設定し、接続ダイアログ上の対応するプレースホルダー`{}`を接続パラメーターに置き換えます。
 
     ```dotenv
     TIDB_HOST={host}
@@ -133,7 +133,7 @@ npm install mysql2 dotenv --save
     cp .env.example .env
     ```
 
-8. `.env`ファイルを編集し、環境変数を以下のように設定し、接続ダイアログで対応するプレースホルダー`{}`を接続パラメータに置き換えます。
+8. `.env`ファイルを編集し、環境変数を以下のように設定し、接続ダイアログで対応するプレースホルダー`{}`を接続パラメーターに置き換えます。
 
     ```dotenv
     TIDB_HOST={host}
@@ -149,15 +149,15 @@ npm install mysql2 dotenv --save
 </div>
 <div label="TiDB Cloud Dedicated">
 
-1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスタの名前をクリックして概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動します。
 
 2. 右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
 3. 接続ダイアログで、 **Connection Type**ドロップダウンリストから**Public**を選択し、 **CA cert**をクリックしてCA証明書をダウンロードします。
 
-    IP アクセス リストを設定していない場合は、最初の接続の前に、 **Configure IP Access List**をクリックするか、[IP アクセス リストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)の手順に従って設定します。
+    IP アクセスリストを設定していない場合は、最初の接続の前に、 **Configure IP Access List**をクリックするか、[IP アクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)の手順に従って設定します。
 
-    TiDB Cloud Dedicated は、**Public**接続タイプに加えて、**Private Endpoint**および**VPC Peering**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスタに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)を参照してください。
+    TiDB Cloud Dedicated は、**Public**接続タイプに加えて、**Private Endpoint**および**VPC Peering**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスターに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)を参照してください。
 
 4. `.env.example`をコピーして`.env`に名前を変更するには、次のコマンドを実行します。
 
@@ -165,7 +165,7 @@ npm install mysql2 dotenv --save
     cp .env.example .env
     ```
 
-5. `.env`ファイルを編集し、環境変数を以下のように設定し、接続ダイアログ上の対応するプレースホルダー`{}`を接続パラメータに置き換えます。
+5. `.env`ファイルを編集し、環境変数を以下のように設定し、接続ダイアログ上の対応するプレースホルダー`{}`を接続パラメーターに置き換えます。
 
     ```dotenv
     TIDB_HOST={host}
@@ -194,7 +194,7 @@ npm install mysql2 dotenv --save
     cp .env.example .env
     ```
 
-2. `.env`ファイルを編集し、環境変数を以下のように設定し、接続ダイアログ上の対応するプレースホルダー`{}`を接続パラメータに置き換えます。
+2. `.env`ファイルを編集し、環境変数を以下のように設定し、接続ダイアログ上の対応するプレースホルダー`{}`を接続パラメーターに置き換えます。
 
     ```dotenv
     TIDB_HOST={host}

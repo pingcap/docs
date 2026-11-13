@@ -3,7 +3,7 @@ title: Deploy and Maintain an Online TiDB Cluster Using TiUP No-sudo Mode
 summary: TiUP no-sudo モードを使用してオンライン TiDB クラスターをデプロイおよび管理する方法を学習します。
 ---
 
-# TiUP No-sudo モードを使用してオンライン TiDBクラスタをデプロイおよび管理 {#deploy-and-maintain-an-online-tidb-cluster-using-tiup-no-sudo-mode}
+# TiUP No-sudo モードを使用してオンライン TiDBクラスターをデプロイおよび管理 {#deploy-and-maintain-an-online-tidb-cluster-using-tiup-no-sudo-mode}
 
 このドキュメントでは、 TiUP no-sudo モードを使用してクラスターをデプロイする方法について説明します。
 
@@ -51,7 +51,7 @@ summary: TiUP no-sudo モードを使用してオンライン TiDB クラスタ�
         source ~/.bashrc.d/systemd
         ```
 
-    2. `root`ユーザーを使用してユーザー サービスを開始します。
+    2. `root`ユーザーを使用してユーザーサービスを開始します。
 
         ```shell
         $ uid=$(id -u tidb) # Get the ID of the tidb user
@@ -108,19 +108,19 @@ summary: TiUP no-sudo モードを使用してオンライン TiDB クラスタ�
         chmod 600 /home/tidb/.ssh/authorized_keys
         ```
 
-## トポロジファイルを準備する {#prepare-the-topology-file}
+## トポロジーファイルを準備する {#prepare-the-topology-file}
 
-1. 次のコマンドを実行してトポロジファイルを生成します。
+1. 次のコマンドを実行してトポロジーファイルを生成します。
 
     ```shell
     tiup cluster template > topology.yaml
     ```
 
-2. トポロジファイルを編集します。
+2. トポロジーファイルを編集します。
 
-    通常モードと比較して、 TiUPをno-sudoモードで使用する場合は、 `topology.yaml`ファイルの`global`モジュールに`systemd_mode: "user"`の行を追加する必要があります。`systemd_mode`パラメータは、`systemd user`モードを使用するかどうかを設定するために使用されます。このパラメータが設定されていない場合、デフォルト値は`system`で、sudo権限が必要であることを意味します。
+    通常モードと比較して、 TiUPをno-sudoモードで使用する場合は、 `topology.yaml`ファイルの`global`モジュールに`systemd_mode: "user"`の行を追加する必要があります。`systemd_mode`パラメーターは、`systemd user`モードを使用するかどうかを設定するために使用されます。このパラメーターが設定されていない場合、デフォルト値は`system`で、sudo権限が必要であることを意味します。
 
-    さらに、no-sudoモードでは、非rootユーザー`tidb`は`/data`ディレクトリを`deploy_dir`または`data_dir`として使用する権限がないため、非rootユーザーがアクセスできるパスを選択する必要があります。以下の例では相対パスを使用しており、実際に使用されるパスは`/home/tidb/data/tidb-deploy`と`/home/tidb/data/tidb-data`です。トポロジファイルの残りの部分は、通常モードと同じです。別の方法として、rootユーザーを使用してディレクトリを作成し、その後`chown`を使用して所有権を`tidb:tidb`に変更することもできます。
+    さらに、no-sudoモードでは、非rootユーザー`tidb`は`/data`ディレクトリを`deploy_dir`または`data_dir`として使用する権限がないため、非rootユーザーがアクセスできるパスを選択する必要があります。以下の例では相対パスを使用しており、実際に使用されるパスは`/home/tidb/data/tidb-deploy`と`/home/tidb/data/tidb-data`です。トポロジーファイルの残りの部分は、通常モードと同じです。別の方法として、rootユーザーを使用してディレクトリを作成し、その後`chown`を使用して所有権を`tidb:tidb`に変更することもできます。
 
     ```yaml
     global:
