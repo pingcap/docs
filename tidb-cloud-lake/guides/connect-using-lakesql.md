@@ -58,6 +58,22 @@ Github: https://github.com/tidbcloud/lakesql
 >>> More information at https://github.com/tidbcloud/lakesql
 ```
 
+インストーラーは `lakesql` バイナリを `~/.lakesql/bin` に配置し、次のような行を `~/.zprofile` と `~/.profile` に追加します。
+
+```bash
+export PATH="$PATH:$HOME/.lakesql/bin"
+```
+
+これらのファイルは、現在のシェルでは自動的に再読み込みされません。現在のターミナルで `lakesql` を使用するには、次のコマンドを実行します。
+
+```bash
+source ~/.profile
+```
+
+> **Note:**
+>
+> Bash を使用していて `~/.bash_profile` が存在する場合（これは CentOS、RHEL、Alibaba Cloud Linux などの多くの Linux ディストリビューションでデフォルトです）、Bash はログイン時に `~/.profile` を読み込みません。`~/.bash_profile` が存在せず、`~/.bash_login` が存在する場合も同様です。いずれの場合も、前述の `export PATH` コマンドを Bash が読み込むファイルに追加してください。
+
 #### `--prefix` を使用したカスタムインストール {#custom-installation-with---prefix}
 
 指定したディレクトリ (例: /usr/local) に LakeSQL をインストールします。

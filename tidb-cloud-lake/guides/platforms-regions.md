@@ -15,6 +15,7 @@ summary: TiDB Cloud Lake でサポートされているクラウドプラット�
 | AWS            | アジアパシフィック (シンガポール) | ap-southeast-1 |
 | AWS            | アジアパシフィック (ムンバイ) | ap-south-1     |
 | Alibaba Cloud  | 日本 (東京)              | ap-northeast-1 |
+| Alibaba Cloud  | シンガポール             | ap-southeast-1 |
 
 > **Note:**
 >
