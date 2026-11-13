@@ -17,7 +17,7 @@ summary: データファイルが Amazon S3 などのオブジェクトストレ
 
 開始する前に、次のタスクを完了していることを確認してください。
 
-1. サンプルファイル [books.parquet](https://lakesql-bin.tidbcloud.com/datasets/books.parquet) をダウンロードし、ローカルフォルダに保存します。このファイルには 2 件のレコードが含まれています。
+1. サンプルファイル [books.parquet](https://lakesql-bin.tidbcloud.com/datasets/books.parquet) をダウンロードし、ローカルフォルダーに保存します。このファイルには 2 件のレコードが含まれています。
 
     ```text title='books.parquet'
     Transaction Processing,Jim Gray,1992

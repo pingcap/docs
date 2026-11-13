@@ -17,7 +17,7 @@ Linux では、TiDB Cloud Filesystem は FUSE を使用して、ローカルデ�
 
 - [TiDB Cloud CLI (`ti`) をインストールする](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-tidb-cloud-cli)。
 - ファイルシステムとそのトークンを `ti` から利用できるようにします。詳細は [既存のファイルシステムにアクセスする](/tidb-cloud-filesystem/access-filesystem.md) を参照してください。
-- `fuse3` パッケージをインストールできる Linux ホストを使用します。コンテナの場合は、代わりに [Docker と Docker Compose](/tidb-cloud-filesystem/filesystem-mount-docker.md) に従ってください。
+- `fuse3` パッケージをインストールできる Linux ホストを使用します。コンテナーの場合は、代わりに [Docker と Docker Compose](/tidb-cloud-filesystem/filesystem-mount-docker.md) に従ってください。
 
 マウントと、それにアクセスするアプリケーションは、同じ OS ユーザーとして実行してください。
 

@@ -6,7 +6,7 @@ aliases: ['/ja/ai/manage-filesystem-layers']
 
 # ファイルシステムのレイヤーとチェックポイントを管理する
 
-TiDB Cloud Filesystem では、レイヤーは、コミットするまでファイルの変更をベースファイルシステムから分離します。チェックポイントを使用すると中間状態を保持でき、フォークを使用すると変更を独立して試すことができます。基礎となる概念については、[レイヤーとチェックポイント](/tidb-cloud-filesystem/filesystem-layers-checkpoints.md) を参照してください。
+TiDB Cloud Filesystem では、レイヤーは、コミットするまでファイルの変更をベースファイルシステムから分離します。チェックポイントを使用すると中間状態を保持でき、フォークを使用すると変更を独立して試せます。基礎となる概念については、[レイヤーとチェックポイント](/tidb-cloud-filesystem/filesystem-layers-checkpoints.md) を参照してください。
 
 ## 前提条件 {#prerequisites}
 

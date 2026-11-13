@@ -21,12 +21,12 @@ aliases: ['/ja/tidb/stable/vector-search-get-started-using-python/','/ja/tidb/de
 
 - [Python 3.8以降](https://www.python.org/downloads/)がインストールされていること。
 - [Git](https://git-scm.com/downloads)がインストールされていること。
-- TiDBクラスタ。
+- TiDBクラスター。
 
-**TiDBクラスタをお持ちでない場合は、以下の手順で作成できます。**
+**TiDBクラスターをお持ちでない場合は、以下の手順で作成できます。**
 
 - (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
-- [ローカルテスト用のTiDB Self-Managedクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスタをデプロイ](/production-deployment-using-tiup.md)
+- [ローカルテスト用のTiDB Self-Managedクラスターをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスターをデプロイ](/production-deployment-using-tiup.md)
 
 ## さあ始めましょう {#get-started}
 
@@ -97,7 +97,7 @@ TiDB Cloud Starterインスタンスの場合、接続文字列を取得し、�
 </div>
 <div label="TiDB Self-Managed" value="tidb">
 
-TiDB Self-Managedクラスタの場合、Pythonプロジェクトのルートディレクトリに`.env`ファイルを作成します。次の内容を`.env`ファイルにコピーし、TiDBクラスタの接続パラメータに応じて環境変数の値を変更します。
+TiDB Self-Managedクラスターの場合、Pythonプロジェクトのルートディレクトリに`.env`ファイルを作成します。次の内容を`.env`ファイルにコピーし、TiDBクラスターの接続パラメーターに応じて環境変数の値を変更します。
 
 ```dotenv
 TIDB_DATABASE_URL="mysql+pymysql://<USER>:<PASSWORD>@<HOST>:<PORT>/<DATABASE>"
@@ -106,12 +106,12 @@ TIDB_DATABASE_URL="mysql+pymysql://<USER>:<PASSWORD>@<HOST>:<PORT>/<DATABASE>"
 
 TiDBをローカルマシンで実行している場合、 `<HOST>`はデフォルトで`127.0.0.1`になります。初期の`<PASSWORD>`は空なので、クラスターを初めて起動する場合は、このフィールドを省略できます。
 
-各パラメータの説明は以下のとおりです。
+各パラメーターの説明は以下のとおりです。
 
 - `<USER>` : TiDBに接続するためのユーザー名。
 - `<PASSWORD>` : TiDBに接続するためのパスワード。
-- `<HOST>` : TiDBクラスタのホスト。
-- `<PORT>` : TiDB クラスタのポート。
+- `<HOST>` : TiDBクラスターのホスト。
+- `<PORT>` : TiDB クラスターのポート。
 - `<DATABASE>` : 接続するデータベースの名前。
 
 </div>

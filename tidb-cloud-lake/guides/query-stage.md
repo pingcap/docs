@@ -55,7 +55,7 @@ COPY INTO [<database_name>.]<table_name> [ ( <col_name> [ , <col_name> ... ] ) ]
 >
 > - 同じ `Select List`
 > - 同じ `FROM {@<stage_name>[/<path>] | '<uri>'}`
-> - 異なるパラメータ:
+> - 異なるパラメーター:
 >     - query では `table function parameters`、つまり `(<key> => <value>, ...)` を使用します
 >     - transform では [Copy into table](/tidb-cloud-lake/sql/copy-into-table.md) の末尾にある Options を使用します
 
@@ -63,9 +63,9 @@ COPY INTO [<database_name>.]<table_name> [ ( <col_name> [ , <col_name> ... ] ) ]
 
 FROM 句は `Table Function` と似た構文を使用します。通常のテーブルと同様に、他のテーブルと join する際にはテーブル `alias` を使用できます。
 
-テーブル関数のパラメータ:
+テーブル関数のパラメーター:
 
-| パラメータ | 説明 |
+| パラメーター | 説明 |
 |-------------------------|---------------------------------------------------------|
 | `FILE_FORMAT`           | ファイル形式のタイプ (CSV, TSV, NDJSON, PARQUET, ORC, Avro) |
 | `PATTERN`               | ファイルを絞り込むための正規表現パターン |

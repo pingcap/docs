@@ -15,7 +15,7 @@ summary: "{{{ .lake }}} では、ユーザー stage または内部/外部 stage
 
 開始する前に、次のタスクを完了していることを確認してください。
 
-- サンプルファイル [books.parquet](https://lakesql-bin.tidbcloud.com/datasets/books.parquet) をダウンロードし、ローカルフォルダに保存します。このファイルには 2 件のレコードが含まれています。
+- サンプルファイル [books.parquet](https://lakesql-bin.tidbcloud.com/datasets/books.parquet) をダウンロードし、ローカルフォルダーに保存します。このファイルには 2 件のレコードが含まれています。
 
 ```text
 Transaction Processing,Jim Gray,1992

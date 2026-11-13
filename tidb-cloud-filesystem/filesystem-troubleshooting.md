@@ -211,7 +211,7 @@ ti fs unmount-file-system \
 
 ## アンマウントで busy が報告される {#unmount-reports-busy}
 
-エディタ、作業ディレクトリがマウント内にあるシェル、そのほか開いているファイルハンドルを閉じてから、再試行してください。
+エディター、作業ディレクトリがマウント内にあるシェル、そのほか開いているファイルハンドルを閉じてから、再試行してください。
 
 ```bash
 ti fs unmount-file-system --mount-path /path/to/workspace

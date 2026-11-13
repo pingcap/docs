@@ -64,7 +64,7 @@ SELECT * FROM t WHERE content LIKE '%quick br%'
 
 1. パターン `'quick br'` は n-gram にトークン化されます: "qui", "uic", "ick", "ck ", "k b", " br"
 2. インデックスが、これらの n-gram を含むデータブロックを絞り込みます
-3. 完全な `LIKE` フィルタは、事前に絞り込まれたブロックに対してのみ適用されます
+3. 完全な `LIKE` フィルターは、事前に絞り込まれたブロックに対してのみ適用されます
 
 > **Note:**
 >

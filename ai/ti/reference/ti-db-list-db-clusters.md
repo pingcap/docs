@@ -27,7 +27,7 @@ ti db list-db-clusters
 ## オプション {#options}
 
 - `--db-cluster-type <string>`: DB クラスターのタイプです。`starter` である必要があります。\[required]
-- `--filter <string>`: TiDB Cloud Starter API のフィルタ式です。API は、`region.provider`、`region.name`、`state`、`projectId`、`clusterId`、`displayName`、`labels.<key>` に対して、Google AIP スタイルの `=` および `AND` 式をサポートします。
+- `--filter <string>`: TiDB Cloud Starter API のフィルター式です。API は、`region.provider`、`region.name`、`state`、`projectId`、`clusterId`、`displayName`、`labels.<key>` に対して、Google AIP スタイルの `=` および `AND` 式をサポートします。
 - `--help`: ヘルプ情報を表示します。
 - `--order-by <string>`: TiDB Cloud Starter API の `orderBy` 式です。`ti` はこの値を解釈せず、そのまま API に渡します。
 - `--page-size <int32>`: 返される検証済みクラスターの数です。省略した場合、または `0` に設定した場合のデフォルトは `10` です。最大値は `1000` です。
@@ -72,15 +72,15 @@ ti db list-db-clusters
 
 リージョンをまたぐインスタンスおよび非Starter インスタンスは除外されます。また、サービスプランまたはリージョン情報の欠落や競合により、選択したリージョン内の Starter インスタンスであることを `ti` が検証できない場合も、そのインスタンスは除外されます。
 
-## フィルタと並べ替えの動作 {#filter-and-ordering-behavior}
+## フィルターと並べ替えの動作 {#filter-and-ordering-behavior}
 
-`ti` は、ユーザー指定のフィルタ式および並べ替え式を TiDB Cloud Starter API に渡します。無効または未サポートの式は API によって拒否されます。API の仕様については、[TiDB Cloud API v1beta1 の概要](/api/tidb-cloud-api-v1beta1.md) を参照してください。
+`ti` は、ユーザー指定のフィルター式および並べ替え式を TiDB Cloud Starter API に渡します。無効または未サポートの式は API によって拒否されます。API の仕様については、[TiDB Cloud API v1beta1 の概要](/api/tidb-cloud-api-v1beta1.md) を参照してください。
 
 ## ページトークンの再利用 {#page-token-reuse}
 
 このコマンドは、1 つの結果ページを満たすために複数の TiDB Cloud API ページを取得でき、`ti` の `next_page_token` を返します。検証済みの結果外のリソースを含む可能性があるため、API の `total_size` は省略されます。
 
-ページトークンは、同じプロファイル、クラスタータイプ、リージョン、フィルタ、並べ替えでのみ再利用できます。再実行時のページが変更されている場合は、`--page-token` を付けずに一覧取得をやり直してください。
+ページトークンは、同じプロファイル、クラスタータイプ、リージョン、フィルター、並べ替えでのみ再利用できます。再実行時のページが変更されている場合は、`--page-token` を付けずに一覧取得をやり直してください。
 
 ## 関連ドキュメント {#related-documentation}
 

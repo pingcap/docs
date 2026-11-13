@@ -144,7 +144,7 @@ SELECT MD5('abc');
 >
 > この関数はMySQL 5.7で非推奨となり、MySQL 8.0で削除されました。TiDBでも非推奨です。この関数の使用は推奨されません。
 
-`PASSWORD(str)`関数は、 `mysql_native_password`認証方法で使用できるパスワード ハッシュを計算します。
+`PASSWORD(str)`関数は、 `mysql_native_password`認証方法で使用できるパスワードハッシュを計算します。
 
 ```sql
 SELECT PASSWORD('secret');
@@ -163,7 +163,7 @@ Warning (Code 1681): PASSWORD is deprecated and will be removed in a future rele
 
 ### `RANDOM_BYTES()` {#random_bytes}
 
-`RANDOM_BYTES(n)`関数は`n`ランダム バイトを返します。
+`RANDOM_BYTES(n)`関数はランダムな`n`バイトを返します。
 
 ```sql
 SELECT RANDOM_BYTES(3);
