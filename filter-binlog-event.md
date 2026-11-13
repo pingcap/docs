@@ -25,44 +25,81 @@ filters:
     action: Ignore
 ```
 
-- `schema-pattern`/`table-pattern`: Filters matching schemas or tables
-- `events`: Filters binlog events. Supported events are listed in the table below:
+After defining a filter rule, reference it in `filter-rules` under the corresponding `mysql-instances` entry. Otherwise, DM does not apply the rule to that source.
 
-  | Event           | Category | Description                       |
-  | --------------- | ---- | --------------------------|
-  | all             |      | Includes all events            |
-  | all dml         |      | Includes all DML events        |
-  | all ddl         |      | Includes all DDL events        |
-  | none            |      | Includes no event          |
-  | none ddl        |      | Excludes all DDL events      |
-  | none dml        |      | Excludes all DML events      |
-  | insert          | DML  | Insert DML event      |
-  | update          | DML  | Update DML event      |
-  | delete          | DML  | Delete DML event      |
-  | create database | DDL  | Create database event |
-  | drop database   | DDL  | Drop database event   |
-  | create table    | DDL  | Create table event    |
-  | create index    | DDL  | Create index event    |
-  | drop table      | DDL  | Drop table event      |
-  | truncate table  | DDL  | Truncate table event  |
-  | rename table    | DDL  | Rename table event    |
-  | drop index      | DDL  | Drop index event      |
-  | alter table     | DDL  | Alter table event     |
+```yaml
+mysql-instances:
+  - source-id: "mysql-replica-01"
+    filter-rules: ["rule-1"]
+```
 
-- `sql-pattern`: Filters specified DDL SQL statements. The matching rule supports using a regular expression.
-- `action`: `Do` or `Ignore`
+For more information, see [Data Migration task configuration guide](/dm/dm-task-configuration-guide.md#configure-binlog-events-to-be-migrated).
 
-    - `Do`: the allow list. A binlog event is replicated if meeting either of the following two conditions:
+- `schema-pattern`/`table-pattern`: filters matching schemas or tables.
+- `events`: filters binlog events. Supported events are listed in the following table:
 
-        - The event matches the rule setting.
-        - sql-pattern has been specified and the SQL statement of the event matches any of the sql-pattern options.
+  | Event | Category | Description |
+  | --- | --- | --- |
+  | `all` |  | Includes all events. |
+  | `all dml` |  | Includes all DML events. |
+  | `all ddl` |  | Includes all DDL events. |
+  | `incompatible ddl changes` |  | Includes all incompatible DDL events that might cause data loss. |
+  | `none` |  | Includes no events. |
+  | `none ddl` |  | Excludes all DDL events. |
+  | `none dml` |  | Excludes all DML events. |
+  | `insert` | DML | The `INSERT` DML event. |
+  | `update` | DML | The `UPDATE` DML event. |
+  | `delete` | DML | The `DELETE` DML event. |
+  | `create database` | DDL | The `CREATE DATABASE` DDL event. |
+  | `drop database` | incompatible DDL | The `DROP DATABASE` DDL event. |
+  | `create table` | DDL | The `CREATE TABLE` DDL event. |
+  | `create index` | DDL | The `CREATE INDEX` DDL event. |
+  | `drop table` | incompatible DDL | The `DROP TABLE` DDL event. |
+  | `truncate table` | incompatible DDL | The `TRUNCATE TABLE` DDL event. |
+  | `rename table` | incompatible DDL | The `RENAME TABLE` DDL event. |
+  | `drop index` | incompatible DDL | The `DROP INDEX` DDL event. |
+  | `alter table` | DDL | The `ALTER TABLE` DDL event. |
+  | `value range decrease` | incompatible DDL | Decreases the value range of a column field. |
+  | `precision decrease` | incompatible DDL | Decreases the precision of a column field. |
+  | `modify column` | incompatible DDL | Changes a column field type. |
+  | `rename column` | incompatible DDL | Changes a column name. |
+  | `rename index` | incompatible DDL | Changes an index name. |
+  | `drop column` | incompatible DDL | Drops a column from a table. |
+  | `truncate table partition` | incompatible DDL | Removes all data from a specified partition. |
+  | `drop primary key` | incompatible DDL | Drops the primary key. |
+  | `drop unique key` | incompatible DDL | Drops a unique key. |
+  | `modify default value` | incompatible DDL | Modifies a column default value. |
+  | `modify constraint` | incompatible DDL | Modifies a constraint. |
+  | `modify columns order` | incompatible DDL | Modifies the order of columns. |
+  | `modify charset` | incompatible DDL | Modifies a column character set. |
+  | `modify collation` | incompatible DDL | Modifies a column collation. |
+  | `remove auto increment` | incompatible DDL | Removes an auto-increment attribute. |
+  | `modify storage engine` | incompatible DDL | Modifies the table storage engine. |
+  | `reorganize table partition` | incompatible DDL | Reorganizes table partitions. |
+  | `rebuild table partition` | incompatible DDL | Rebuilds a table partition. |
+  | `exchange table partition` | incompatible DDL | Exchanges a partition between two tables. |
+  | `coalesce table partition` | incompatible DDL | Decreases the number of partitions in a table. |
 
-    - `Ignore`: the block list. A binlog event is filtered out if meeting either of the following two conditions:
+- `sql-pattern`: filters specified DDL SQL statements. The matching rule supports regular expressions.
+- `action`: `Do`, `Ignore`, or `Error`.
 
-        - The event matches the rule setting.
-        - sql-pattern has been specified and the SQL statement of the event matches any of the sql-pattern options.
+    - `Do`: the allow list.
 
-    If both `Do` and `Ignore` are configured, `Ignore` has higher priority over `Do`. That is, an event satisfying both `Ignore` and `Do` conditions will be filtered out.
+        - If you configure only `events`, DM replicates only events whose types match `events`.
+        - If you configure only `sql-pattern`, DM replicates only DDL statements whose SQL text matches `sql-pattern`.
+        - If you configure both `events` and `sql-pattern` for a DDL statement, DM replicates the statement only when both the event type and the SQL text match the rule.
+
+    - `Ignore`: the block list. DM filters out a binlog event if either of the following conditions is met:
+
+        - The event type matches `events`.
+        - `sql-pattern` is configured and the SQL statement matches any item in `sql-pattern`.
+
+    - `Error`: the error list. DM reports an error if either of the following conditions is met:
+
+        - The event type matches `events`.
+        - `sql-pattern` is configured and the SQL statement matches any item in `sql-pattern`.
+
+    When multiple rules match the same table, `Ignore` has higher priority than `Error`, and `Error` has higher priority than `Do`.
 
 ## Application scenarios
 
