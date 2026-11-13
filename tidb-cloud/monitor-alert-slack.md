@@ -1,6 +1,6 @@
 ---
 title: Subscribe via Slack
-summary: Slack経由でアラート通知を受け取ることで、TiDBクラスタを監視する方法を学びましょう。
+summary: Slack経由でアラート通知を受け取ることで、TiDBクラスターを監視する方法を学びましょう。
 ---
 
 # Slack経由で購読する {#subscribe-via-slack}
@@ -9,7 +9,7 @@ TiDB Cloudでは、Slack、[メール](/tidb-cloud/monitor-alert-email.md)、[Zo
 
 > **Note:**
 >
-> 現在、アラート購読は、 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)インスタンス、 [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium)インスタンス、および[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタで利用可能です。
+> 現在、アラート購読は、 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)インスタンス、 [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium)インスタンス、および[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターで利用可能です。
 
 ## 前提条件 {#prerequisites}
 
@@ -29,19 +29,19 @@ TiDB Cloudでは、Slack、[メール](/tidb-cloud/monitor-alert-email.md)、[Zo
 
 ## アラート通知を購読する {#subscribe-to-alert-notifications}
 
-### ステップ1：SlackウェブフックURLを生成する {#step-1-generate-a-slack-webhook-url}
+### ステップ1. SlackウェブフックURLを生成する {#step-1-generate-a-slack-webhook-url}
 
-1. まだお持ちでない場合は、 [Slackアプリを作成する](https://api.slack.com/apps/new)。 **Create New App**をクリックし、 **From scratch**を選択します。名前を入力し、アプリを関連付けるワークスペースを選択して、 **Create App**をクリックします。
+1. まだお持ちでない場合は、 [Slackアプリを作成します](https://api.slack.com/apps/new)。 **Create New App**をクリックし、 **From scratch**を選択します。名前を入力し、アプリを関連付けるワークスペースを選択して、 **Create App**をクリックします。
 2. アプリの設定ページに移動します。[アプリの管理ダッシュボード](https://api.slack.com/apps)から設定をロードできます。
 3. **Incoming Webhooks**タブをクリックし、 **Activate Incoming Webhooks**を**ON**に切り替えます。
 4. **Add New Webhook to Workspace**をクリックします。
 5. アラート通知を受信するチャネルを選択し、 **Authorize**を選択してください。受信Webhookをプライベートチャネルに追加する必要がある場合は、まずそのチャネルに参加している必要があります。
 
-**ワークスペースの Webhook URL**セクションに、次の形式で新しいエントリが表示されます: `https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX` 。
+**Webhook URLs for Your Workspace**セクションに、次の形式で新しいエントリが表示されます: `https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX` 。
 
 ### ステップ2. TiDB Cloudから購読する {#step-2-subscribe-from-tidb-cloud}
 
-アラート通知のサブスクリプションは[TiDB Cloudプラン](/tidb-cloud/select-cluster-tier.md)によって異なります。
+アラート通知の購読は[TiDB Cloudプラン](/tidb-cloud/select-cluster-tier.md)によって異なります。
 
 <CustomContent plan="dedicated">
 
@@ -49,7 +49,7 @@ TiDB Cloud Dedicatedクラスターのアラート通知を購読するには、
 
 > **Tip:**
 >
-> TiDB Cloud Dedicatedの場合、アラートの購読は現在のプロジェクト内のすべてのアラートに適用されます。プロジェクト内に複数のTiDB Cloud Dedicatedクラスタがある場合でも、購読は一度だけで済みます。
+> TiDB Cloud Dedicatedの場合、アラートの購読は現在のプロジェクト内のすべてのアラートに適用されます。プロジェクト内に複数のTiDB Cloud Dedicatedクラスターがある場合でも、購読は一度だけで済みます。
 
 1. [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **Project view**タブをクリックします。
 
@@ -59,7 +59,7 @@ TiDB Cloud Dedicatedクラスターのアラート通知を購読するには、
 
 4. **Alert Subscription**ページで、右上隅にある**Add Subscriber**をクリックします。
 
-5. **購読者タイプの**ドロップダウンリストから**Slack**を選択してください。
+5. **Subscriber Type**のドロップダウンリストから**Slack**を選択してください。
 
 6. **Name**欄に名前を、**URL**欄にSlackのWebhook URLを入力してください。
 
@@ -70,9 +70,9 @@ TiDB Cloud Dedicatedクラスターのアラート通知を購読するには、
 
 8. 購読を完了するには、 **Save**をクリックしてください。
 
-または、対象のTiDB Cloud Dedicatedクラスタの**アラート**ページの右上にある**Subscribe**をクリックすることもできます。**Alert Subscription**ページに移動します。
+または、対象のTiDB Cloud Dedicatedクラスターの**Alert**ページの右上にある**Subscribe**をクリックすることもできます。**Alert Subscription**ページに移動します。
 
-または、クラスターの**アラート**ページの右上隅にある**Subscribe**をクリックすることもできます。**Alert Subscription**ページに移動します。
+または、クラスターの**Alert**ページの右上隅にある**Subscribe**をクリックすることもできます。**Alert Subscription**ページに移動します。
 
 </CustomContent>
 
@@ -88,7 +88,7 @@ TiDB Cloud Dedicatedクラスターのアラート通知を購読するには、
 
 3. **Alert Subscription**ページで、右上隅にある**Add Subscriber**をクリックします。
 
-4. **購読者タイプの**ドロップダウンリストから**Slack**を選択してください。
+4. **Subscriber Type**のドロップダウンリストから**Slack**を選択してください。
 
 5. **Name**欄に名前を、**URL**欄にSlackのWebhook URLを入力してください。
 
@@ -99,7 +99,7 @@ TiDB Cloud Dedicatedクラスターのアラート通知を購読するには、
 
 7. 購読を完了するには、 **Save**をクリックしてください。
 
-または、対象のTiDB Cloud Essentialインスタンスの**アラート**ページの右上隅にある**Subscribe**をクリックすることもできます。**Alert Subscription**ページに移動します。
+または、対象のTiDB Cloud Essentialインスタンスの**Alert**ページの右上隅にある**Subscribe**をクリックすることもできます。**Alert Subscription**ページに移動します。
 
 </CustomContent>
 
@@ -115,7 +115,7 @@ TiDB Cloud Dedicatedクラスターのアラート通知を購読するには、
 
 3. **Alert Subscription**ページで、右上隅にある**Add Subscriber**をクリックします。
 
-4. **購読者タイプの**ドロップダウンリストから**Slack**を選択してください。
+4. **Subscriber Type**のドロップダウンリストから**Slack**を選択してください。
 
 5. **Name**欄に名前を、**URL**欄にSlackのWebhook URLを入力してください。
 
@@ -126,7 +126,7 @@ TiDB Cloud Dedicatedクラスターのアラート通知を購読するには、
 
 7. 購読を完了するには、 **Save**をクリックしてください。
 
-または、対象のTiDB Cloud Premiumインスタンスの**アラート**ページの右上にある**Subscribe**をクリックすることもできます。**Alert Subscription**ページに移動します。
+または、対象のTiDB Cloud Premiumインスタンスの**Alert**ページの右上にある**Subscribe**をクリックすることもできます。**Alert Subscription**ページに移動します。
 
 </CustomContent>
 

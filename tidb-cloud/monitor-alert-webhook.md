@@ -5,7 +5,7 @@ summary: 汎用webhook を介してアラート通知を受信し、TiDB クラ�
 
 # Webhook経由で購読する
 
-TiDB Cloud では、[汎用webhook](/tidb-cloud/monitor-alert-webhook.md)、[email](/tidb-cloud/monitor-alert-email.md)、[Slack](/tidb-cloud/monitor-alert-slack.md)、[Zoom](/tidb-cloud/monitor-alert-zoom.md)、[Flashduty](/tidb-cloud/monitor-alert-flashduty.md)、および [PagerDuty](/tidb-cloud/monitor-alert-pagerduty.md) を通じて、アラート通知を簡単に購読できます。このドキュメントでは、汎用webhook を介してアラート通知を購読する方法について説明します。
+TiDB Cloud では、[汎用webhook](/tidb-cloud/monitor-alert-webhook.md)、[メール](/tidb-cloud/monitor-alert-email.md)、[Slack](/tidb-cloud/monitor-alert-slack.md)、[Zoom](/tidb-cloud/monitor-alert-zoom.md)、[Flashduty](/tidb-cloud/monitor-alert-flashduty.md)、および [PagerDuty](/tidb-cloud/monitor-alert-pagerduty.md) を通じて、アラート通知を簡単に購読できます。このドキュメントでは、汎用webhook を介してアラート通知を購読する方法について説明します。
 
 > **Note:**
 >
@@ -31,7 +31,7 @@ TiDB Cloud では、[汎用webhook](/tidb-cloud/monitor-alert-webhook.md)、[ema
 
 ## アラート通知を購読する {#subscribe-to-alert-notifications}
 
-アラート通知のサブスクリプションは、[TiDB Cloud プラン](/tidb-cloud/select-cluster-tier.md)によって異なります。
+アラート通知の購読は、[TiDB Cloud プラン](/tidb-cloud/select-cluster-tier.md)によって異なります。
 
 <CustomContent plan="dedicated">
 
@@ -39,9 +39,9 @@ TiDB Cloud では、[汎用webhook](/tidb-cloud/monitor-alert-webhook.md)、[ema
 
 > **Tip:**
 >
-> {{{ .dedicated }}} では、アラートサブスクリプションは現在のプロジェクト内のすべてのアラートに対して適用されます。プロジェクト内に複数の {{{ .dedicated }}} クラスターがある場合でも、購読は一度だけで済みます。
+> {{{ .dedicated }}} では、アラートの購読は現在のプロジェクト内のすべてのアラートに対して適用されます。プロジェクト内に複数の {{{ .dedicated }}} クラスターがある場合でも、購読は一度だけで済みます。
 
-1. [TiDB Cloud console](https://tidbcloud.com) で、組織の [**My TiDB**](https://tidbcloud.com/tidbs) ページに移動し、**Project view** タブをクリックします。
+1. [TiDB Cloudコンソール](https://tidbcloud.com) で、組織の [**My TiDB**](https://tidbcloud.com/tidbs) ページに移動し、**Project view** タブをクリックします。
 2. プロジェクトビューで対象のプロジェクトを見つけ、プロジェクトの <MDSvgIcon name="icon-project-settings" /> をクリックします。
 3. 左側のナビゲーションペインで、**Project Settings** の下にある **Alert Subscription** をクリックします。
 4. **Alert Subscription** ページで、右上の **Add Subscriber** をクリックします。
@@ -59,9 +59,9 @@ TiDB Cloud では、[汎用webhook](/tidb-cloud/monitor-alert-webhook.md)、[ema
 
 > **Tip:**
 >
-> {{{ .essential }}} では、アラートサブスクリプションは現在のインスタンス内のすべてのアラートに対して適用されます。複数の {{{ .essential }}} インスタンスがある場合は、各インスタンスごとに個別に購読する必要があります。
+> {{{ .essential }}} では、アラートの購読は現在のインスタンス内のすべてのアラートに対して適用されます。複数の {{{ .essential }}} インスタンスがある場合は、各インスタンスごとに個別に購読する必要があります。
 
-1. [TiDB Cloud console](https://tidbcloud.com) で、組織の [**My TiDB**](https://tidbcloud.com/tidbs) ページに移動し、対象の {{{ .essential }}} インスタンス名をクリックして概要ページに移動します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com) で、組織の [**My TiDB**](https://tidbcloud.com/tidbs) ページに移動し、対象の {{{ .essential }}} インスタンス名をクリックして概要ページに移動します。
 2. 左側のナビゲーションペインで、**Settings** > **Alert Subscription** をクリックします。
 3. **Alert Subscription** ページで、右上の **Add Subscriber** をクリックします。
 4. **Subscriber Type** ドロップダウンリストから **Webhook** を選択します。
@@ -78,9 +78,9 @@ TiDB Cloud では、[汎用webhook](/tidb-cloud/monitor-alert-webhook.md)、[ema
 
 > **Tip:**
 >
-> {{{ .premium }}} では、アラートサブスクリプションは現在のインスタンス内のすべてのアラートに対して適用されます。複数の {{{ .premium }}} インスタンスがある場合は、各インスタンスごとに個別に購読する必要があります。
+> {{{ .premium }}} では、アラートの購読は現在のインスタンス内のすべてのアラートに対して適用されます。複数の {{{ .premium }}} インスタンスがある場合は、各インスタンスごとに個別に購読する必要があります。
 
-1. [TiDB Cloud console](https://tidbcloud.com) で、組織の [**My TiDB**](https://tidbcloud.com/tidbs) ページに移動し、対象の {{{ .premium }}} インスタンス名をクリックして概要ページに移動します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com) で、組織の [**My TiDB**](https://tidbcloud.com/tidbs) ページに移動し、対象の {{{ .premium }}} インスタンス名をクリックして概要ページに移動します。
 2. 左側のナビゲーションペインで、**Settings** > **Alert Subscription** をクリックします。
 3. **Alert Subscription** ページで、右上の **Add Subscriber** をクリックします。
 4. **Subscriber Type** ドロップダウンリストから **Webhook** を選択します。
@@ -97,32 +97,32 @@ TiDB Cloud では、[汎用webhook](/tidb-cloud/monitor-alert-webhook.md)、[ema
 
 ## アラート通知の購読を解除する {#unsubscribe-from-alert-notifications}
 
-アラート通知を受信しなくなった場合は、次の手順を実行します。手順は [TiDB Cloud プラン](/tidb-cloud/select-cluster-tier.md)によって異なります。
+アラート通知の受信を停止したい場合は、次の手順を実行します。手順は [TiDB Cloud プラン](/tidb-cloud/select-cluster-tier.md)によって異なります。
 
 <CustomContent plan="dedicated">
 
-1. [TiDB Cloud console](https://tidbcloud.com) で、組織の [**My TiDB**](https://tidbcloud.com/tidbs) ページに移動し、**Project view** タブをクリックします。
+1. [TiDB Cloudコンソール](https://tidbcloud.com) で、組織の [**My TiDB**](https://tidbcloud.com/tidbs) ページに移動し、**Project view** タブをクリックします。
 2. プロジェクトビューで対象のプロジェクトを見つけ、プロジェクトの <MDSvgIcon name="icon-project-settings" /> をクリックします。
 3. 左側のナビゲーションペインで、**Project Settings** の下にある **Alert Subscription** をクリックします。
-4. **Alert Subscription** ページで、削除する対象サブスクライバーの行を見つけ、**...** > **Unsubscribe** をクリックします。
+4. **Alert Subscription** ページで、削除する対象購読者の行を見つけ、**...** > **Unsubscribe** をクリックします。
 5. **Unsubscribe** をクリックして、購読解除を確定します。
 
 </CustomContent>
 
 <CustomContent plan="essential">
 
-1. [TiDB Cloud console](https://tidbcloud.com) で、組織の [**My TiDB**](https://tidbcloud.com/tidbs) ページに移動し、対象の {{{ .essential }}} インスタンス名をクリックして概要ページに移動します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com) で、組織の [**My TiDB**](https://tidbcloud.com/tidbs) ページに移動し、対象の {{{ .essential }}} インスタンス名をクリックして概要ページに移動します。
 2. 左側のナビゲーションペインで、**Settings** > **Alert Subscription** をクリックします。
-3. **Alert Subscription** ページで、削除する対象サブスクライバーの行を見つけ、**...** > **Unsubscribe** をクリックします。
+3. **Alert Subscription** ページで、削除する対象購読者の行を見つけ、**...** > **Unsubscribe** をクリックします。
 4. **Unsubscribe** をクリックして、購読解除を確定します。
 
 </CustomContent>
 
 <CustomContent plan="premium">
 
-1. [TiDB Cloud console](https://tidbcloud.com) で、組織の [**My TiDB**](https://tidbcloud.com/tidbs) ページに移動し、対象の {{{ .premium }}} インスタンス名をクリックして概要ページに移動します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com) で、組織の [**My TiDB**](https://tidbcloud.com/tidbs) ページに移動し、対象の {{{ .premium }}} インスタンス名をクリックして概要ページに移動します。
 2. 左側のナビゲーションペインで、**Settings** > **Alert Subscription** をクリックします。
-3. **Alert Subscription** ページで、削除する対象サブスクライバーの行を見つけ、**...** > **Unsubscribe** をクリックします。
+3. **Alert Subscription** ページで、削除する対象購読者の行を見つけ、**...** > **Unsubscribe** をクリックします。
 4. **Unsubscribe** をクリックして、購読解除を確定します。
 
 </CustomContent>

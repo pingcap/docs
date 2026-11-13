@@ -9,7 +9,7 @@ TiDB Cloud は Datadog との統合をサポートしています。TiDB Cloud �
 
 ## 前提条件 {#prerequisites}
 
-- TiDB Cloud を Datadog と統合するには、Datadog アカウントと [Datadog API key](https://app.datadoghq.com/organization-settings/api-keys) が必要です。Datadog アカウントを初めて作成すると、Datadog から API key が付与されます。
+- TiDB Cloud を Datadog と統合するには、Datadog アカウントと [Datadog APIキー](https://app.datadoghq.com/organization-settings/api-keys) が必要です。Datadog アカウントを初めて作成すると、Datadog から APIキーが付与されます。
 
     Datadog アカウントを持っていない場合は、[https://app.datadoghq.com/signup](https://app.datadoghq.com/signup) でサインアップしてください。
 
@@ -22,7 +22,7 @@ TiDB Cloud は Datadog との統合をサポートしています。TiDB Cloud �
 
 ## 手順 {#steps}
 
-### 手順 1. 事前構築済み Datadog ダッシュボードをインポートする {#step-1-import-the-pre-built-datadog-dashboard}
+### ステップ 1. 事前構築済み Datadog ダッシュボードをインポートする {#step-1-import-the-pre-built-datadog-dashboard}
 
 現在、<CustomContent plan="essential">{{{ .essential }}}</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> 用の TiDB Cloud ダッシュボードは、Datadog統合マーケットプレイスではまだ利用できません。ダッシュボード JSON ファイルを手動でダウンロードし、Datadog にインポートする必要があります。
 
@@ -51,14 +51,14 @@ TiDB Cloud は Datadog との統合をサポートしています。TiDB Cloud �
 
 6. **Yes, Replace** をクリックしてインポートを確定します。
 
-### 手順 2. Datadog API key と統合する {#step-2-integrate-with-your-datadog-api-key}
+### ステップ 2. Datadog APIキーと統合する {#step-2-integrate-with-your-datadog-api-key}
 
 <CustomContent plan="essential">
 
-1. [TiDB Cloud console](https://tidbcloud.com/) で [**My TiDB**](https://tidbcloud.com/tidbs) ページに移動し、対象の {{{ .essential }}} インスタンス名をクリックして概要ページを開きます。
+1. [TiDB Cloud コンソール](https://tidbcloud.com/) で [**My TiDB**](https://tidbcloud.com/tidbs) ページに移動し、対象の {{{ .essential }}} インスタンス名をクリックして概要ページを開きます。
 2. 左側のナビゲーションペインで、**Integrations** をクリックします。
 3. **Integrations** ページで、**Datadog (PREVIEW)** 統合を見つけて **Connect** をクリックします。
-4. Datadog API key を入力し、Datadog リージョンを選択してから、**Test Integration** をクリックします。
+4. Datadog APIキーを入力し、Datadog リージョンを選択してから、**Test Integration** をクリックします。
 
     - テストが成功すると、**Confirm** ボタンが表示されます。
     - テストが失敗すると、エラーメッセージが表示されます。メッセージに従ってトラブルシューティングを行い、再度統合を試してください。
@@ -69,10 +69,10 @@ TiDB Cloud は Datadog との統合をサポートしています。TiDB Cloud �
 
 <CustomContent plan="premium">
 
-1. [TiDB Cloud console](https://tidbcloud.com/) で [**My TiDB**](https://tidbcloud.com/tidbs) ページに移動し、対象の {{{ .premium }}} インスタンス名をクリックして概要ページを開きます。
+1. [TiDB Cloud コンソール](https://tidbcloud.com/) で [**My TiDB**](https://tidbcloud.com/tidbs) ページに移動し、対象の {{{ .premium }}} インスタンス名をクリックして概要ページを開きます。
 2. 左側のナビゲーションペインで、**Settings** > **Integrations** をクリックします。
 3. **Integrations** ページで、**Datadog (PREVIEW)** 統合を見つけて **Connect** をクリックします。
-4. Datadog API key を入力し、Datadog リージョンを選択してから、**Test Integration** をクリックします。
+4. Datadog APIキーを入力し、Datadog リージョンを選択してから、**Test Integration** をクリックします。
 
     - テストが成功すると、**Confirm** ボタンが表示されます。
     - テストが失敗すると、エラーメッセージが表示されます。メッセージに従ってトラブルシューティングを行い、再度統合を試してください。
@@ -83,9 +83,9 @@ TiDB Cloud は Datadog との統合をサポートしています。TiDB Cloud �
 
 ## 事前構築済みダッシュボードを表示する {#view-the-pre-built-dashboard}
 
-統合後に事前構築済みダッシュボードを表示するには、[Datadog](https://app.datadoghq.com) で **Dashboards** > **Dashboard List** に移動し、[手順 1](#step-1-import-the-pre-built-datadog-dashboard) でインポートしたダッシュボードを選択します。ダッシュボードページでは、対象のインスタンス名でフィルタリングしてメトリクスを表示できます。
+統合後に事前構築済みダッシュボードを表示するには、[Datadog](https://app.datadoghq.com) で **Dashboards** > **Dashboard List** に移動し、[ステップ 1](#step-1-import-the-pre-built-datadog-dashboard) でインポートしたダッシュボードを選択します。ダッシュボードページでは、対象のインスタンス名でフィルタリングしてメトリクスを表示できます。
 
-また、[TiDB Cloud console](https://tidbcloud.com/) から Datadog の **Dashboard List** ページにアクセスすることもできます。対象インスタンスの **Integrations** ページに移動し、**Datadog (PREVIEW)** をクリックしてから **Dashboard** をクリックします。
+また、[TiDB Cloud コンソール](https://tidbcloud.com/) から Datadog の **Dashboard List** ページにアクセスすることもできます。対象インスタンスの **Integrations** ページに移動し、**Datadog (PREVIEW)** をクリックしてから **Dashboard** をクリックします。
 
 ## Datadog で利用可能なメトリクス {#metrics-available-to-datadog}
 
@@ -99,9 +99,9 @@ Datadog は、<CustomContent plan="essential">{{{ .essential }}}</CustomContent>
 
 | メトリック名 | メトリックタイプ | ラベル | 説明 |
 |:--- |:--- |:--- |:--- |
-| `tidb_cloud.db_total_connection` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | TiDB server における現在の接続数 |
+| `tidb_cloud.db_total_connection` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | TiDB サーバーにおける現在の接続数 |
 | `tidb_cloud.db_active_connections` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | アクティブな接続数 |
-| `tidb_cloud.db_disconnections` | gauge | `result: Error\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | 接続結果ごとに切断されたクライアント数 |
+| `tidb_cloud.db_disconnections` | gauge | `result: Error\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | 切断されたクライアント数（接続結果別） |
 | `tidb_cloud.db_database_time` | gauge | `sql_type: Select\|Insert\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | TiDB で実行中のすべての SQL 文が 1秒あたりに消費した合計時間。すべてのプロセスの CPU 時間と、アイドル状態ではない待機時間を含みます |
 | `tidb_cloud.db_query_per_second` | gauge | `type: Select\|Insert\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | 文の種類ごとに集計された、1秒あたりに実行された SQL 文の数 |
 | `tidb_cloud.db_failed_queries` | gauge | `type: planner:xxx\|executor:2345\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | SQL 文の実行時に 1秒あたりに発生したエラー種別（構文エラーや主キー競合など）の統計 |
@@ -119,9 +119,9 @@ Datadog は、<CustomContent plan="essential">{{{ .essential }}}</CustomContent>
 
 | メトリック名 | メトリックタイプ | ラベル | 説明 |
 |:--- |:--- |:--- |:--- |
-| `tidb_cloud.db_total_connection` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | TiDB server における現在の接続数 |
+| `tidb_cloud.db_total_connection` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | TiDB サーバーにおける現在の接続数 |
 | `tidb_cloud.db_active_connections` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | アクティブな接続数 |
-| `tidb_cloud.db_disconnections` | gauge | `result: Error\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | 接続結果ごとに切断されたクライアント数 |
+| `tidb_cloud.db_disconnections` | gauge | `result: Error\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | 切断されたクライアント数（接続結果別） |
 | `tidb_cloud.db_database_time` | gauge | `sql_type: Select\|Insert\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | TiDB で実行中のすべての SQL 文が 1秒あたりに消費した合計時間。すべてのプロセスの CPU 時間と、アイドル状態ではない待機時間を含みます |
 | `tidb_cloud.db_query_per_second` | gauge | `type: Select\|Insert\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | 文の種類ごとに集計された、1秒あたりに実行された SQL 文の数 |
 | `tidb_cloud.db_failed_queries` | gauge | `type: planner:xxx\|executor:2345\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | SQL 文の実行時に 1秒あたりに発生したエラー種別（構文エラーや主キー競合など）の統計 |
@@ -132,7 +132,7 @@ Datadog は、<CustomContent plan="essential">{{{ .essential }}}</CustomContent>
 | `tidb_cloud.db_row_storage_used_bytes` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | {{{ .premium }}} インスタンスの行ベースストレージサイズ（バイト） |
 | `tidb_cloud.db_columnar_storage_used_bytes` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | {{{ .premium }}} インスタンスの列指向ストレージサイズ（バイト） |
 | `tidb_cloud.resource_manager_resource_request_unit_total` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | 消費された合計 Request Units/s (RU/s) |
-| `tidb_cloud.changefeed_latency` | gauge | `changefeed: <changefeed-id>`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | changefeed の upstream と downstream 間のデータレプリケーション レイテンシー |
+| `tidb_cloud.changefeed_latency` | gauge | `changefeed: <changefeed-id>`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | changefeed の upstream と downstream 間のデータレプリケーションレイテンシー |
 | `tidb_cloud.changefeed_status` | gauge | `changefeed: <changefeed-id>`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | Changefeed のステータス:<br/>`-1`: Unknown<br/>`0`: Normal<br/>`1`: Warning<br/>`2`: Failed<br/>`3`: Stopped<br/>`4`: Finished<br/>`6`: Warning<br/>`7`: Other |
 
 </CustomContent>
