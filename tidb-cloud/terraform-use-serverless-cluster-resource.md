@@ -421,6 +421,10 @@ resource "tidbcloud_serverless_cluster" "example" {
 
 For a {{{ .starter }}} instance that is not managed by Terraform, you can bring it under Terraform management by importing it.
 
+> **Note:**
+>
+> The `import` block and the `-generate-config-out` option used in the following steps require Terraform v1.5.0 or later.
+
 1. Add an import block for the new `tidbcloud_serverless_cluster` resource.
 
     Add the following import block to your `.tf` file, replace `example` with a desired resource name, and replace `${id}` with the cluster ID:

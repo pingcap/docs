@@ -1053,6 +1053,10 @@ $ terraform show
 
 For a TiDB cluster that is not managed by Terraform, you can bring it under Terraform management by importing it.
 
+> **Note:**
+>
+> The `import` block and the `-generate-config-out` option used in the following steps require Terraform v1.5.0 or later.
+
 Import a cluster that is not created by Terraform as follows:
 
 1. Add an import block for the new `tidbcloud_dedicated_cluster` resource.

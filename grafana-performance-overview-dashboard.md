@@ -78,20 +78,27 @@ Generally, `tso - request` divided by `tso - cmd` is the average size of TSO req
 - kv request total time: Total time of processing KV and TiFlash requests per second in all TiDB instances
 - Each KV request and the corresponding request source form a stacked bar chart, in which `external` identifies normal business requests and `internal` identifies internal activity requests (such as DDL and auto analyze requests)
 
-### TiDB CPU
+### TiDB CPU/Memory
 
-- avg: Average CPU utilization across all TiDB instances
-- delta: Maximum CPU utilization of all TiDB instances minus minimum CPU utilization of all TiDB instances
-- max: Maximum CPU utilization across all TiDB instances
+- CPU-Avg: Average CPU utilization across all TiDB instances
+- CPU-Delta: Maximum CPU utilization of all TiDB instances minus minimum CPU utilization of all TiDB instances
+- CPU-Max: Maximum CPU utilization across all TiDB instances
+- CPU-Quota: Maximum number of CPU cores that a TiDB instance can use among all TiDB instances
+- Mem-Max: Maximum memory usage among all TiDB instances
 
-### TiKV CPU/IO MBps
+### TiKV CPU/Memory
 
 - CPU-Avg: Average CPU utilization of all TiKV instances
 - CPU-Delta: Maximum CPU utilization of all TiKV instances minus minimum CPU utilization of all TiKV instances
-- CPU-MAX: Maximum CPU utilization among all TiKV instances
-- IO-Avg: Average MBps of all TiKV instances
-- IO-Delt: Maximum MBps of all TiKV instances minus minimum MBps of all TiKV instances
-- IO-MAX: Maximum MBps of all TiKV instances
+- CPU-Max: Maximum CPU utilization among all TiKV instances
+- CPU-Quota: Maximum number of CPU cores that a TiKV instance can use among all TiKV instances
+- Mem-Max: Maximum memory usage among all TiKV instances
+
+### PD CPU/Memory
+
+- CPU-Max: Maximum CPU utilization among all PD instances
+- CPU-Quota: Maximum number of CPU cores that a PD instance can use among all PD instances
+- Mem-Max: Maximum memory usage among all PD instances
 
 ### Duration
 
@@ -124,7 +131,7 @@ Connection Idle Duration indicates the duration of a connection being idle.
 
 - Parse Duration: Time consumed in parsing SQL statements
 - Compile Duration: Time consumed in compiling the parsed SQL AST to execution plans
-- Execution Duration: Time consumed in executing execution plans of SQL statements
+- Execute Duration: Time consumed in executing execution plans of SQL statements
 
 All these three metrics include the average duration and the 99th percentile duration in all TiDB instances.
 
