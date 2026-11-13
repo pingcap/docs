@@ -292,10 +292,21 @@ After creating a changefeed, data written to the upstream cluster is replicated 
     ]
     ```
 
-2. Create a changefeed from downstream to upstream. You can leave `start-ts` unspecified so as to use the default setting, because the upstream and downstream data are consistent and there is no new data written to the cluster.
+2. Clear the downstream auto-increment ID cache before redirecting write traffic.
+
+    TiCDC does not automatically clear the auto-increment ID cache after incremental replication. If you switch writes to the downstream cluster without clearing the cache, implicitly allocated IDs might overlap with IDs written during replication and cause duplicate-key errors.
+
+    To clear the auto-increment ID cache, you can use either of the following methods:
+
+    - Restart all TiDB nodes in the downstream cluster.
+    - For each affected table, execute `ALTER TABLE ... AUTO_INCREMENT = 0` in the downstream cluster.
+
+    For more information, see [Clear the auto-increment ID cache](/auto-increment.md#clear-the-auto-increment-id-cache).
+
+3. Create a changefeed from downstream to upstream. You can leave `start-ts` unspecified so as to use the default setting, because the upstream and downstream data are consistent and there is no new data written to the cluster.
 
     ```shell
     tiup cdc cli changefeed create --server=http://172.16.6.125:8300 --sink-uri="mysql://root:@172.16.6.122:4000" --changefeed-id="downstream-to-upstream"
     ```
 
-3. After migrating writing services to the downstream cluster, observe for a period. If the downstream cluster is stable, you can discard the upstream cluster.
+4. After migrating writing services to the downstream cluster, observe for a period. If the downstream cluster is stable, you can discard the upstream cluster.
