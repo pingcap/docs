@@ -33,12 +33,12 @@ TiDBバージョン：8.5.3
     - インデックスを使用したグローバルソート時にマージソート段階の監視メトリクスを追加する [#61025](https://github.com/pingcap/tidb/issues/61025) @[fzzf678](https://github.com/fzzf678)
     - `IndexLookup`オペレーターが`context canceled`エラーに遭遇したときに、冗長なログエントリを削除します [#61072](https://github.com/pingcap/tidb/issues/61072) @[yibin87](https://github.com/yibin87)
     - `tidb_replica_read`を`closest-adaptive`に設定した場合のパフォーマンスを改善します [#61745](https://github.com/pingcap/tidb/issues/61745) @[you06](https://github.com/you06)
-    - 大規模クラスタにおける監視メトリクスデータの量を減らすことで運用コストを削減する [#59990](https://github.com/pingcap/tidb/issues/59990) @[zimulala](https://github.com/zimulala)
+    - 大規模クラスターにおける監視メトリクスデータの量を減らすことで運用コストを削減する [#59990](https://github.com/pingcap/tidb/issues/59990) @[zimulala](https://github.com/zimulala)
 
 - TiKV
 
     - フォアグラウンド書き込みをブロックせずにSSTファイルを取り込むことをサポートし、レイテンシーの影響を軽減します [#18081](https://github.com/tikv/tikv/issues/18081) @[hhwyt](https://github.com/hhwyt)
-    - フローコントローラによって引き起こされるパフォーマンスのジッターを軽減します [#18625](https://github.com/tikv/tikv/issues/18625) @[hhwyt](https://github.com/hhwyt)
+    - フローコントローラーによって引き起こされるパフォーマンスのジッターを軽減します [#18625](https://github.com/tikv/tikv/issues/18625) @[hhwyt](https://github.com/hhwyt)
     - TiDB での`ADD INDEX`操作中のテールレイテンシーを最適化 [#18081](https://github.com/tikv/tikv/issues/18081) @[overvenus](https://github.com/overvenus)
     - Raftstoreでの`CompactedEvent`の処理を最適化し`split-check`ワーカーに移動することで、メインのRaftstoreスレッドでのブロッキングを軽減します [#18532](https://github.com/tikv/tikv/issues/18532) @[LykxSassinator](https://github.com/LykxSassinator)
     - SST の取り込みが遅すぎる場合のみ`SST ingest is experiencing slowdowns`をログに記録し、パフォーマンスのジッターを回避するために`get_sst_key_ranges`の呼び出しをスキップします [#18549](https://github.com/tikv/tikv/issues/18549) @[LykxSassinator](https://github.com/LykxSassinator)
@@ -84,7 +84,7 @@ TiDBバージョン：8.5.3
     - メタデータロック（MDL）を無効にした後、スキーマバージョンの更新に失敗してDDL操作が停止する問題を修正しました [#61210](https://github.com/pingcap/tidb/issues/61210) @[wjhuang2016](https://github.com/wjhuang2016)
     - 非公開インデックスが統計システムテーブルに表示される問題を修正 [#60430](https://github.com/pingcap/tidb/issues/60430) @[tangenta](https://github.com/tangenta)
     - HashAggオペレーターにおけるメモリ追跡の誤りにより、大量のエラーログが発生する問題を修正しました [#58822](https://github.com/pingcap/tidb/issues/58822) @[xzhangxian1008](https://github.com/xzhangxian1008)
-    - HashAgg オペレーターでディスクスピル中に`basePartialResult4GroupConcat`内の`nil`バッファがpanicを引き起こす問題を修正しました [#61749](https://github.com/pingcap/tidb/issues/61749) @[xzhangxian1008](https://github.com/xzhangxian1008)
+    - HashAgg オペレーターでディスクスピル中に`basePartialResult4GroupConcat`内の`nil`バッファーがpanicを引き起こす問題を修正しました [#61749](https://github.com/pingcap/tidb/issues/61749) @[xzhangxian1008](https://github.com/xzhangxian1008)
     - 集計式のエンコードロジックにおける誤った戻り値がクエリ実行中にpanicを引き起こす問題を修正 [#61735](https://github.com/pingcap/tidb/issues/61735) @[YangKeao](https://github.com/YangKeao)
     - HashJoinオペレーターがメモリの過剰使用によりゴルーチンリークを引き起こす問題を修正 [#60926](https://github.com/pingcap/tidb/issues/60926) @[xzhangxian1008](https://github.com/xzhangxian1008)
     - `IndexMerge`および`IndexLookUp`オペレーターで共有 KV リクエストがクエリのプッシュダウン時にデータ競合を引き起こす問題を修正しました [#60175](https://github.com/pingcap/tidb/issues/60175) @[you06](https://github.com/you06)
@@ -93,7 +93,7 @@ TiDBバージョン：8.5.3
     - 無効な夏時間 (DST) タイムスタンプを挿入すると`0000-00-00`になる問題を修正 [#61334](https://github.com/pingcap/tidb/issues/61334) @[mjonss](https://github.com/mjonss)
     - `INSERT IGNORE`を使用して厳密なSQLモードで無効な夏時間タイムスタンプを挿入すると、MySQLと矛盾するタイムスタンプが生成される問題を修正しました [#61439](https://github.com/pingcap/tidb/issues/61439) @[mjonss](https://github.com/mjonss)
     - リージョンのマージが頻繁に行われるとTTLジョブの開始が妨げられる問題を修正 [#61512](https://github.com/pingcap/tidb/issues/61512) @[YangKeao](https://github.com/YangKeao)
-    - TiDB がネットワーク プロトコルで返す列の長さが`0`になる可能性がある問題を修正します。もし`0`であれば、TiDB は各フィールド タイプのデフォルトの長さを返します。 [#60503](https://github.com/pingcap/tidb/issues/60503) @[xhebox](https://github.com/xhebox)
+    - TiDB がネットワークプロトコルで返す列の長さが`0`になる可能性がある問題を修正します。もし`0`であれば、TiDB は各フィールドタイプのデフォルトの長さを返します。 [#60503](https://github.com/pingcap/tidb/issues/60503) @[xhebox](https://github.com/xhebox)
     - ネットワークプロトコルにおける`blob`の戻り値の型が MySQL と一致しない問題を修正しました [#60195](https://github.com/pingcap/tidb/issues/60195) @[dveeden](https://github.com/dveeden)
     - `CAST()`が返す長さが MySQL と互換性がない問題を修正 [#61350](https://github.com/pingcap/tidb/issues/61350) @[YangKeao](https://github.com/YangKeao)
     - `latin1_bin`の比較動作が`utf8mb4_bin`および`utf8_bin`と異なる問題を修正 [#60701](https://github.com/pingcap/tidb/issues/60701) @[hawkingrei](https://github.com/hawkingrei)
@@ -113,7 +113,7 @@ TiDBバージョン：8.5.3
 - PD
 
     - `recovery-duration`が低速ノード検出メカニズムで有効にならない問題を修正 [#9384](https://github.com/tikv/pd/issues/9384) @[rleungx](https://github.com/rleungx)
-    - クラスタのアップグレード後に Evict Leaderスケジューラが誤って一時停止される可能性がある問題を修正しました [#9416](https://github.com/tikv/pd/issues/9416) @[rleungx](https://github.com/rleungx)
+    - クラスターのアップグレード後に Evict Leaderスケジューラーが誤って一時停止される可能性がある問題を修正しました [#9416](https://github.com/tikv/pd/issues/9416) @[rleungx](https://github.com/rleungx)
     - TiDB DashboardのTCP接続を不適切に閉じるとPDゴルーチンリークが発生する問題を修正しました [#9402](https://github.com/tikv/pd/issues/9402) @[baurine](https://github.com/baurine)
     - 新しく追加された TiKV ノードがスケジュールに失敗する可能性がある問題を修正 [#9145](https://github.com/tikv/pd/issues/9145) @[bufferflies](https://github.com/bufferflies)
 
@@ -131,15 +131,15 @@ TiDBバージョン：8.5.3
         - HTTP/2 GOAWAY エラーが発生した際に、外部ストレージからのデータインポートが自動的に再試行されない問題を修正 [#60143](https://github.com/pingcap/tidb/issues/60143) @[joechenrh](https://github.com/joechenrh)
         - インポートモードの切り替えにより復元中に発生する`keepalive watchdog timedout`エラーを修正 [#18541](https://github.com/tikv/tikv/issues/18541) @[Leavrth](https://github.com/Leavrth)
         - 大量のデータを転送する際に、ログバックアップのAzure Blob Storageへのアップロードが遅くなる問題を修正しました [#18410](https://github.com/tikv/tikv/issues/18410) @[YuJuncen](https://github.com/YuJuncen)
-        - `-f`でテーブルをフィルタリングする際に、 BRが対応するテーブルがクラスタ内に存在するかどうかをチェックしない問題を修正 [#61592](https://github.com/pingcap/tidb/issues/61592) @[RidRisR](https://github.com/RidRisR)
+        - `-f`でテーブルをフィルタリングする際に、 BRが対応するテーブルがクラスター内に存在するかどうかをチェックしない問題を修正 [#61592](https://github.com/pingcap/tidb/issues/61592) @[RidRisR](https://github.com/RidRisR)
         - PITR が 3072 バイトを超えるインデックスの復元に失敗する問題を修正 [#58430](https://github.com/pingcap/tidb/issues/58430) @[YuJuncen](https://github.com/YuJuncen)
         - RangeTree の結果が完全バックアップ中にメモリを非効率的に消費する問題を修正 [#58587](https://github.com/pingcap/tidb/issues/58587) @[3pointer](https://github.com/3pointer)
 
     - TiCDC
 
-        - 仮想列を含むテーブルでイベントフィルタ式を評価するとpanicが発生する可能性がある問題を修正 [#12206](https://github.com/pingcap/tiflow/issues/12206) @[lidezhu](https://github.com/lidezhu)
+        - 仮想列を含むテーブルでイベントフィルター式を評価するとpanicが発生する可能性がある問題を修正 [#12206](https://github.com/pingcap/tiflow/issues/12206) @[lidezhu](https://github.com/lidezhu)
         - 古いストア ID が原因で、同じ IP アドレス上の TiKV ノードをスケールインまたはスケールアウトした後、resolved ts ラグが増加し続ける問題を修正 [#12162](https://github.com/pingcap/tiflow/issues/12162) @[3AceShowHand](https://github.com/3AceShowHand)
-        - ディスパッチャ構成における列名とインデックス名の大文字小文字を区別するマッチングの問題を修正 [#12103](https://github.com/pingcap/tiflow/issues/12103) @[wk989898](https://github.com/wk989898)
+        - ディスパッチャー構成における列名とインデックス名の大文字小文字を区別するマッチングの問題を修正 [#12103](https://github.com/pingcap/tiflow/issues/12103) @[wk989898](https://github.com/wk989898)
         - Debeziumプロトコルで`column-selector`を設定するとpanicが発生する可能性がある問題を修正しました [#12208](https://github.com/pingcap/tiflow/issues/12208) @[wk989898](https://github.com/wk989898)
 
     - TiDB Lightning

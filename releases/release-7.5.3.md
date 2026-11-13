@@ -51,10 +51,10 @@ TiDB バージョン: 7.5.3
 
     - インデックス統計の読み込み時にメモリリークが発生する可能性がある問題を修正[#54022](https://github.com/pingcap/tidb/issues/54022) @[hi-rustin](https://github.com/Rustin170506)
     - `UPDATE`操作で複数テーブルシナリオで TiDB OOM が発生する可能性がある問題を修正 [#53742](https://github.com/pingcap/tidb/issues/53742) @[hawkingrei](https://github.com/hawkingrei)
-    - `GROUP BY`ステートメント内の間接プレースホルダ`?`参照が列を見つけられない問題を修正しました [#53872](https://github.com/pingcap/tidb/issues/53872) @[qw4990](https://github.com/qw4990)
+    - `GROUP BY`ステートメント内の間接プレースホルダー`?`参照が列を見つけられない問題を修正しました [#53872](https://github.com/pingcap/tidb/issues/53872) @[qw4990](https://github.com/qw4990)
     - 照合順序が`utf8_bin`または`utf8mb4_bin` の場合に`LENGTH()`条件が予期せず削除される問題を修正しました [#53730](https://github.com/pingcap/tidb/issues/53730) @[elsa0520](https://github.com/elsa0520)
     - 科学表記法で大きすぎる数値を挿入するとエラーではなく警告が返される問題を修正し、MySQL と一貫性を保ちます。 [#47787](https://github.com/pingcap/tidb/issues/47787) @[qw4990](https://github.com/qw4990)
-    - 再帰CTEクエリが無効なポインタを生成する可能性がある問題を修正しました [#54449](https://github.com/pingcap/tidb/issues/54449) @[hawkingrei](https://github.com/hawkingrei)
+    - 再帰CTEクエリが無効なポインターを生成する可能性がある問題を修正しました [#54449](https://github.com/pingcap/tidb/issues/54449) @[hawkingrei](https://github.com/hawkingrei)
     - 重複する主キーに遭遇したときに統計収集で`stats_history`テーブルが更新されない問題を修正しました [#47539](https://github.com/pingcap/tidb/issues/47539) @[Defined2014](https://github.com/Defined2014)
     - クエリに非相関サブクエリと`LIMIT`句が含まれている場合、列のプルーニングが不完全になり、最適でないプランになる可能性がある問題を修正しました。 [#54213](https://github.com/pingcap/tidb/issues/54213) @[qw4990](https://github.com/qw4990)
     - `HashJoin`または`IndexLookUp`オペレーターが`Apply`オペレーターの駆動側サブノードである場合に`memTracker`が切り離されないことで発生する異常に高いメモリ使用量の問題を修正しました。 [#54005](https://github.com/pingcap/tidb/issues/54005) @[XuHuaiyu](https://github.com/XuHuaiyu)
@@ -68,7 +68,7 @@ TiDB バージョン: 7.5.3
     - `CREATE OR REPLACE VIEW`を同時に実行すると`table doesn't exist`エラーが発生する可能性がある問題を修正 [#53673](https://github.com/pingcap/tidb/issues/53673) @[tangenta](https://github.com/tangenta)
     - データ変更操作を含むトランザクションで仮想列を持つテーブルをクエリすると、TiDB が誤ったクエリ結果を返す可能性がある問題を修正しました [#53951](https://github.com/pingcap/tidb/issues/53951) @[qw4990](https://github.com/qw4990)
     - `SELECT DISTINCT CAST(col AS DECIMAL), CAST(col AS SIGNED) FROM ...`クエリを実行すると誤った結果が返される可能性がある問題を修正[#53726](https://github.com/pingcap/tidb/issues/53726) @[hawkingrei](https://github.com/hawkingrei)
-    - オプティマイザヒント使用時に誤った警告情報が表示される問題を修正しました [#53767](https://github.com/pingcap/tidb/issues/53767) @[hawkingrei](https://github.com/hawkingrei)
+    - オプティマイザーヒント使用時に誤った警告情報が表示される問題を修正しました [#53767](https://github.com/pingcap/tidb/issues/53767) @[hawkingrei](https://github.com/hawkingrei)
     - 場合によっては無効な列タイプ`DECIMAL(0,0)`が作成される可能性がある問題を修正[#53779](https://github.com/pingcap/tidb/issues/53779) @[tangenta](https://github.com/tangenta)
     - `memory_quota`ヒントがサブクエリで機能しない可能性がある問題を修正しました [#53834](https://github.com/pingcap/tidb/issues/53834) @[qw4990](https://github.com/qw4990)
     - JSON関連の関数がMySQLと矛盾するエラーを返す場合がある問題を修正[#53799](https://github.com/pingcap/tidb/issues/53799) @[dveeden](https://github.com/dveeden)
@@ -93,10 +93,10 @@ TiDB バージョン: 7.5.3
 
 - PD
 
-    - リソースグループ クライアントでスロットが完全に削除されず、割り当てられたトークンの数が指定された値より少なくなる問題を修正しました。 [#7346](https://github.com/tikv/pd/issues/7346) @[guo-shaoge](https://github.com/guo-shaoge)
+    - リソースグループクライアントでスロットが完全に削除されず、割り当てられたトークンの数が指定された値より少なくなる問題を修正しました。 [#7346](https://github.com/tikv/pd/issues/7346) @[guo-shaoge](https://github.com/guo-shaoge)
     - 500 ミリ秒を超えてトークンをリクエストするとリソースグループがクォータ制限に達する問題を修正[#8349](https://github.com/tikv/pd/issues/8349) @[nolouch](https://github.com/nolouch)
     - リソースグループのデータ競合問題を修正 [#8267](https://github.com/tikv/pd/issues/8267) @[HuSharp](https://github.com/HuSharp)
-    - PD がオペレーター チェック中に遭遇するデータ競合問題を修正しました [#8263](https://github.com/tikv/pd/issues/8263) @[lhy1024](https://github.com/lhy1024)
+    - PD がオペレーターチェック中に遭遇するデータ競合問題を修正しました [#8263](https://github.com/tikv/pd/issues/8263) @[lhy1024](https://github.com/lhy1024)
     - 削除されたノードがetcdクライアントの候補接続リストにまだ表示される問題を修正 [#8286](https://github.com/tikv/pd/issues/8286) @[JmPotato](https://github.com/JmPotato)
     - TiKV設定項目[`coprocessor.region-split-size`](/tikv-configuration-file.md#region-split-size)を1 MiB未満の値に設定するとPD panicが発生する問題を修正しました [#8323](https://github.com/tikv/pd/issues/8323) @[JmPotato](https://github.com/JmPotato)
     - 暗号化マネージャーが使用前に初期化されない問題を修正[#8384](https://github.com/tikv/pd/issues/8384) @[releungx](https://github.com/releungx)
@@ -127,7 +127,7 @@ TiDB バージョン: 7.5.3
     - TiCDC
 
         - `UPDATE`イベントを分割した後、チェックサムが正しく`0`に設定されない問題を修正しました。 [#11402](https://github.com/pingcap/tiflow/issues/11402) @[3AceShowHand](https://github.com/3AceShowHand)
-        - 下流の Kafka にアクセスできない場合にプロセッサモジュールがスタックする可能性がある問題を修正[#11340](https://github.com/pingcap/tiflow/issues/11340) @[asddongmen](https://github.com/asddongmen)
+        - 下流の Kafka にアクセスできない場合にプロセッサーモジュールがスタックする可能性がある問題を修正[#11340](https://github.com/pingcap/tiflow/issues/11340) @[asddongmen](https://github.com/asddongmen)
 
     - Dumpling
 

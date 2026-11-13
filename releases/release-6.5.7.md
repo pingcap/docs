@@ -21,12 +21,12 @@ TiDB バージョン: 6.5.7
 - TiDB
 
     - パーティションテーブルでの`ANALYZE`操作のメモリ使用量とパフォーマンスを最適化します [#47071](https://github.com/pingcap/tidb/issues/47071) [#47104](https://github.com/pingcap/tidb/issues/47104) [#46804](https://github.com/pingcap/tidb/issues/46804) @[hawkingrei](https://github.com/hawkingrei)
-    - オプティマイザ修正コントロールを使用して、物理的な最適化中に生成された`PointGet`オペレーターを含む実行計画をプランキャッシュでキャッシュできるようにします。 [#44830](https://github.com/pingcap/tidb/issues/44830) @[qw4990](https://github.com/qw4990)
+    - オプティマイザー修正コントロールを使用して、物理的な最適化中に生成された`PointGet`オペレーターを含む実行計画をプランキャッシュでキャッシュできるようにします。 [#44830](https://github.com/pingcap/tidb/issues/44830) @[qw4990](https://github.com/qw4990)
     - 特定のシナリオで`OUTER JOIN`を`INNER JOIN`に変換する能力を強化する[#49616](https://github.com/pingcap/tidb/issues/49616) @[qw4990](https://github.com/qw4990)
 
 - TiFlash
 
-    - ディスクパフォーマンスジッタによる読み取りレイテンシーへの影響を軽減[#8583](https://github.com/pingcap/tiflash/issues/8583) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - ディスクパフォーマンスジッターによる読み取りレイテンシーへの影響を軽減[#8583](https://github.com/pingcap/tiflash/issues/8583) @[JaySon-Huang](https://github.com/JaySon-Huang)
 
 - ツール
 
@@ -54,7 +54,7 @@ TiDB バージョン: 6.5.7
     - 正常なシャットダウン中に TiDBサーバーがpanicする可能性がある問題を修正[#36793](https://github.com/pingcap/tidb/issues/36793) @[bb7133](https://github.com/bb7133)
     - TiDB の初期バージョンからエクスポートされた統計をインポートするときに統計データエラーが発生する可能性がある問題を修正しました。 [#42931](https://github.com/pingcap/tidb/issues/42931) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
     - Golang の暗黙的な変換アルゴリズムによって発生する統計情報の構築における過剰な統計エラーの問題を修正しました [#49801](https://github.com/pingcap/tidb/issues/49801) @[qw4990](https://github.com/qw4990)
-    - 特定のシナリオでオプティマイザがTiFlash選択パスを DUAL テーブルに誤って変換する問題を修正[#49285](https://github.com/pingcap/tidb/issues/49285) @[AilinKid](https://github.com/AilinKid)
+    - 特定のシナリオでオプティマイザーがTiFlash選択パスを DUAL テーブルに誤って変換する問題を修正[#49285](https://github.com/pingcap/tidb/issues/49285) @[AilinKid](https://github.com/AilinKid)
     - `ENUM`または`SET`型の無効な値を解析すると、SQL文エラーが直接発生する問題を修正しました。 [#49487](https://github.com/pingcap/tidb/issues/49487) @[winoros](https://github.com/winoros)
     - `WITH RECURSIVE` CTE を含む`UPDATE`または`DELETE`文で誤った結果が生成される可能性がある問題を修正しました[#48969](https://github.com/pingcap/tidb/issues/48969) @[winoros](https://github.com/winoros)
     - データの末尾にスペースが含まれている場合に`LIKE`で`_`ワイルドカードを使用すると、クエリ結果が不正確になる可能性がある問題を修正しました[#48983](https://github.com/pingcap/tidb/issues/48983) @[time-and-fate](https://github.com/time-and-fate)

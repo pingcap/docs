@@ -28,7 +28,7 @@ TiDB バージョン: 8.1.2
 
     - 空のテーブルと小さなリージョンのシナリオでのリージョンマージの速度を向上 [#17376](https://github.com/tikv/tikv/issues/17376) @[LykxSassinator](https://github.com/LykxSassinator)
     - TiKVの`DiskFull`検出を最適化してRaftEngineの`spill-dir`構成と互換性を持たせ、この機能が一貫して動作することを保証します。 [#17356](https://github.com/tikv/tikv/issues/17356) @[LykxSassinator](https://github.com/LykxSassinator)
-    - RocksDB コンパクションのトリガー メカニズムを最適化し、多数の DELETE バージョンを処理するときにディスク領域の再利用を高速化します。 [#17269](https://github.com/tikv/tikv/issues/17269) @[AndreMouche](https://github.com/AndreMouche)
+    - RocksDB コンパクションのトリガーメカニズムを最適化し、多数の DELETE バージョンを処理するときにディスク領域の再利用を高速化します。 [#17269](https://github.com/tikv/tikv/issues/17269) @[AndreMouche](https://github.com/AndreMouche)
     - `import.num-threads`設定項目を動的に変更することをサポート[#17807](https://github.com/tikv/tikv/issues/17807) @[RidRisR](https://github.com/RidRisR)
     - Rusoto ライブラリを AWS Rust SDK に置き換えて、バックアップと復元のために外部ストレージ(Amazon S3 など) にアクセスします。これにより、IMDSv2 や EKS Pod Identity などの AWS 機能との互換性が向上します。 [#12371](https://github.com/tikv/tikv/issues/12371) @[akoshchiy](https://github.com/akoshchiy)
 
@@ -77,10 +77,10 @@ TiDB バージョン: 8.1.2
     - 整数型の列に小さい表示幅を指定すると`out of range`エラーが発生する可能性がある問題を修正しました。 [#55837](https://github.com/pingcap/tidb/issues/55837) @[windtalker](https://github.com/windtalker)
     - `LOAD DATA ... REPLACE INTO`操作でデータの不整合が発生する問題を修正[#56408](https://github.com/pingcap/tidb/issues/56408) @[fzzf678](https://github.com/fzzf678)
     - `columnEvaluator`は入力チャンク内の列参照を識別できず、SQL 文を実行すると`runtime error: index out of range`が発生する問題を修正しました。 [#53713](https://github.com/pingcap/tidb/issues/53713) @[AilinKid](https://github.com/AilinKid)
-    - 共通テーブル式 (CTE) に複数のデータ コンシューマーがあり、1つのコンシューマーがデータを読み取らずに終了した場合に発生する可能性のある無効なメモリアクセスの問題を修正しました[#55881](https://github.com/pingcap/tidb/issues/55881) @[windtalker](https://github.com/windtalker)
+    - 共通テーブル式 (CTE) に複数のデータコンシューマーがあり、1つのコンシューマーがデータを読み取らずに終了した場合に発生する可能性のある無効なメモリアクセスの問題を修正しました[#55881](https://github.com/pingcap/tidb/issues/55881) @[windtalker](https://github.com/windtalker)
     - TTLタスクをキャンセルした際に、対応するSQLが強制終了されない問題を修正[#56511](https://github.com/pingcap/tidb/issues/56511) @[lcwangchao](https://github.com/lcwangchao)
     - `IMPORT INTO`文を使用して一時テーブルをインポートするときに TiDB がパニックになる問題を修正しました [#55970](https://github.com/pingcap/tidb/issues/55970) @[D3Hunter](https://github.com/D3Hunter)
-    - クエリ条件`column IS NULL` で一意インデックスにアクセスするときに、オプティマイザが行数を誤って 1 と推定する問題を修正しました。 [#56116](https://github.com/pingcap/tidb/issues/56116) @[hawkingrei](https://github.com/hawkingrei)
+    - クエリ条件`column IS NULL` で一意インデックスにアクセスするときに、オプティマイザーが行数を誤って 1 と推定する問題を修正しました。 [#56116](https://github.com/pingcap/tidb/issues/56116) @[hawkingrei](https://github.com/hawkingrei)
     - 情報スキーマキャッシュミスにより、ステイル読み取りのクエリレイテンシーが増加する問題を修正しました。 [#53428](https://github.com/pingcap/tidb/issues/53428) @[crazycs520](https://github.com/crazycs520)
     - `UPDATE`文が`ENUM`型の値を誤って更新する問題を修正しました [#56832](https://github.com/pingcap/tidb/issues/56832) @[xhebox](https://github.com/xhebox)
     - 外部キーを含むテーブル構造をインポートするときに Plan Replayer がエラーを報告する可能性がある問題を修正しました。 [#56456](https://github.com/pingcap/tidb/issues/56456) @[hawkingrei](https://github.com/hawkingrei)
@@ -114,18 +114,18 @@ TiDB バージョン: 8.1.2
     - etcdリーダー遷移中にPDがリーダーを素早く再選出できない問題を修正 [#8823](https://github.com/tikv/pd/issues/8823) @[rleungx](https://github.com/rleungx)
     - `replication.strictly-match-label`を`true`に設定するとTiFlash が起動しなくなる問題を修正 [#8480](https://github.com/tikv/pd/issues/8480) @[rleungx](https://github.com/rleungx)
     - 同じストアID で繰り返し作成された場合に`evict-leader-scheduler`が正常に動作しない問題を修正 [#8756](https://github.com/tikv/pd/issues/8756) @[okJiang](https://github.com/okJiang)
-    - 乱数ジェネレータの頻繁な作成によって発生するパフォーマンスジッターの問題を修正しました [#8674](https://github.com/tikv/pd/issues/8674) @[rleungx](https://github.com/rleungx)
-    - ホットスポット キャッシュのメモリリーク問題を修正 [#8698](https://github.com/tikv/pd/issues/8698) @[lhy1024](https://github.com/lhy1024)
+    - 乱数ジェネレーターの頻繁な作成によって発生するパフォーマンスジッターの問題を修正しました [#8674](https://github.com/tikv/pd/issues/8674) @[rleungx](https://github.com/rleungx)
+    - ホットスポットキャッシュのメモリリーク問題を修正 [#8698](https://github.com/tikv/pd/issues/8698) @[lhy1024](https://github.com/lhy1024)
     - ラベル統計のメモリリーク問題を修正 [#8700](https://github.com/tikv/pd/issues/8700) @[lhy1024](https://github.com/lhy1024)
     - 削除されたリソースグループが監視パネルに引き続き表示される問題を修正しました [#8716](https://github.com/tikv/pd/issues/8716) @[AndreMouche](https://github.com/AndreMouche)
     - マイクロサービスモードでPDリーダーが切り替えられたときにスケジューリングサーバーでデータ競合が発生する可能性がある問題を修正しました [#8538](https://github.com/tikv/pd/issues/8538) @[lhy1024](https://github.com/lhy1024)
-    - `evict-leader-scheduler`で間違ったパラメータを使用すると、PD がエラーを正しく報告せず、一部のスケジューラが利用できなくなる問題を修正しました[#8619](https://github.com/tikv/pd/issues/8619) @[rleungx](https://github.com/rleungx)
+    - `evict-leader-scheduler`で間違ったパラメーターを使用すると、PD がエラーを正しく報告せず、一部のスケジューラーが利用できなくなる問題を修正しました[#8619](https://github.com/tikv/pd/issues/8619) @[rleungx](https://github.com/rleungx)
     - リソースグループセレクターがどのパネルでも有効にならない問題を修正しました [#56572](https://github.com/pingcap/tidb/issues/56572) @[glorv](https://github.com/glorv)
 
 - TiFlash
 
     - 複数のリージョンがスナップショットを同時に適用しているときに発生する誤ったリージョン重複チェックの失敗によりTiFlash がpanicになる可能性がある問題を修正しました。 [#9329](https://github.com/pingcap/tiflash/issues/9329) @[CalvinNeo](https://github.com/CalvinNeo)
-    - 2番目のパラメータが負の場合に`SUBSTRING()`関数が誤った結果を返す問題を修正しました [#9604](https://github.com/pingcap/tiflash/issues/9604) @[guo-shaoge](https://github.com/guo-shaoge)
+    - 2番目のパラメーターが負の場合に`SUBSTRING()`関数が誤った結果を返す問題を修正しました [#9604](https://github.com/pingcap/tiflash/issues/9604) @[guo-shaoge](https://github.com/guo-shaoge)
     - 遅延マテリアライゼーションが有効になっている場合に一部のクエリでエラーが報告される可能性がある問題を修正[#9472](https://github.com/pingcap/tiflash/issues/9472) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     - テーブルに無効な文字を含むデフォルト値を持つビット型の列が含まれている場合、 TiFlash がテーブルスキーマを解析できない問題を修正しました。 [#9461](https://github.com/pingcap/tiflash/issues/9461) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     - TiFlashでサポートされていない一部の JSON関数がTiFlash にプッシュダウンされる問題を修正しました [#9444](https://github.com/pingcap/tiflash/issues/9444) @[windtalker](https://github.com/windtalker)
@@ -149,7 +149,7 @@ TiDB バージョン: 8.1.2
     - TiCDC
 
         - PullerモジュールのResolved TSレイテンシーモニタリングで誤った値が表示される問題を修正しました [#11561](https://github.com/pingcap/tiflow/issues/11561) @[wlwilliamx](https://github.com/wlwilliamx)
-        - `enable-table-across-nodes`を有効にすると、リージョン分割中にテーブルの一部のスパン レプリケーションタスクが失われる可能性がある問題を修正しました。 [#11675](https://github.com/pingcap/tiflow/issues/11675) @[wk989898](https://github.com/wk989898)
+        - `enable-table-across-nodes`を有効にすると、リージョン分割中にテーブルの一部のスパンレプリケーションタスクが失われる可能性がある問題を修正しました。 [#11675](https://github.com/pingcap/tiflow/issues/11675) @[wk989898](https://github.com/wk989898)
         - REDOモジュールがエラーを正しく報告できない問題を修正しました [#11744](https://github.com/pingcap/tiflow/issues/11744) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - TiDB DDL 所有者の変更中に DDL タスクのスキーマバージョンが非増分になったときに、TiCDC が誤って DDL タスクを破棄する問題を修正[#11714](https://github.com/pingcap/tiflow/issues/11714) @[wlwilliamx](https://github.com/wlwilliamx)
         - チェンジフィードチェックポイントの**barrier-ts**監視メトリックが不正確になる可能性がある問題を修正しました[#11553](https://github.com/pingcap/tiflow/issues/11553) @[3AceShowHand](https://github.com/3AceShowHand)
