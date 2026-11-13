@@ -7,10 +7,6 @@ summary: "了解如何在 {{{ .lake }}} 中使用 ALTER WAREHOUSE ASSIGN NODES �
 
 将节点分配给计算集群 (Warehouse) 中的一个或多个集群。
 
-> **注意：**
->
-> 此命令需要系统管理支持和企业版许可证。
-
 ## 语法 {#syntax}
 
 ```sql
