@@ -70,6 +70,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - AFFINITY
 - AGAINST
 - AGO
+- ALERT
 - ALGORITHM
 - ALL (R)
 - ALTER (R)
@@ -82,8 +83,10 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - AS (R)
 - ASC (R)
 - ASCII
+- ASYNC
 - ATTRIBUTE
 - ATTRIBUTES
+- AUTO
 - AUTO_ID_CACHE
 - AUTO_INCREMENT
 - AUTO_RANDOM
@@ -161,6 +164,8 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - COMMIT
 - COMMITTED
 - COMPACT
+- COMPARE
+- COMPLETE
 - COMPRESSED
 - COMPRESSION
 - COMPRESSION_LEVEL
@@ -216,6 +221,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - DELAY_KEY_WRITE
 - DELAYED (R)
 - DELETE (R)
+- DELTA
 - DENSE_RANK (R-Window)
 - DEPENDENCY
 - DEPTH
@@ -281,6 +287,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 
 - FAILED_LOGIN_ATTEMPTS
 - FALSE (R)
+- FAST
 - FAULTS
 - FETCH (R)
 - FIELDS
@@ -338,6 +345,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - IGNORE (R)
 - IGNORE_STATS
 - ILIKE (R)
+- IMMEDIATE
 - IMPORT
 - IMPORTS
 - IN (R)
@@ -425,6 +433,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - MASKING
 - MASTER
 - MATCH (R)
+- MATERIALIZED
 - MAXVALUE (R)
 - MAX_CONNECTIONS_PER_HOUR
 - MAX_IDXNUM
@@ -497,6 +506,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - ONLINE
 - ONLY
 - OPEN
+- OPERATE
 - OPTIMISTIC
 - OPTIMIZE (R)
 - OPTION (R)
@@ -507,6 +517,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - OUT (R)
 - OUTER (R)
 - OUTFILE (R)
+- OUTPUT
 - OVER (R-Window)
 
 <a id="P" class="letter" href="#P">P</a>
@@ -529,6 +540,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - PER_DB
 - PER_TABLE
 - PESSIMISTIC
+- PLACE
 - PLUGINS
 - POINT
 - POLICY
@@ -596,7 +608,9 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - RESTORE
 - RESTORES
 - RESTRICT (R)
+- RESULT
 - RESUME
+- RETURN
 - RETURNING
 - REUSE
 - REVERSE
@@ -743,6 +757,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - TRAILING (R)
 - TRANSACTION
 - TRANSACTIONAL
+- TRANSITIONS
 - TRIGGER (R)
 - TRIGGERS
 - TRUE (R)
@@ -788,6 +803,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - VARYING (R)
 - VECTOR
 - VIEW
+- VIEWS
 - VIRTUAL (R)
 - VISIBLE
 
