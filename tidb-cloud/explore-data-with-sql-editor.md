@@ -1,4 +1,97 @@
----
+-- Schema base do app de agendamento (Supabase / Postgres)
+-- Cole no SQL Editor do Supabase e execute uma vez.
+
+create extension if not exists btree_gist;
+
+-- Perfil do usuário (criado automaticamente no cadastro)
+create table public.profiles (
+  id uuid primary key references auth.users (id) on delete cascade,
+  nome text,
+  assinatura_status text not null default 'inativa'
+    check (assinatura_status in ('inativa', 'ativa', 'atrasada', 'cancelada')),
+  asaas_customer_id text,
+  asaas_subscription_id text,
+  created_at timestamptz not null default now()
+);
+
+create table public.servicos (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid not null default auth.uid() references auth.users (id) on delete cascade,
+  nome text not null,
+  duracao_min int not null check (duracao_min > 0),
+  preco_centavos int not null default 0 check (preco_centavos >= 0),
+  created_at timestamptz not null default now()
+);
+
+create table public.agendamentos (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid not null default auth.uid() references auth.users (id) on delete cascade,
+  servico_id uuid references public.servicos (id) on delete set null,
+  cliente_nome text not null,
+  cliente_contato text,
+  inicio timestamptz not null,
+  fim timestamptz not null,
+  status text not null default 'agendado'
+    check (status in ('agendado', 'concluido', 'cancelado')),
+  observacoes text,
+  created_at timestamptz not null default now(),
+  check (fim > inicio),
+  -- impede dois horários sobrepostos para o mesmo usuário
+  exclude using gist (
+    user_id with =,
+    tstzrange(inicio, fim) with &&
+  ) where (status <> 'cancelado')
+);
+
+create index on public.agendamentos (user_id, inicio);
+create index on public.servicos (user_id);
+
+-- Cria o perfil ao cadastrar
+create or replace function public.handle_new_user()
+returns trigger
+language plpgsql
+security definer
+set search_path = ''
+as $$
+begin
+  insert into public.profiles (id, nome)
+  values (new.id, new.raw_user_meta_data ->> 'nome');
+  return new;
+end;
+$$;
+
+create trigger on_auth_user_created
+  after insert on auth.users
+  for each row execute function public.handle_new_user();
+
+-- Segurança: cada usuário só enxerga e altera os próprios dados
+alter table public.profiles enable row level security;
+alter table public.servicos enable row level security;
+alter table public.agendamentos enable row level security;
+
+create policy "perfil: ler o próprio" on public.profiles
+  for select to authenticated
+  using ((select auth.uid()) = id);
+
+create policy "perfil: atualizar o próprio" on public.profiles
+  for update to authenticated
+  using ((select auth.uid()) = id)
+  with check ((select auth.uid()) = id);
+
+-- O usuário só pode editar o nome; status da assinatura e IDs do Asaas
+-- ficam por conta do webhook (service role, no servidor).
+revoke update on public.profiles from authenticated;
+grant update (nome) on public.profiles to authenticated;
+
+create policy "servicos: dono" on public.servicos
+  for all to authenticated
+  using ((select auth.uid()) = user_id)
+  with check ((select auth.uid()) = user_id);
+
+create policy "agendamentos: dono" on public.agendamentos
+  for all to authenticated
+  using ((select auth.uid()) = user_id)
+  with check ((select auth.uid()) = user_id);---
 title: Explore Your Data with SQL Editor (Preview)
 summary: Learn how to use SQL Editor in the TiDB Cloud console to write and run SQL queries, manage SQL files, and view query results.
 aliases: ['/tidbcloud/explore-data-with-chat2query', '/tidbcloud/use-chat2query-api', '/tidbcloud/use-chat2query-knowledge', '/tidbcloud/use-chat2query-sessions']
