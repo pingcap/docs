@@ -252,7 +252,7 @@ If the request is successful, `202 Accepted` is returned. If the request fails, 
 
 ## Query the replication task list
 
-This API is a synchronous interface. If the request is successful, the basic information of all nodes in the TiCDC cluster is returned.
+This API is a synchronous interface. If the request is successful, the basic information of the replication tasks in the selected states is returned.
 
 ### Request URI
 

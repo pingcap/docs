@@ -57,7 +57,7 @@ config export -d /tmp/configs
 export configs to directory `/tmp/configs` succeed
 ```
 
-## import the data source and task configuration of clusters
+## Import the data source and task configuration of clusters
 
 You can use `import` command to import the data source and task configuration of clusters from specified files.
 
