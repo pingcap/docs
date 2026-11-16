@@ -9,7 +9,7 @@ summary: DM バイナリを使用してデータ移行クラスターをデプ�
 
 > **Note:**
 >
-> 本番環境では、 [TiUPを使用したDMクラスタのデプロイ](/dm/deploy-a-dm-cluster-using-tiup.md)を推奨します。
+> 本番環境では、 [TiUPを使用したDMクラスターのデプロイ](/dm/deploy-a-dm-cluster-using-tiup.md)を推奨します。
 
 ## DMバイナリをダウンロード {#download-dm-binary}
 
@@ -17,7 +17,7 @@ DMバイナリはTiDB Toolkitに含まれています。TiDB Toolkitをダウン
 
 ## サンプルシナリオ {#sample-scenario}
 
-次のサンプル シナリオに基づいて DM クラスターをデプロイするとします。
+次のサンプルシナリオに基づいて DM クラスターをデプロイするとします。
 
 2 つの DM-workerノードと 3つの DM-masterノードが 5台のサーバーにデプロイされます。
 
@@ -39,7 +39,7 @@ DMバイナリはTiDB Toolkitに含まれています。TiDB Toolkitをダウン
 >
 > - DM クラスターの高可用性を確保する必要がない場合は、DM-masterノードを 1つだけデプロイし、デプロイされる DM-workerノードの数は、移行するアップストリーム MySQL/MariaDB インスタンスの数以上である必要があります。
 >
-> - DM クラスターの高可用性を確保するには、3つの DM-masterノードをデプロイすることをお勧めします。また、デプロイする DM-workerノードの数は、移行するアップストリーム MySQL/MariaDB インスタンスの数より多くする必要があります (たとえば、DM-workerノードの数は、アップストリーム インスタンスの数より 2つ多くなります)。
+> - DM クラスターの高可用性を確保するには、3つの DM-masterノードをデプロイすることをお勧めします。また、デプロイする DM-workerノードの数は、移行するアップストリーム MySQL/MariaDB インスタンスの数より多くする必要があります (たとえば、DM-workerノードの数は、アップストリームインスタンスの数より 2つ多くなります)。
 >
 > - 次のコンポーネント間のポートが相互接続されていることを確認します。
 >     - DM-masterノード間の`8291`ポートは相互接続されています。
@@ -48,11 +48,11 @@ DMバイナリはTiDB Toolkitに含まれています。TiDB Toolkitをダウン
 
 ### DM-masterをデプロイ {#deploy-dm-master}
 
-[コマンドラインパラメータ](#dm-master-command-line-parameters)または[設定ファイル](#dm-master-configuration-file)を使用して DM-masterを設定できます。
+[コマンドラインパラメーター](#dm-master-command-line-parameters)または[設定ファイル](#dm-master-configuration-file)を使用して DM-masterを設定できます。
 
-#### DM-masterのコマンドラインパラメータ {#dm-master-command-line-parameters}
+#### DM-masterのコマンドラインパラメーター {#dm-master-command-line-parameters}
 
-DM-masterのコマンドラインパラメータの説明は次のとおりです。
+DM-masterのコマンドラインパラメーターの説明は次のとおりです。
 
 ```bash
 ./dm-master --help
@@ -129,11 +129,11 @@ Usage of dm-master:
 
 ### DM-workerをデプロイ {#deploy-dm-worker}
 
-[コマンドラインパラメータ](#dm-worker-command-line-parameters)または[設定ファイル](#dm-worker-configuration-file)を使用して DM-worker を構成できます。
+[コマンドラインパラメーター](#dm-worker-command-line-parameters)または[設定ファイル](#dm-worker-configuration-file)を使用して DM-worker を構成できます。
 
-#### DM-workerのコマンドラインパラメータ {#dm-worker-command-line-parameters}
+#### DM-workerのコマンドラインパラメーター {#dm-worker-command-line-parameters}
 
-DM-worker のコマンドラインパラメータの説明は次のとおりです。
+DM-worker のコマンドラインパラメーターの説明は次のとおりです。
 
 ```bash
 ./dm-worker --help

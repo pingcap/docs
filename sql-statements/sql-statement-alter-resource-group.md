@@ -9,7 +9,7 @@ summary: TiDBにおけるALTER RESOURCE GROUPの使い方を学びましょう�
 
 > **Note:**
 >
-> この機能は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスではご利用いただけません。
+> この機能は、 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスではご利用いただけません。
 
 ## 概要 {#synopsis}
 
@@ -178,7 +178,7 @@ SELECT * FROM information_schema.resource_groups WHERE NAME ='default';
 
 ## MySQLとの互換性 {#mysql-compatibility}
 
-MySQL は[ALTER RESOURCE GROUP](https://dev.mysql.com/doc/refman/8.0/en/alter-resource-group.html)もサポートしています。ただし、受け入れられるパラメータが TiDB とは異なるため、互換性はありません。
+MySQL は[ALTER RESOURCE GROUP](https://dev.mysql.com/doc/refman/8.0/en/alter-resource-group.html)もサポートしています。ただし、受け入れられるパラメーターが TiDB とは異なるため、互換性はありません。
 
 ## 参照 {#see-also}
 

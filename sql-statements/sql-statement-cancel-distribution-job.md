@@ -5,11 +5,11 @@ summary: TiDBにおけるCANCEL DISTRIBUTION JOBの使用方法の概要。
 
 # CANCEL DISTRIBUTION JOB <span class="version-mark">New in v8.5.4 and v9.0.0</span> {#cancel-distribution-job-new-in-v854}
 
-`CANCEL DISTRIBUTION JOB`ステートメントは、TiDB の[`DISTRIBUTE TABLE`](/sql-statements/sql-statement-distribute-table.md)ステートメントを使用して作成されたリージョンスケジューリング タスクをキャンセルするために使用されます。
+`CANCEL DISTRIBUTION JOB`ステートメントは、TiDB の[`DISTRIBUTE TABLE`](/sql-statements/sql-statement-distribute-table.md)ステートメントを使用して作成されたリージョンスケジューリングタスクをキャンセルするために使用されます。
 
 > **Note:**
 >
-> この機能は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスではご利用いただけません。
+> この機能は、 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスではご利用いただけません。
 
 ## 概要 {#synopsis}
 

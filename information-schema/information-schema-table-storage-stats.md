@@ -5,7 +5,7 @@ summary: "`TABLE_STORAGE_STATS` INFORMATION_SCHEMA テーブルについて学�
 
 # TABLE_STORAGE_STATS {#table-storage-stats}
 
-`TABLE_STORAGE_STATS`テーブルは、ストレージエンジン (TiKV) によって保存されるテーブル サイズに関する情報を提供します。
+`TABLE_STORAGE_STATS`テーブルは、ストレージエンジン (TiKV) によって保存されるテーブルサイズに関する情報を提供します。
 
 ```sql
 USE INFORMATION_SCHEMA;

@@ -73,7 +73,7 @@ ResourceGroupRunawayActionOption ::=
 | "SWITCH_GROUP" '(' ResourceGroupName ')'
 ```
 
-リソースグループ名パラメータ（ `ResourceGroupName` ）は、グローバルに一意である必要があります。
+リソースグループ名パラメーター（ `ResourceGroupName` ）は、グローバルに一意である必要があります。
 
 TiDB は、次の`DirectResourceGroupOption`をサポートします。ここで[リクエストユニット（RU）](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru)は、CPU、IO、およびその他のシステムリソースに対する TiDB の統合抽象化ユニットです。
 
@@ -86,7 +86,7 @@ TiDB は、次の`DirectResourceGroupOption`をサポートします。ここで
 
 > **Note:**
 >
-> - `CREATE RESOURCE GROUP`ステートメントは、グローバル変数[`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660)が`ON`に設定されている場合にのみ実行できます。 TiDB は、クラスタ初期化時に`default`リソースグループを自動的に作成します。 このリソースグループの`RU_PER_SEC`のデフォルト値は`UNLIMITED` ( `INT`型の最大値、つまり`2147483647`に相当) であり、 `BURSTABLE`モードです。いずれのリソースグループにも紐付けられていないすべてのリクエストは、自動的にこの`default`リソースグループに紐付けられます。別のリソースグループの新しい構成を作成する場合は、必要に応じて`default`リソースグループの構成を変更することをお勧めします。
+> - `CREATE RESOURCE GROUP`ステートメントは、グローバル変数[`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660)が`ON`に設定されている場合にのみ実行できます。 TiDB は、クラスター初期化時に`default`リソースグループを自動的に作成します。 このリソースグループの`RU_PER_SEC`のデフォルト値は`UNLIMITED` ( `INT`型の最大値、つまり`2147483647`に相当) であり、 `BURSTABLE`モードです。いずれのリソースグループにも紐付けられていないすべてのリクエストは、自動的にこの`default`リソースグループに紐付けられます。別のリソースグループの新しい構成を作成する場合は、必要に応じて`default`リソースグループの構成を変更することをお勧めします。
 > - 現在、 `default`リソースグループのみが`BACKGROUND`構成の変更をサポートしています。
 
 ## 例 {#examples}
@@ -137,7 +137,7 @@ SELECT * FROM information_schema.resource_groups WHERE NAME ='rg1' or NAME = 'rg
 
 ## MySQLとの互換性 {#mysql-compatibility}
 
-MySQL は[CREATE RESOURCE GROUP](https://dev.mysql.com/doc/refman/8.0/en/create-resource-group.html)もサポートしています。ただし、受け入れられるパラメータが TiDB とは異なるため、互換性はありません。
+MySQL は[CREATE RESOURCE GROUP](https://dev.mysql.com/doc/refman/8.0/en/create-resource-group.html)もサポートしています。ただし、受け入れられるパラメーターが TiDB とは異なるため、互換性はありません。
 
 ## 参照 {#see-also}
 

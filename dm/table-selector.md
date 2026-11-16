@@ -1,6 +1,6 @@
 ---
 title: Table Selector of TiDB Data Migration
-summary: データ移行のテーブルルーティング、 binlogイベントフィルタリング、列マッピングルールで使用されるテーブル セレクターについて学習します。
+summary: データ移行のテーブルルーティング、 binlogイベントフィルタリング、列マッピングルールで使用されるテーブルセレクターについて学習します。
 ---
 
 # TiDB Data Migrationのテーブルセレクター {#table-selector-of-tidb-data-migration}

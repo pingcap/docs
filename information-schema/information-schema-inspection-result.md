@@ -153,7 +153,7 @@ select * from information_schema.inspection_result where rule='critical-error';
 
 ## 診断ルール {#diagnostic-rules}
 
-診断モジュールには一連のルールが含まれています。これらのルールは、既存の監視テーブルとクラスタ情報テーブルを照会した後、結果をしきい値と比較します。結果がしきい値を超えた場合、 `warning`または`critical`診断が生成され、対応する情報が`details`列に表示されます。
+診断モジュールには一連のルールが含まれています。これらのルールは、既存の監視テーブルとクラスター情報テーブルを照会した後、結果をしきい値と比較します。結果がしきい値を超えた場合、 `warning`または`critical`診断が生成され、対応する情報が`details`列に表示されます。
 
 `inspection_rules`システムテーブルをクエリすることによって、既存の診断ルールをクエリできます。
 
@@ -248,7 +248,7 @@ DETAILS   | the cluster has 2 different tidb versions, execute the sql to see mo
     | ---- | ----------------------- | ---------------------------------- | -------------------------------------------- |
     | TiDB | panic-count             | tidb_panic_count_total_count       | TiDB でパニックが発生します。                            |
     | TiKV | critical-error          | tikv_critical_error_total_count    | TiKV の重大なエラー。                                |
-    | TiKV | scheduler-is-busy       | tikv_scheduler_is_busy_total_count | TiKV スケジューラがビジー状態のため、TiKV が一時的に使用できなくなっています。 |
+    | TiKV | scheduler-is-busy       | tikv_scheduler_is_busy_total_count | TiKV スケジューラーがビジー状態のため、TiKV が一時的に使用できなくなっています。 |
     | TiKV | coprocessor-is-busy     | tikv_coprocessor_is_busy_total_count | TiKVコプロセッサーがビジー状態です。                         |
     | TiKV | channel-is-full         | tikv_channel_full_total_count      | TiKV で"channel full"というエラーが発生します。             |
     | TiKV | tikv_engine_write_stall | tikv_engine_write_stall            | TiKV で"stall"エラーが発生します。                       |
@@ -263,7 +263,7 @@ DETAILS   | the cluster has 2 different tidb versions, execute the sql to see mo
 | :--- | :------------------- | :---------------------------------- | :-------- | :--------------------------------------------------------------------------------------------------------------- |
 | TiDB | tso-duration              | pd_tso_wait_duration                | 50ミリ秒未満   | トランザクションの TSO を取得するまでの待機時間。                                                                                      |
 | TiDB | get-token-duration        | tidb_get_token_duration             | 1ミリ秒未満    | トークンの取得にかかる時間を照会します。関連するTiDB設定項目は[`token-limit`](/command-line-flags-for-tidb-configuration.md#--token-limit)です。 |
-| TiDB | load-schema-duration      | tidb_load_schema_duration           | 1秒未満      | TiDB がスキーマ メタデータを更新するのにかかる時間。                                                                                    |
+| TiDB | load-schema-duration      | tidb_load_schema_duration           | 1秒未満      | TiDB がスキーマメタデータを更新するのにかかる時間。                                                                                    |
 | TiKV | scheduler-cmd-duration    | tikv_scheduler_command_duration     | 0.1秒未満    | TiKV が KV `cmd`リクエストを実行するのにかかる時間。                                                                                   |
 | TiKV | handle-snapshot-duration  | tikv_handle_snapshot_duration       | 30秒未満     | TiKV がスナップショットを処理するのにかかる時間。                                                                                      |
 | TiKV | storage-write-duration    | tikv_storage_async_request_duration | 0.1秒未満    | TiKV の書き込みレイテンシー。                                                                                                |

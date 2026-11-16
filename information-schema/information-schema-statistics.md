@@ -5,7 +5,7 @@ summary: "`STATISTICS` information_schema テーブルについて学習しま�
 
 # STATISTICS {#statistics}
 
-`STATISTICS`テーブルはテーブル インデックスに関する情報を提供します。
+`STATISTICS`テーブルはテーブルインデックスに関する情報を提供します。
 
 ```sql
 USE information_schema;

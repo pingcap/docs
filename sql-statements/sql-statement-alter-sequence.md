@@ -47,9 +47,9 @@ ALTER SEQUENCE sequence_name
     [table_options]
 ```
 
-## パラメータ {#parameters}
+## パラメーター {#parameters}
 
-| パラメータ       | デフォルト値                       | 説明                                                                                                                                  |
+| パラメーター       | デフォルト値                       | 説明                                                                                                                                  |
 | :---------- | :--------------------------- | :---------------------------------------------------------------------------------------------------------------------------------- |
 | `INCREMENT` | `1`                          | シーケンスの増分を指定します。正または負の値を指定することで、シーケンスの増加方向を制御できます。                                                                                   |
 | `MINVALUE`  | `1`または`-9223372036854775807` | シーケンスの最小値を指定します。`INCREMENT` &gt; `0`の場合、デフォルト値は`1`です。`INCREMENT` &lt; `0`の場合、デフォルト値は`-9223372036854775807`です。                     |
@@ -76,7 +76,7 @@ ALTER SEQUENCE sequence_name
 
 - `SETVAL`
 
-    この関数は、シーケンスの現在の値の進行を設定します。この関数の最初のパラメータはシーケンスの`identifier` 、2番目のパラメータは`num`です。
+    この関数は、シーケンスの現在の値の進行を設定します。この関数の最初のパラメーターはシーケンスの`identifier` 、2番目のパラメーターは`num`です。
 
 > **Note:**
 >
@@ -162,7 +162,7 @@ SELECT NEXTVAL(s1);
 
 出力からわかるように、 `ALTER SEQUENCE`文の後に値が 2 増加します。
 
-シーケンスの他のパラメータを変更することもできます。例えば、シーケンスの`MAXVALUE`を次のように変更できます。
+シーケンスの他のパラメーターを変更することもできます。例えば、シーケンスの`MAXVALUE`を次のように変更できます。
 
 ```sql
 CREATE SEQUENCE s2 MAXVALUE=10;
@@ -205,7 +205,7 @@ SELECT SETVAL(seq, 6)   // Sets the current value of a sequence to 6.
 7, 9, 11, ...           // Subsequent values still follow the progression rule.
 ```
 
-`CYCLE`モードでは、最初のラウンドのシーケンスの初期値は`START`パラメータの値であり、後続のラウンドの初期値は`MinValue` ( `INCREMENT` &gt; 0) または`MaxValue` ( `INCREMENT` &lt; 0) の値です。
+`CYCLE`モードでは、最初のラウンドのシーケンスの初期値は`START`パラメーターの値であり、後続のラウンドの初期値は`MinValue` ( `INCREMENT` &gt; 0) または`MaxValue` ( `INCREMENT` &lt; 0) の値です。
 
 ## 参照 {#see-also}
 

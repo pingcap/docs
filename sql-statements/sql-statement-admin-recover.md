@@ -26,7 +26,7 @@ ADMIN CHECK INDEX tbl idx ;
 ERROR 1105 (HY000): handle &kv.CommonHandle{encoded:[]uint8{0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xf8}, colEndOffsets:[]uint16{0xa}}, index:types.Datum{k:0x5, decimal:0x0, length:0x0, i:0, collation:"utf8mb4_bin", b:[]uint8{0x0}, x:interface {}(nil)} != record:<nil>
 ```
 
-クエリ`SELECT`のエラーメッセージから、テーブル`tbl`には3行のデータと2行のインデックスデータが含まれていることがわかります。これは、行データとインデックスデータに矛盾があることを意味します。同時に、少なくとも1行のデータに対応するインデックスがありません。この場合、 `ADMIN RECOVER INDEX`文を使用して、不足しているインデックスを補うことができます。
+クエリ`SELECT`のエラーメッセージから、テーブル`tbl`には3行のデータと2行のインデックスデータが含まれていることがわかります。これは、行データとインデックスデータに矛盾があることを意味します。同時に、少なくとも1行のデータに対応するインデックスがありません。この場合、 `ADMIN RECOVER INDEX`文を使用して、不足しているインデックスを補えます。
 
 ```sql
 ADMIN RECOVER INDEX tbl idx;

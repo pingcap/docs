@@ -10,15 +10,15 @@ summary: DM（データ移行）データソースおよび移行タスク構成
 ## 使用法 {#usage}
 
 1. カスタムキーファイルを作成します。このファイルには、64文字の16進数AES-256秘密鍵が含まれている必要があります。この鍵を生成する方法の一つは、ランダムデータのSHA256チェックサムを計算することです（例えば`head -n 256 /dev/urandom | sha256sum`）。
-2. DM-master [コマンドラインフラグ](/dm/dm-command-line-flags.md)または[設定ファイル](/dm/dm-master-configuration-file.md)で、カスタム キー ファイルのパスとして`secret-key-path`を指定します。
+2. DM-master [コマンドラインフラグ](/dm/dm-command-line-flags.md)または[設定ファイル](/dm/dm-master-configuration-file.md)で、カスタムキーファイルのパスとして`secret-key-path`を指定します。
 
 ## v8.0.0 より前のバージョンからアップグレードする {#upgrade-from-a-version-earlier-than-v8-0-0}
 
 DM はバージョン 8.0.0 以降では固定秘密キーを使用しなくなったため、バージョン 8.0.0 より前のバージョンから DM をアップグレードする場合は次の点に注意してください。
 
-- [データソース構成](/dm/dm-source-configuration-file.md)と[移行タスクの構成](/dm/task-configuration-file-full.md)の両方でプレーンテキスト パスワードが使用されている場合、アップグレードに追加の手順は必要ありません。
+- [データソース構成](/dm/dm-source-configuration-file.md)と[移行タスクの構成](/dm/task-configuration-file-full.md)の両方でプレーンテキストパスワードが使用されている場合、アップグレードに追加の手順は必要ありません。
 - [データソース構成](/dm/dm-source-configuration-file.md)と[移行タスクの構成](/dm/task-configuration-file-full.md)で暗号化されたパスワードが使用されている場合、または将来的に暗号化されたパスワードを使用する場合は、次の手順を実行する必要があります。
-    1. [DM-master設定ファイル](/dm/dm-master-configuration-file.md)に`secret-key-path`パラメータを追加し、カスタムキーファイルのパスを指定します。ファイルには、64 文字の 16 進数 AES-256 キーが含まれている必要があります。アップグレード前に[固定AES-256秘密鍵](https://github.com/pingcap/tiflow/blob/1252979421fc83ffa2a1548d981e505f7fc0b909/dm/pkg/encrypt/encrypt.go#L27)を使用して暗号化していた場合は、この秘密鍵をキーファイルにコピーできます。すべての DM-masterノードで同じ秘密鍵設定が使用されていることを確認してください。
+    1. [DM-master設定ファイル](/dm/dm-master-configuration-file.md)に`secret-key-path`パラメーターを追加し、カスタムキーファイルのパスを指定します。ファイルには、64 文字の 16 進数 AES-256 キーが含まれている必要があります。アップグレード前に[固定AES-256秘密鍵](https://github.com/pingcap/tiflow/blob/1252979421fc83ffa2a1548d981e505f7fc0b909/dm/pkg/encrypt/encrypt.go#L27)を使用して暗号化していた場合は、この秘密鍵をキーファイルにコピーできます。すべての DM-masterノードで同じ秘密鍵設定が使用されていることを確認してください。
     2. まずDM-masterのローリングアップグレードを実行し、次にDM-workerのローリングアップグレードを実行します。詳細については、 [ローリングアップグレード](/dm/maintain-dm-using-tiup.md#rolling-upgrade)を参照してください。
 
 ## 暗号化と復号化の秘密鍵を更新する {#update-the-secret-key-for-encryption-and-decryption}

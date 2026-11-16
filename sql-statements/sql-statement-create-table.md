@@ -167,7 +167,7 @@ NextValueForSequence ::=
 | [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md) | 暗黙の`_tidb_rowid`シャードのビット数を設定します                                                                                                                                            | `SHARD_ROW_ID_BITS` = 4             |
 | `PRE_SPLIT_REGIONS`                          | テーブル作成時に`2^(PRE_SPLIT_REGIONS)`リージョンを事前に分割します                                                                                                                                 | `PRE_SPLIT_REGIONS` = 4             |
 | `AUTO_ID_CACHE`                              | TiDBインスタンスで自動IDキャッシュサイズを設定します。デフォルトでは、TiDBは自動IDの割り当て速度に応じてこのサイズを自動的に変更します。                                                                                                  | `AUTO_ID_CACHE` = 200               |
-| `AUTO_RANDOM_BASE`                           | auto_randomの初期増分値を設定します。このオプションは内部インターフェースの一部とみなすことができます。ユーザーはこのパラメータを無視できます。                                                                                               | `AUTO_RANDOM_BASE` = 0              |
+| `AUTO_RANDOM_BASE`                           | auto_randomの初期増分値を設定します。このオプションは内部インターフェースの一部とみなせます。ユーザーはこのパラメーターを無視できます。                                                                                               | `AUTO_RANDOM_BASE` = 0              |
 | `CHARACTER SET`                              | テーブルの[文字セット](/character-set-and-collation.md)を指定します                                                                                                                        | `CHARACTER SET` = 'utf8mb4' |
 | `COLLATE`                                    | テーブルの文字セット照合順序を指定します                                                                                                                                                       | `COLLATE` = 'utf8mb4_bin'   |
 | `COMMENT`                                    | コメント情報                                                                                                                                                                      | `COMMENT` = 'コメント情報'        |
@@ -178,7 +178,7 @@ NextValueForSequence ::=
 > **Note:**
 >
 > - `split-table`設定オプションはデフォルトで有効になっています。このオプションを有効にすると、新しく作成されるテーブルごとに個別のリージョンが作成されます。詳細は、 [TiDB設定ファイル](/tidb-configuration-file.md)を参照してください。
-> - `AFFINITY`を使用する前に、アフィニティが有効になっているテーブルのパーティショニング スキームの変更 (パーティションの追加、削除、再編成、または交換など) はサポートされておらず、一時テーブルまたはビューで`AFFINITY`を構成することもサポートされていないことに注意してください。
+> - `AFFINITY`を使用する前に、アフィニティが有効になっているテーブルのパーティショニングスキームの変更 (パーティションの追加、削除、再編成、または交換など) はサポートされておらず、一時テーブルまたはビューで`AFFINITY`を構成することもサポートされていないことに注意してください。
 
 </CustomContent>
 
@@ -187,7 +187,7 @@ NextValueForSequence ::=
 > **Note:**
 >
 > - TiDBは、新しく作成されたテーブルごとに個別のリージョンを作成します。
-> - `AFFINITY`を使用する前に、アフィニティが有効になっているテーブルのパーティショニング スキームの変更 (パーティションの追加、削除、再編成、または交換など) はサポートされておらず、一時テーブルまたはビューで`AFFINITY`を構成することもサポートされていないことに注意してください。
+> - `AFFINITY`を使用する前に、アフィニティが有効になっているテーブルのパーティショニングスキームの変更 (パーティションの追加、削除、再編成、または交換など) はサポートされておらず、一時テーブルまたはビューで`AFFINITY`を構成することもサポートされていないことに注意してください。
 
 </CustomContent>
 
@@ -273,7 +273,7 @@ mysql> DESC t1;
 
 - 空間型を除くすべてのデータ型がサポートされています。
 
-- TiDB は、MySQL との互換性のために、 `HASH` 、 `BTREE` 、 `RTREE`などのインデックス タイプを構文で受け入れますが、それらを無視します。
+- TiDB は、MySQL との互換性のために、 `HASH` 、 `BTREE` 、 `RTREE`などのインデックスタイプを構文で受け入れますが、それらを無視します。
 
 - TiDB Self-Managed およびTiDB Cloud Dedicatedは`FULLTEXT`構文の解析をサポートしていますが、 `FULLTEXT`インデックスの使用はサポートしていません。
 

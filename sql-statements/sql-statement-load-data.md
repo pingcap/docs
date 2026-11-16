@@ -10,17 +10,17 @@ summary: TiDB データベースの LOAD DATA の使用法の概要。
 TiDB v7.0.0 以降、 `LOAD DATA` SQL文は次の機能をサポートします。
 
 - S3およびGCSからのデータのインポートをサポート
-- 新しいパラメータ`FIELDS DEFINED NULL BY`を追加する
+- 新しいパラメーター`FIELDS DEFINED NULL BY`を追加する
 
 > **Warning:**
 >
-> 新しいパラメータ`FIELDS DEFINED NULL BY`と S3 および GCS からのデータインポートのサポートは実験的です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される可能性があります。バグを発見した場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告してください。
+> 新しいパラメーター`FIELDS DEFINED NULL BY`と S3 および GCS からのデータインポートのサポートは実験的です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される可能性があります。バグを発見した場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告してください。
 
 <CustomContent platform="tidb-cloud">
 
 > **Note:**
 >
-> `LOAD DATA INFILE`ステートメントの場合、 TiDB Cloud Dedicated は`LOAD DATA LOCAL INFILE`と、Amazon S3 または Google Cloud Storage からの`LOAD DATA INFILE`をサポートしますが、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)と[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)は`LOAD DATA LOCAL INFILE`のみをサポートします。
+> `LOAD DATA INFILE`ステートメントの場合、 TiDB Cloud Dedicated は`LOAD DATA LOCAL INFILE`と、Amazon S3 または Google Cloud Storage からの`LOAD DATA INFILE`をサポートしますが、 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)と[{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)は`LOAD DATA LOCAL INFILE`のみをサポートします。
 
 </CustomContent>
 
@@ -42,15 +42,15 @@ Fields ::=
     | 'DEFINED' 'NULL' 'BY' stringLit ('OPTIONALLY' 'ENCLOSED')?)?
 ```
 
-## パラメータ {#parameters}
+## パラメーター {#parameters}
 
 ### `LOCAL` {#local}
 
-`LOCAL`を使用して、インポートするクライアント上のデータファイルを指定できます。ファイル パラメーターは、クライアント上のファイルシステム パスである必要があります。
+`LOCAL`を使用して、インポートするクライアント上のデータファイルを指定できます。ファイルパラメーターは、クライアント上のファイルシステムパスである必要があります。
 
 TiDB Cloudを使用している場合、 `LOAD DATA`文を使用してローカルデータファイルをロードするには、 TiDB Cloudに接続するときに接続文字列に`--local-infile`オプションを追加する必要があります。
 
-- 以下は、 TiDB Cloud Starter の接続文字列の例です。
+- 以下は、 {{{ .starter }}} の接続文字列の例です。
 
     ```
     mysql --connect-timeout 15 -u '<user_name>' -h <host_name> -P 4000 -D test --ssl-mode=VERIFY_IDENTITY --ssl-ca=/etc/ssl/cert.pem -p<your_password> --local-infile
@@ -75,13 +75,13 @@ TiDB Cloudを使用している場合、 `LOAD DATA`文を使用してローカ�
 
 <CustomContent platform="tidb">
 
-`LOCAL`を指定しない場合は、 [外部ストレージ](/br/backup-and-restore-storages.md)で詳述されているように、ファイル パラメータは有効な S3 または GCS パスである必要があります。
+`LOCAL`を指定しない場合は、 [外部ストレージ](/br/backup-and-restore-storages.md)で詳述されているように、ファイルパラメーターは有効な S3 または GCS パスである必要があります。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-`LOCAL`を指定しない場合は、 [外部ストレージ](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages)で詳述されているように、ファイル パラメータは有効な S3 または GCS パスである必要があります。
+`LOCAL`を指定しない場合は、 [外部ストレージ](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages)で詳述されているように、ファイルパラメーターは有効な S3 または GCS パスである必要があります。
 
 </CustomContent>
 
@@ -95,7 +95,7 @@ TiDB Cloudを使用している場合、 `LOAD DATA`文を使用してローカ�
 
 ### `Fields` 、 `Lines` 、 `Ignore Lines` {#fields-lines-and-ignore-lines}
 
-`Fields`および`Lines`パラメータを使用して、データ形式の処理方法を指定できます。
+`Fields`および`Lines`パラメーターを使用して、データ形式の処理方法を指定できます。
 
 - `FIELDS TERMINATED BY` : データ区切り文字を指定します。
 - `FIELDS ENCLOSED BY` : データの囲み文字を指定します。
@@ -122,14 +122,14 @@ TiDB Cloudを使用している場合、 `LOAD DATA`文を使用してローカ�
 FIELDS TERMINATED BY ',' ENCLOSED BY '\"' LINES TERMINATED BY '\r\n'
 ```
 
-上記のパラメータを指定しない場合、インポートされたデータはデフォルトで次のように処理されます。
+上記のパラメーターを指定しない場合、インポートされたデータはデフォルトで次のように処理されます。
 
 ```sql
 FIELDS TERMINATED BY '\t' ENCLOSED BY '' ESCAPED BY '\\'
 LINES TERMINATED BY '\n' STARTING BY ''
 ```
 
-`IGNORE <number> LINES`パラメータを設定することで、ファイルの最初の`number`行を無視できます。例えば、 `IGNORE 1 LINES`を設定すると、ファイルの最初の行が無視されます。
+`IGNORE <number> LINES`パラメーターを設定することで、ファイルの最初の`number`行を無視できます。例えば、 `IGNORE 1 LINES`を設定すると、ファイルの最初の行が無視されます。
 
 ## 例 {#examples}
 
@@ -156,7 +156,7 @@ Query OK, 815264 rows affected (39.63 sec)
 Records: 815264  Deleted: 0  Skipped: 0  Warnings: 0
 ```
 
-`LOAD DATA` 、 `FIELDS ENCLOSED BY`および`FIELDS TERMINATED BY`パラメータとして、16進ASCII文字式または2進ASCII文字式の使用もサポートしています。次の例を参照してください。
+`LOAD DATA` 、 `FIELDS ENCLOSED BY`および`FIELDS TERMINATED BY`パラメーターとして、16進ASCII文字式または2進ASCII文字式の使用もサポートしています。次の例を参照してください。
 
 ```sql
 LOAD DATA LOCAL INFILE '/mnt/evo970/data-sets/bikeshare-data/2017Q4-capitalbikeshare-tripdata.csv' INTO TABLE trips FIELDS TERMINATED BY x'2c' ENCLOSED BY b'100010' LINES TERMINATED BY '\r\n' IGNORE 1 LINES (duration, start_date, end_date, start_station_number, start_station, end_station_number, end_station, bike_number, member_type);
@@ -207,7 +207,7 @@ IGNORE 1 LINES;
 > - TiDB v4.0.0 より前のバージョンでは、20000 行ごとに`LOAD DATA`コミットが実行され、これは構成できません。
 > - TiDB v4.0.0 から v6.6.0 までのバージョンでは、TiDB はデフォルトですべての行を 1つのトランザクションでコミットします。ただし、 `LOAD DATA`文で一定数の行をコミットする必要がある場合は、必要な行数を[`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size)に設定できます。
 > - v7.0.0 以降、 `tidb_dml_batch_size`は`LOAD DATA`には影響しなくなり、 TiDB は 1つのトランザクションですべての行をコミットします。
-> - TiDB v4.0.0以前のバージョンからアップグレードすると、 `ERROR 8004 (HY000) at line 1: Transaction is too large, size: 100000058`が発生する場合があります。このエラーを解決するには、 [TiDB Cloudサポート](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)に連絡して[`txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit)の値を増やすことができます。
+> - TiDB v4.0.0以前のバージョンからアップグレードすると、 `ERROR 8004 (HY000) at line 1: Transaction is too large, size: 100000058`が発生する場合があります。このエラーを解決するには、 [TiDB Cloudサポート](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)に連絡して[`txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit)の値を増やせます。
 > - TiDB v7.6.0 より前のバージョンでは、トランザクションでコミットされる行数に関係なく、明示的なトランザクションの[`ROLLBACK`](/sql-statements/sql-statement-rollback.md)ステートメントによって`LOAD DATA`がロールバックされることはありません。
 > - TiDB v7.6.0 より前のバージョンでは、TiDB トランザクションモードの構成に関係なく、 `LOAD DATA`文は常に楽観的トランザクションモードで実行されます。
 > - v7.6.0 以降、TiDB は他の DML文と同じ方法でトランザクション内の`LOAD DATA`を処理します。

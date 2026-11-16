@@ -13,7 +13,7 @@ TiDB Data Migration (DM) は、アップストリーム MySQL/MariaDB シャー�
 
 現在、シャードマージ機能は限られたシナリオでのみサポートされています。詳細については、 [悲観的モードでのシャーディングDDLの使用制限](/dm/feature-shard-merge-pessimistic.md#restrictions)と[楽観的モードでのシャーディングDDLの使用制限](/dm/feature-shard-merge-optimistic.md#restrictions)を参照してください。
 
-## パラメータを設定する {#configure-parameters}
+## パラメーターを設定する {#configure-parameters}
 
 タスク設定ファイルで、 `shard-mode`を`pessimistic`に設定します。
 

@@ -108,8 +108,8 @@ DESC tiflash_tables;
 - `AVG_STABLE_SIZE` : すべての安定レイヤーのデータの平均サイズ (バイト単位)。
 - `TOTAL_PACK_COUNT_IN_DELTA` : すべての Delta レイヤー内のカラムファイルの合計数。
 - `MAX_PACK_COUNT_IN_DELTA` : 単一の Deltaレイヤー内のカラムファイルの最大数。
-- `AVG_PACK_COUNT_IN_DELTA` : すべてのデルタ レイヤー内のカラムファイルの平均数。
-- `AVG_PACK_ROWS_IN_DELTA` : すべてのデルタ レイヤー内のすべてのカラムファイル内の行の平均数。
+- `AVG_PACK_COUNT_IN_DELTA` : すべてのデルタレイヤー内のカラムファイルの平均数。
+- `AVG_PACK_ROWS_IN_DELTA` : すべてのデルタレイヤー内のすべてのカラムファイル内の行の平均数。
 - `AVG_PACK_SIZE_IN_DELTA` : すべての Delta レイヤー内のすべてのカラムファイルのデータの平均サイズ (バイト単位)。
 - `TOTAL_PACK_COUNT_IN_STABLE` : すべての安定レイヤー内のパックの合計数。
 - `AVG_PACK_COUNT_IN_STABLE` : すべての安定レイヤー内のパックの平均数。
@@ -127,5 +127,5 @@ DESC tiflash_tables;
 - `STORAGE_META_OLDEST_SNAPSHOT_LIFETIME` : メタ情報内の最も古いスナップショットの継続時間 (秒単位)。
 - `STORAGE_META_OLDEST_SNAPSHOT_THREAD_ID` : メタ情報内の最も古いスナップショットのスレッド ID。
 - `STORAGE_META_OLDEST_SNAPSHOT_TRACING_ID` : メタ情報内の最も古いスナップショットのトレース ID。
-- `BACKGROUND_TASKS_LENGTH` : バックグラウンドのタスク キューの長さ。
+- `BACKGROUND_TASKS_LENGTH` : バックグラウンドのタスクキューの長さ。
 - `TIFLASH_INSTANCE` : TiFlashインスタンスのアドレス。

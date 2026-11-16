@@ -68,7 +68,7 @@ tiup dmctl check-task ./task.yaml
 
     - `INFORMATION_SCHEMA`とダンプテーブルに対する`SELECT`権限
     - `consistency=flush`の場合、`RELOAD`権限
-    - `consistency=lock`の場合、ダンプ テーブルに対する `LOCK TABLES` 権限
+    - `consistency=lock`の場合、ダンプテーブルに対する `LOCK TABLES` 権限
 
     > **Note:**
     >

@@ -77,7 +77,7 @@ TiDBは、ISO/IEC SQL標準に準拠することを目的としたSQL文を使�
 | SQL文                                                  | 説明                                 |
 | ----------------------------------------------------------- | ---------------------------------- |
 | [`DEALLOCATE`](/sql-statements/sql-statement-deallocate.md) | プリペアドステートメントを解除し、関連するリソースを解放します。   |
-| [`EXECUTE`](/sql-statements/sql-statement-execute.md)       | 特定のパラメータ値を指定して、プリペアドステートメントを実行します。 |
+| [`EXECUTE`](/sql-statements/sql-statement-execute.md)       | 特定のパラメーター値を指定して、プリペアドステートメントを実行します。 |
 | [`PREPARE`](/sql-statements/sql-statement-prepare.md)       | プレースホルダーを含むプリペアドステートメントを作成します。     |
 
 ## 管理ステートメント {#administrative-statements}
@@ -86,7 +86,7 @@ TiDBは、ISO/IEC SQL標準に準拠することを目的としたSQL文を使�
 
 | SQL文                                                                              | 説明                                                                      |
 | --------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| [`ADMIN ALTER DDL JOBS`](/sql-statements/sql-statement-admin-alter-ddl.md)              | 実行中の単一のDDLジョブのパラメータを変更します。                                              |
+| [`ADMIN ALTER DDL JOBS`](/sql-statements/sql-statement-admin-alter-ddl.md)              | 実行中の単一のDDLジョブのパラメーターを変更します。                                              |
 | [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)                 | DDLジョブをキャンセルします。                                                        |
 | [`ADMIN CHECK [TABLE\|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) | テーブルまたはインデックスの整合性をチェックします。                                              |
 | [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)         | テーブルのチェックサムを計算します。                                                      |
@@ -106,7 +106,7 @@ TiDBは、ISO/IEC SQL標準に準拠することを目的としたSQL文を使�
 
 | SQL文                                                                              | 説明                                                                      |
 | --------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| [`ADMIN ALTER DDL JOBS`](/sql-statements/sql-statement-admin-alter-ddl.md)              | 実行中の単一のDDLジョブのパラメータを変更します。                                              |
+| [`ADMIN ALTER DDL JOBS`](/sql-statements/sql-statement-admin-alter-ddl.md)              | 実行中の単一のDDLジョブのパラメーターを変更します。                                              |
 | [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)                 | DDLジョブをキャンセルします。                                                        |
 | [`ADMIN CHECK [TABLE\|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) | テーブルまたはインデックスの整合性をチェックします。                                              |
 | [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)         | テーブルのチェックサムを計算します。                                                      |
@@ -136,7 +136,7 @@ TiDBは、ISO/IEC SQL標準に準拠することを目的としたSQL文を使�
 
 | SQL文                                                                  | 説明                                            |
 | --------------------------------------------------------------------------- | --------------------------------------------- |
-| [`BACKUP`](/sql-statements/sql-statement-backup.md)                         | TiDBクラスタの分散バックアップを実行します。                      |
+| [`BACKUP`](/sql-statements/sql-statement-backup.md)                         | TiDBクラスターの分散バックアップを実行します。                      |
 | [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md)   | クラスターを特定の時点のスナップショットに復元します。                   |
 | [`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md) | `DROP`文によって削除されたデータベースとそのデータを復元します。     |
 | [`FLASHBACK TABLE`](/sql-statements/sql-statement-flashback-table.md)       | `DROP`または`TRUNCATE`操作によって削除されたテーブルとデータを復元します。 |
@@ -236,13 +236,13 @@ TiDBは、ISO/IEC SQL標準に準拠することを目的としたSQL文を使�
 | ----------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [`ALTER INSTANCE`](/sql-statements/sql-statement-alter-instance.md)     | インスタンスを変更します。                                                                                                                                                           |
 | [`FLUSH STATUS`](/sql-statements/sql-statement-flush-status.md)         | [MySQLとの互換性](/mysql-compatibility.md)のために含まれています。 TiDB は、ほとんどのメトリックに対して`SHOW STATUS`の代わりに[PrometheusとGrafana](/tidb-monitoring-framework.md)を使用して一元的なメトリック収集を行います。 |
-| [`KILL`](/sql-statements/sql-statement-kill.md)                         | 現在の TiDB クラスタ内の任意の TiDB インスタンスの接続を切断します。                                                                                                                                |
+| [`KILL`](/sql-statements/sql-statement-kill.md)                         | 現在の TiDB クラスター内の任意の TiDB インスタンスの接続を切断します。                                                                                                                                |
 | [`SHOW CONFIG`](/sql-statements/sql-statement-show-config.md)           | TiDBの各種コンポーネントの設定を表示します。                                                                                                                                                |
 | [`SHOW ENGINES`](/sql-statements/sql-statement-show-engines.md)         | 利用可能なストレージエンジンを表示します。                                                                                                                                                 |
 | [`SHOW PLUGINS`](/sql-statements/sql-statement-show-plugins.md)         | インストールされているプラグインを表示します。                                                                                                                                               |
 | [`SHOW PROCESSLIST`](/sql-statements/sql-statement-show-processlist.md) | 同じ TiDBサーバーに接続されている現在のセッションを表示します。                                                                                                                                      |
 | [`SHOW PROFILES`](/sql-statements/sql-statement-show-profiles.md)       | [MySQLとの互換性](/mysql-compatibility.md)のために含まれています。現時点では、空の結果のみが返されます。                                                                                                    |
-| [`SHUTDOWN`](/sql-statements/sql-statement-shutdown.md)                 | クライアントに接続されているTiDBインスタンスを停止します。TiDBクラスタ全体を停止するわけではありません。                                                                                                                |
+| [`SHUTDOWN`](/sql-statements/sql-statement-shutdown.md)                 | クライアントに接続されているTiDBインスタンスを停止します。TiDBクラスター全体を停止するわけではありません。                                                                                                                |
 
 </CustomContent>
 
@@ -252,7 +252,7 @@ TiDBは、ISO/IEC SQL標準に準拠することを目的としたSQL文を使�
 | ----------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [`ALTER INSTANCE`](/sql-statements/sql-statement-alter-instance.md)     | インスタンスを変更します。                                                                                                                                                    |
 | [`FLUSH STATUS`](/sql-statements/sql-statement-flush-status.md)         | [MySQLとの互換性](/mysql-compatibility.md)のために含まれています。 TiDB Cloudは、ほとんどのメトリクスに対して`SHOW STATUS`の代わりに、一元化されたメトリクス収集のための[監視](/tidb-cloud/monitor-tidb-cluster.md)を提供します。 |
-| [`KILL`](/sql-statements/sql-statement-kill.md)                         | 現在の TiDB クラスタ内の任意の TiDB インスタンスの接続を切断します。                                                                                                                         |
+| [`KILL`](/sql-statements/sql-statement-kill.md)                         | 現在の TiDB クラスター内の任意の TiDB インスタンスの接続を切断します。                                                                                                                         |
 | [`SHOW ENGINES`](/sql-statements/sql-statement-show-engines.md)         | 利用可能なストレージエンジンを表示します。                                                                                                                                          |
 | [`SHOW PLUGINS`](/sql-statements/sql-statement-show-plugins.md)         | インストールされているプラグインを表示します。                                                                                                                                        |
 | [`SHOW PROCESSLIST`](/sql-statements/sql-statement-show-processlist.md) | 同じ TiDBサーバーに接続されている現在のセッションを表示します。                                                                                                                               |

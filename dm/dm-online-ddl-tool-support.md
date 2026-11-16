@@ -16,7 +16,7 @@ MySQLエコシステムでは、gh-ostやpt-oscなどのツールが広く使用
 - DM は gh-ost と pt-osc のみをサポートします。
 - `online-ddl`を有効にすると、増分レプリケーションに対応するチェックポイントは、オンライン DDL 実行中であってはなりません。例えば、上流のオンライン DDL 操作がbinlogの`position-A`で開始され、 `position-B`で終了する場合、増分レプリケーションの開始点は`position-A`より前、または`position-B`より後にする必要があります。それ以外の場合、エラーが発生します。詳細は[FAQ](/dm/dm-faq.md#how-to-handle-the-error-returned-by-the-ddl-operation-related-to-the-gh-ost-table-after-online-ddl-true-is-set)を参照してください。
 
-## パラメータを設定する {#configure-parameters}
+## パラメーターを設定する {#configure-parameters}
 
 <SimpleTab>
 <div label="v2.0.5 and later">

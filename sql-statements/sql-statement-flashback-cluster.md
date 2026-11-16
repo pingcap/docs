@@ -5,13 +5,13 @@ summary: TiDBデータベースにおけるFLASHBACK CLUSTERの使い方を学�
 
 # FLASHBACK CLUSTER {#flashback-cluster}
 
-TiDB v6.4.0 では`FLASHBACK CLUSTER TO TIMESTAMP`構文が導入されました。これを使用すると、クラスタを特定の時点に復元できます。タイムスタンプを指定する際には、datetime 値を設定するか、time 関数を使用できます。datetime の形式は、たとえば'2016-10-08 16:45:26.999'のようになります。最小時間単位はミリ秒です。ただし、ほとんどの場合、時間単位を秒としてタイムスタンプを指定するだけで十分です。たとえば、'2016-10-08 16:45:26'のように指定します。
+TiDB v6.4.0 では`FLASHBACK CLUSTER TO TIMESTAMP`構文が導入されました。これを使用すると、クラスターを特定の時点に復元できます。タイムスタンプを指定する際には、datetime 値を設定するか、time 関数を使用できます。datetime の形式は、たとえば'2016-10-08 16:45:26.999'のようになります。最小時間単位はミリ秒です。ただし、ほとんどの場合、時間単位を秒としてタイムスタンプを指定するだけで十分です。たとえば、'2016-10-08 16:45:26'のように指定します。
 
 TiDBは、v6.5.6、v7.1.3、v7.5.1、v7.6.0以降で`FLASHBACK CLUSTER TO TSO`構文を導入しました。この構文を使用すると、 [TSO](/tso.md)を使用してより正確なリカバリ時点を指定できるため、データリカバリの柔軟性が向上します。
 
 > **Warning:**
 >
-> `FLASHBACK CLUSTER TO [TIMESTAMP|TSO]`構文は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)、[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)、および[{{{ .premium }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#premium)インスタンスには適用できません。予期しない結果を避けるため、 TiDB Cloud Starter、Essential、およびPremiumインスタンスではこのステートメントを実行しないでください。
+> `FLASHBACK CLUSTER TO [TIMESTAMP|TSO]`構文は、 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)、[{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)、および[{{{ .premium }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#premium)インスタンスには適用できません。予期しない結果を避けるため、 TiDB Cloud Starter、Essential、およびPremiumインスタンスではこのステートメントを実行しないでください。
 
 > **Warning:**
 >
@@ -114,7 +114,7 @@ mysql> SELECT * FROM t;
 Empty set (0.00 sec)
 ```
 
-次の例は、誤って削除されたデータを正確に復元するために、クラスタを特定のTSOにフラッシュバックする方法を示しています。
+次の例は、誤って削除されたデータを正確に復元するために、クラスターを特定のTSOにフラッシュバックする方法を示しています。
 
 ```sql
 mysql> INSERT INTO t VALUES (1);

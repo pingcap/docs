@@ -5,7 +5,7 @@ summary: データ複製タスクのステータスを照会する方法を学�
 
 # TiDB データ移行でタスクのステータスを照会する {#query-task-status-in-tidb-data-migration}
 
-このドキュメントでは、 `query-status`コマンドを使用して、DM のタスク ステータスとサブタスク ステータスを照会する方法を紹介します。
+このドキュメントでは、 `query-status`コマンドを使用して、DM のタスクステータスとサブタスクステータスを照会する方法を紹介します。
 
 ## クエリ結果 {#query-result}
 
@@ -232,8 +232,8 @@ DM移行タスクのステータスは、DM-workerに割り当てられた各サ
         - `result` : サブタスクが失敗した場合にエラー情報を表示します。
         - `unresolvedDDLLockID` : シャーディングDDLロックID。異常状態におけるシャーディングDDLロックを手動で処理するために使用されます。"sources"の"subTaskStatus"の"unresolvedDDLLockID"の動作の詳細については、 [シャーディング DDL ロックを手動で処理する](/dm/manually-handling-sharding-ddl-locks.md)を参照してください。
         - `sync` ： `Sync`処理ユニットの複製情報。この情報は、現在の処理ユニットと同じコンポーネントに関するものです。
-            - `masterBinlog` : アップストリーム データベース内のbinlog の位置。
-            - `masterBinlogGtid` : アップストリーム データベース内の GTID 情報。
+            - `masterBinlog` : アップストリームデータベース内のbinlog の位置。
+            - `masterBinlogGtid` : アップストリームデータベース内の GTID 情報。
             - `syncerBinlog` : `Sync`処理ユニットで複製されたbinlogの位置。
             - `syncerBinlogGtid` : GTID を使用して複製されたbinlogの位置。
             - `blockingDDLs` : 現在ブロックされているDDLリスト。このDM-workerのすべての上流テーブルが"synced"ステータスにある場合にのみ空ではなくなります。この場合、実行されるかスキップされるシャーディングDDL文を示します。
