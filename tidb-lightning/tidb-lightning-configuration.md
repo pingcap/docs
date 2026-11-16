@@ -615,7 +615,7 @@ Configures how CSV files are parsed.
 ### tidb.security
 
 - Specifies certificates and keys for TLS-enabled MySQL connections.
-- Default value: the copy of the [`security`](#security) section.
+- Default value: the copy of the [`security`](#security-1) section.
 
 #### `ca-path`
 
