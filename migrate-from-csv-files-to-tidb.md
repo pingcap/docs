@@ -47,9 +47,9 @@ level = "info"
 file = "tidb-lightning.log"
 
 [tikv-importer]
-# "local": デフォルトのバックエンド。local バックエンドは、大量のデータ（1 TiB 以上）のインポートに推奨されます。インポート中、対象の TiDB クラスターは限定的なサービスのみ提供できます。TiDB Lightning のバージョンが v6.2.0 以降で、TiDB のバージョンが v6.1.0 以降の場合、TiDB Lightning はデフォルトで対象テーブルのリージョンに対してのみスケジューリングを一時停止します。インポートは引き続きクラスターのパフォーマンスに影響を与える可能性があります。
-# インポート中は、対象テーブルに対して DDL または DML 操作を実行しないでください。
-# 結果に一貫性がなくなる可能性があるため、対象テーブルの読み取りは避けてください。
+# "local": Default backend. The local backend is recommended to import large volumes of data (1 TiB or more). During the import, the target TiDB cluster can provide only limited service. If your TiDB Lightning version is v6.2.0 or later and your TiDB version is v6.1.0 or later, TiDB Lightning pauses scheduling only for the target table's Regions by default. The import might still affect cluster performance.
+# During import, do not perform DDL or DML operations on the target table.
+# Avoid reading from the target table because the results might be inconsistent.
 # "tidb": The "tidb" backend is recommended to import data less than 1 TiB. During the import, the target TiDB cluster can provide service normally.
 # For more information on import mode, refer to <https://docs.pingcap.com/tidb/stable/tidb-lightning-overview#tidb-lightning-architecture>
 backend = "local"
@@ -118,7 +118,7 @@ CSVファイルが上記の要件を満たしている場合は、次のよう�
 strict-format = true
 
 [mydumper.csv]
-terminator = "\n" # 実際のファイル内の行末記号に応じて、"\n"、"\r"、または "\r\n" に設定します。
+terminator = "\n" # Set it to "\n", "\r", or "\r\n", depending on the actual line terminator in your files.
 ```
 
 ## ステップ5．データのインポート {#step-5-import-the-data}

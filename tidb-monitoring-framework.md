@@ -28,19 +28,19 @@ Grafanaは、メトリクスを分析および視覚化するためのオープ�
 ![Grafana monitored\_groups](/media/grafana-monitored-groups.png)
 
 - {TiDB_Cluster_name}-Backup-Restore: バックアップと復元に関連するメトリックを監視します。
-- {TiDB_Cluster_name}-Blackbox_exporter: ネットワーク プローブに関連するメトリックを監視します。
-- {TiDB_Cluster_name}-Disk-Performance: ディスク パフォーマンスに関連するメトリックを監視します。
+- {TiDB_Cluster_name}-Blackbox_exporter: ネットワークプローブに関連するメトリックを監視します。
+- {TiDB_Cluster_name}-Disk-Performance: ディスクパフォーマンスに関連するメトリックを監視します。
 - {TiDB_Cluster_name}-Kafka-Overview: Kafka に関連するメトリックを監視します。
 - {TiDB_Cluster_name}-Lightning: TiDB Lightningに関連するメトリックを監視します。
 - {TiDB_Cluster_name}-Node_exporter: オペレーティングシステムに関連するメトリックを監視します。
-- {TiDB_Cluster_name}-概要: 重要なコンポーネントに関連する監視の概要。
+- {TiDB_Cluster_name}-Overview: 重要なコンポーネントに関連する監視の概要。
 - {TiDB_Cluster_name}-PD: PDサーバーに関連するメトリックを監視します。
 - {TiDB_Cluster_name}-Performance-Read: 読み取りパフォーマンスに関連するメトリックを監視します。
 - {TiDB_Cluster_name}-Performance-Write: 書き込みパフォーマンスに関連するメトリックを監視します。
 - {TiDB_Cluster_name}-TiDB: TiDBサーバーに関連する詳細な監視メトリック。
 - {TiDB_Cluster_name}-TiDB-Summary: TiDB に関連する監視の概要。
-- {TiDB_Cluster_name}- TiFlash -Proxy-Summary: TiFlashにデータを複製するために使用されるプロキシサーバーの監視概要。
-- {TiDB_Cluster_name}- TiFlash- 概要: TiFlashに関連する監視の概要。
+- {TiDB_Cluster_name}-TiFlash-Proxy-Summary: TiFlashにデータを複製するために使用されるプロキシサーバーの監視概要。
+- {TiDB_Cluster_name}-TiFlash-Summary: TiFlashに関連する監視の概要。
 - {TiDB_Cluster_name}-TiKV-Details: TiKVサーバーに関連する詳細な監視メトリック。
 - {TiDB_Cluster_name}-TiKV-Summary: TiKVサーバーに関連する監視の概要。
 - {TiDB_Cluster_name}-TiKV-Trouble-Shooting: TiKV エラー診断に関連するメトリックを監視します。
@@ -53,4 +53,4 @@ Grafanaは、メトリクスを分析および視覚化するためのオープ�
 
 ## TiDB Dashboard {#tidb-dashboard}
 
-TiDB Dashboardは、TiDBクラスタの監視、診断、管理のためのWeb UIで、v4.0で導入されました。PDコンポーネントに組み込まれているため、別途導入する必要はありません。詳細については、 [TiDB Dashboardの紹介](/dashboard/dashboard-intro.md)をご覧ください。
+TiDB Dashboardは、TiDBクラスターの監視、診断、管理のためのWeb UIで、v4.0で導入されました。PDコンポーネントに組み込まれているため、別途導入する必要はありません。詳細については、 [TiDB Dashboardの紹介](/dashboard/dashboard-intro.md)をご覧ください。

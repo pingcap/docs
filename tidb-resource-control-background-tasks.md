@@ -7,7 +7,7 @@ summary: リソース制御を通じてバックグラウンドタスクを制�
 
 > **Note:**
 >
-> この機能は、[TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)クラスターでは利用できません。
+> この機能は、[{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスでは利用できません。
 
 データのバックアップや自動統計収集などのバックグラウンドタスクは、優先度が低いにもかかわらず、多くのリソースを消費します。これらのタスクは通常、定期的または不定期に実行されます。実行中は多くのリソースを消費するため、オンラインの高優先度タスクのパフォーマンスに影響を与えます。
 
@@ -17,7 +17,7 @@ v7.4.0以降、 [TiDB リソース制御](/tidb-resource-control-ru-groups.md)�
 >
 > リソース制御におけるバックグラウンドタスク管理は、TiKVによるCPU/IO使用率のリソースクォータの動的調整に基づいています。そのため、各インスタンスの利用可能なリソースクォータに依存します。複数のコンポーネントまたはインスタンスを単一サーバーにデプロイする場合、 `cgroup`を通して各インスタンスに適切なリソースクォータを設定する必要があります。TiUP Playgroundのような共有リソースを持つデプロイメントでは、期待される効果を得ることが困難です。
 
-## `BACKGROUND`パラメータ {#background-parameters}
+## `BACKGROUND`パラメーター {#background-parameters}
 
 - `TASK_TYPES` : バックグラウンドタスクとして管理する必要があるタスクの種類を指定します。複数のタスクの種類を指定する場合は、カンマ ( `,` ) で区切ります。
 - `UTILIZATION_LIMIT` : 各 TiKV ノード上でバックグラウンドタスクが消費できるリソースの最大割合（0～100）を制限します。デフォルトでは、TiKV はノードの総リソースとフォアグラウンドタスクが現在占有しているリソースに基づいて、バックグラウンドタスクに利用可能なリソースを計算します。`UTILIZATION_LIMIT`を設定すると、バックグラウンドタスクに割り当てられるリソースはこの制限を超えません。

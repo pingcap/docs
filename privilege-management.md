@@ -30,7 +30,7 @@ GRANT SELECT ON test.* TO 'xxx'@'%';
 GRANT ALL PRIVILEGES ON *.* TO 'xxx'@'%';
 ```
 
-バージョン8.5.6以降、TiDBはMySQL互換の列レベルの権限管理メカニズムをサポートしています。指定したテーブルの特定の列に対して、 `SELECT` 、 `INSERT` 、 `UPDATE` 、および`REFERENCES`権限を付与または取り消すことができます。詳細については、[列レベルの権限管理](/column-privilege-management.md)を参照してください。
+バージョン8.5.6以降、TiDBはMySQL互換の列レベルの権限管理メカニズムをサポートしています。指定したテーブルの特定の列に対して、 `SELECT` 、 `INSERT` 、 `UPDATE` 、および`REFERENCES`権限を付与または取り消せます。詳細については、[列レベルの権限管理](/column-privilege-management.md)を参照してください。
 
 デフォルトでは、 [`GRANT`](/sql-statements/sql-statement-grant-privileges.md)ステートメントは、指定されたユーザーが存在しない場合にエラーを返します。この動作は、 [SQLモード](/system-variables.md#sql_mode)`NO_AUTO_CREATE_USER`が指定されているかどうかによって異なります。
 
@@ -158,7 +158,7 @@ SELECT user,host,db FROM mysql.db WHERE user='genius';
 
 ### 権限を取り消す {#revoke-privileges}
 
-[`REVOKE`](/sql-statements/sql-statement-revoke-privileges.md)ステートメントを使用すると、システム管理者はユーザーアカウントから権限を取り消すことができます。
+[`REVOKE`](/sql-statements/sql-statement-revoke-privileges.md)ステートメントを使用すると、システム管理者はユーザーアカウントから権限を取り消せます。
 
 `REVOKE`文は`GRANT`文に対応します。
 
@@ -282,7 +282,7 @@ SHOW GRANTS FOR `rw_user`@`192.168.%`;
 - `RESTRICTED_VARIABLES_ADMIN`は、SEM が有効になっている場合に、権限所有者がすべてのシステム変数を表示できるようにします。
 - `RESTRICTED_USER_ADMIN` SEM が有効になっている場合、特権所有者が SUPER ユーザーによってアクセス権を取り消されることを禁止します。
 - `RESTRICTED_CONNECTION_ADMIN`権限所有者が`RESTRICTED_USER_ADMIN`ユーザーの接続を強制終了することを許可します。この権限は`KILL`および`KILL TIDB`文に影響します。
-- `RESTRICTED_REPLICA_WRITER_ADMIN`を使用すると、TiDB クラスタで読み取り専用モードが有効になっている場合でも、権限所有者は影響を受けることなく書き込みまたは更新操作を実行できます。詳細については、 [`tidb_restricted_read_only`](/system-variables.md#tidb_restricted_read_only-new-in-v520)を参照してください。
+- `RESTRICTED_REPLICA_WRITER_ADMIN`を使用すると、TiDB クラスターで読み取り専用モードが有効になっている場合でも、権限所有者は影響を受けることなく書き込みまたは更新操作を実行できます。詳細については、 [`tidb_restricted_read_only`](/system-variables.md#tidb_restricted_read_only-new-in-v520)を参照してください。
 
 動的権限の全セットを確認するには、 `SHOW PRIVILEGES`文を実行してください。プラグインは新しい権限を追加できるため、割り当て可能な権限のリストは、TiDB のインストール環境によって異なる場合があります。
 

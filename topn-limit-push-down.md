@@ -17,7 +17,7 @@ TiDB実行計画ツリーでは、SQLの`LIMIT`句はLimitオペレーターノ�
 
 このセクションでは、いくつかの例を通して TopN プッシュダウンについて説明します。
 
-### 例1:ストレージレイヤーのコプロセッサにプッシュダウンする {#example-1-push-down-to-the-coprocessors-in-the-storage-layer}
+### 例1:ストレージレイヤーのコプロセッサーにプッシュダウンする {#example-1-push-down-to-the-coprocessors-in-the-storage-layer}
 
 ```sql
 create table t(id int primary key, a int not null);
@@ -115,4 +115,4 @@ explain select * from t left join s on t.a = s.a order by t.id limit 10;
 
 ```
 
-上記のクエリでは、まず TopN が外部テーブル`t`にプッシュされます。TopN は主キーである`t.id`でソートする必要がありますが、これは TopN 内で追加のソート処理を行わなくても ( `keep order: true` ) の順序で直接読み取ることができます。そのため、TopN は Limit として簡略化されます。
+上記のクエリでは、まず TopN が外部テーブル`t`にプッシュされます。TopN は主キーである`t.id`でソートする必要がありますが、これは TopN 内で追加のソート処理を行わなくても ( `keep order: true` ) の順序で直接読み取れます。そのため、TopN は Limit として簡略化されます。

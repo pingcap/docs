@@ -86,7 +86,7 @@ select * from employee where id in (...) and salary between ? and ?;
 
 ## `statements_summary_history` {#statements_summary_history}
 
-`statements_summary_history`のテーブルスキーマは`statements_summary`と同一です。 `statements_summary_history`は、特定の期間の履歴データを保存します。履歴データを確認することで、異常のトラブルシューティングや、異なる期間の監視メトリクスの比較を行うことができます。
+`statements_summary_history`のテーブルスキーマは`statements_summary`と同一です。 `statements_summary_history`は、特定の期間の履歴データを保存します。履歴データを確認することで、異常のトラブルシューティングや、異なる期間の監視メトリクスの比較を行えます。
 
 `SUMMARY_BEGIN_TIME`フィールドと`SUMMARY_END_TIME`フィールドは、履歴期間の開始時刻と終了時刻を表します。
 
@@ -118,11 +118,11 @@ select * from employee where id in (...) and salary between ? and ?;
 
 ## ステートメントサマリーの`cluster`テーブル {#the-cluster-tables-for-statement-summary}
 
-`statements_summary` 、 `statements_summary_history` 、および`statements_summary_evicted`テーブルには、単一の TiDBサーバーのステートメントの概要のみが表示されます。クラスタ全体のデータを照会するには、 `cluster_statements_summary` 、 `cluster_statements_summary_history` 、または`cluster_statements_summary_evicted`テーブルを照会する必要があります。
+`statements_summary` 、 `statements_summary_history` 、および`statements_summary_evicted`テーブルには、単一の TiDBサーバーのステートメントの概要のみが表示されます。クラスター全体のデータを照会するには、 `cluster_statements_summary` 、 `cluster_statements_summary_history` 、または`cluster_statements_summary_evicted`テーブルを照会する必要があります。
 
 `cluster_statements_summary`には、各 TiDBサーバーの`statements_summary`データが表示されます。 `cluster_statements_summary_history`には、各 TiDBサーバーの`statements_summary_history`データが表示されます。 `cluster_statements_summary_evicted`には、各 TiDBサーバーの`statements_summary_evicted`データが表示されます。これらのテーブルでは`INSTANCE`フィールドを使用して TiDBサーバーのアドレスを表します。その他のフィールドは`statements_summary` 、 `statements_summary_history` 、および`statements_summary_evicted`と同じです。
 
-## パラメータ設定 {#parameter-configuration}
+## パラメーター設定 {#parameter-configuration}
 
 ステートメントサマリーを制御するために、以下のシステム変数が使用されます。
 
@@ -219,7 +219,7 @@ select * from information_schema.statements_summary_evicted;
 
 <CustomContent platform="tidb-cloud">
 
-このセクションは、TiDB Self-Managed にのみ適用されます。TiDB Cloudの場合、 `tidb_stmt_summary_enable_persistent`パラメータの値はデフォルトで`false`であり、動的な変更はサポートされていません。
+このセクションは、TiDB Self-Managed にのみ適用されます。TiDB Cloudの場合、 `tidb_stmt_summary_enable_persistent`パラメーターの値はデフォルトで`false`であり、動的な変更はサポートされていません。
 
 </CustomContent>
 
@@ -251,13 +251,13 @@ tidb_stmt_summary_enable_persistent = true
 # tidb_stmt_summary_file_max_backups = 0
 ```
 
-ステートメントサマリーの永続化が有効になると、メモリには現在のリアルタイムデータのみが保持され、履歴データは保持されません。リアルタイムデータが履歴データとして更新されると、履歴データは、[パラメータ設定](#parameter-configuration)セクションで説明されている`tidb_stmt_summary_refresh_interval`間隔でディスクに書き込まれます。 `statements_summary_history`テーブルまたは`cluster_statements_summary_history`テーブルに対するクエリは、メモリ内データとディスク上のデータを組み合わせた結果を返します。
+ステートメントサマリーの永続化が有効になると、メモリには現在のリアルタイムデータのみが保持され、履歴データは保持されません。リアルタイムデータが履歴データとして更新されると、履歴データは、[パラメーター設定](#parameter-configuration)セクションで説明されている`tidb_stmt_summary_refresh_interval`間隔でディスクに書き込まれます。 `statements_summary_history`テーブルまたは`cluster_statements_summary_history`テーブルに対するクエリは、メモリ内データとディスク上のデータを組み合わせた結果を返します。
 
 <CustomContent platform="tidb">
 
 > **Note:**
 >
-> - ステートメントサマリーの永続化が有効になっている場合、メモリが履歴データを保持しないため、[パラメータ設定](#parameter-configuration)セクションで説明されている`tidb_stmt_summary_history_size`構成は無効になります。代わりに、永続化のための履歴データの保持期間とサイズを制御するために、次の3つの構成が使用されます[`tidb_stmt_summary_file_max_days`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_days-new-in-v660) 、 [`tidb_stmt_summary_file_max_size`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_size-new-in-v660) 、および[`tidb_stmt_summary_file_max_backups`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_backups-new-in-v660) 。
+> - ステートメントサマリーの永続化が有効になっている場合、メモリが履歴データを保持しないため、[パラメーター設定](#parameter-configuration)セクションで説明されている`tidb_stmt_summary_history_size`構成は無効になります。代わりに、永続化のための履歴データの保持期間とサイズを制御するために、次の3つの構成が使用されます: [`tidb_stmt_summary_file_max_days`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_days-new-in-v660) 、 [`tidb_stmt_summary_file_max_size`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_size-new-in-v660) 、および[`tidb_stmt_summary_file_max_backups`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_backups-new-in-v660) 。
 > - `tidb_stmt_summary_refresh_interval`の値が小さいほど、ディスクに書き込まれるデータ量は多くなります。しかし、これは同時に、ディスクに書き込まれる冗長なデータ量も多くなることを意味します。
 
 </CustomContent>
@@ -356,8 +356,8 @@ TiDBサーバーに関連するフィールド：
 - `AVG_LATENCY` : このカテゴリの SQL文の平均実行レイテンシー。
 - `AVG_PARSE_LATENCY` : パーサーの平均レイテンシー。
 - `MAX_PARSE_LATENCY` : パーサーの最大レイテンシー。
-- `AVG_COMPILE_LATENCY` : コンパイラの平均レイテンシー。
-- `MAX_COMPILE_LATENCY` : コンパイラの最大レイテンシー。
+- `AVG_COMPILE_LATENCY` : コンパイラーの平均レイテンシー。
+- `MAX_COMPILE_LATENCY` : コンパイラーの最大レイテンシー。
 - `AVG_MEM` : 平均メモリ使用量（バイト）。
 - `MAX_MEM` : 使用される最大メモリ（バイト）。
 - `AVG_DISK` : 平均ディスク使用量（バイト）。
@@ -379,8 +379,8 @@ TiDBサーバーに関連するフィールド：
 - `AVG_LATENCY` : このカテゴリの SQL文の平均実行レイテンシー。
 - `AVG_PARSE_LATENCY` : パーサーの平均レイテンシー。
 - `MAX_PARSE_LATENCY` : パーサーの最大レイテンシー。
-- `AVG_COMPILE_LATENCY` : コンパイラの平均レイテンシー。
-- `MAX_COMPILE_LATENCY` : コンパイラの最大レイテンシー。
+- `AVG_COMPILE_LATENCY` : コンパイラーの平均レイテンシー。
+- `MAX_COMPILE_LATENCY` : コンパイラーの最大レイテンシー。
 - `AVG_MEM` : 平均メモリ使用量（バイト）。
 - `MAX_MEM` : 使用される最大メモリ（バイト）。
 - `AVG_DISK` : 平均ディスク使用量（バイト）。

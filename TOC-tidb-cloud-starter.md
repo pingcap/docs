@@ -32,9 +32,9 @@
 
 - [プランを選択する](/tidb-cloud/select-cluster-tier.md)
 - [TiDB Cloudのリソースとプロジェクトを管理する](/tidb-cloud/manage-projects-and-resources.md)
-- TiDB Cloud Starterインスタンスの管理
-  - [TiDB Cloud Starterインスタンスを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)
-  - TiDB Cloud Starterインスタンスに接続する
+- {{{ .starter }}}インスタンスの管理
+  - [{{{ .starter }}}インスタンスを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)
+  - {{{ .starter }}}インスタンスに接続する
     - [ネットワーク接続の概要](/tidb-cloud/connect-to-tidb-cluster-serverless.md)
     - [パブリックエンドポイント経由で接続](/tidb-cloud/connect-via-standard-connection-serverless.md)
     - [AWS のプライベートエンドポイント経由で接続する](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
@@ -114,7 +114,7 @@
       - [設定](/garbage-collection-configuration.md)
     - [TiFlashのパフォーマンスをチューニング](/tiflash/tune-tiflash-performance.md)
   - [TiDBのバージョンをアップグレードする](/tidb-cloud/upgrade-tidb-cluster.md)
-  - [TiDB Cloud Starterインスタンスを削除する](/tidb-cloud/delete-tidb-cluster.md)
+  - [{{{ .starter }}}インスタンスを削除する](/tidb-cloud/delete-tidb-cluster.md)
 - データの移行またはインポート
   - [概要](/tidb-cloud/tidb-cloud-migration-overview.md)
   - TiDB Cloudへのデータ移行
@@ -531,7 +531,7 @@
     - [TiDB Cloudパートナー](/tidb-cloud/tidb-cloud-partners.md)
     - [MSP顧客](/tidb-cloud/managed-service-provider-customer.md)
     - [販売代理店の顧客](/tidb-cloud/cppo-customer.md)
-  - [TiDB Cloud StarterとEssentialの制限事項](/tidb-cloud/serverless-limitations.md)
+  - [{{{ .starter }}}とEssentialの制限事項](/tidb-cloud/serverless-limitations.md)
   - [TiDB X インスタンスでの制限付き SQL 機能](/tidb-cloud/limited-sql-features-tidb-x.md)
   - [TiDBの制限事項](/tidb-limitations.md)
   - [システム変数](/system-variables.md)
@@ -540,7 +540,7 @@
   - [外部ストレージサービスのURI形式](/external-storage-uri.md)
   - [データとインデックス間の不整合のトラブルシューティング](/troubleshoot-data-inconsistency-errors.md)
   - [通知](/tidb-cloud/notifications.md)
-  - [TiDB Cloud StarterおよびEssential向けプロジェクトAPI移行ガイド](/tidb-cloud/tidbx-starter-essential-project-api-migration-guide.md)
+  - [{{{ .starter }}}およびEssential向けプロジェクトAPI移行ガイド](/tidb-cloud/tidbx-starter-essential-project-api-migration-guide.md)
 - サポートプラン
   - [Connected Careの概要](/tidb-cloud/connected-care-overview.md)
   - [Connected Careの詳細](/tidb-cloud/connected-care-detail.md)
@@ -555,6 +555,6 @@
   - [サポートを受ける](/tidb-cloud/tidb-cloud-support.md)
 - よくある質問
   - [TiDB Cloudよくある質問](/tidb-cloud/tidb-cloud-faq.md)
-  - [TiDB Cloud Starterよくある質問](/tidb-cloud/serverless-faqs.md)
+  - [{{{ .starter }}}よくある質問](/tidb-cloud/serverless-faqs.md)
   - [TiDB Xインスタンスのプロジェクト移行に関するFAQ](/tidb-cloud/tidbx-instance-move-faq.md)
 - [用語集](/tidb-cloud/tidb-cloud-glossary.md)

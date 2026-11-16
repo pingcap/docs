@@ -18,7 +18,7 @@ summary: オペレーティングシステムのパラメーターを調整す�
 
 ### 60秒で {#in-60-seconds}
 
-[*60,000ミリ秒でLinuxのパフォーマンス分析*](http://www.brendangregg.com/Articles/Netflix_Linux_Perf_Analysis_60s.pdf) 、著者のBrendan Gregg氏とNetflixパフォーマンスエンジニアリングチームによって公開されています。使用されているツールはすべてLinuxの公式リリースから入手できます。以下のリスト項目の出力を分析することで、最も一般的なパフォーマンス問題のトラブルシューティングを行えます。
+[*Linux Performance Analysis in 60,000 Milliseconds*](http://www.brendangregg.com/Articles/Netflix_Linux_Perf_Analysis_60s.pdf) 、著者のBrendan Gregg氏とNetflixパフォーマンスエンジニアリングチームによって公開されています。使用されているツールはすべてLinuxの公式リリースから入手できます。以下のリスト項目の出力を分析することで、最も一般的なパフォーマンス問題のトラブルシューティングを行えます。
 
 - `uptime`
 - `dmesg | tail`

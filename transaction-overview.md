@@ -7,7 +7,7 @@ summary: TiDB でのトランザクションについて学習します。
 
 TiDBは、 [悲観的](/pessimistic-transaction.md)または[楽観的](/optimistic-transaction.md)トランザクションモードを使用した分散トランザクションをサポートします。TiDB 3.0.8以降では、デフォルトで悲観的トランザクションモードが使用されます。
 
-このドキュメントでは、一般的に使用されるトランザクション関連のステートメント、明示的および暗黙的なトランザクション、分離レベル、制約の遅延チェック、およびトランザクション サイズについて説明します。
+このドキュメントでは、一般的に使用されるトランザクション関連のステートメント、明示的および暗黙的なトランザクション、分離レベル、制約の遅延チェック、およびトランザクションサイズについて説明します。
 
 一般的な変数には、 [`autocommit`](#autocommit) 、 [`tidb_disable_txn_auto_retry`](/system-variables.md#tidb_disable_txn_auto_retry) 、 [`tidb_retry_limit`](/system-variables.md#tidb_retry_limit) 、 [`tidb_txn_mode`](/system-variables.md#tidb_txn_mode)などがあります。
 
@@ -145,7 +145,7 @@ mysql> SELECT * FROM t2;
 Empty set (0.00 sec)
 ```
 
-グローバルまたはセッション ベースの[`autocommit`](/system-variables.md#autocommit)システム変数は[変更可能](/sql-statements/sql-statement-set-variable.md)です。
+グローバルまたはセッションベースの[`autocommit`](/system-variables.md#autocommit)システム変数は[変更可能](/sql-statements/sql-statement-set-variable.md)です。
 
 例えば：
 

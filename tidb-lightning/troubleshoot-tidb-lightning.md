@@ -34,7 +34,7 @@ TiDB Lightningは、データソースを256MB程度の複数のファイルに�
 strict-format = true
 
 [mydumper.csv]
-terminator = "\n" # ファイル内の実際の行末記号に応じて、"\n"、"\r"、または "\r\n" に設定します。
+terminator = "\n" # Set it to "\n", "\r", or "\r\n", depending on the actual line terminator in your files.
 ```
 
 **原因 4** : TiDB Lightning が古すぎます。

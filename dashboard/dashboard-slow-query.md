@@ -51,8 +51,8 @@ TiDB Dashboardの「スロークエリ」ページでは、クラスター内の
 
 リスト内のいずれかの項目をクリックすると、以下の項目を含む、スロークエリの詳細な実行情報が表示されます。
 
-- クエリ：SQL文のテキスト（下図の領域1）
-- 計画：スロークエリの実行計画（下図の領域2）
+- Query：SQL文のテキスト（下図の領域1）
+- Plan：スロークエリの実行計画（下図の領域2）
 - その他のソート済みSQL実行情報（下図の領域3）
 
 ![View execution details](/media/dashboard/dashboard-slow-queries-detail1-v620.png)

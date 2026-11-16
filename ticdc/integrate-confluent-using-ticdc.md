@@ -40,7 +40,7 @@ TiDB v6.1.0以降、TiCDCはAvro形式でConfluentへの増分データのレプ
 
 1. クラスター API キーを作成します。
 
-    [Confluent Cloud](https://confluent.cloud)にサインインします。**Data integration** > **APIキー** > **キーの作成**を選択します。表示される**APIキーのスコープの選択**ページで、**グローバルアクセス**を選択します。
+    [Confluent Cloud](https://confluent.cloud)にサインインします。**Data integration** > **API keys** > **Create key**を選択します。表示される**Select scope for API key**ページで、**Global access**を選択します。
 
     作成後、以下に示すようにキーペアファイルが生成されます。
 
@@ -181,7 +181,7 @@ Snowflakeはクラウドネイティブなデータウェアハウスです。Co
 
     ![Configuration](/media/integrate/configuration.png)
 
-4. Snowflakeに接続するための認証情報を指定します。**データベース名**と**スキーマ名**には、前の手順で作成した値を入力してください。次のページに進みます。
+4. Snowflakeに接続するための認証情報を指定します。**Database name**と**Schema name**には、前の手順で作成した値を入力してください。次のページに進みます。
 
     ![Configuration](/media/integrate/configuration.png)
 
