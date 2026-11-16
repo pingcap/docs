@@ -24,7 +24,7 @@ TiDB バージョン: 5.0.6
 
 - TiDB
 
-    - コプロセッサがロックに遭遇したときに影響を受けるSQL文をデバッグログに表示します。これは問題の診断に役立ちます[#27718](https://github.com/pingcap/tidb/issues/27718)
+    - コプロセッサーがロックに遭遇したときに影響を受けるSQL文をデバッグログに表示します。これは問題の診断に役立ちます[#27718](https://github.com/pingcap/tidb/issues/27718)
 
 - TiKV
 
@@ -34,9 +34,9 @@ TiDB バージョン: 5.0.6
 
 - PD
 
-    - スケジューラの終了プロセスを高速化 [#4146](https://github.com/tikv/pd/issues/4146)
-    - スケジューラが空のリージョンをスケジュールできるようにし、スケジューラの構成を修正することで、 `scatter-range-scheduler`スケジューラのスケジュール結果をより均等にします。 [#4497](https://github.com/tikv/pd/issues/4497)
-    - リーダー排除スケジューラが不健全なピアを持つリージョンをスケジュールできるようにサポート[#4093](https://github.com/tikv/pd/issues/4093)
+    - スケジューラーの終了プロセスを高速化 [#4146](https://github.com/tikv/pd/issues/4146)
+    - スケジューラーが空のリージョンをスケジュールできるようにし、スケジューラーの構成を修正することで、 `scatter-range-scheduler`スケジューラーのスケジュール結果をより均等にします。 [#4497](https://github.com/tikv/pd/issues/4497)
+    - エビクトリーダースケジューラーが不健全なピアを持つリージョンをスケジュールできるようにサポート[#4093](https://github.com/tikv/pd/issues/4093)
 
 - ツール
 
@@ -79,7 +79,7 @@ TiDB バージョン: 5.0.6
     - MPPモードのクエリの予期しないエラー`can not found column in Schema column`を修正 [#30980](https://github.com/pingcap/tidb/issues/30980)
     - TiFlashがシャットダウンするときに TiDB がpanicする可能性がある問題を修正[#28096](https://github.com/pingcap/tidb/issues/28096)
     - プランナーが結合順序変更を実行しているときに発生する予期しないエラー`index out of range`を修正しました [#24095](https://github.com/pingcap/tidb/issues/24095)
-    - `ENUM`型データを制御関数のパラメータとして使用した場合に、制御関数の誤った結果（ `IF`や`CASE WHEN`など）が返される問題を修正しました[#23114](https://github.com/pingcap/tidb/issues/23114)
+    - `ENUM`型データを制御関数のパラメーターとして使用した場合に、制御関数の誤った結果（ `IF`や`CASE WHEN`など）が返される問題を修正しました[#23114](https://github.com/pingcap/tidb/issues/23114)
     - `CONCAT(IFNULL(TIME(3))` の間違った結果を修正 [#29498](https://github.com/pingcap/tidb/issues/29498)
     - 符号なし`BIGINT`引数を渡したときに`GREATEST`と`LEAST`の誤った結果が返される問題を修正 [#30101](https://github.com/pingcap/tidb/issues/30101)
     - JSON型の列が`CHAR`型の列に結合するとSQL操作がキャンセルされる問題を修正 [#29401](https://github.com/pingcap/tidb/issues/29401)
@@ -139,7 +139,7 @@ TiDB バージョン: 5.0.6
     - TiCDC
 
         - `force-replicate`が有効になっているときに、有効なインデックスのない一部のパーティションテーブルが無視される可能性がある問題を修正[#2834](https://github.com/pingcap/tiflow/issues/2834)
-        - `cdc cli`が予期しないパラメータを受け取ったときにユーザーパラメータを黙って切り捨て、ユーザー入力パラメータが失われる問題を修正[#2303](https://github.com/pingcap/tiflow/issues/2303)
+        - `cdc cli`が予期しないパラメーターを受け取ったときにユーザーパラメーターを黙って切り捨て、ユーザー入力パラメーターが失われる問題を修正[#2303](https://github.com/pingcap/tiflow/issues/2303)
         - Kafka メッセージの書き込み中にエラーが発生すると、TiCDC 同期タスクが一時停止する可能性がある問題を修正しました[#2978](https://github.com/pingcap/tiflow/issues/2978)
         - 一部のタイプの列を Open Protocol 形式にエンコードするときに発生する可能性のあるpanic問題を修正しました。 [#2758](https://github.com/pingcap/tiflow/issues/2758)
         - `max-message-bytes`のデフォルト値を`10M` に設定することで、Kafkaが過度に大きなメッセージを送信する可能性がある問題を修正しました。 [#3081](https://github.com/pingcap/tiflow/issues/3081)
@@ -158,7 +158,7 @@ TiDB バージョン: 5.0.6
         - etcd でタスクステータスを手動でクリーンアップするときに発生する TiCDC panicの問題を修正しました [#2980](https://github.com/pingcap/tiflow/issues/2980)
         - ErrGCTTLExceeded エラーが発生したときに changefeed が十分に速く失敗しない問題を修正しました[#3111](https://github.com/pingcap/ticdc/issues/3111)
         - 初期化に時間がかかりすぎて TiKV が GC safepoint を進めた場合に、changefeed が失敗する可能性がある問題を修正しました[#2470](https://github.com/pingcap/tiflow/issues/2470)
-        - コンテナ環境におけるOOMの修正[#1798](https://github.com/pingcap/ticdc/issues/1798)
+        - コンテナー環境におけるOOMの修正[#1798](https://github.com/pingcap/ticdc/issues/1798)
 
     - Backup & Restore (BR)
 

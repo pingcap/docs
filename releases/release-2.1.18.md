@@ -1,6 +1,6 @@
 ---
 title: TiDB 2.1.18 Release Notes
-summary: TiDB 2.1.18は2019年11月4日にリリースされました。このリリースには、SQLオプティマイザ、SQLエンジン、サーバー、DDL、モニター、ツールに関する様々な修正と最適化が含まれています。注目すべき改善点としては、ORDER BY、GROUP BY、LIMIT OFFSETにおけるパラメータの使用のサポート、インデックス追加操作の進行状況を監視するための新しいメトリクスの追加などが挙げられます。TiDB Ansibleバージョン2.1.18には、TiDB Binlogの更新と新しい監視項目も含まれています。
+summary: TiDB 2.1.18は2019年11月4日にリリースされました。このリリースには、SQLオプティマイザー、SQLエンジン、サーバー、DDL、モニター、ツールに関する様々な修正と最適化が含まれています。注目すべき改善点としては、ORDER BY、GROUP BY、LIMIT OFFSETにおけるパラメーターの使用のサポート、インデックス追加操作の進行状況を監視するための新しいメトリクスの追加などが挙げられます。TiDB Ansibleバージョン2.1.18には、TiDB Binlogの更新と新しい監視項目も含まれています。
 ---
 
 # TiDB 2.1.18 リリースノート {#tidb-2-1-18-release-notes}
@@ -13,11 +13,11 @@ TiDB Ansible バージョン: 2.1.18
 
 ## TiDB {#tidb}
 
-- SQLオプティマイザ
+- SQLオプティマイザー
     - フィードバックで分割すると無効なクエリ範囲が表示される可能性がある問題を修正しました [#12172](https://github.com/pingcap/tidb/pull/12172)
     - PointGetプランで権限チェックが正しく行われない問題を修正 [#12341](https://github.com/pingcap/tidb/pull/12341)
     - Limitオペレーターを`IndexLookUpReader`実行ロジックにプッシュすることで、 `select ... limit ... offset …`文の実行パフォーマンスを最適化します。 [#12380](https://github.com/pingcap/tidb/pull/12380)
-    - `ORDER BY` 、 `GROUP BY` 、および`LIMIT OFFSET`でのパラメータの使用をサポート [#12514](https://github.com/pingcap/tidb/pull/12514)
+    - `ORDER BY` 、 `GROUP BY` 、および`LIMIT OFFSET`でのパラメーターの使用をサポート [#12514](https://github.com/pingcap/tidb/pull/12514)
     - パーティションテーブルでの`IndexJoin`が誤った結果を返す問題を修正[#12713](https://github.com/pingcap/tidb/pull/12713)
     - 日付文字列とフォーマット文字列が一致しない場合に、TiDBの`str_to_date`関数がMySQLとは異なる結果を返す問題を修正しました[#12757](https://github.com/pingcap/tidb/pull/12757)
     - クエリ条件に`cast`関数が含まれている場合に外部結合が誤って内部結合に変換される問題を修正しました[#12791](https://github.com/pingcap/tidb/pull/12791)
@@ -64,7 +64,7 @@ TiDB Ansible バージョン: 2.1.18
 
 - TiDB Binlog
     - `ALTER DATABASE`に関連する DDL 操作によりDrainerが異常終了する問題を修正[#770](https://github.com/pingcap/tidb-binlog/pull/770)
-    - レプリケーション効率を向上させるためにコミットbinlog のトランザクション ステータス情報のクエリをサポートする[#761](https://github.com/pingcap/tidb-binlog/pull/761)
+    - レプリケーション効率を向上させるためにコミットbinlog のトランザクションステータス情報のクエリをサポートする[#761](https://github.com/pingcap/tidb-binlog/pull/761)
     - Drainerの`start_ts`がPumpの最大`commit_ts`より大きい場合にPump panicが発生する可能性がある問題を修正しました[#759](https://github.com/pingcap/tidb-binlog/pull/759)
 
 ## TiDB Ansible {#tidb-ansible}

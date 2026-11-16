@@ -80,10 +80,10 @@ TiDB バージョン: 5.0.4
     - 読み取り準備と書き込み準備は別々に処理して読み取りレイテンシーを削減する[#10475](https://github.com/tikv/tikv/issues/10475)
     - ネットワーク帯域幅を節約するために、Resolved TSメッセージのサイズを縮小します[#2448](https://github.com/pingcap/tiflow/issues/2448)
     - スロガースレッドが過負荷になりキューがいっぱいになったときに、スレッドをブロックする代わりにログをドロップする[#10841](https://github.com/tikv/tikv/issues/10841)
-    - TiKVコプロセッサのスローログに、リクエスト処理に費やされた時間のみを考慮するようにする [#10841](https://github.com/tikv/tikv/issues/10841)
+    - TiKVコプロセッサーのスローログが、リクエスト処理に費やされた時間のみを考慮するようにする [#10841](https://github.com/tikv/tikv/issues/10841)
     - 未確定エラーの可能性を減らすために、できるだけべき等な事前書き込みを行う[#10587](https://github.com/tikv/tikv/pull/10587)
     - 書き込みフローが低い場合に"GC can not work"という誤った警告を回避する[#10662](https://github.com/tikv/tikv/pull/10662)
-    - 復元するデータベースが、バックアップ時の元のクラスタサイズと常に一致するようにします[#10643](https://github.com/tikv/tikv/pull/10643)
+    - 復元するデータベースが、バックアップ時の元のクラスターサイズと常に一致するようにします[#10643](https://github.com/tikv/tikv/pull/10643)
     - panic出力が確実にログにフラッシュされるようにする [#9955](https://github.com/tikv/tikv/pull/9955)
 
 - PD
@@ -140,7 +140,7 @@ TiDB バージョン: 5.0.4
     - 破損したスナップショットファイルによって引き起こされる潜在的なディスクフル問題を修正[#10813](https://github.com/tikv/tikv/issues/10813)
     - Titan が有効になっている 5.0 より前のバージョンからアップグレードするときに発生する TiKV panic問題を修正しました[#10843](https://github.com/tikv/tikv/pull/10843)
     - 新しいバージョンのTiKVをv5.0.xにロールバックできない問題を修正しました[#10843](https://github.com/tikv/tikv/pull/10843)
-    - 5.0より前のバージョンから5.0以降のバージョンにアップグレードする際に発生するTiKV panicの問題を修正しました。アップグレード前にTitanが有効になっているTiKV v3.xからクラスタをアップグレードした場合、このクラスタでこの問題が発生する可能性があります[#10774](https://github.com/tikv/tikv/issues/10774)
+    - 5.0より前のバージョンから5.0以降のバージョンにアップグレードする際に発生するTiKV panicの問題を修正しました。アップグレード前にTitanが有効になっているTiKV v3.xからクラスターをアップグレードした場合、このクラスターでこの問題が発生する可能性があります[#10774](https://github.com/tikv/tikv/issues/10774)
     - 残存する悲観的ロックによる解析エラーを修正[#26404](https://github.com/pingcap/tidb/issues/26404)
     - 特定のプラットフォームで期間を計算するときに発生するpanicを修正[#10571](https://github.com/tikv/tikv/pull/10571)
     - Load Base Split の`batch_get_command`のキーがエンコードされていない問題を修正[#10542](https://github.com/tikv/tikv/issues/10542)
@@ -150,8 +150,8 @@ TiDB バージョン: 5.0.4
     - PDがダウンしたピアを速やかに修復しない問題を修正[#4077](https://github.com/tikv/pd/issues/4077)
     - `replication.max-replicas`を更新した後、デフォルトの配置ルールのレプリカ数が一定のままになる問題を修正[#3886](https://github.com/tikv/pd/issues/3886)
     - TiKV をスケールアウトするときに PD がpanicする可能性があるバグを修正しました [#3868](https://github.com/tikv/pd/issues/3868)
-    - 複数のスケジューラが同時に実行されているときに発生するスケジュール競合の問題を修正[#3807](https://github.com/tikv/pd/issues/3807)
-    - スケジューラが削除された後でも再び表示されることがある問題を修正[#2572](https://github.com/tikv/pd/issues/2572)
+    - 複数のスケジューラーが同時に実行されているときに発生するスケジュール競合の問題を修正[#3807](https://github.com/tikv/pd/issues/3807)
+    - スケジューラーが削除された後でも再び表示されることがある問題を修正[#2572](https://github.com/tikv/pd/issues/2572)
 
 - TiFlash
 
@@ -180,7 +180,7 @@ TiDB バージョン: 5.0.4
     - TiCDC
 
         - `mysql.TypeString, mysql.TypeVarString, mysql.TypeVarchar`などのデータ型をJSON にエンコードする際に発生するプロセスpanicの問題を修正 [#2758](https://github.com/pingcap/tiflow/issues/2758)
-        - このテーブルが再スケジュールされているときに複数のプロセッサが同じテーブルにデータを書き込む可能性があるために発生するデータの不整合の問題を修正しました[#2417](https://github.com/pingcap/tiflow/pull/2417)
+        - このテーブルが再スケジュールされているときに複数のプロセッサーが同じテーブルにデータを書き込む可能性があるために発生するデータの不整合の問題を修正しました[#2417](https://github.com/pingcap/tiflow/pull/2417)
         - TiCDC があまりにも多くのリージョンをキャプチャしたときに発生する OOM を回避するために、gRPC ウィンドウのサイズを小さくします[#2724](https://github.com/pingcap/tiflow/pull/2724)
         - メモリ負荷が高いときにgRPC接続が頻繁に切断されるエラーを修正[#2202](https://github.com/pingcap/tiflow/issues/2202)
         - 符号なし`TINYINT`型でTiCDCがpanicを起こすバグを修正 [#2648](https://github.com/pingcap/tiflow/issues/2648)

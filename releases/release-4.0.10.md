@@ -57,8 +57,8 @@ TiDB バージョン: 4.0.10
     - `prepare`プランキャッシュによって引き起こされるTiFlashの`wrong precision`問題を修正 [#21960](https://github.com/pingcap/tidb/pull/21960)
     - スキーマ変更によって発生する誤った結果の問題を修正しました [#21596](https://github.com/pingcap/tidb/pull/21596)
     - `ALTER TABLE` の不要な列フラグの変更を避ける [#21474](https://github.com/pingcap/tidb/pull/21474)
-    - オプティマイザヒントで使用されるクエリブロックのテーブルエイリアスのデータベース名を設定します [#21380](https://github.com/pingcap/tidb/pull/21380)
-    - `IndexHashJoin`と`IndexMergeJoin`の適切なオプティマイザヒントを生成する[#21020](https://github.com/pingcap/tidb/pull/21020)
+    - オプティマイザーヒントで使用されるクエリブロックのテーブルエイリアスのデータベース名を設定します [#21380](https://github.com/pingcap/tidb/pull/21380)
+    - `IndexHashJoin`と`IndexMergeJoin`の適切なオプティマイザーヒントを生成する[#21020](https://github.com/pingcap/tidb/pull/21020)
 
 - TiKV
 
@@ -75,7 +75,7 @@ TiDB バージョン: 4.0.10
     - TiFlashが古いバージョンの TiDB スキーマを処理できないために起動に失敗する問題を修正しました
     - RedHatシステムで`cpu_time`が正しく処理されないためTiFlashが起動に失敗する問題を修正
     - `path_realtime_mode`を`true`に設定するとTiFlash が起動に失敗する問題を修正しました
-    - 3つのパラメータを持つ`substr`関数を呼び出すときに誤った結果が返される問題を修正しました
+    - 3つのパラメーターを持つ`substr`関数を呼び出すときに誤った結果が返される問題を修正しました
     - TiFlashがロスレスの変更であっても`Enum`タイプの変更をサポートしない問題を修正
 
 - ツール

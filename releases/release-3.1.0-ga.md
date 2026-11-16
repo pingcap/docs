@@ -1,6 +1,6 @@
 ---
 title: TiDB 3.1.0 GA Release Notes
-summary: TiDB 3.1.0 GAは2020年4月16日にリリースされました。TiDB、 TiFlash、TiKV、そしてBackup & RestoreやTiDB Binlogなどのツールに対する互換性の変更、新機能、バグ修正、そして改善が含まれています。主な変更点としては、コプロセッサータスクの表示サポート、ホットリージョンスケジューリングの最適化、そして様々なpanicおよびデータ損失の問題の修正などが挙げられます。また、このリリースには、監視と設定パラメータの改善のためのTiDB Ansibleの改善も含まれています。
+summary: TiDB 3.1.0 GAは2020年4月16日にリリースされました。TiDB、 TiFlash、TiKV、そしてBackup & RestoreやTiDB Binlogなどのツールに対する互換性の変更、新機能、バグ修正、そして改善が含まれています。主な変更点としては、コプロセッサータスクの表示サポート、ホットリージョンスケジューリングの最適化、そして様々なpanicおよびデータ損失の問題の修正などが挙げられます。また、このリリースには、監視と設定パラメーターの改善のためのTiDB Ansibleの改善も含まれています。
 ---
 
 # TiDB 3.1.0 GA リリースノート {#tidb-3-1-0-ga-release-notes}
@@ -38,12 +38,12 @@ TiDB Ansible バージョン: 3.1.0 GA
 
     - DeltaTreeエンジンの読み取りおよび書き込みワークロードに関連するメトリックレポートを追加します
     - `fromUnixTime`と`dateFormat`プッシュダウン関数をサポート
-    - デフォルトでラフセットフィルタを無効にする
+    - デフォルトでラフセットフィルターを無効にする
 
 - TiDB Ansible
 
     - TiFlashモニター を追加 [#1257](https://github.com/pingcap/tidb-ansible/pull/1257) [#1253](https://github.com/pingcap/tidb-ansible/pull/1253)
-    - TiFlashの設定パラメータを最適化する [#1262](https://github.com/pingcap/tidb-ansible/pull/1262) [#1265](https://github.com/pingcap/tidb-ansible/pull/1265) [#1271](https://github.com/pingcap/tidb-ansible/pull/1271)
+    - TiFlashの設定パラメーターを最適化する [#1262](https://github.com/pingcap/tidb-ansible/pull/1262) [#1265](https://github.com/pingcap/tidb-ansible/pull/1265) [#1271](https://github.com/pingcap/tidb-ansible/pull/1271)
     - TiDB 起動スクリプトを最適化する [#1268](https://github.com/pingcap/tidb-ansible/pull/1268)
 
 ## バグ修正 {#bug-fixes}
@@ -62,7 +62,7 @@ TiDB Ansible バージョン: 3.1.0 GA
     - `TypeNull`クラスが可変長型と誤認されるために左結合の`sort`演算子でpanicが発生する問題を修正 [#15739](https://github.com/pingcap/tidb/pull/15739)
     - 監視セッション再試行エラーの数が不正確になる問題を修正[#16120](https://github.com/pingcap/tidb/pull/16120)
     - `ALLOW_INVALID_DATES`モードで`weekday`の間違った結果の問題を修正 [#16171](https://github.com/pingcap/tidb/pull/16171)
-    - クラスタにTiFlashノードがある場合にガベージコレクション（GC）が正常に動作しない可能性がある問題を修正しました [#15761](https://github.com/pingcap/tidb/pull/15761)
+    - クラスターにTiFlashノードがある場合にガベージコレクション（GC）が正常に動作しない可能性がある問題を修正しました [#15761](https://github.com/pingcap/tidb/pull/15761)
     - ハッシュパーティションテーブルを作成する際にユーザーが大きなパーティション数を設定すると、TiDBがメモリ不足（OOM）になる問題を修正しました。 [#16219](https://github.com/pingcap/tidb/pull/16219)
     - 警告がエラーと誤認される問題を修正し、 `UNION`文が`SELECT`文と同じ動作になるようにします[#16138](https://github.com/pingcap/tidb/pull/16138)
     - `TopN`が mocktikv にプッシュダウンされたときの実行エラーを修正しました [#16200](https://github.com/pingcap/tidb/pull/16200)

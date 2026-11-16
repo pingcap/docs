@@ -17,9 +17,9 @@ TiDB バージョン: 4.0.6
 
 - TiDB Dashboard
 
-    - クエリエディタと実行UIの追加（実験的） [#713](https://github.com/pingcap-incubator/tidb-dashboard/pull/713)
-    - ストアロケーショントポロジの可視化をサポート [#719](https://github.com/pingcap-incubator/tidb-dashboard/pull/719)
-    - クラスタ構成UIの追加（実験的） [#733](https://github.com/pingcap-incubator/tidb-dashboard/pull/733)
+    - クエリエディターと実行UIの追加（実験的） [#713](https://github.com/pingcap-incubator/tidb-dashboard/pull/713)
+    - ストアロケーショントポロジーの可視化をサポート [#719](https://github.com/pingcap-incubator/tidb-dashboard/pull/719)
+    - クラスター構成UIの追加（実験的） [#733](https://github.com/pingcap-incubator/tidb-dashboard/pull/733)
     - 現在のセッション共有をサポート [#741](https://github.com/pingcap-incubator/tidb-dashboard/pull/741)
     - SQL Statementsリストで実行計画の数を表示する機能をサポート [#746](https://github.com/pingcap-incubator/tidb-dashboard/pull/746)
 
@@ -35,7 +35,7 @@ TiDB バージョン: 4.0.6
     - パーティションテーブルの書き込みパフォーマンスを向上させる [#19649](https://github.com/pingcap/tidb/pull/19649)
     - `Cop Runtime`統計でより多くのRPC実行時情報を記録 [#19264](https://github.com/pingcap/tidb/pull/19264)
     - `metrics_schema`と`performance_schema` でのテーブル作成を禁止する [#19792](https://github.com/pingcap/tidb/pull/19792)
-    - ユニオンエグゼキュータの同時実行の調整をサポート [#19886](https://github.com/pingcap/tidb/pull/19886)
+    - ユニオンエグゼキューターの同時実行の調整をサポート [#19886](https://github.com/pingcap/tidb/pull/19886)
     - ブロードキャスト結合で外部結合をサポート[#19664](https://github.com/pingcap/tidb/pull/19664)
     - プロセスリストのSQLダイジェストを追加する [#19829](https://github.com/pingcap/tidb/pull/19829)
     - 自動コミット文を再試行するために悲観的トランザクションモードに切り替える [#19796](https://github.com/pingcap/tidb/pull/19796)
@@ -115,9 +115,9 @@ TiDB バージョン: 4.0.6
     - `HashJoin` に`Apply`オペレーターがある場合のクエリエラーを修正しました [#19611](https://github.com/pingcap/tidb/pull/19611)
     - `Real`を`Time` に変換するベクトル化の誤った結果を修正 [#19594](https://github.com/pingcap/tidb/pull/19594)
     - `SHOW GRANTS`文で存在しないユーザーの権限が表示されるバグを修正 [#19588](https://github.com/pingcap/tidb/pull/19588)
-    - `IndexLookupJoin` に`Apply`エグゼキュータが存在する場合のクエリエラーを修正 [#19566](https://github.com/pingcap/tidb/pull/19566)
+    - `IndexLookupJoin` に`Apply`エグゼキューターが存在する場合のクエリエラーを修正 [#19566](https://github.com/pingcap/tidb/pull/19566)
     - パーティションテーブルで`Apply`を`HashJoin`に変換するときに誤った結果が発生する問題を修正しました [#19546](https://github.com/pingcap/tidb/pull/19546)
-    - `Apply` の内側に`IndexLookUp`エグゼキュータがある場合の誤った結果を修正しました [#19508](https://github.com/pingcap/tidb/pull/19508)
+    - `Apply` の内側に`IndexLookUp`エグゼキューターがある場合の誤った結果を修正しました [#19508](https://github.com/pingcap/tidb/pull/19508)
     - ビュー使用時に予期しないpanicが発生する問題を修正しました [#19491](https://github.com/pingcap/tidb/pull/19491)
     - `anti-semi-join`クエリの誤った結果を修正 [#19477](https://github.com/pingcap/tidb/pull/19477)
     - 統計を削除しても統計`TopN`が削除されないバグを修正[#19465](https://github.com/pingcap/tidb/pull/19465)
@@ -157,10 +157,10 @@ TiDB バージョン: 4.0.6
 
 - PD
 
-    - ブートストラップ中に異なるクラスタが相互に通信するのを防ぐために、 `initial-cluster-token`構成を追加します。 [#2922](https://github.com/pingcap/pd/pull/2922)
+    - ブートストラップ中に異なるクラスターが相互に通信するのを防ぐために、 `initial-cluster-token`構成を追加します。 [#2922](https://github.com/pingcap/pd/pull/2922)
     - モードが`auto`のときのストア制限レートの単位を修正 [#2826](https://github.com/pingcap/pd/pull/2826)
-    - 一部のスケジューラがエラーを解決せずに構成を保持する問題を修正[#2818](https://github.com/tikv/pd/pull/2818)
-    - スケジューラの空のHTTPレスポンスを修正 [#2874](https://github.com/tikv/pd/pull/2874) [#2871](https://github.com/tikv/pd/pull/2871)
+    - 一部のスケジューラーがエラーを解決せずに構成を保持する問題を修正[#2818](https://github.com/tikv/pd/pull/2818)
+    - スケジューラーの空のHTTPレスポンスを修正 [#2874](https://github.com/tikv/pd/pull/2874) [#2871](https://github.com/tikv/pd/pull/2871)
 
 - TiFlash
 
@@ -169,7 +169,7 @@ TiDB バージョン: 4.0.6
     - テーブルのレプリケーションステータスの計算によって発生するクラッシュを修正
     - ユーザーがサポートされていないDDL操作を適用した後に、 TiFlashがデータ読み取りに使用できなくなる問題を修正しました。
     - `utf8mb4_bin`として扱われるサポートされていない照合順序によって発生する例外を修正しました
-    - TiFlashコプロセッサエグゼキュータのQPSパネルにGrafanaで常に`0`が表示される問題を修正
+    - TiFlashコプロセッサーエグゼキューターのQPSパネルにGrafanaで常に`0`が表示される問題を修正
     - 入力が`NULL`の場合の`FROM_UNIXTIME`関数の誤った結果を修正
 
 - ツール
@@ -179,7 +179,7 @@ TiDB バージョン: 4.0.6
         - TiCDC がメモリリークを起こす場合がある問題を修正しました [#942](https://github.com/pingcap/tiflow/pull/942)
         - Kafka シンクで TiCDC がpanicする可能性がある問題を修正しました [#912](https://github.com/pingcap/tiflow/pull/912)
         - プルラーでCommitTsまたはResolvedTs（CRTs）が`resolvedTs`未満になる可能性がある問題を修正しました [#927](https://github.com/pingcap/tiflow/pull/927)
-        - `changefeed`が MySQL ドライバによってブロックされる可能性がある問題を修正しました [#936](https://github.com/pingcap/tiflow/pull/936)
+        - `changefeed`が MySQL ドライバーによってブロックされる可能性がある問題を修正しました [#936](https://github.com/pingcap/tiflow/pull/936)
         - TiCDC の誤ったResolved Ts間隔を修正 [#8573](https://github.com/tikv/tikv/pull/8573)
 
     - Backup & Restore (BR)

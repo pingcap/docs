@@ -13,7 +13,7 @@ TiDB バージョン: 3.0.16
 
 - TiDB
 
-    - ハッシュパーティションプルーニングの`is null`フィルタ条件をサポート [#17308](https://github.com/pingcap/tidb/pull/17308)
+    - ハッシュパーティションプルーニングの`is null`フィルター条件をサポート [#17308](https://github.com/pingcap/tidb/pull/17308)
     - 複数のリージョンリクエストが同時に失敗した場合にSQLタイムアウトの問題を回避するために、各リージョンに異なる`Backoffer`を割り当てます[#17583](https://github.com/pingcap/tidb/pull/17583)
     - 新しく追加されたパーティションに個別のリージョンを分割します [#17668](https://github.com/pingcap/tidb/pull/17668)
     - `delete`または`update`文から生成されたフィードバックを破棄します [#17841](https://github.com/pingcap/tidb/pull/17841)

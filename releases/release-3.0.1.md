@@ -41,7 +41,7 @@ TiDB Ansible バージョン: 3.0.1
 - `FAST ANALYZE`文で"invalid key"エラーが報告される場合がある問題を修正[#11098](https://github.com/pingcap/tidb/pull/11098)
 - 列のデフォルト値として`CURRENT_TIMESTAMP`が使用され、float精度が指定されている場合、 `SHOW CREATE TABLE`文で表示される精度が不完全になる問題を修正しました。 [#11088](https://github.com/pingcap/tidb/pull/11088)
 - MySQL との互換性を保つために、ウィンドウ関数がエラーを報告するときに関数名が小文字にならない問題を修正しました。 [#11118](https://github.com/pingcap/tidb/pull/11118)
-- TiKV クライアント バッチ gRPC のバックグラウンドスレッドがパニックを起こした後、TiDB が TiKV に接続できず、サービスを提供できなくなる問題を修正しました[#11101](https://github.com/pingcap/tidb/pull/11101)
+- TiKV クライアントバッチ gRPC のバックグラウンドスレッドがパニックを起こした後、TiDB が TiKV に接続できず、サービスを提供できなくなる問題を修正しました[#11101](https://github.com/pingcap/tidb/pull/11101)
 - 文字列の浅いコピーにより`SetVar`によって変数が誤って設定される問題を修正しました [#11044](https://github.com/pingcap/tidb/pull/11044)
 - `INSERT … ON DUPLICATE`ステートメントがテーブルパーティションに適用されると実行が失敗し、エラーが報告される問題を修正しました。 [#11231](https://github.com/pingcap/tidb/pull/11231)
 - 悲観的ロック（実験的機能）
@@ -57,14 +57,14 @@ TiDB Ansible バージョン: 3.0.1
 - ファイルハンドルの統計が不正確であるためにファイルハンドルが利用できないという問題を回避するために、開いているファイルハンドルの数をカウントするときに Titan の開いているファイルハンドルの数を追加します[#5026](https://github.com/tikv/tikv/pull/5026)
 - 特定のCF でTitanエンジンを有効にするかどうかを決定するには`blob_run_mode`を設定します。 [#4991](https://github.com/tikv/tikv/pull/4991)
 - 読み取り操作で悲観的トランザクションのコミット情報を取得できない問題を修正[#5067](https://github.com/tikv/tikv/pull/5067)
-- Titanエンジンの実行モードを制御するための`blob-run-mode`設定パラメータを追加します。その値は`normal`、`fallback`、または`read-only`になります [#4865](https://github.com/tikv/tikv/pull/4865)
+- Titanエンジンの実行モードを制御するための`blob-run-mode`設定パラメーターを追加します。その値は`normal`、`fallback`、または`read-only`になります [#4865](https://github.com/tikv/tikv/pull/4865)
 - デッドロック検出のパフォーマンスを向上[#5089](https://github.com/tikv/tikv/pull/5089)
 
 ## PD {#pd}
 
 - PDがホットリージョンをスケジュールするときに、スケジュール制限が自動的に0に調整される問題を修正しました。 [#1552](https://github.com/pingcap/pd/pull/1552)
 - etcd の gRPC ゲートウェイ機能を有効にするには、 `enable-grpc-gateway`設定オプションを追加します。 [#1596](https://github.com/pingcap/pd/pull/1596)
-- `store-balance-rate` 、 `hot-region-schedule-limit` 、およびスケジューラ構成に関連するその他の統計情報を追加します [#1601](https://github.com/pingcap/pd/pull/1601)
+- `store-balance-rate` 、 `hot-region-schedule-limit` 、およびスケジューラー構成に関連するその他の統計情報を追加します [#1601](https://github.com/pingcap/pd/pull/1601)
 - ホットリージョンのスケジュール戦略を最適化し、スケジュール時にレプリカが不足しているリージョンをスキップして、同じIDC に複数のレプリカがスケジュールされるのを防ぎます。 [#1609](https://github.com/pingcap/pd/pull/1609)
 - リージョンのマージ処理ロジックを最適化し、サイズの小さいリージョンのマージを優先してリージョンのマージを高速化します[#1613](https://github.com/pingcap/pd/pull/1613)
 - 一度に実行できるホットリージョンのスケジューリング数のデフォルト制限を64に調整し、スケジューリングタスクが多すぎるとシステムリソースが占有され、パフォーマンスに影響が出るのを防ぎます[#1616](https://github.com/pingcap/pd/pull/1616)
@@ -85,7 +85,7 @@ TiDB Lightning
 ## TiDB Ansible {#tidb-ansible}
 
 - ansibleコマンドとその`jmespath`および`jinja2`依存パッケージの事前チェック機能を追加します[#813](https://github.com/pingcap/tidb-ansible/pull/813) [#803](https://github.com/pingcap/tidb-ansible/pull/803)
-- Pumpに`stop-write-at-available-space`パラメータ（デフォルトでは10 GiB）を追加して、使用可能なディスク容量がパラメータ値より少ない場合にPumpでbinlogファイルの書き込みを停止します。 [#806](https://github.com/pingcap/tidb-ansible/pull/806)
+- Pumpに`stop-write-at-available-space`パラメーター（デフォルトでは10 GiB）を追加して、使用可能なディスク容量がパラメーター値より少ない場合にPumpでbinlogファイルの書き込みを停止します。 [#806](https://github.com/pingcap/tidb-ansible/pull/806)
 - TiKV監視情報のI/O監視項目を更新し、新しいバージョンの監視コンポーネントと互換性を持たせます。 [#820](https://github.com/pingcap/tidb-ansible/pull/820)
-- PD 監視情報を更新し、ディスク パフォーマンス ダッシュボードでDisk Latency が空になる異常を修正しました。 [#817](https://github.com/pingcap/tidb-ansible/pull/817)
+- PD 監視情報を更新し、ディスクパフォーマンスダッシュボードでDisk Latency が空になる異常を修正しました。 [#817](https://github.com/pingcap/tidb-ansible/pull/817)
 - TiKV-DetailsダッシュボードにTitanの監視項目を追加する [#824](https://github.com/pingcap/tidb-ansible/pull/824)

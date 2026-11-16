@@ -40,7 +40,7 @@ TiDB バージョン: 5.4.3
     - `LIMIT`と併用すると`INL_HASH_JOIN`がハングアップする可能性がある問題を修正[#35638](https://github.com/pingcap/tidb/issues/35638)
     - TiDBが`SHOW WARNINGS`文を実行するときに`invalid memory address or nil pointer dereference`エラーを返す可能性がある問題を修正しました[#31569](https://github.com/pingcap/tidb/issues/31569)
     - RC分離レベルでステイル読み取りを実行するときに発生する`invalid transaction`エラーを修正[#30872](https://github.com/pingcap/tidb/issues/30872)
-    - DMLエグゼキュータを使用した`EXPLAIN ANALYZE`文がトランザクションコミットが完了する前に結果を返す可能性がある問題を修正しました[#37373](https://github.com/pingcap/tidb/issues/37373)
+    - DMLエグゼキューターを使用した`EXPLAIN ANALYZE`文がトランザクションコミットが完了する前に結果を返す可能性がある問題を修正しました[#37373](https://github.com/pingcap/tidb/issues/37373)
     - TiDB Binlogを有効にして重複した値を挿入すると発生する`data and columnID count not match`エラーの問題を修正しました[#33608](https://github.com/pingcap/tidb/issues/33608)
     - 静的パーティションプルーニングモードで、テーブルが空の場合に集計条件を含むSQL文が間違った結果を返す可能性がある問題を修正しました[#35295](https://github.com/pingcap/tidb/issues/35295)
     - `UPDATE`文を実行するときに TiDB がpanicする可能性がある問題を修正しました[#32311](https://github.com/pingcap/tidb/issues/32311)
@@ -52,7 +52,7 @@ TiDB バージョン: 5.4.3
 
 - TiKV
 
-    - PDリーダーの切り替え後またはPDの再起動後にクラスタ内でSQL実行エラーが継続する問題を修正[#12934](https://github.com/tikv/tikv/issues/12934)
+    - PDリーダーの切り替え後またはPDの再起動後にクラスター内でSQL実行エラーが継続する問題を修正[#12934](https://github.com/tikv/tikv/issues/12934)
         - 原因：この問題は、TiKVのバグが原因で発生します。このバグにより、ハートビートリクエストが失敗した後、TiKVはPDクライアントに再接続するまで、PDクライアントへのハートビート情報の送信を再試行しません。その結果、障害が発生したTiKVノードのリージョン情報が古くなり、TiDBは最新のリージョン情報を取得できず、SQL実行エラーが発生します。
         - 影響を受けるバージョン: v5.3.2 および v5.4.2。この問題は v5.3.3 および v5.4.3 で修正されています。v5.4.2 をご利用の場合は、クラスターを v5.4.3 にアップグレードできます。
         - 回避策: アップグレードに加えて、送信するリージョンハートビートがなくなるまで、リージョンハートビートを PD に送信できない TiKV ノードを再起動することもできます。

@@ -1,6 +1,6 @@
 ---
 title: TiDB 2.0.7 Release Notes
-summary: "TiDB 2.0.7は2018年9月7日にリリースされ、システムの互換性と安定性が向上しました。新機能には、`information_schema`への`PROCESSLIST`テーブルの追加が含まれます。バグ修正では、インデックスの使用、結合出力、クエリ条件に関する問題が修正されました。TiKVは、スペースの増幅を軽減するためにデフォルトで`dynamic-level-bytes`パラメータを開き、リージョンマージ後におおよそのサイズとキー数を更新するようになりました。"
+summary: "TiDB 2.0.7は2018年9月7日にリリースされ、システムの互換性と安定性が向上しました。新機能には、`information_schema`への`PROCESSLIST`テーブルの追加が含まれます。バグ修正では、インデックスの使用、結合出力、クエリ条件に関する問題が修正されました。TiKVは、スペースの増幅を軽減するためにデフォルトで`dynamic-level-bytes`パラメーターを開き、リージョンマージ後におおよそのサイズとキー数を更新するようになりました。"
 ---
 
 # TiDB 2.0.7 リリースノート {#tidb-2-0-7-release-notes}
@@ -24,13 +24,13 @@ summary: "TiDB 2.0.7は2018年9月7日にリリースされ、システムの互
     - `range column` を含むテーブルを作成するステートメントによって発生するpanic問題を修正しました [#7379](https://github.com/pingcap/tidb/pull/7379)
     - `admin check table`が時刻型列のエラーを誤って報告する問題を修正[#7457](https://github.com/pingcap/tidb/pull/7457)
     - デフォルト値`current_timestamp`のデータが条件`=`を使用してクエリできない問題を修正しました。 [#7467](https://github.com/pingcap/tidb/pull/7467)
-    - `ComStmtSendLongData`コマンドを使用して挿入された長さゼロのパラメータが誤って NULL として解析される問題を修正しました [#7508](https://github.com/pingcap/tidb/pull/7508)
+    - `ComStmtSendLongData`コマンドを使用して挿入された長さゼロのパラメーターが誤って NULL として解析される問題を修正しました [#7508](https://github.com/pingcap/tidb/pull/7508)
     - 特定のシナリオで`auto analyze`が繰り返し実行される問題を修正[#7556](https://github.com/pingcap/tidb/pull/7556)
     - 改行文字で終わる1行コメントをパーサーが解析できない問題を修正[#7635](https://github.com/pingcap/tidb/pull/7635)
 
 ## TiKV {#tikv}
 
 - 改善
-    - スペース増幅を減らすために、デフォルトで空のクラスター内の`dynamic-level-bytes`パラメータを開きます。
+    - スペース増幅を減らすために、デフォルトで空のクラスター内の`dynamic-level-bytes`パラメーターを開きます。
 - バグ修正
     - リージョンのマージ後に、リージョンの`approximate size`と`approximate keys count`を更新

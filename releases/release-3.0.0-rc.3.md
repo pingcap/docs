@@ -1,6 +1,6 @@
 ---
 title: TiDB 3.0.0-rc.3 Release Notes
-summary: TiDB 3.0.0-rc.3は2019年6月21日にリリースされ、安定性、ユーザビリティ、機能、SQLオプティマイザ、統計、実行エンジンが改善されました。TiDB、PD、TiKV、TiDB Ansibleに修正と新機能が追加されました。主な改善点としては、統計情報の自動読み込み、テーブルとインデックスのリージョンの手動分割、TiKVにおける悲観的トランザクションのサポートなどが挙げられます。
+summary: TiDB 3.0.0-rc.3は2019年6月21日にリリースされ、安定性、ユーザビリティ、機能、SQLオプティマイザー、統計、実行エンジンが改善されました。TiDB、PD、TiKV、TiDB Ansibleに修正と新機能が追加されました。主な改善点としては、統計情報の自動読み込み、テーブルとインデックスのリージョンの手動分割、TiKVにおける悲観的トランザクションのサポートなどが挙げられます。
 ---
 
 # TiDB 3.0.0-rc.3 リリースノート {#tidb-3-0-0-rc-3-release-notes}
@@ -13,11 +13,11 @@ TiDB Ansible バージョン: 3.0.0-rc.3
 
 ## 概要 {#overview}
 
-2019年6月21日にTiDB 3.0.0-rc.3がリリースされました。対応するTiDB Ansibleバージョンは3.0.0-rc.3です。このリリースでは、TiDB 3.0.0-rc.2と比較して、安定性、使いやすさ、機能、SQLオプティマイザ、統計、実行エンジンが大幅に向上しています。
+2019年6月21日にTiDB 3.0.0-rc.3がリリースされました。対応するTiDB Ansibleバージョンは3.0.0-rc.3です。このリリースでは、TiDB 3.0.0-rc.2と比較して、安定性、使いやすさ、機能、SQLオプティマイザー、統計、実行エンジンが大幅に向上しています。
 
 ## TiDB {#tidb}
 
-- SQLオプティマイザ
+- SQLオプティマイザー
     - 仮想生成列統計を収集する機能を削除します [#10629](https://github.com/pingcap/tidb/pull/10629)
     - ポイントクエリ中に主キー定数がオーバーフローする問題を修正[#10699](https://github.com/pingcap/tidb/pull/10699)
     - `fast analyze`で初期化されていない情報を使用するとpanicが発生する問題を修正[#10691](https://github.com/pingcap/tidb/pull/10691)
@@ -39,7 +39,7 @@ TiDB Ansible バージョン: 3.0.0-rc.3
     - コプロセッサーへの式のプッシュダウンを禁止するブロックリストを追加します。 [#10791](https://github.com/pingcap/tidb/pull/10791)
     - クエリがメモリ構成制限を超えたときに`expensive query`ログを出力する機能を追加 [#10849](https://github.com/pingcap/tidb/pull/10849)
     - 変更されたバインディング実行計画の更新時間を制御する`bind-info-lease`設定項目を追加します。 [#10727](https://github.com/pingcap/tidb/pull/10727)
-    - `execdetails.ExecDetails`ポインタの結果としてコプロセッサーリソースを迅速に解放できないことによって引き起こされる、高同時実行シナリオでのOOM問題を修正しました。 [#10832](https://github.com/pingcap/tidb/pull/10832)
+    - `execdetails.ExecDetails`ポインターの結果としてコプロセッサーリソースを迅速に解放できないことによって引き起こされる、高同時実行シナリオでのOOM問題を修正しました。 [#10832](https://github.com/pingcap/tidb/pull/10832)
     - `kill`文によって発生するpanic問題を修正[#10876](https://github.com/pingcap/tidb/pull/10876)
 
 - サーバー
@@ -55,7 +55,7 @@ TiDB Ansible バージョン: 3.0.0-rc.3
     - `alter table`を使用して文字セットを変更すると`blob`型が変更される問題を修正[#10698](https://github.com/pingcap/tidb/pull/10698)
     - ホットスポットの問題を軽減するために、列に`AUTO_INCREMENT`属性が含まれている場合に`SHARD_ROW_ID_BITS`を使用して行 ID を分散させる機能を追加します[#10794](https://github.com/pingcap/tidb/pull/10794)
     - `alter table`文を使用して、保存生成列の追加を禁止します。 [#10808](https://github.com/pingcap/tidb/pull/10808)
-    - DDLメタデータの無効な生存時間を最適化し、クラスタのアップグレード後にDDL操作が遅くなる期間を短縮します[#10795](https://github.com/pingcap/tidb/pull/10795)
+    - DDLメタデータの無効な生存時間を最適化し、クラスターのアップグレード後にDDL操作が遅くなる期間を短縮します[#10795](https://github.com/pingcap/tidb/pull/10795)
 
 ## PD {#pd}
 
@@ -69,7 +69,7 @@ TiDB Ansible バージョン: 3.0.0-rc.3
 ## TiKV {#tikv}
 
 - エンジン
-    - イテレータがステータスをチェックしないために、システム内に不完全なスナップショットが生成される問題を修正しました。 [#4936](https://github.com/tikv/tikv/pull/4936)
+    - イテレーターがステータスをチェックしないために、システム内に不完全なスナップショットが生成される問題を修正しました。 [#4936](https://github.com/tikv/tikv/pull/4936)
     - 異常な状況で電源障害が発生した後にスナップショットを受信するときに、ディスクへのデータのフラッシュが遅れることによって発生するデータ損失の問題を修正しました[#4850](https://github.com/tikv/tikv/pull/4850)
 
 - サーバー
@@ -114,7 +114,7 @@ TiDB Ansible バージョン: 3.0.0-rc.3
 
 - TiDB Binlog
     - データの書き込みに失敗したときにPumpが戻り値をチェックしないことによって発生する間違ったオフセットの問題を修正しました[#640](https://github.com/pingcap/tidb-binlog/pull/640)
-    - コンテナ環境でブリッジモードをサポートするために、 Drainerに`advertise-addr`構成を追加します。 [#634](https://github.com/pingcap/tidb-binlog/pull/634)
+    - コンテナー環境でブリッジモードをサポートするために、 Drainerに`advertise-addr`構成を追加します。 [#634](https://github.com/pingcap/tidb-binlog/pull/634)
     - Pumpに`GetMvccByEncodeKey`関数を追加して、トランザクションステータスクエリを高速化します。 [#632](https://github.com/pingcap/tidb-binlog/pull/632)
 
 ## TiDB Ansible {#tidb-ansible}

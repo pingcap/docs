@@ -31,7 +31,7 @@ TiDB Ansible バージョン: 3.1.0-beta.1
     - 不正確なバックアップ進行状況情報を修正[#127](https://github.com/pingcap/br/pull/127)
     - リージョン分割のパフォーマンスを向上 [#122](https://github.com/pingcap/br/pull/122)
     - パーティションテーブルのバックアップと復元機能を追加する [#137](https://github.com/pingcap/br/pull/137)
-    - PDスケジューラ自動スケジュール機能を追加 [#123](https://github.com/pingcap/br/pull/123)
+    - PDスケジューラー自動スケジュール機能を追加 [#123](https://github.com/pingcap/br/pull/123)
     - `PKIsHandle`以外のテーブルを復元した後にデータが上書きされる問題を修正[#139](https://github.com/pingcap/br/pull/139)
 
 ## TiDB Ansible {#tidb-ansible}

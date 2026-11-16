@@ -1,6 +1,6 @@
 ---
 title: TiDB 3.0.0 Beta.1 Release Notes
-summary: TiDB 3.0.0 Beta.1は2019年3月26日にリリースされ、安定性、ユーザビリティ、機能、SQLオプティマイザ、統計、実行エンジンが改善されました。このリリースには、さまざまなSQL関数のサポート、権限管理、サーバーの機能強化、DDLの改善、PDおよびTiKVの最適化が含まれています。TiDB Binlog、Lightning、データレプリケーション比較ツールなどのツールも、新機能と改善が追加されてアップデートされました。
+summary: TiDB 3.0.0 Beta.1は2019年3月26日にリリースされ、安定性、ユーザビリティ、機能、SQLオプティマイザー、統計、実行エンジンが改善されました。このリリースには、さまざまなSQL関数のサポート、権限管理、サーバーの機能強化、DDLの改善、PDおよびTiKVの最適化が含まれています。TiDB Binlog、Lightning、データレプリケーション比較ツールなどのツールも、新機能と改善が追加されてアップデートされました。
 ---
 
 # TiDB 3.0.0 Beta.1 リリースノート {#tidb-3-0-0-beta-1-release-notes}
@@ -13,11 +13,11 @@ TiDB Ansible バージョン: 3.0.0-beta.1
 
 ## 概要 {#overview}
 
-2019年3月26日にTiDB 3.0.0 Beta.1がリリースされました。対応するTiDB Ansibleバージョンは3.0.0 Beta.1です。TiDB 3.0.0 Betaと比較して、このリリースでは安定性、使いやすさ、機能、SQLオプティマイザ、統計、実行エンジンが大幅に向上しています。
+2019年3月26日にTiDB 3.0.0 Beta.1がリリースされました。対応するTiDB Ansibleバージョンは3.0.0 Beta.1です。TiDB 3.0.0 Betaと比較して、このリリースでは安定性、使いやすさ、機能、SQLオプティマイザー、統計、実行エンジンが大幅に向上しています。
 
 ## TiDB {#tidb}
 
-- SQLオプティマイザ
+- SQLオプティマイザー
     - `Sort Merge Join` を使用して直積を計算することをサポートします [#9032](https://github.com/pingcap/tidb/pull/9037)
     - スカイラインプルーニングをサポートし、実行計画が統計情報に過度に依存しないようにするいくつかのルールを備えています[#9337](https://github.com/pingcap/tidb/pull/9337)
 
@@ -49,7 +49,7 @@ TiDB Ansible バージョン: 3.0.0-beta.1
 
     <!---->
 
-    - クエリコンテキストに基づいてChunkサイズを最適化し、SQL文の実行時間とクラスタのリソース消費を削減します[#6489](https://github.com/pingcap/tidb/issues/6489)
+    - クエリコンテキストに基づいてChunkサイズを最適化し、SQL文の実行時間とクラスターのリソース消費を削減します[#6489](https://github.com/pingcap/tidb/issues/6489)
 - 権限管理
     - `SET ROLE`と`CURRENT_ROLE`をサポート [#9581](https://github.com/pingcap/tidb/pull/9581)
     - `DROP ROLE`をサポート [#9616](https://github.com/pingcap/tidb/pull/9616)
@@ -107,7 +107,7 @@ TiDB Ansible バージョン: 3.0.0-beta.1
     - 複製する必要のないファイルのフィルタリングをサポート
     - 生成列の複製をサポート
 - Lightning
-    - TiKVの定期的なレベル1コンパクションを無効にすることをサポートし、TiKVクラスタバージョンが2.1.4以降の場合、レベル1コンパクションはインポートモードで自動的に実行されます[#4199](https://github.com/tikv/tikv/pull/4199) [#119](https://github.com/pingcap/tidb-lightning/pull/119)
+    - TiKVの定期的なレベル1コンパクションを無効にすることをサポートし、TiKVクラスターバージョンが2.1.4以降の場合、レベル1コンパクションはインポートモードで自動的に実行されます[#4199](https://github.com/tikv/tikv/pull/4199) [#119](https://github.com/pingcap/tidb-lightning/pull/119)
     - `table_concurrency`設定項目を追加して、インポートエンジンの数（デフォルトでは"16"）を制限し、インポーターのディスクスペースの過剰な使用を回避します。 [#119](https://github.com/pingcap/tidb-lightning/pull/119)
     - メモリ使用量を削減するために、中間状態SSTをディスクに保存することをサポート[#4369](https://github.com/tikv/tikv/pull/4369)
     - TiKV-Importer のインポートパフォーマンスを最適化し、大規模なテーブルのデータとインデックスの個別インポートをサポートします[#132](https://github.com/pingcap/tidb-lightning/pull/132)

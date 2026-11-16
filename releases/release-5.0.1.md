@@ -1,6 +1,6 @@
 ---
 title: TiDB 5.0.1 Release Notes
-summary: "TiDB 5.0.1は2021年4月24日にリリースされました。`committer-concurrency`のデフォルト値が128に変更されました。TiDB、TiKV、PD、 TiFlash、およびツールに様々なバグ修正と改善が行われました。例えば、TiDBではクエリ結果とパフォーマンスの低下に関する問題が修正され、TiKVではコプロセッサと起動エラーに関する問題が修正されました。TiDB LightningやBackup & Restoreなどのツールにもバグ修正が行われました。"
+summary: "TiDB 5.0.1は2021年4月24日にリリースされました。`committer-concurrency`のデフォルト値が128に変更されました。TiDB、TiKV、PD、 TiFlash、およびツールに様々なバグ修正と改善が行われました。例えば、TiDBではクエリ結果とパフォーマンスの低下に関する問題が修正され、TiKVではコプロセッサーと起動エラーに関する問題が修正されました。TiDB LightningやBackup & Restoreなどのツールにもバグ修正が行われました。"
 ---
 
 # TiDB 5.0.1 リリースノート {#tidb-5-0-1-release-notes}
@@ -26,7 +26,7 @@ TiDB バージョン: 5.0.1
 - PD
 
     - 異種ストアをより適切に満たすようにリージョンスコア計算機を変更する [#3605](https://github.com/pingcap/pd/pull/3605)
-    - `scatter region`スケジューラを追加した後の予期しない統計を回避する [#3602](https://github.com/pingcap/pd/pull/3602)
+    - `scatter region`スケジューラーを追加した後の予期しない統計を回避する [#3602](https://github.com/pingcap/pd/pull/3602)
 
 - ツール
 
@@ -42,9 +42,9 @@ TiDB バージョン: 5.0.1
     - 列に`NULL`値が含まれている場合に間違ったクエリ結果が表示される問題を修正しました[#24063](https://github.com/pingcap/tidb/pull/24063)
     - スキャンに仮想列が含まれている場合、MPP プランの生成を禁止します。 [#24058](https://github.com/pingcap/tidb/pull/24058)
     - プランキャッシュの`PointGet`と`TableDual`の誤った再利用を修正 [#24043](https://github.com/pingcap/tidb/pull/24043)
-    - オプティマイザがクラスター化インデックスの`IndexMerge`プランを構築するときに発生するエラーを修正します [#24042](https://github.com/pingcap/tidb/pull/24042)
+    - オプティマイザーがクラスター化インデックスの`IndexMerge`プランを構築するときに発生するエラーを修正します [#24042](https://github.com/pingcap/tidb/pull/24042)
     - BIT型エラーの型推論を修正[#24027](https://github.com/pingcap/tidb/pull/24027)
-    - `PointGet`オペレーターが存在する場合に一部のオプティマイザヒントが有効にならない問題を修正[#23685](https://github.com/pingcap/tidb/pull/23685)
+    - `PointGet`オペレーターが存在する場合に一部のオプティマイザーヒントが有効にならない問題を修正[#23685](https://github.com/pingcap/tidb/pull/23685)
     - エラーによりロールバック時にDDL操作が失敗する可能性がある問題を修正 [#24080](https://github.com/pingcap/tidb/pull/24080)
     - バイナリリテラル定数のインデックス範囲が正しく構築されない問題を修正[#24041](https://github.com/pingcap/tidb/pull/24041)
     - いくつかのケースで`IN`述語の潜在的な誤った結果を修正[#24023](https://github.com/pingcap/tidb/pull/24023)
@@ -55,7 +55,7 @@ TiDB バージョン: 5.0.1
 
 - TiKV
 
-    - コプロセッサが`IN`式の符号付きまたは符号なし整数型を適切に処理できない問題を修正しました。 [#10018](https://github.com/tikv/tikv/pull/10018)
+    - コプロセッサーが`IN`式の符号付きまたは符号なし整数型を適切に処理できない問題を修正しました。 [#10018](https://github.com/tikv/tikv/pull/10018)
     - SST ファイルのバッチ取り込み後に多くの空のリージョンが発生する問題を修正[#10015](https://github.com/tikv/tikv/pull/10015)
     - `cast_string_as_time`の入力が無効なUTF-8バイトである場合に発生する潜在的なpanicを修正[#9995](https://github.com/tikv/tikv/pull/9995)
     - ファイル辞書ファイルが破損した後にTiKVが起動できなくなるバグを修正[#9992](https://github.com/tikv/tikv/pull/9992)
@@ -65,14 +65,14 @@ TiDB バージョン: 5.0.1
     - ストレージエンジンが一部の範囲のデータの削除に失敗する問題を修正しました
     - 時間型を整数型にキャストしたときに誤った結果が返される問題を修正しました
     - `receiver`が10秒以内に対応するタスクを見つけられないバグを修正
-    - `cancelMPPQuery`に無効なイテレータが存在する可能性がある問題を修正
+    - `cancelMPPQuery`に無効なイテレーターが存在する可能性がある問題を修正
     - `bitwise`演算子の動作がTiDBと異なるバグを修正
     - `prefix key`を使用する際に範囲が重複することで発生するアラートの問題を修正
     - 文字列型を整数型にキャストするときに誤った結果が返される問題を修正しました
     - 連続した高速書き込みによりTiFlashのメモリが不足する可能性がある問題を修正しました
     - 重複した列名によりTiFlashでエラーが発生する問題を修正しました
     - TiFlashがMPPプランを解析できない問題を修正
-    - テーブルGC中にヌルポインタの例外が発生する可能性がある問題を修正しました
+    - テーブルGC中にヌルポインターの例外が発生する可能性がある問題を修正しました
     - ドロップされたテーブルにデータを書き込むときに発生するTiFlash panic問題を修正しました
     - BRの復元中にTiFlashがpanicする可能性がある問題を修正
 

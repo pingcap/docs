@@ -1,6 +1,6 @@
 ---
 title: TiDB 3.0.5 Release Notes
-summary: TiDB 3.0.5は、2019年10月25日にリリースされ、様々な改善とバグ修正が行われました。このリリースには、SQLオプティマイザ、SQL実行エンジン、サーバー、DDL、モニター、TiKV、PD、TiDB Binlog、 TiDB Lightning、TiDB Ansibleの機能強化が含まれています。改善点には、ウィンドウ関数の境界チェックのサポート、インデックス結合と外部結合の問題の修正、各種操作の監視メトリクスの追加などがあります。さらに、TiKVではストレージとパフォーマンスの最適化が行われ、PDではストレージ精度とHTTPリクエスト処理が改善されました。TiDB Ansibleでは、監視メトリクスのアップデートと設定ファイルの簡素化も行われました。
+summary: TiDB 3.0.5は、2019年10月25日にリリースされ、様々な改善とバグ修正が行われました。このリリースには、SQLオプティマイザー、SQL実行エンジン、サーバー、DDL、モニター、TiKV、PD、TiDB Binlog、 TiDB Lightning、TiDB Ansibleの機能強化が含まれています。改善点には、ウィンドウ関数の境界チェックのサポート、インデックス結合と外部結合の問題の修正、各種操作の監視メトリクスの追加などがあります。さらに、TiKVではストレージとパフォーマンスの最適化が行われ、PDではストレージ精度とHTTPリクエスト処理が改善されました。TiDB Ansibleでは、監視メトリクスのアップデートと設定ファイルの簡素化も行われました。
 ---
 
 # TiDB 3.0.5 リリースノート {#tidb-3-0-5-release-notes}
@@ -13,7 +13,7 @@ TiDB Ansible バージョン: 3.0.5
 
 ## TiDB {#tidb}
 
-- SQLオプティマイザ
+- SQLオプティマイザー
     - ウィンドウ関数の境界チェックをサポート [#12404](https://github.com/pingcap/tidb/pull/12404)
     - パーティションテーブルでの`IndexJoin`が誤った結果を返す問題を修正[#12712](https://github.com/pingcap/tidb/pull/12712)
     - 外部結合オペレーター`Apply`の先頭の`ifnull`関数が誤った結果を返す問題を修正[#12694](https://github.com/pingcap/tidb/pull/12694)
@@ -46,7 +46,7 @@ TiDB Ansible バージョン: 3.0.5
     - `Create Table`文で一意インデックスを作成するときに複数の`unique`をサポートする [#12463](https://github.com/pingcap/tidb/pull/12463)
     - `Alter Table` を使用してビット型の列を追加するときに、既存の行にこの列のデフォルト値を設定するとエラーが発生する可能性がある問題を修正しました。 [#12489](https://github.com/pingcap/tidb/pull/12489)
     - レンジパーティションテーブルで日付または日時型の列をパーティションキーとして使用している場合にパーティションを追加できない問題を修正[#12815](https://github.com/pingcap/tidb/pull/12815)
-    - 日付または日時型の列をパーティションキーとして持つレンジパーティションテーブルの場合、テーブルの作成時またはパーティションの追加時に、パーティションタイプとパーティションキー タイプの一貫性をチェックする機能をサポート[#12792](https://github.com/pingcap/tidb/pull/12792)
+    - 日付または日時型の列をパーティションキーとして持つレンジパーティションテーブルの場合、テーブルの作成時またはパーティションの追加時に、パーティションタイプとパーティションキータイプの一貫性をチェックする機能をサポート[#12792](https://github.com/pingcap/tidb/pull/12792)
     - レンジパーティションテーブルを作成するときに、一意キーの列セットがパーティション化された列セット以上である必要があるというチェックを追加します[#12718](https://github.com/pingcap/tidb/pull/12718)
 - モニター
     - コミットおよびロールバック操作の監視メトリックを`Transaction OPS`ダッシュボードに追加します。 [#12505](https://github.com/pingcap/tidb/pull/12505)
@@ -79,7 +79,7 @@ TiDB Ansible バージョン: 3.0.5
 
 - TiDB Binlog
     - `ALTER DATABASE`に関連する DDL 操作によりDrainerが異常終了する問題を修正[#769](https://github.com/pingcap/tidb-binlog/pull/769)
-    - レプリケーション効率を向上させるためにコミットbinlog のトランザクション ステータス情報のクエリをサポートする[#757](https://github.com/pingcap/tidb-binlog/pull/757)
+    - レプリケーション効率を向上させるためにコミットbinlog のトランザクションステータス情報のクエリをサポートする[#757](https://github.com/pingcap/tidb-binlog/pull/757)
     - Drainerの`start_ts`がPumpの最大`commit_ts`より大きい場合にPump panicが発生する可能性がある問題を修正しました [#758](https://github.com/pingcap/tidb-binlog/pull/758)
 
 - TiDB Lightning
@@ -88,7 +88,7 @@ TiDB Ansible バージョン: 3.0.5
 ## TiDB Ansible {#tidb-ansible}
 
 - インデックス追加速度の監視メトリックを追加します [#986](https://github.com/pingcap/tidb-ansible/pull/986)
-- 設定ファイルの内容を簡素化し、ユーザーが設定する必要のないパラメータを削除します[#1043c](https://github.com/pingcap/tidb-ansible/commit/1043c3df7ddb72eb234c55858960e9fdd3830a14) 、 [#998](https://github.com/pingcap/tidb-ansible/pull/998)
+- 設定ファイルの内容を簡素化し、ユーザーが設定する必要のないパラメーターを削除します[#1043c](https://github.com/pingcap/tidb-ansible/commit/1043c3df7ddb72eb234c55858960e9fdd3830a14) 、 [#998](https://github.com/pingcap/tidb-ansible/pull/998)
 - パフォーマンス読み取りとパフォーマンス書き込み[#e90e7](https://github.com/pingcap/tidb-ansible/commit/e90e79f5117bb89197e01b1391fd02e25d57a440)の監視式エラーを修正
 - Raftstore CPU使用率の監視表示方法とアラームルールを更新 [#992](https://github.com/pingcap/tidb-ansible/pull/992)
 - Overview 監視ダッシュボードの TiKV CPU 監視項目を更新して、余分な監視コンテンツをフィルタリングします[#1001](https://github.com/pingcap/tidb-ansible/pull/1001)

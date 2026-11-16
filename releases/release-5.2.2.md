@@ -13,7 +13,7 @@ TiDB バージョン: 5.2.2
 
 - TiDB
 
-    - コプロセッサがロックに遭遇したときに影響を受けるSQL文をデバッグログに表示します。これは問題の診断に役立ちます[#27718](https://github.com/pingcap/tidb/issues/27718)
+    - コプロセッサーがロックに遭遇したときに影響を受けるSQL文をデバッグログに表示します。これは問題の診断に役立ちます[#27718](https://github.com/pingcap/tidb/issues/27718)
     - SQL論理レイヤーでデータをバックアップおよび復元するときに、バックアップおよび復元データのサイズを表示する機能をサポート [#27247](https://github.com/pingcap/tidb/issues/27247)
 
 - TiKV
@@ -25,11 +25,11 @@ TiDB バージョン: 5.2.2
 
 - PD
 
-    - ホットスポット スケジューラの QPS ディメンションに書き込みクエリの種類を追加する [#3869](https://github.com/tikv/pd/issues/3869)
-    - バランスリージョンスケジューラの再試行制限を動的に調整して、スケジューラのパフォーマンスを向上させることをサポートしました。 [#3744](https://github.com/tikv/pd/issues/3744)
+    - ホットスポットスケジューラーの QPS ディメンションに書き込みクエリの種類を追加する [#3869](https://github.com/tikv/pd/issues/3869)
+    - バランスリージョンスケジューラーの再試行制限を動的に調整して、スケジューラーのパフォーマンスを向上させることをサポートしました。 [#3744](https://github.com/tikv/pd/issues/3744)
     - TiDB Dashboardをv2021.10.08.1 に更新 [#4070](https://github.com/tikv/pd/pull/4070)
-    - 退去リーダースケジューラが不健全なピアを持つリージョンをスケジュールできるようにサポート[#4093](https://github.com/tikv/pd/issues/4093)
-    - スケジューラの終了プロセスを高速化 [#4146](https://github.com/tikv/pd/issues/4146)
+    - エビクトリーダースケジューラーが不健全なピアを持つリージョンをスケジュールできるようにサポート[#4093](https://github.com/tikv/pd/issues/4093)
+    - スケジューラーの終了プロセスを高速化 [#4146](https://github.com/tikv/pd/issues/4146)
 
 - ツール
 
@@ -47,15 +47,15 @@ TiDB バージョン: 5.2.2
     - プランキャッシュが符号なし（unsigned）フラグの変更を検出できない問題を修正[#28254](https://github.com/pingcap/tidb/issues/28254)
     - パーティション関数が範囲外の場合の誤ったパーティションプルーニングを修正[#28233](https://github.com/pingcap/tidb/issues/28233)
     - プランナーが`join`の無効なプランをキャッシュする可能性がある問題を修正しました[#28087](https://github.com/pingcap/tidb/issues/28087)
-    - ハッシュ列の型が列挙型の場合の間違ったインデックス ハッシュ結合を修正しました [#27893](https://github.com/pingcap/tidb/issues/27893)
+    - ハッシュ列の型が列挙型の場合の間違ったインデックスハッシュ結合を修正しました [#27893](https://github.com/pingcap/tidb/issues/27893)
     - アイドル接続をリサイクルすると、まれにリクエストの送信がブロックされる可能性があるバッチクライアントのバグを修正しました[#27688](https://github.com/pingcap/tidb/pull/27688)
-    - ターゲットクラスタでチェックサムの実行に失敗した場合のTiDB Lightning panic問題を修正しました。 [#27686](https://github.com/pingcap/tidb/pull/27686)
+    - ターゲットクラスターでチェックサムの実行に失敗した場合のTiDB Lightning panic問題を修正しました。 [#27686](https://github.com/pingcap/tidb/pull/27686)
     - いくつかのケースで`date_add`と`date_sub`関数の誤った結果を修正[#27232](https://github.com/pingcap/tidb/issues/27232)
     - ベクトル化された式の関数`hour`の誤った結果を修正します [#28643](https://github.com/pingcap/tidb/issues/28643)
     - MySQL 5.1またはそれ以前のクライアントバージョンに接続する際の認証問題を修正 [#27855](https://github.com/pingcap/tidb/issues/27855)
     - 新しいインデックスが追加されたときに、指定された時間外にauto analyzeがトリガーされる可能性がある問題を修正しました[#28698](https://github.com/pingcap/tidb/issues/28698)
     - セッション変数を設定すると`tidb_snapshot` が無効になるバグを修正 [#28683](https://github.com/pingcap/tidb/pull/28683)
-    - ピアが見つからないリージョンが多数あるクラスタでBRが機能しないバグを修正[#27534](https://github.com/pingcap/tidb/issues/27534)
+    - ピアが見つからないリージョンが多数あるクラスターでBRが機能しないバグを修正[#27534](https://github.com/pingcap/tidb/issues/27534)
     - サポートされていない`cast`が TiFlash にプッシュダウンされたときに発生する`tidb_cast to Int32 is not supported`のような予期しないエラーを修正しました [#23907](https://github.com/pingcap/tidb/issues/23907)
     - `%s value is out of range in '%s'`エラーメッセージに`DECIMAL overflow`が欠落している問題を修正 [#27964](https://github.com/pingcap/tidb/issues/27964)
     - MPPノードの可用性検出が一部のコーナーケースで機能しないバグを修正[#3118](https://github.com/pingcap/tics/issues/3118)
@@ -84,17 +84,17 @@ TiDB バージョン: 5.2.2
     - チャネルがいっぱいになるとRaft接続が切断される問題を修正[#11047](https://github.com/tikv/tikv/issues/11047)
     - Raftクライアント実装でバッチメッセージが大きすぎる問題を修正 [#9714](https://github.com/tikv/tikv/issues/9714)
     - `resolved_ts` で一部のコルーチンがリークする問題を修正 [#10965](https://github.com/tikv/tikv/issues/10965)
-    - 応答サイズが4GiBを超えるとコプロセッサに発生するpanic問題を修正[#9012](https://github.com/tikv/tikv/issues/9012)
-    - スナップショットファイルがガベージコレクションできない場合に、スナップショット ガベージコレクション (GC) でスナップショットファイルの GC が漏れる問題を修正しました[#10813](https://github.com/tikv/tikv/issues/10813)
+    - 応答サイズが4GiBを超えるとコプロセッサーに発生するpanic問題を修正[#9012](https://github.com/tikv/tikv/issues/9012)
+    - スナップショットファイルがガベージコレクションできない場合に、スナップショットガベージコレクション (GC) でスナップショットファイルの GC が漏れる問題を修正しました[#10813](https://github.com/tikv/tikv/issues/10813)
     - コプロセッサーリクエストの処理中にタイムアウトによって発生するpanic問題を修正[#10852](https://github.com/tikv/tikv/issues/10852)
 
 - PD
 
     - ピア数が設定されたピア数を超えたために、PD がデータがあり保留中の状態のピアを誤って削除する問題を修正しました。 [#4045](https://github.com/tikv/pd/issues/4045)
     - PDがダウンしたピアを速やかに修復しない問題を修正[#4077](https://github.com/tikv/pd/issues/4077)
-    - 散布範囲スケジューラが空のリージョンをスケジュールできない問題を修正[#4118](https://github.com/tikv/pd/pull/4118)
-    - キーマネージャのCPU使用率が高すぎる問題を修正[#4071](https://github.com/tikv/pd/issues/4071)
-    - ホットリージョンスケジューラの設定時に発生する可能性のあるデータ競合の問題を修正しました。 [#4159](https://github.com/tikv/pd/issues/4159)
+    - scatter range スケジューラーが空のリージョンをスケジュールできない問題を修正[#4118](https://github.com/tikv/pd/pull/4118)
+    - キーマネージャーのCPU使用率が高すぎる問題を修正[#4071](https://github.com/tikv/pd/issues/4071)
+    - ホットリージョンスケジューラーの設定時に発生する可能性のあるデータ競合の問題を修正しました。 [#4159](https://github.com/tikv/pd/issues/4159)
     - リージョン同期が停止したことによるリーダー選出の遅延を修正[#3936](https://github.com/tikv/pd/issues/3936)
 
 - TiFlash

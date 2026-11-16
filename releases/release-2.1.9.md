@@ -1,6 +1,6 @@
 ---
 title: TiDB 2.1.9 Release Notes
-summary: TiDB 2.1.9は2019年5月6日にリリースされました。互換性の問題、権限チェックの問題、誤った結果の問題など、さまざまなバグ修正と改善が含まれています。また、スロークエリログの改善と、演算子によって返される行数を制御するためのサポートも含まれています。さらに、PD、TiKV、TiDB Binlog、 TiDB Lightning、sync-diff-inspectorも更新されています。TiDB Ansibleも更新され、ドキュメントへのリンクとパラメータの削除が追加されました。
+summary: TiDB 2.1.9は2019年5月6日にリリースされました。互換性の問題、権限チェックの問題、誤った結果の問題など、さまざまなバグ修正と改善が含まれています。また、スロークエリログの改善と、演算子によって返される行数を制御するためのサポートも含まれています。さらに、PD、TiKV、TiDB Binlog、 TiDB Lightning、sync-diff-inspectorも更新されています。TiDB Ansibleも更新され、ドキュメントへのリンクとパラメーターの削除が追加されました。
 ---
 
 # TiDB 2.1.9 リリースノート {#tidb-2-1-9-release-notes}
@@ -66,4 +66,4 @@ TiDB Ansible バージョン: 2.1.9
 ## TiDB Ansible {#tidb-ansible}
 
 - ドキュメントのリファクタリングに従って tidb-ansible ドキュメント内のリンクを更新します [#740](https://github.com/pingcap/tidb-ansible/pull/740) [#741](https://github.com/pingcap/tidb-ansible/pull/741)
-- `inventory.ini`ファイル内の`enable_slow_query_log`パラメータを削除し、スロークエリログをデフォルトで別のログファイルに出力します[#742](https://github.com/pingcap/tidb-ansible/pull/742)
+- `inventory.ini`ファイル内の`enable_slow_query_log`パラメーターを削除し、スロークエリログをデフォルトで別のログファイルに出力します[#742](https://github.com/pingcap/tidb-ansible/pull/742)

@@ -89,7 +89,7 @@ TiDB バージョン: 4.0.0-rc.1
 - TiCDC
 
     - Kafka シンクモジュールでのメッセージのバッチ送信をサポート [#426](https://github.com/pingcap/tiflow/pull/426)
-    - プロセッサでのファイルソートをサポート [#477](https://github.com/pingcap/tiflow/pull/477)
+    - プロセッサーでのファイルソートをサポート [#477](https://github.com/pingcap/tiflow/pull/477)
     - 自動`resolve lock`をサポート [#459](https://github.com/pingcap/tiflow/pull/459)
     - TiCDC サービスの GC セーフポイントを PD に自動的に更新する機能を追加します。 [#487](https://github.com/pingcap/tiflow/pull/487)
     - データ複製のタイムゾーン設定を追加する [#498](https://github.com/pingcap/tiflow/pull/498)
@@ -139,14 +139,14 @@ TiDB バージョン: 4.0.0-rc.1
 
     - 一部のAPIがTLS検証に失敗する可能性がある問題を修正[#2363](https://github.com/pingcap/pd/pull/2363)
     - 構成APIがプレフィックスを持つ設定項目を受け入れることができない問題を修正しました [#2354](https://github.com/pingcap/pd/pull/2354)
-    - スケジューラが見つからない場合に`500`エラーが返される問題を修正しました[#2328](https://github.com/pingcap/pd/pull/2328)
+    - スケジューラーが見つからない場合に`500`エラーが返される問題を修正しました[#2328](https://github.com/pingcap/pd/pull/2328)
     - `scheduler config balance-hot-region-scheduler list`コマンドで`404`エラーが返される問題を修正 [#2321](https://github.com/pingcap/pd/pull/2321)
 
 - TiFlash
 
     - ストレージエンジンの粗粒度インデックス最適化を無効にする
     - リージョンのロックを解決する際に一部のロックをスキップする必要がある場合に、例外がスローされるバグを修正しました。
-    - コプロセッサー統計の収集時に発生するヌルポインタ例外 (NPE) を修正しました
+    - コプロセッサー統計の収集時に発生するヌルポインター例外 (NPE) を修正しました
     - リージョン分割/リージョン結合のプロセスが正しいことを確認するために、リージョンメタのチェックを修正しました。
     - コプロセッサー応答のサイズが予測されないため、メッセージサイズが gRPC の制限を超える問題を修正しました
     - TiFlashの`AdminCmdType::Split`コマンドの処理を修正

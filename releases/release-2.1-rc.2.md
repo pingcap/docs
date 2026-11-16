@@ -1,15 +1,15 @@
 ---
 title: TiDB 2.1 RC2 Release Notes
-summary: TiDB 2.1 RC2は2018年9月14日にリリースされ、安定性、SQLオプティマイザ、統計、実行エンジンが改善されました。このリリースには、SQLオプティマイザ、SQL実行エンジン、統計、サーバー、互換性、式、DML、DDL、TiKV Goクライアント、テーブルパーティションの機能強化が含まれています。PD機能、改善、バグ修正も含まれています。TiKVのパフォーマンス、改善、バグ修正もこのリリースに含まれています。
+summary: TiDB 2.1 RC2は2018年9月14日にリリースされ、安定性、SQLオプティマイザー、統計、実行エンジンが改善されました。このリリースには、SQLオプティマイザー、SQL実行エンジン、統計、サーバー、互換性、式、DML、DDL、TiKV Goクライアント、テーブルパーティションの機能強化が含まれています。PD機能、改善、バグ修正も含まれています。TiKVのパフォーマンス、改善、バグ修正もこのリリースに含まれています。
 ---
 
 # TiDB 2.1 RC2 リリースノート {#tidb-2-1-rc2-release-notes}
 
-2018年9月14日にTiDB 2.1 RC2がリリースされました。TiDB 2.1 RC1と比較して、このリリースでは安定性、SQLオプティマイザ、統計情報、実行エンジンが大幅に改善されています。
+2018年9月14日にTiDB 2.1 RC2がリリースされました。TiDB 2.1 RC1と比較して、このリリースでは安定性、SQLオプティマイザー、統計情報、実行エンジンが大幅に改善されています。
 
 ## TiDB {#tidb}
 
-- SQLオプティマイザ
+- SQLオプティマイザー
     - 次世代プランナーの提案 [#7543](https://github.com/pingcap/tidb/pull/7543)
     - 定数伝播の最適化ルールを改善する[#7276](https://github.com/pingcap/tidb/pull/7276)
     - `Range`の計算ロジックを強化して、複数の`IN`または`EQUAL`条件を同時に処理できるようにします[#7577](https://github.com/pingcap/tidb/pull/7577)
@@ -22,7 +22,7 @@ summary: TiDB 2.1 RC2は2018年9月14日にリリースされ、安定性、SQL�
     - ハッシュ集計オペレーターのパフォーマンスを最適化する[#7541](https://github.com/pingcap/tidb/pull/7541)
     - Joinオペレーターのパフォーマンスを最適化します [#7433](https://github.com/pingcap/tidb/pull/7433) [#7493](https://github.com/pingcap/tidb/pull/7493)
     - 結合順序が変更されると`UPDATE JOIN`の結果が正しくなくなる問題を修正[#7571](https://github.com/pingcap/tidb/pull/7571)
-    - チャンクのイテレータのパフォーマンスを向上させる [#7585](https://github.com/pingcap/tidb/pull/7585)
+    - チャンクのイテレーターのパフォーマンスを向上させる [#7585](https://github.com/pingcap/tidb/pull/7585)
 - 統計
     - 自動分析作業で統計を繰り返し分析する問題を修正 [#7550](https://github.com/pingcap/tidb/pull/7550)
     - 統計情報に変更がない場合に発生する統計情報更新エラーを修正[#7530](https://github.com/pingcap/tidb/pull/7530)
@@ -44,9 +44,9 @@ summary: TiDB 2.1 RC2は2018年9月14日にリリースされ、安定性、SQL�
     - TiDBの起動中に内部SQLを高優先度に設定する[#7616](https://github.com/pingcap/tidb/pull/7616)
     - 監視メトリクスで内部SQLとユーザーSQLをフィルタリングするために異なるラベルを使用する [#7631](https://github.com/pingcap/tidb/pull/7631)
     - 過去1週間のスロークエリ上位30件をTiDBサーバーに保存する [#7646](https://github.com/pingcap/tidb/pull/7646)
-    - TiDBクラスタのグローバルシステムタイムゾーンを設定する提案を提出する [#7656](https://github.com/pingcap/tidb/pull/7656)
+    - TiDBクラスターのグローバルシステムタイムゾーンを設定する提案を提出する [#7656](https://github.com/pingcap/tidb/pull/7656)
     - 「GC life time is shorter than transaction duration」というエラーメッセージを充実させる[#7658](https://github.com/pingcap/tidb/pull/7658)
-    - TiDBクラスタを起動するときにグローバルシステムのタイムゾーンを設定する [#7638](https://github.com/pingcap/tidb/pull/7638)
+    - TiDBクラスターを起動するときにグローバルシステムのタイムゾーンを設定する [#7638](https://github.com/pingcap/tidb/pull/7638)
 - 互換性
     - `Year`型に符号なしフラグを追加 [#7542](https://github.com/pingcap/tidb/pull/7542)
     - `Prepare` / `Execute`モードで`Year`型の結果の長さを設定する問題を修正 [#7525](https://github.com/pingcap/tidb/pull/7525)
@@ -69,7 +69,7 @@ summary: TiDB 2.1 RC2は2018年9月14日にリリースされ、安定性、SQL�
     - `DateTime`データのデフォルト値を計算するときにタイムゾーンが考慮されない問題を修正しました [#7655](https://github.com/pingcap/tidb/pull/7655)
 - DML
     - `InsertOnDuplicateUpdate`文の`last_insert_id`を正しく設定する [#7534](https://github.com/pingcap/tidb/pull/7534)
-    - `auto_increment_id`カウンタを更新するケースを減らす [#7515](https://github.com/pingcap/tidb/pull/7515)
+    - `auto_increment_id`カウンターを更新するケースを減らす [#7515](https://github.com/pingcap/tidb/pull/7515)
     - `Duplicate Key` のエラーメッセージを最適化 [#7495](https://github.com/pingcap/tidb/pull/7495)
     - `insert...select...on duplicate key update`問題を修正[#7406](https://github.com/pingcap/tidb/pull/7406)
     - `LOAD DATA IGNORE LINES`文をサポートする [#7576](https://github.com/pingcap/tidb/pull/7576)
@@ -90,7 +90,7 @@ summary: TiDB 2.1 RC2は2018年9月14日にリリースされ、安定性、SQL�
 
 - 新機能
     - `GetAllStores`インターフェースをサポート [#1228](https://github.com/pingcap/pd/pull/1228)
-    - シミュレータにスケジュール見積もりの統計を追加する [#1218](https://github.com/pingcap/pd/pull/1218)
+    - シミュレーターにスケジュール見積もりの統計を追加する [#1218](https://github.com/pingcap/pd/pull/1218)
 - 改善点
     - ダウンストアの処理プロセスを最適化して、できるだけ早くレプリカを作成します[#1222](https://github.com/pingcap/pd/pull/1222)
     - PD 再起動によって発生する不要なスケジュールを削減するためにコーディネーターの起動を最適化します。 [#1225](https://github.com/pingcap/pd/pull/1225)
@@ -106,7 +106,7 @@ summary: TiDB 2.1 RC2は2018年9月14日にリリースされ、安定性、SQL�
 
 - パフォーマンス
     - I/Oコストを削減するために統計推定に基づいてリージョンを分割する機能をサポート[#3511](https://github.com/tikv/tikv/pull/3511)
-    - トランザクションスケジューラ内のクローンを削減 [#3530](https://github.com/tikv/tikv/pull/3530)
+    - トランザクションスケジューラー内のクローンを削減 [#3530](https://github.com/tikv/tikv/pull/3530)
 - 改善点
     - 多数の組み込み関数にプッシュダウンのサポートを追加
     - 特定のシナリオにおけるリーダースケジューリングの失敗の問題を修正するために`leader-transfer-max-log-lag`構成を追加します[#3507](https://github.com/tikv/tikv/pull/3507)

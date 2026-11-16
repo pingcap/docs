@@ -1,15 +1,15 @@
 ---
 title: TiDB 2.1 RC3 Release Notes
-summary: TiDB 2.1 RC3は2018年9月29日にリリースされ、安定性、互換性、SQLオプティマイザ、実行エンジンが改善されました。このリリースには、SQLオプティマイザ、実行エンジン、サーバー、互換性、式、DML、DDL、PDに関する修正と機能強化が含まれています。TiKVにもパフォーマンスの最適化、新機能、バグ修正が施されています。
+summary: TiDB 2.1 RC3は2018年9月29日にリリースされ、安定性、互換性、SQLオプティマイザー、実行エンジンが改善されました。このリリースには、SQLオプティマイザー、実行エンジン、サーバー、互換性、式、DML、DDL、PDに関する修正と機能強化が含まれています。TiKVにもパフォーマンスの最適化、新機能、バグ修正が施されています。
 ---
 
 # TiDB 2.1 RC3 リリースノート {#tidb-2-1-rc3-release-notes}
 
-2018年9月29日にTiDB 2.1 RC3がリリースされました。このリリースでは、TiDB 2.1 RC2と比較して、安定性、互換性、SQLオプティマイザ、実行エンジンが大幅に改善されています。
+2018年9月29日にTiDB 2.1 RC3がリリースされました。このリリースでは、TiDB 2.1 RC2と比較して、安定性、互換性、SQLオプティマイザー、実行エンジンが大幅に改善されています。
 
 ## TiDB {#tidb}
 
-- SQLオプティマイザ
+- SQLオプティマイザー
     - 文に埋め込み`LEFT OUTER JOIN` が含まれている場合の誤った結果の問題を修正しました [#7689](https://github.com/pingcap/tidb/pull/7689)
     - `JOIN`文の述語プッシュダウンの最適化ルールを強化する [#7645](https://github.com/pingcap/tidb/pull/7645)
     - `UnionScan`オペレーターの述語プッシュダウンの最適化ルールを修正 [#7695](https://github.com/pingcap/tidb/pull/7695)
@@ -18,7 +18,7 @@ summary: TiDB 2.1 RC3は2018年9月29日にリリースされ、安定性、互�
     - テーブルデュアルへの伝播後にフィルターがnullになるデータソースを最適化します [#7756](https://github.com/pingcap/tidb/pull/7756)
 - SQL実行エンジン
     - トランザクションにおける読み取りリクエストのパフォーマンスを最適化する [#7717](https://github.com/pingcap/tidb/pull/7717)
-    - 一部のエグゼキュータにおけるChunkメモリの割り当てコストを最適化する[#7540](https://github.com/pingcap/tidb/pull/7540)
+    - 一部のエグゼキューターにおけるChunkメモリの割り当てコストを最適化する[#7540](https://github.com/pingcap/tidb/pull/7540)
     - ポイントクエリですべての NULL 値が取得される列によって発生する"index out of range"panicを修正[#7790](https://github.com/pingcap/tidb/pull/7790)
 - サーバー
     - 設定ファイル内のメモリクォータが有効にならない問題を修正[#7729](https://github.com/pingcap/tidb/pull/7729)
@@ -37,7 +37,7 @@ summary: TiDB 2.1 RC3は2018年9月29日にリリースされ、安定性、互�
 - DDL
     - タイムスタンプ型の新しい列に新しいインデックスを作成するときに、インデックス値がタイムゾーン間で変換されない問題を修正しました。 [#7724](https://github.com/pingcap/tidb/pull/7724)
     - 列挙型に新しい値を追加することをサポート [#7767](https://github.com/pingcap/tidb/pull/7767)
-    - etcdセッションの迅速な作成をサポートし、ネットワーク分離後のクラスタの可用性を向上します[#7774](https://github.com/pingcap/tidb/pull/7774)
+    - etcdセッションの迅速な作成をサポートし、ネットワーク分離後のクラスターの可用性を向上します[#7774](https://github.com/pingcap/tidb/pull/7774)
 
 ## PD {#pd}
 
@@ -51,7 +51,7 @@ summary: TiDB 2.1 RC3は2018年9月29日にリリースされ、安定性、互�
 ## TiKV {#tikv}
 
 - パフォーマンス
-    - コプロセッサリクエストの同時実行を最適化する[#3515](https://github.com/tikv/tikv/pull/3515)
+    - コプロセッサーリクエストの同時実行を最適化する[#3515](https://github.com/tikv/tikv/pull/3515)
 - 新機能
     - ログ関数のサポートを追加[#3603](https://github.com/tikv/tikv/pull/3603)
     - `sha1`関数のサポートを追加 [#3612](https://github.com/tikv/tikv/pull/3612)

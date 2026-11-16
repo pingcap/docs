@@ -1,6 +1,6 @@
 ---
 title: TiDB 3.0.0-rc.1 Release Notes
-summary: "TiDB 3.0.0-rc.1は2019年5月10日にリリースされ、安定性、使いやすさ、機能、SQLオプティマイザ、統計、実行エンジンが改善されました。このリリースには、SQLオプティマイザ、実行エンジン、サーバー、DDL、PD、TiKV、TiDB Binlog、Lightning、sync-diff-inspector、TiDB Ansibleの機能強化が含まれています。主な改善点としては、SQLプラン管理、メモリ使用量の追跡、実行エンジンの制御のサポート、DDLの`CREATE TABLE`文への`pre_split_regions`オプションの追加などが挙げられます。また、このリリースには、さまざまなバグ修正とパフォーマンスの最適化も含まれています。"
+summary: "TiDB 3.0.0-rc.1は2019年5月10日にリリースされ、安定性、使いやすさ、機能、SQLオプティマイザー、統計、実行エンジンが改善されました。このリリースには、SQLオプティマイザー、実行エンジン、サーバー、DDL、PD、TiKV、TiDB Binlog、Lightning、sync-diff-inspector、TiDB Ansibleの機能強化が含まれています。主な改善点としては、SQLプラン管理、メモリ使用量の追跡、実行エンジンの制御のサポート、DDLの`CREATE TABLE`文への`pre_split_regions`オプションの追加などが挙げられます。また、このリリースには、さまざまなバグ修正とパフォーマンスの最適化も含まれています。"
 ---
 
 # TiDB 3.0.0-rc.1 リリースノート {#tidb-3-0-0-rc-1-release-notes}
@@ -13,26 +13,26 @@ TiDB Ansible バージョン: 3.0.0-rc.1
 
 ## 概要 {#overview}
 
-2019年5月10日にTiDB 3.0.0-rc.1がリリースされました。対応するTiDB Ansibleバージョンは3.0.0-rc.1です。このリリースでは、TiDB 3.0.0-beta.1と比較して、安定性、使いやすさ、機能、SQLオプティマイザ、統計、実行エンジンが大幅に改善されています。
+2019年5月10日にTiDB 3.0.0-rc.1がリリースされました。対応するTiDB Ansibleバージョンは3.0.0-rc.1です。このリリースでは、TiDB 3.0.0-beta.1と比較して、安定性、使いやすさ、機能、SQLオプティマイザー、統計、実行エンジンが大幅に改善されています。
 
 ## TiDB {#tidb}
 
-- SQLオプティマイザ
-    - 列間の順序相関を使用してコスト見積りの精度を向上させます。相関を見積りに直接使用できない場合に、インデックススキャンの優先順位を制御するヒューリスティックパラメータ`tidb_opt_correlation_exp_factor`を導入します[#9839](https://github.com/pingcap/tidb/pull/9839)
-    - フィルタに関連する列がある場合、複合インデックスのアクセス条件を抽出するときに、インデックスのプレフィックス列をさらに一致させます。 [#10053](https://github.com/pingcap/tidb/pull/10053)
+- SQLオプティマイザー
+    - 列間の順序相関を使用してコスト見積りの精度を向上させます。相関を見積りに直接使用できない場合に、インデックススキャンの優先順位を制御するヒューリスティックパラメーター`tidb_opt_correlation_exp_factor`を導入します[#9839](https://github.com/pingcap/tidb/pull/9839)
+    - フィルターに関連する列がある場合、複合インデックスのアクセス条件を抽出するときに、インデックスのプレフィックス列をさらに一致させます。 [#10053](https://github.com/pingcap/tidb/pull/10053)
     - 結合に含まれるテーブルの数が`tidb_opt_join_reorder_threshold`未満の場合に、結合操作の実行順序を指定するには、動的計画法アルゴリズムを使用します[#8816](https://github.com/pingcap/tidb/pull/8816)
     - アクセス条件として複合インデックスを使用する場合、インデックス結合を構築する内部テーブル内のインデックスのプレフィックス列をさらに一致させる[#8471](https://github.com/pingcap/tidb/pull/8471)
     - NULL値を持つ単一列インデックスの行数推定の精度を向上[#9474](https://github.com/pingcap/tidb/pull/9474)
     - 論理最適化フェーズで集計関数を削除するときに、誤った実行を防ぐために`GROUP_CONCAT`を特別に処理します[#9967](https://github.com/pingcap/tidb/pull/9967)
-    - フィルタが定数の場合、結合オペレーターの子ノードにフィルタを適切にプッシュダウンします。 [#9848](https://github.com/pingcap/tidb/pull/9848)
+    - フィルターが定数の場合、結合オペレーターの子ノードにフィルターを適切にプッシュダウンします。 [#9848](https://github.com/pingcap/tidb/pull/9848)
     - MySQL との非互換性を防ぐために、論理最適化フェーズで列をプルーニングするときに`RAND()`などのいくつかの関数を特別に処理します。 [#10064](https://github.com/pingcap/tidb/pull/10064)
     - `FAST ANALYZE`をサポートします。これは、リージョン全体をスキャンするのではなく、リージョンをサンプリングすることで統計収集を高速化します。この機能は変数`tidb_enable_fast_analyze`によって制御されます[#10258](https://github.com/pingcap/tidb/pull/10258)
     - SQL文の実行計画のバインドを実行することで実行の安定性を確保するSQL計画管理をサポートします。この機能は現在ベータ版であり、SELECT文のバインド実行計画のみをサポートします。本番環境での使用は推奨されません[#10284](https://github.com/pingcap/tidb/pull/10284)
 
 - 実行エンジン
     - 3つの演算子（ `TableReader` 、 `IndexReader` 、 `IndexLookupReader` ）でメモリ使用量の追跡と制御をサポートします [#10003](https://github.com/pingcap/tidb/pull/10003)
-    - コプロセッサのタスク数、実行時間/待機時間の平均/最長/90%、実行時間または待機時間が最も長い TiKV のアドレスなど、スローログ内のコプロセッサタスクに関する詳細情報の表示をサポートします[#10165](https://github.com/pingcap/tidb/pull/10165)
-    - プレースホルダなしの準備済みDDL文をサポートする[#10144](https://github.com/pingcap/tidb/pull/10144)
+    - コプロセッサーのタスク数、実行時間/待機時間の平均/最長/90%、実行時間または待機時間が最も長い TiKV のアドレスなど、スローログ内のコプロセッサータスクに関する詳細情報の表示をサポートします[#10165](https://github.com/pingcap/tidb/pull/10165)
+    - プレースホルダーなしの準備済みDDL文をサポートする[#10144](https://github.com/pingcap/tidb/pull/10144)
 
 - サーバー
     - TiDB の起動時にのみ DDL 所有者にブートストラップの実行を許可する[#10029](https://github.com/pingcap/tidb/pull/10029)
@@ -87,15 +87,15 @@ TiDB Ansible バージョン: 3.0.0-rc.1
 
 - サーバー
     - `batch commands`のコンテキストスイッチのオーバーヘッドを削減 [#4473](https://github.com/tikv/tikv/pull/4473)
-    - シークイテレータステータスの有効性をチェックする [#4470](https://github.com/tikv/tikv/pull/4470)
+    - シークイテレーターステータスの有効性をチェックする [#4470](https://github.com/tikv/tikv/pull/4470)
 
 - RaftStore
     - 構成可能な`properties index distance` をサポート [#4517](https://github.com/tikv/tikv/pull/4517)
 
 - コプロセッサー
-    - バッチインデックススキャンエグゼキュータを追加 [#4419](https://github.com/tikv/tikv/pull/4419)
+    - バッチインデックススキャンエグゼキューターを追加 [#4419](https://github.com/tikv/tikv/pull/4419)
     - ベクトル化評価フレームワークを追加 [#4322](https://github.com/tikv/tikv/pull/4322)
-    - バッチエグゼキュータ実行サマリーフレームワークの追加 [#4433](https://github.com/tikv/tikv/pull/4433)
+    - バッチエグゼキューター実行サマリーフレームワークの追加 [#4433](https://github.com/tikv/tikv/pull/4433)
     - RPN式を構築するときに最大列をチェックして、評価panicを引き起こす可能性のある無効な列オフセットを回避します。 [#4481](https://github.com/tikv/tikv/pull/4481)
     - `BatchLimitExecutor` を加える [#4469](https://github.com/tikv/tikv/pull/4469)
     - ReadPoolの元の`futures-cpupool`を`tokio-threadpool`に置き換えてコンテキストスイッチを減らす [#4486](https://github.com/tikv/tikv/pull/4486)
@@ -105,7 +105,7 @@ TiDB Ansible バージョン: 3.0.0-rc.1
     - RPN関数`LogicalAnd` を追加 [#4575](https://github.com/tikv/tikv/pull/4575)
 
 - その他
-    - メモリアロケータとして`tcmalloc`をサポート [#4370](https://github.com/tikv/tikv/pull/4370)
+    - メモリアロケーターとして`tcmalloc`をサポート [#4370](https://github.com/tikv/tikv/pull/4370)
 
 ## ツール {#tools}
 
@@ -122,7 +122,7 @@ TiDB Ansible バージョン: 3.0.0-rc.1
     - SST の一部がインポートに失敗した場合でも、インポート成功が返される可能性があるインポーターのバグを修正しました[#4566](https://github.com/tikv/tikv/pull/4566)
     - SST を TiKV にアップロードする際のインポーターの速度制限をサポート [#4412](https://github.com/tikv/tikv/pull/4412)
     - 大きなテーブルに対するチェックサムと分析によるクラスターへの影響を軽減し、チェックサムと分析の成功率を向上させるために、サイズによるテーブルインポートをサポートします。 [#156](https://github.com/pingcap/tidb-lightning/pull/156)
-    - データソースファイルをTiDBのtypes.Datumとして直接解析し、KVエンコーダからの余分な解析オーバーヘッドを削減することで、LightningのSQLエンコードパフォーマンスを50％向上しました。 [#145](https://github.com/pingcap/tidb-lightning/pull/145)
+    - データソースファイルをTiDBのtypes.Datumとして直接解析し、KVエンコーダーからの余分な解析オーバーヘッドを削減することで、LightningのSQLエンコードパフォーマンスを50％向上しました。 [#145](https://github.com/pingcap/tidb-lightning/pull/145)
     - ログ形式を[統合ログ形式](https://github.com/tikv/rfcs/blob/master/text/0018-unified-log-format.md) に変更 [#162](https://github.com/pingcap/tidb-lightning/pull/162)
     - 設定ファイルが見つからない場合に使用するコマンドラインオプションをいくつか追加します[#157](https://github.com/pingcap/tidb-lightning/pull/157)
 

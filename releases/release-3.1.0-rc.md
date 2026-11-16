@@ -22,7 +22,7 @@ TiDB Ansible バージョン: 3.1.0-rc
     - バイナリサーチを使用してパーティションプルーニングを再実装し、パフォーマンスを向上する[#15678](https://github.com/pingcap/tidb/pull/15678)
     - 切り捨てられたテーブルを回復するために`RECOVER`構文の使用をサポートします [#15460](https://github.com/pingcap/tidb/pull/15460)
     - ステートメントの再試行とテーブルの回復のための`AUTO_RANDOM` IDキャッシュを追加します[#15393](https://github.com/pingcap/tidb/pull/15393)
-    - `recover table`ステートメントを使用して`AUTO_RANDOM` ID アロケータの状態を復元するサポート [#15393](https://github.com/pingcap/tidb/pull/15393)
+    - `recover table`ステートメントを使用して`AUTO_RANDOM` ID アロケーターの状態を復元するサポート [#15393](https://github.com/pingcap/tidb/pull/15393)
     - ハッシュパーティションテーブルのパーティションキーとして`YEAR` 、 `MONTH` 、 `TO_DAY`関数をサポートします [#15619](https://github.com/pingcap/tidb/pull/15619)
     - `SELECT... FOR UPDATE`文でキーをロックする必要がある場合にのみ、スキーマ変更関連テーブルにテーブル ID を追加します。 [#15708](https://github.com/pingcap/tidb/pull/15708)
     - 負荷分散ポリシーに従って異なるロールからデータを自動的に読み取る機能を追加し、この機能を有効にするために`leader-and-follower`システム変数を追加します[#15721](https://github.com/pingcap/tidb/pull/15721)
@@ -85,7 +85,7 @@ TiDB Ansible バージョン: 3.1.0-rc
 
 - TiKV
 
-    - 整合性チェックパラメータを無効にしたときに、既存のキーをトランザクションに挿入してすぐに削除すると競合チェックが失敗したり、データインデックスの不整合が発生したりする問題を修正しました。 [#7112](https://github.com/tikv/tikv/pull/7112)
+    - 整合性チェックパラメーターを無効にしたときに、既存のキーをトランザクションに挿入してすぐに削除すると競合チェックが失敗したり、データインデックスの不整合が発生したりする問題を修正しました。 [#7112](https://github.com/tikv/tikv/pull/7112)
     - `TopN`が符号なし整数を比較する際の計算エラーを修正[#7199](https://github.com/tikv/tikv/pull/7199)
     - Raftstoreにフロー制御メカニズムを導入し、フロー制御がないとログの追跡が遅くなり、クラスターが停止する可能性がある問題と、トランザクションサイズが大きいと TiKV サーバー間の再接続が頻繁に発生する可能性がある問題を解決します[#7087](https://github.com/tikv/tikv/pull/7087) [#7078](https://github.com/tikv/tikv/pull/7078)
     - レプリカに送信された保留中の読み取りリクエストが永久にブロックされる可能性がある問題を修正[#6543](https://github.com/tikv/tikv/pull/6543)
@@ -110,4 +110,4 @@ TiDB Ansible バージョン: 3.1.0-rc
 
     - Backup & Restore (BR)
 
-        - BRがTiFlashクラスタデータを復元できない問題を修正[#194](https://github.com/pingcap/br/pull/194)
+        - BRがTiFlashクラスターデータを復元できない問題を修正[#194](https://github.com/pingcap/br/pull/194)

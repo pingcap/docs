@@ -38,7 +38,7 @@ TiDB バージョン: 4.0.2
     - `IF()` / `BITXOR()` / `BITNEG()` / `JSON_LENGTH()`関数をTiFlashコプロセッサー にプッシュすることをサポート [#17592](https://github.com/pingcap/tidb/pull/17592) [#17651](https://github.com/pingcap/tidb/pull/17651)
     - `COUNT(DISTINCT)` のおおよその結果を計算する新しい集計関数`APPROX_COUNT_DISTINCT()`をサポートします。 [#18120](https://github.com/pingcap/tidb/pull/18120)
     - TiFlashでの照合順序をサポートし、照合関連の関数をTiFlash にプッシュします。 [#17705](https://github.com/pingcap/tidb/pull/17705)
-    - `INFORMATION_SCHEMA.INSPECTION_RESULT`テーブルに`STATUS_ADDRESS`列を追加して、サーバーのステータス アドレスを示します。 [#17695](https://github.com/pingcap/tidb/pull/17695)
+    - `INFORMATION_SCHEMA.INSPECTION_RESULT`テーブルに`STATUS_ADDRESS`列を追加して、サーバーのステータスアドレスを示します。 [#17695](https://github.com/pingcap/tidb/pull/17695)
     - `MYSQL.BIND_INFO`表に`SOURCE`列を追加して、バインディングの作成方法を示します[#17587](https://github.com/pingcap/tidb/pull/17587)
     - SQL文のプランキャッシュの使用状況を示すために、 `PERFORMANCE_SCHEMA.EVENTS_STATEMENTS_SUMMARY_BY_DIGEST`表に`PLAN_IN_CACHE`と`PLAN_CACHE_HITS`列を追加します。 [#17493](https://github.com/pingcap/tidb/pull/17493)
     - `enable-collect-execution-info`設定項目と`tidb_enable_collect_execution_info`セッション変数を追加して、各オペレーターの実行情報を収集し、その情報をスロークエリログ に記録するかどうかを制御します。 [#18072](https://github.com/pingcap/tidb/pull/18072) [#18073](https://github.com/pingcap/tidb/pull/18073)
@@ -49,7 +49,7 @@ TiDB バージョン: 4.0.2
 - TiKV
 
     - TiKV Control の`encryption-meta`コマンドをサポート [#8103](https://github.com/tikv/tikv/pull/8103)
-    - `RocksDB::WriteImpl` の perf コンテキスト メトリックを追加します。 [#7991](https://github.com/tikv/tikv/pull/7991)
+    - `RocksDB::WriteImpl` の perf コンテキストメトリックを追加します。 [#7991](https://github.com/tikv/tikv/pull/7991)
 
 - PD
 
@@ -108,9 +108,9 @@ TiDB バージョン: 4.0.2
     - `HashJoin` Executor の子が`NULL`列を返すときのランタイムエラーを修正しました [#17937](https://github.com/pingcap/tidb/pull/17937)
     - 同じデータベースで`DROP DATABASE`文と他の DDL 文を同時に実行することによって発生する実行時エラーを修正します。 [#17659](https://github.com/pingcap/tidb/pull/17659)
     - ユーザー変数の関数`COERCIBILITY()`の誤った結果を修正 [#17890](https://github.com/pingcap/tidb/pull/17890)
-    - `IndexMergeJoin`エグゼキュータが時々スタックする問題を修正[#18091](https://github.com/pingcap/tidb/pull/18091)
-    - メモリクォータ不足とクエリキャンセルがトリガーされたときに`IndexMergeJoin`のエグゼキュータがハングする問題を修正[#17654](https://github.com/pingcap/tidb/pull/17654)
-    - `Insert`と`Replace`エグゼキュータのメモリ使用量が過剰にカウントされる問題を修正 [#18062](https://github.com/pingcap/tidb/pull/18062)
+    - `IndexMergeJoin`エグゼキューターが時々スタックする問題を修正[#18091](https://github.com/pingcap/tidb/pull/18091)
+    - メモリクォータ不足とクエリキャンセルがトリガーされたときに`IndexMergeJoin`のエグゼキューターがハングする問題を修正[#17654](https://github.com/pingcap/tidb/pull/17654)
+    - `Insert`と`Replace`エグゼキューターのメモリ使用量が過剰にカウントされる問題を修正 [#18062](https://github.com/pingcap/tidb/pull/18062)
     - `DROP DATABASE`と`DROP TABLE`を同じデータベースで同時に実行するとTiFlashストレージへのデータレプリケーションが停止する問題を修正 [#17901](https://github.com/pingcap/tidb/pull/17901)
     - TiDBとオブジェクトストレージサービス間の`BACKUP`/`RESTORE`の失敗を修正 [#17844](https://github.com/pingcap/tidb/pull/17844)
     - アクセスが拒否されたときに権限チェックに失敗したという誤ったエラーメッセージを修正しました[#17724](https://github.com/pingcap/tidb/pull/17724)
@@ -121,7 +121,7 @@ TiDB バージョン: 4.0.2
     - 大きな整数と浮動小数点値に対する JSON 比較の不正確な結果を修正[#17717](https://github.com/pingcap/tidb/pull/17717)
     - `COUNT()`関数の結果の小数点以下のプロパティが正しくない問題を修正しました [#17704](https://github.com/pingcap/tidb/pull/17704)
     - 入力の型がバイナリ文字列の場合の`HEX()`関数の誤った結果を修正 [#17620](https://github.com/pingcap/tidb/pull/17620)
-    - フィルタ条件なしで`INFORMATION_SCHEMA.INSPECTION_SUMMARY`テーブルをクエリすると空の結果が返される問題を修正 [#17697](https://github.com/pingcap/tidb/pull/17697)
+    - フィルター条件なしで`INFORMATION_SCHEMA.INSPECTION_SUMMARY`テーブルをクエリすると空の結果が返される問題を修正 [#17697](https://github.com/pingcap/tidb/pull/17697)
     - `ALTER USER`文でユーザー情報を更新する際に使用されるハッシュ化されたパスワードが予期しないものである問題を修正[#17646](https://github.com/pingcap/tidb/pull/17646)
     - `ENUM`と`SET`値の照合順序をサポート[#17701](https://github.com/pingcap/tidb/pull/17701)
     - テーブル作成時にリージョンの事前分割のタイムアウトメカニズムが機能しない問題を修正しました [#17619](https://github.com/pingcap/tidb/pull/17619)

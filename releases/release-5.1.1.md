@@ -13,7 +13,7 @@ TiDB バージョン: 5.1.1
 
 - TiDB
 
-    - TiDBクラスタをv4.0からv5.1にアップグレードする場合、`tidb_multi_statement_mode`のデフォルト値は`OFF`です。代わりに、クライアントライブラリのマルチステートメント機能を使用することをお勧めします。詳細は[`tidb_multi_statement_mode`に関するドキュメント](/system-variables.md#tidb_multi_statement_mode-new-in-v4011)を参照してください[#25751](https://github.com/pingcap/tidb/pull/25751)
+    - TiDBクラスターをv4.0からv5.1にアップグレードする場合、`tidb_multi_statement_mode`のデフォルト値は`OFF`です。代わりに、クライアントライブラリのマルチステートメント機能を使用することをお勧めします。詳細は[`tidb_multi_statement_mode`に関するドキュメント](/system-variables.md#tidb_multi_statement_mode-new-in-v4011)を参照してください[#25751](https://github.com/pingcap/tidb/pull/25751)
     - `tidb_stmt_summary_max_stmt_count`変数のデフォルト値を`200`から`3000`に変更します[#25874](https://github.com/pingcap/tidb/pull/25874)
     - `table_storage_stats`テーブルにアクセスするには`SUPER`権限が必要です [#26352](https://github.com/pingcap/tidb/pull/26352)
     - 他のユーザーの権限を表示するには、 `information_schema.user_privileges`テーブルにアクセスするために`mysql.user`の`SELECT`権限が必要です。 [#26311](https://github.com/pingcap/tidb/pull/26311)
@@ -74,7 +74,7 @@ TiDB バージョン: 5.1.1
 
     - Dumpling
 
-        - アップストリームが TiDB v3.x クラスタの場合は、常に`_tidb_rowid`を使用してテーブルを分割します。これにより、TiDB のメモリ使用量が削減されます[#295](https://github.com/pingcap/dumpling/issues/295)
+        - アップストリームが TiDB v3.x クラスターの場合は、常に`_tidb_rowid`を使用してテーブルを分割します。これにより、TiDB のメモリ使用量が削減されます[#295](https://github.com/pingcap/dumpling/issues/295)
         - データベースメタデータへのアクセス頻度を減らして、Dumplingのパフォーマンスと安定性を向上させます[#315](https://github.com/pingcap/dumpling/pull/315)
 
 ## バグ修正 {#bug-fixes}
@@ -89,14 +89,14 @@ TiDB バージョン: 5.1.1
     - 正常にコミットされた楽観的トランザクションがコミットエラーを報告する可能性があるバグを修正[#10468](https://github.com/tikv/tikv/issues/10468)
     - `SET`型列でマージ結合を使用すると誤った結果が返される問題を修正しました [#25669](https://github.com/pingcap/tidb/issues/25669)
     - 悲観的トランザクションのインデックスキーが繰り返しコミットされる可能性があるバグを修正[#26359](https://github.com/pingcap/tidb/issues/26359)
-    - オプティマイザがパーティション検索する際の整数オーバーフローのリスクを修正 [#26227](https://github.com/pingcap/tidb/issues/26227)
+    - オプティマイザーがパーティション検索する際の整数オーバーフローのリスクを修正 [#26227](https://github.com/pingcap/tidb/issues/26227)
     - `DATE`をタイムスタンプにキャストするときに無効な値が書き込まれる可能性がある問題を修正しました [#26292](https://github.com/pingcap/tidb/issues/26292)
-    - Grafana でコプロセッサーキャッシュ メトリックが表示されない問題を修正しました [#26338](https://github.com/pingcap/tidb/issues/26338)
+    - Grafana でコプロセッサーキャッシュメトリックが表示されない問題を修正しました [#26338](https://github.com/pingcap/tidb/issues/26338)
     - テレメトリ による迷惑なログの問題を修正 [#25785](https://github.com/pingcap/tidb/issues/25785) [#25760](https://github.com/pingcap/tidb/issues/25760)
     - プレフィックスインデックスのクエリ範囲に関するバグを修正 [#26029](https://github.com/pingcap/tidb/issues/26029)
     - 同じパーティションを同時に切り捨てるとDDL実行がハングする問題を修正[#26229](https://github.com/pingcap/tidb/issues/26229)
     - 重複した`ENUM`項目の問題を修正 [#25955](https://github.com/pingcap/tidb/issues/25955)
-    - CTEイテレータが正しく閉じられていないバグを修正[#26112](https://github.com/pingcap/tidb/issues/26112)
+    - CTEイテレーターが正しく閉じられていないバグを修正[#26112](https://github.com/pingcap/tidb/issues/26112)
     - `LOAD DATA`文が非 UTF8 データを異常にインポートする可能性がある問題を修正[#25979](https://github.com/pingcap/tidb/issues/25979)
     - 符号なし整数列でウィンドウ関数を使用する際に発生する可能性のあるpanic問題を修正しました [#25956](https://github.com/pingcap/tidb/issues/25956)
     - 非同期コミットロックを解決する際に TiDB がpanicする可能性がある問題を修正[#25778](https://github.com/pingcap/tidb/issues/25778)
@@ -109,17 +109,17 @@ TiDB バージョン: 5.1.1
     - 特定のプラットフォームで期間計算がpanicになる可能性がある問題を修正[#10569](https://github.com/tikv/tikv/pull/10569)
     - Load Base Splitが誤って`batch_get_command` のエンコードされていないキーを使用する問題を修正しました [#10542](https://github.com/tikv/tikv/issues/10542)
     - `resolved-ts.advance-ts-interval`構成を動的に変更してもすぐには反映されない問題を修正[#10426](https://github.com/tikv/tikv/issues/10426)
-    - レプリカが 4 つを超える場合に稀に発生するフォロワー メタデータ破損の問題を修正[#10225](https://github.com/tikv/tikv/issues/10225)
+    - レプリカが 4 つを超える場合に稀に発生するフォロワーメタデータ破損の問題を修正[#10225](https://github.com/tikv/tikv/issues/10225)
     - 暗号化が有効になっている場合にスナップショットを2回構築すると発生するpanic問題を修正[#9786](https://github.com/tikv/tikv/issues/9786) [#10407](https://github.com/tikv/tikv/issues/10407)
     - 間違った`tikv_raftstore_hibernated_peer_state`指標を修正する[#10330](https://github.com/tikv/tikv/issues/10330)
-    - コプロセッサの関数`json_unquote()`の間違った引数の型を修正 [#10176](https://github.com/tikv/tikv/issues/10176)
+    - コプロセッサーの関数`json_unquote()`の間違った引数の型を修正 [#10176](https://github.com/tikv/tikv/issues/10176)
     - 悲観的トランザクションのインデックスキーが繰り返しコミットされる可能性があるバグを修正[#10468](https://github.com/tikv/tikv/issues/10468#issuecomment-869491061)
     - リーダーが移行された直後に`ReadIndex`リクエストが古い結果を返す問題を修正しました[#9351](https://github.com/tikv/tikv/issues/9351)
 
 - PD
 
-    - 複数のスケジューラが同時に実行されているために競合が発生した場合に、期待どおりのスケジュールを生成できない問題を修正[#3807](https://github.com/tikv/pd/issues/3807) [#3778](https://github.com/tikv/pd/issues/3778)
-    - スケジューラがすでに削除されているにもかかわらず、スケジューラが再び表示されることがある問題を修正しました[#2572](https://github.com/tikv/pd/issues/2572)
+    - 複数のスケジューラーが同時に実行されているために競合が発生した場合に、期待どおりのスケジュールを生成できない問題を修正[#3807](https://github.com/tikv/pd/issues/3807) [#3778](https://github.com/tikv/pd/issues/3778)
+    - スケジューラーがすでに削除されているにもかかわらず、スケジューラーが再び表示されることがある問題を修正しました[#2572](https://github.com/tikv/pd/issues/2572)
 
 - TiFlash
 

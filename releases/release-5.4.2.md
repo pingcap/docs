@@ -23,7 +23,7 @@ TiDB バージョン: 5.4.2
 
     - 可用性を向上させるために、更新ごとに TLS 証明書を自動的に再読み込みします[#12546](https://github.com/tikv/tikv/issues/12546)
     - ヘルスチェックを改善して、利用できないRaftstoreを検出し、TiKV クライアントがリージョンキャッシュを速やかに更新できるようにします[#12398](https://github.com/tikv/tikv/issues/12398)
-    - レイテンシージッタを削減するためにリーダーシップをCDCオブザーバーに移譲する[#12111](https://github.com/tikv/tikv/issues/12111)
+    - レイテンシージッターを削減するためにリーダーシップをCDCオブザーバーに移譲する[#12111](https://github.com/tikv/tikv/issues/12111)
 
 - PD
 
@@ -93,7 +93,7 @@ TiDB バージョン: 5.4.2
     - TiCDC
 
         - 特別な増分スキャンシナリオで発生するデータ損失を修正[#5468](https://github.com/pingcap/tiflow/issues/5468)
-        - ログを書き込む前にREDOログマネージャがログをフラッシュするバグを修正[#5486](https://github.com/pingcap/tiflow/issues/5486)
+        - ログを書き込む前にREDOログマネージャーがログをフラッシュするバグを修正[#5486](https://github.com/pingcap/tiflow/issues/5486)
         - 一部のテーブルがREDOライターによってメンテナンスされていない場合に、resolved tsが速すぎる動きをするバグを修正しました[#5486](https://github.com/pingcap/tiflow/issues/5486)
         - ファイル名の競合によりデータ損失が発生する可能性がある問題を修正[#5486](https://github.com/pingcap/tiflow/issues/5486)
         - リージョンリーダーが見つからず、再試行が制限を超えた場合に発生するレプリケーション中断を修正[#5230](https://github.com/pingcap/tiflow/issues/5230)

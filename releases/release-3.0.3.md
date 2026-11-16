@@ -1,6 +1,6 @@
 ---
 title: TiDB 3.0.3 Release Notes
-summary: TiDB 3.0.3は2019年8月29日にリリースされました。SQLオプティマイザ、SQL実行エンジン、サーバー、DDL、モニター、TiKV、PD、TiDB Binlog、 TiDB Lightning、TiDB Ansibleに関する様々な修正とアップデートが含まれています。主な修正には、不正な結果、型エラー、panic発生、権限チェックエラーに関する問題が含まれます。また、PD操作の最適化、サポート対象外のGrafana Collectorコンポーネントの削除、TiKVアラートルールの更新も行われています。さらに、TiDB AnsibleはSpark V2.4.3とTiSpark V2.1.4をサポートするようになりました。
+summary: TiDB 3.0.3は2019年8月29日にリリースされました。SQLオプティマイザー、SQL実行エンジン、サーバー、DDL、モニター、TiKV、PD、TiDB Binlog、 TiDB Lightning、TiDB Ansibleに関する様々な修正とアップデートが含まれています。主な修正には、不正な結果、型エラー、panic発生、権限チェックエラーに関する問題が含まれます。また、PD操作の最適化、サポート対象外のGrafana Collectorコンポーネントの削除、TiKVアラートルールの更新も行われています。さらに、TiDB AnsibleはSpark V2.4.3とTiSpark V2.1.4をサポートするようになりました。
 ---
 
 # TiDB 3.0.3 リリースノート {#tidb-3-0-3-release-notes}
@@ -13,7 +13,7 @@ TiDB Ansible バージョン: 3.0.3
 
 ## TiDB {#tidb}
 
-- SQLオプティマイザ
+- SQLオプティマイザー
     - `aggregation_eliminate`や`column_prune`などのロジック最適化ルールを無効にするための`opt_rule_blacklist`テーブルを追加します[#11658](https://github.com/pingcap/tidb/pull/11658)
     - 結合キーがプレフィックスインデックスまたは負の値に等しい符号なしインデックス列を使用する場合に、 `Index Join`に対して誤った結果が返される可能性がある問題を修正しました[#11759](https://github.com/pingcap/tidb/pull/11759)
     - `create … binding ...`の`SELECT`文で`"`または`\`を使用すると解析エラーになる可能性がある問題を修正しました [#11726](https://github.com/pingcap/tidb/pull/11726)
@@ -22,7 +22,7 @@ TiDB Ansible バージョン: 3.0.3
     - `NotNullFlag`を保持した状態で Max/Min を使用して型推論を行うと、 `ifnull`の誤った結果が返される可能性がある問題を修正しました[#11641](https://github.com/pingcap/tidb/pull/11641)
     - 文字列形式でビット型データを比較する際に発生する可能性のあるエラーを修正 [#11660](https://github.com/pingcap/tidb/pull/11660)
     - OOM の可能性を減らすために、シーケンシャル読み取りを必要とするデータの同時実行性を減らします。 [#11679](https://github.com/pingcap/tidb/pull/11679)
-    - 一部の組み込み関数で複数のパラメータが符号なしの場合（たとえば、 `if`と`coalesce` ）に誤った型推論が発生する可能性がある問題を修正しました[#11621](https://github.com/pingcap/tidb/pull/11621)
+    - 一部の組み込み関数で複数のパラメーターが符号なしの場合（たとえば、 `if`と`coalesce` ）に誤った型推論が発生する可能性がある問題を修正しました[#11621](https://github.com/pingcap/tidb/pull/11621)
     - `Div`関数が符号なし小数型を扱う際の MySQL との非互換性を修正 [#11813](https://github.com/pingcap/tidb/pull/11813)
     - Pump/Drainerのステータスを変更するSQL文を実行するとpanicが発生する可能性がある問題を修正しました。 [#11827](https://github.com/pingcap/tidb/pull/11827)
     - Autocommit = 1 で`begin`文がない場合に`select ... for update`でpanicが発生する可能性がある問題を修正しました[#11736](https://github.com/pingcap/tidb/pull/11736)
@@ -31,7 +31,7 @@ TiDB Ansible バージョン: 3.0.3
     - `select ... for update`文が`PointGetExecutor`関数に組み込まれると自動的に再試行される可能性がある問題を修正しました [#11718](https://github.com/pingcap/tidb/pull/11718)
     - ウィンドウ関数がパーティションを処理するときに発生する可能性のある境界エラーを修正しました [#11825](https://github.com/pingcap/tidb/pull/11825)
     - `time`関数が不正な形式の引数を処理するときに EOF エラーが発生する問題を修正しました [#11893](https://github.com/pingcap/tidb/pull/11893)
-    - ウィンドウ関数が渡されたパラメータをチェックしない問題を修正[#11705](https://github.com/pingcap/tidb/pull/11705)
+    - ウィンドウ関数が渡されたパラメーターをチェックしない問題を修正[#11705](https://github.com/pingcap/tidb/pull/11705)
     - `Explain`で表示される計画結果が実際に実行された計画と一致しない問題を修正 [#11186](https://github.com/pingcap/tidb/pull/11186)
     - ウィンドウ関数によって参照される重複メモリがクラッシュまたは誤った結果をもたらす可能性がある問題を修正[#11823](https://github.com/pingcap/tidb/pull/11823)
     - スローログの`Succ`フィールドの誤った情報を更新します [#11887](https://github.com/pingcap/tidb/pull/11887)
@@ -75,5 +75,5 @@ TiDB Ansible バージョン: 3.0.3
 - ローリングアップデートのPD操作を最適化して安定性を向上[#894](https://github.com/pingcap/tidb-ansible/pull/894)
 - 現在のGrafanaバージョンでサポートされていないGrafana Collectorコンポーネントを削除します。 [#892](https://github.com/pingcap/tidb-ansible/pull/892)
 - TiKVアラートルールを更新 [#898](https://github.com/pingcap/tidb-ansible/pull/898)
-- 生成されたTiKV構成で`pessimistic-txn`パラメータが欠落している問題を修正 [#911](https://github.com/pingcap/tidb-ansible/pull/911)
+- 生成されたTiKV構成で`pessimistic-txn`パラメーターが欠落している問題を修正 [#911](https://github.com/pingcap/tidb-ansible/pull/911)
 - SparkをV2.4.3にアップデートし、TiSparkをSpark V2.4.3と互換性のあるV2.1.4にアップデートします。 [#913](https://github.com/pingcap/tidb-ansible/pull/913) 、 [#918](https://github.com/pingcap/tidb-ansible/pull/918)
