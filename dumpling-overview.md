@@ -153,7 +153,7 @@ In the command above:
 
 ### Export to Parquet files
 
-Starting from v9.0.0, you can export data to Parquet files by adding the `--filetype parquet` argument.
+Starting from v8.5.9 and v9.0.0, you can export data to Parquet files by adding the `--filetype parquet` argument.
 
 {{< copyable "shell-regular" >}}
 
