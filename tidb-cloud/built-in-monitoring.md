@@ -92,9 +92,9 @@ TiDB Cloudでは、メトリクスデータは7日間保持されます。
 
 <CustomContent plan="starter,essential">
 
-## TiDB Cloud StarterおよびTiDB Cloud Essentialインスタンスのメトリクス {#metrics-for-tidb-cloud-starter-and-tidb-cloud-essential-instances}
+## {{{ .starter }}}および{{{ .essential }}}インスタンスのメトリクス {#metrics-for-tidb-cloud-starter-and-tidb-cloud-essential-instances}
 
-**Metrics**ページには、TiDB Cloud StarterとTiDB Cloud Essentialインスタンスのメトリクスを表示する2つのタブがあります。
+**Metrics**ページには、{{{ .starter }}}と{{{ .essential }}}インスタンスのメトリクスを表示する2つのタブがあります。
 
 - **Instance Overview**：インスタンスレベルの主要なメトリクスを表示します。
 - **Database Status**：データベースレベルの主要なメトリックを表示します。
@@ -105,16 +105,16 @@ TiDB Cloudでは、メトリクスデータは7日間保持されます。
 
 | メトリック名       | ラベル                      | 説明                                                                                                                                                                 |
 | :----------- | :----------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Request Units | RU per second                     | リクエストユニット（RU）は、 TiDB Cloud Starterインスタンスにおけるクエリまたはトランザクションのリソース消費量を追跡するために使用される測定単位です。ユーザークエリに加えて、バックグラウンドアクティビティもRUを消費するため、QPSが0の場合でも、1秒あたりのRU使用量はゼロにならない場合があります。 |
-| Capacity vs Usage (RU/s) | Provisioned capacity (RCU)、Consumed RU/s | TiDB Cloud Essentialインスタンスにおける、1秒あたりのリクエストキャパシティユニット（RCU）と消費リクエストユニット（RU）。                                                                                             |
+| Request Units | RU per second                     | リクエストユニット（RU）は、 {{{ .starter }}}インスタンスにおけるクエリまたはトランザクションのリソース消費量を追跡するために使用される測定単位です。ユーザークエリに加えて、バックグラウンドアクティビティもRUを消費するため、QPSが0の場合でも、1秒あたりのRU使用量はゼロにならない場合があります。 |
+| Capacity vs Usage (RU/s) | Provisioned capacity (RCU)、Consumed RU/s | {{{ .essential }}}インスタンスにおける、1秒あたりのリクエストキャパシティユニット（RCU）と消費リクエストユニット（RU）。                                                                                             |
 | Used Storage Size | Row-based storage、Row-based standard storage、Columnar storage  | 行ベースストレージ、行ベースStandardストレージ、列指向ストレージのサイズ。TiDB Cloud は、各ストレージタイプのサイズが50 MiB以上の場合にのみこのメトリックを表示します。**Row-based standard storage**は**Row-based storage**と同じ意味です。|
 | Query Per Second   | All、{SQL type}             | 1秒あたりに実行される SQL文の数。これは、 `SELECT` 、 `INSERT` 、 `UPDATE`などの SQL タイプごとに収集されます。                                                                                |
-| Query Duration      | Avg、P99、P99-{SQL type}     | クライアントからTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにリクエストが送信されてから、インスタンスがリクエストを実行して結果をクライアントに返すまでの時間。                                                          |
+| Query Duration      | Avg、P99、P99-{SQL type}     | クライアントから{{{ .starter }}}または{{{ .essential }}}インスタンスにリクエストが送信されてから、インスタンスがリクエストを実行して結果をクライアントに返すまでの時間。                                                          |
 | Failed Query   | All                       | 1秒あたりのSQL文実行エラー数。                                                                                                                                                  |
 | Transaction Per Second   | All                       | 1秒あたりに実行されるトランザクション数。                                                                                                                                              |
 | Transaction Duration   | Avg、P99                   | トランザクションの実行時間。                                                                                                                                                     |
 | Lock-wait        | P95、P99                  | トランザクションが悲観的ロックの取得を待機する時間。値が高いほど、同じ行またはキーに対する競合が発生していることを示します。                                                                                                     |
-| Total Connection   | All                       | TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスへの接続数。                                                                                                              |
+| Total Connection   | All                       | {{{ .starter }}}または{{{ .essential }}}インスタンスへの接続数。                                                                                                              |
 | Idle Connection Duration     | P99、P99(in-txn)、P99(not-in-txn)    | トランザクションが開いている間、接続がアイドル状態になっている時間。この時間が長い場合は、通常、アプリケーションロジックの処理速度が遅いか、トランザクションの実行時間が長いことを示しています。                                                                   |
 
 ### Database Status {#database-status}

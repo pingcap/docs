@@ -5,18 +5,18 @@ summary: Top RUを使用して、1分単位の粒度で最もリクエストユ�
 
 # Top RU {#top-ru}
 
-**Top RU**は、SQL文をリクエストユニット（RU）消費量に基づいてランク付けし、RU使用量を押し上げているクエリを迅速に特定するのに役立ちます。TiDB Cloud EssentialまたはTiDB Cloud Premiumインスタンスのメトリクスで予期せぬRUの急増に気づいた場合は、Top RUを使用して原因となっているSQL文を特定し、的を絞った対策を講じてください。
+**Top RU**は、SQL文をリクエストユニット（RU）消費量に基づいてランク付けし、RU使用量を押し上げているクエリを迅速に特定するのに役立ちます。{{{ .essential }}}または{{{ .premium }}}インスタンスのメトリクスで予期せぬRUの急増に気づいた場合は、Top RUを使用して原因となっているSQL文を特定し、的を絞った対策を講じてください。
 
 > **Note:**
 >
-> - Top RUは、 TiDB Cloud Premiumインスタンス向けにパブリックプレビュー版として提供されています。
-> - Top RUは、段階的な展開期間中に、一部のリージョンにおけるTiDB Cloud Essentialインスタンスで利用可能になります。
+> - Top RUは、 {{{ .premium }}}インスタンス向けにパブリックプレビュー版として提供されています。
+> - Top RUは、段階的な展開期間中に、一部のリージョンにおける{{{ .essential }}}インスタンスで利用可能になります。
 
 ## 製品プラン比較 {#product-plan-comparison}
 
 TiDB Cloudプランによって、Top RUの機能は異なります。
 
-| 特徴                   | TiDB Cloud Premium | TiDB Cloud Essential |
+| 特徴                   | {{{ .premium }}} | {{{ .essential }}} |
 | -------------------- | --------------- | -------------------- |
 | **Overview**タブ             | サポート対象          | サポート対象               |
 | **Sliced by Users**タブ      | サポート対象          | サポート対象               |
@@ -26,7 +26,7 @@ TiDB Cloudプランによって、Top RUの機能は異なります。
 
 ## Top RUを開く {#open-top-ru}
 
-1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、 TiDB Cloud EssentialまたはTiDB Cloud Premiumインスタンスに移動してください。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、 {{{ .essential }}}または{{{ .premium }}}インスタンスに移動してください。
 2. 左側のナビゲーションペインで、 **Monitoring** > **Top RU**をクリックします。
 
 ## SQLによるRU消費量の分析 {#analyze-ru-consumption-by-sql}
@@ -43,13 +43,13 @@ TiDB Cloudプランによって、Top RUの機能は異なります。
 
     カスタム時間範囲の場合：
 
-    - 利用可能な開始日の最短日は、データ保持期間によって異なります。TiDB Cloud Premiumインスタンスの場合は**30 days ago**、 TiDB Cloud Essentialインスタンスの場合は**7 days ago**。
+    - 利用可能な開始日の最短日は、データ保持期間によって異なります。{{{ .premium }}}インスタンスの場合は**30 days ago**、 {{{ .essential }}}インスタンスの場合は**7 days ago**。
     - 1回のクエリの最大期間は**24 hours**です。
 
 - **Top N**：表示するSQL文の数を指定します。
 
-    - TiDB Cloud Premiumインスタンス：デフォルトは**10**。オプション：**5**、**20**、および**100**。
-    - TiDB Cloud Essentialインスタンス：デフォルトは**10**。オプション：**5**と**20**。
+    - {{{ .premium }}}インスタンス：デフォルトは**10**。オプション：**5**、**20**、および**100**。
+    - {{{ .essential }}}インスタンス：デフォルトは**10**。オプション：**5**と**20**。
 
 ### SQLリストを読む {#read-the-sql-list}
 
@@ -60,7 +60,7 @@ TiDB Cloudプランによって、Top RUの機能は異なります。
 | SQL Statement | 正規化されたSQLテンプレート                                                                                                                                                                      |
 | Total RU       | 選択した期間内にこのSQL文によって消費された合計RU                                                                                                                                                          |
 | Mean RU       | 選択した期間内にこのSQL文によって消費された平均RU値。この値は、総RU値を実行回数で割った値に等しくなります。                                                                                                                            |
-| Share         | 選択したTiDB Cloud EssentialまたはTiDB Cloud Premium インスタンスにおいて、この SQL文が消費する RU の総量に対する割合。上位 N 個の SQL文の合計が 100% にならない場合があります。残りの RU 消費量を考慮して 100% にするには、 **Others**の行を含めてください。 |
+| Share         | 選択した{{{ .essential }}}または{{{ .premium }}} インスタンスにおいて、この SQL文が消費する RU の総量に対する割合。上位 N 個の SQL文の合計が 100% にならない場合があります。残りの RU 消費量を考慮して 100% にするには、 **Others**の行を含めてください。 |
 | Executions       | 選択した期間内にこのSQL文が実行された回数                                                                                                                                                               |
 | Plans     | 選択した期間における、このSQL文の実行計画の数。                                                                                                                                                           |
 | Total latency   | 選択した期間内にこのSQL文が消費した合計実行時間                                                                                                                                                            |
@@ -99,7 +99,7 @@ TiDB Cloudプランによって、Top RUの機能は異なります。
 | SQL Digest | 正規化されたSQLテンプレートID                                                                     |
 | Total RU      | 選択した期間内にこのSQLによって消費された合計RU                                                            |
 | Mean RU      | 選択した期間内にこのSQL文によって消費された平均RU値。この値は、総RU値を実行回数で割った値に等しくなります。                             |
-| Share        | 選択したTiDB Cloud EssentialまたはTiDB Cloud Premiumインスタンスにおいて、このSQL文が消費するRUの総量に対する割合。 |
+| Share        | 選択した{{{ .essential }}}または{{{ .premium }}}インスタンスにおいて、このSQL文が消費するRUの総量に対する割合。 |
 | Executions      | 選択した期間内にこのSQL文が実行された回数。                                                               |
 | Plans    | 選択した期間における、このSQL文の実行計画の数。                                                            |
 | Total latency  | 選択した時間範囲内で、このSQL文が消費した合計実行時間。                                                         |
@@ -124,7 +124,7 @@ SQLに複数の実行計画がある場合、パネルにはまずプラン一�
 
 RUスパイクを調査するには、以下のワークフローを使用してください。
 
-1. TiDB Cloud EssentialまたはTiDB Cloud PremiumインスタンスのメトリクスでRUの急上昇、またはトリガーされたアラートに気付きます。
+1. {{{ .essential }}}または{{{ .premium }}}インスタンスのメトリクスでRUの急上昇、またはトリガーされたアラートに気付きます。
 2. **Monitoring** > **Top RU**に移動し、 **Overview**タブをクリックして、スパイクが発生した期間を選択します。
 3. **Total RU**が最も高いSQL文を特定します。各SQL文にカーソルを合わせると、RU値の推移が表示され、急上昇が始まった時期がわかります。
 4. 特定のユーザーがRUの急増を引き起こしているかどうかを確認するには、 **Rank by Users**パネルを確認してください。
@@ -147,13 +147,13 @@ RUスパイクを調査するには、以下のワークフローを使用して
 
 [Top SQL](/tidb-cloud/tidb-cloud-clinic.md#monitor-top-sql)は、特定のTiDBまたはTiKVノードにおけるCPU時間に基づいてSQL文をランク付けします。これはTiDB Cloud Dedicatedクラスターに適用されます。
 
-Top RUは、インスタンスレベルでのリクエストユニット（RU）消費量に基づいてSQL文をランク付けし、ユーザーレベルでの内訳をサポートします。TiDB Cloud PremiumインスタンスとTiDB Cloud Essentialインスタンスに適用されます。
+Top RUは、インスタンスレベルでのリクエストユニット（RU）消費量に基づいてSQL文をランク付けし、ユーザーレベルでの内訳をサポートします。{{{ .premium }}}インスタンスと{{{ .essential }}}インスタンスに適用されます。
 
 ### Top RUにデータがないのはなぜですか？ {#why-is-there-no-data-in-top-ru}
 
 - 選択した期間に実際のSQLワークロードが含まれていることを確認してください。
 - 少なくとも1分間ワークロードを実行した後、ページを更新してください。
-- [TiDB Cloudリリースノート](/tidb-cloud/releases/tidb-cloud-release-notes.md)を確認して、お使いのTiDB Cloud EssentialまたはTiDB Cloud Premium インスタンスのバージョンとリージョンで Top RU が利用可能かどうかを確認してください。
+- [TiDB Cloudリリースノート](/tidb-cloud/releases/tidb-cloud-release-notes.md)を確認して、お使いの{{{ .essential }}}または{{{ .premium }}} インスタンスのバージョンとリージョンで Top RU が利用可能かどうかを確認してください。
 
 問題が解決しない場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 

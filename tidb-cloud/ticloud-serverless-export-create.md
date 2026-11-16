@@ -5,7 +5,7 @@ summary: "`ticloud serverless export create` のリファレンス。"
 
 # ticloud serverless export create {#ticloud-serverless-export-create}
 
-TiDB Cloud Starter またはTiDB Cloud Essential インスタンスからデータをエクスポートします。
+{{{ .starter }}} または{{{ .essential }}} インスタンスからデータをエクスポートします。
 
 ```shell
 ticloud serverless export create [flags]
@@ -13,37 +13,37 @@ ticloud serverless export create [flags]
 
 ## 例 {#examples}
 
-対話型モードでTiDB Cloud Starter またはTiDB Cloud Essential インスタンスからデータをエクスポートします。
+対話型モードで{{{ .starter }}} または{{{ .essential }}} インスタンスからデータをエクスポートします。
 
 ```shell
 ticloud serverless export create
 ```
 
-非対話型モードでTiDB Cloud Starter またはTiDB Cloud Essential インスタンスからローカルファイルにデータをエクスポートします。
+非対話型モードで{{{ .starter }}} または{{{ .essential }}} インスタンスからローカルファイルにデータをエクスポートします。
 
 ```shell
 ticloud serverless export create -c <cluster-id> --filter <database.table>
 ```
 
-非対話型モードでTiDB Cloud Starter またはTiDB Cloud Essential インスタンスから Amazon S3 にデータをエクスポートします。
+非対話型モードで{{{ .starter }}} または{{{ .essential }}} インスタンスから Amazon S3 にデータをエクスポートします。
 
 ```shell
 ticloud serverless export create -c <cluster-id> --s3.uri <uri> --s3.access-key-id <access-key-id> --s3.secret-access-key <secret-access-key> --filter <database.table>
 ```
 
-非対話型モードでTiDB Cloud Starter またはTiDB Cloud Essential インスタンスから Google Cloud Storage にデータをエクスポートします。
+非対話型モードで{{{ .starter }}} または{{{ .essential }}} インスタンスから Google Cloud Storage にデータをエクスポートします。
 
 ```shell
 ticloud serverless export create -c <cluster-id> --gcs.uri <uri> --gcs.service-account-key <service-account-key> --filter <database.table>
 ```
 
-非対話型モードでTiDB Cloud Starter またはTiDB Cloud Essential インスタンスから Azure Blob Storage にデータをエクスポートします。
+非対話型モードで{{{ .starter }}} または{{{ .essential }}} インスタンスから Azure Blob Storage にデータをエクスポートします。
 
 ```shell
 ticloud serverless export create -c <cluster-id> --azblob.uri <uri> --azblob.sas-token <sas-token> --filter <database.table>
 ```
 
-TiDB Cloud Starter またはTiDB Cloud Essential インスタンスから Alibaba Cloud OSS に非対話型モードでデータをエクスポートします。
+{{{ .starter }}} または{{{ .essential }}} インスタンスから Alibaba Cloud OSS に非対話型モードでデータをエクスポートします。
 
 ```shell
 ticloud serverless export create -c <cluster-id> --oss.uri <uri> --oss.access-key-id <access-key-id> --oss.access-key-secret <access-key-secret> --filter <database.table>
@@ -90,7 +90,7 @@ ticloud serverless export create -c <cluster-id> --sql 'select * from database.t
 | --sql string                   | `SQL SELECT`文を使用してエクスポートされたデータをフィルターします。                                                                            | いいえ | 非対話型モードでのみ動作します。         |
 | --where string                       | エクスポートされたテーブルを`WHERE`条件でフィルタリングします。--sqlと同時に使用しないでください。                                                                   | いいえ | 非対話型モードでのみ動作します。         |
 | --compression string                     | エクスポートファイルの圧縮アルゴリズムを指定します。サポートされているアルゴリズムは`GZIP` 、 `SNAPPY` 、 `ZSTD` 、 `NONE`です。デフォルト値は`GZIP`です。                          | いいえ | 非対話型モードでのみ動作します。         |
-|  --force                    | 確認なしでエクスポートタスクを作成します。非対話型モードでTiDB Cloud Starter またはTiDB Cloud Essential インスタンス全体をエクスポートする場合は、確認が必要です。                                                                 | いいえ | 非対話型モードでのみ動作します。         |
+|  --force                    | 確認なしでエクスポートタスクを作成します。非対話型モードで{{{ .starter }}} または{{{ .essential }}} インスタンス全体をエクスポートする場合は、確認が必要です。                                                                 | いいえ | 非対話型モードでのみ動作します。         |
 | -h, --help                  | このコマンドのヘルプ情報を表示します。                                                                                                       | いいえ | 非対話型モードと対話型モードの両方で動作します。 |
 
 ## 継承されたフラグ {#inherited-flags}

@@ -5,7 +5,7 @@ summary: "`ticloud serverless update` のリファレンス。"
 
 # ticloud serverless update {#ticloud-serverless-update}
 
-TiDB Cloud Starter またはTiDB Cloud Essential インスタンスを更新します。
+{{{ .starter }}} または{{{ .essential }}} インスタンスを更新します。
 
 ```shell
 ticloud serverless update [flags]
@@ -13,19 +13,19 @@ ticloud serverless update [flags]
 
 ## 例 {#examples}
 
-対話型モードでTiDB Cloud Starter またはTiDB Cloud Essential インスタンスを更新します。
+対話型モードで{{{ .starter }}} または{{{ .essential }}} インスタンスを更新します。
 
 ```shell
 ticloud serverless update
 ```
 
-非対話型モードでTiDB Cloud Starter またはTiDB Cloud Essential インスタンスの名前を更新します。
+非対話型モードで{{{ .starter }}} または{{{ .essential }}} インスタンスの名前を更新します。
 
 ```shell
 ticloud serverless update -c <cluster-id> --display-name <new-display-mame>
 ```
 
-非対話型モードでTiDB Cloud Starter またはTiDB Cloud Essential インスタンスのラベルを更新する
+非対話型モードで{{{ .starter }}} または{{{ .essential }}} インスタンスのラベルを更新する
 
 ```shell
 ticloud serverless update -c <cluster-id> --labels "{\"label1\":\"value1\"}"
@@ -38,9 +38,9 @@ ticloud serverless update -c <cluster-id> --labels "{\"label1\":\"value1\"}"
 | フラグ                  | 説明                          | 必須  | 注記                       |
 | -------------------- | --------------------------- | --- | ------------------------ |
 | -c, --cluster-id string | クラスターの ID を指定します。           | はい  | 非対話型モードでのみ動作します。         |
-| -n, --display-name string  | TiDB Cloud Starter またはEssential インスタンスの新しい名前を指定します。          | いいえ | 非対話型モードでのみ動作します。         |
-| --labels string         | TiDB Cloud Starter またはEssential インスタンスの新しいラベルを指定します。         | いいえ | 非対話型モードでのみ動作します。         |
-| --disable-public-endpoint | TiDB Cloud Starter またはEssential インスタンスのパブリックエンドポイントを無効にします。 | いいえ | 非対話型モードでのみ動作します。         |
+| -n, --display-name string  | {{{ .starter }}} またはEssential インスタンスの新しい名前を指定します。          | いいえ | 非対話型モードでのみ動作します。         |
+| --labels string         | {{{ .starter }}} またはEssential インスタンスの新しいラベルを指定します。         | いいえ | 非対話型モードでのみ動作します。         |
+| --disable-public-endpoint | {{{ .starter }}} またはEssential インスタンスのパブリックエンドポイントを無効にします。 | いいえ | 非対話型モードでのみ動作します。         |
 | -h, --help           | このコマンドのヘルプ情報を表示します。         | いいえ | 非対話型モードと対話型モードの両方で動作します。 |
 
 ## 継承されたフラグ {#inherited-flags}

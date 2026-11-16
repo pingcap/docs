@@ -16,9 +16,9 @@ summary: ticloud CLI を使用して、{{{ .starter }}} および Essential イ�
 
 TiDB Cloud は、ターミナルから数行のコマンドで TiDB Cloud Starter および Essential とやり取りできるコマンドラインインターフェイス (CLI) [`ticloud`](https://github.com/tidbcloud/tidbcloud-cli)を提供しています。たとえば、 `ticloud`を使用して、次の操作を実行できます。
 
-- TiDB Cloud StarterまたはEssentialインスタンスの作成、削除、一覧表示を行います。
-- TiDB Cloud StarterまたはEssentialインスタンスにデータをインポートします。
-- TiDB Cloud StarterまたはEssentialインスタンスからデータをエクスポートします。
+- {{{ .starter }}}またはEssentialインスタンスの作成、削除、一覧表示を行います。
+- {{{ .starter }}}またはEssentialインスタンスにデータをインポートします。
+- {{{ .starter }}}またはEssentialインスタンスからデータをエクスポートします。
 
 > **Note:**
 >
@@ -100,11 +100,11 @@ MySQL コマンドラインクライアントがインストールされてい�
 >
 > TiUPを使用する場合は、`ticloud`の代わりに`tiup cloud`を使用できます。
 
-[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)は、 TiDB Cloudを始めるための最適な方法です。このセクションでは、 TiDB Cloud CLIを使用してTiDB Cloud Starterインスタンスを作成する方法を学びます。
+[{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter)は、 TiDB Cloudを始めるための最適な方法です。このセクションでは、 TiDB Cloud CLIを使用して{{{ .starter }}}インスタンスを作成する方法を学びます。
 
 ### ユーザープロファイルを作成するか、TiDB Cloudにログインする {#create-a-user-profile-or-log-into-tidb-cloud}
 
-TiDB Cloud CLI を使用して TiDB Cloud Starterインスタンスを作成する前に、ユーザープロファイルを作成するか、 TiDB Cloudにログインする必要があります。
+TiDB Cloud CLI を使用して {{{ .starter }}}インスタンスを作成する前に、ユーザープロファイルを作成するか、 TiDB Cloudにログインする必要があります。
 
 - [TiDB Cloud APIキー](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management)を使用してユーザープロファイルを作成します。
 
@@ -128,9 +128,9 @@ TiDB Cloud CLI を使用して TiDB Cloud Starterインスタンスを作成す�
 >
 > 上記2つの方法では、 TiDB Cloud APIキーがOAuthトークンよりも優先されます。両方が利用可能な場合は、APIキーが使用されます。
 
-### TiDB Cloud Starterインスタンスを作成する {#create-a-tidb-cloud-starter-instance}
+### {{{ .starter }}}インスタンスを作成する {#create-a-tidb-cloud-starter-instance}
 
-TiDB Cloud Starterインスタンスを作成するには、次のコマンドを入力し、CLIプロンプトに従って必要な情報を入力してください。
+{{{ .starter }}}インスタンスを作成するには、次のコマンドを入力し、CLIプロンプトに従って必要な情報を入力してください。
 
 ```shell
 ticloud serverless create

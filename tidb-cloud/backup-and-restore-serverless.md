@@ -172,13 +172,13 @@ TiDB Cloudは、新しいTiDB Cloud StarterまたはEssentialインスタンス�
 
 復元処理が開始されると、 TiDB Cloud StarterまたはEssentialインスタンスのステータスが**Restoring**に変わります。復元が完了し、ステータスが**Available**に変わるまで、 TiDB Cloud StarterまたはEssentialインスタンスは利用できません。
 
-### ごみ箱から復元 {#restore-from-recycle-bin}
+### Recycle Bin から復元 {#restore-from-recycle-bin}
 
 > **Note:**
 >
-> TiDB Cloud Starterは、ごみ箱からの復元をサポートしていません。
+> TiDB Cloud Starterは、Recycle Bin からの復元をサポートしていません。
 
-ごみ箱から削除されたTiDB Cloud Essentialインスタンスを復元するには、次の手順を実行します。
+Recycle Bin から削除されたTiDB Cloud Essentialインスタンスを復元するには、次の手順を実行します。
 
 1. [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、右上隅の**...**をクリックして、 **Recycle Bin**をクリックします。
 
@@ -192,7 +192,7 @@ TiDB Cloudは、新しいTiDB Cloud StarterまたはEssentialインスタンス�
 
     > **Note:**
     >
-    > TiDB Cloud Essentialインスタンス**にバックアップがない**場合、削除されたインスタンスはごみ箱に表示されません。
+    > TiDB Cloud Essentialインスタンス**にバックアップがない**場合、削除されたインスタンスは Recycle Bin に表示されません。
 
 4. 復元したいバックアップの行で、 **...**をクリックし、次に**Restore**を選択します。
 
@@ -202,5 +202,5 @@ TiDB Cloudは、新しいTiDB Cloud StarterまたはEssentialインスタンス�
 
 - TiFlashレプリカが有効になっている場合、データの再構築がTiFlash内で行われるため、復元後一定期間は利用できなくなります。
 - TiDB Cloud Starterインスタンスでは、手動バックアップはサポートされていません。TiDB Cloud Essentialインスタンスでは、手動バックアップにはTiDBバージョン `CLOUD.202603.x` 以降が必要です。
-- 手動バックアップでは、特定時点への復元や、テーブルレベルまたはデータベースレベルのバックアップなどの部分バックアップはサポートされていません。復元のたびに新しいインスタンスが作成されるため、既存のインスタンスへの手動バックアップの復元はサポートされていません。
+- 手動バックアップでは、特定時点への復元や、テーブルレベルまたはデータベースレベルのバックアップなどの部分バックアップはサポートされていません。復元のたびに新しいインスタンスが作成されます。既存のインスタンスに手動バックアップを復元することはサポートされていません。
 - TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスで、1 TiBを超えるデータが含まれている場合、デフォルトでは新しいインスタンスへの復元はサポートされません。より大規模なデータセットに関するサポートが必要な場合は[TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。

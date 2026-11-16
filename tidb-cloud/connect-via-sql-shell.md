@@ -1,6 +1,6 @@
 ---
 title: Connect via SQL Shell
-summary: SQLシェルを使用してTiDBクラスタに接続する方法を学びましょう。
+summary: SQLシェルを使用してTiDBクラスターに接続する方法を学びましょう。
 ---
 
 # SQL Shell経由で接続する {#connect-via-sql-shell}
@@ -23,4 +23,4 @@ SQLシェルを使用してTiDBに接続するには、以下の手順を実行�
 
 3. **Networking**ページで、右上隅にある**Web SQL Shell**をクリックします。
 
-4. **Enter password**というプロンプトが表示されたら、現在のクラスタのrootパスワードを入力してください。これで、アプリケーションがTiDBクラスタに接続されます。
+4. **Enter password**というプロンプトが表示されたら、現在のクラスターのrootパスワードを入力してください。これで、アプリケーションがTiDBクラスターに接続されます。

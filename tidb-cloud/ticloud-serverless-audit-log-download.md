@@ -5,7 +5,7 @@ summary: "`ticloud serverless audit-log download` のリファレンス。"
 
 # ticloud serverless audit-log download {#ticloud-serverless-audit-log-download}
 
-TiDB Cloud Essential インスタンスからデータベース監査ログファイルをダウンロードします。
+{{{ .essential }}} インスタンスからデータベース監査ログファイルをダウンロードします。
 
 ```shell
 ticloud serverless audit-log download [flags]

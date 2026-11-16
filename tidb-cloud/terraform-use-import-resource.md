@@ -17,7 +17,7 @@ summary: "`tidbcloud_import` リソースを使用してインポートタスク
 
 - [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) 。
 - TiDB Cloudクラスターを作成するには、次のいずれかのドキュメントを参照してください。
-    - [TiDB Cloud StarterまたはEssentialインスタンスを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)
+    - [{{{ .starter }}}またはEssentialインスタンスを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)
     - [TiDB Cloud Dedicatedクラスターを作成する](/tidb-cloud/create-tidb-cluster.md) 。
 
 ## インポートタスクを作成して実行する {#create-and-run-an-import-task}
@@ -28,7 +28,7 @@ summary: "`tidbcloud_import` リソースを使用してインポートタスク
 
 > **Note:**
 >
-> ローカルファイルのインポートは、 TiDB Cloud Starter またはTiDB Cloud Essential インスタンスでのみサポートされ、 TiDB Cloud Dedicated クラスターではサポートされません。
+> ローカルファイルのインポートは、 {{{ .starter }}} または{{{ .essential }}} インスタンスでのみサポートされ、 TiDB Cloud Dedicated クラスターではサポートされません。
 
 1. インポート用のCSVファイルを作成します。例:
 

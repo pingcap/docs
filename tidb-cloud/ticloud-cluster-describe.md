@@ -5,7 +5,7 @@ summary: "`ticloud serverless describe` のリファレンス。"
 
 # ticloud serverless describe {#ticloud-serverless-describe}
 
-TiDB Cloud Starter またはTiDB Cloud Essential インスタンスに関する情報 (インスタンス構成やインスタンスステータスなど) を取得します。
+{{{ .starter }}} または{{{ .essential }}} インスタンスに関する情報 (インスタンス構成やインスタンスステータスなど) を取得します。
 
 ```shell
 ticloud serverless describe [flags]
@@ -19,13 +19,13 @@ ticloud serverless get [flags]
 
 ## 例 {#examples}
 
-対話型モードでTiDB Cloud Starter またはTiDB Cloud Essential インスタンスに関する情報を取得します。
+対話型モードで{{{ .starter }}} または{{{ .essential }}} インスタンスに関する情報を取得します。
 
 ```shell
 ticloud serverless describe
 ```
 
-非対話型モードでTiDB Cloud Starter またはTiDB Cloud Essential インスタンスに関する情報を取得します。
+非対話型モードで{{{ .starter }}} または{{{ .essential }}} インスタンスに関する情報を取得します。
 
 ```shell
 ticloud serverless describe --cluster-id <cluster-id>

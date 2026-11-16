@@ -575,7 +575,7 @@ summary: 2025年のTiDB Cloudのリリースノートについて説明します
     このリリースにより、 TiDB Cloud はAWS、Google Cloud、Azure の 3つの主要なパブリッククラウドプラットフォームすべてをサポートするようになり、ビジネスニーズとクラウド戦略に最適な場所にTiDB Cloud Dedicated クラスターをデプロイできるようになりました。
 
     - AWS および Google Cloud で利用可能なすべてのコア機能は、Azure で完全にサポートされています。
-    - Azure サポートは現在、米国東部 2、東日本、東南アジアの 3つのリージョンで利用可能であり、近日中にさらに多くのリージョンで利用可能になる予定です。
+    - Azure サポートは現在、East US 2、Japan East、Southeast Asia の 3つのリージョンで利用可能であり、近日中にさらに多くのリージョンで利用可能になる予定です。
     - Azure 上のTiDB Cloud Dedicated クラスターには、TiDB バージョン v7.5.3 以降が必要です。
 
     Azure でTiDB Cloud Dedicated をすぐに使い始めるには、次のドキュメントを参照してください。

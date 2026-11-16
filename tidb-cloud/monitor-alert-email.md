@@ -9,7 +9,7 @@ TiDB Cloudでは、電子メール、[Slack](/tidb-cloud/monitor-alert-slack.md)
 
 > **Note:**
 >
-> 現在、アラート購読は、 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)インスタンス、 [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium)インスタンス、および[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタで利用可能です。
+> 現在、アラート購読は、 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)インスタンス、 [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium)インスタンス、および[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターで利用可能です。
 
 ## 前提条件 {#prerequisites}
 
@@ -33,7 +33,7 @@ TiDB Cloudでは、電子メール、[Slack](/tidb-cloud/monitor-alert-slack.md)
 
 > **Tip:**
 >
-> TiDB Cloud Dedicatedの場合、アラートの購読は現在のプロジェクト内のすべてのアラートに適用されます。プロジェクト内に複数のTiDB Cloud Dedicatedクラスタがある場合でも、購読は一度だけで済みます。
+> TiDB Cloud Dedicatedの場合、アラートの購読は現在のプロジェクト内のすべてのアラートに適用されます。プロジェクト内に複数のTiDB Cloud Dedicatedクラスターがある場合でも、購読は一度だけで済みます。
 
 1. [TiDB Cloudコンソール](https://tidbcloud.com/)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **Project view**タブをクリックします。
 
@@ -58,7 +58,7 @@ TiDB Cloudでは、電子メール、[Slack](/tidb-cloud/monitor-alert-slack.md)
 
 8. 購読を完了するには、 **Save**をクリックしてください。
 
-または、 TiDB Cloud Dedicatedクラスタの[**Alert**](/tidb-cloud/monitor-built-in-alerting.md#view-alerts)ページの右上隅にある**Subscribe**をクリックすることもできます。**Alert Subscription**ページに移動します。
+または、 TiDB Cloud Dedicatedクラスターの[**Alert**](/tidb-cloud/monitor-built-in-alerting.md#view-alerts)ページの右上隅にある**Subscribe**をクリックすることもできます。**Alert Subscription**ページに移動します。
 
 </CustomContent>
 

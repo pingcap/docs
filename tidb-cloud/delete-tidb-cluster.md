@@ -40,17 +40,17 @@ summary: TiDB Cloudリソースを削除する方法を学びましょう。
 
 5. **I understand, delete it**をクリックしてください。
 
-    バックアップ済みのTiDB Cloud EssentialインスタンスまたはTiDB Cloud Dedicatedクラスターが削除されると、既存のバックアップファイルはごみ箱に移動されます。
+    バックアップ済みのTiDB Cloud EssentialインスタンスまたはTiDB Cloud Dedicatedクラスターが削除されると、既存のバックアップファイルは Recycle Bin に移動されます。
 
     - 自動バックアップは、最新のものを除き、保持期間が終了すると期限切れとなり自動的に削除されます。保持期間は、変更しない場合はデフォルトで7日間です。最新の自動バックアップは、明示的に削除しない限り削除されません。
 
-    - 手動で作成したバックアップファイルは、手動で削除されるまでごみ箱に保存されます。
+    - 手動で作成したバックアップファイルは、手動で削除されるまで Recycle Bin に保存されます。
 
     > **Note:**
     >
     > バックアップは削除されるまで料金が発生し続けることにご注意ください。
 
-    ごみ箱からデータを復元したい場合は、以下のドキュメントを参照してください。
+    Recycle Bin からデータを復元したい場合は、以下のドキュメントを参照してください。
 
     - [削除されたTiDB Cloud Essentialインスタンスを復元する](/tidb-cloud/backup-and-restore-serverless.md#restore-from-recycle-bin)。
     - [削除されたTiDB Cloud Dedicatedクラスターを復元する](/tidb-cloud/backup-and-restore.md#restore-a-deleted-cluster)。

@@ -21,9 +21,9 @@ TiDB Cloud は、実行された SQL ステートメントなど、データベ�
 
     > **Note:**
     >
-    > - TiDB Cloud Starterでは、データベース監査ログは利用できません。
-    > - TiDB Cloud Essentialについては、 [TiDB Cloud Essentialのデータベース監査ログ機能 (PREVIEW)](/tidb-cloud/essential-database-audit-logging.md)を参照してください。
-    > - TiDB Cloud Dedicatedについては、 [TiDB Cloud Dedicatedデータベース監査ログ](/tidb-cloud/tidb-cloud-auditing.md)を参照してください。
+    > - {{{ .starter }}}では、データベース監査ログは利用できません。
+    > - {{{ .essential }}}については、 [{{{ .essential }}}のデータベース監査ログ機能 (PREVIEW)](/tidb-cloud/essential-database-audit-logging.md)を参照してください。
+    > - {{{ .dedicated }}}については、 [{{{ .dedicated }}}データベース監査ログ](/tidb-cloud/tidb-cloud-auditing.md)を参照してください。
 
 - 組織内で`Organization Owner`ロールが付与されている必要があります。付与されていない場合、 TiDB Cloudコンソールでデータベース監査関連のオプションは表示されません。
 
@@ -57,10 +57,10 @@ TiDB Cloudが監査ログを書き込む宛先として、組織が所有するA
 
     4. **Database Audit Log Storage Configuration**ダイアログで、 **AWS IAM Policy Settings**セクションを探し、後で使用するために**TiDB Cloud Account ID**と**TiDB Cloud External ID**を記録してください。
 
-2. AWS マネジメントコンソールで、 **IAM** > **Access Management** > **Policies**に移動し、 `s3:PutObject`書き込み専用権限を持つストレージバケット ポリシーが存在するかどうかを確認します。
+2. AWS マネジメントコンソールで、 **IAM** > **Access Management** > **Policies**に移動し、 `s3:PutObject`書き込み専用権限を持つストレージバケットポリシーが存在するかどうかを確認します。
 
     - はいの場合、後で使用するために、一致したストレージバケットポリシーを記録してください。
-    - そうでない場合は、 **IAM** > **Access Management** > **Policies** > **Create Policy**に移動し、次のポリシー テンプレートに従ってバケット ポリシーを定義します。
+    - そうでない場合は、 **IAM** > **Access Management** > **Policies** > **Create Policy**に移動し、次のポリシーテンプレートに従ってバケットポリシーを定義します。
 
         ```json
         {
@@ -75,7 +75,7 @@ TiDB Cloudが監査ログを書き込む宛先として、組織が所有するA
         }
         ```
 
-        テンプレートでは、 `<Your S3 bucket ARN>`は監査ログファイルが書き込まれる S3 バケットの Amazon リソース ネーム (ARN) です。S3 バケットの**Properties**タブに移動し、 **Bucket Overview**領域で ARN の値を取得できます。 `"Resource"`フィールドでは、ARN の後に`/*`を追加する必要があります。たとえば、ARN が`arn:aws:s3:::tidb-cloud-test`の場合、 `"Resource"`フィールドの値を`"arn:aws:s3:::tidb-cloud-test/*"`に設定する必要があります。
+        テンプレートでは、 `<Your S3 bucket ARN>`は監査ログファイルが書き込まれる S3 バケットの Amazon リソースネーム (ARN) です。S3 バケットの**Properties**タブに移動し、 **Bucket Overview**領域で ARN の値を取得できます。 `"Resource"`フィールドでは、ARN の後に`/*`を追加する必要があります。たとえば、ARN が`arn:aws:s3:::tidb-cloud-test`の場合、 `"Resource"`フィールドの値を`"arn:aws:s3:::tidb-cloud-test/*"`に設定する必要があります。
 
 3. **IAM** > **Access Management** > **Roles**に移動し、以前に記録したTiDB Cloudアカウント ID と外部 ID に対応する信頼エンティティを持つロールが既に存在するかどうかを確認します。
 
@@ -137,7 +137,7 @@ TiDB Cloudが監査ログを書き込む宛先として、組織が所有するA
 
 監査ログを保存するOSSバケットと、そのOSSバケットにアクセスするロールが同じクラウドアカウントにある場合は、OSSアクセスを次のように構成します。
 
-1. 監査ログを有効にしたいTiDB Cloud PremiumインスタンスのAlibaba CloudサービスアカウントIDを取得してください。
+1. 監査ログを有効にしたい{{{ .premium }}}インスタンスのAlibaba CloudサービスアカウントIDを取得してください。
 
     1. TiDB Cloudコンソールで、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
     2. 対象インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** > **DB Audit Logging**をクリックします。
@@ -281,25 +281,25 @@ TiDB Cloudコンソールで、TiDB CloudアカウントIDを取得した**Datab
 >
 > ログの秘匿化を無効にすると、クラウドストレージに書き込まれる監査ログファイルに機密情報が含まれる可能性があります。潜在的なセキュリティリスクがあるため、この設定は推奨されません。
 
-## 監査フィルタルールを指定する {#specify-audit-filter-rules}
+## 監査フィルタールールを指定する {#specify-audit-filter-rules}
 
-監査ログを有効にした後、どのユーザーアクセスイベントをキャプチャして監査ログに書き込むかを制御するために、監査フィルタルールを指定する必要があります。フィルタルールが指定されていない場合、 TiDB Cloudは何もログに記録しません。
+監査ログを有効にした後、どのユーザーアクセスイベントをキャプチャして監査ログに書き込むかを制御するために、監査フィルタールールを指定する必要があります。フィルタールールが指定されていない場合、 TiDB Cloudは何もログに記録しません。
 
-インスタンスの監査フィルタルールを指定するには、次の手順を実行します。
+インスタンスの監査フィルタールールを指定するには、次の手順を実行します。
 
-1. **DB Audit Logging**ページで、 **Log Filter Rules**セクションの**Add Filter Rule**をクリックして、監査フィルタルールを追加します。
+1. **DB Audit Logging**ページで、 **Log Filter Rules**セクションの**Add Filter Rule**をクリックして、監査フィルタールールを追加します。
 
 2. **Add Filter Rule** ダイアログで、次の項目を設定します:
 
-    - **Filter Name**: フィルタルールの名前を入力します。
+    - **Filter Name**: フィルタールールの名前を入力します。
     - **SQL User**: SQL ユーザーを `<user>@<host>` 形式で入力します。ユーザー名とホスト名では、`%` を使用して 0 文字以上の任意の文字に一致させることができ、`_` を使用してちょうど 1 文字に一致させることができます。`@` 記号と `<host>` は省略可能です。
-    - **Filter Events**: ログに記録するイベントを選択します。サポートされているフィルタイベントについては、[監査フィルタイベント](#audit-filter-events) を参照してください。
+    - **Filter Events**: ログに記録するイベントを選択します。サポートされているフィルターイベントについては、[監査フィルターイベント](#audit-filter-events) を参照してください。
 
-3. **Confirm** をクリックしてフィルタルールを追加します。
+3. **Confirm** をクリックしてフィルタールールを追加します。
 
 > **Note:**
 >
-> - 監査ログはインスタンスのリソースを消費するため、フィルタルールを指定する際には注意が必要です。リソース使用量を最小限に抑えるには、可能な限り、監査ログを特定のユーザーとイベントに限定するフィルタルールを指定してください。
+> - 監査ログはインスタンスのリソースを消費するため、フィルタールールを指定する際には注意が必要です。リソース使用量を最小限に抑えるには、可能な限り、監査ログを特定のユーザーとイベントに限定するフィルタールールを指定してください。
 
 ## 監査ログを確認する {#view-audit-logs}
 
@@ -317,7 +317,7 @@ TiDB Cloudの監査ログは、インスタンスID、内部ID、およびログ
 >
 > ログファイルのサイズが10MiBに達するたびに、ログファイルはクラウドストレージバケットにプッシュされます。そのため、監査ログを無効にした後は、サイズが10MiB未満のログファイルは自動的にクラウドストレージバケットにプッシュされません。この状況でログファイルを取得するには、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
-## 監査フィルタイベント {#audit-filter-events}
+## 監査フィルターイベント {#audit-filter-events}
 
 次の表は、データベース監査ログのすべてのイベントクラスを示しています。
 
@@ -369,7 +369,7 @@ TiDB Cloudは、監査ログ内の各データベースイベントレコード�
 | ---------------- | -------------------------------------------------------------------------- |
 | `CURRENT_DB`     | 現在使用しているデータベースの名前。                                                         |
 | `SQL_TEXT`       | 実行されたSQL文。監査ログの秘匿化が有効になっている場合は、秘匿化された文が記録されます。                         |
-| `EXECUTE_PARAMS` | `EXECUTE`文に渡されるパラメータ。イベントクラスに`EXECUTE`が含まれ、かつ秘匿化が無効になっている場合にのみ記録されます。 |
+| `EXECUTE_PARAMS` | `EXECUTE`文に渡されるパラメーター。イベントクラスに`EXECUTE`が含まれ、かつ秘匿化が無効になっている場合にのみ記録されます。 |
 | `AFFECTED_ROWS`  | SQL文によって影響を受けた行数。イベントクラスに`QUERY_DML`が含まれている場合にのみ記録されます。            |
 
 ### 接続情報 {#connection-information}

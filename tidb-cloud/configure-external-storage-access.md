@@ -337,7 +337,7 @@ AccessKey ペアを設定するには、以下の手順に従ってください�
 
     **Access Mode**セクションで、 **Using permanent AccessKey to access**を選択します。
 
-2. 必要な権限を持つカスタム ポリシーを作成します。詳細については、 [カスタムポリシーを作成する](https://www.alibabacloud.com/help/en/ram/user-guide/create-a-custom-policy)を参照してください。
+2. 必要な権限を持つカスタムポリシーを作成します。詳細については、 [カスタムポリシーを作成する](https://www.alibabacloud.com/help/en/ram/user-guide/create-a-custom-policy)を参照してください。
 
     - **Effect**セクションで**Allow**を選択します。
 
@@ -351,4 +351,4 @@ AccessKey ペアを設定するには、以下の手順に従ってください�
 
     - **Resource**セクションで、バケットとバケット内のオブジェクトを選択します。
 
-3. カスタム ポリシーを RAM ユーザーにアタッチします。詳細については、 [RAMユーザーに権限を付与する](https://www.alibabacloud.com/help/en/ram/user-guide/grant-permissions-to-the-ram-user)を参照してください。
+3. カスタムポリシーを RAM ユーザーにアタッチします。詳細については、 [RAMユーザーに権限を付与する](https://www.alibabacloud.com/help/en/ram/user-guide/grant-permissions-to-the-ram-user)を参照してください。

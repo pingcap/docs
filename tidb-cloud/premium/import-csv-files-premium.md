@@ -1,16 +1,16 @@
 ---
 title: クラウドストレージからCSVファイルを{{{ .premium }}}または{{{ .byoc }}}にインポートする
-summary: Amazon Simple Storage Service（Amazon S3）からTiDB Cloud Premiumおよび{{{ .byoc }}}インスタンスにCSVファイルをインポートする方法と、Alibaba Cloud Object Storage Service（OSS）からTiDB Cloud PremiumインスタンスにCSVファイルをインポートする方法を学びましょう。
+summary: Amazon Simple Storage Service（Amazon S3）から{{{ .premium }}}および{{{ .byoc }}}インスタンスにCSVファイルをインポートする方法と、Alibaba Cloud Object Storage Service（OSS）から{{{ .premium }}}インスタンスにCSVファイルをインポートする方法を学びましょう。
 ---
 
 # クラウドストレージからCSVファイルを{{{ .premium }}}または{{{ .byoc }}}にインポートする
 
-このドキュメントでは、Amazon Simple Storage Service（Amazon S3）からTiDB Cloud Premiumおよび{{{ .byoc }}}インスタンスにCSVファイルをインポートする方法と、Alibaba Cloud Object Storage Service（OSS）からTiDB Cloud PremiumインスタンスにCSVファイルをインポートする方法について説明します。
+このドキュメントでは、Amazon Simple Storage Service（Amazon S3）から{{{ .premium }}}および{{{ .byoc }}}インスタンスにCSVファイルをインポートする方法と、Alibaba Cloud Object Storage Service（OSS）から{{{ .premium }}}インスタンスにCSVファイルをインポートする方法について説明します。
 
 > **Tip:**
 >
-> - {{{ .starter }}} または Essential については、[TiDB Cloud StarterまたはEssentialにクラウドストレージからCSVファイルをインポートする](/tidb-cloud/import-csv-files-serverless.md)を参照してください。
-> - {{{ .dedicated }}} については、[クラウドストレージからTiDB Cloud DedicatedにCSVファイルをインポートする](/tidb-cloud/import-csv-files.md)を参照してください。
+> - {{{ .starter }}} または Essential については、[{{{ .starter }}}またはEssentialにクラウドストレージからCSVファイルをインポートする](/tidb-cloud/import-csv-files-serverless.md)を参照してください。
+> - {{{ .dedicated }}} については、[クラウドストレージから{{{ .dedicated }}}にCSVファイルをインポートする](/tidb-cloud/import-csv-files.md)を参照してください。
 
 ## 制限事項 {#limitations}
 
@@ -97,7 +97,7 @@ CSVファイルにはスキーマ情報が含まれていないため、CSVフ�
 
 <CustomContent plan="premium">
 
-- CSV ファイルが Alibaba Cloud Object Storage Service (OSS) にある場合は、 TiDB Cloud Premium インスタンスの[Alibaba Cloud Object Storage Service (OSS) へのアクセスを設定](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access)してください。
+- CSV ファイルが Alibaba Cloud Object Storage Service (OSS) にある場合は、 {{{ .premium }}} インスタンスの[Alibaba Cloud Object Storage Service (OSS) へのアクセスを設定](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access)してください。
 
 </CustomContent>
 
@@ -125,7 +125,7 @@ CSVファイルを{{{ .premium }}} または {{{ .byoc }}} にインポートす
     - **Storage Provider**: **Amazon S3**を選択します。
     - **Source Files URI**:
         - 1つのファイルをインポートする場合は、ソースファイルのURIを`s3://[bucket_name]/[data_source_folder]/[file_name].csv`形式で入力します。例: `s3://sampledata/ingest/TableName.01.csv`。
-        - 複数のファイルをインポートする場合は、ソースフォルダのURIを`s3://[bucket_name]/[data_source_folder]/`形式で入力します。例: `s3://sampledata/ingest/`。
+        - 複数のファイルをインポートする場合は、ソースフォルダーのURIを`s3://[bucket_name]/[data_source_folder]/`形式で入力します。例: `s3://sampledata/ingest/`。
     - **Credential**: AWS Role ARNまたはAWSアクセスキーのいずれかを使用してバケットにアクセスできます。詳細については、[Amazon S3へのアクセスを設定する](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access)を参照してください。
         - **AWS Role ARN**: AWS Role ARNの値を入力します。新しいロールを作成する必要がある場合は、**Click here to create a new one with AWS CloudFormation**をクリックし、ガイド付きの手順に従って提供されたテンプレートを起動し、IAM警告を確認し、スタックを作成して、生成されたARNをTiDB Cloudにコピーして戻します。
         - **AWS Access Key**: AWSアクセスキーIDとAWSシークレットアクセスキーを入力します。
@@ -181,7 +181,7 @@ CSVファイルを{{{ .premium }}} または {{{ .byoc }}} にインポートす
     - **Storage Provider**: **Alibaba Cloud OSS**を選択します。
     - **Source Files URI**:
         - 1つのファイルをインポートする場合は、ソースファイルのURIを`oss://[bucket_name]/[data_source_folder]/[file_name].csv`形式で入力します。例: `oss://sampledata/ingest/TableName.01.csv`。
-        - 複数のファイルをインポートする場合は、ソースフォルダのURIを`oss://[bucket_name]/[data_source_folder]/`形式で入力します。例: `oss://sampledata/ingest/`。
+        - 複数のファイルをインポートする場合は、ソースフォルダーのURIを`oss://[bucket_name]/[data_source_folder]/`形式で入力します。例: `oss://sampledata/ingest/`。
     - **Credential**: AccessKeyペアを使用してバケットにアクセスできます。詳細については、[Alibaba Cloudオブジェクトストレージサービス（OSS）へのアクセスを設定する](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access)を参照してください。
     - **Test Bucket Access**: 認証情報の入力後、このボタンをクリックして、{{{ .premium }}} がバケットにアクセスできることを確認します。
     - **Target Connection**: インポートを実行するTiDBのユーザー名とパスワードを入力します。必要に応じて、**Test Connection**をクリックして認証情報を検証します。

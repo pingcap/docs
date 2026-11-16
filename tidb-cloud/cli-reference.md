@@ -22,7 +22,7 @@ summary: TiDB Cloud StarterおよびEssential向けのticloud CLIの概要を説
 
 ## 始める前に {#before-you-begin}
 
-必ず最初に[TiDB Cloud CLI環境をセットアップ](/tidb-cloud/get-started-with-cli.md)してください。 `ticloud` CLI をインストールすると、それを使用してコマンドラインからTiDB Cloud StarterインスタンスとEssentialインスタンスを管理できるようになります。
+必ず最初に[TiDB Cloud CLI環境をセットアップ](/tidb-cloud/get-started-with-cli.md)してください。 `ticloud` CLI をインストールすると、それを使用してコマンドラインから{{{ .starter }}}インスタンスとEssentialインスタンスを管理できるようになります。
 
 ## 使用可能なコマンド {#commands-available}
 
@@ -33,12 +33,12 @@ summary: TiDB Cloud StarterおよびEssential向けのticloud CLIの概要を説
 | コマンド            | サブコマンド                             | 説明                                                               |
 | ------------- | ---------------------------------- | ---------------------------------------------------------------- |
 | auth            | login, logout, whoami                  | ログインとログアウト                                                       |
-| serverless (alias: s)  | create, delete, describe, list, update, spending-limit, region, shell    | TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスを管理する             |
-| serverless branch    | create, delete, describe, list, shell                  | TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスのブランチを管理します。      |
-| serverless import   | cancel, describe, list, start                    | TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスのインポートタスクを管理します。  |
-| serverless export  | create, describe, list, cancel, download            | TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスのエクスポートタスクを管理します。 |
-| serverless sql-user | create, list, delete, update                      | TiDB Cloud StarterまたはTiDB Cloud EssentialインスタンスのSQLユーザーを管理する     |
-| serverless audit-log    | config, describe, filter-rule (alias: filter), download      | TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスのデータベース監査ログを管理する  |
+| serverless (alias: s)  | create, delete, describe, list, update, spending-limit, region, shell    | {{{ .starter }}}または{{{ .essential }}}インスタンスを管理する             |
+| serverless branch    | create, delete, describe, list, shell                  | {{{ .starter }}}または{{{ .essential }}}インスタンスのブランチを管理します。      |
+| serverless import   | cancel, describe, list, start                    | {{{ .starter }}}または{{{ .essential }}}インスタンスのインポートタスクを管理します。  |
+| serverless export  | create, describe, list, cancel, download            | {{{ .starter }}}または{{{ .essential }}}インスタンスのエクスポートタスクを管理します。 |
+| serverless sql-user | create, list, delete, update                      | {{{ .starter }}}または{{{ .essential }}}インスタンスのSQLユーザーを管理する     |
+| serverless audit-log    | config, describe, filter-rule (alias: filter), download      | {{{ .starter }}}または{{{ .essential }}}インスタンスのデータベース監査ログを管理する  |
 | completion            | bash, fish, powershell, zsh           | 指定されたシェル用の補完スクリプトを生成する                                           |
 | config            | create, delete, describe, edit, list, set, use             | ユーザープロファイルの設定                                                    |
 | project        | list                                | プロジェクトを管理する                                                      |

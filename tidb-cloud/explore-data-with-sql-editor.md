@@ -6,7 +6,7 @@ aliases: ['/ja/tidbcloud/explore-data-with-chat2query','/ja/tidbcloud/use-chat2q
 
 # SQL Editor（プレビュー）でデータを探索する {#explore-your-data-with-sql-editor-preview}
 
-[TiDB Cloudコンソール](https://tidbcloud.com/) に組み込まれている SQL Editor を使用して、データの価値を最大限に引き出すことができます。
+[TiDB Cloudコンソール](https://tidbcloud.com/) に組み込まれている SQL Editor を使用して、データの価値を最大限に引き出せます。
 
 SQL Editor では、ローカルの SQL クライアントがなくても、データベースに対して SQL クエリを作成して実行できます。クエリ結果をテーブルやチャートで直感的に確認でき、クエリログも簡単に確認できます。
 

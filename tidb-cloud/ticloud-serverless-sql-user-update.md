@@ -5,7 +5,7 @@ summary: "`ticloud serverless sql-user update` のリファレンス。"
 
 # ticloud serverless sql-user update {#ticloud-serverless-sql-user-update}
 
-TiDB Cloud Starter またはTiDB Cloud Essential インスタンス内の SQL ユーザーを更新します。
+{{{ .starter }}} または{{{ .essential }}} インスタンス内の SQL ユーザーを更新します。
 
 ```shell
 ticloud serverless sql-user update [flags]
@@ -13,13 +13,13 @@ ticloud serverless sql-user update [flags]
 
 ## 例 {#examples}
 
-対話型モードでTiDB Cloud Starter またはTiDB Cloud Essential インスタンス内の SQL ユーザーを更新します。
+対話型モードで{{{ .starter }}} または{{{ .essential }}} インスタンス内の SQL ユーザーを更新します。
 
 ```shell
 ticloud serverless sql-user update
 ```
 
-非対話型モードでTiDB Cloud Starter またはTiDB Cloud Essential インスタンス内の SQL ユーザーを更新します。
+非対話型モードで{{{ .starter }}} または{{{ .essential }}} インスタンス内の SQL ユーザーを更新します。
 
 ```shell
 ticloud serverless sql-user update -c <cluster-id> --user <user-name> --password <password> --role <role>

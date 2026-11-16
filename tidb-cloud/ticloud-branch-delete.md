@@ -5,7 +5,7 @@ summary: "`ticloud serverless branch delete` のリファレンス。"
 
 # ticloud serverless branch delete {#ticloud-serverless-branch-delete}
 
-TiDB Cloud Starter またはTiDB Cloud Essential インスタンスからブランチを削除します。
+{{{ .starter }}} または{{{ .essential }}} インスタンスからブランチを削除します。
 
 ```shell
 ticloud serverless branch delete [flags]

@@ -116,7 +116,7 @@ class Main {
 
 - TLS を有効にしてTiDB Cloud Dedicated クラスターを検証するには、 `sslMode=VERIFY_IDENTITY`を設定します。
 - TLSプロトコルのバージョンを制限するには、 `enabledTLSProtocols=TLSv1.2`を設定します。TLS 1.3を使用する場合は、バージョンを`TLSv1.3`に設定できます。
-- `trustCertificateKeyStoreUrl`をカスタム トラストストアのパスに設定します。
+- `trustCertificateKeyStoreUrl`をカスタムトラストストアのパスに設定します。
 - トラストストアのパスワードを`trustCertificateKeyStorePassword`に設定します。
 
 </div>

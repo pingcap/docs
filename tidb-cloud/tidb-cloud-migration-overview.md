@@ -41,21 +41,21 @@ SQL、CSV、Parquet、またはAurora Snapshot形式のデータファイルを�
 
 - サンプルデータ（SQLファイル）をTiDB Cloudにインポートする
 
-    TiDB Cloudにサンプルデータ（SQLファイル）をインポートすることで、 TiDB Cloud のインターフェースとインポートプロセスをすぐに理解できます。詳細については、 [サンプルデータをTiDB Cloud StarterまたはEssentialにインポートする](/tidb-cloud/import-sample-data-serverless.md)と[サンプルデータをTiDB Cloud Dedicatedにインポート](/tidb-cloud/import-sample-data.md)をご覧ください。
+    TiDB Cloudにサンプルデータ（SQLファイル）をインポートすることで、 TiDB Cloud のインターフェースとインポートプロセスをすぐに理解できます。詳細については、 [サンプルデータを{{{ .starter }}}またはEssentialにインポートする](/tidb-cloud/import-sample-data-serverless.md)と[サンプルデータをTiDB Cloud Dedicatedにインポート](/tidb-cloud/import-sample-data.md)をご覧ください。
 
 - Amazon S3、Google Cloud Storage (GCS)、Azure Blob Storage、または Alibaba Cloud OSS から CSV ファイルをTiDB Cloudにインポートします。
 
-    Amazon S3、Google Cloud Storage（GCS）、Azure Blob Storage、またはAlibaba Cloud OSSからTiDB CloudにCSVファイルをインポートできます。詳細については、 [クラウドストレージからTiDB Cloud StarterまたはEssentialにCSVファイルをインポートする](/tidb-cloud/import-csv-files-serverless.md)と[クラウドストレージからTiDB Cloud DedicatedにCSVファイルをインポートする](/tidb-cloud/import-csv-files.md)をご覧ください。
+    Amazon S3、Google Cloud Storage（GCS）、Azure Blob Storage、またはAlibaba Cloud OSSからTiDB CloudにCSVファイルをインポートできます。詳細については、 [クラウドストレージから{{{ .starter }}}またはEssentialにCSVファイルをインポートする](/tidb-cloud/import-csv-files-serverless.md)と[クラウドストレージからTiDB Cloud DedicatedにCSVファイルをインポートする](/tidb-cloud/import-csv-files.md)をご覧ください。
 
 - Amazon S3、Google Cloud Storage (GCS)、Azure Blob Storage、または Alibaba Cloud OSS から Apache Parquet ファイルをTiDB Cloudにインポートします。
 
-    Amazon S3、Google Cloud Storage（GCS）、Azure Blob Storage、またはAlibaba Cloud OSSからParquetファイルをTiDB Cloudにインポートできます。詳細については、 [クラウドストレージからTiDB Cloud StarterまたはEssentialにApache Parquetファイルをインポートする](/tidb-cloud/import-parquet-files-serverless.md)と[クラウドストレージからTiDB Cloud DedicatedにApache Parquetファイルをインポートする](/tidb-cloud/import-parquet-files.md)をご覧ください。
+    Amazon S3、Google Cloud Storage（GCS）、Azure Blob Storage、またはAlibaba Cloud OSSからParquetファイルをTiDB Cloudにインポートできます。詳細については、 [クラウドストレージから{{{ .starter }}}またはEssentialにApache Parquetファイルをインポートする](/tidb-cloud/import-parquet-files-serverless.md)と[クラウドストレージからTiDB Cloud DedicatedにApache Parquetファイルをインポートする](/tidb-cloud/import-parquet-files.md)をご覧ください。
 
 ## 参照 {#reference}
 
 ### クラウドストレージアクセスを構成する {#configure-cloud-storage-access}
 
-ソースデータがAmazon S3、Google Cloud Storage（GCS）バケット、Azure Blob Storageコンテナー、またはAlibaba Cloud OSSバケットに保存されている場合、 TiDB Cloudにデータをインポートまたは移行する前に、ストレージへのアクセスを設定する必要があります。詳細については、 [TiDB Cloud Starter または Essential の外部ストレージアクセスを構成する](/tidb-cloud/configure-external-storage-access.md)と[TiDB Cloud Dedicatedの外部ストレージアクセスを構成する](/tidb-cloud/dedicated-external-storage.md)を参照してください。
+ソースデータがAmazon S3、Google Cloud Storage（GCS）バケット、Azure Blob Storageコンテナー、またはAlibaba Cloud OSSバケットに保存されている場合、 TiDB Cloudにデータをインポートまたは移行する前に、ストレージへのアクセスを設定する必要があります。詳細については、 [{{{ .starter }}} または Essential の外部ストレージアクセスを構成する](/tidb-cloud/configure-external-storage-access.md)と[TiDB Cloud Dedicatedの外部ストレージアクセスを構成する](/tidb-cloud/dedicated-external-storage.md)を参照してください。
 
 ### データインポートの命名規則 {#naming-conventions-for-data-import}
 

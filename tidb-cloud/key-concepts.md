@@ -52,8 +52,8 @@ TiDB Cloud を使用すると、データ変更を Kafka、MySQL、オブジェ�
 
 ## バックアップと復元 {#backup-x26-restore}
 
-TiDB Cloudは、自動バックアップ ソリューションとポイントインタイムリカバリ(PITR) 機能を提供します。[バックアップと復元について詳しくはこちらをご覧ください](/tidb-cloud/backup-and-restore-concepts.md)。
+TiDB Cloudは、自動バックアップソリューションとポイントインタイムリカバリ(PITR) 機能を提供します。[バックアップと復元について詳しくはこちらをご覧ください](/tidb-cloud/backup-and-restore-concepts.md)。
 
 ## セキュリティ {#security}
 
-TiDB Cloudは、データを保護し、アクセス制御を実施し、最新のコンプライアンス基準を満たすように設計された、堅牢かつ柔軟なセキュリティ フレームワークを提供します。[セキュリティについて詳しくはこちらをご覧ください](/tidb-cloud/security-concepts.md)。
+TiDB Cloudは、データを保護し、アクセス制御を実施し、最新のコンプライアンス基準を満たすように設計された、堅牢かつ柔軟なセキュリティフレームワークを提供します。[セキュリティについて詳しくはこちらをご覧ください](/tidb-cloud/security-concepts.md)。

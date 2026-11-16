@@ -1,17 +1,17 @@
 ---
 title: Use `tidbcloud_serverless_branch` Resource
-summary: サーバーレスブランチリソースを使用して、 TiDB Cloud Starter またはTiDB Cloud Essential ブランチを作成および変更する方法を学習します。
+summary: サーバーレスブランチリソースを使用して、 {{{ .starter }}} または{{{ .essential }}} ブランチを作成および変更する方法を学習します。
 ---
 
 # `tidbcloud_serverless_branch`リソースを使用する {#use-the-tidbcloud-serverless-branch-resource}
 
-このドキュメントでは、 `tidbcloud_serverless_branch`リソースを使用して[TiDB Cloud Starter またはTiDB Cloud Essential ブランチ](/tidb-cloud/branch-manage.md)を管理する方法について説明します。
+このドキュメントでは、 `tidbcloud_serverless_branch`リソースを使用して[{{{ .starter }}} または{{{ .essential }}} ブランチ](/tidb-cloud/branch-manage.md)を管理する方法について説明します。
 
 `tidbcloud_serverless_branch`リソースの機能は次のとおりです。
 
-- TiDB Cloud Starter またはTiDB Cloud Essential ブランチを作成します。
-- TiDB Cloud Starter またはTiDB Cloud Essential ブランチをインポートします。
-- TiDB Cloud Starter またはTiDB Cloud Essential ブランチを削除します。
+- {{{ .starter }}} または{{{ .essential }}} ブランチを作成します。
+- {{{ .starter }}} または{{{ .essential }}} ブランチをインポートします。
+- {{{ .starter }}} または{{{ .essential }}} ブランチを削除します。
 
 > **Note:**
 >
@@ -20,13 +20,13 @@ summary: サーバーレスブランチリソースを使用して、 TiDB Cloud
 ## 前提条件 {#prerequisites}
 
 - [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0以降。
-- [TiDB Cloud StarterまたはEssentialインスタンスを作成する](/tidb-cloud/create-tidb-cluster-serverless.md) 。
+- [{{{ .starter }}}またはEssentialインスタンスを作成する](/tidb-cloud/create-tidb-cluster-serverless.md) 。
 
-## TiDB Cloud Starter またはTiDB Cloud Essential ブランチを作成する {#create-a-tidb-cloud-starter-or-tidb-cloud-essential-branch}
+## {{{ .starter }}} または{{{ .essential }}} ブランチを作成する {#create-a-tidb-cloud-starter-or-tidb-cloud-essential-branch}
 
-`tidbcloud_serverless_branch`リソースを使用して、 TiDB Cloud Starter またはTiDB Cloud Essential ブランチを作成できます。
+`tidbcloud_serverless_branch`リソースを使用して、 {{{ .starter }}} または{{{ .essential }}} ブランチを作成できます。
 
-次の例は、TiDB Cloud Starter またはTiDB Cloud Essential ブランチを作成する方法を示しています。
+次の例は、{{{ .starter }}} または{{{ .essential }}} ブランチを作成する方法を示しています。
 
 1. ブランチ用のディレクトリを作成してそこに入ります。
 
@@ -158,11 +158,11 @@ summary: サーバーレスブランチリソースを使用して、 TiDB Cloud
     }
     ```
 
-## TiDB Cloud Starter またはTiDB Cloud Essential ブランチをインポートする {#import-a-tidb-cloud-starter-or-tidb-cloud-essential-branch}
+## {{{ .starter }}} または{{{ .essential }}} ブランチをインポートする {#import-a-tidb-cloud-starter-or-tidb-cloud-essential-branch}
 
-Terraform によって管理されていないTiDB Cloud Starter またはTiDB Cloud Essential ブランチの場合は、インポートすることで Terraform の管理下に置けます。
+Terraform によって管理されていない{{{ .starter }}} または{{{ .essential }}} ブランチの場合は、インポートすることで Terraform の管理下に置けます。
 
-次のように、Terraform によって作成されていないTiDB Cloud Starter またはTiDB Cloud Essential ブランチをインポートします。
+次のように、Terraform によって作成されていない{{{ .starter }}} または{{{ .essential }}} ブランチをインポートします。
 
 1. 新しい`tidbcloud_serverless_branch`リソースのインポートブロックを追加します。
 
@@ -200,9 +200,9 @@ Terraform によって管理されていないTiDB Cloud Starter またはTiDB C
 
 これで、インポートしたブランチを Terraform で管理できるようになりました。
 
-## TiDB Cloud Starter またはTiDB Cloud Essential ブランチを削除する {#delete-a-tidb-cloud-starter-or-tidb-cloud-essential-branch}
+## {{{ .starter }}} または{{{ .essential }}} ブランチを削除する {#delete-a-tidb-cloud-starter-or-tidb-cloud-essential-branch}
 
-TiDB Cloud Starter またはTiDB Cloud Essential ブランチを削除するには、 `tidbcloud_serverless_branch`リソースの構成を削除してから、 `terraform apply`コマンドを使用してリソースを破棄します。
+{{{ .starter }}} または{{{ .essential }}} ブランチを削除するには、 `tidbcloud_serverless_branch`リソースの構成を削除してから、 `terraform apply`コマンドを使用してリソースを破棄します。
 
 ```shell
 $ terraform apply

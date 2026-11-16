@@ -162,14 +162,14 @@ TiDB Cloudは、 [TiDB Cloudコンソール](https://tidbcloud.com)上のユー�
 | BindSupportPlan | サポートプランを締結する                                                         |
 | CancelSupportPlan | サポートプランをキャンセルする                                                      |
 | UpdateOrganizationName | 組織名を更新する                                                             |
-| SetSpendLimit | TiDB Cloud Starter インスタンスの支出限度額を編集する                                   |
+| SetSpendLimit | {{{ .starter }}} インスタンスの支出限度額を編集する                                   |
 | UpdateMaintenanceWindow | メンテナンスウィンドウの開始時刻を変更する                                                |
 | DeferMaintenanceTask | メンテナンスタスクを延期する                                                       |
-| CreateBranch | TiDB Cloud Starter またはTiDB Cloud Essential インスタンスのブランチを作成する           |
-| DeleteBranch | TiDB Cloud Starter またはTiDB Cloud Essential インスタンスのブランチを削除します          |
-| SetBranchRootPassword | TiDB Cloud Starter またはTiDB Cloud Essential インスタンスのブランチのルートパスワードを設定する |
-| ConnectBranchGitHub | TiDB Cloud Starter またはTiDB Cloud Essential インスタンスをGitHubリポジトリに接続してブランチ統合を有効にする                                   |
-| DisconnectBranchGitHub | TiDB Cloud Starter またはTiDB Cloud Essential インスタンスを GitHub リポジトリから切断してブランチ統合を無効にする                           |
+| CreateBranch | {{{ .starter }}} または{{{ .essential }}} インスタンスのブランチを作成する           |
+| DeleteBranch | {{{ .starter }}} または{{{ .essential }}} インスタンスのブランチを削除します          |
+| SetBranchRootPassword | {{{ .starter }}} または{{{ .essential }}} インスタンスのブランチのルートパスワードを設定する |
+| ConnectBranchGitHub | {{{ .starter }}} または{{{ .essential }}} インスタンスをGitHubリポジトリに接続してブランチ統合を有効にする                                   |
+| DisconnectBranchGitHub | {{{ .starter }}} または{{{ .essential }}} インスタンスを GitHub リポジトリから切断してブランチ統合を無効にする                           |
 | UpdateAuthenticationMethod | Cloud Organization SSO の認証方法を更新する                                    |
 
 ## コンソール監査ログフィールド {#console-audit-log-fields}

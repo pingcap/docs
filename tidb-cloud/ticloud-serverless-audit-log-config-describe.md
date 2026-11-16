@@ -5,7 +5,7 @@ summary: "`ticloud serverless audit-log config describe` のリファレンス�
 
 # ticloud serverless audit-log config describe {#ticloud-serverless-audit-log-config-describe}
 
-TiDB Cloud Essential インスタンスのデータベース監査ログ構成の詳細を表示します。
+{{{ .essential }}} インスタンスのデータベース監査ログ構成の詳細を表示します。
 
 ```shell
 ticloud serverless audit-log config describe [flags]

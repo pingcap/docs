@@ -18,7 +18,7 @@ summary: "`tidbcloud_sql_user` リソースを使用してTiDB Cloud SQL ユー�
 
 - [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0以降。
 - TiDB Cloudクラスターを作成するには、次のいずれかのドキュメントを参照してください。
-    - [TiDB Cloud StarterまたはEssentialインスタンスを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)
+    - [{{{ .starter }}}またはEssentialインスタンスを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)
     - [TiDB Cloud Dedicatedクラスターを作成する](/tidb-cloud/create-tidb-cluster.md) 。
 
 ## SQLユーザーを作成する {#create-a-sql-user}
@@ -57,7 +57,7 @@ summary: "`tidbcloud_sql_user` リソースを使用してTiDB Cloud SQL ユー�
 
     - `tidbcloud_sql_user`リソースを使用するには、リソースタイプを`tidbcloud_sql_user`に設定します。
     - リソース名は必要に応じて定義できます。例： `example` 。
-    - TiDB Cloud Starter またはTiDB Cloud Essential インスタンスの SQL ユーザーの場合、 `user_name`と組み込みロール`role_readonly`および`role_readwrite`は、ユーザープレフィックスで始まる必要があり、 `tidbcloud_serverless_cluster`データソースを実行することでユーザープレフィックスを取得できます。
+    - {{{ .starter }}} または{{{ .essential }}} インスタンスの SQL ユーザーの場合、 `user_name`と組み込みロール`role_readonly`および`role_readwrite`は、ユーザープレフィックスで始まる必要があり、 `tidbcloud_serverless_cluster`データソースを実行することでユーザープレフィックスを取得できます。
     - SQL ユーザーの仕様情報を取得するには、 [`tidbcloud_sql_user` (リソース)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/sql_user)を参照してください。
 
 3. `terraform apply`コマンドを実行します。リソースを適用する場合は`terraform apply --auto-approve`の使用は推奨されません。

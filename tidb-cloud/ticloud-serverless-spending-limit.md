@@ -5,7 +5,7 @@ summary: "`ticloud serverless spending-limit` のリファレンス。"
 
 # ticloud serverless spending-limit {#ticloud-serverless-spending-limit}
 
-TiDB Cloud Starter インスタンスの月間最大[支出限度額](/tidb-cloud/manage-serverless-spend-limit.md)を設定します。
+{{{ .starter }}} インスタンスの月間最大[支出限度額](/tidb-cloud/manage-serverless-spend-limit.md)を設定します。
 
 ```shell
 ticloud serverless spending-limit [flags]
@@ -13,13 +13,13 @@ ticloud serverless spending-limit [flags]
 
 ## 例 {#examples}
 
-対話型モードでTiDB Cloud Starter インスタンスの支出限度額を設定します。
+対話型モードで{{{ .starter }}} インスタンスの支出限度額を設定します。
 
 ```shell
 ticloud serverless spending-limit
 ```
 
-非対話型モードでTiDB Cloud Starter インスタンスの支出限度額を設定します。
+非対話型モードで{{{ .starter }}} インスタンスの支出限度額を設定します。
 
 ```shell
 ticloud serverless spending-limit -c <cluster-id> --monthly <spending-limit-monthly>

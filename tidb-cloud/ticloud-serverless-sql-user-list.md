@@ -5,7 +5,7 @@ summary: "`ticloud serverless sql-user list` のリファレンス。"
 
 # ticloud serverless sql-user list {#ticloud-serverless-sql-user-list}
 
-TiDB Cloud Starter またはTiDB Cloud Essential インスタンス内の SQL ユーザーを一覧表示します。
+{{{ .starter }}} または{{{ .essential }}} インスタンス内の SQL ユーザーを一覧表示します。
 
 ```shell
 ticloud serverless sql-user list [flags]
@@ -13,13 +13,13 @@ ticloud serverless sql-user list [flags]
 
 ## 例 {#examples}
 
-対話型モードでTiDB Cloud Starter またはTiDB Cloud Essential インスタンス内の SQL ユーザーを一覧表示します。
+対話型モードで{{{ .starter }}} または{{{ .essential }}} インスタンス内の SQL ユーザーを一覧表示します。
 
 ```shell
 ticloud serverless sql-user list
 ```
 
-非対話型モードでTiDB Cloud Starter またはTiDB Cloud Essential インスタンス内の SQL ユーザーを一覧表示します。
+非対話型モードで{{{ .starter }}} または{{{ .essential }}} インスタンス内の SQL ユーザーを一覧表示します。
 
 ```shell
 ticloud serverless sql-user list -c <cluster-id>

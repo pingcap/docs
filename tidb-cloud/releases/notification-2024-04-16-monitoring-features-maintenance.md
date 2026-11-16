@@ -23,7 +23,7 @@ summary: 2024年4月16日に実施されるTiDB Cloud監視機能のメンテナ
     - クラウドプロバイダー：AWS、リージョン：東京（ap-northeast-1）
     - クラウドプロバイダー：AWS、リージョン：北バージニア（us-east-1）
 
-- TiDB Cloud Starterインスタンス：
+- {{{ .starter }}}インスタンス：
     - クラウドプロバイダー：AWS、リージョン：東京（ap-northeast-1）
     - クラウドプロバイダー：AWS、リージョン：北バージニア（us-east-1）
 

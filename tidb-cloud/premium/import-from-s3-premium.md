@@ -58,7 +58,7 @@ TiDB Cloud Premiumまたは{{{ .byoc }}}がバケットを読み取れるよう�
 
 3. **Source Connection**ダイアログで：
     - **Storage Provider**を**Amazon S3**に設定します。
-    - 単一ファイル（ `s3://bucket/path/file.csv` ）またはフォルダ（ `s3://bucket/path/` ）の**Source Files URI**を入力します。
+    - 単一ファイル（ `s3://bucket/path/file.csv` ）またはフォルダー（ `s3://bucket/path/` ）の**Source Files URI**を入力します。
     - **AWS Role ARN**または**AWS Access Key**を選択し、認証情報を入力してください。
     - 接続を確認するには、 **Test Bucket Access**をクリックしてください。<!--Todo-- Known preview issue: the button returns to the idle state without a success toast.-->
 

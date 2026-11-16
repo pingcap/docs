@@ -5,7 +5,7 @@ summary: AWS エンドポイントサービスプライベートリンク接続�
 
 # プライベートリンク接続を介して AWS 上の Confluent Cloud に接続する {#connect-to-confluent-cloud-on-aws-via-a-private-link-connection}
 
-このドキュメントでは、 [AWS エンドポイントサービスプライベートリンク接続](/tidb-cloud/serverless-private-link-connection.md)を使用してTiDB Cloud Essential インスタンスを AWS 上の[Confluent Cloud Dedicated クラスター](https://docs.confluent.io/cloud/current/clusters/cluster-types.html)に接続する方法について説明します。
+このドキュメントでは、 [AWS エンドポイントサービスプライベートリンク接続](/tidb-cloud/serverless-private-link-connection.md)を使用して{{{ .essential }}} インスタンスを AWS 上の[Confluent Cloud Dedicated クラスター](https://docs.confluent.io/cloud/current/clusters/cluster-types.html)に接続する方法について説明します。
 
 > **Note**
 >
@@ -15,14 +15,14 @@ summary: AWS エンドポイントサービスプライベートリンク接続�
 
 - [Confluent Cloud](https://confluent.cloud/)のアカウントがあること。
 
-- TiDB Cloud Essential は AWS でホストされており、アクティブです。後で使用するために、以下の詳細情報を取得して保存してください。
+- {{{ .essential }}} は AWS でホストされており、アクティブです。後で使用するために、以下の詳細情報を取得して保存してください。
 
     - AWSアカウントID
     - アベイラビリティゾーン（AZ）
 
 AWS アカウント ID とアベイラビリティゾーンを表示するには、次の手順を実行します。
 
-1. [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB Cloud Essentialインスタンスの概要ページに移動し、左側のナビゲーションペインで **Settings** > **Networking** をクリックします。
+1. [TiDB Cloudコンソール](https://tidbcloud.com)で、{{{ .essential }}}インスタンスの概要ページに移動し、左側のナビゲーションペインで **Settings** > **Networking** をクリックします。
 2. **AWS Private Endpoints for External Services** 領域で、**Create Private Endpoint for External Services** をクリックします。
 3. 表示されたダイアログで、AWS アカウント ID とアベイラビリティゾーンを見つけることができます。
 
@@ -33,8 +33,8 @@ AWS アカウント ID とアベイラビリティゾーンを表示するには
 Confluent Cloud ネットワークは次の要件を満たしている必要があります。
 
 - タイプ: ネットワークは**PrivateLink**ネットワークである必要があります。
-- リージョンの一致: ネットワークは、 TiDB Cloud Essential インスタンスと同じ AWS リージョンに存在する必要があります。
-- AZ (アベイラビリティゾーン) の可用性: ネットワークのアベイラビリティゾーンは、 TiDB Cloud Essential インスタンスのアベイラビリティゾーンと重複している必要があります。
+- リージョンの一致: ネットワークは、 {{{ .essential }}} インスタンスと同じ AWS リージョンに存在する必要があります。
+- AZ (アベイラビリティゾーン) の可用性: ネットワークのアベイラビリティゾーンは、 {{{ .essential }}} インスタンスのアベイラビリティゾーンと重複している必要があります。
 
 Confluent Cloud ネットワークの一意の名前を取得するには、次の手順を実行します。
 

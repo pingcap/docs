@@ -108,4 +108,4 @@ Plan Replayer ファイルは一時的な診断用アーティファクトです
 
 ## 関連ドキュメント {#related-documentation}
 
-[PLAN REPLAYERを使用してクラスタのオンサイト情報を保存および復元する](https://docs.pingcap.com/tidb/stable/sql-plan-replayer/)
+[PLAN REPLAYERを使用してクラスターのオンサイト情報を保存および復元する](https://docs.pingcap.com/tidb/stable/sql-plan-replayer/)

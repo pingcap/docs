@@ -83,37 +83,37 @@ TiDB Cloudは、以下の導入オプションを提供します。
     - MySQL互換のStarterでは、月間無料クォータが提供され、無料枠を超えた使用量については従量課金を利用できます。<CustomContent language="en,zh">現在、{{{ .starter }}}はAWSで一般提供されており、Alibaba Cloudではパブリックプレビュー版として提供されています。</CustomContent>
     - PostgreSQL互換のStarterは、使用量の上限を条件として、パブリックプレビュー期間中は無料で利用できます。このプレビューは開発および評価を目的としており、本番ワークロードには推奨されません。
 
-- TiDB Cloud Essential
+- {{{ .essential }}}
 
-    ワークロードが増加し、リアルタイムでの拡張性を必要とするアプリケーション向けに、 TiDB Cloud Essentialはビジネスの成長ペースに追随できる柔軟性とパフォーマンスを提供します。
+    ワークロードが増加し、リアルタイムでの拡張性を必要とするアプリケーション向けに、 {{{ .essential }}}はビジネスの成長ペースに追随できる柔軟性とパフォーマンスを提供します。
 
     <CustomContent language="en,zh">
 
-    現在、 TiDB Cloud EssentialはAWSおよびAlibaba Cloudでパブリックプレビュー版として提供されています。
+    現在、 {{{ .essential }}}はAWSおよびAlibaba Cloudでパブリックプレビュー版として提供されています。
 
-    Alibaba Cloud 上のTiDB Cloud StarterとTiDB Cloud Essentialの機能比較については、 [Alibaba Cloud 上の TiDB](https://www.pingcap.com/partners/alibaba-cloud/)を参照してください。
+    Alibaba Cloud 上の{{{ .starter }}}と{{{ .essential }}}の機能比較については、 [Alibaba Cloud 上の TiDB](https://www.pingcap.com/partners/alibaba-cloud/)を参照してください。
 
     </CustomContent>
 
     <CustomContent language="ja">
 
-    現在、 TiDB Cloud EssentialはAWS上でパブリックプレビュー版として提供されています。
+    現在、 {{{ .essential }}}はAWS上でパブリックプレビュー版として提供されています。
 
     </CustomContent>
 
-- TiDB Cloud Premium
+- {{{ .premium }}}
 
-    TiDB Cloud Premiumは、無制限のリアルタイム拡張性を必要とするミッションクリティカルなビジネス向けに設計されています。ワークロードに応じた自動スケーリングと包括的なエンタープライズ機能を提供します。
+    {{{ .premium }}}は、無制限のリアルタイム拡張性を必要とするミッションクリティカルなビジネス向けに設計されています。ワークロードに応じた自動スケーリングと包括的なエンタープライズ機能を提供します。
 
     <CustomContent language="en,zh">
 
-    現在、 TiDB Cloud PremiumはAWSとAlibaba Cloudでパブリックプレビュー版として提供されています。
+    現在、 {{{ .premium }}}はAWSとAlibaba Cloudでパブリックプレビュー版として提供されています。
 
     </CustomContent>
 
     <CustomContent language="ja">
 
-    現在、 TiDB Cloud PremiumはAWS上でパブリックプレビュー版として提供されています。
+    現在、 {{{ .premium }}}はAWS上でパブリックプレビュー版として提供されています。
 
     </CustomContent>
 

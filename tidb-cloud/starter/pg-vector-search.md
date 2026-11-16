@@ -112,9 +112,9 @@ ON documents
 USING hnsw (embedding vector_ip_ops);
 ```
 
-### HNSW インデックスパラメータを設定する {#configure-hnsw-index-parameters}
+### HNSW インデックスパラメーターを設定する {#configure-hnsw-index-parameters}
 
-インデックス作成時に HNSW インデックスのビルドパラメータを設定できます。
+インデックス作成時に HNSW インデックスのビルドパラメーターを設定できます。
 
 ```sql
 CREATE INDEX idx_documents_embedding
@@ -138,7 +138,7 @@ SET hnsw.ef_search = 100;
 
 ### HNSW インデックスが使用される条件 {#when-an-hnsw-index-is-used}
 
-以下の条件をすべて満たす場合、オプティマイザは HNSW インデックスを使用できます。
+以下の条件をすべて満たす場合、オプティマイザーは HNSW インデックスを使用できます。
 
 - クエリが、インデックス付きベクトルカラムと定数ベクトルに対する距離式で並べ替えている、またはそのカラムに対して定数のクエリテキストを使って `vec_embed_cosine_distance()` を使用している。
 - クエリに `LIMIT` 句が含まれている。
@@ -159,7 +159,7 @@ LIMIT 10;
 
 > **Note:**
 >
-> クエリベクトルとして使用されるバインドパラメータは、HNSW プランニングでは定数として扱われません。たとえば、`ORDER BY embedding <=> $1::vector LIMIT 10` は逐次スキャンにフォールバックします。
+> クエリベクトルとして使用されるバインドパラメーターは、HNSW プランニングでは定数として扱われません。たとえば、`ORDER BY embedding <=> $1::vector LIMIT 10` は逐次スキャンにフォールバックします。
 
 ## SQL で埋め込みを生成する {#generate-embeddings-in-sql}
 

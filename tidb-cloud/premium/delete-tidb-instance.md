@@ -1,6 +1,6 @@
 ---
-title: Delete a TiDB Cloud Premium or {{{ .byoc }}} instance
-summary: TiDB Cloud Premiumまたは{{{ .byoc }}}インスタンスを削除する方法を学びましょう。
+title: Delete a {{{ .premium }}} or {{{ .byoc }}} instance
+summary: "{{{ .premium }}}または{{{ .byoc }}}インスタンスを削除する方法を学びましょう。"
 ---
 
 # {{{ .premium }}} または {{{ .byoc }}} インスタンスを削除する
@@ -45,4 +45,4 @@ summary: TiDB Cloud Premiumまたは{{{ .byoc }}}インスタンスを削除す�
 
     </CustomContent>
 
-    ごみ箱から {{{ .premium }}} または {{{ .byoc }}} インスタンスを復元する場合は、[ごみ箱から復元](/tidb-cloud/premium/backup-and-restore-premium.md#restore-from-recycle-bin)を参照してください。
+    ごみ箱から {{{ .premium }}} または {{{ .byoc }}} インスタンスを復元する場合は、[Recycle Bin から復元](/tidb-cloud/premium/backup-and-restore-premium.md#restore-from-recycle-bin)を参照してください。

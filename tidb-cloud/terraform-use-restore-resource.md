@@ -14,7 +14,7 @@ summary: "`tidbcloud_restore` リソースを使用して復元タスクを作�
 ## 前提条件 {#prerequisites}
 
 - [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) 。
-- このドキュメントで紹介されているバックアップと復元機能は、TiDB Cloud Starter およびTiDB Cloud Essential インスタンスではご利用いただけません。`tidbcloud_restore`リソースを使用するには、 TiDB Cloud Dedicated クラスターを作成してください。
+- このドキュメントで紹介されているバックアップと復元機能は、{{{ .starter }}} および{{{ .essential }}} インスタンスではご利用いただけません。`tidbcloud_restore`リソースを使用するには、 TiDB Cloud Dedicated クラスターを作成してください。
 
 ## 復元タスクを作成する {#create-a-restore-task}
 

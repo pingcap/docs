@@ -1,6 +1,6 @@
 ---
-title: Connect to Your TiDB Cloud Premium or {{{ .byoc }}} Instance
-summary: さまざまな方法でTiDB Cloud Premiumまたは{{{ .byoc }}}インスタンスに接続する方法を学びましょう。
+title: Connect to Your {{{ .premium }}} or {{{ .byoc }}} Instance
+summary: さまざまな方法で{{{ .premium }}}または{{{ .byoc }}}インスタンスに接続する方法を学びましょう。
 ---
 
 # {{{ .premium }}} または {{{ .byoc }}} インスタンスに接続する
@@ -9,7 +9,7 @@ summary: さまざまな方法でTiDB Cloud Premiumまたは{{{ .byoc }}}イン�
 
 > **Tip:**
 >
-> TiDB Cloud Dedicatedクラスターに接続する方法については、 [TiDB Cloud Dedicatedクラスタに接続します](/tidb-cloud/connect-to-tidb-cluster.md)を参照してください。
+> TiDB Cloud Dedicatedクラスターに接続する方法については、 [TiDB Cloud Dedicatedクラスターに接続します](/tidb-cloud/connect-to-tidb-cluster.md)を参照してください。
 
 ## 接続方法 {#connection-methods}
 
@@ -39,7 +39,7 @@ TiDB Cloud で {{{ .premium }}} または {{{ .byoc }}} インスタンスが作
 
 | 接続方法 | ネットワーク                | 説明                                                |
 | ---- | --------------------- | ------------------------------------------------- |
-| 直接接続 | パブリックまたはプライベートエンドポイント | 直接接続は、パブリックエンドポイントとプライベートエンドポイントの両方を介して行うことができます。 |
+| 直接接続 | パブリックまたはプライベートエンドポイント | 直接接続は、パブリックエンドポイントとプライベートエンドポイントの両方を介して行えます。 |
 
 ## 次は？ {#what-s-next}
 
