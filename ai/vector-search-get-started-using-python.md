@@ -125,7 +125,7 @@ To set up the model, copy the following code into the `example.py` file. This co
 from sentence_transformers import SentenceTransformer
 
 print("Downloading and loading the embedding model...")
-embed_model = SentenceTransformer("sentence-transformers/msmarco-MiniLM-L12-cos-v5", trust_remote_code=True)
+embed_model = SentenceTransformer("sentence-transformers/msmarco-MiniLM-L12-cos-v5", trust_remote_code=False)
 embed_model_dims = embed_model.get_sentence_embedding_dimension()
 
 def text_to_embedding(text):
@@ -133,6 +133,8 @@ def text_to_embedding(text):
     embedding = embed_model.encode(text)
     return embedding.tolist()
 ```
+
+When you use a Hugging Face Hub model ID, `trust_remote_code=False` prevents dynamic loading of custom code provided by the model repository. This setting does not replace reviewing a local model directory. If you switch to a local directory or another model that requires custom code, inspect its configuration and code files and pin the model revision before you decide whether to enable remote code.
 
 ### Step 5. Connect to TiDB
 
