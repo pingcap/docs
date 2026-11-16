@@ -46,6 +46,7 @@ env:
 
 jobs:
   translate:
+    environment: ai-doc-translation
     if: >
       github.repository == 'pingcap/docs' &&
       (

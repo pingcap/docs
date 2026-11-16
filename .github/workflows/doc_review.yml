@@ -14,6 +14,7 @@ permissions:
 
 jobs:
   review:
+    environment: ai-doc-review
     runs-on: ubuntu-latest
     if: >
       github.repository == 'pingcap/docs' &&

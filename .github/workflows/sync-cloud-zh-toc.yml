@@ -13,6 +13,7 @@ env:
 
 jobs:
   sync-toc:
+    environment: cloud-toc-sync
     if: >
       github.repository == 'pingcap/docs' &&
       github.ref == 'refs/heads/master' &&
