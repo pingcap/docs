@@ -5,7 +5,7 @@ cd "$(dirname "$0")/.."
 if ! program=$(which markdownlint) &>/dev/null ; then
   program=./node_modules/.bin/markdownlint
   if ! test -f ./node_modules/.bin/markdownlint; then
-    npm install --no-save 'markdownlint-cli@0.17.0'
+    npm install --no-save --ignore-scripts 'markdownlint-cli@0.17.0' || exit $?
   fi
 fi
 
