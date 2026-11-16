@@ -22,12 +22,16 @@ env:
   PRODUCT: TiDB
 
 jobs:
+  authorize:
+    uses: ./.github/workflows/authorize-privileged-workflow.yml
+    permissions:
+      actions: read
+
   sync-docs:
     runs-on: ubuntu-latest
-    if: >
-      github.repository == 'pingcap/docs' &&
-      contains(fromJson('["lilin90","qiancai","seominjea1942"]'), github.actor) &&
-      contains(fromJson('["lilin90","qiancai","seominjea1942"]'), github.triggering_actor)
+    needs: authorize
+    # A partial rerun must pass authorization for the current attempt.
+    if: needs.authorize.outputs.attempt == github.run_attempt
 
     steps:
       - name: Checkout current repository

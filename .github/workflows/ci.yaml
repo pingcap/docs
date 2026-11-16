@@ -23,6 +23,7 @@ jobs:
         run: |
           python3 -m pip install --disable-pip-version-check --no-deps PyYAML==6.0.3
           python3 scripts/test-media-workflow.py
+          python3 scripts/test-privileged-workflow-actors.py
 
   internal-links-files:
     runs-on: ubuntu-latest

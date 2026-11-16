@@ -22,8 +22,15 @@ permissions:
   issues: write
 
 jobs:
+  authorize:
+    uses: ./.github/workflows/authorize-privileged-workflow.yml
+    permissions:
+      actions: read
+
   linkChecker:
-    if: github.repository == 'pingcap/docs'
+    needs: authorize
+    # A partial rerun must pass authorization for the current attempt.
+    if: needs.authorize.outputs.attempt == github.run_attempt
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
