@@ -122,7 +122,7 @@ TiDB のビューの制限については、 [ビューの制限](/views.md#limi
 - [CREATE VIEW](/sql-statements/sql-statement-create-view.md)
 - [DROP VIEW](/sql-statements/sql-statement-drop-view.md)
 - [ビューを使用するステートメントの実行計画](/explain-views.md)
-- [TiFlink: TiKV と Flink を使用した強整合性マテリアライズド ビュー](https://github.com/tiflink/tiflink)
+- [TiFlink: TiKV と Flink を使用した強整合性マテリアライズドビュー](https://github.com/tiflink/tiflink)
 
 ## ヘルプが必要ですか? {#need-help}
 

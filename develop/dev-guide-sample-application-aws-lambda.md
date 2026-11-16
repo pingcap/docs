@@ -6,7 +6,7 @@ aliases: ['/ja/tidb/stable/dev-guide-sample-application-aws-lambda/','/ja/tidb/d
 
 # AWS Lambda関数でmysql2を使用してTiDBに接続する {#connect-to-tidb-with-mysql2-in-aws-lambda-function}
 
-TiDBはMySQL互換データベース、 [AWS Lambda関数](https://aws.amazon.com/lambda/)はコンピューティングサービス、 [mysql2](https://github.com/sidorares/node-mysql2)はNode.jsで人気のオープンソースドライバです。
+TiDBはMySQL互換データベース、 [AWS Lambda関数](https://aws.amazon.com/lambda/)はコンピューティングサービス、 [mysql2](https://github.com/sidorares/node-mysql2)はNode.jsで人気のオープンソースドライバーです。
 
 このチュートリアルでは、AWS Lambda FunctionsでTiDBとmysql2を使用して以下のタスクを実行する方法を学びます。
 
@@ -25,15 +25,15 @@ TiDBはMySQL互換データベース、 [AWS Lambda関数](https://aws.amazon.co
 
 - [Node.js **18**](https://nodejs.org/en/download/)以降。
 - [Git](https://git-scm.com/downloads) 。
-- TiDBクラスタ。
+- TiDBクラスター。
 - 管理者権限を持つ[AWSユーザー](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html)。
 - [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 - [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html)
 
-**TiDBクラスタをお持ちでない場合は、以下の手順で作成できます。**
+**TiDBクラスターをお持ちでない場合は、以下の手順で作成できます。**
 
 - (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
-- [ローカルテスト用のTiDB Self-Managedクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスタをデプロイ](/production-deployment-using-tiup.md)
+- [ローカルテスト用のTiDB Self-Managedクラスターをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスターをデプロイ](/production-deployment-using-tiup.md)
 
 AWSアカウントまたはユーザーをお持ちでない場合は、 [Lambda入門](https://docs.aws.amazon.com/lambda/latest/dg/getting-started.html)ガイドの手順に従って作成できます。
 

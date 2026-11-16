@@ -15,7 +15,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-prisma-example/']
 
 > **Tip:**
 >
-> このドキュメントの手順は、 TiDB Cloud Starterインスタンスに加えて、 TiDB Cloud Essentialインスタンスでも適用できます。
+> このドキュメントの手順は、 {{{ .starter }}}インスタンスに加えて、 {{{ .essential }}}インスタンスでも適用できます。
 
 ## インストール {#install}
 
@@ -84,7 +84,7 @@ const prisma = new PrismaClient({ adapter });
 
 - [Node.js](https://nodejs.org/en) &gt;= 18.0.0。
 - [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) 、またはお好みのパッケージマネージャーを使用してください。
-- TiDB Cloud Starterインスタンス。お持ちでない場合は、 [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
+- {{{ .starter }}}インスタンス。お持ちでない場合は、 [{{{ .starter }}}インスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
 
 ### ステップ1. プロジェクトを作成する {#step-1-create-a-project}
 
@@ -123,7 +123,7 @@ const prisma = new PrismaClient({ adapter });
 
 ### ステップ2. 環境を設定する {#step-2-set-the-environment}
 
-1. TiDB Cloud Starterインスタンスの概要ページで、右上隅の**Connect**をクリックし、表示されたダイアログからデータベースの接続文字列を取得します。接続文字列は次のようになります。
+1. {{{ .starter }}}インスタンスの概要ページで、右上隅の**Connect**をクリックし、表示されたダイアログからデータベースの接続文字列を取得します。接続文字列は次のようになります。
 
     ```
     mysql://[username]:[password]@[host]:4000/[database]?sslaccept=strict
@@ -184,13 +184,13 @@ const prisma = new PrismaClient({ adapter });
    }
    ```
 
-3. データベースをPrismaスキーマと同期させます。TiDB Cloud Starterインスタンスでデータベーステーブルを手動で作成するか、Prisma CLIを使用して次のように自動的に作成できます。
+3. データベースをPrismaスキーマと同期させます。{{{ .starter }}}インスタンスでデータベーステーブルを手動で作成するか、Prisma CLIを使用して次のように自動的に作成できます。
 
     ```
     npx prisma db push
     ```
 
-    このコマンドは、 `@tidbcloud/prisma-adapter`を使用した HTTPS 接続ではなく、従来の TCP 接続を通じてTiDB Cloud Starterインスタンスに`user`テーブルを作成します。これは、Prisma Migrate と同じエンジンを使用しているためです。このコマンドの詳細については、 [スキーマのプロトタイプを作成します](https://www.prisma.io/docs/concepts/components/prisma-migrate/db-push)を参照してください。
+    このコマンドは、 `@tidbcloud/prisma-adapter`を使用した HTTPS 接続ではなく、従来の TCP 接続を通じて{{{ .starter }}}インスタンスに`user`テーブルを作成します。これは、Prisma Migrate と同じエンジンを使用しているためです。このコマンドの詳細については、 [スキーマのプロトタイプを作成します](https://www.prisma.io/docs/concepts/components/prisma-migrate/db-push)を参照してください。
 
 4. Prisma Clientを生成する：
 

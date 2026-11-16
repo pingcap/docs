@@ -77,9 +77,9 @@ try (Connection connection = ds.getConnection()) {
 }
 ```
 
-MySQL JDBCDriverのデフォルト設定では、一括挿入のパフォーマンスを向上させるために、いくつかのパラメータを変更する必要があります。
+MySQL JDBCDriverのデフォルト設定では、一括挿入のパフォーマンスを向上させるために、いくつかのパラメーターを変更する必要があります。
 
-|            パラメータ           |                意味                |                                                                    推奨シナリオ                                                                   |          推奨設定         |
+|            パラメーター           |                意味                |                                                                    推奨シナリオ                                                                   |          推奨設定         |
 | :------------------------: | :------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------: |
 |    `useServerPrepStmts`    | サーバー側を使用してプリペアドステートメントを有効にするかどうか |                                                         プリペアドステートメントを複数回使用する必要がある場合                                                         |             `true`            |
 |      `cachePrepStmts`      |  クライアントがプリペアドステートメントをキャッシュするかどうか  |                                                          `useServerPrepStmts=true`                                                          |             `true`            |
@@ -237,7 +237,7 @@ TiDBに大量のデータを迅速にインポートする必要がある場合�
 - データエクスポート： [Dumpling](/dumpling-overview.md)を使用して、MySQLまたはTiDBデータをローカルストレージまたはクラウドストレージにエクスポートします。TiDB Cloud StarterまたはEssentialインスタンスの場合は、 [TiDB Cloudコンソール](https://tidbcloud.com/)の[エクスポート](/tidb-cloud/serverless-export.md)機能を使用して、より効率的にデータをエクスポートすることもできます。
 - データのインポート: [TiDB Cloudコンソール](https://tidbcloud.com/)の[インポート](/tidb-cloud/import-sample-data.md)機能を使用します。 Dumplingでエクスポートしたデータをインポートしたり、ローカルの CSV ファイルをインポートしたり、[クラウドストレージからCSVファイルをTiDB Cloudにインポートする](/tidb-cloud/import-csv-files.md)ことができます。
 - データレプリケーション： [TiDB Cloudコンソール](https://tidbcloud.com/)の[TiDB Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md)機能を使用します。 MySQL 互換データベースを TiDB にレプリケートできます。また、ソースデータベースからのシャーディングされたインスタンスとテーブルのマージおよび移行もサポートしています。
-- データのバックアップと復元: [TiDB Cloudコンソール](https://tidbcloud.com/)の[バックアップ](/tidb-cloud/backup-and-restore.md)機能を使用します。 Dumplingと比較して、バックアップと復元はビッグ データのシナリオにより適しています。
+- データのバックアップと復元: [TiDB Cloudコンソール](https://tidbcloud.com/)の[バックアップ](/tidb-cloud/backup-and-restore.md)機能を使用します。 Dumplingと比較して、バックアップと復元はビッグデータのシナリオにより適しています。
 
 </div>
 <div label="TiDB Self-Managed" value="tidb">

@@ -5,7 +5,7 @@ summary: "`tiup dm scale-out` コマンドは、新しいノードへの SSH 接
 
 # tiup dm scale-out {#tiup-dm-scale-out}
 
-`tiup dm scale-out`コマンドはクラスタのスケールアウトに使用されます。クラスタのスケールアウトの内部ロジックは、クラスタのデプロイメントと同様です。`tiup-dm`コンポーネントは、まず新しいノードへのSSH接続を確立し、ターゲットノードに必要なディレクトリを作成し、次にデプロイメントを実行してサービスを起動します。
+`tiup dm scale-out`コマンドはクラスターのスケールアウトに使用されます。クラスターのスケールアウトの内部ロジックは、クラスターのデプロイメントと同様です。`tiup-dm`コンポーネントは、まず新しいノードへのSSH接続を確立し、ターゲットノードに必要なディレクトリを作成し、次にデプロイメントを実行してサービスを起動します。
 
 ## 構文 {#syntax}
 
@@ -15,7 +15,7 @@ tiup dm scale-out <cluster-name> <topology.yaml> [flags]
 
 `<cluster-name>` : 操作対象のクラスターの名前。クラスター名を忘れた場合は、 [クラスターリスト](/tiup/tiup-component-dm-list.md)コマンドで確認できます。
 
-`<topology.yaml>` : 準備された[トポロジファイル](/tiup/tiup-dm-topology-reference.md)。このトポロジファイルには、現在のクラスターに追加される新しいノードのみを含める必要があります。
+`<topology.yaml>` : 準備された[トポロジーファイル](/tiup/tiup-dm-topology-reference.md)。このトポロジーファイルには、現在のクラスターに追加される新しいノードのみを含める必要があります。
 
 ## オプション {#options}
 
@@ -27,7 +27,7 @@ tiup dm scale-out <cluster-name> <topology.yaml> [flags]
 
 ### -i, --identity_file {#i-identity-file}
 
-- ターゲットマシンに接続するために使用するキー ファイルを指定します。
+- ターゲットマシンに接続するために使用するキーファイルを指定します。
 - データ型: `STRING`
 - コマンドでこのオプションを指定しない場合は、デフォルトで`~/.ssh/id_rsa`ファイルを使用してターゲットマシンに接続します。
 

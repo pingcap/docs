@@ -1,17 +1,17 @@
 ---
 title: Topology Configuration File for DM Cluster Deployment Using TiUP
-summary: TiUPを使用して TiDB Data Migration (DM) クラスターをデプロイまたは拡張するには、クラスターのグローバル設定、サーバー設定、マスターサーバー、ワーカーサーバー、モニタリングサーバー、Grafana サーバー、および Alertmanager サーバーを記述するトポロジファイルが必要です。各セクションには、設定用の特定のフィールドが含まれています。トポロジファイルの構造は、global、server_configs、master_servers、worker_servers、monitoring_servers、grafana_servers、およびalertmanager_servers で構成されます。各セクションには、デプロイと設定のための独自の設定可能なフィールドセットがあります。
+summary: TiUPを使用して TiDB Data Migration (DM) クラスターをデプロイまたは拡張するには、クラスターのグローバル設定、サーバー設定、マスターサーバー、ワーカーサーバー、モニタリングサーバー、Grafana サーバー、および Alertmanager サーバーを記述するトポロジーファイルが必要です。各セクションには、設定用の特定のフィールドが含まれています。トポロジーファイルの構造は、global、server_configs、master_servers、worker_servers、monitoring_servers、grafana_servers、およびalertmanager_servers で構成されます。各セクションには、デプロイと設定のための独自の設定可能なフィールドセットがあります。
 ---
 
-# TiUPを使用した DMクラスタデプロイのトポロジ設定ファイル {#topology-configuration-file-for-dm-cluster-deployment-using-tiup}
+# TiUPを使用した DMクラスターデプロイのトポロジー設定ファイル {#topology-configuration-file-for-dm-cluster-deployment-using-tiup}
 
-TiDB Data Migration (DM)クラスターをデプロイまたは拡張するには、クラスタートポロジを記述するトポロジファイル（ [サンプル](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml) ）を提供する必要があります。
+TiDB Data Migration (DM)クラスターをデプロイまたは拡張するには、クラスタートポロジーを記述するトポロジーファイル（ [サンプル](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml) ）を提供する必要があります。
 
-同様に、クラスタトポロジを変更するには、トポロジファイルに変更を加える必要があります。違いは、クラスタのデプロイ後は、トポロジファイル内のフィールドの一部しか変更できないことです。このドキュメントでは、トポロジファイルの各セクションと、各セクション内の各フィールドについて説明します。
+同様に、クラスタートポロジーを変更するには、トポロジーファイルに変更を加える必要があります。違いは、クラスターのデプロイ後は、トポロジーファイル内のフィールドの一部しか変更できないことです。このドキュメントでは、トポロジーファイルの各セクションと、各セクション内の各フィールドについて説明します。
 
 ## ファイル構造 {#file-structure}
 
-TiUPを使用した DM クラスターのデプロイメントのトポロジ設定ファイルには、次のセクションが含まれる場合があります。
+TiUPを使用した DM クラスターのデプロイメントのトポロジー設定ファイルには、次のセクションが含まれる場合があります。
 
 - [global](#global) : クラスターのグローバル設定。一部の設定項目はクラスターのデフォルト値を使用しますが、インスタンスごとに個別に設定できます。
 - [server_configs](#server_configs) : コンポーネントのグローバル設定。各コンポーネントを個別に設定できます。インスタンスに同じキーの設定項目がある場合、そのインスタンスの設定項目が有効になります。
@@ -25,7 +25,7 @@ TiUPを使用した DM クラスターのデプロイメントのトポロジ設
 
 `global`セクションはクラスターのグローバル構成に対応し、次のフィールドがあります。
 
-- `user` : デプロイされたクラスタを起動するユーザー。デフォルト値は"tidb"です。`<user>`に指定されたユーザーがターゲットマシン上に存在しない場合、 TiUP は自動的にユーザーの作成を試みます。
+- `user` : デプロイされたクラスターを起動するユーザー。デフォルト値は"tidb"です。`<user>`に指定されたユーザーがターゲットマシン上に存在しない場合、 TiUP は自動的にユーザーの作成を試みます。
 - `group` : ユーザーが自動作成された際に所属するユーザーグループ。デフォルト値は`<user>`フィールドと同じです。指定されたグループが存在しない場合は、自動的に作成されます。
 - `ssh_port` : 操作のためにターゲットマシンに接続するためのSSHポート。デフォルト値は"22"です。
 - `deploy_dir` : 各コンポーネントのデプロイメントディレクトリ。デフォルト値は"deploy"です。構築ルールは以下のとおりです。

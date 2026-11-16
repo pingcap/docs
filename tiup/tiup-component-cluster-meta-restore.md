@@ -14,7 +14,7 @@ tiup cluster meta restore <cluster-name> <backup-file> [flags]
 ```
 
 - `<cluster-name>`は操作対象となるクラスターの名前です。
-- `<backup-file>`はTiUPメタ バックアップファイルへのパスです。
+- `<backup-file>`はTiUPメタバックアップファイルへのパスです。
 
 > **Note:**
 >
@@ -32,4 +32,4 @@ tiup cluster meta restore <cluster-name> <backup-file> [flags]
 
 tiup-clusterの実行ログ。
 
-[&lt;&lt; 前のページに戻る - TiUPクラスタコマンドリスト](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPクラスターコマンドリスト](/tiup/tiup-component-cluster.md#command-list)

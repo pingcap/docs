@@ -1,11 +1,11 @@
 ---
 title: tiup cluster reload
-summary: "`tiup cluster reload` コマンドは、変更されたクラスタ構成を適用し、サービスを再起動するために使用されます。`--force` で強制実行、`--transfer-timeout` で転送タイムアウトを設定、`--ignore-config-check` で設定チェックを無視、`-N, --node` でノードを指定、`-R, --role` でロールを指定、`--skip-restart` で再起動をスキップできます。出力はtiup-clusterの実行ログです。"
+summary: "`tiup cluster reload` コマンドは、変更されたクラスター構成を適用し、サービスを再起動するために使用されます。`--force` で強制実行、`--transfer-timeout` で転送タイムアウトを設定、`--ignore-config-check` で設定チェックを無視、`-N, --node` でノードを指定、`-R, --role` でロールを指定、`--skip-restart` で再起動をスキップできます。出力はtiup-clusterの実行ログです。"
 ---
 
 # tiup cluster reload {#tiup-cluster-reload}
 
-[クラスタ構成の変更](/tiup/tiup-component-cluster-edit-config.md)後、設定を有効にするには、 `tiup cluster reload`コマンドを使用してクラスタをリロードする必要があります。このコマンドは、制御マシンの設定をサービスが稼働しているリモートマシンに公開し、アップグレードプロセスに従ってサービスを順番に再起動します。再起動プロセス中もクラスタは引き続き利用可能です。
+[クラスター構成の変更](/tiup/tiup-component-cluster-edit-config.md)後、設定を有効にするには、 `tiup cluster reload`コマンドを使用してクラスターをリロードする必要があります。このコマンドは、制御マシンの設定をサービスが稼働しているリモートマシンに公開し、アップグレードプロセスに従ってサービスを順番に再起動します。再起動プロセス中もクラスターは引き続き利用可能です。
 
 ## 構文 {#syntax}
 
@@ -19,7 +19,7 @@ tiup cluster reload <cluster-name> [flags]
 
 ### --force {#--force}
 
-- 再ロード プロセス中のエラーを無視し、強制的に再ロードします。
+- 再ロードプロセス中のエラーを無視し、強制的に再ロードします。
 - データ型: `BOOLEAN`
 - デフォルト: false
 
@@ -47,7 +47,7 @@ tiup cluster reload <cluster-name> [flags]
 
 > **Note:**
 >
-> - `-R, --role`オプションを同時に指定した場合は、 `-N, --node`と`-R, --role`両方の指定に一致するサービス ノードのみが再起動されます。
+> - `-R, --role`オプションを同時に指定した場合は、 `-N, --node`と`-R, --role`両方の指定に一致するサービスノードのみが再起動されます。
 > - オプション`--skip-restart`を指定した場合、オプション`-N, --node`は無効になります。
 
 ### -R, --role {#-r---role}
@@ -58,7 +58,7 @@ tiup cluster reload <cluster-name> [flags]
 
 > **Note:**
 >
-> 1. `-N, --node`オプションを同時に指定した場合は、 `-N, --node`と`-R, --role`両方の指定に一致するサービス ノードのみが再起動されます。
+> 1. `-N, --node`オプションを同時に指定した場合は、 `-N, --node`と`-R, --role`両方の指定に一致するサービスノードのみが再起動されます。
 > 2. オプション`--skip-restart`を指定した場合、オプション`-R, --role`は無効になります。
 
 ### --skip-restart {#--skip-restart}
@@ -103,4 +103,4 @@ tiup cluster reload <cluster-name> [flags]
 
 tiup-clusterの実行ログ。
 
-[&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPクラスターコマンドリスト](/tiup/tiup-component-cluster.md#command-list)

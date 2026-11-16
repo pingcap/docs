@@ -11,7 +11,7 @@ summary: "`tiup cluster rename`コマンドは、デプロイ後にクラスタ�
 >
 > TiUPクラスターで`grafana_servers`の`dashboard_dir`フィールドが設定されている場合、コマンド`tiup cluster rename`を実行してクラスターの名前を変更した後、次の追加手順が必要になります。
 >
-> - ローカル ダッシュボード ディレクトリ内の`*.json`ファイルについては、各ファイルの`datasource`フィールドを新しいクラスター名に更新します。`datasource`の値はクラスターの名前である必要があるためです。
+> - ローカルダッシュボードディレクトリ内の`*.json`ファイルについては、各ファイルの`datasource`フィールドを新しいクラスター名に更新します。`datasource`の値はクラスターの名前である必要があるためです。
 > - コマンド`tiup cluster reload -R grafana`を実行します。
 
 ## 構文 {#syntax}
@@ -35,4 +35,4 @@ tiup cluster rename <old-cluster-name> <new-cluster-name> [flags]
 
 tiup-clusterの実行ログ。
 
-[&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPクラスターコマンドリスト](/tiup/tiup-component-cluster.md#command-list)

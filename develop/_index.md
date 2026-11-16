@@ -6,7 +6,7 @@ aliases: ['/ja/tidb/stable/dev-guide-overview/','/ja/tidb/dev/dev-guide-overview
 
 # 開発者ガイドの概要 {#developer-guide-overview}
 
-[TiDB](https://github.com/pingcap/tidb)は、ハイブリッドトランザクションおよび分析処理 (HTAP) ワークロードをサポートするオープン ソースの分散 SQL データベースです。
+[TiDB](https://github.com/pingcap/tidb)は、ハイブリッドトランザクションおよび分析処理 (HTAP) ワークロードをサポートするオープンソースの分散 SQL データベースです。
 
 このガイドは、アプリケーション開発者が TiDB への接続、データベースの設計、データの書き込みとクエリ、TiDB 上での信頼性の高い高パフォーマンスのアプリケーションの構築方法を迅速に習得するのに役立ちます。
 
@@ -143,7 +143,7 @@ mysql2 ドライバーを使用して TiDB に接続します。
 </DevToolCard>
 </DevLangAccordion>
 
-これらのガイドに加えて、PingCAP はコミュニティと協力して[サードパーティのMySQLドライバ、ORM、ツール](/develop/dev-guide-third-party-support.md)をサポートします。
+これらのガイドに加えて、PingCAP はコミュニティと協力して[サードパーティのMySQLドライバー、ORM、ツール](/develop/dev-guide-third-party-support.md)をサポートします。
 
 ## MySQLクライアントソフトウェアを使用する {#use-mysql-client-software}
 

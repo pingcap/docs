@@ -28,7 +28,7 @@ TiUPプログラムには、コンポーネントのダウンロード、アッ�
 
 TiUPのすべてのコンポーネントは、 TiUPミラーからダウンロードされます。TiUPミラーには、各コンポーネントのTARパッケージと対応するメタ情報（バージョン、エントリ起動ファイル、チェックサム）が含まれています。TiUPはデフォルトでPingCAPの公式ミラーを使用します。ミラーソースは、環境変数`TIUP_MIRRORS`を使用してカスタマイズできます。
 
-TiUPミラーは、ローカルファイル ディレクトリまたはオンライン HTTPサーバーになります。
+TiUPミラーは、ローカルファイルディレクトリまたはオンライン HTTPサーバーになります。
 
 - `TIUP_MIRRORS=/path/to/local tiup list`
 - `TIUP_MIRRORS=https://private-mirrors.example.com tiup list`

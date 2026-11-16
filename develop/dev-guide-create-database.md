@@ -12,7 +12,7 @@ aliases: ['/ja/tidb/stable/dev-guide-create-database/','/ja/tidb/dev/dev-guide-c
 
 データベースを作成する前に、以下の手順を実行してください。
 
-- [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
+- [{{{ .starter }}}インスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
 - [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md)をお読みください。
 
 ## データベースとは何か {#what-is-database}
@@ -76,7 +76,7 @@ mysql
 - [データベース命名規則](/develop/dev-guide-object-naming-guidelines.md)に従って、データベースに意味のある名前を付けます。
 - TiDBには`test`という名前のデフォルトデータベースが付属しています。ただし、必要がない限り、本番環境での使用は推奨されません。 `CREATE DATABASE`文を使用して独自のデータベースを作成し、SQLセッションで[`USE {databasename};`](/sql-statements/sql-statement-use.md)文を使用して現在のデータベースを変更できます。
 - `root`ユーザーを使用して、データベース、ロール、ユーザーなどのオブジェクトを作成します。ロールとユーザーには、必要な権限のみを付与してください。
-- ベストプラクティスとして、データベーススキーマの変更を実行する際には、ドライバやORMではなく、 **MySQLコマンドラインクライアント**または**MySQL GUIクライアント**を使用することをお勧めします。
+- ベストプラクティスとして、データベーススキーマの変更を実行する際には、ドライバーやORMではなく、 **MySQLコマンドラインクライアント**または**MySQL GUIクライアント**を使用することをお勧めします。
 
 ## 次のステップ {#next-step}
 

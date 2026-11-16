@@ -44,7 +44,7 @@ TiDBには`test`という名前のデフォルトデータベースが付属し�
 > TiDBでは、**主キー**のデフォルト定義は[InnoDB](https://dev.mysql.com/doc/refman/8.0/en/innodb-storage-engine.html) （MySQLの一般的なストレージエンジン）とは異なります。
 >
 > - InnoDBでは、**主キー**の定義は一意であり、nullではなく、**クラスター化されたインデックス**です。
-> - TiDB では、**プライマリ キー**の定義は一意であり、NULL ではありません。ただし、プライマリ キーが**クラスター化インデックス**であるとは限りません。プライマリ キーがクラスター化インデックスであるかどうかを指定するには、`CREATE TABLE`ステートメントの`PRIMARY KEY`の後に、予約されていないキーワード`CLUSTERED`または`NONCLUSTERED`を追加します。ステートメントでこれらのキーワードが明示的に指定されていない場合、デフォルトの動作はシステム変数`@@global.tidb_enable_clustered_index`によって制御されます。詳細については、[クラスター化インデックス](/clustered-indexes.md)を参照してください。
+> - TiDB では、**プライマリキー**の定義は一意であり、NULL ではありません。ただし、プライマリキーが**クラスター化インデックス**であるとは限りません。プライマリキーがクラスター化インデックスであるかどうかを指定するには、`CREATE TABLE`ステートメントの`PRIMARY KEY`の後に、予約されていないキーワード`CLUSTERED`または`NONCLUSTERED`を追加します。ステートメントでこれらのキーワードが明示的に指定されていない場合、デフォルトの動作はシステム変数`@@global.tidb_enable_clustered_index`によって制御されます。詳細については、[クラスター化インデックス](/clustered-indexes.md)を参照してください。
 
 #### 特殊なインデックス {#specialized-indexes}
 
@@ -60,11 +60,11 @@ TiDBは、**テーブル**と同じレベルで以下の論理オブジェクト
 
 ## アクセス制御 {#access-control}
 
-TiDB は、ユーザーベースとロールベースの両方のアクセス制御をサポートします。ユーザーがデータオブジェクトおよびデータ スキーマを表示、変更、または削除できるようにするには、[ユーザー](/user-account-management.md)に直接[権限](/privilege-management.md)を付与するか、[ロール](/role-based-access-control.md)を通じて[権限](/privilege-management.md)をユーザーに付与します。
+TiDB は、ユーザーベースとロールベースの両方のアクセス制御をサポートします。ユーザーがデータオブジェクトおよびデータスキーマを表示、変更、または削除できるようにするには、[ユーザー](/user-account-management.md)に直接[権限](/privilege-management.md)を付与するか、[ロール](/role-based-access-control.md)を通じて[権限](/privilege-management.md)をユーザーに付与します。
 
 ## データベーススキーマの変更 {#database-schema-changes}
 
-ベストプラクティスとして、データベーススキーマの変更を実行する際には、ドライバやORMではなく、 [MySQLクライアント](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)またはGUIクライアントを使用することをお勧めします。
+ベストプラクティスとして、データベーススキーマの変更を実行する際には、ドライバーやORMではなく、 [MySQLクライアント](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)またはGUIクライアントを使用することをお勧めします。
 
 ## オブジェクトの制限 {#object-limitations}
 

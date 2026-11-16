@@ -12,7 +12,7 @@ aliases: ['/ja/tidb/stable/dev-guide-create-secondary-indexes/','/ja/tidb/dev/de
 
 セカンダリインデックスを作成する前に、以下の手順を実行してください。
 
-- [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
+- [{{{ .starter }}}インスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
 - [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md)をお読みください。
 - [データベースを作成する](/develop/dev-guide-create-database.md)。
 - [テーブルを作成する](/develop/dev-guide-create-table.md)。

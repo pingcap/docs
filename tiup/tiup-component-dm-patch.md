@@ -1,6 +1,6 @@
 ---
 title: Apply Hotfix to DM Clusters Online
-summary: DM クラスターにホットフィックス パッチを適用する方法を学習します。
+summary: DM クラスターにホットフィックスパッチを適用する方法を学習します。
 ---
 
 # DM クラスターにオンラインでホットフィックスを適用する {#apply-hotfix-to-dm-clusters-online}
@@ -19,7 +19,7 @@ summary: DM クラスターにホットフィックス パッチを適用する�
 tiup dm patch <cluster-name> <package-path> [flags]
 ```
 
-- `<cluster-name>` : 操作対象となるクラスタの名前
+- `<cluster-name>` : 操作対象となるクラスターの名前
 - `<package-path>` : 置換に使用するバイナリパッケージへのパス
 
 ### 準備 {#preparation}
@@ -30,7 +30,7 @@ tiup dm patch <cluster-name> <package-path> [flags]
 - コマンド`wget https://tiup-mirrors.pingcap.com/${component}-${version}-${os}-${arch}.tar.gz -O /tmp/${component}-${version}-${os}-${arch}.tar.gz`を使用して現在のコンポーネントパッケージをダウンロードします。
 - `mkdir -p /tmp/package && cd /tmp/package`を実行して、ファイルをパックするための一時ディレクトリを作成します。
 - `tar xf /tmp/${component}-${version}-${os}-${arch}.tar.gz`を実行して元のバイナリパッケージを解凍します。
-- `find .`を実行して、一時パッケージ ディレクトリ内のファイル構造を表示します。
+- `find .`を実行して、一時パッケージディレクトリ内のファイル構造を表示します。
 - バイナリファイルまたは設定ファイルを一時ディレクトリ内の対応する場所にコピーします。
 - `tar czf /tmp/${component}-hotfix-${os}-${arch}.tar.gz *`を実行して、一時ディレクトリにファイルをパックします。
 - 最後に、 `tiup dm patch`コマンドの`<package-path>`の値として`/tmp/${component}-hotfix-${os}-${arch}.tar.gz`を使用できます。
@@ -39,7 +39,7 @@ tiup dm patch <cluster-name> <package-path> [flags]
 
 ### --overwrite {#overwrite}
 
-- 特定のコンポーネント（dm-workerなど）にパッチを適用した後、tiup-dmがそのコンポーネントをスケールアウトすると、tiup-dmはデフォルトで元のコンポーネントバージョンを使用します。将来クラスタがスケールアウトした際にパッチを適用したバージョンを使用するには、コマンドでオプション`--overwrite`を指定する必要があります。
+- 特定のコンポーネント（dm-workerなど）にパッチを適用した後、tiup-dmがそのコンポーネントをスケールアウトすると、tiup-dmはデフォルトで元のコンポーネントバージョンを使用します。将来クラスターがスケールアウトした際にパッチを適用したバージョンを使用するには、コマンドでオプション`--overwrite`を指定する必要があります。
 - データ型: `BOOLEAN`
 - このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないかのいずれかを選択します。
 
@@ -51,7 +51,7 @@ tiup dm patch <cluster-name> <package-path> [flags]
 
 > **Note:**
 >
-> オプション`-R, --role`が同時に指定されている場合、 TiUP は`-N, --node`と`-R, --role`両方の要件に一致するサービス ノードを置き換えます。
+> オプション`-R, --role`が同時に指定されている場合、 TiUP は`-N, --node`と`-R, --role`両方の要件に一致するサービスノードを置き換えます。
 
 ### -R, --role {#r-role}
 
@@ -61,11 +61,11 @@ tiup dm patch <cluster-name> <package-path> [flags]
 
 > **Note:**
 >
-> オプション`-N, --node`が同時に指定されている場合、 TiUP は`-N, --node`と`-R, --role`両方の要件に一致するサービス ノードを置き換えます。
+> オプション`-N, --node`が同時に指定されている場合、 TiUP は`-N, --node`と`-R, --role`両方の要件に一致するサービスノードを置き換えます。
 
 ### --offline {#offline}
 
-- 現在のクラスタがオフラインであることを宣言します。このオプションを指定すると、 TiUP DMはサービスを再起動せずに、クラスタコンポーネントのバイナリファイルのみを置き換えます。
+- 現在のクラスターがオフラインであることを宣言します。このオプションを指定すると、 TiUP DMはサービスを再起動せずに、クラスターコンポーネントのバイナリファイルのみを置き換えます。
 
 ### -h, --help {#h-help}
 
@@ -79,11 +79,11 @@ tiup dm patch <cluster-name> <package-path> [flags]
 
 > **Note:**
 >
-> ホットフィックスは緊急時の修正にのみ使用されます。日常的なメンテナンスは複雑です。正式版がリリースされたら、できるだけ早くDMクラスタを正式版にアップグレードすることをお勧めします。
+> ホットフィックスは緊急時の修正にのみ使用されます。日常的なメンテナンスは複雑です。正式版がリリースされたら、できるだけ早くDMクラスターを正式版にアップグレードすることをお勧めします。
 
 ### 準備 {#preparations}
 
-修正プログラムを適用する前に、修正プログラム パッケージ`dm-linux-amd64.tar.gz`を準備し、現在の DM ソフトウェア バージョンを確認します。
+修正プログラムを適用する前に、修正プログラムパッケージ`dm-linux-amd64.tar.gz`を準備し、現在の DM ソフトウェアバージョンを確認します。
 
 ```shell
 /home/tidb/dm/deploy/dm-master-8261/bin/dm-master/dm-master -V
@@ -100,9 +100,9 @@ UTC Build Time: 2021-11-29 08:29:49
 Go Version: go version go1.16.4 linux/amd64
 ```
 
-### パッチパッケージを準備し、DMクラスタに適用する {#prepare-the-patch-package-and-apply-it-to-the-dm-cluster}
+### パッチパッケージを準備し、DMクラスターに適用する {#prepare-the-patch-package-and-apply-it-to-the-dm-cluster}
 
-1. 現在のバージョンに一致する DM ソフトウェア パッケージを準備します。
+1. 現在のバージョンに一致する DM ソフトウェアパッケージを準備します。
 
     ```shell
     mkdir -p /tmp/package
@@ -110,7 +110,7 @@ Go Version: go version go1.16.4 linux/amd64
     tar -zxvf /root/.tiup/storage/dm/packages/dm-worker-v5.3.0-linux-amd64.tar.gz -C /tmp/package/
     ```
 
-2. バイナリファイルを修正プログラム パッケージに置き換えます。
+2. バイナリファイルを修正プログラムパッケージに置き換えます。
 
     ```shell
     # Decompress the hotfix package and use it to replace the binary file.

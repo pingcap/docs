@@ -9,7 +9,7 @@ summary: "`tiup cluster stop`コマンドは、指定されたクラスターの
 
 > **Note:**
 >
-> クラスターのコア サービスが停止すると、クラスターはサービスを提供できなくなります。
+> クラスターのコアサービスが停止すると、クラスターはサービスを提供できなくなります。
 
 ## 構文 {#syntax}
 
@@ -29,7 +29,7 @@ tiup cluster stop <cluster-name> [flags]
 
 > **Note:**
 >
-> `-R, --role`オプションを同時に指定した場合は、 `-N, --node`と`-R, --role`両方の指定に一致するサービス ノードのみが停止されます。
+> `-R, --role`オプションを同時に指定した場合は、 `-N, --node`と`-R, --role`両方の指定に一致するサービスノードのみが停止されます。
 
 ### -R, --role {#r-role}
 
@@ -39,7 +39,7 @@ tiup cluster stop <cluster-name> [flags]
 
 > **Note:**
 >
-> `-N, --node`オプションを同時に指定した場合は、 `-N, --node`と`-R, --role`両方の指定に一致するサービス ノードのみが停止されます。
+> `-N, --node`オプションを同時に指定した場合は、 `-N, --node`と`-R, --role`両方の指定に一致するサービスノードのみが停止されます。
 
 ### -h, --help {#h-help}
 
@@ -51,4 +51,4 @@ tiup cluster stop <cluster-name> [flags]
 
 サービスを停止したログ。
 
-[&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPクラスターコマンドリスト](/tiup/tiup-component-cluster.md#command-list)
