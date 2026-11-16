@@ -25,16 +25,16 @@ TiDB バージョン: 7.5.1
 
 - TiDB
 
-    - DDLスキーマの再ロードプロセス中に`tikv_client_read_timeout`を使用して、クラスタでのメタリージョンLeaderの読み取り不可の影響を軽減します。 [#48124](https://github.com/pingcap/tidb/issues/48124) @[cfzjywxk](https://github.com/cfzjywxk)
+    - DDLスキーマの再ロードプロセス中に`tikv_client_read_timeout`を使用して、クラスターでのメタリージョンLeaderの読み取り不可の影響を軽減します。 [#48124](https://github.com/pingcap/tidb/issues/48124) @[cfzjywxk](https://github.com/cfzjywxk)
 
     - リソース制御に関する可観測性を強化する[#49318](https://github.com/pingcap/tidb/issues/49318) @[glorv](https://github.com/glorv) @[bufferflies](https://github.com/bufferflies) @[nolouch](https://github.com/nolouch)
 
         リソースグループを使用してアプリケーションのワークロードを分離するユーザーが増えるにつれ、リソースコントロールはリソースグループに基づいた拡張データを提供します。これにより、リソースグループのワークロードと設定を監視し、次のような問題を迅速に特定し、正確に診断できるようになります。
 
-        - [スロークエリ](/identify-slow-queries.md) : リソースグループ名、リソース ユニット (RU) の消費量、およびリソースの待機時間を追加します。
+        - [スロークエリ](/identify-slow-queries.md) : リソースグループ名、リソースユニット (RU) の消費量、およびリソースの待機時間を追加します。
         - [ステートメントサマリーテーブル](/statement-summary-tables.md) : リソースグループ名、RU 消費量、リソースの待機時間を追加します。
         - システム変数[`tidb_last_query_info`](/system-variables.md#tidb_last_query_info-new-in-v4014)に、SQL文によって消費されたリソース量[RU](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru)を示す新しいエントリ`ru_consumption`を追加します。この変数を使用して、セッション内の最後の文のリソース消費量を取得できます。
-        - リソースグループに基づいてデータベース メトリックを追加します: QPS/TPS、実行時間 (P999/P99/P95)、障害数、接続数。
+        - リソースグループに基づいてデータベースメトリックを追加します: QPS/TPS、実行時間 (P999/P99/P95)、障害数、接続数。
 
     - `CANCEL IMPORT JOB`文を同期文に変更します。 [#48736](https://github.com/pingcap/tidb/issues/48736) @[D3Hunter](https://github.com/D3Hunter)
 
@@ -42,7 +42,7 @@ TiDB バージョン: 7.5.1
 
     - いくつかの型変換を処理する際の TiDB 実装を最適化し、関連する問題を修正しました[#47945](https://github.com/pingcap/tidb/issues/47945) [#47864](https://github.com/pingcap/tidb/issues/47864) [#47829](https://github.com/pingcap/tidb/issues/47829) [#47816](https://github.com/pingcap/tidb/issues/47816) @[YangKeao](https://github.com/YangKeao) @[lcwangchao](https://github.com/lcwangchao)
 
-    - 非バイナリ照合順序が設定され、クエリに`LIKE`が含まれている場合、オプティマイザは実行効率を向上させるために`IndexRangeScan`を生成します[#48181](https://github.com/pingcap/tidb/issues/48181) [#49138](https://github.com/pingcap/tidb/issues/49138) @[time-and-fate](https://github.com/time-and-fate)
+    - 非バイナリ照合順序が設定され、クエリに`LIKE`が含まれている場合、オプティマイザーは実行効率を向上させるために`IndexRangeScan`を生成します[#48181](https://github.com/pingcap/tidb/issues/48181) [#49138](https://github.com/pingcap/tidb/issues/49138) @[time-and-fate](https://github.com/time-and-fate)
 
     - 特定のシナリオで`OUTER JOIN`を`INNER JOIN`に変換する能力を強化する[#49616](https://github.com/pingcap/tidb/issues/49616) @[qw4990](https://github.com/qw4990)
 
@@ -94,7 +94,7 @@ TiDB バージョン: 7.5.1
     - `BIT`型の列が一部の関数の計算に関係する場合にデコード失敗によりクエリエラーが発生する可能性がある問題を修正しました[#49566](https://github.com/pingcap/tidb/issues/49566) [#50850](https://github.com/pingcap/tidb/issues/50850) [#50855](https://github.com/pingcap/tidb/issues/50855) @[jiyfhust](https://github.com/jiyfhust)
     - CTEクエリのメモリ使用量が制限を超えたときに発生するgoroutineリークの問題を修正しました [#50337](https://github.com/pingcap/tidb/issues/50337) @[guo-shaoge](https://github.com/guo-shaoge)
     - TiFlash の遅延マテリアライゼーションが関連列 を処理するときに間違った結果が返される可能性がある問題を修正しました [#51204](https://github.com/pingcap/tidb/issues/51204) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger) [#49241](https://github.com/pingcap/tidb/issues/49241)
-    - TiDB が履歴統計を記録するときに TiDB のバックグラウンド ジョブ スレッドがpanicになる可能性がある問題を修正しました [#49076](https://github.com/pingcap/tidb/issues/49076) @[hawkingrei](https://github.com/hawkingrei)
+    - TiDB が履歴統計を記録するときに TiDB のバックグラウンドジョブスレッドがpanicになる可能性がある問題を修正しました [#49076](https://github.com/pingcap/tidb/issues/49076) @[hawkingrei](https://github.com/hawkingrei)
     - TiDBがパーティションテーブルのグローバル統計のヒストグラムをマージするときに発生する可能性のあるエラーを修正しました。 [#49023](https://github.com/pingcap/tidb/issues/49023) @[hawkingrei](https://github.com/hawkingrei)
     - パーティションが削除された後、 `stats_meta`テーブルの履歴統計が更新されない問題を修正しました [#49334](https://github.com/pingcap/tidb/issues/49334) @[hi-rustin](https://github.com/Rustin170506)
     - 複数値インデックスが誤って`Index Join`プローブ側として選択されたために発生する誤ったクエリ結果の問題を修正しました。 [#50382](https://github.com/pingcap/tidb/issues/50382) @[AilinKid](https://github.com/AilinKid)
@@ -109,13 +109,13 @@ TiDB バージョン: 7.5.1
     - 文字列型の変数に対する`SET_VAR`の制御が無効になる可能性がある問題を修正[#50507](https://github.com/pingcap/tidb/issues/50507) @[qw4990](https://github.com/qw4990)
     - `tidb_server_memory_limit` による長期メモリ圧迫により TiDB の CPU 使用率が上昇する問題を修正 [#48741](https://github.com/pingcap/tidb/issues/48741) @[XuHuaiyu](https://github.com/XuHuaiyu)
     - 依存関係のある 2つの DDL タスクの完了時間が誤って順序付けられる問題を修正しました。 [#49498](https://github.com/pingcap/tidb/issues/49498) @[tangenta](https://github.com/tangenta)
-    - 無効なオプティマイザヒントによって有効なヒントが無効になる可能性がある問題を修正[#49308](https://github.com/pingcap/tidb/issues/49308) @[hawkingrei](https://github.com/hawkingrei)
+    - 無効なオプティマイザーヒントによって有効なヒントが無効になる可能性がある問題を修正[#49308](https://github.com/pingcap/tidb/issues/49308) @[hawkingrei](https://github.com/hawkingrei)
     - `CHECK`制約の DDL 文がスタックする問題を修正しました [#47632](https://github.com/pingcap/tidb/issues/47632) @[jiyfhust](https://github.com/jiyfhust)
     - `CHECK`制約の`ENFORCED`オプションの動作がMySQL 8.0 と一致しない問題を修正 [#47631](https://github.com/pingcap/tidb/issues/47631) @[jiyfhust](https://github.com/jiyfhust) [#47567](https://github.com/pingcap/tidb/issues/47567)
     - CTEクエリが再試行プロセス中にエラー`type assertion for CTEStorageMap failed`を報告する可能性がある問題を修正しました [#46522](https://github.com/pingcap/tidb/issues/46522) @[tiancaiamao](https://github.com/tiancaiamao)
     - `tidb_multi_statement_mode`モードが有効になっている場合、インデックス検索を使用する`DELETE`および`UPDATE`文でエラーが報告される可能性がある問題を修正しました[#50012](https://github.com/pingcap/tidb/issues/50012) @[tangenta](https://github.com/tangenta)
     - `WITH RECURSIVE` CTE を含む`UPDATE`または`DELETE`文で誤った結果が生成される可能性がある問題を修正しました[#48969](https://github.com/pingcap/tidb/issues/48969) @[winoros](https://github.com/winoros)
-    - 特定のシナリオでオプティマイザがTiFlash選択パスを DUAL テーブルに誤って変換する問題を修正しました [#49285](https://github.com/pingcap/tidb/issues/49285) @[AilinKid](https://github.com/AilinKid)
+    - 特定のシナリオでオプティマイザーがTiFlash選択パスを DUAL テーブルに誤って変換する問題を修正しました [#49285](https://github.com/pingcap/tidb/issues/49285) @[AilinKid](https://github.com/AilinKid)
     - 同じクエリプランで、場合によっては`PLAN_DIGEST`値が異なる問題を修正しました [#47634](https://github.com/pingcap/tidb/issues/47634) @[King-Dylan](https://github.com/King-Dylan)
     - 自動統計更新の時間枠を設定した後、その時間枠外でも統計が更新される可能性がある問題を修正[#49552](https://github.com/pingcap/tidb/issues/49552) @[hawkingrei](https://github.com/hawkingrei)
     - `ENUM`型の列を結合キーとして使用した場合にクエリ結果が正しくない問題を修正しました [#48991](https://github.com/pingcap/tidb/issues/48991) @[winoros](https://github.com/winoros)
@@ -133,7 +133,7 @@ TiDB バージョン: 7.5.1
     - `GROUP_CONCAT(ORDER BY)`構文を含むクエリを実行するとエラーが返される可能性がある問題を修正しました [#49986](https://github.com/pingcap/tidb/issues/49986) @[AilinKid](https://github.com/AilinKid)
     - 監査ログ用のEnterpriseプラグインを使用すると、TiDBサーバーが大量のリソースを消費する可能性がある問題を修正しました[#49273](https://github.com/pingcap/tidb/issues/49273) @[lcwangchao](https://github.com/lcwangchao)
     - 古いインターフェースを使用するとテーブルのメタデータに不整合が発生する可能性がある問題を修正しました。 [#49751](https://github.com/pingcap/tidb/issues/49751) @[hawkingrei](https://github.com/hawkingrei)
-    - `tidb_enable_collect_execution_info`を無効にするとコプロセッサキャッシュがpanicになる問題を修正[#48212](https://github.com/pingcap/tidb/issues/48212) @[you06](https://github.com/you06)
+    - `tidb_enable_collect_execution_info`を無効にするとコプロセッサーキャッシュがpanicになる問題を修正[#48212](https://github.com/pingcap/tidb/issues/48212) @[you06](https://github.com/you06)
     - パーティション列タイプが`DATETIME` の場合に`ALTER TABLE ... LAST PARTITION`実行が失敗する問題を修正しました [#48814](https://github.com/pingcap/tidb/issues/48814) @[crazycs520](https://github.com/crazycs520)
     - `COM_STMT_EXECUTE`を介して実行された`COMMIT`または`ROLLBACK`操作が、タイムアウトしたトランザクションを終了できない問題を修正しました。 [#49151](https://github.com/pingcap/tidb/issues/49151) @[zyguan](https://github.com/zyguan)
     - ヒストグラムの境界に`NULL` が含まれている場合、ヒストグラム統計が読み取り可能な文字列に解析されない可能性がある問題を修正しました。 [#49823](https://github.com/pingcap/tidb/issues/49823) @[AilinKid](https://github.com/AilinKid)
@@ -149,8 +149,8 @@ TiDB バージョン: 7.5.1
     - メモリが`tidb_mem_quota_query` を超えると IndexHashJoin オペレーターを含むクエリが停止する問題を修正しました [#49033](https://github.com/pingcap/tidb/issues/49033) @[XuHuaiyu](https://github.com/XuHuaiyu)
     - 定数伝播で`ENUM`または`SET`型を処理するときに TiDB が間違ったクエリ結果を返す問題を修正しました [#49440](https://github.com/pingcap/tidb/issues/49440) @[winoros](https://github.com/winoros)
     - `PREPARE`メソッドを使用して`SELECT INTO OUTFILE`を実行すると、エラーではなく、誤って成功メッセージが返される問題を修正しました。 [#49166](https://github.com/pingcap/tidb/issues/49166) @[qw4990](https://github.com/qw4990)
-    - クエリがソートを強制するオプティマイザヒント（ `STREAM_AGG()`など）を使用し、その実行計画に`IndexMerge` が含まれている場合、強制ソートが無効になる可能性がある問題を修正しました。 [#49605](https://github.com/pingcap/tidb/issues/49605) @[AilinKid](https://github.com/AilinKid)
-    - テーブルが多数ある場合に、テーブルが`AUTO_ID_CACHE=1`の場合に gRPC クライアント リークが発生する可能性がある問題を修正しました。 [#48869](https://github.com/pingcap/tidb/issues/48869) @[tiancaiamao](https://github.com/tiancaiamao)
+    - クエリがソートを強制するオプティマイザーヒント（ `STREAM_AGG()`など）を使用し、その実行計画に`IndexMerge` が含まれている場合、強制ソートが無効になる可能性がある問題を修正しました。 [#49605](https://github.com/pingcap/tidb/issues/49605) @[AilinKid](https://github.com/AilinKid)
+    - テーブルが多数ある場合に、`AUTO_ID_CACHE=1`のテーブルによって gRPC クライアントリークが発生する可能性がある問題を修正しました。 [#48869](https://github.com/pingcap/tidb/issues/48869) @[tiancaiamao](https://github.com/tiancaiamao)
     - 非厳密モード（ `sql_mode = ''` ）で、 `INSERT`実行中に切り捨てが行われても、エラーが報告される問題を修正しました。 [#49369](https://github.com/pingcap/tidb/issues/49369) @[tiancaiamao](https://github.com/tiancaiamao)
     - データの末尾にスペースが含まれている場合に`LIKE`で`_`ワイルドカードを使用すると、誤ったクエリ結果が返される可能性がある問題を修正しました [#48983](https://github.com/pingcap/tidb/issues/48983) @[time-and-fate](https://github.com/time-and-fate)
     - `tidb_mem_quota_query`システム変数を更新した後に`ADMIN CHECK`を実行すると`ERROR 8175` が返される問題を修正しました [#49258](https://github.com/pingcap/tidb/issues/49258) @[tangenta](https://github.com/tangenta)
@@ -176,7 +176,7 @@ TiDB バージョン: 7.5.1
 
     - リソースグループをバッチでクエリすると PD がpanicになる可能性がある問題を修正しました [#7206](https://github.com/tikv/pd/issues/7206) @[nolouch](https://github.com/nolouch)
     - PDが`systemd` で起動したときにリソース制限を読み取れない問題を修正 [#7628](https://github.com/tikv/pd/issues/7628) @[bufferflies](https://github.com/bufferflies)
-    - PD ディスクレイテンシーの継続的なジッタにより、PD が新しいリーダーを選択できない可能性がある問題を修正しました。 [#7251](https://github.com/tikv/pd/issues/7251) @[HuSharp](https://github.com/HuSharp)
+    - PD ディスクレイテンシーの継続的なジッターにより、PD が新しいリーダーを選択できない可能性がある問題を修正しました。 [#7251](https://github.com/tikv/pd/issues/7251) @[HuSharp](https://github.com/HuSharp)
     - PD のネットワークパーティションにより、スケジュールがすぐに開始されない可能性がある問題を修正[#7016](https://github.com/tikv/pd/issues/7016) @[HuSharp](https://github.com/HuSharp)
     - リーダースイッチ後にPD監視項目`learner-peer-count`が古い値を同期しない問題を修正 [#7728](https://github.com/tikv/pd/issues/7728) @[CabinfeverB](https://github.com/CabinfeverB)
     - PDリーダーが転送され、新しいリーダーとPDクライアントの間にネットワークパーティションがある場合、PDクライアントがリーダーの情報を更新できない問題を修正しました。 [#7416](https://github.com/tikv/pd/issues/7416) @[CabinfeverB](https://github.com/CabinfeverB)
@@ -202,7 +202,7 @@ TiDB バージョン: 7.5.1
     - `ColumnRef in (Literal, Func...)` のようなフィルタリング条件でクエリを実行したときにクエリ結果が正しくない問題を修正しました [#8631](https://github.com/pingcap/tiflash/issues/8631) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     - `FLASHBACK DATABASE` を実行した後もTiFlashレプリカのデータがガベージコレクションされる問題を修正しました [#8450](https://github.com/pingcap/tiflash/issues/8450) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - ストレージとコンピューティングの分離アーキテクチャで、 TiFlash がオブジェクトストレージデータの GC 所有者を選択できない可能性がある問題を修正しました。 [#8519](https://github.com/pingcap/tiflash/issues/8519) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    - 定数文字列パラメータを含む`GREATEST`または`LEAST`関数で発生する可能性のある、ランダムに無効なメモリアクセスの問題を修正しました。 [#8604](https://github.com/pingcap/tiflash/issues/8604) @[windtalker](https://github.com/windtalker)
+    - 定数文字列パラメーターを含む`GREATEST`または`LEAST`関数で発生する可能性のある、ランダムに無効なメモリアクセスの問題を修正しました。 [#8604](https://github.com/pingcap/tiflash/issues/8604) @[windtalker](https://github.com/windtalker)
     - ポイントインタイムリカバリ（PITR）を実行した後、または`FLASHBACK CLUSTER TO`を実行した後にTiFlashレプリカデータが誤って削除され、データ異常が発生する可能性がある問題を修正しました。 [#8777](https://github.com/pingcap/tiflash/issues/8777) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - 結合に非等価条件が含まれている場合に、 TiFlash Anti Semi Join が誤った結果を返す可能性がある問題を修正しました。 [#8791](https://github.com/pingcap/tiflash/issues/8791) @[windtalker](https://github.com/windtalker)
 
@@ -218,7 +218,7 @@ TiDB バージョン: 7.5.1
         - タスク初期化中にPDへの接続に失敗すると、ログバックアップタスクは開始できるが正常に動作しない問題を修正[#16056](https://github.com/tikv/tikv/issues/16056) @[YuJuncen](https://github.com/YuJuncen)
         - BRが外部ストレージファイルに対して誤ったURIを生成する問題を修正 [#48452](https://github.com/pingcap/tidb/issues/48452) @[3AceShowHand](https://github.com/3AceShowHand)
         - 同じノードで TiKV IP アドレスを変更した後にログバックアップが停止する問題を修正しました [#50445](https://github.com/pingcap/tidb/issues/50445) @[3pointer](https://github.com/3pointer)
-        - S3 からファイル コンテンツを読み取っているときにエラーが発生した場合にBR が再試行できない問題を修正しました [#49942](https://github.com/pingcap/tidb/issues/49942) @[Leavrth](https://github.com/Leavrth)
+        - S3 からファイルコンテンツを読み取っているときにエラーが発生した場合にBR が再試行できない問題を修正しました [#49942](https://github.com/pingcap/tidb/issues/49942) @[Leavrth](https://github.com/Leavrth)
 
     - TiCDC
 

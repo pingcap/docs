@@ -56,7 +56,7 @@ TiDB バージョン: 6.5.10
     - TiDB を再起動した後、主キー列統計のヒストグラムと TopN がロードされない問題を修正しました [#37548](https://github.com/pingcap/tidb/issues/37548) @[hawkingrei](https://github.com/hawkingrei)
     - クエリ内の特定のフィルター条件により、プランナーモジュールが`invalid memory address or nil pointer dereference`エラーを報告する可能性がある問題を修正しました [#53582](https://github.com/pingcap/tidb/issues/53582) [#53580](https://github.com/pingcap/tidb/issues/53580) [#53594](https://github.com/pingcap/tidb/issues/53594) [#53603](https://github.com/pingcap/tidb/issues/53603) @[YangKeao](https://github.com/YangKeao)
     - `?`引数を含む`CONV`式を使用した`PREPARE`/`EXECUTE`文を複数回実行すると、誤ったクエリ結果が返される可能性がある問題を修正しました[#53505](https://github.com/pingcap/tidb/issues/53505) @[qw4990](https://github.com/qw4990)
-    - オプティマイザヒント使用時に誤った警告情報が表示される問題を修正しました [#53767](https://github.com/pingcap/tidb/issues/53767) @[hawkingrei](https://github.com/hawkingrei)
+    - オプティマイザーヒント使用時に誤った警告情報が表示される問題を修正しました [#53767](https://github.com/pingcap/tidb/issues/53767) @[hawkingrei](https://github.com/hawkingrei)
     - 情報スキーマキャッシュミスにより、ステイル読み取りのクエリレイテンシーが増加する問題を修正しました。 [#53428](https://github.com/pingcap/tidb/issues/53428) @[crazycs520](https://github.com/crazycs520)
     - DDL文が etcd を誤って使用し、タスクがキューに入れられる問題を修正しました。 [#52335](https://github.com/pingcap/tidb/issues/52335) @[wjhuang2016](https://github.com/wjhuang2016)
     - 式インデックスの名前を変更する`RENAME INDEX`を実行したときに内部列の名前が変更されない問題を修正しました [#51431](https://github.com/pingcap/tidb/issues/51431) @[ywqzzy](https://github.com/ywqzzy)
@@ -108,7 +108,7 @@ TiDB バージョン: 6.5.10
     - データベース間で`ALTER TABLE ... EXCHANGE PARTITION`を実行した後にTiFlash がスキーマの同期に失敗する可能性がある問題を修正しました[#7296](https://github.com/pingcap/tiflash/issues/7296) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - 空のキー範囲を持つクエリがTiFlashで読み取りタスクを正しく生成できず、 TiFlashクエリがブロックされる可能性がある問題を修正しました。 [#9108](https://github.com/pingcap/tiflash/issues/9108) @[JinheLin](https://github.com/JinheLin)
     - `SUBSTRING_INDEX()`関数が一部のコーナーケースでTiFlash のクラッシュを引き起こす可能性がある問題を修正[#9116](https://github.com/pingcap/tiflash/issues/9116) @[wshwsh12](https://github.com/wshwsh12)
-    - クラスタをv6.5.0より前のバージョンからv6.5.0以降にアップグレードするときに、 TiFlashメタデータが破損してプロセスがpanicになる可能性がある問題を修正しました[#9039](https://github.com/pingcap/tiflash/issues/9039) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - クラスターをv6.5.0より前のバージョンからv6.5.0以降にアップグレードするときに、 TiFlashメタデータが破損してプロセスがpanicになる可能性がある問題を修正しました[#9039](https://github.com/pingcap/tiflash/issues/9039) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - TiFlash が高同時実行読み取りシナリオで一時的に誤った結果を返す可能性がある問題を修正[#8845](https://github.com/pingcap/tiflash/issues/8845) @[JinheLin](https://github.com/JinheLin)
 
 - ツール
@@ -117,7 +117,7 @@ TiDB バージョン: 6.5.10
 
         - テストケース`TestGetTSWithRetry`の実行に時間がかかりすぎる問題を修正[#52547](https://github.com/pingcap/tidb/issues/52547) @[Leavrth](https://github.com/Leavrth)
         - BRを使用してデータを復元する場合、または物理インポートモードでTiDB Lightningを使用してデータをインポートする場合に、PD から取得されたリージョンにLeaderがない問題を修正しました[#51124](https://github.com/pingcap/tidb/issues/51124) [#50501](https://github.com/pingcap/tidb/issues/50501) @[Leavrth](https://github.com/Leavrth)
-        - PD接続障害により、ログバックアップアドバンサ所有者が配置されているTiDBインスタンスがpanicになる可能性がある問題を修正しました。 [#52597](https://github.com/pingcap/tidb/issues/52597) @[YuJuncen](https://github.com/YuJuncen)
+        - PD接続障害により、ログバックアップアドバンサー所有者が配置されているTiDBインスタンスがpanicになる可能性がある問題を修正しました。 [#52597](https://github.com/pingcap/tidb/issues/52597) @[YuJuncen](https://github.com/YuJuncen)
         - ログバックアップタスクを一時停止、停止、再構築した後、タスクの状態は正常であるが、チェックポイントが進まない問題を修正しました。 [#53047](https://github.com/pingcap/tidb/issues/53047) @[RidRisR](https://github.com/RidRisR)
         - TiKVノードにリーダーがいないためにデータ復元が遅くなる問題を修正 [#50566](https://github.com/pingcap/tidb/issues/50566) @[Leavrth](https://github.com/Leavrth)
         - TiKV の再起動により、ログバックアップのグローバルチェックポイントが実際のバックアップファイルの書き込みポイントよりも先に進められ、少量のバックアップデータが失われる可能性がある問題を修正しました[#16809](https://github.com/tikv/tikv/issues/16809) @[YuJuncen](https://github.com/YuJuncen)

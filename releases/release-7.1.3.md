@@ -16,7 +16,7 @@ TiDB バージョン: 7.1.3
 - さらなるテストの結果、 TiCDC Changefeed設定項目[`case-sensitive`](/ticdc/ticdc-changefeed-config.md)のデフォルト値が`true`から`false`に変更されました。これは、デフォルトでは TiCDC 設定ファイル内のテーブル名とデータベース名が大文字と小文字を区別しないことを意味します[#10047](https://github.com/pingcap/tiflow/issues/10047) @[sdojjy](https://github.com/sdojjy)
 - TiCDC Changefeed では、次の新しい設定項目が導入されています。
     - [`sql-mode`](/ticdc/ticdc-changefeed-config.md) : TiCDC がデータを複製するときに DDL文を解析するために使用する[SQLモード](https://docs.pingcap.com/tidb/v7.1/ticdc-ddl#sql-mode)を設定できます[#9876](https://github.com/pingcap/tiflow/issues/9876) @[asddongmen](https://github.com/asddongmen)
-    - [`encoding-worker-num`](/ticdc/ticdc-changefeed-config.md)と[`flush-worker-num`](/ticdc/ticdc-changefeed-config.md) : 異なるマシンの仕様に基づいて、REDOモジュールに異なる同時実行パラメータを設定できます[#10048](https://github.com/pingcap/tiflow/issues/10048) @[CharlesCheung96](https://github.com/CharlesCheung96)
+    - [`encoding-worker-num`](/ticdc/ticdc-changefeed-config.md)と[`flush-worker-num`](/ticdc/ticdc-changefeed-config.md) : 異なるマシンの仕様に基づいて、REDOモジュールに異なる同時実行パラメーターを設定できます[#10048](https://github.com/pingcap/tiflow/issues/10048) @[CharlesCheung96](https://github.com/CharlesCheung96)
     - [`compression`](/ticdc/ticdc-changefeed-config.md) : REDOログファイルの圧縮動作を設定できます[#10176](https://github.com/pingcap/tiflow/issues/10176) @[sdojjy](https://github.com/sdojjy)
     - [`sink.cloud-storage-config`](/ticdc/ticdc-changefeed-config.md) : オブジェクトストレージにデータを複製するときに履歴データの自動クリーンアップを設定できます [#10109](https://github.com/pingcap/tiflow/issues/10109) @[CharlesCheung96](https://github.com/CharlesCheung96)
 
@@ -34,7 +34,7 @@ TiDB バージョン: 7.1.3
 
     - Backup & Restore (BR)
 
-        - タイムアウトエラーまたはリージョンスキャッタのキャンセルが発生した場合に、スナップショットリカバリ中にリージョンスキャッタの自動再試行を有効にする [#47236](https://github.com/pingcap/tidb/issues/47236) @[Leavrth](https://github.com/Leavrth)
+        - タイムアウトエラーまたはリージョンスキャッターのキャンセルが発生した場合に、スナップショットリカバリ中にリージョンスキャッターの自動再試行を有効にする [#47236](https://github.com/pingcap/tidb/issues/47236) @[Leavrth](https://github.com/Leavrth)
         - スナップショットバックアップの復元中に、 BRは特定のネットワークエラーが発生すると再試行します[#48528](https://github.com/pingcap/tidb/issues/48528) @[Leavrth](https://github.com/Leavrth)
         - `delete range`シナリオで Point-In-Time Recovery (PITR) の新しい統合テストを導入し、PITR の安定性を強化します。 [#47738](https://github.com/pingcap/tidb/issues/47738) @[Leavrth](https://github.com/Leavrth)
 
@@ -45,7 +45,7 @@ TiDB バージョン: 7.1.3
         - S3へのデータの並列書き込みやlz4圧縮アルゴリズムの採用など、REDOログのパフォーマンスを最適化します[#10176](https://github.com/pingcap/tiflow/issues/10176) [#10226](https://github.com/pingcap/tiflow/issues/10226) @[sdojjy](https://github.com/sdojjy)
         - 並列度を増やすことで、TiCDC がオブジェクトストレージにデータを複製する際のパフォーマンスが向上します。 [#10098](https://github.com/pingcap/tiflow/issues/10098) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - TiCDC 増分スキャンによる上流 TiKV への影響を軽減 [#11390](https://github.com/tikv/tikv/issues/11390) @[hicqu](https://github.com/hicqu)
-        - `sink-uri`構成で`content-compatible=true`を設定することにより、 TiCDC Canal-JSON コンテンツ フォーマット[公式Canal出力のコンテンツ形式と互換性がある](https://docs.pingcap.com/tidb/v6.5/ticdc-canal-json#compatibility-with-the-official-canal)作成をサポートします。 [#10106](https://github.com/pingcap/tiflow/issues/10106) @[3AceShowHand](https://github.com/3AceShowHand)
+        - `sink-uri`構成で`content-compatible=true`を設定することにより、 TiCDC Canal-JSON コンテンツフォーマットを[公式Canal出力のコンテンツ形式と互換性がある](https://docs.pingcap.com/tidb/v6.5/ticdc-canal-json#compatibility-with-the-official-canal)ようにすることをサポートします。 [#10106](https://github.com/pingcap/tiflow/issues/10106) @[3AceShowHand](https://github.com/3AceShowHand)
 
     - TiDB Lightning
 
@@ -68,16 +68,16 @@ TiDB バージョン: 7.1.3
     - `AUTO_ID_CACHE=1` に設定されている場合に`Duplicate entry`が発生する可能性がある問題を修正しました [#46444](https://github.com/pingcap/tidb/issues/46444) @[tiancaiamao](https://github.com/tiancaiamao)
     - 監査ログ用のEnterpriseプラグインを使用すると、TiDBサーバーが大量のリソースを消費する可能性がある問題を修正[#49273](https://github.com/pingcap/tidb/issues/49273) @[lcwangchao](https://github.com/lcwangchao)
     - 正常なシャットダウン中に TiDBサーバーがpanicする可能性がある問題を修正[#36793](https://github.com/pingcap/tidb/issues/36793) @[bb7133](https://github.com/bb7133)
-    - テーブルが多数ある場合に、 `AUTO_ID_CACHE=1`のテーブルによって gRPC クライアント リークが発生する可能性がある問題を修正しました。 [#48869](https://github.com/pingcap/tidb/issues/48869) @[tiancaiamao](https://github.com/tiancaiamao)
+    - テーブルが多数ある場合に、 `AUTO_ID_CACHE=1`のテーブルによって gRPC クライアントリークが発生する可能性がある問題を修正しました。 [#48869](https://github.com/pingcap/tidb/issues/48869) @[tiancaiamao](https://github.com/tiancaiamao)
     - `ErrLoadDataInvalidURI`の誤ったエラーメッセージを修正 (無効な S3 URI エラー) [#48164](https://github.com/pingcap/tidb/issues/48164) @[lance6716](https://github.com/lance6716)
     - パーティション列タイプが`DATETIME` の場合に`ALTER TABLE ... LAST PARTITION`の実行が失敗する問題を修正しました [#48814](https://github.com/pingcap/tidb/issues/48814) @[crazycs520](https://github.com/crazycs520)
     - `IMPORT INTO`実行中に実際のエラーメッセージが他のエラーメッセージによって上書きされる可能性がある問題を修正[#47992](https://github.com/pingcap/tidb/issues/47992) [#47781](https://github.com/pingcap/tidb/issues/47781) @[D3Hunter](https://github.com/D3Hunter)
-    - cgroup v2コンテナにデプロイされたTiDBが検出できない問題を修正[#48342](https://github.com/pingcap/tidb/issues/48342) @[D3Hunter](https://github.com/D3Hunter)
+    - cgroup v2コンテナーにデプロイされたTiDBが検出できない問題を修正[#48342](https://github.com/pingcap/tidb/issues/48342) @[D3Hunter](https://github.com/D3Hunter)
     - DUALテーブルを最初のサブノードとして`UNION ALL`を実行するとエラーが発生する可能性がある問題を修正しました。 [#48755](https://github.com/pingcap/tidb/issues/48755) @[winoros](https://github.com/winoros)
     - DDL `jobID`が 0 に復元されたときに発生する TiDB ノードpanicの問題を修正しました [#46296](https://github.com/pingcap/tidb/issues/46296) @[jiyfhust](https://github.com/jiyfhust)
     - `TABLESAMPLE` によって返されるソートされていない行データの問題を修正しました [#48253](https://github.com/pingcap/tidb/issues/48253) @[tangenta](https://github.com/tangenta)
     - `tidb_enable_ordered_result_mode`が有効になっているときにpanicが発生する可能性がある問題を修正[#45044](https://github.com/pingcap/tidb/issues/45044) @[qw4990](https://github.com/qw4990)
-    - ウィンドウ関数によって導入されたソートを削減するために、オプティマイザが誤って IndexFullScan を選択する問題を修正しました。 [#46177](https://github.com/pingcap/tidb/issues/46177) @[qw4990](https://github.com/qw4990)
+    - ウィンドウ関数によって導入されたソートを削減するために、オプティマイザーが誤って IndexFullScan を選択する問題を修正しました。 [#46177](https://github.com/pingcap/tidb/issues/46177) @[qw4990](https://github.com/qw4990)
     - TiDBスキーマキャッシュからスキーマ差分コミットバージョンを読み取るときにMVCCインターフェースでロックを処理しない問題を修正しました [#48281](https://github.com/pingcap/tidb/issues/48281) @[cfzjywxk](https://github.com/cfzjywxk)
     - `INDEX_LOOKUP_HASH_JOIN` でのメモリ使用量の見積もりが間違っている問題を修正 [#47788](https://github.com/pingcap/tidb/issues/47788) @[SeaRise](https://github.com/SeaRise)
     - PDリーダーが1分間故障したことにより`IMPORT INTO`タスクが失敗する問題を修正[#48307](https://github.com/pingcap/tidb/issues/48307) @[D3Hunter](https://github.com/D3Hunter)
@@ -98,14 +98,14 @@ TiDB バージョン: 7.1.3
     - 大規模なトランザクションを追跡するときに、ステイル読み取りにおける Resolved TS が TiKV OOM 問題を引き起こす可能性がある問題を修正しました [#14864](https://github.com/tikv/tikv/issues/14864) @[overvenus](https://github.com/overvenus)
     - 破損したSSTファイルが他のTiKVノードに広がる可能性がある問題を修正 [#15986](https://github.com/tikv/tikv/issues/15986) @[Connor1996](https://github.com/Connor1996)
     - スケールアウトするときに DR 自動同期のジョイント状態がタイムアウトする可能性がある問題を修正しました [#15817](https://github.com/tikv/tikv/issues/15817) @[Connor1996](https://github.com/Connor1996)
-    - クラウド環境のGrafanaでスケジューラコマンド変数が正しくない問題を修正[#15832](https://github.com/tikv/tikv/issues/15832) @[Connor1996](https://github.com/Connor1996)
+    - クラウド環境のGrafanaでスケジューラーコマンド変数が正しくない問題を修正[#15832](https://github.com/tikv/tikv/issues/15832) @[Connor1996](https://github.com/Connor1996)
     - リージョンをマージした後、古いピアが保持され、resolved-tsがブロックされる問題を修正しました。 [#15919](https://github.com/tikv/tikv/issues/15919) @[overvenus](https://github.com/overvenus)
     - オンラインアンセーフリカバリがマージ中止を処理できない問題を修正 [#15580](https://github.com/tikv/tikv/issues/15580) @[v01dstar](https://github.com/v01dstar)
     - TiKV を再起動したときに、適用されていないRaftログが多数存在すると TiKV OOM が発生する問題を修正しました[#15770](https://github.com/tikv/tikv/issues/15770) @[overvenus](https://github.com/overvenus)
     - `lz4-sys`のバージョンを 1.9.4 にアップグレードしてセキュリティ問題を修正しました [#15621](https://github.com/tikv/tikv/issues/15621) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
     - Titanの`blob-run-mode`をオンラインで更新できない問題を修正 [#15978](https://github.com/tikv/tikv/issues/15978) @[tonyxuqqi](https://github.com/tonyxuqqi)
     - PDとTiKV間のネットワーク中断によりPITRが停止する可能性がある問題を修正しました [#15279](https://github.com/tikv/tikv/issues/15279) @[YuJuncen](https://github.com/YuJuncen)
-    - Raftピアを削除するときに TiKV コプロセッサが古いデータを返す可能性がある問題を修正しました [#16069](https://github.com/tikv/tikv/issues/16069) @[overvenus](https://github.com/overvenus)
+    - Raftピアを削除するときに TiKV コプロセッサーが古いデータを返す可能性がある問題を修正しました [#16069](https://github.com/tikv/tikv/issues/16069) @[overvenus](https://github.com/overvenus)
 
 - PD
 
@@ -113,7 +113,7 @@ TiDB バージョン: 7.1.3
     - **Calibrate by Workload**ページでエラーが報告される問題を修正しました [#48162](https://github.com/pingcap/tidb/issues/48162) @[CabinfeverB](https://github.com/CabinfeverB)
     - リソースグループを削除すると DDL の原子性が損なわれる可能性がある問題を修正しました [#45050](https://github.com/pingcap/tidb/issues/45050) @[glorv](https://github.com/glorv)
     - PDリーダーが転送され、新しいリーダーとPDクライアントの間にネットワークパーティションがある場合、PDクライアントがリーダーの情報を更新できない問題を修正しました。 [#7416](https://github.com/tikv/pd/issues/7416) @[CabinfeverB](https://github.com/CabinfeverB)
-    - 大規模クラスタに複数の TiKV ノードを追加すると、TiKVハートビートレポートが遅くなったり停止したりする可能性がある問題を修正しました[#7248](https://github.com/tikv/pd/issues/7248) @[rleungx](https://github.com/rleungx)
+    - 大規模クラスターに複数の TiKV ノードを追加すると、TiKVハートビートレポートが遅くなったり停止したりする可能性がある問題を修正しました[#7248](https://github.com/tikv/pd/issues/7248) @[rleungx](https://github.com/rleungx)
     - TiDB DashboardがPD `trace`データを正しく読み取れない問題を修正[#7253](https://github.com/tikv/pd/issues/7253) @[nolouch](https://github.com/nolouch)
     - Gin Web Framework のバージョンを v1.8.1 から v1.9.1 にアップグレードして、いくつかのセキュリティ問題を修正しました[#7438](https://github.com/tikv/pd/issues/7438) @[niubell](https://github.com/niubell)
     - ルールチェッカーが配置ルール設定に従ってラーナーを追加しない問題を修正しました [#7185](https://github.com/tikv/pd/issues/7185) @[nolouch](https://github.com/nolouch)

@@ -13,7 +13,7 @@ TiDBバージョン：8.5.1
 
 ## オペレーティングシステムとプラットフォームの要件変更 {#operating-system-and-platform-requirement-changes}
 
-バージョン8.5.1以降、TiDBはCentOS Linux 7のテストを再開し、互換性を確保しています。TiDB v8.5をデプロイする場合、またはクラスタをv8.5にアップグレードする場合は、TiDB v8.5.1以降のバージョンを使用してください。
+バージョン8.5.1以降、TiDBはCentOS Linux 7のテストを再開し、互換性を確保しています。TiDB v8.5をデプロイする場合、またはクラスターをv8.5にアップグレードする場合は、TiDB v8.5.1以降のバージョンを使用してください。
 
 - CentOS Linux 7 は[2024年6月30日にサポート終了（EOL）となった](https://www.redhat.com/en/topics/linux/centos-linux-eol)。そのため、TiDB v8.4.0 DMR および v8.5.0 リリースでは、CentOS Linux 7 のサポートとテストを終了しました。CentOS 7 上の TiDB クラスターを v8.4.0 または v8.5.0 にアップグレードすると、クラスターが使用できなくなるリスクが発生します。
 

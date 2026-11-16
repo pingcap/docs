@@ -1,6 +1,6 @@
 ---
 title: TiDB 6.1.3 Release Notes
-summary: TiDB 6.1.3は2022年12月5日にリリースされました。このリリースには、互換性の変更、改善、バグ修正、そしてTiCDC、PD、TiKV、 TiFlash、バックアップとリストア、TiCDC、TiDB Data Migrationなどの各種ツールのアップデートが含まれています。主な変更点としては、TiCDCのデフォルト値の変更、PDのロック粒度の最適化、TiDB、PD、TiKV、 TiFlash、および各種ツールのバグ修正などが挙げられます。また、このリリースにはTiDBのGoコンパイラバージョンがgo1.18からgo1.19にアップグレードされ、安定性が向上しています。
+summary: TiDB 6.1.3は2022年12月5日にリリースされました。このリリースには、互換性の変更、改善、バグ修正、そしてTiCDC、PD、TiKV、 TiFlash、バックアップとリストア、TiCDC、TiDB Data Migrationなどの各種ツールのアップデートが含まれています。主な変更点としては、TiCDCのデフォルト値の変更、PDのロック粒度の最適化、TiDB、PD、TiKV、 TiFlash、および各種ツールのバグ修正などが挙げられます。また、このリリースにはTiDBのGoコンパイラーバージョンがgo1.18からgo1.19にアップグレードされ、安定性が向上しています。
 ---
 
 # TiDB 6.1.3 リリースノート {#tidb-6-1-3-release-notes}
@@ -34,7 +34,7 @@ TiDB バージョン: 6.1.3
 
 - その他
 
-    - TiDBのGoコンパイラバージョンをgo1.18から[go1.19](https://go.dev/doc/go1.19)にアップグレードすることで、TiDBの安定性が向上します。具体的には、TiDBのメモリ使用量を一定のしきい値未満に保つためのGo環境変数[`GOMEMLIMIT`](https://pkg.go.dev/runtime@go1.19#hdr-Environment_Variables)が導入されました。これにより、ほとんどのOOM問題を軽減できます。詳細については、 [`GOMEMLIMIT`を設定してOOMの問題を軽減する](/configure-memory-usage.md#mitigate-oom-issues-by-configuring-gomemlimit)をご覧ください。
+    - TiDBのGoコンパイラーバージョンをgo1.18から[go1.19](https://go.dev/doc/go1.19)にアップグレードすることで、TiDBの安定性が向上します。具体的には、TiDBのメモリ使用量を一定のしきい値未満に保つためのGo環境変数[`GOMEMLIMIT`](https://pkg.go.dev/runtime@go1.19#hdr-Environment_Variables)が導入されました。これにより、ほとんどのOOM問題を軽減できます。詳細については、 [`GOMEMLIMIT`を設定してOOMの問題を軽減する](/configure-memory-usage.md#mitigate-oom-issues-by-configuring-gomemlimit)をご覧ください。
 
 ## バグ修正 {#bug-fixes}
 

@@ -85,16 +85,16 @@ TiDB バージョン: 6.5.3
     - `batch cop`実行中のスキャン詳細情報が不正確になる可能性がある問題を修正[#41582](https://github.com/pingcap/tidb/issues/41582) @[you06](https://github.com/you06)
     - ステイル読み取りと`PREPARE`文が同時に使用されている場合にTiDBがデータ更新を読み取れない問題を修正[#43044](https://github.com/pingcap/tidb/issues/43044) @[you06](https://github.com/you06)
     - `LOAD DATA`文を実行すると`assertion failed`エラーが誤って報告される可能性がある問題を修正しました [#43849](https://github.com/pingcap/tidb/issues/43849) @[you06](https://github.com/you06)
-    - ステイル読み取り の使用中に`region data not ready`エラーが発生した場合にコプロセッサがリーダーにフォールバックできない問題を修正しました。 [#43365](https://github.com/pingcap/tidb/issues/43365) @[you06](https://github.com/you06)
+    - ステイル読み取りの使用中に`region data not ready`エラーが発生した場合にコプロセッサーがリーダーにフォールバックできない問題を修正しました。 [#43365](https://github.com/pingcap/tidb/issues/43365) @[you06](https://github.com/you06)
 
 - TiKV
 
     - TiKVノードが失敗したときに、対応するリージョンのピアが誤って休止状態になる問題を修正しました [#14547](https://github.com/tikv/tikv/issues/14547) @[hicqu](https://github.com/hicqu)
-    - 継続的プロファイリングにおけるファイル ハンドル リークの問題を修正しました [#14224](https://github.com/tikv/tikv/issues/14224) @[tabokie](https://github.com/tabokie)
+    - 継続的プロファイリングにおけるファイルハンドルリークの問題を修正しました [#14224](https://github.com/tikv/tikv/issues/14224) @[tabokie](https://github.com/tabokie)
     - PD クラッシュにより PITR が続行できなくなる問題を修正しました [#14184](https://github.com/tikv/tikv/issues/14184) @[YuJuncen](https://github.com/YuJuncen)
     - 暗号化キーIDの競合により古いキーが削除される可能性がある問題を修正しました [#14585](https://github.com/tikv/tikv/issues/14585) @[tabokie](https://github.com/tabokie)
     - 自動コミットとPointGetレプリカ読み取りによって線形化可能性が破壊される可能性がある問題を修正しました [#14715](https://github.com/tikv/tikv/issues/14715) @[cfzjywxk](https://github.com/cfzjywxk)
-    - クラスタを以前のバージョンからv6.5以降のバージョンにアップグレードしたときに、蓄積されたロックレコードによって引き起こされるパフォーマンス低下の問題を修正しました。 [#14780](https://github.com/tikv/tikv/issues/14780) @[MyonKeminta](https://github.com/MyonKeminta)
+    - クラスターを以前のバージョンからv6.5以降のバージョンにアップグレードしたときに、蓄積されたロックレコードによって引き起こされるパフォーマンス低下の問題を修正しました。 [#14780](https://github.com/tikv/tikv/issues/14780) @[MyonKeminta](https://github.com/MyonKeminta)
     - TiDB Lightning がSST ファイルの漏洩を引き起こす可能性がある問題を修正[#14745](https://github.com/tikv/tikv/issues/14745) @[YuJuncen](https://github.com/YuJuncen)
     - 暗号化キーとRaft ログファイルの削除の間の潜在的な競合を修正しました。これにより、TiKV が起動しなくなる可能性があります。 [#14761](https://github.com/tikv/tikv/issues/14761) @[Connor1996](https://github.com/Connor1996)
 

@@ -24,7 +24,7 @@ TiDB バージョン: 7.5.2
 
     - `ANALYZE`文がメタデータロックをブロックする問題を最適化します [#47475](https://github.com/pingcap/tidb/issues/47475) @[wjhuang2016](https://github.com/wjhuang2016)
     - `SHOW CREATE TABLE` の出力に表示される式のデフォルト値のMySQL互換性を改善しました [#52939](https://github.com/pingcap/tidb/issues/52939) @[CbcWestwolf](https://github.com/CbcWestwolf)
-    - 常に`false`である DNF 項目の処理を強化し、そのようなフィルタ条件を直接無視することで、不要なテーブル全体のスキャンを回避します[#40997](https://github.com/pingcap/tidb/issues/40997) @[hi-rustin](https://github.com/Rustin170506)
+    - 常に`false`である DNF 項目の処理を強化し、そのようなフィルター条件を直接無視することで、不要なテーブル全体のスキャンを回避します[#40997](https://github.com/pingcap/tidb/issues/40997) @[hi-rustin](https://github.com/Rustin170506)
     - `EXPLAIN ANALYZE` のTiFlash `TableScan`オペレーターの実行プロセスの統計を最適化します [#51727](https://github.com/pingcap/tidb/issues/51727) @[JinheLin](https://github.com/JinheLin)
     - MPP ロードバランシング中にリージョンのないストアを削除する [#52313](https://github.com/pingcap/tidb/issues/52313) @[xzhangxian1008](https://github.com/xzhangxian1008)
     - PD からリージョンを一括ロードすることをサポートし、大規模なテーブルをクエリするときに KV 範囲からリージョンへの変換プロセスを高速化します。 [#51326](https://github.com/pingcap/tidb/issues/51326) @[SeaRise](https://github.com/SeaRise)
@@ -34,7 +34,7 @@ TiDB バージョン: 7.5.2
 
 - TiKV
 
-    - コプロセッサエラーのログレベルを`warn`から`debug`に調整して、クラスタの不要なログを削減します。 [#15881](https://github.com/tikv/tikv/issues/15881) @[cfzjywxk](https://github.com/cfzjywxk)
+    - コプロセッサーエラーのログレベルを`warn`から`debug`に調整して、クラスターの不要なログを削減します。 [#15881](https://github.com/tikv/tikv/issues/15881) @[cfzjywxk](https://github.com/cfzjywxk)
     - CDC イベント処理のキュー時間の監視メトリックを追加して、下流の CDC イベントレイテンシー問題のトラブルシューティングを容易にします[#16282](https://github.com/tikv/tikv/issues/16282) @[hicqu](https://github.com/hicqu)
     - TiKV の安定性を向上させるために、raftstore スレッドでスナップショットファイルに対する IO 操作を実行しないようにします[#16564](https://github.com/tikv/tikv/issues/16564) @[Connor1996](https://github.com/Connor1996)
     - ピアおよびストアのメッセージのスローログを追加します [#16600](https://github.com/tikv/tikv/issues/16600) @[Connor1996](https://github.com/Connor1996)
@@ -70,7 +70,7 @@ TiDB バージョン: 7.5.2
         - トランザクション競合シナリオにおけるデータレプリケーションの安定性が大幅に向上し、パフォーマンスが最大10倍向上します[#10896](https://github.com/pingcap/tiflow/issues/10896) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - PDクライアント転送機能を有効にして、TiCDCとPDリーダー間のネットワーク分離中にTiCDCをより安定させます[#10849](https://github.com/pingcap/tiflow/issues/10849) @[asddongmen](https://github.com/asddongmen)
         - レプリケーションタスクの初期化速度を向上 [#11124](https://github.com/pingcap/tiflow/issues/11124) @[asddongmen](https://github.com/asddongmen)
-        - レプリケーションタスクを非同期に初期化して、プロセッサと所有者の初期化時間を短縮します。 [#10845](https://github.com/pingcap/tiflow/issues/10845) @[sdojjy](https://github.com/sdojjy)
+        - レプリケーションタスクを非同期に初期化して、プロセッサーと所有者の初期化時間を短縮します。 [#10845](https://github.com/pingcap/tiflow/issues/10845) @[sdojjy](https://github.com/sdojjy)
         - Kafka クラスターのバージョンを自動的に検出し、Kafka との互換性を向上します [#10852](https://github.com/pingcap/tiflow/issues/10852) @[wk989898](https://github.com/wk989898)
 
 ## バグ修正 {#bug-fixes}
@@ -93,7 +93,7 @@ TiDB バージョン: 7.5.2
     - クラスター化インデックスを述語として使用すると`SELECT INTO OUTFILE`が機能しない問題を修正[#42093](https://github.com/pingcap/tidb/issues/42093) @[qw4990](https://github.com/qw4990)
     - TopNオペレーターが誤ってプッシュダウンされる可能性がある問題を修正しました [#37986](https://github.com/pingcap/tidb/issues/37986) @[qw4990](https://github.com/qw4990)
     - 空の射影により TiDB がpanicを引き起こす問題を修正しました [#49109](https://github.com/pingcap/tidb/issues/49109) @[winoros](https://github.com/winoros)
-    - インデックス プランの順序が保たれている場合に、インデックスマージによって部分的な制限が誤ってプッシュダウンされる問題を修正しました。 [#52947](https://github.com/pingcap/tidb/issues/52947) @[AilinKid](https://github.com/AilinKid)
+    - インデックスプランの順序が保たれている場合に、インデックスマージによって部分的な制限が誤ってプッシュダウンされる問題を修正しました。 [#52947](https://github.com/pingcap/tidb/issues/52947) @[AilinKid](https://github.com/AilinKid)
     - 再帰CTE でビューの使用が機能しない問題を修正 [#49721](https://github.com/pingcap/tidb/issues/49721) @[hawkingrei](https://github.com/hawkingrei)
     - 列の不安定な一意のIDにより、 `UPDATE`文がエラーを返す可能性がある問題を修正しました。 [#53236](https://github.com/pingcap/tidb/issues/53236) @[winoros](https://github.com/winoros)
     - 常に`true` となる述語を持つ`SHOW ERRORS`文を実行すると TiDB がパニックを起こす問題を修正しました。 [#46962](https://github.com/pingcap/tidb/issues/46962) @[elsa0520](https://github.com/elsa0520)
@@ -137,7 +137,7 @@ TiDB バージョン: 7.5.2
     - パーティションDDLタスクをロールバックするときにステータスが停止する問題を修正しました [#51090](https://github.com/pingcap/tidb/issues/51090) @[jiyfhust](https://github.com/jiyfhust)
     - `BINARY`タイプの JSON をクエリすると、場合によってはエラーが発生する可能性がある問題を修正しました[#51547](https://github.com/pingcap/tidb/issues/51547) @[YangKeao](https://github.com/YangKeao)
     - 分散実行フレームワーク (DXF) を有効にした後に、大きなテーブルにインデックスを追加できない問題を修正しました。 [#52640](https://github.com/pingcap/tidb/issues/52640) @[tangenta](https://github.com/tangenta)
-    - TTL 機能により、データ範囲の分割が不正確になり、場合によってはデータ ホットスポットが発生する問題を修正しました。 [#51527](https://github.com/pingcap/tidb/issues/51527) @[lcwangchao](https://github.com/lcwangchao)
+    - TTL 機能により、データ範囲の分割が不正確になり、場合によってはデータホットスポットが発生する問題を修正しました。 [#51527](https://github.com/pingcap/tidb/issues/51527) @[lcwangchao](https://github.com/lcwangchao)
     - 主キーの型が`VARCHAR` の場合に`ALTER TABLE ... COMPACT TIFLASH REPLICA`が誤って終了する可能性がある問題を修正しました [#51810](https://github.com/pingcap/tidb/issues/51810) @[breezewish](https://github.com/breezewish)
     - インデックス追加中にクラスターのアップグレードによって発生するデータインデックスの不整合の問題を修正しました。 [#52411](https://github.com/pingcap/tidb/issues/52411) @[tangenta](https://github.com/tangenta)
     - TableDual で述語プッシュダウンを無効にすることで発生するパフォーマンス低下の問題を修正しました [#50614](https://github.com/pingcap/tidb/issues/50614) @[time-and-fate](https://github.com/time-and-fate)
@@ -184,7 +184,7 @@ TiDB バージョン: 7.5.2
     - 配置ルールを使用しているときに、ダウンしたピアが回復しない可能性がある問題を修正しました。 [#7808](https://github.com/tikv/pd/issues/7808) @[rleungx](https://github.com/rleungx)
     - PDリーダーを手動で転送すると失敗する可能性がある問題を修正しました [#8225](https://github.com/tikv/pd/issues/8225) @[HuSharp](https://github.com/HuSharp)
     - 書き込みホットスポットのスケジュール設定により配置ポリシーの制約が破られる可能性がある問題を修正[#7848](https://github.com/tikv/pd/issues/7848) @[lhy1024](https://github.com/lhy1024)
-    - リソースグループ クライアントでスロットが完全に削除されず、割り当てられたトークンの数が指定された値より少なくなる問題を修正しました。 [#7346](https://github.com/tikv/pd/issues/7346) @[guo-shaoge](https://github.com/guo-shaoge)
+    - リソースグループクライアントでスロットが完全に削除されず、割り当てられたトークンの数が指定された値より少なくなる問題を修正しました。 [#7346](https://github.com/tikv/pd/issues/7346) @[guo-shaoge](https://github.com/guo-shaoge)
     - スケーリングの進行状況が正しく表示されない問題を修正[#7726](https://github.com/tikv/pd/issues/7726) @[CabinfeverB](https://github.com/CabinfeverB)
     - デプロイされた2つのデータセンター間で Leader を切り替えると Leader の転送に失敗する問題を修正[#7992](https://github.com/tikv/pd/issues/7992) @[TonsnakeLin](https://github.com/TonsnakeLin)
     - PDの`Filter target`監視メトリックが散布範囲情報を提供しない問題を修正[#8125](https://github.com/tikv/pd/issues/8125) @[HuSharp](https://github.com/HuSharp)
@@ -196,7 +196,7 @@ TiDB バージョン: 7.5.2
     - 空のパーティションを含むパーティションテーブルでクエリを実行するときに発生するクエリタイムアウトの問題を修正しました。 [#9024](https://github.com/pingcap/tiflash/issues/9024) @[JinheLin](https://github.com/JinheLin)
     - ストレージとコンピューティングの分離アーキテクチャで、コンピューティングノードのプロセスが停止するとTiFlash がpanicする可能性がある問題を修正しました[#8860](https://github.com/pingcap/tiflash/issues/8860) @[guo-shaoge](https://github.com/guo-shaoge)
     - 生成列をクエリするとエラーが返される問題を修正しました [#8787](https://github.com/pingcap/tiflash/issues/8787) @[guo-shaoge](https://github.com/guo-shaoge)
-    - クラスタをv6.5.0より前のバージョンからv6.5.0以降にアップグレードするときに、 TiFlashメタデータが破損してプロセスがpanicになる可能性がある問題を修正しました[#9039](https://github.com/pingcap/tiflash/issues/9039) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - クラスターをv6.5.0より前のバージョンからv6.5.0以降にアップグレードするときに、 TiFlashメタデータが破損してプロセスがpanicになる可能性がある問題を修正しました[#9039](https://github.com/pingcap/tiflash/issues/9039) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - チャンクエンコード中に`ENUM`列がTiFlashのクラッシュを引き起こす可能性がある問題を修正しました [#8674](https://github.com/pingcap/tiflash/issues/8674) @[yibin87](https://github.com/yibin87)
     - ログの誤った`local_region_num`値を修正 [#8895](https://github.com/pingcap/tiflash/issues/8895) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - ストレージとコンピューティングの分離アーキテクチャで、シャットダウン中にTiFlash がpanicになる可能性がある問題を修正しました。 [#8837](https://github.com/pingcap/tiflash/issues/8837) @[JaySon-Huang](https://github.com/JaySon-Huang)
@@ -211,7 +211,7 @@ TiDB バージョン: 7.5.2
 
         - 特別なイベントタイミングにより、ログバックアップでデータ損失が発生する可能性があるという稀な問題を修正しました。 [#16739](https://github.com/tikv/tikv/issues/16739) @[YuJuncen](https://github.com/YuJuncen)
         - フルバックアップが失敗したときにログが多すぎる問題を修正[#51572](https://github.com/pingcap/tidb/issues/51572) @[Leavrth](https://github.com/Leavrth)
-        - PD接続障害により、ログバックアップアドバンサ所有者が配置されているTiDBインスタンスがpanicになる可能性がある問題を修正しました。 [#52597](https://github.com/pingcap/tidb/issues/52597) @[YuJuncen](https://github.com/YuJuncen)
+        - PD接続障害により、ログバックアップアドバンサー所有者が配置されているTiDBインスタンスがpanicになる可能性がある問題を修正しました。 [#52597](https://github.com/pingcap/tidb/issues/52597) @[YuJuncen](https://github.com/YuJuncen)
         - TiKV の再起動により、ログバックアップのグローバルチェックポイントが実際のバックアップファイルの書き込みポイントよりも先に進められ、少量のバックアップデータが失われる可能性がある問題を修正しました[#16809](https://github.com/tikv/tikv/issues/16809) @[YuJuncen](https://github.com/YuJuncen)
         - PD へのネットワーク接続が不安定な状態で一時停止中のログバックアップタスクを再開すると TiKV がpanicする可能性がある問題を修正しました [#17020](https://github.com/tikv/tikv/issues/17020) @[YuJuncen](https://github.com/YuJuncen)
         - 不安定なテストケースを修正する [#52547](https://github.com/pingcap/tidb/issues/52547) @[Leavrth](https://github.com/Leavrth)

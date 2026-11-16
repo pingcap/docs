@@ -17,11 +17,11 @@ TiDBバージョン：8.5.7
 
 * 読み取り負荷分散を改善するために、CPU を考慮したホットリージョンのスケジューリングをサポート [#5718](https://github.com/tikv/pd/issues/5718) [#19373](https://github.com/tikv/tikv/issues/19373) @[lhy1024](https://github.com/lhy1024)
 
-    以前のバージョンでは、ホットリージョンスケジューラは主にクエリレートとバイトスループットに基づいて読み取りホットスポットを分散していました。一部のワークロードでは、QPS とバイトスループットが均衡しているように見えても、TiKV の CPU 使用率は依然として不均一なままです。たとえば、クエリごとの CPU コストが大きく異なる場合や、TiKV ノードごとに性能特性が異なる場合が該当します。
+    以前のバージョンでは、ホットリージョンスケジューラーは主にクエリレートとバイトスループットに基づいて読み取りホットスポットを分散していました。一部のワークロードでは、QPS とバイトスループットが均衡しているように見えても、TiKV の CPU 使用率は依然として不均一なままです。たとえば、クエリごとの CPU コストが大きく異なる場合や、TiKV ノードごとに性能特性が異なる場合が該当します。
 
     v8.5.7 以降、TiKV はストアハートビート内でホットリージョンの読み取り CPU 使用率を報告し、PD は読み取りホットリージョンのスケジューリングにおいて CPU 使用率をスケジューリングの次元として利用できるようになりました。この仕組みにより、PD は CPU ベースの読み取りホットスポットを識別し、TiKV ストア間でより正確に分散できます。
 
-    さらに、PD には CPU 関連のホットスポット統計とスケジューラ制御が追加されました。これには、[ホットストア統計](https://docs.pingcap.com/tidb/v8.5/pd-control#hot-read--write--store--history-start_time-end_time-key-value) の `cpu-read-rate` フィールドと、[`min-hot-cpu-rate` および `cpu-rate-rank-step-ratio`](https://docs.pingcap.com/tidb/v8.5/pd-control#scheduler-config-balance-hot-region-scheduler) のスケジューラ設定が含まれます。
+    さらに、PD には CPU 関連のホットスポット統計とスケジューラー制御が追加されました。これには、[ホットストア統計](https://docs.pingcap.com/tidb/v8.5/pd-control#hot-read--write--store--history-start_time-end_time-key-value) の `cpu-read-rate` フィールドと、[`min-hot-cpu-rate` および `cpu-rate-rank-step-ratio`](https://docs.pingcap.com/tidb/v8.5/pd-control#scheduler-config-balance-hot-region-scheduler) のスケジューラー設定が含まれます。
 
     詳細は、[ドキュメント](https://docs.pingcap.com/tidb/v8.5/troubleshoot-hot-spot-issues#cpu-aware-hot-region-scheduling-for-read-hotspots) を参照してください。
 
@@ -77,12 +77,12 @@ TiDBバージョン：8.5.7
 
 ## 互換性の変更 {#compatibility-changes}
 
-v8.5.6 で新規にデプロイされた TiDB クラスター（つまり、以前のバージョンからアップグレードされたものではない v8.5.6 クラスター）の場合、v8.5.7 にスムーズにアップグレードできます。v8.5.7 の変更の大部分は通常のアップグレードに対して安全ですが、このリリースにはいくつかの動作変更、MySQL 互換性の変更、システム変数の更新、設定パラメータの更新、および非推奨機能も含まれています。アップグレード前に、このセクションを必ず注意深く確認してください。
+v8.5.6 で新規にデプロイされた TiDB クラスター（つまり、以前のバージョンからアップグレードされたものではない v8.5.6 クラスター）の場合、v8.5.7 にスムーズにアップグレードできます。v8.5.7 の変更の大部分は通常のアップグレードに対して安全ですが、このリリースにはいくつかの動作変更、MySQL 互換性の変更、システム変数の更新、設定パラメーターの更新、および非推奨機能も含まれています。アップグレード前に、このセクションを必ず注意深く確認してください。
 
 ### 動作変更 {#behavior-changes}
 
 * TiKV は、無効であることが確認された `max_ts` の更新を、従来のようにログに記録するだけでなく、デフォルトで拒否するようになりました。この変更により、TiKV の panic を引き起こすことなく無効なタイムスタンプ更新を防止し、安全性が向上します。従来のログ記録のみの動作を維持するには、[`storage.max-ts.action-on-invalid-update`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#action-on-invalid-update-new-in-v857) を `log` に設定してください [#19755](https://github.com/tikv/tikv/issues/19755) @[ekexium](https://github.com/ekexium)
-* v8.5.7 以降、TiDB はデフォルトで [optimizer fix control `52869`](https://docs.pingcap.com/tidb/v8.5/optimizer-fix-controls#52869-new-in-v810) を有効にします。この変更により、代替インデックスが存在する場合にオプティマイザが `IndexMerge` を自動的に考慮できるようになり、一部のケースでクエリプランが変わる可能性があります。[#26764](https://github.com/pingcap/tidb/issues/26764) @[time-and-fate](https://github.com/time-and-fate)
+* v8.5.7 以降、TiDB はデフォルトで [オプティマイザー修正コントロール `52869`](https://docs.pingcap.com/tidb/v8.5/optimizer-fix-controls#52869-new-in-v810) を有効にします。この変更により、代替インデックスが存在する場合にオプティマイザーが `IndexMerge` を自動的に考慮できるようになり、一部のケースでクエリプランが変わる可能性があります。[#26764](https://github.com/pingcap/tidb/issues/26764) @[time-and-fate](https://github.com/time-and-fate)
 
 ### MySQL 互換性 {#mysql-compatibility}
 
@@ -108,9 +108,9 @@ v8.5.6 で新規にデプロイされた TiDB クラスター（つまり、以�
 | [`tidb_opt_enable_alternative_logical_plans`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_opt_enable_alternative_logical_plans-new-in-v857) | 新しく追加された | 相関サブクエリの decorrelation シナリオにおいて、optimizer が decorrelate しない論理候補プランも追加で構築するかどうかを制御します。デフォルト値は `OFF` です。|
 | [`tidb_opt_partial_ordered_index_for_topn`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_opt_partial_ordered_index_for_topn-new-in-v857) | 新しく追加された | クエリに `ORDER BY ... LIMIT` が含まれる場合に、optimizer がインデックスの部分的な順序性を利用して TopN 計算を最適化できるかどうかを制御します。デフォルト値は `DISABLE` で、この最適化が無効であることを意味します。|
 
-### 設定パラメータ {#configuration-parameters}
+### 設定パラメーター {#configuration-parameters}
 
-| 設定ファイルまたはコンポーネント | 設定パラメータ | 変更の種類 | 説明 |
+| 設定ファイルまたはコンポーネント | 設定パラメーター | 変更の種類 | 説明 |
 | -------- | -------- | -------- | -------- |
 | TiDB | [`enable-telemetry`](https://docs.pingcap.com/tidb/v8.5/tidb-configuration-file#enable-telemetry-new-in-v402) | 非推奨 | v8.5.7 以降、TiDB はこの設定項目とテレメトリ機能を非推奨とします。この項目は互換性のためにのみ保持されており、今後の使用は推奨されません。|
 | TiKV | [`raftdb.compaction-readahead-size`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#compaction-readahead-size-1) | 変更 | デフォルト値を `0`（無効）から `2MiB` に変更し、コンパクション中の読み取りパフォーマンスを向上させます。 |
@@ -134,10 +134,10 @@ v8.5.6 で新規にデプロイされた TiDB クラスター（つまり、以�
 | TiKV | [`storage.max-ts.max-drift`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#max-drift-new-in-v857) | 新しく追加された | 読み取りまたは書き込みリクエストのタイムスタンプが、TiKV にキャッシュされた PD TSO を超過できる最大時間を指定します。デフォルト値は `"60s"` です。|
 | TiCDC | [`sink.dispatchers`](https://docs.pingcap.com/tidb/v8.5/ticdc-changefeed-config#dispatchers) | 更新 | changefeed のダウンストリームが MQ sink の場合、`dispatchers` を使用して event dispatcher を設定できます。v8.5.7 以降、[TiCDCの新アーキテクチャ](https://docs.pingcap.com/tidb/v8.5/ticdc-architecture) を使用している場合は、`dispatchers` を使用して [テーブルルーティング](https://docs.pingcap.com/tidb/v8.5/ticdc-table-routing) も設定できます。|
 
-### コンパイラバージョン {#compiler-versions}
+### コンパイラーバージョン {#compiler-versions}
 
-* TiDB の Go コンパイラバージョンを go1.25.8 から go1.25.10 にアップグレードし、TiDB のパフォーマンスを向上させました。TiDB 開発者の場合は、スムーズにコンパイルできるよう Go コンパイラバージョンをアップグレードしてください。 
-* TiKV の Rust コンパイラバージョンを nightly-2023-12-28 から nightly-2025-02-28 にアップグレードし、TiKV のパフォーマンスを向上させました。TiKV 開発者の場合は、スムーズにコンパイルできるよう Rust コンパイラバージョンをアップグレードしてください。
+* TiDB の Go コンパイラーバージョンを go1.25.8 から go1.25.10 にアップグレードし、TiDB のパフォーマンスを向上させました。TiDB 開発者の場合は、スムーズにコンパイルできるよう Go コンパイラーバージョンをアップグレードしてください。 
+* TiKV の Rust コンパイラーバージョンを nightly-2023-12-28 から nightly-2025-02-28 にアップグレードし、TiKV のパフォーマンスを向上させました。TiKV 開発者の場合は、スムーズにコンパイルできるよう Rust コンパイラーバージョンをアップグレードしてください。
 
 ## 非推奨機能 {#deprecated-features}
 
@@ -157,26 +157,26 @@ v8.5.6 で新規にデプロイされた TiDB クラスター（つまり、以�
 
 + TiDB
 
-    - `OR` 条件および `IN` 条件を含む `ORDER BY ... LIMIT` クエリのパフォーマンスを改善しました。オプティマイザが `IndexMerge` をより効果的に選択できるようになり、`IndexMerge` 内の `IN` 条件パスに対するマージソートもサポートしました。これにより、`Limit` を部分パスへプッシュダウンでき、不要な行読み取りと I/O オーバーヘッドを削減できます。[#65712](https://github.com/pingcap/tidb/issues/65712) @[time-and-fate](https://github.com/time-and-fate)
+    - `OR` 条件および `IN` 条件を含む `ORDER BY ... LIMIT` クエリのパフォーマンスを改善しました。オプティマイザーが `IndexMerge` をより効果的に選択できるようになり、`IndexMerge` 内の `IN` 条件パスに対するマージソートもサポートしました。これにより、`Limit` を部分パスへプッシュダウンでき、不要な行読み取りと I/O オーバーヘッドを削減できます。[#65712](https://github.com/pingcap/tidb/issues/65712) @[time-and-fate](https://github.com/time-and-fate)
     - スロークエリログにクライアント接続属性を記録し、`INFORMATION_SCHEMA.SLOW_QUERY` および `INFORMATION_SCHEMA.CLUSTER_SLOW_QUERY` から問い合わせ可能にすることで、スロークエリの可観測性を向上しました。`performance_schema_session_connect_attrs_size` で属性の切り詰めを制御し、切り詰められたバイト数は `_truncated` に記録されます。[#66616](https://github.com/pingcap/tidb/issues/66616) @[jiong-nba](https://github.com/jiong-nba)
     - 単一行の `INSERT` 文に対して TiDB が厳格な `NOT NULL` チェックを適用するかどうかを制御するシステム変数 `tidb_enable_strict_not_null_check` を追加しました。これにより、従来の非厳格な動作に依存するワークロードにおけるアップグレードリスクを低減できます。[#68108](https://github.com/pingcap/tidb/issues/68108) @[xhebox](https://github.com/xhebox)
     - runaway query watch 処理のパフォーマンスと安定性を改善しました。これには、TiDB インスタンス間でのより信頼性の高い watch 同期と、より効率的なバックグラウンドでのフラッシュおよび同期が含まれます。[#65746](https://github.com/pingcap/tidb/issues/65746) @[JmPotato](https://github.com/JmPotato)
     - TiDB が PD に対してバッチ化されたリージョンクエリを使用するかどうかを制御するグローバルシステム変数 `tidb_enable_batch_query_region` を追加しました。これによりリージョン情報取得の効率が向上します。この変数はデフォルトで無効です。[#58439](https://github.com/pingcap/tidb/issues/58439) [#8690](https://github.com/tikv/pd/issues/8690) @[JmPotato](https://github.com/JmPotato)
-    - 多数のインデックスを持つテーブルに対するクエリのオプティマイザパフォーマンスを改善しました。コスト見積もりの前に無関係なインデックスをプルーニングすることで、クエリ計画時間を短縮し、不要な全範囲の範囲外推定を回避します。[#63856](https://github.com/pingcap/tidb/issues/63856) @[terry1purcell](https://github.com/terry1purcell) @[qw4990](https://github.com/qw4990)
+    - 多数のインデックスを持つテーブルに対するクエリのオプティマイザーパフォーマンスを改善しました。コスト見積もりの前に無関係なインデックスをプルーニングすることで、クエリ計画時間を短縮し、不要な全範囲の範囲外推定を回避します。[#63856](https://github.com/pingcap/tidb/issues/63856) @[terry1purcell](https://github.com/terry1purcell) @[qw4990](https://github.com/qw4990)
     - Blackbox exporter ダッシュボードの **Ping Latency** パネルを強化し、`max_over_time` アラートルールを使用した `Max Ping Latency` メトリクスを追加しました。この変更により、ダッシュボードの可視化が TiDB のアラートロジックと一致し、レイテンシーのピークスパイクの特定やアラート発火の確認が容易になります。[#1071](https://github.com/pingcap/monitoring/issues/1071) @[yibin87](https://github.com/yibin87)
     - 一致するプレフィックスインデックス上の `ORDER BY ... LIMIT/OFFSET` クエリに対して、部分順序付きインデックス最適化をサポートしました。`tidb_opt_partial_ordered_index_for_topn` を `COST` に設定すると、TiDB はインデックスの部分順序を利用して全表スキャンを減らし、`TOPN` クエリのパフォーマンスを向上できます。[#63280](https://github.com/pingcap/tidb/issues/63280) [#65813](https://github.com/pingcap/tidb/issues/65813) [#66338](https://github.com/pingcap/tidb/issues/66338) @[elsa0520](https://github.com/elsa0520) @[xzhangxian1008](https://github.com/xzhangxian1008) @[winoros](https://github.com/winoros)
     - Stream Aggregate を使用する高カーディナリティの `GROUP BY` クエリについて、メモリ追跡における CPU オーバーヘッドを削減し、パフォーマンスを最適化しました。[#68475](https://github.com/pingcap/tidb/issues/68475) @[guo-shaoge](https://github.com/guo-shaoge)
     - ローカルインデックスを持つ高分割テーブル上の `IndexLookUp` クエリにおけるコプロセッサーリクエストのバーストを緩和し、クエリの安定性を向上させ、性能スパイクを低減しました。[#67545](https://github.com/pingcap/tidb/issues/67545) @[gengliqi](https://github.com/gengliqi)
-    - 実行時の不要な式バッファ割り当てを削減することで、`INSERT ... ON DUPLICATE KEY UPDATE` 文の CPU およびメモリ使用量を最適化しました。[#65003](https://github.com/pingcap/tidb/issues/65003) @[windtalker](https://github.com/windtalker)
+    - 実行時の不要な式バッファー割り当てを削減することで、`INSERT ... ON DUPLICATE KEY UPDATE` 文の CPU およびメモリ使用量を最適化しました。[#65003](https://github.com/pingcap/tidb/issues/65003) @[windtalker](https://github.com/windtalker)
     - 範囲構築時の CPU およびメモリオーバーヘッドを削減することで、大きな `IN` リストを含む文のクエリ計画パフォーマンスを最適化しました。[#67756](https://github.com/pingcap/tidb/issues/67756) @[winoros](https://github.com/winoros)
     - `tidb_auto_build_stats_concurrency` と `tidb_sysproc_scan_concurrency` のデフォルト値を手動 `ANALYZE` と揃えることで、自動 `ANALYZE` のデフォルトパフォーマンスと一貫性を改善しました。[#67195](https://github.com/pingcap/tidb/issues/67195) @[0xTars](https://github.com/0xTars)
     - サブクエリの decorrelation に対する代替論理プラン最適化を有効にするシステム変数 `tidb_opt_enable_alternative_logical_plans` を追加しました。[#66676](https://github.com/pingcap/tidb/issues/66676) @[AilinKid](https://github.com/AilinKid)
     - 同一セッション内で繰り返し使用されるプリペアドステートメントをキャッシュし、リクエストごとに prepare を行うワークロードの CPU オーバーヘッドを削減するシステム変数 `tidb_enable_cache_prepare_stmt` を追加しました。[#67815](https://github.com/pingcap/tidb/issues/67815) @[guo-shaoge](https://github.com/guo-shaoge)
-    - join reorder を改善し、TiDB が join グループ間の projection を処理できるようにしました。これにより不要な Cartesian join を減らし、より多くのクエリで `LEADING` ヒントが有効になります。[#50229](https://github.com/pingcap/tidb/issues/50229) @[Reminiscent](https://github.com/Reminiscent)
-    - `LEADING((a, b), (c, d))` のように、より複雑な join 順序を指定するために、`LEADING` オプティマイザヒントでネストした括弧をサポートしました。[#63253](https://github.com/pingcap/tidb/issues/63253) @[guo-shaoge](https://github.com/guo-shaoge)
-    - 推定 probe 行数が全スキャンに近い場合に非効率な index join を選択しないよう join プラン選択を改善し、一部の `HASHAGG` + join シナリオでクエリパフォーマンスを向上しました。[#67610](https://github.com/pingcap/tidb/issues/67610) @[qw4990](https://github.com/qw4990)
+    - 結合順序の変更を改善し、TiDB が結合グループ間の射影を処理できるようにしました。これにより不要なデカルト結合を減らし、より多くのクエリで `LEADING` ヒントが有効になります。[#50229](https://github.com/pingcap/tidb/issues/50229) @[Reminiscent](https://github.com/Reminiscent)
+    - `LEADING((a, b), (c, d))` のように、より複雑な結合順序を指定するために、`LEADING` オプティマイザーヒントでネストした括弧をサポートしました。[#63253](https://github.com/pingcap/tidb/issues/63253) @[guo-shaoge](https://github.com/guo-shaoge)
+    - 推定プローブ行数が全スキャンに近い場合に非効率なインデックス結合を選択しないよう結合プラン選択を改善し、一部の `HASHAGG` + 結合シナリオでクエリパフォーマンスを向上しました。[#67610](https://github.com/pingcap/tidb/issues/67610) @[qw4990](https://github.com/qw4990)
     - ネストした `OR` 条件を含むクエリについて、より効率的な `IndexMerge` プランを有効にし、冗長なグローバルフィルターを削除して `LIMIT` をプッシュダウンできるようにすることで、クエリパフォーマンスを改善しました。[#65822](https://github.com/pingcap/tidb/issues/65822) @[time-and-fate](https://github.com/time-and-fate)
-    - [`FLUSH STATS_DELTA`](https://docs.pingcap.com/tidb/v8.5/sql-statement-flush-stats-delta) 文をサポートし、クラスター、データベース単位、またはテーブル単位のスコープについて、保留中のオプティマイザ統計デルタを永続化できるようにしました。[#65668](https://github.com/pingcap/tidb/issues/65668) @[0xPoe](https://github.com/0xPoe)
+    - [`FLUSH STATS_DELTA`](https://docs.pingcap.com/tidb/v8.5/sql-statement-flush-stats-delta) 文をサポートし、クラスター、データベース単位、またはテーブル単位のスコープについて、保留中のオプティマイザー統計デルタを永続化できるようにしました。[#65668](https://github.com/pingcap/tidb/issues/65668) @[0xPoe](https://github.com/0xPoe)
     - 代替インデックスが存在する場合に `IndexMerge` を考慮するための optimizer fix control をデフォルトで有効にし、より多くの適用可能なクエリで TiDB が `IndexMerge` プランを選択できるようにして、クエリ最適化を改善しました。[#26764](https://github.com/pingcap/tidb/issues/26764) @[time-and-fate](https://github.com/time-and-fate)
     - `set_var` および `resource_group` ヒントを使用するプリペアドクエリと非プリペアドクエリのキャッシュをサポートし、ヒント付きクエリのプランキャッシュヒット率を向上しました。[#60920](https://github.com/pingcap/tidb/issues/60920) @[qw4990](https://github.com/qw4990)
     - `IndexMerge` を使用する `ORDER BY ... LIMIT` および `ORDER BY ... TOPN` クエリを最適化し、可能な場合は `Limit` または `TopN` を個々の部分パスにプッシュダウンすることで、一部のクエリプランにおける不要なスキャンとソートを削減しました。[#68773](https://github.com/pingcap/tidb/issues/68773) @[time-and-fate](https://github.com/time-and-fate)
@@ -257,12 +257,12 @@ v8.5.6 で新規にデプロイされた TiDB クラスター（つまり、以�
     - まれなケースで、クエリの並行実行中に TiDB が `SIGSEGV` でクラッシュする可能性がある問題を修正しました。[#66391](https://github.com/pingcap/tidb/issues/66391) @[bb7133](https://github.com/bb7133)
     - 大文字小文字の異なるユーザー変数を使用するクエリで、最適でない実行計画が生成され、インデックス範囲スキャンを使用できない場合がある問題を修正しました。[#66339](https://github.com/pingcap/tidb/issues/66339) @[qw4990](https://github.com/qw4990)
     - 複数セッションが同時にグローバルバインディングにヒットしてグローバルバインディングキャッシュが破損し、TiDB がメモリ不足になる可能性がある問題を修正しました。[#68015](https://github.com/pingcap/tidb/issues/68015) @[qw4990](https://github.com/qw4990)
-    - `NULL` 値に敏感な条件を伴う outer join を使用するクエリで、TiDB が誤った結果を返す可能性がある問題を修正しました。この問題は、オプティマイザが outer join を inner join に簡略化できるかどうかを誤って判断することが原因で発生します。影響を受けるシナリオには、`OR`、`IS NULL`、`COALESCE()`、`NULLIF()`、`CAST()`、`IN (NULL, ...)` などの述語や式を含む `WHERE` 句、および派生テーブルや `UNION ALL` を含む outer join クエリが含まれます。この問題により、誤った結果、欠落行、空結果、または `NULL` 値を含む予期しない行が発生する可能性があります。[#58793](https://github.com/pingcap/tidb/issues/58793) [#59162](https://github.com/pingcap/tidb/issues/59162) [#60080](https://github.com/pingcap/tidb/issues/60080) [#60081](https://github.com/pingcap/tidb/issues/60081) [#60370](https://github.com/pingcap/tidb/issues/60370) [#61327](https://github.com/pingcap/tidb/issues/61327) [#66824](https://github.com/pingcap/tidb/issues/66824) [#66825](https://github.com/pingcap/tidb/issues/66825) [#67330](https://github.com/pingcap/tidb/issues/67330) [#67373](https://github.com/pingcap/tidb/issues/67373) @[winoros](https://github.com/winoros)
-    - null-reject チェックがパラメーター値に依存しない場合に、outer join 上のプリペアドステートメントがプリペアドプランキャッシュをスキップする可能性がある問題を修正しました。[#67048](https://github.com/pingcap/tidb/issues/67048) @[winoros](https://github.com/winoros)
+    - `NULL` 値に敏感な条件を伴う外部結合を使用するクエリで、TiDB が誤った結果を返す可能性がある問題を修正しました。この問題は、オプティマイザーが外部結合を内部結合に簡略化できるかどうかを誤って判断することが原因で発生します。影響を受けるシナリオには、`OR`、`IS NULL`、`COALESCE()`、`NULLIF()`、`CAST()`、`IN (NULL, ...)` などの述語や式を含む `WHERE` 句、および派生テーブルや `UNION ALL` を含む外部結合クエリが含まれます。この問題により、誤った結果、欠落行、空結果、または `NULL` 値を含む予期しない行が発生する可能性があります。[#58793](https://github.com/pingcap/tidb/issues/58793) [#59162](https://github.com/pingcap/tidb/issues/59162) [#60080](https://github.com/pingcap/tidb/issues/60080) [#60081](https://github.com/pingcap/tidb/issues/60081) [#60370](https://github.com/pingcap/tidb/issues/60370) [#61327](https://github.com/pingcap/tidb/issues/61327) [#66824](https://github.com/pingcap/tidb/issues/66824) [#66825](https://github.com/pingcap/tidb/issues/66825) [#67330](https://github.com/pingcap/tidb/issues/67330) [#67373](https://github.com/pingcap/tidb/issues/67373) @[winoros](https://github.com/winoros)
+    - null-reject チェックがパラメーター値に依存しない場合に、外部結合上のプリペアドステートメントがプリペアドプランキャッシュをスキップする可能性がある問題を修正しました。[#67048](https://github.com/pingcap/tidb/issues/67048) @[winoros](https://github.com/winoros)
     - 全範囲インデックススキャンのクエリ計画時に、非同期インデックスヒストグラム読み込みに関する不要な警告を TiDB が記録する可能性がある問題を修正しました。[#64791](https://github.com/pingcap/tidb/issues/64791) @[terry1purcell](https://github.com/terry1purcell)
     - 同期統計読み込みがタイムアウトして pseudo または部分統計へフォールバックした際に生成されたプランが、必要な統計が読み込まれた後もキャッシュされ再利用される可能性がある問題を修正しました。[#66585](https://github.com/pingcap/tidb/issues/66585) @[winoros](https://github.com/winoros)
-    - outer join に対して TiDB が誤った join 順序を生成し、誤ったクエリ結果を返す可能性がある問題を修正しました。[#63887](https://github.com/pingcap/tidb/issues/63887) @[guo-shaoge](https://github.com/guo-shaoge)
-    - outer join を含む一部のクエリで、TiDB が最適でない join 順序を選択し、効率の低い実行計画につながる可能性がある問題を修正しました。[#67774](https://github.com/pingcap/tidb/issues/67774) @[AilinKid](https://github.com/AilinKid)
+    - 外部結合に対して TiDB が誤った結合順序を生成し、誤ったクエリ結果を返す可能性がある問題を修正しました。[#63887](https://github.com/pingcap/tidb/issues/63887) @[guo-shaoge](https://github.com/guo-shaoge)
+    - 外部結合を含む一部のクエリで、TiDB が最適でない結合順序を選択し、効率の低い実行計画につながる可能性がある問題を修正しました。[#67774](https://github.com/pingcap/tidb/issues/67774) @[AilinKid](https://github.com/AilinKid)
     - `mysql.global_variables` に対応する行が存在しない場合、アップグレード中に `tidb_ignore_inlist_plan_digest` が予期せずリセットされる可能性がある問題を修正しました。[#68136](https://github.com/pingcap/tidb/issues/68136) @[qw4990](https://github.com/qw4990)
     - `ORDER BY` と `LIMIT` を含むクエリの最適化時に、`IndexFullScan` コストの過小評価により TiDB が非効率な `MergeJoin` プランを選択し、クエリパフォーマンスが低下する可能性がある問題を修正しました。[#67595](https://github.com/pingcap/tidb/issues/67595) @[qw4990](https://github.com/qw4990)
     - 重複した式を持つ式インデックスを使用するクエリで、TiDB が誤った隠し生成列を解決するため、`Unexpected missing column` エラーが返される可能性がある問題を修正しました。[#67552](https://github.com/pingcap/tidb/issues/67552) @[AilinKid](https://github.com/AilinKid)
@@ -271,7 +271,7 @@ v8.5.6 で新規にデプロイされた TiDB クラスター（つまり、以�
     - 一部の非相関 `IN` サブクエリを TiDB が相関実行計画へ変換できず、index lookup を使用できなくなり、効率の低いクエリプランにつながる可能性がある問題を修正しました。[#66320](https://github.com/pingcap/tidb/issues/66320) @[terry1purcell](https://github.com/terry1purcell)
     - インデックス付き文字列カラムに対して `CAST(... AS BINARY)` を使用するクエリで、インデックス範囲スキャンではなくインデックス全スキャンが使用される可能性がある問題を修正しました。[#67899](https://github.com/pingcap/tidb/issues/67899) @[terry1purcell](https://github.com/terry1purcell)
     - `JSON` などスキップされるカラム型に依存する、インデックス付き stored generated column に対して `ANALYZE TABLE` を実行した際に発生する可能性がある panic を修正しました。[#66359](https://github.com/pingcap/tidb/issues/66359) [#66918](https://github.com/pingcap/tidb/issues/66918) @[xhebox](https://github.com/xhebox)
-    - outer join を含むクエリに対して TiDB が誤った join 順序を生成し、誤ったクエリ結果につながる可能性がある問題を修正しました。[#67290](https://github.com/pingcap/tidb/issues/67290) @[guo-shaoge](https://github.com/guo-shaoge)
+    - 外部結合を含むクエリに対して TiDB が誤った結合順序を生成し、誤ったクエリ結果につながる可能性がある問題を修正しました。[#67290](https://github.com/pingcap/tidb/issues/67290) @[guo-shaoge](https://github.com/guo-shaoge)
     - セッション `time_zone` が UTC より進んでいる場合に、`SHOW ANALYZE STATUS` が負の `Remaining_seconds` 値を表示する問題を修正しました。[#67230](https://github.com/pingcap/tidb/issues/67230) @[0xPoe](https://github.com/0xPoe)
     - パーティションテーブルに対する `ANALYZE`（auto-analyze を含む）中に、`fatal error: concurrent map read and map write` を報告して TiDB サーバーがクラッシュする可能性がある問題を修正しました。[#68457](https://github.com/pingcap/tidb/issues/68457) @[mjonss](https://github.com/mjonss)
     - 部分インデックスが外部キーの強制に誤って使用され、親行に対する delete または update 時に一致する子行を見逃して孤立行が残る可能性がある問題を修正しました。[#68587](https://github.com/pingcap/tidb/issues/68587) @[YangKeao](https://github.com/YangKeao)

@@ -43,7 +43,7 @@ TiDB バージョン: 6.1.2
     - TiFlash のパーティションテーブルでダイナミックモードを有効にしたときに発生する誤った結果を修正しました [#37254](https://github.com/pingcap/tidb/issues/37254) @[wshwsh12](https://github.com/wshwsh12)
     - リージョンがマージされたときにリージョンキャッシュが速やかにクリーンアップされない問題を修正しました [#37141](https://github.com/pingcap/tidb/issues/37141) @[sticnarf](https://github.com/sticnarf)
     - KVクライアントが不要なpingメッセージを送信する問題を修正しました [#36861](https://github.com/pingcap/tidb/issues/36861) @[jackysp](https://github.com/jackysp)
-    - DMLエグゼキュータを使用した`EXPLAIN ANALYZE`文が、トランザクションコミットが完了する前に結果を返す可能性がある問題を修正しました[#37373](https://github.com/pingcap/tidb/issues/37373) @[cfzjywxk](https://github.com/cfzjywxk)
+    - DMLエグゼキューターを使用した`EXPLAIN ANALYZE`文が、トランザクションコミットが完了する前に結果を返す可能性がある問題を修正しました[#37373](https://github.com/pingcap/tidb/issues/37373) @[cfzjywxk](https://github.com/cfzjywxk)
     - `ORDER BY`句に相関サブクエリが含まれている場合に`ORDER BY`付きの`GROUP CONCAT`が失敗する可能性がある問題を修正しました。 [#18216](https://github.com/pingcap/tidb/issues/18216) @[winoros](https://github.com/winoros)
     - `UPDATE`文に共通テーブル式 (CTE) が含まれている場合に`Can't find column`が報告される問題を修正しました [#35758](https://github.com/pingcap/tidb/issues/35758) @[AilinKid](https://github.com/AilinKid)
     - 特定のシナリオで`EXECUTE`が予期しないエラーを返す可能性がある問題を修正 [#37187](https://github.com/pingcap/tidb/issues/37187) @[Reminiscent](https://github.com/Reminiscent)
@@ -59,7 +59,7 @@ TiDB バージョン: 6.1.2
 
     - リージョンツリーの統計が不正確になる可能性がある問題を修正[#5318](https://github.com/tikv/pd/issues/5318) @[rleungx](https://github.com/rleungx)
     - TiFlashラーナーレプリカが作成されない可能性がある問題を修正[#5401](https://github.com/tikv/pd/issues/5401) @[HunDunDM](https://github.com/HunDunDM)
-    - PD がダッシュボード プロキシ リクエストを正しく処理できない問題を修正しました [#5321](https://github.com/tikv/pd/issues/5321) @[HunDunDM](https://github.com/HunDunDM)
+    - PD がダッシュボードプロキシリクエストを正しく処理できない問題を修正しました [#5321](https://github.com/tikv/pd/issues/5321) @[HunDunDM](https://github.com/HunDunDM)
     - 不健全なリージョンがPD panicを引き起こす可能性がある問題を修正 [#5491](https://github.com/tikv/pd/issues/5491) @[nolouch](https://github.com/nolouch)
 
 - TiFlash
@@ -79,14 +79,14 @@ TiDB バージョン: 6.1.2
         - DMタスクが同期ユニットに入り、中断されると上流のテーブル構造情報が失われる問題を修正[#7159](https://github.com/pingcap/tiflow/issues/7159) @[lance6716](https://github.com/lance6716)
         - チェックポイントを保存するときに SQL文を分割して、大規模なトランザクションエラーを修正します。 [#5010](https://github.com/pingcap/tiflow/issues/5010) @[lance6716](https://github.com/lance6716)
         - DM事前チェックに`INFORMATION_SCHEMA` の`SELECT`権限が必要になる問題を修正 [#7317](https://github.com/pingcap/tiflow/issues/7317) @[lance6716](https://github.com/lance6716)
-        - 高速/完全バリデータで DM タスクを実行した後に DM-workerがデッドロックエラーをトリガーする問題を修正しました [#7241](https://github.com/pingcap/tiflow/issues/7241) @[buchuitoudegou](https://github.com/buchuitoudegou)
+        - 高速/完全バリデーターで DM タスクを実行した後に DM-workerがデッドロックエラーをトリガーする問題を修正しました [#7241](https://github.com/pingcap/tiflow/issues/7241) @[buchuitoudegou](https://github.com/buchuitoudegou)
         - DMが`Specified key was too long`エラーを報告する問題を修正 [#5315](https://github.com/pingcap/tiflow/issues/5315) @[lance6716](https://github.com/lance6716)
         - レプリケーション中に latin1 データが破損する可能性がある問題を修正しました [#7028](https://github.com/pingcap/tiflow/issues/7028) @[lance6716](https://github.com/lance6716)
 
     - TiCDC
 
         - CDCサーバーが完全に起動する前に HTTP リクエストを受信すると、CDCサーバーがpanicする可能性がある問題を修正しました[#6838](https://github.com/pingcap/tiflow/issues/6838) @[asddongmen](https://github.com/asddongmen)
-        - アップグレード中のログ フラッディング問題を修正 [#7235](https://github.com/pingcap/tiflow/issues/7235) @[Rustin170506](https://github.com/Rustin170506)
+        - アップグレード中のログフラッディング問題を修正 [#7235](https://github.com/pingcap/tiflow/issues/7235) @[Rustin170506](https://github.com/Rustin170506)
         - changefeed の redo ログファイルが誤って削除される可能性がある問題を修正[#6413](https://github.com/pingcap/tiflow/issues/6413) @[Rustin170506](https://github.com/Rustin170506)
         - etcdトランザクションでコミットされる操作が多すぎるとTiCDCが利用できなくなる問題を修正[#7131](https://github.com/pingcap/tiflow/issues/7131) @[Rustin170506](https://github.com/Rustin170506)
         - REDOログ内の非再入可能DDL文が2回実行されるとデータの不整合が発生する可能性がある問題を修正[#6927](https://github.com/pingcap/tiflow/issues/6927) @[hicqu](https://github.com/hicqu)

@@ -36,7 +36,7 @@ TiDB バージョン: 6.1.6
     - `indexMerge`がエラーに遭遇した後に TiDB がpanicする可能性がある問題を修正[#41047](https://github.com/pingcap/tidb/issues/41047) [#40877](https://github.com/pingcap/tidb/issues/40877) @[guo-shaoge](https://github.com/guo-shaoge) @[windtalker](https://github.com/windtalker)
     - 仮想列を持つ TopN オペレーターが誤って TiKV またはTiFlashにプッシュダウンすると、誤った結果が返される可能性がある問題を修正しました。 [#41355](https://github.com/pingcap/tidb/issues/41355) @[Dousir9](https://github.com/Dousir9)
     - 多数のリージョンがあるが、 `Prepare`または`Execute`を使用して一部の仮想テーブルをクエリするときにテーブル ID をプッシュダウンできないという PD OOM 問題を修正しました。 [#39605](https://github.com/pingcap/tidb/issues/39605) @[djshow832](https://github.com/djshow832)
-    - プランキャッシュが`int_col in (decimal...)`条件を処理するときにフルスキャン プランをキャッシュする可能性がある問題を修正しました [#40224](https://github.com/pingcap/tidb/issues/40224) @[qw4990](https://github.com/qw4990)
+    - プランキャッシュが`int_col in (decimal...)`条件を処理するときにフルスキャンプランをキャッシュする可能性がある問題を修正しました [#40224](https://github.com/pingcap/tidb/issues/40224) @[qw4990](https://github.com/qw4990)
     - IndexMerge プランが SET 型の列に誤った範囲を生成する可能性がある問題を修正しました [#41273](https://github.com/pingcap/tidb/issues/41273) [#41293](https://github.com/pingcap/tidb/issues/41293) @[time-and-fate](https://github.com/time-and-fate)
     - 符号なしの`TINYINT` / `SMALLINT` / `INT`値を`0`より小さい`DECIMAL` / `FLOAT` / `DOUBLE`値と比較するときに誤った結果になる可能性がある問題を修正しました。 [#41736](https://github.com/pingcap/tidb/issues/41736) @[LittleFall](https://github.com/LittleFall)
     - `INFORMATION_SCHEMA.CLUSTER_SLOW_QUERY`テーブルへのクエリ実行時に TiDBサーバーがメモリ不足になる可能性がある問題を修正しました。この問題は、Grafana ダッシュボードでスロークエリを確認した場合に発生する可能性があります。 [#33893](https://github.com/pingcap/tidb/issues/33893) @[crazycs520](https://github.com/crazycs520)
@@ -84,7 +84,7 @@ TiDB バージョン: 6.1.6
 
         - データレプリケーション中の`UPDATE`と`INSERT`文の順序が乱れると、 `Duplicate entry`エラーが発生する可能性がある問題を修正しました。 [#8597](https://github.com/pingcap/tiflow/issues/8597) @[sdojjy](https://github.com/sdojjy)
         - PDとTiCDC間のネットワーク分離によって発生するTiCDCサービスの異常終了問題を修正 [#8562](https://github.com/pingcap/tiflow/issues/8562) @[overvenus](https://github.com/overvenus)
-        - TiDB または MySQL シンクにデータを複製するときに、主キーのない非 NULL ユニーク インデックスを持つ列に`CHARACTER SET`を指定した場合に発生するデータの不整合を修正しました。 [#8420](https://github.com/pingcap/tiflow/issues/8420) @[zhaoxinyu](https://github.com/zhaoxinyu)
+        - TiDB または MySQL シンクにデータを複製するときに、主キーのない非 NULL ユニークインデックスを持つ列に`CHARACTER SET`を指定した場合に発生するデータの不整合を修正しました。 [#8420](https://github.com/pingcap/tiflow/issues/8420) @[zhaoxinyu](https://github.com/zhaoxinyu)
         - `db sorter`のメモリ使用量が`cgroup memory limit`で制御されない問題を修正 [#8588](https://github.com/pingcap/tiflow/issues/8588) @[amyangfei](https://github.com/amyangfei)
         - 無効な入力に対する`cdc cli`のエラーメッセージを最適化します [#7903](https://github.com/pingcap/tiflow/issues/7903) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - S3ストレージ障害に対して、REDO ログが許容できる期間が不十分である問題を修正しました [#8089](https://github.com/pingcap/tiflow/issues/8089) @[CharlesCheung96](https://github.com/CharlesCheung96)

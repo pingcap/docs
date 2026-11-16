@@ -30,7 +30,7 @@ TiDB バージョン: 7.5.8
     - 外部 SST の取り込みとフォアグラウンド書き込みの競合により、TiKV が `txn record found but not expected` で panic する可能性がある問題を修正しました [#19891](https://github.com/tikv/tikv/issues/19891) @[gengliqi](https://github.com/gengliqi) <!-- pr: https://github.com/tikv/tikv/pull/19914 -->
     - TiCDC の再起動またはネットワーク障害の後に、TiKV と TiCDC 間の古い接続が完全にクリーンアップされず、TiKV CDC のメモリクォータを使い果たして changefeed が停止する問題を修正しました [#18169](https://github.com/tikv/tikv/issues/18169) [#19610](https://github.com/tikv/tikv/issues/19610) @[asddongmen](https://github.com/asddongmen) @[wk989898](https://github.com/wk989898) <!-- pr: https://github.com/tikv/tikv/pull/18864 --> <!-- pr: https://github.com/tikv/tikv/pull/19689 -->
     - PD 関連の処理が I/O 操作によってブロックされるため、TiKV の I/O ハング中に TiKV のスループットが継続的に低下する可能性がある問題を修正しました [#17939](https://github.com/tikv/tikv/issues/17939) @[LykxSassinator](https://github.com/LykxSassinator) <!-- pr: https://github.com/tikv/tikv/pull/18969 -->
-    - TiDB Lightning によるデータインポート中に、null ポインタ参照によって TiKV がクラッシュする可能性がある問題を修正しました [#18671](https://github.com/tikv/tikv/issues/18671) [#18756](https://github.com/tikv/tikv/issues/18756) @[Dog-Du](https://github.com/Dog-Du) <!-- pr: https://github.com/tikv/tikv/pull/19908 -->
+    - TiDB Lightning によるデータインポート中に、null ポインター参照によって TiKV がクラッシュする可能性がある問題を修正しました [#18671](https://github.com/tikv/tikv/issues/18671) [#18756](https://github.com/tikv/tikv/issues/18756) @[Dog-Du](https://github.com/Dog-Du) <!-- pr: https://github.com/tikv/tikv/pull/19908 -->
 
 + PD
 

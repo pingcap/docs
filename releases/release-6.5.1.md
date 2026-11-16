@@ -13,7 +13,7 @@ TiDB バージョン: 6.5.1
 
 ## 互換性の変更 {#compatibility-changes}
 
-- 2023年2月20日以降、TiDBおよびTiDB Dashboardの新しいバージョン（v6.5.1を含む）では、 [テレメトリ機能](/telemetry.md)がデフォルトで無効化され、使用状況情報は収集されず、PingCAPと共有されません。これらのバージョンにアップグレードする前に、クラスターがデフォルトのテレメトリ設定を使用している場合、アップグレード後にテレメトリ機能が無効化されます。具体的なバージョンについては、 [TiDB リリース タイムライン](/releases/release-timeline.md)を参照してください。
+- 2023年2月20日以降、TiDBおよびTiDB Dashboardの新しいバージョン（v6.5.1を含む）では、 [テレメトリ機能](/telemetry.md)がデフォルトで無効化され、使用状況情報は収集されず、PingCAPと共有されません。これらのバージョンにアップグレードする前に、クラスターがデフォルトのテレメトリ設定を使用している場合、アップグレード後にテレメトリ機能が無効化されます。具体的なバージョンについては、 [TiDB リリースタイムライン](/releases/release-timeline.md)を参照してください。
 
     - [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402)システム変数のデフォルト値が`ON`から`OFF`に変更されます。
     - TiDB [`enable-telemetry`](/tidb-configuration-file.md#enable-telemetry-new-in-v402)設定項目のデフォルト値が`true`から`false`に変更されます。
@@ -31,20 +31,20 @@ TiDB バージョン: 6.5.1
 
 - TiDB
 
-    - v6.5.1以降、 TiDB Operator v1.4.3以降でデプロイされたTiDBクラスタはIPv6アドレスをサポートします。これにより、TiDBはより広いアドレス空間をサポートし、セキュリティとネットワークパフォーマンスを向上させることができます。
+    - v6.5.1以降、 TiDB Operator v1.4.3以降でデプロイされたTiDBクラスターはIPv6アドレスをサポートします。これにより、TiDBはより広いアドレス空間をサポートし、セキュリティとネットワークパフォーマンスを向上させることができます。
 
         - IPv6 アドレスの完全サポート: TiDB は、クライアント接続、ノード間の内部通信、外部システムとの通信など、すべてのネットワーク接続で IPv6 アドレスの使用をサポートします。
-        - デュアルスタックのサポート：まだIPv6への完全移行の準備が整っていない場合でも、TiDBはデュアルスタックネットワークをサポートしています。つまり、同じTiDBクラスタ内でIPv4とIPv6の両方のアドレスを使用し、設定によってIPv6を優先するネットワークデプロイモードを選択できます。
+        - デュアルスタックのサポート：まだIPv6への完全移行の準備が整っていない場合でも、TiDBはデュアルスタックネットワークをサポートしています。つまり、同じTiDBクラスター内でIPv4とIPv6の両方のアドレスを使用し、設定によってIPv6を優先するネットワークデプロイモードを選択できます。
 
         IPv6 の導入の詳細については、 [Kubernetes 上の TiDB ドキュメント](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-a-tidb-cluster#ipv6-support)を参照してください。
 
-    - TiDB クラスタの初期化時に実行される SQL スクリプトの指定をサポート[#35624](https://github.com/pingcap/tidb/issues/35624) @[morgo](https://github.com/morgo)
+    - TiDB クラスターの初期化時に実行される SQL スクリプトの指定をサポート[#35624](https://github.com/pingcap/tidb/issues/35624) @[morgo](https://github.com/morgo)
 
-        TiDB v6.5.1 では、新しい設定項目[`initialize-sql-file`](https://docs.pingcap.com/tidb/v6.5/tidb-configuration-file#initialize-sql-file-new-in-v651)が追加されました。TiDB クラスタを初めて起動する際に、コマンドラインパラメータ`--initialize-sql-file`を設定することで、実行する SQL スクリプトを指定できます。この機能は、システム変数の値の変更、ユーザーの作成、権限の付与などの操作を行う際に使用できます。詳細については、 [ドキュメント](https://docs.pingcap.com/tidb/v6.5/tidb-configuration-file#initialize-sql-file-new-in-v651)を参照してください。
+        TiDB v6.5.1 では、新しい設定項目[`initialize-sql-file`](https://docs.pingcap.com/tidb/v6.5/tidb-configuration-file#initialize-sql-file-new-in-v651)が追加されました。TiDB クラスターを初めて起動する際に、コマンドラインパラメーター`--initialize-sql-file`を設定することで、実行する SQL スクリプトを指定できます。この機能は、システム変数の値の変更、ユーザーの作成、権限の付与などの操作を行う際に使用できます。詳細については、 [ドキュメント](https://docs.pingcap.com/tidb/v6.5/tidb-configuration-file#initialize-sql-file-new-in-v651)を参照してください。
 
     - メモリリークとパフォーマンスの低下を防ぐため、期限切れのリージョンキャッシュを定期的にクリアします[#40461](https://github.com/pingcap/tidb/issues/40461) @[sticnarf](https://github.com/sticnarf)
 
-    - PROXYプロトコルフォールバックモードを有効にするかどうかを制御する新しい設定項目`--proxy-protocol-fallbackable`を追加します。このパラメータを`true`に設定すると、TiDBはPROXYクライアント接続とPROXYプロトコルヘッダーのないクライアント接続を受け入れます。 [#41409](https://github.com/pingcap/tidb/issues/41409) @[blacktear23](https://github.com/blacktear23)
+    - PROXYプロトコルフォールバックモードを有効にするかどうかを制御する新しい設定項目`--proxy-protocol-fallbackable`を追加します。このパラメーターを`true`に設定すると、TiDBはPROXYクライアント接続とPROXYプロトコルヘッダーのないクライアント接続を受け入れます。 [#41409](https://github.com/pingcap/tidb/issues/41409) @[blacktear23](https://github.com/blacktear23)
 
     - メモリトラッカー の精度を向上させる [#40500](https://github.com/pingcap/tidb/issues/40500) @[wshwsh12](https://github.com/wshwsh12) [#40900](https://github.com/pingcap/tidb/issues/40900)
 
@@ -108,8 +108,8 @@ TiDB バージョン: 6.5.1
     - 大きな範囲と大量のデータ変更を伴うクエリを実行するときに大きな推定エラーが発生する問題を修正[#39593](https://github.com/pingcap/tidb/issues/39593) @[time-and-fate](https://github.com/time-and-fate)
     - Plan Cache の使用時に、一部の条件が Join 演算子を通じてプッシュダウンできない問題を修正しました。 [#38205](https://github.com/pingcap/tidb/issues/38205) @[qw4990](https://github.com/qw4990) [#40093](https://github.com/pingcap/tidb/issues/40093)
     - IndexMerge プランが SET 型の列 に誤った範囲を生成する可能性がある問題を修正しました [#41293](https://github.com/pingcap/tidb/issues/41293) @[time-and-fate](https://github.com/time-and-fate) [#41273](https://github.com/pingcap/tidb/issues/41273)
-    - プランキャッシュが`int_col <cmp> decimal`条件 を処理するときにフルスキャン プランをキャッシュする可能性がある問題を修正しました [#41032](https://github.com/pingcap/tidb/issues/41032) @[qw4990](https://github.com/qw4990) [#40679](https://github.com/pingcap/tidb/issues/40679)
-    - プランキャッシュが`int_col in (decimal...)`条件を処理するときにフルスキャン プランをキャッシュする可能性がある問題を修正しました [#40224](https://github.com/pingcap/tidb/issues/40224) @[qw4990](https://github.com/qw4990)
+    - プランキャッシュが`int_col <cmp> decimal`条件 を処理するときにフルスキャンプランをキャッシュする可能性がある問題を修正しました [#41032](https://github.com/pingcap/tidb/issues/41032) @[qw4990](https://github.com/qw4990) [#40679](https://github.com/pingcap/tidb/issues/40679)
+    - プランキャッシュが`int_col in (decimal...)`条件を処理するときにフルスキャンプランをキャッシュする可能性がある問題を修正しました [#40224](https://github.com/pingcap/tidb/issues/40224) @[qw4990](https://github.com/qw4990)
     - `ignore_plan_cache`ヒントが`INSERT`文 では機能しない可能性がある問題を修正しました [#39717](https://github.com/pingcap/tidb/issues/39717) @[qw4990](https://github.com/qw4990) [#40079](https://github.com/pingcap/tidb/issues/40079)
     - 自動分析により TiDB が終了できなくなる問題を修正しました [#40038](https://github.com/pingcap/tidb/issues/40038) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
     - パーティションテーブルの符号なし主キーに不正なアクセス間隔が構築される可能性がある問題を修正しました。 [#40309](https://github.com/pingcap/tidb/issues/40309) @[winoros](https://github.com/winoros)
@@ -135,7 +135,7 @@ TiDB バージョン: 6.5.1
 
     - 特定の条件下で`replace-down-peer`の実行が遅くなる問題を修正[#5788](https://github.com/tikv/pd/issues/5788) @[HunDunDM](https://github.com/HunDunDM)
     - PD が予期せず複数の Learner をリージョンに追加する可能性がある問題を修正しました。 [#5786](https://github.com/tikv/pd/issues/5786) @[HunDunDM](https://github.com/HunDunDM)
-    - リージョンスキャッタタスクが予期せず冗長レプリカを生成する問題を修正[#5909](https://github.com/tikv/pd/issues/5909) @[HunDunDM](https://github.com/HunDunDM)
+    - リージョンスキャッタータスクが予期せず冗長レプリカを生成する問題を修正[#5909](https://github.com/tikv/pd/issues/5909) @[HunDunDM](https://github.com/HunDunDM)
     - `ReportMinResolvedTS`の呼び出しが頻繁すぎる場合に発生する PD OOM 問題を修正しました [#5965](https://github.com/tikv/pd/issues/5965) @[HunDunDM](https://github.com/HunDunDM)
     - リージョン散布により、リーダーの分布が不均一になる可能性がある問題を修正しました。 [#6017](https://github.com/tikv/pd/issues/6017) @[HunDunDM](https://github.com/HunDunDM)
 
@@ -153,13 +153,13 @@ TiDB バージョン: 6.5.1
 
         - PDとtidb-server間の接続障害により、PITRバックアップの進行が進まない問題を修正しました。 [#41082](https://github.com/pingcap/tidb/issues/41082) @[YuJuncen](https://github.com/YuJuncen)
         - PDとTiKV 間の接続障害によりTiKVがPITRタスクをリッスンできない問題を修正しました [#14159](https://github.com/tikv/tikv/issues/14159) @[YuJuncen](https://github.com/YuJuncen)
-        - PITRがPDクラスタの構成変更をサポートしない問題を修正 [#14165](https://github.com/tikv/tikv/issues/14165) @[YuJuncen](https://github.com/YuJuncen)
+        - PITRがPDクラスターの構成変更をサポートしない問題を修正 [#14165](https://github.com/tikv/tikv/issues/14165) @[YuJuncen](https://github.com/YuJuncen)
         - PITR機能がCAバンドルをサポートしない問題を修正 [#38775](https://github.com/pingcap/tidb/issues/38775) @[3pointer](https://github.com/3pointer)
         - PITRバックアップタスクを削除すると、残りのバックアップデータによって新しいタスクでデータの不整合が発生する問題を修正しました。 [#40403](https://github.com/pingcap/tidb/issues/40403) @[joccau](https://github.com/joccau)
         - BRが`backupmeta`ファイルを解析するときにpanicを引き起こす問題を修正しました [#40878](https://github.com/pingcap/tidb/issues/40878) @[MoCuishle28](https://github.com/MoCuishle28)
         - リージョンサイズ取得に失敗したために復元が中断される問題を修正しました [#36053](https://github.com/pingcap/tidb/issues/36053) @[YuJuncen](https://github.com/YuJuncen)
-        - TiDBクラスタにPITRバックアップタスクがない場合に`resolve lock`の頻度が高すぎる問題を修正 [#40759](https://github.com/pingcap/tidb/issues/40759) @[joccau](https://github.com/joccau)
-        - ログバックアップが実行中のクラスタにデータを復元すると、ログバックアップファイルが復元できなくなる問題を修正[#40797](https://github.com/pingcap/tidb/issues/40797) @[Leavrth](https://github.com/Leavrth)
+        - TiDBクラスターにPITRバックアップタスクがない場合に`resolve lock`の頻度が高すぎる問題を修正 [#40759](https://github.com/pingcap/tidb/issues/40759) @[joccau](https://github.com/joccau)
+        - ログバックアップが実行中のクラスターにデータを復元すると、ログバックアップファイルが復元できなくなる問題を修正[#40797](https://github.com/pingcap/tidb/issues/40797) @[Leavrth](https://github.com/Leavrth)
         - 完全バックアップの失敗後にチェックポイントからバックアップを再開しようとしたときに発生するpanicの問題を修正[#40704](https://github.com/pingcap/tidb/issues/40704) @[Leavrth](https://github.com/Leavrth)
         - PITRエラーが上書きされる問題を修正 [#40576](https://github.com/pingcap/tidb/issues/40576) @[Leavrth](https://github.com/Leavrth)
         - PITR バックアップタスクで、advance owner と GC owner が異なる場合にチェックポイントが進まない問題を修正しました[#41806](https://github.com/pingcap/tidb/issues/41806) @[joccau](https://github.com/joccau)
@@ -175,14 +175,14 @@ TiDB バージョン: 6.5.1
         - REDOログがメタへの書き込みを有効にするとパフォーマンスが低下する問題を修正しました [#8074](https://github.com/pingcap/tiflow/issues/8074) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - TiCDCが大きなトランザクションを分割せずにデータを複製するとコンテキスト期限が超過するバグを修正 [#7982](https://github.com/pingcap/tiflow/issues/7982) @[hi-rustin](https://github.com/Rustin170506)
         - PDが異常なときにチェンジフィードを一時停止すると、誤ったステータスになる問題を修正しました。 [#8330](https://github.com/pingcap/tiflow/issues/8330) @[sdojjy](https://github.com/sdojjy)
-        - TiDB または MySQL シンクにデータを複製するときに、主キーのない非 NULL ユニーク インデックスを持つ列に`CHARACTER SET`を指定した場合に発生するデータの不整合を修正しました。 [#8420](https://github.com/pingcap/tiflow/issues/8420) @[asddongmen](https://github.com/asddongmen)
+        - TiDB または MySQL シンクにデータを複製するときに、主キーのない非 NULL ユニークインデックスを持つ列に`CHARACTER SET`を指定した場合に発生するデータの不整合を修正しました。 [#8420](https://github.com/pingcap/tiflow/issues/8420) @[asddongmen](https://github.com/asddongmen)
         - テーブルスケジューリングとブラックホールシンクのpanic問題を修正[#8024](https://github.com/pingcap/tiflow/issues/8024) [#8142](https://github.com/pingcap/tiflow/issues/8142) @[hicqu](https://github.com/hicqu)
 
     - TiDB Data Migration (DM)
 
         - `binlog-schema delete`コマンドが実行に失敗する問題を修正 [#7373](https://github.com/pingcap/tiflow/issues/7373) @[liumengya94](https://github.com/liumengya94)
         - 最後のbinlogがスキップされたDDL の場合にチェックポイントが進まない問題を修正しました [#8175](https://github.com/pingcap/tiflow/issues/8175) @[D3Hunter](https://github.com/D3Hunter)
-        - 1つのテーブルに"update"と"non-update"の両方の式フィルタが指定されている場合、すべての`UPDATE`文がスキップされるバグを修正しました[#7831](https://github.com/pingcap/tiflow/issues/7831) @[lance6716](https://github.com/lance6716)
+        - 1つのテーブルに"update"と"non-update"の両方の式フィルターが指定されている場合、すべての`UPDATE`文がスキップされるバグを修正しました[#7831](https://github.com/pingcap/tiflow/issues/7831) @[lance6716](https://github.com/lance6716)
 
     - TiDB Lightning
 

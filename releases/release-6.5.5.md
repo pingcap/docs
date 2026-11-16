@@ -15,8 +15,8 @@ TiDB バージョン: 6.5.5
 
 - TiDB
 
-    - [`NO_MERGE_JOIN()`](/optimizer-hints.md#no_merge_joint1_name--tl_name-)、[`NO_INDEX_JOIN()`](/optimizer-hints.md#no_index_joint1_name--tl_name-)、[`NO_INDEX_MERGE_JOIN()`](/optimizer-hints.md#no_index_merge_joint1_name--tl_name-)、[`NO_HASH_JOIN()`](/optimizer-hints.md#no_hash_joint1_name--tl_name-)、[`NO_INDEX_HASH_JOIN()`](/optimizer-hints.md#no_index_hash_joint1_name--tl_name-)を含む新しいオプティマイザヒントを追加 [#45520](https://github.com/pingcap/tidb/issues/45520) @[qw4990](https://github.com/qw4990)
-    - コプロセッサに関連するリクエスト元情報を追加します [#46514](https://github.com/pingcap/tidb/issues/46514) @[you06](https://github.com/you06)
+    - [`NO_MERGE_JOIN()`](/optimizer-hints.md#no_merge_joint1_name--tl_name-)、[`NO_INDEX_JOIN()`](/optimizer-hints.md#no_index_joint1_name--tl_name-)、[`NO_INDEX_MERGE_JOIN()`](/optimizer-hints.md#no_index_merge_joint1_name--tl_name-)、[`NO_HASH_JOIN()`](/optimizer-hints.md#no_hash_joint1_name--tl_name-)、[`NO_INDEX_HASH_JOIN()`](/optimizer-hints.md#no_index_hash_joint1_name--tl_name-)を含む新しいオプティマイザーヒントを追加 [#45520](https://github.com/pingcap/tidb/issues/45520) @[qw4990](https://github.com/qw4990)
+    - コプロセッサーに関連するリクエスト元情報を追加します [#46514](https://github.com/pingcap/tidb/issues/46514) @[you06](https://github.com/you06)
 
 - TiKV
 
@@ -46,9 +46,9 @@ TiDB バージョン: 6.5.5
 
 - PD
 
-    - スケジューラの起動に時間がかかる問題を修正[#6920](https://github.com/tikv/pd/issues/6920) @[HuSharp](https://github.com/HuSharp)
+    - スケジューラーの起動に時間がかかる問題を修正[#6920](https://github.com/tikv/pd/issues/6920) @[HuSharp](https://github.com/HuSharp)
     - Scatter Region における Leader と Peerの処理ロジックが矛盾している問題を修正しました [#6962](https://github.com/tikv/pd/issues/6962) @[bufferflies](https://github.com/bufferflies)
-    - クラスタが再起動されたとき、またはPD Leader が切り替えられたときに、 `empty-region-count`監視メトリックが異常になる問題を修正しました。 [#7008](https://github.com/tikv/pd/issues/7008) @[CabinfeverB](https://github.com/CabinfeverB)
+    - クラスターが再起動されたとき、またはPD Leader が切り替えられたときに、 `empty-region-count`監視メトリックが異常になる問題を修正しました。 [#7008](https://github.com/tikv/pd/issues/7008) @[CabinfeverB](https://github.com/CabinfeverB)
 
 - ツール
 
@@ -71,6 +71,6 @@ TiDB バージョン: 6.5.5
     - TiDB Lightning
 
         - ターゲットサーバーにTiCDCがデプロイされているときにTiDB Lightningが起動に失敗する問題を修正 [#41040](https://github.com/pingcap/tidb/issues/41040) @[lance6716](https://github.com/lance6716)
-        - PDトポロジが変更されるとTiDB Lightningが起動に失敗する問題を修正[#46688](https://github.com/pingcap/tidb/issues/46688) @[lance6716](https://github.com/lance6716)
+        - PDトポロジーが変更されるとTiDB Lightningが起動に失敗する問題を修正[#46688](https://github.com/pingcap/tidb/issues/46688) @[lance6716](https://github.com/lance6716)
         - PD の Leader を切り替えた後にTiDB Lightning がデータのインポートを続行できない問題を修正しました [#46540](https://github.com/pingcap/tidb/issues/46540) @[lance6716](https://github.com/lance6716)
         - 事前チェックがターゲットクラスターで実行中の TiCDC の存在を正確に検出できない問題を修正しました。 [#41040](https://github.com/pingcap/tidb/issues/41040) @[lance6716](https://github.com/lance6716)
