@@ -3,9 +3,9 @@ title: DR Solution Based on Multiple Replicas in a Single Cluster
 summary: 単一クラスターのマルチレプリカ災害復旧ソリューションについて学習します。
 ---
 
-# 単一クラスタ内の複数のレプリカに基づく DR ソリューション {#dr-solution-based-on-multiple-replicas-in-a-single-cluster}
+# 単一クラスター内の複数のレプリカに基づく DR ソリューション {#dr-solution-based-on-multiple-replicas-in-a-single-cluster}
 
-このドキュメントでは、単一クラスタ内の複数のレプリカに基づく災害復旧（DR）ソリューションについて説明します。このドキュメントは、以下の構成になっています。
+このドキュメントでは、単一クラスター内の複数のレプリカに基づく災害復旧（DR）ソリューションについて説明します。このドキュメントは、以下の構成になっています。
 
 - ソリューション紹介
 - クラスターをセットアップしてレプリカを構成する方法
@@ -26,7 +26,7 @@ summary: 単一クラスターのマルチレプリカ災害復旧ソリュー�
 
 この例では、TiDBには5つのレプリカと3つのリージョンが含まれています。リージョン1はプライマリリージョン、リージョン2はセカンダリリージョン、リージョン3は投票に使用されます。同様に、PDクラスターにも5つのレプリカが含まれており、TiDBクラスターと基本的に同じように機能します。
 
-1. 次のようなトポロジファイルを作成します。
+1. 次のようなトポロジーファイルを作成します。
 
     ```toml
     global:
@@ -124,7 +124,7 @@ summary: 単一クラスターのマルチレプリカ災害復旧ソリュー�
     >
     > 利用可能なすべての PD ノードの中で、優先順位番号が最も高いノードがリーダーになります。
 
-3. 配置ルールを作成し、テスト テーブルのプライマリ レプリカをリージョン 1 に固定します。
+3. 配置ルールを作成し、テストテーブルのプライマリレプリカをリージョン 1 に固定します。
 
     ```sql
     -- Create two placement rules: the first rule specifies that region 1 works as the primary region, and region 2 as the secondary region.
@@ -142,7 +142,7 @@ summary: 単一クラスターのマルチレプリカ災害復旧ソリュー�
     SELECT STORE_ID, address, leader_count, label FROM TIKV_STORE_STATUS ORDER BY store_id;
     ```
 
-    次の SQL文は、すべての非システム スキーマ テーブルのリーダーを特定のリージョンに構成する SQL スクリプトを生成できます。
+    次の SQL文は、すべての非システムスキーマテーブルのリーダーを特定のリージョンに構成する SQL スクリプトを生成できます。
 
     ```sql
     SET @region_name=primary_rule_for_region1;
@@ -208,4 +208,4 @@ GrafanaまたはTiDB Dashboardにアクセスすることで、TiKV、TiDB、PD�
     SELECT STORE_ID, address, leader_count, label FROM TIKV_STORE_STATUS ORDER BY store_id;
     ```
 
-    リージョン 1 が回復したら、前述のコマンドと同様のコマンドを使用して、ユーザーテーブルのリーダーをリージョン 1 に戻すことができます。
+    リージョン 1 が回復したら、前述のコマンドと同様のコマンドを使用して、ユーザーテーブルのリーダーをリージョン 1 に戻せます。

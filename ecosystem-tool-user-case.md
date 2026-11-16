@@ -29,7 +29,7 @@ MySQL/ Auroraから全データと増分データの両方を移行する必要�
 
 全データ量が大きい場合 (TB レベル)、最初に[Dumpling](/dumpling-overview.md)と[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用して全データ移行を実行し、次に DM を使用して増分データ移行を実行できます。
 
-## TiDB クラスタのバックアップと復元 {#back-up-and-restore-tidb-cluster}
+## TiDB クラスターのバックアップと復元 {#back-up-and-restore-tidb-cluster}
 
 TiDB クラスターをバックアップする必要がある場合、またはバックアップしたデータをクラスターに復元する必要がある場合は、 [BR](/br/backup-and-restore-overview.md) (バックアップと復元) を使用します。
 

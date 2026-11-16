@@ -190,7 +190,7 @@ tidb> EXPLAIN SELECT * FROM t WHERE (a,b) IN (SELECT * FROM s);
 
 最初のクエリ文`EXPLAIN SELECT (a,b) IN (SELECT * FROM s) FROM t;`では、テーブル`t`と`s`列`a`と`b` NULL 値可能（NULLABLE）であるため、サブクエリ`IN`によって変換された左外部セミ結合は NULL 値に対応します。具体的には、まずカルテシアン積を計算し、次に列`IN`または`= ANY`で連結された列を、フィルタリングのための通常の等価性クエリとして他の条件に組み込みます。
 
-2番目のクエリ文`EXPLAIN SELECT * FROM t WHERE (a,b) IN (SELECT * FROM s);`では、テーブル`t`と`s`列`a`と`b`が NULL 可能であるため、 `IN`サブクエリは NULL 対応のセミ結合に変換される必要があります。しかし、TiDB はセミ結合を内部結合と集計に変換することで最適化します。これは、非スカラー出力の`IN`のサブクエリでは、 `NULL`と`false`等価であるためです。プッシュダウンフィルタの`NULL`行は、 `WHERE`句の否定的なセマンティクスになります。したがって、これらの行は事前に無視できます。
+2番目のクエリ文`EXPLAIN SELECT * FROM t WHERE (a,b) IN (SELECT * FROM s);`では、テーブル`t`と`s`列`a`と`b`が NULL 可能であるため、 `IN`サブクエリは NULL 対応のセミ結合に変換される必要があります。しかし、TiDB はセミ結合を内部結合と集計に変換することで最適化します。これは、非スカラー出力の`IN`のサブクエリでは、 `NULL`と`false`等価であるためです。プッシュダウンフィルターの`NULL`行は、 `WHERE`句の否定的なセマンティクスになります。したがって、これらの行は事前に無視できます。
 
 > **Note:**
 >

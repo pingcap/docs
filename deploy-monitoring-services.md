@@ -3,13 +3,13 @@ title: Deploy Monitoring Services for the TiDB Cluster
 summary: TiDB クラスターの監視サービスをデプロイする方法を学習します。
 ---
 
-# TiDBクラスタの監視サービスをデプロイ {#deploy-monitoring-services-for-the-tidb-cluster}
+# TiDBクラスターの監視サービスをデプロイ {#deploy-monitoring-services-for-the-tidb-cluster}
 
 このドキュメントは、TiDB 監視およびアラートサービスを手動でデプロイしたいユーザーを対象としています。TiUPを使用して TiDB クラスターをデプロイする場合、監視およびアラートサービスは自動的にデプロイされるため、手動でのデプロイは不要です。[TiDB Dashboard](/dashboard/dashboard-intro.md)はPDコンポーネントに組み込まれているため、別途デプロイする必要はありません。
 
 ## PrometheusとGrafanaをデプロイ {#deploy-prometheus-and-grafana}
 
-TiDB クラスター トポロジが次のようになっていると仮定します。
+TiDB クラスタートポロジーが次のようになっていると仮定します。
 
 | 名前   | ホストIP           | サービス                              |
 | :--- | :-------------- | :-------------------------------- |
@@ -103,7 +103,7 @@ scrape_configs:
 ...
 ```
 
-TiDB、PD、TiKV などのコンポーネントのアラーム ルールを有効にするには、対応するコンポーネントのアラーム ルール ファイルを個別にダウンロードし、アラーム ルール ファイルの構成を Prometheus 設定ファイルに追加します。
+TiDB、PD、TiKV などのコンポーネントのアラームルールを有効にするには、対応するコンポーネントのアラームルールファイルを個別にダウンロードし、アラームルールファイルの構成を Prometheus 設定ファイルに追加します。
 
 - TiDB: [`tidb.rules.yml`](https://github.com/pingcap/tidb/blob/release-8.5/pkg/metrics/alertmanager/tidb.rules.yml)
 - PD: [`pd.rules.yml`](https://github.com/tikv/pd/blob/release-8.5/metrics/alertmanager/pd.rules.yml)
@@ -210,26 +210,26 @@ Grafana サービスを開始します。
     >
     > **Change Password**手順では、 **Skip**を選択できます。
 
-2. Grafana サイドバー メニューで、**Configuration**内の**データソース**をクリックします。
+2. Grafana サイドバーメニューで、**Configuration**内の**Data Source**をクリックします。
 
-3. **データソースの追加**をクリックします。
+3. **Add data source**をクリックします。
 
 4. データソース情報を指定します。
 
-    - データソースの**名前**を指定します。
-    - **タイプ**には**Prometheus**を選択します。
+    - データソースの**Name**を指定します。
+    - **Type**には**Prometheus**を選択します。
     - **URL**には、Prometheus アドレスを指定します。
     - 必要に応じて他のフィールドを指定します。
 
-5. 新しいデータソースを保存するには、 **追加**をクリックします。
+5. 新しいデータソースを保存するには、 **Add**をクリックします。
 
 ### ステップ2: Grafanaダッシュボードをインポートする {#step-2-import-a-grafana-dashboard}
 
 PDサーバー、TiKVサーバー、および TiDBサーバーの Grafana ダッシュボードをインポートするには、それぞれ次の手順を実行します。
 
-1. Grafana ロゴをクリックしてサイドバー メニューを開きます。
+1. Grafana ロゴをクリックしてサイドバーメニューを開きます。
 
-2. サイドバー メニューで、 **ダッシュボード** -> **インポート**をクリックして、 **ダッシュボードのインポート**ウィンドウを開きます。
+2. サイドバーメニューで、 **Dashboards** -> **Import**をクリックして、 **Import Dashboard**ウィンドウを開きます。
 
 3. **Upload .json File**をクリックして JSON ファイルをアップロードします ( [pingcap/tidb](https://github.com/pingcap/tidb/tree/release-8.5/pkg/metrics/grafana) [tikv/tikv](https://github.com/tikv/tikv/tree/release-8.5/metrics/grafana)、および[tikv/pd](https://github.com/tikv/pd/tree/release-8.5/metrics/grafana)から TiDB Grafana 設定ファイルをダウンロードします)。
 
@@ -237,7 +237,7 @@ PDサーバー、TiKVサーバー、および TiDBサーバーの Grafana ダッ
     >
     > TiKV、PD、および TiDB Dashboardの場合、対応する JSON ファイルは`tikv_summary.json` 、 `tikv_details.json` 、 `tikv_trouble_shooting.json` 、 `pd.json` 、 `tidb.json` 、および`tidb_summary.json`です。
 
-4. **ロード**をクリックします。
+4. **Load**をクリックします。
 
 5. Prometheus データソースを選択します。
 
@@ -245,11 +245,11 @@ PDサーバー、TiKVサーバー、および TiDBサーバーの Grafana ダッ
 
 ## コンポーネントメトリックを表示する {#view-component-metrics}
 
-上部のメニューで**新しいダッシュボード**をクリックし、表示するダッシュボードを選択します。
+上部のメニューで**New dashboard**をクリックし、表示するダッシュボードを選択します。
 
 ![view dashboard](/media/view-dashboard.png)
 
-クラスター コンポーネントの次のメトリックを取得できます。
+クラスターコンポーネントの次のメトリックを取得できます。
 
 - **TiDBサーバー:**
 
@@ -262,16 +262,16 @@ PDサーバー、TiKVサーバー、および TiDBサーバーの Grafana ダッ
 
     - コマンドが実行される合計回数
     - 特定のコマンドが失敗した合計回数
-    - コマンドが成功するまでの期間
-    - コマンドが失敗する期間
+    - コマンドが成功するまでにかかる時間
+    - コマンドが失敗するまでにかかる時間
     - コマンドが終了して結果を返すまでの時間
 
 - **TiKVサーバー:**
 
     - ガベージコレクション（GC）監視
     - TiKVコマンドが実行される合計回数
-    - スケジューラがコマンドを実行する期間
-    - Raftの提案コマンドの総回数
-    - Raftがコマンドを実行する期間
+    - スケジューラーがコマンドを実行するのにかかる時間
+    - Raftの提案コマンドの合計回数
+    - Raftがコマンドを実行するのにかかる時間
     - Raftコマンドが失敗した合計回数
     - Raftが準備完了状態を処理する合計回数

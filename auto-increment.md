@@ -23,7 +23,7 @@ summary: "TiDB の `AUTO_INCREMENT` 列属性について学習します。"
 
 </CustomContent>
 
-[`CREATE TABLE`](/sql-statements/sql-statement-create-table.md)ステートメントの`AUTO_INCREMENT`パラメータを使用して、増分フィールドの初期値を指定することもできます。
+[`CREATE TABLE`](/sql-statements/sql-statement-create-table.md)ステートメントの`AUTO_INCREMENT`パラメーターを使用して、増分フィールドの初期値を指定することもできます。
 
 ## 概念 {#concept}
 
@@ -108,13 +108,13 @@ INSERT INTO t (c) VALUES (1)
 
 > **Warning:**
 >
-> クラスタに複数のTiDBインスタンスがあり、テーブルスキーマにAUTO_INCREMENT IDが含まれている場合、明示的な挿入と暗黙的な割り当て（AUTO_INCREMENT列のデフォルト値とカスタム値の使用）を同時に使用しないことを推奨します。そうしないと、暗黙的に割り当てられた値の一意性が損なわれる可能性があります。
+> クラスターに複数のTiDBインスタンスがあり、テーブルスキーマにAUTO_INCREMENT IDが含まれている場合、明示的な挿入と暗黙的な割り当て（AUTO_INCREMENT列のデフォルト値とカスタム値の使用）を同時に使用しないことを推奨します。そうしないと、暗黙的に割り当てられた値の一意性が損なわれる可能性があります。
 
 上記の例では、次の操作を順番に実行します。
 
 1. クライアントはインスタンス`B`にステートメント`INSERT INTO t VALUES (2, 1)`を挿入し、 `id`を`2`に設定します。ステートメントは正常に実行されます。
 
-2. クライアントはインスタンス`A`にステートメント`INSERT INTO t (c) (1)`を送信します。このステートメントでは`id`の値が指定されていないため、ID は`A`に割り当てられます。現在、 `A` `[1, 30000]`のIDをキャッシュしているため、AUTO_INCREMENT IDの値として`2`を割り当て、ローカルカウンタを`1`増加させる可能性があります。このとき、ID `2`のデータが既にデータベースに存在するため、 `Duplicated Error`エラーが返されます。
+2. クライアントはインスタンス`A`にステートメント`INSERT INTO t (c) (1)`を送信します。このステートメントでは`id`の値が指定されていないため、ID は`A`に割り当てられます。現在、 `A` `[1, 30000]`のIDをキャッシュしているため、AUTO_INCREMENT IDの値として`2`を割り当て、ローカルカウンターを`1`増加させる可能性があります。このとき、ID `2`のデータが既にデータベースに存在するため、 `Duplicated Error`エラーが返されます。
 
 ### 単調性 {#monotonicity}
 
@@ -344,13 +344,13 @@ SELECT * FROM t;
 <CustomContent platform="tidb">
 
 - [データ移行（DM）](/dm/dm-overview.md)を使用した増分レプリケーションのシナリオでは、レプリケーションが完了すると、下流の TiDB へのデータ書き込みは DM からアプリケーションの書き込み操作に切り替わります。同時に、AUTO_INCREMENT列の ID 書き込みモードは通常、明示的な挿入から暗黙的な割り当てに切り替わります。
-- TiDB Lightningはデータのインポートを完了すると、AUTO_INCREMENT IDキャッシュを自動的にクリアします。しかし、TiCDCは増分データ同期後にキャッシュを自動的にクリアしません。そのため、TiCDCを停止した後、フェイルオーバーを実行する前に、下流クラスタのAUTO_INCREMENT IDキャッシュを手動でクリアする必要があります。
+- TiDB Lightningはデータのインポートを完了すると、AUTO_INCREMENT IDキャッシュを自動的にクリアします。しかし、TiCDCは増分データ同期後にキャッシュを自動的にクリアしません。そのため、TiCDCを停止した後、フェイルオーバーを実行する前に、下流クラスターのAUTO_INCREMENT IDキャッシュを手動でクリアする必要があります。
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
 - [データ移行](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md)機能を使用した増分レプリケーションのシナリオでは、レプリケーションが完了すると、下流 TiDB へのデータ書き込みは DM からアプリケーションの書き込み操作に切り替わります。同時に、AUTO_INCREMENT列の ID 書き込みモードは通常、明示的な挿入から暗黙的な割り当てに切り替わります。
-- TiDB Lightningはデータのインポートを完了すると、AUTO_INCREMENT IDキャッシュを自動的にクリアします。しかし、TiCDCは増分データ同期後にキャッシュを自動的にクリアしません。そのため、TiCDCを停止した後、フェイルオーバーを実行する前に、下流クラスタのAUTO_INCREMENT IDキャッシュを手動でクリアする必要があります。
+- TiDB Lightningはデータのインポートを完了すると、AUTO_INCREMENT IDキャッシュを自動的にクリアします。しかし、TiCDCは増分データ同期後にキャッシュを自動的にクリアしません。そのため、TiCDCを停止した後、フェイルオーバーを実行する前に、下流クラスターのAUTO_INCREMENT IDキャッシュを手動でクリアする必要があります。
 
 </CustomContent>
 
@@ -420,7 +420,7 @@ TiDBは、MySQL互換のAUTO_INCREMENT列モードを提供し、IDが厳密に�
 CREATE TABLE t(a int AUTO_INCREMENT key) AUTO_ID_CACHE 1;
 ```
 
-`AUTO_ID_CACHE` `1`に設定すると、すべての TiDB インスタンスにわたって ID が厳密に増加し、各 ID が一意であることが保証され、デフォルトのキャッシュ モード (キャッシュされた値が 30000 の`AUTO_ID_CACHE 0` ) と比較して ID 間のギャップが最小限に抑えられます。
+`AUTO_ID_CACHE` `1`に設定すると、すべての TiDB インスタンスにわたって ID が厳密に増加し、各 ID が一意であることが保証され、デフォルトのキャッシュモード (キャッシュされた値が 30000 の`AUTO_ID_CACHE 0` ) と比較して ID 間のギャップが最小限に抑えられます。
 
 たとえば、 `AUTO_ID_CACHE 1`の場合、次のようなシーケンスが表示されます。
 

@@ -13,7 +13,7 @@ Grafanaダッシュボードは、PD、TiDB、TiKV、Node_exporter、概要、�
 
 - Overview：データベース時間とSQL実行時間の概要。概要で異なる色を確認することで、データベースのワークロードプロファイルとパフォーマンスのボトルネックを素早く特定できます。
 
-- Load profile: データベース QPS、接続情報、アプリケーションが TiDB と対話する MySQL コマンド タイプ、データベース内部 TSO および KV リクエスト OPS、TiKV および TiDB のリソース使用量など、主要なメトリックとリソース使用量。
+- Load profile: データベース QPS、接続情報、アプリケーションが TiDB と対話する MySQL コマンドタイプ、データベース内部 TSO および KV リクエスト OPS、TiKV および TiDB のリソース使用量など、主要なメトリックとリソース使用量。
 
 - Top-down latency breakdown: クエリレイテンシーと接続アイドル時間の比率、クエリレイテンシーの内訳、実行中の TSO/KV リクエストレイテンシー、TiKV 内の書き込みレイテンシーの内訳。
 
@@ -76,7 +76,7 @@ SQL実行フェーズは緑色で、その他のフェーズは全体的に赤�
 ### KV Request Time By Source {#kv-request-time-by-source}
 
 - kv request total time: すべての TiDB インスタンスで 1秒あたりに KV およびTiFlashリクエストを処理する合計時間
-- 各 KV リクエストとそれに対応するリクエストソースは積み上げ棒グラフを形成し、 `external`通常のビジネス リクエストを識別し、 `internal`内部アクティビティ リクエスト (DDL やauto analyzeリクエストなど) を識別します。
+- 各 KV リクエストとそれに対応するリクエストソースは積み上げ棒グラフを形成し、 `external`は通常のビジネスリクエストを、 `internal`は内部アクティビティリクエスト (DDL やauto analyzeリクエストなど) を識別します。
 
 ### TiDB CPU {#tidb-cpu}
 
@@ -119,7 +119,7 @@ Connection Idle Duration は、接続がアイドル状態にある期間を示�
 - total: すべてのTiDBインスタンスへの接続数
 - active connections: すべての TiDB インスタンスへのアクティブな接続の数
 - tidb-{node-number}-peer: 各TiDBインスタンスへの接続数
-- disconnection/s: TiDB クラスタ内の切断回数
+- disconnection/s: TiDB クラスター内の切断回数
 - 99-not-in-txn: 接続がトランザクション内にない場合の P99 接続アイドル期間
 
 ### Parse Duration, Compile Duration, and Execute Duration {#parse-duration-compile-duration-and-execute-duration}
@@ -173,17 +173,17 @@ Connection Idle Duration は、接続がアイドル状態にある期間を示�
 - Memory: TiFlashインスタンスごとのメモリ使用量。
 - IO utilization: TiFlashインスタンスごとの IO 使用率。
 - MPP Query count: TiFlashインスタンスあたりの 1秒あたりのTiFlash MPP クエリ数。
-- Request QPS: すべてのTiFlashインスタンスによって受信されたコプロセッサリクエストの数。
+- Request QPS: すべてのTiFlashインスタンスによって受信されたコプロセッサーリクエストの数。
 
     - `batch` : バッチリクエストの数。
-    - `batch_cop` : バッチリクエスト内のコプロセッサリクエストの数。
-    - `cop` : コプロセッサ インターフェイスを介して直接送信されるコプロセッサリクエストの数。
-    - `cop_dag` : すべてのコプロセッサリクエスト内の DAG リクエストの数。
+    - `batch_cop` : バッチリクエスト内のコプロセッサーリクエストの数。
+    - `cop` : コプロセッサーインターフェイスを介して直接送信されるコプロセッサーリクエストの数。
+    - `cop_dag` : すべてのコプロセッサーリクエスト内の DAG リクエストの数。
     - `super_batch` : スーパーバッチ機能を有効にするリクエストの数。
 - Executor QPS: すべてのTiFlashインスタンスが受信したリクエスト内の各タイプの DAG Executor の数。`table_scan`はテーブルスキャン Executor です。`selection`は選択 Executor です。`aggregation`は集約 Executor です。`top_n`は`TopN` Executor です。`limit`は制限 Executor です。
 - Request Duration Overview: すべてのTiFlashインスタンスのすべてのリクエストタイプについて、1秒あたりの合計処理時間の積み上げグラフを提供します。
-- Request Duration: すべてのTiFlashインスタンスにおける各MPPおよびコプロセッサリクエストタイプの合計処理期間。コプロセッサリクエストの受信からリクエストへの応答が完了するまでの時間であり、平均レイテンシーとp99レイテンシーが含まれます。
-- Request Handle Duration：すべてのTiFlashインスタンスにおける各MPPおよびコプロセッサリクエストタイプの実際の処理時間。コプロセッサリクエストの実行開始から完了までの時間であり、平均レイテンシーとp99レイテンシーが含まれます。
+- Request Duration: すべてのTiFlashインスタンスにおける各MPPおよびコプロセッサーリクエストタイプの合計処理期間。コプロセッサーリクエストの受信からリクエストへの応答が完了するまでの時間であり、平均レイテンシーとp99レイテンシーが含まれます。
+- Request Handle Duration：すべてのTiFlashインスタンスにおける各MPPおよびコプロセッサーリクエストタイプの実際の処理時間。コプロセッサーリクエストの実行開始から完了までの時間であり、平均レイテンシーとp99レイテンシーが含まれます。
 - Raft Wait Index Duration: すべてのTiFlashインスタンスに対して`wait_index`が使用する時間。つまり、 `read_index`リクエストを受信してから、リージョンインデックスが`read_index`になるまで待機する時間です。
 - Raft Batch Read Index Duration: すべてのTiFlashインスタンスの`read_index`が使用する時間。ほとんどの時間は、リージョンリーダーとのやり取りと再試行に使用されます。
 - Write Throughput By Instance：インスタンスごとの書き込みスループット。Raft書き込みコマンドとRaftスナップショットを適用した場合のスループットも含まれます。
@@ -196,7 +196,7 @@ Connection Idle Duration は、接続がアイドル状態にある期間を示�
 - Memory usage: TiCDC ノードごとのメモリ使用量。
 - Goroutine count: TiCDC ノードあたりのゴルーチンの数。
 - Changefeed checkpoint lag: アップストリームとダウンストリーム間のデータ複製の進行ラグ (単位は秒)。
-- Changefeed resolved ts lag: アップストリーム ノードと TiCDC ノード間のデータ複製の進行ラグ (単位は秒)。
+- Changefeed resolved ts lag: アップストリームノードと TiCDC ノード間のデータ複製の進行ラグ (単位は秒)。
 - The status of changefeeds:
 
     - 0: 正常
@@ -206,10 +206,10 @@ Connection Idle Duration は、接続がアイドル状態にある期間を示�
     - 4: 完了
     - -1: 不明
 - Puller output events/s: TiCDC ノードの Puller モジュールが Sorter モジュールに 1秒あたりに送信する行数。
-- Sorter output events/s: TiCDC ノードのソーターモジュールがマウンター モジュールに 1秒あたりに送信する行数。
-- Mounter output events/s: TiCDC ノードのマウンター モジュールがシンク モジュールに 1秒あたりに送信する行数。
-- Table sink output events/s: TiCDC ノードのテーブル ソーターモジュールがシンク モジュールに 1秒あたりに送信する行数。
-- SinkV2 - Sink flush rows/s: TiCDC ノードのシンク モジュールがダウンストリームに 1秒あたりに送信する行数。
-- Transaction Sink Full Flush Duration: TiCDC ノードの MySQL シンクによるダウンストリーム トランザクションの書き込みの平均レイテンシーと p999レイテンシー。
+- Sorter output events/s: TiCDC ノードのソーターモジュールがマウンターモジュールに 1秒あたりに送信する行数。
+- Mounter output events/s: TiCDC ノードのマウンターモジュールがシンクモジュールに 1秒あたりに送信する行数。
+- Table sink output events/s: TiCDC ノードのテーブルソーターモジュールがシンクモジュールに 1秒あたりに送信する行数。
+- SinkV2 - Sink flush rows/s: TiCDC ノードのシンクモジュールがダウンストリームに 1秒あたりに送信する行数。
+- Transaction Sink Full Flush Duration: TiCDC ノードの MySQL シンクによるダウンストリームトランザクションの書き込みの平均レイテンシーと p999レイテンシー。
 - MQ Worker Send Message Duration Percentile: ダウンストリームが Kafka の場合の MQ ワーカーによるメッセージ送信のレイテンシー。
-- Kafka Outgoing Bytes: MQ ワークロードでのダウンストリーム トランザクションの書き込みトラフィック。
+- Kafka Outgoing Bytes: MQ ワークロードでのダウンストリームトランザクションの書き込みトラフィック。

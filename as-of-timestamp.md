@@ -7,7 +7,7 @@ summary: "`AS OF TIMESTAMP` ステートメント句を使用して履歴デー�
 
 このドキュメントでは、 `AS OF TIMESTAMP`句を使用して[ステイル読み取り](/stale-read.md)機能を実行し、TiDB 内の履歴データを読み取る方法について説明します。具体的な使用例と履歴データを保存するための戦略も説明します。
 
-TiDBは、特別なクライアントやドライバーを必要とせず、標準SQLインターフェース（ `AS OF TIMESTAMP` SQL句）を介して履歴データの読み取りをサポートします。データが更新または削除された後でも、このSQLインターフェースを使用して更新または削除前の履歴データを読み取ることができます。
+TiDBは、特別なクライアントやドライバーを必要とせず、標準SQLインターフェース（ `AS OF TIMESTAMP` SQL句）を介して履歴データの読み取りをサポートします。データが更新または削除された後でも、このSQLインターフェースを使用して更新または削除前の履歴データを読み取れます。
 
 > **Note:**
 >
@@ -125,7 +125,7 @@ select * from t;
 
 ### `SELECT`文を使用して履歴データを読み取る {#read-historical-data-using-the-select-statement}
 
-[`SELECT ... FROM ... AS OF TIMESTAMP`](/sql-statements/sql-statement-select.md)ステートメントを使用すると、過去の時点からデータを読み取ることができます。
+[`SELECT ... FROM ... AS OF TIMESTAMP`](/sql-statements/sql-statement-select.md)ステートメントを使用すると、過去の時点からデータを読み取れます。
 
 ```sql
 select * from t as of timestamp '2021-05-26 16:45:26';
@@ -181,7 +181,7 @@ commit;
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-トランザクションがコミットされた後、最新のデータを読み取ることができます。
+トランザクションがコミットされた後、最新のデータを読み取れます。
 
 ```sql
 select * from t;
@@ -245,7 +245,7 @@ commit;
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-トランザクションがコミットされた後、最新のデータを読み取ることができます。
+トランザクションがコミットされた後、最新のデータを読み取れます。
 
 ```sql
 select * from t;

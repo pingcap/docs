@@ -13,7 +13,7 @@ summary: 小さなデータセットを MySQL から TiDB に移行する方法�
 
 ## 前提条件 {#prerequisites}
 
-- [TiUPを使用して DMクラスタをデプロイ](/dm/deploy-a-dm-cluster-using-tiup.md)
+- [TiUPを使用して DMクラスターをデプロイ](/dm/deploy-a-dm-cluster-using-tiup.md)
 - [DMのソースデータベースとターゲットデータベースに必要な権限を付与します](/dm/dm-worker-intro.md)
 
 ## ステップ1. データソースを作成する {#step-1-create-the-data-source}
@@ -40,11 +40,11 @@ from:
 tiup dmctl --master-addr ${advertise-addr} operate-source create source1.yaml
 ```
 
-上記のコマンドで使用されるパラメータは次のとおりです。
+上記のコマンドで使用されるパラメーターは次のとおりです。
 
-| パラメータ                   | 説明                                                                    |
+| パラメーター                   | 説明                                                                    |
 | :---------------------- | :-------------------------------------------------------------------- |
-| `--master-addr`         | `dmctl`が接続するクラスタ内の任意のDM-masterノードの`{advertise-addr}`例：172.16.10.71:8261。 |
+| `--master-addr`         | `dmctl`が接続するクラスター内の任意のDM-masterノードの`{advertise-addr}`例：172.16.10.71:8261。 |
 | `operate-source create` | データソースを DM クラスターにロードします。                                             |
 
 ## ステップ2. 移行タスクを作成する {#step-2-create-the-migration-task}
@@ -99,9 +99,9 @@ tiup dmctl --master-addr ${advertise-addr} check-task task.yaml
 tiup dmctl --master-addr ${advertise-addr} start-task task.yaml
 ```
 
-上記のコマンドで使用されるパラメータは次のとおりです。
+上記のコマンドで使用されるパラメーターは次のとおりです。
 
-| パラメータ           | 説明                                                                     |
+| パラメーター           | 説明                                                                     |
 | --------------- | ---------------------------------------------------------------------- |
 | `--master-addr` | `dmctl`が接続するクラスター内の任意のDM-masterノードの`{advertise-addr}`例：172.16.10.71:8261。 |
 | `start-task`    | 移行タスクを開始する                                                             |
@@ -124,8 +124,8 @@ tiup dmctl --master-addr ${advertise-addr} query-status ${task-name}
 
 TiUPを使用して DM をデプロイする際に Prometheus、Alertmanager、Grafana をデプロイしている場合は、デプロイ時に指定した IP アドレスとポートを使用して Grafana にアクセスできます。その後、DM ダッシュボードを選択して、DM 関連の監視メトリクスを表示できます。
 
-- DM-masterのログディレクトリ：DM-masterプロセスパラメータ`--log-file`で指定されます。TiUPを使用してDMをデプロイした場合、ログディレクトリはデフォルトで`/dm-deploy/dm-master-8261/log/`になります。
-- DM-workerのログディレクトリ：DM-workerプロセスパラメータ`--log-file`で指定されます。TiUPを使用してDMをデプロイした場合、デフォルトのログディレクトリは`/dm-deploy/dm-worker-8262/log/`です。
+- DM-masterのログディレクトリ：DM-masterプロセスパラメーター`--log-file`で指定されます。TiUPを使用してDMをデプロイした場合、ログディレクトリはデフォルトで`/dm-deploy/dm-master-8261/log/`になります。
+- DM-workerのログディレクトリ：DM-workerプロセスパラメーター`--log-file`で指定されます。TiUPを使用してDMをデプロイした場合、デフォルトのログディレクトリは`/dm-deploy/dm-worker-8262/log/`です。
 
 ## 次は何？ {#what-s-next}
 

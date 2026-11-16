@@ -49,9 +49,9 @@ summary: TiDBは、ハイブリッドトランザクションおよび分析処�
 
 [ソフトウェアおよびハードウェア要件](https://docs.pingcap.com/ja/tidb/stable/hardware-and-software-requirements)
 
-[TiUPを使用して TiDBクラスタをデプロイ](https://docs.pingcap.com/ja/tidb/stable/production-deployment-using-tiup)
+[TiUPを使用して TiDBクラスターをデプロイ](https://docs.pingcap.com/ja/tidb/stable/production-deployment-using-tiup)
 
-[Kubernetes に TiDBクラスタをデプロイ](https://docs.pingcap.com/ja/tidb/stable/tidb-in-kubernetes/)
+[Kubernetes に TiDBクラスターをデプロイ](https://docs.pingcap.com/ja/tidb/stable/tidb-in-kubernetes/)
 
 </LearningPath>
 
@@ -67,11 +67,11 @@ summary: TiDBは、ハイブリッドトランザクションおよび分析処�
 
 <LearningPath label="管理" icon="maintain">
 
-[クラスタのアップグレード](https://docs.pingcap.com/ja/tidb/stable/upgrade-tidb-using-tiup)
+[クラスターのアップグレード](https://docs.pingcap.com/ja/tidb/stable/upgrade-tidb-using-tiup)
 
-[クラスタのスケール](https://docs.pingcap.com/ja/tidb/stable/scale-tidb-using-tiup)
+[クラスターのスケール](https://docs.pingcap.com/ja/tidb/stable/scale-tidb-using-tiup)
 
-[クラスタデータのバックアップと復元](https://docs.pingcap.com/ja/tidb/stable/backup-and-restore-overview)
+[クラスターデータのバックアップと復元](https://docs.pingcap.com/ja/tidb/stable/backup-and-restore-overview)
 
 [毎日のチェック](https://docs.pingcap.com/ja/tidb/stable/daily-check)
 
@@ -127,7 +127,7 @@ summary: TiDBは、ハイブリッドトランザクションおよび分析処�
 
 <LearningPath label="リファレンス" icon="cloud-dev">
 
-[TiDB設定ファイルのパラメータ](https://docs.pingcap.com/ja/tidb/stable/tidb-configuration-file)
+[TiDB設定ファイルのパラメーター](https://docs.pingcap.com/ja/tidb/stable/tidb-configuration-file)
 
 [TiDB コマンドラインフラグ](https://docs.pingcap.com/ja/tidb/stable/command-line-flags-for-tidb-configuration)
 

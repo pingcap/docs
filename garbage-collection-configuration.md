@@ -1,6 +1,6 @@
 ---
 title: Garbage Collection Configuration
-summary: GC 設定パラメータについて学習します。
+summary: GC 設定パラメーターについて学習します。
 ---
 
 # ガベージコレクションの設定 {#garbage-collection-configuration}
@@ -38,11 +38,11 @@ tikv-ctl --host=ip:port modify-tikv-config -n gc.max-write-bytes-per-sec -v 10MB
 
 ## TiDB 5.0 の変更点 {#changes-in-tidb-5-0}
 
-TiDBの以前のリリースでは、ガベージコレクションは`mysql.tidb`システムテーブルを介して設定されていました。このテーブルへの変更は引き続きサポートされますが、提供されているシステム変数を使用することをお勧めします。これにより、設定の変更が確実に検証され、予期しない動作を防ぐことができます( [#20655](https://github.com/pingcap/tidb/issues/20655) )。
+TiDBの以前のリリースでは、ガベージコレクションは`mysql.tidb`システムテーブルを介して設定されていました。このテーブルへの変更は引き続きサポートされますが、提供されているシステム変数を使用することをお勧めします。これにより、設定の変更が確実に検証され、予期しない動作を防げます( [#20655](https://github.com/pingcap/tidb/issues/20655) )。
 
 `CENTRAL` GCモードはサポートされなくなりました。代わりに、TiDB 3.0以降のデフォルトである`DISTRIBUTED` GCモードが自動的に使用されます。このモードは、TiDBがガベージコレクションを開始するために各TiKVリージョンにリクエストを送信する必要がなくなるため、より効率的です。
 
-以前のリリースの変更点については、左側のメニューにある*TIDB バージョン セレクター*を使用して、このドキュメントの以前のバージョンを参照してください。
+以前のリリースの変更点については、左側のメニューにある*TIDB バージョンセレクター*を使用して、このドキュメントの以前のバージョンを参照してください。
 
 ## TiDB 6.1.0 の変更点 {#changes-in-tidb-6-1-0}
 
@@ -104,10 +104,10 @@ show config where type = 'tikv' and name like '%enable-compaction-filter%';
 
 > **Note:**
 >
-> コンパクションフィルター機構を使用すると、GCの進行が遅れる可能性があり、TiKVスキャンのパフォーマンスに影響する可能性があります。ワークロードに多数のコプロセッサリクエストが含まれており、[**TiKV-Details &gt; Coprocessor Detail**](/grafana-tikv-dashboard.md#coprocessor-detail)パネルで**Total Ops Details**の呼び出し回数が`next()`または`prev()`で、呼び出し回数が`processed_keys`回の3倍を大幅に超えている場合は、以下の対策を講じることができます。
+> コンパクションフィルター機構を使用すると、GCの進行が遅れる可能性があり、TiKVスキャンのパフォーマンスに影響する可能性があります。ワークロードに多数のコプロセッサーリクエストが含まれており、[**TiKV-Details &gt; Coprocessor Detail**](/grafana-tikv-dashboard.md#coprocessor-detail)パネルで**Total Ops Details**の呼び出し回数が`next()`または`prev()`で、呼び出し回数が`processed_keys`回の3倍を大幅に超えている場合は、以下の対策を講じることができます。
 >
 > - v7.1.3 より前の TiDB バージョンでは、GC を高速化するために Compaction Filter を無効にすることをお勧めします。
-> - TiDBバージョンv7.1.3からv7.5.6およびv7.6.0からv8.5.3では、TiDBは各リージョン[`region-compact-min-redundant-rows`](/tikv-configuration-file.md#region-compact-min-redundant-rows-new-in-v710)の冗長バージョンの数と冗長バージョン[`region-compact-redundant-rows-percent`](/tikv-configuration-file.md#region-compact-redundant-rows-percent-new-in-v710)の割合に基づいて自動的にコンパクションをトリガーし、コンパクションフィルタGCのパフォーマンスを向上させます。この場合、コンパクションフィルタを無効にするのではなく、これらの設定項目を調整してください。
+> - TiDBバージョンv7.1.3からv7.5.6およびv7.6.0からv8.5.3では、TiDBは各リージョン[`region-compact-min-redundant-rows`](/tikv-configuration-file.md#region-compact-min-redundant-rows-new-in-v710)の冗長バージョンの数と冗長バージョン[`region-compact-redundant-rows-percent`](/tikv-configuration-file.md#region-compact-redundant-rows-percent-new-in-v710)の割合に基づいて自動的にコンパクションをトリガーし、コンパクションフィルターGCのパフォーマンスを向上させます。この場合、コンパクションフィルターを無効にするのではなく、これらの設定項目を調整してください。
 > - v7.5.7およびv8.5.4以降、 [`region-compact-min-redundant-rows`](/tikv-configuration-file.md#region-compact-min-redundant-rows-new-in-v710)と[`region-compact-redundant-rows-percent`](/tikv-configuration-file.md#region-compact-redundant-rows-percent-new-in-v710)が非推奨となりました。TiDBは現在、 [`gc.auto-compaction.redundant-rows-threshold`](/tikv-configuration-file.md#redundant-rows-threshold-new-in-v757-and-v854)と[`gc.auto-compaction.redundant-rows-percent-threshold`](/tikv-configuration-file.md#redundant-rows-percent-threshold-new-in-v757-and-v854)に基づいて自動的にコンパクションをトリガーします。この場合、コンパクションフィルターを無効にするのではなく、これらの設定項目を調整してください。
 
 </CustomContent>

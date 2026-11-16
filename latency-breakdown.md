@@ -16,13 +16,13 @@ summary: TiDB のレイテンシーと、実際の使用例でレイテンシー
 
 これらの分析により、 TiDB SQLクエリの実行時間コストに関する詳細な情報が得られます。これは、TiDBのクリティカルパス診断のガイドです。さらに、[診断のユースケース](#diagnosis-use-cases)セクションでは、実際のユースケースにおけるレイテンシーの分析方法を紹介します。
 
-このドキュメントを読む前に、 [パフォーマンス分析とチューニング](/performance-tuning-methods.md)をお読みください。レイテンシーをメトリクスに分解する際、特定のスロークエリではなく、実行時間またはレイテンシーの平均値を計算することに注意してください。多くのメトリクスは、実行時間またはレイテンシーの分布を示すヒストグラムとして表示されます。平均レイテンシーを計算するには、以下の合計とカウントのカウンタを使用する必要があります。
+このドキュメントを読む前に、 [パフォーマンス分析とチューニング](/performance-tuning-methods.md)をお読みください。レイテンシーをメトリクスに分解する際、特定のスロークエリではなく、実行時間またはレイテンシーの平均値を計算することに注意してください。多くのメトリクスは、実行時間またはレイテンシーの分布を示すヒストグラムとして表示されます。平均レイテンシーを計算するには、以下の合計とカウントのカウンターを使用する必要があります。
 
 ```
 avg = ${metric_name}_sum / ${metric_name}_count
 ```
 
-このドキュメントで説明されているメトリックは、TiDB の Prometheus ダッシュボードから直接読み取ることができます。
+このドキュメントで説明されているメトリックは、TiDB の Prometheus ダッシュボードから直接読み取れます。
 
 ## 一般的なSQLレイヤー {#general-sql-layer}
 
@@ -73,7 +73,7 @@ e2e duration =
 
 ## クエリを読む {#read-queries}
 
-読み取りクエリにはプロセス フォームが 1つだけあります。
+読み取りクエリにはプロセスフォームが 1つだけあります。
 
 ### PointGet {#point-get}
 
@@ -104,7 +104,7 @@ tidb_session_execute_duration_seconds{type="general"} =
     read value duration
 ```
 
-`pd_client_cmd_handle_cmds_duration_seconds{type="wait"}`はPDから[TSO (タイムスタンプ オラクル)](/tso.md)を取得するのに要した時間を記録します。クラスター化プライマリインデックスを使用した自動コミットトランザクションモード、またはスナップショットからの読み取りの場合、値は0になります。
+`pd_client_cmd_handle_cmds_duration_seconds{type="wait"}`はPDから[TSO (タイムスタンプオラクル)](/tso.md)を取得するのに要した時間を記録します。クラスター化プライマリインデックスを使用した自動コミットトランザクションモード、またはスナップショットからの読み取りの場合、値は0になります。
 
 `read handle duration`と`read value duration`は次のように計算されます。
 
@@ -229,7 +229,7 @@ tidb_session_execute_duration_seconds{type="general"} =
     tidb_distsql_handle_query_duration_seconds{sql_type="general"} <= send request duration
 ```
 
-テーブルスキャンとインデックススキャンは同じように処理されます。`req_per_copr`は分散タスク数です。コプロセッサの実行とクライアントへのデータ応答は異なるスレッドで行われるため、待機時間は`tidb_distsql_handle_query_duration_seconds{sql_type="general"}`となり、 `send request duration`よりも短くなります。
+テーブルスキャンとインデックススキャンは同じように処理されます。`req_per_copr`は分散タスク数です。コプロセッサーの実行とクライアントへのデータ応答は異なるスレッドで行われるため、待機時間は`tidb_distsql_handle_query_duration_seconds{sql_type="general"}`となり、 `send request duration`よりも短くなります。
 
 `send request duration`と`req_per_copr`は次のように計算されます。
 
@@ -317,7 +317,7 @@ Diagram(
 
 - 実行フェーズ: 変更を実行し、TiDB のメモリに書き込みます。
 - ロックフェーズ: 実行結果に対して悲観的ロックを取得します。
-- コミットフェーズ: 2 フェーズコミット プロトコル (2PC) を使用してトランザクションをコミットします。
+- コミットフェーズ: 2 フェーズコミットプロトコル (2PC) を使用してトランザクションをコミットします。
 
 実行フェーズでは、TiDBはメモリ内のデータを操作します。主なレイテンシーは必要なデータの読み取りに起因します。更新クエリと削除クエリの場合、TiDBはまずTiKVからデータを読み取り、次にメモリ内の行を更新または削除します。
 
@@ -351,7 +351,7 @@ execution(non-clustered PK or UK) =
     2 * tidb_tikvclient_txn_cmd_duration_seconds{type="lock_keys"}
 ```
 
-ロック取得時のPointGetはキーをロックし、その値を返します。実行後のロックフェーズと比較すると、1ラウンドトリップを節約できます。ロック取得時のPointGetの実行時間は[ロック期間](#lock)として扱うことができます。
+ロック取得時のPointGetはキーをロックし、その値を返します。実行後のロックフェーズと比較すると、1ラウンドトリップを節約できます。ロック取得時のPointGetの実行時間は[ロック期間](#lock)として扱えます。
 
 ### ロック取得時のBatch PointGet {#lock-time-batch-point-get}
 
@@ -396,7 +396,7 @@ lock = tidb_tikvclient_txn_cmd_duration_seconds{type="lock_keys"} =
     round * tidb_tikvclient_request_seconds{type="PessimisticLock"}
 ```
 
-ロックは、フロー制御機構を備えた2PC構造を通じて取得されます。フロー制御は、同時オンザフライリクエスト数を`committer-concurrency`に制限します（デフォルト値は`128` ）。簡略化のため、フロー制御はリクエストレイテンシーの増幅（ `round` ）として扱うことができます。
+ロックは、フロー制御機構を備えた2PC構造を通じて取得されます。フロー制御は、同時オンザフライリクエスト数を`committer-concurrency`に制限します（デフォルト値は`128` ）。簡略化のため、フロー制御はリクエストレイテンシーの増幅（ `round` ）として扱えます。
 
 `tidb_tikvclient_request_seconds{type="PessimisticLock"}`は次のように計算されます。
 
@@ -437,7 +437,7 @@ tikv_grpc_msg_duration_seconds{type="kv_pessimistic_lock"} =
         sum(rate(tikv_grpc_msg_duration_seconds_count{type="kv_pessimistic_lock"}}))
     ```
 
-    メモリ内およびディスク上のロックされたキーの数は、メモリ内ロックカウンタによって計算できます。TiKVはロックを取得する前にキーの値を読み取り、読み取り時間はRocksDBパフォーマンスコンテキストによって計算できます。
+    メモリ内およびディスク上のロックされたキーの数は、メモリ内ロックカウンターによって計算できます。TiKVはロックを取得する前にキーの値を読み取り、読み取り時間はRocksDBパフォーマンスコンテキストによって計算できます。
 
     ```text
     lock read duration(from disk) =
@@ -522,7 +522,7 @@ Commit_time =
 
 コミット期間は、次の4つの指標に分類できます。
 
-- `Get_latest_ts_time`は、非同期コミットまたはシングル フェーズコミット (1PC) トランザクションで最新の TSO を取得するのにかかる時間を記録します。
+- `Get_latest_ts_time`は、非同期コミットまたはシングルフェーズコミット (1PC) トランザクションで最新の TSO を取得するのにかかる時間を記録します。
 - `Prewrite_time`は事前書き込みフェーズの期間を記録します。
 - `Get_commit_ts_time`は、一般的な 2PC トランザクションの期間を記録します。
 - `Commit_time`はコミットフェーズの所要時間を記録します。非同期コミットまたは1PCトランザクションにはこのフェーズはありません。
@@ -624,8 +624,8 @@ tidb_tikvclient_request_seconds{type="?"} =
     tidb_tikvclient_rpc_net_latency_seconds{store="?"}
 ```
 
-- `tidb_tikvclient_batch_wait_duration`はバッチ システムでの待機期間を記録します。
-- `tidb_tikvclient_batch_send_latency`はバッチ システムでのエンコード期間を記録します。
+- `tidb_tikvclient_batch_wait_duration`はバッチシステムでの待機期間を記録します。
+- `tidb_tikvclient_batch_send_latency`はバッチシステムでのエンコード期間を記録します。
 - `tikv_grpc_msg_duration_seconds{type="kv_?"}`は TiKV 処理期間です。
 - `tidb_tikvclient_rpc_net_latency_seconds`はネットワークレイテンシーを記録します。
 
@@ -657,7 +657,7 @@ tikv_storage_engine_async_request_duration_seconds{type="snapshot"} =
     get snapshot from rocksdb duration
 ```
 
-リーダー リースの有効期限が切れると、TiKV は RocksDB からスナップショットを取得する前に読み取りインデックス コマンドを提案します。`tikv_raftstore_request_wait_time_duration_secs`と`tikv_raftstore_commit_log_duration_seconds`は読み取りインデックス コマンドをコミットする期間です。
+リーダーリースの有効期限が切れると、TiKV は RocksDB からスナップショットを取得する前に読み取りインデックスコマンドを提案します。`tikv_raftstore_request_wait_time_duration_secs`と`tikv_raftstore_commit_log_duration_seconds`は読み取りインデックスコマンドをコミットする期間です。
 
 RocksDB からスナップショットを取得する操作は通常は高速なので、 `get snapshot from rocksdb duration`は無視されます。
 
@@ -825,7 +825,7 @@ raft db write duration(raft engine disabled) =
     tikv_raftstore_store_perf_context_time_duration_secs{type="write_memtable_time"}
 ```
 
-クォーラム ピアの最長期間は`commit log wait duration`であるため、 `raft db write duration`よりも大きくなる可能性があります。
+クォーラムピアの最長期間は`commit log wait duration`であるため、 `raft db write duration`よりも大きくなる可能性があります。
 
 v6.1.0 以降、TiKV はデフォルトのログストレージエンジンとして[Raft Engine](/glossary.md#raft-engine)を使用するようになり、ログの書き込みプロセスが変更されました。
 
@@ -865,7 +865,7 @@ tikv_raftstore_apply_log_duration_seconds =
 
 `SELECT`文がデータベース時間の大部分を占める場合、TiDB の読み取りクエリが遅いと想定できます。
 
-スロークエリの実行計画は、TiDB Dashboardの[Top SQL文](/dashboard/dashboard-overview.md#top-sql-statements)パネルに表示されます。遅い読み取りクエリの時間コストを調査するには、前述の説明に従って、[PointGet](#point-get)、[Batch PointGet](#batch-point-get)、およびいくつかの[シンプルなコプロセッサクエリ](#table-scan--index-scan)を分析できます。
+スロークエリの実行計画は、TiDB Dashboardの[Top SQL文](/dashboard/dashboard-overview.md#top-sql-statements)パネルに表示されます。遅い読み取りクエリの時間コストを調査するには、前述の説明に従って、[PointGet](#point-get)、[Batch PointGet](#batch-point-get)、およびいくつかの[シンプルなコプロセッサークエリ](#table-scan--index-scan)を分析できます。
 
 ### 書き込みクエリが遅い {#slow-write-queries}
 

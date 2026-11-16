@@ -7,7 +7,7 @@ summary: このドキュメントでは、TiDB でサポートされているコ
 
 このドキュメントでは、TiDB でサポートされているコメント構文について説明します。
 
-TiDB は次の3つのコメント スタイルをサポートしています。
+TiDB は次の3つのコメントスタイルをサポートしています。
 
 - 行をコメント化するには`#`を使用します。
 
@@ -90,7 +90,7 @@ TiDB は次の3つのコメント スタイルをサポートしています。
 
 ## MySQL互換のコメント構文 {#mysql-compatible-comment-syntax}
 
-MySQL と同じように、TiDB は C コメント スタイルのバリエーションをサポートしています。
+MySQL と同じように、TiDB は C スタイルのコメントを変形した構文をサポートしています。
 
 ```
 /*! Specific code */
@@ -110,7 +110,7 @@ MySQL と同じように、TiDB は C コメント スタイルのバリエー�
 SELECT /*! STRAIGHT_JOIN */ col1 FROM table1,table2 WHERE ...
 ```
 
-TiDB では、別のバージョンも使用できます。
+TiDB では、別の書き方も使用できます。
 
 ```sql
 SELECT STRAIGHT_JOIN col1 FROM table1,table2 WHERE ...
@@ -125,15 +125,15 @@ TiDB には独自のコメント構文 (つまり、TiDB 固有のコメント�
 - `/*T! Specific code */` : この構文は TiDB によってのみ解析および実行され、他のデータベースでは無視されます。
 - `/*T![feature_id] Specific code */` : この構文は、TiDBの異なるバージョン間の互換性を確保するために使用されます。TiDBは、現在のバージョンで`feature_id`の対応する機能を実装している場合にのみ、このコメント内のSQLフラグメントを解析できます。例えば、 `AUTO_RANDOM`機能はv3.1.1で導入されているため、このバージョンのTiDBは`/*T![auto_rand] auto_random */`を`auto_random`に解析できます。`AUTO_RANDOM`機能はv3.0.0では実装されていないため、上記のSQL文フラグメントは無視されます。**`/*T![`文字内にスペースを入れないでください**。
 
-## オプティマイザコメント構文 {#optimizer-comment-syntax}
+## オプティマイザーコメント構文 {#optimizer-comment-syntax}
 
-別の種類のコメントは、オプティマイザヒントとして特別に扱われます。
+別の種類のコメントは、オプティマイザーヒントとして特別に扱われます。
 
 ```sql
 SELECT /*+ hint */ FROM ...;
 ```
 
-TiDB がサポートするオプティマイザヒントの詳細については、 [オプティマイザヒント](/optimizer-hints.md)を参照してください。
+TiDB がサポートするオプティマイザーヒントの詳細については、 [オプティマイザーヒント](/optimizer-hints.md)を参照してください。
 
 > **Note:**
 >

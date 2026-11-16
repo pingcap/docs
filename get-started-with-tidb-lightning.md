@@ -1,11 +1,11 @@
 ---
 title: Get Started with TiDB Lightning
-summary: TiDB Lightningは、MySQLデータをTiDBクラスタにインポートするためのツールです。本番や開発環境ではなく、テストおよび試用目的でのみ使用することをお勧めします。このプロセスには、フルバックアップデータの準備、TiDBクラスタのデプロイ、 TiDB Lightningのインストール、 TiDB Lightningの起動、およびデータ整合性のチェックが含まれます。詳細な機能と使用方法については、 TiDB Lightningの概要を参照してください。
+summary: TiDB Lightningは、MySQLデータをTiDBクラスターにインポートするためのツールです。本番や開発環境ではなく、テストおよび試用目的でのみ使用することをお勧めします。このプロセスには、フルバックアップデータの準備、TiDBクラスターのデプロイ、 TiDB Lightningのインストール、 TiDB Lightningの起動、およびデータ整合性のチェックが含まれます。詳細な機能と使用方法については、 TiDB Lightningの概要を参照してください。
 ---
 
 # TiDB Lightningを使い始める {#get-started-with-tidb-lightning}
 
-このドキュメントでは、MySQLデータをTiDBクラスタにインポートすることでTiDB Lightningを使い始めるための簡単なガイドを提供します。
+このドキュメントでは、MySQLデータをTiDBクラスターにインポートすることでTiDB Lightningを使い始めるための簡単なガイドを提供します。
 
 > **Warning:**
 >
@@ -42,9 +42,9 @@ summary: TiDB Lightningは、MySQLデータをTiDBクラスタにインポート
 
     エクスポートされた完全なバックアップデータは、 `/data/my_database`ディレクトリに保存されます。
 
-## ステップ2：TiDBクラスタをデプロイ {#step-2-deploy-the-tidb-cluster}
+## ステップ2：TiDBクラスターをデプロイ {#step-2-deploy-the-tidb-cluster}
 
-データインポートを開始する前に、インポート用のTiDBクラスタをデプロイする必要があります。既にTiDBクラスタをお持ちの場合は、この手順をスキップできます。
+データインポートを開始する前に、インポート用のTiDBクラスターをデプロイする必要があります。既にTiDBクラスターをお持ちの場合は、この手順をスキップできます。
 
 TiDB クラスターのデプロイ手順については、 [TiDB Self-Managedのクイックスタート](/quick-start-with-tidb.md)を参照してください。
 
@@ -62,7 +62,7 @@ tiup install tidb-lightning:<version>
 >
 > このセクションのインポート方法は、テストと機能体験にのみ適しています。本番環境については、 [MySQLからTiDBへの大規模データセットの移行](/migrate-large-mysql-to-tidb.md)を参照してください。
 
-1. 設定ファイル`tidb-lightning.toml`を作成し、クラスタ情報に基づいて以下の設定を入力してください。
+1. 設定ファイル`tidb-lightning.toml`を作成し、クラスター情報に基づいて以下の設定を入力してください。
 
     ```toml
     [lightning]
@@ -110,7 +110,7 @@ tiup install tidb-lightning:<version>
 
 ## まとめ {#summary}
 
-このチュートリアルでは、TiDB Lightningとは何か、そしてTiDB Lightningクラスタを迅速にデプロイして完全なバックアップデータをTiDBクラスタにインポートする方法について簡単に説明します。
+このチュートリアルでは、TiDB Lightningとは何か、そしてTiDB Lightningクラスターを迅速にデプロイして完全なバックアップデータをTiDBクラスターにインポートする方法について簡単に説明します。
 
 TiDB Lightning の詳しい機能や使い方については、 [TiDB Lightningの概要](/tidb-lightning/tidb-lightning-overview.md)をご覧ください。
 

@@ -7,15 +7,15 @@ summary: Grafana Resource Control ダッシュボードに表示される主要�
 
 TiUPを使用してTiDBクラスターをデプロイする場合、監視システム（PrometheusとGrafana）も同時にデプロイされます。詳細については、 [監視フレームワークの概要](/tidb-monitoring-framework.md)を参照してください。
 
-Grafana ダッシュボードは、概要、PD、TiDB、TiKV、Node_exporter、ディスク パフォーマンス、パフォーマンス概要などの一連のサブ ダッシュボードに分かれています。
+Grafana ダッシュボードは、概要、PD、TiDB、TiKV、Node_exporter、ディスクパフォーマンス、パフォーマンス概要などの一連のサブダッシュボードに分かれています。
 
 クラスターで[リソース管理](/tidb-resource-control-ru-groups.md)機能を使用している場合は、リソース制御ダッシュボードからリソース消費状況の概要を取得できます。
 
-TiDBはフロー制御に[トークンバケットアルゴリズム](https://en.wikipedia.org/wiki/Token_bucket)を使用します[RFC: TiDB におけるグローバル リソース制御](https://github.com/pingcap/tidb/blob/release-8.5/docs/design/2022-11-25-global-resource-control.md#distributed-token-buckets)で説明したように、TiDBノードは複数のリソースグループを持つことができ、PD側のGAC（Global Admission Control）によってフロー制御されます。各TiDBノードのローカルトークンバケットは、PD側のGACと定期的に（デフォルトでは5秒）通信し、ローカルトークンを再設定します。TiDBでは、ローカルトークンバケットはリソースコントローラークライアントとして実装されています。
+TiDBはフロー制御に[トークンバケットアルゴリズム](https://en.wikipedia.org/wiki/Token_bucket)を使用します[RFC: TiDB におけるグローバルリソース制御](https://github.com/pingcap/tidb/blob/release-8.5/docs/design/2022-11-25-global-resource-control.md#distributed-token-buckets)で説明したように、TiDBノードは複数のリソースグループを持つことができ、PD側のGAC（Global Admission Control）によってフロー制御されます。各TiDBノードのローカルトークンバケットは、PD側のGACと定期的に（デフォルトでは5秒）通信し、ローカルトークンを再設定します。TiDBでは、ローカルトークンバケットはリソースコントローラークライアントとして実装されています。
 
-このドキュメントでは、リソース コントロール ダッシュボードに表示されるいくつかの主要な監視メトリックについて説明します。
+このドキュメントでは、リソースコントロールダッシュボードに表示されるいくつかの主要な監視メトリックについて説明します。
 
-## Metrics about Request Unit {#metrics-about-request-unit}
+## リクエストユニットに関する指標 {#metrics-about-request-unit}
 
 - RU: 各リソースグループの[リクエストユニット（RU）](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru)の消費情報。リアルタイムで計算されます。`total`は、すべてのリソースグループで消費されるリクエストユニットの合計です。各リソースグループのリクエストユニット消費量は、読み取り消費量（読み取りリクエストユニット）と書き込み消費量（書き込みリクエストユニット）の合計と等しくなります。
 - RU Per Query: 各SQL文が1秒あたりに消費するリクエストユニットの平均数。上記のRUメトリックを1秒あたりに実行されるSQL文の数で割ることで算出されます。
@@ -26,7 +26,7 @@ TiDBはフロー制御に[トークンバケットアルゴリズム](https://en
 - Available RU: 各リソースグループのRUトークンバケット内の利用可能なトークン数。この値が`0`の場合、このリソースグループは`RU_PER_SEC`の割合でトークンを消費し、レート制限状態にあるとみなされます。
 - Query Max Duration: リソースグループに関する最大クエリ期間。
 
-## Metrics about resources {#metrics-about-resources}
+## リソースに関する指標 {#metrics-about-resources}
 
 - KV Request Count: 各リソースグループに対するKVリクエストの数（1秒あたり）。リクエストは読み取りと書き込みの2種類に分類されます。`total`は 、すべてのリソースグループのKVリクエストの合計です。
 - KV Request Count Per Query: 各SQL文による1秒あたりの読み取りおよび書き込みKVリクエストの平均数。上記のKVリクエスト数メトリックを1秒あたりに実行されるSQL文の数で割ることで算出されます。
@@ -37,12 +37,12 @@ TiDBはフロー制御に[トークンバケットアルゴリズム](https://en
 - KV CPU Time: 各リソースグループで消費された KVレイヤーCPU 時間 (リアルタイムで計算)。`total`は 、すべてのリソースグループで消費された KVレイヤーCPU 時間の合計です。
 - SQL CPU Time: 各リソースグループで消費された SQLレイヤーのCPU 時間 (リアルタイムで計算)。`total`は 、すべてのリソースグループで消費された SQLレイヤーのCPU 時間の合計です。
 
-## Metrics about Resource Controller Client {#metrics-about-resource-controller-client}
+## リソースコントローラークライアントに関する指標 {#metrics-about-resource-controller-client}
 
-- Active Resource Groups: リアルタイムで計算された、各リソース コントローラー クライアントのリソースグループの数。
-- Total KV Request Count: 各リソース コントローラー クライアントの KV リクエストの数。リアルタイムでリソースグループごとに計算されます。`total`は 、すべてのリソース コントローラー クライアントの KV リクエストの合計です。
-- Failed KV Request Count: 各リソース コントローラー クライアントの失敗した KV リクエストの数。リアルタイムでリソースグループごとに計算されます。`total`は 、すべてのリソース コントローラー クライアントの失敗した KV リクエストの合計です。
-- Successful KV Request Count: 各リソース コントローラー クライアントの成功した KV リクエストの数。リアルタイムでリソースグループごとに計算されます。`total`は 、すべてのリソース コントローラー クライアントの成功した KV リクエストの合計です。
-- Successful KV Request Wait Duration (99/90): 各リソース コントローラー クライアントの成功した KV リクエストの待機時間 (異なるパーセンタイル)。リアルタイムでリソースグループごとに計算されます。
-- Token Request Handle Duration (999/99): 各リソース コントローラー クライアントのサーバー側からのトークンリクエストの待機時間 (異なるパーセンタイル)。リアルタイムでリソースグループごとに計算されます。
-- Token Request Count: 各リソース コントローラー クライアントに対するサーバー側からのトークンリクエストの数。リアルタイムでリソースグループごとに計算されます。`successful`と`failed`はすべてのリソース コントローラー クライアントの成功したトークンリクエストと失敗したトークンリクエストの合計です。
+- Active Resource Groups: リアルタイムで計算された、各リソースコントローラークライアントのリソースグループの数。
+- Total KV Request Count: 各リソースコントローラークライアントの KV リクエストの数。リアルタイムでリソースグループごとに計算されます。`total`は 、すべてのリソースコントローラークライアントの KV リクエストの合計です。
+- Failed KV Request Count: 各リソースコントローラークライアントの失敗した KV リクエストの数。リアルタイムでリソースグループごとに計算されます。`total`は 、すべてのリソースコントローラークライアントの失敗した KV リクエストの合計です。
+- Successful KV Request Count: 各リソースコントローラークライアントの成功した KV リクエストの数。リアルタイムでリソースグループごとに計算されます。`total`は 、すべてのリソースコントローラークライアントの成功した KV リクエストの合計です。
+- Successful KV Request Wait Duration (99/90): 各リソースコントローラークライアントの成功した KV リクエストの待機時間 (異なるパーセンタイル)。リアルタイムでリソースグループごとに計算されます。
+- Token Request Handle Duration (999/99): 各リソースコントローラークライアントのサーバー側からのトークンリクエストの待機時間 (異なるパーセンタイル)。リアルタイムでリソースグループごとに計算されます。
+- Token Request Count: 各リソースコントローラークライアントに対するサーバー側からのトークンリクエストの数。リアルタイムでリソースグループごとに計算されます。`successful`と`failed`はすべてのリソースコントローラークライアントの成功したトークンリクエストと失敗したトークンリクエストの合計です。

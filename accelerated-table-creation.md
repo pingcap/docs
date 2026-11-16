@@ -7,7 +7,7 @@ summary: TiDBでテーブルを作成する際のパフォーマンス最適化�
 
 TiDB v7.6.0 では、テーブル作成の高速化をサポートするシステム変数[`tidb_ddl_version`](https://docs-archive.pingcap.com/tidb/v7.6/system-variables/#tidb_ddl_version-new-in-v760)が導入され、一括テーブル作成の効率が向上しました。v8.0.0 以降、このシステム変数は[`tidb_enable_fast_create_table`](/system-variables.md#tidb_enable_fast_create_table-new-in-v800)に名称変更されました。
 
-[`tidb_enable_fast_create_table`](/system-variables.md#tidb_enable_fast_create_table-new-in-v800)で高速テーブル作成を有効にすると、同じスキーマを持つテーブル作成ステートメントが同じ TiDB ノードに同時にコミットされた場合、テーブル作成パフォーマンスを向上させるために、バッチ テーブル作成ステートメントにマージされます。したがって、テーブル作成パフォーマンスを向上させるには、同じ TiDB ノードに接続し、同じスキーマを持つテーブルを並行して作成し、並行処理数を適切に増やすようにしてください。
+[`tidb_enable_fast_create_table`](/system-variables.md#tidb_enable_fast_create_table-new-in-v800)で高速テーブル作成を有効にすると、同じスキーマを持つテーブル作成ステートメントが同じ TiDB ノードに同時にコミットされた場合、テーブル作成パフォーマンスを向上させるために、バッチテーブル作成ステートメントにマージされます。したがって、テーブル作成パフォーマンスを向上させるには、同じ TiDB ノードに接続し、同じスキーマを持つテーブルを並行して作成し、並行処理数を適切に増やすようにしてください。
 
 マージされたバッチテーブル作成ステートメントは同じトランザクション内で実行されるため、いずれかのステートメントが失敗すると、すべてが失敗します。
 

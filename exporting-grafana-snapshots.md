@@ -6,7 +6,7 @@ summary: Grafana ダッシュボードのスナップショットをエクスポ
 > **Warning:**
 >
 > - TiDB v6.0.0以降、PingCAPはMetricsToolのメンテナンスを終了しました。v6.1.0以降、PingCAPはMetricsToolドキュメントのメンテナンスを終了しました。
-> - 監視メトリック データをエクスポートするには、 [PingCAP Clinic診断サービス](/clinic/clinic-introduction.md)を使用して、監視メトリック、ログ、クラスター トポロジ、構成、パラメーターなど、TiDB クラスターの診断に必要な情報を取得します。
+> - 監視メトリックデータをエクスポートするには、 [PingCAP Clinic診断サービス](/clinic/clinic-introduction.md)を使用して、監視メトリック、ログ、クラスタートポロジー、構成、パラメーターなど、TiDB クラスターの診断に必要な情報を取得します。
 
 # Grafanaスナップショットのエクスポート {#export-grafana-snapshots}
 
@@ -14,13 +14,13 @@ summary: Grafana ダッシュボードのスナップショットをエクスポ
 >
 > 現在、MetricsToolはGrafana v6.xxでのみ使用できます。
 
-メトリクスデータはトラブルシューティングにおいて重要です。リモートアシスタンスを依頼した場合、サポートスタッフが問題を診断するためにGrafanaダッシュボードを確認する必要がある場合があります。[メトリクスツール](https://metricstool.pingcap.net/)は、Grafanaダッシュボードのスナップショットをローカルファイルとしてエクスポートし、可視化するのに役立ちます。これらのスナップショットを外部の担当者と共有することで、Grafanaサーバー上の他の機密情報へのアクセスを外部に漏らすことなく、グラフを正確に読み取ることができます。
+メトリクスデータはトラブルシューティングにおいて重要です。リモートアシスタンスを依頼した場合、サポートスタッフが問題を診断するためにGrafanaダッシュボードを確認する必要がある場合があります。[メトリクスツール](https://metricstool.pingcap.net/)は、Grafanaダッシュボードのスナップショットをローカルファイルとしてエクスポートし、可視化するのに役立ちます。これらのスナップショットを外部の担当者と共有することで、Grafanaサーバー上の他の機密情報へのアクセスを外部に漏らすことなく、グラフを正確に読み取れます。
 
 ## 使用法 {#usage}
 
 MetricsToolは[https://metricstool.pingcap.net/](https://metricstool.pingcap.net/)からアクセスできます。MetricsToolは3つのツールセットで構成されています。
 
-- **Export**: ブラウザの開発者ツールで実行されるユーザー スクリプト。これにより、任意の Grafana v6.xxサーバー上の現在のダッシュボードに表示されているすべてのパネルのスナップショットをダウンロードできます。
+- **Export**: ブラウザーの開発者ツールで実行されるユーザースクリプト。これにより、任意の Grafana v6.xxサーバー上の現在のダッシュボードに表示されているすべてのパネルのスナップショットをダウンロードできます。
 
     ![Screenshot of MetricsTool Exporter after running the user script](/media/metricstool-export.png)
 
@@ -42,7 +42,7 @@ MetricsToolによってエクスポートされるスナップショットファ
 
 ### Visualizer はアップロードされたスナップショットファイルを PingCAP のサーバーに保存しますか? {#will-the-visualizer-save-the-uploaded-snapshot-files-in-pingcap-s-servers}
 
-いいえ、Visualizerはスナップショットファイルをすべてブラウザ内で解析します。PingCAPには何も送信されません。機密性の高いソースから受信したスナップショットファイルは自由に閲覧でき、Visualizerを通じて第三者に漏洩する心配はありません。
+いいえ、Visualizerはスナップショットファイルをすべてブラウザー内で解析します。PingCAPには何も送信されません。機密性の高いソースから受信したスナップショットファイルは自由に閲覧でき、Visualizerを通じて第三者に漏洩する心配はありません。
 
 ### すべてのメトリックがロードされる前にスクリプトを実行すると問題が発生しますか? {#will-there-be-problems-to-execute-the-script-before-all-metrics-are-loaded}
 

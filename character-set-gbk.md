@@ -74,11 +74,11 @@ MySQLにおけるGBK文字セットのデフォルトの照合照合順序は`gb
 | MySQL  | `SELECT HEX('一a');` <br/> `e4b88061`<br/><br/>`INSERT INTO gbk_table values('一a');`<br/> `Incorrect Error`        | `SELECT HEX('一a');` <br/> `e4b88061`<br/><br/>`INSERT INTO gbk_table VALUES('一a');`<br/>`SELECT HEX(a) FROM gbk_table;`<br/> `e4b8` |
 | TiDB   | `SELECT HEX('一a');` <br/> `Incorrect Error`<br/><br/>`INSERT INTO gbk_table VALUES('一a');`<br/> `Incorrect Error` | `SELECT HEX('一a');` <br/> `e4b83f`<br/><br/>`INSERT INTO gbk_table VALUES('一a');`<br/>`SELECT HEX(a) FROM gbk_table;`<br/> `e4b83f` |
 
-上記の表では、 `utf8mb4`バイト セットの`SELECT HEX('a');`の結果は`e4b88061`なります。
+上記の表では、 `utf8mb4`バイトセットの`SELECT HEX('a');`の結果は`e4b88061`なります。
 
 ### その他のMySQL互換性 {#other-mysql-compatibility}
 
-- 現在、TiDB は、 `ALTER TABLE`文を使用して他の文字セット タイプを`gbk`に変換したり、 `gbk`を他の文字セット タイプに変換したりすることはサポートしていません。
+- 現在、TiDB は、 `ALTER TABLE`文を使用して他の文字セットタイプを`gbk`に変換したり、 `gbk`を他の文字セットタイプに変換したりすることはサポートしていません。
 
 <!---->
 
