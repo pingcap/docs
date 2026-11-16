@@ -12,7 +12,7 @@ PingCAP Clinicによって収集された診断データは、クラスターの
 クラウドにデプロイされる診断サービスである Clinic Server は、データのストレージの場所に応じて 2つの独立したサービスを提供します。
 
 - [国際ユーザー向けClinic Server](https://clinic.pingcap.com) ：収集したデータを国際ユーザー向けのClinic Serverにアップロードすると、データはPingCAPがAWS米国リージョンにデプロイするAmazon S3サービスに保存されます。PingCAPは厳格なデータアクセスポリシーを採用しており、承認されたテクニカルサポート担当者のみがデータにアクセスできます。
-- [中国本土のユーザー向けClinic Server](https://clinic.pingcap.com.cn) ：収集したデータを中国本土のユーザー向けClinic Serverにアップロードすると、データはPingCAPが中国（北京）リージョンにデプロイするAmazon S3サービスに保存されます。PingCAPは厳格なデータアクセスポリシーを採用しており、承認されたテクニカルサポート担当者のみがデータにアクセスできます。
+- [中国本土のユーザー向けClinic Server](https://clinic.pingcap.com.cn) ：収集したデータを中国本土のユーザー向けClinic Serverにアップロードすると、データはPingCAPが China (Beijing) リージョンにデプロイするAmazon S3サービスに保存されます。PingCAPは厳格なデータアクセスポリシーを採用しており、承認されたテクニカルサポート担当者のみがデータにアクセスできます。
 
 ## TiDB クラスター {#tidb-clusters}
 
