@@ -15,7 +15,7 @@ TiDB Cloud CLI コマンドを通じてファイルに直接アクセスする�
 
 - [TiDB Cloud CLI をインストールして設定する](/ai/ti/reference/ti-install-configure-update.md)。
 - TiDB Cloud API 認証情報を使用してプロファイルを設定します。
-- `jq` をインストールするか、別の JSON プロセッサを使用してコマンド出力を安全に取得します。
+- `jq` をインストールするか、別の JSON プロセッサーを使用してコマンド出力を安全に取得します。
 
 ## Filesystem を作成する {#create-a-filesystem}
 

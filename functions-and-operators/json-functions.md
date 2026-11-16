@@ -133,7 +133,7 @@ JSON関数を使用して[JSONデータ型](/data-type-json.md)のデータを�
 | `$.database.features`                 | すべてのデータベース機能               | `["distributed", "scalable", "relational", "cloud native"]`                                          |
 | `$.database.features[0]`              | 最初のデータベース機能。               | `"distributed"`                                                                                      |
 | `$.database.features[2]`              | 3番目のデータベース機能。              | `"relational"`                                                                                       |
-| `$.database.versions[0].type`         | 最初のデータベース バージョンのタイプ。       | `"lts"`                                                                                              |
+| `$.database.versions[0].type`         | 最初のデータベースバージョンのタイプ。       | `"lts"`                                                                                              |
 | `$.database.versions[*].release_date` | すべてのバージョンのリリース日。           | `["2024-05-24","2024-03-29"]`                                                                        |
 | `$.*.features`                        | 2つの機能の配列                   | `[["distributed", "scalable", "relational", "cloud native"], ["MySQL compatible", "Shard merging"]]` |
 | `$**.version`                         | パスワイルドカードを使用したすべてのバージョン    | `["v8.1.0","v8.0.0"]`                                                                                |

@@ -35,9 +35,9 @@ TiDB Cloudコンソールを使用して接続の詳細を取得し、Windsurf�
 
 6. コピーした値を使用して`mcp_config.json`ファイルを更新します。詳細については、 [Windsurf MCP ドキュメント](https://docs.windsurf.com/windsurf/cascade/mcp#adding-a-new-mcp-plugin)を参照してください。
 
-## 手動設定（任意のTiDBクラスタ） {#manual-configuration-any-tidb-cluster}
+## 手動設定（任意のTiDBクラスター） {#manual-configuration-any-tidb-cluster}
 
-手動で設定する場合は、 `mcp_config.json`ファイルを次のように更新し、プレースホルダーを接続パラメータに置き換えてください。
+手動で設定する場合は、 `mcp_config.json`ファイルを次のように更新し、プレースホルダーを接続パラメーターに置き換えてください。
 
 ```json
 {

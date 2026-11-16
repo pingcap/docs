@@ -89,7 +89,7 @@ summary: このページでは、TPC-H SF100 データセットのロード、Cl
 
 このベンチマークでは、Snowflake と {{{ .lake }}} の両方を同様の条件でテストしています。
 
-| パラメータ      | Snowflake                                                | {{{ .lake }}}                            |
+| パラメーター      | Snowflake                                                | {{{ .lake }}}                            |
 | -------------- | -------------------------------------------------------- | ----------------------------------------- |
 | Warehouse サイズ | Small                                                    | Small                                     |
 | 価格          | [$4/hour](https://www.snowflake.com/en/pricing-options/) | [$3.2/hour](https://www.pingcap.com/pricing/) |

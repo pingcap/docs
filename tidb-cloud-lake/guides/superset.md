@@ -37,7 +37,7 @@ USER superset
 docker build -t superset-lake .
 ```
 
-イメージからコンテナを起動します。
+イメージからコンテナーを起動します。
 
 ```shell
 docker run -d \

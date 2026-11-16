@@ -1,13 +1,13 @@
 ---
 title: TiDB Cloud Filesystem をコンソールから使い始める
-summary: TiDB Cloud コンソールでファイルシステムを作成し、コンピュータから接続して、テストファイルを書き込み、コンソールでそのファイルを表示します。
+summary: TiDB Cloud コンソールでファイルシステムを作成し、コンピューターから接続して、テストファイルを書き込み、コンソールでそのファイルを表示します。
 ---
 
 # TiDB Cloud Filesystem をコンソールから使い始める
 
 [TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-intro.md) は、アプリケーション、自動化、AI エージェント向けの永続的で共有可能なクラウドファイルシステムです。ファイルは、それを作成したマシンやプロセスに依存せず利用可能な状態が維持されるため、セッションや環境をまたいでワークスペースを再利用できます。
 
-このクイックスタートでは、[TiDB Cloud コンソール](https://tidbcloud.com/) を使用してファイルシステムを作成し、macOS または Linux コンピュータにマウントし、テストファイルを書き込み、コンソールでそのメタデータを確認する方法を説明します。
+このクイックスタートでは、[TiDB Cloud コンソール](https://tidbcloud.com/) を使用してファイルシステムを作成し、macOS または Linux コンピューターにマウントし、テストファイルを書き込み、コンソールでそのメタデータを確認する方法を説明します。
 
 > **Note:**
 >
@@ -70,7 +70,7 @@ cat ~/tidbcloudfs/hello.txt
 ti fs unmount-file-system --mount-path ~/tidbcloudfs
 ```
 
-Linux では、FUSE が正常にアンマウントされるまで書き込みをローカルにバッファすることがあります。アンマウントに失敗した場合は、マシンを離れたりローカルキャッシュを削除したりする前に [安全に終了する](/tidb-cloud-filesystem/filesystem-mount.md#finish-safely) に従ってください。
+Linux では、FUSE が正常にアンマウントされるまで書き込みをローカルにバッファーすることがあります。アンマウントに失敗した場合は、マシンを離れたりローカルキャッシュを削除したりする前に [安全に終了する](/tidb-cloud-filesystem/filesystem-mount.md#finish-safely) に従ってください。
 
 ## 次のステップ {#what-s-next}
 

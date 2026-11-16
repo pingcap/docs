@@ -19,7 +19,7 @@ TiDBは、Intel x86-64アーキテクチャの64ビット汎用ハードウェ�
 
 ### 10 ギガビットのネットワークカード 2枚の目的は何ですか? {#whats-the-purposes-of-2-network-cards-of-10-gigabit}
 
-分散型クラスタであるTiDBは、特にPDに対して高い時間要件を要求します。これは、PDが一意のタイムスタンプを配布する必要があるためです。PDサーバーの時刻が一致していないと、PDサーバーを切り替える際に待機時間が長くなります。2枚のネットワークカードの結合によりデータ転送の安定性が保証され、10ギガビットの速度により転送速度が保証されます。ギガビットネットワークカードはボトルネックになりやすいため、10ギガビットネットワークカードの使用を強くお勧めします。
+分散型クラスターであるTiDBは、特にPDに対して高い時間要件を要求します。これは、PDが一意のタイムスタンプを配布する必要があるためです。PDサーバーの時刻が一致していないと、PDサーバーを切り替える際に待機時間が長くなります。2枚のネットワークカードの結合によりデータ転送の安定性が保証され、10ギガビットの速度により転送速度が保証されます。ギガビットネットワークカードはボトルネックになりやすいため、10ギガビットネットワークカードの使用を強くお勧めします。
 
 ### SSD に RAID を使用しない場合は実現可能でしょうか? {#is-it-feasible-if-we-dont-use-raid-for-ssd}
 
@@ -28,18 +28,18 @@ TiDBは、Intel x86-64アーキテクチャの64ビット汎用ハードウェ�
 ### TiDB コンポーネントの推奨構成は何ですか? {#whats-the-recommended-configuration-of-tidb-components}
 
 - TiDB は CPU とメモリに対して高い要件があります。
-- PDはクラスタのメタデータを保存し、頻繁に読み取りおよび書き込みリクエストが発生します。そのため、高いI/Oディスクを必要とします。ディスクパフォーマンスが低いと、クラスタ全体のパフォーマンスに影響します。SSDディスクの使用をお勧めします。また、リージョン数が多いほど、CPUとメモリの要件が高くなります。
+- PDはクラスターのメタデータを保存し、頻繁に読み取りおよび書き込みリクエストが発生します。そのため、高いI/Oディスクを必要とします。ディスクパフォーマンスが低いと、クラスター全体のパフォーマンスに影響します。SSDディスクの使用をお勧めします。また、リージョン数が多いほど、CPUとメモリの要件が高くなります。
 - TiKVはCPU、メモリ、ディスクに対する要件が厳しく、SSDの使用が必須です。
 
 詳細は[ソフトウェアとハードウェアの推奨事項](/hardware-and-software-requirements.md)を参照してください。
 
 ## インストールとデプロイ {#installation-and-deployment}
 
-本番環境では、 [TiUP](/tiup/tiup-overview.md)を使用してTiDBクラスタをデプロイすることをお勧めします。[TiUPを使用して TiDBクラスタをデプロイ](/production-deployment-using-tiup.md)を参照してください。
+本番環境では、 [TiUP](/tiup/tiup-overview.md)を使用してTiDBクラスターをデプロイすることをお勧めします。[TiUPを使用して TiDBクラスターをデプロイ](/production-deployment-using-tiup.md)を参照してください。
 
 ### TiKV/PD 用に変更された`toml`構成が有効にならないのはなぜですか? {#why-the-modified-toml-configuration-for-tikvpd-does-not-take-effect}
 
-`toml`設定を有効にするには、TiKV/PD で`--config`パラメータを設定する必要があります。TiKV/PD はデフォルトでは設定を読み取りません。現在、この問題はバイナリを使用してデプロイする場合にのみ発生します。TiKV の場合は、設定を編集してサービスを再起動してください。PD の場合は、設定ファイルは PD の初回起動時にのみ読み込まれ、その後は pd-ctl を使用して設定を変更できます。詳細は[PD Controlユーザーガイド](/pd-control.md)を参照してください。
+`toml`設定を有効にするには、TiKV/PD で`--config`パラメーターを設定する必要があります。TiKV/PD はデフォルトでは設定を読み取りません。現在、この問題はバイナリを使用してデプロイする場合にのみ発生します。TiKV の場合は、設定を編集してサービスを再起動してください。PD の場合は、設定ファイルは PD の初回起動時にのみ読み込まれ、その後は pd-ctl を使用して設定を変更できます。詳細は[PD Controlユーザーガイド](/pd-control.md)を参照してください。
 
 ### TiDB モニタリングフレームワーク (Prometheus + Grafana) はスタンドアロンマシンにデプロイするべきでしょうか、それとも複数のマシンにデプロイするべきでしょうか? 推奨される CPU とメモリはどれくらいでしょうか? {#should-i-deploy-the-tidb-monitoring-framework-prometheus--grafana-on-a-standalone-machine-or-on-multiple-machines-what-is-the-recommended-cpu-and-memory}
 
@@ -59,15 +59,15 @@ TiDBは、Intel x86-64アーキテクチャの64ビット汎用ハードウェ�
 
 ### TiDB クラスターを初めてデプロイしたときに TiKV の`label`が構成されていなかった場合、 `label`構成を追加するにはどうすればよいですか? {#how-to-add-the-label-configuration-if-label-of-tikv-was-not-configured-when-i-deployed-the-tidb-cluster-for-the-first-time}
 
-TiDB `label`の設定は、クラスタのデプロイメントアーキテクチャに関連しています。これは重要であり、PDがグローバル管理とスケジューリングを実行するための基盤となります。以前のクラスタのデプロイメント時に`label`を設定していない場合は、PD管理ツール`pd-ctl`を使用して`location-labels`情報を手動で追加し、デプロイメント構造を調整する必要があります（例： `config set location-labels "zone,rack,host"` ）。（実際の`label`レベル名に基づいて設定する必要があります）。
+TiDB `label`の設定は、クラスターのデプロイメントアーキテクチャに関連しています。これは重要であり、PDがグローバル管理とスケジューリングを実行するための基盤となります。以前のクラスターのデプロイメント時に`label`を設定していない場合は、PD管理ツール`pd-ctl`を使用して`location-labels`情報を手動で追加し、デプロイメント構造を調整する必要があります（例： `config set location-labels "zone,rack,host"` ）。（実際の`label`レベル名に基づいて設定する必要があります）。
 
 `pd-ctl`の使い方については[PD Controlユーザーガイド](/pd-control.md)を参照してください。
 
-### ディスク テストの`dd`コマンドが`oflag=direct`オプションを使用するのはなぜですか? {#why-does-the-dd-command-for-the-disk-test-use-the-oflagdirect-option}
+### ディスクテストの`dd`コマンドが`oflag=direct`オプションを使用するのはなぜですか? {#why-does-the-dd-command-for-the-disk-test-use-the-oflagdirect-option}
 
-ダイレクト モードでは、書き込みリクエストを I/O コマンドにラップし、このコマンドをディスクに送信してファイルシステム キャッシュをバイパスし、ディスクの実際の I/O 読み取り/書き込みパフォーマンスを直接テストします。
+ダイレクトモードでは、書き込みリクエストを I/O コマンドにラップし、このコマンドをディスクに送信してファイルシステムキャッシュをバイパスし、ディスクの実際の I/O 読み取り/書き込みパフォーマンスを直接テストします。
 
-### `fio`コマンドを使用して TiKV インスタンスのディスク パフォーマンスをテストするにはどうすればよいですか? {#how-to-use-the-fio-command-to-test-the-disk-performance-of-the-tikv-instance}
+### `fio`コマンドを使用して TiKV インスタンスのディスクパフォーマンスをテストするにはどうすればよいですか? {#how-to-use-the-fio-command-to-test-the-disk-performance-of-the-tikv-instance}
 
 以下の例では`ioengine=psync` （同期I/O）を使用しているため、 `iodepth`は通常`1`に固定され、同時実行性は主に`numjobs`によって制御されます。ファイルシステムキャッシュをバイパスするには、 `direct=1`を設定することをお勧めします。
 
@@ -83,7 +83,7 @@ TiDB `label`の設定は、クラスタのデプロイメントアーキテク�
     ./fio -ioengine=psync -bs=32k -direct=1 -thread -rw=randrw -percentage_random=100,0 -time_based -size=10G -filename=fio_randread_write_test.txt -name='fio mixed randread and sequential write test' -iodepth=1 -runtime=60 -numjobs=4 -group_reporting --output-format=json --output=fio_randread_write_test.json
     ```
 
-## 現在 TiDB でサポートされているパブリッククラウド ベンダーは何ですか? {#what-public-cloud-vendors-are-currently-supported-by-tidb}
+## 現在 TiDB でサポートされているパブリッククラウドベンダーは何ですか? {#what-public-cloud-vendors-are-currently-supported-by-tidb}
 
 TiDB は[Google Cloud GKE](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-gcp-gke) 、 [AWS EKS](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-aws-eks) 、 [アリババクラウドACK](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-alibaba-cloud)でのデプロイメントをサポートします。
 

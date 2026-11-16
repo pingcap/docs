@@ -78,7 +78,7 @@ CLI は、生成したトークンをデフォルトではローカルに保存�
 
 ## スコープ付きトークンを生成して委任する {#generate-and-delegate-a-scoped-token}
 
-TiDB Cloud コンソールまたは TiDB Cloud CLI を使用してスコープ付きトークンを生成し、それを別のユーザー、アプリケーション、またはエージェントに渡すことができます。
+TiDB Cloud コンソールまたは TiDB Cloud CLI を使用してスコープ付きトークンを生成し、それを別のユーザー、アプリケーション、またはエージェントに渡せます。
 
 <SimpleTab groupId="console-cli">
 

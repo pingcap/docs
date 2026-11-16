@@ -40,7 +40,7 @@ streamlit run app.py
 
 ### Step 4. アプリを使用する {#step-4-use-the-app}
 
-ブラウザを開き、`http://localhost:8501` にアクセスします。
+ブラウザーを開き、`http://localhost:8501` にアクセスします。
 
 1. 左側のサイドバーに OpenAI APIキーを入力します
 2. 左側のサイドバーに TiDB 接続文字列を入力します。例: `mysql+pymysql://root@localhost:4000/test`

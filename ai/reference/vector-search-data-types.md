@@ -11,7 +11,7 @@ aliases: ['/ja/tidb/stable/vector-search-data-types/','/ja/tidbcloud/vector-sear
 > **Note:**
 >
 > - ベクトルデータ型はパブリックプレビューであり、予告なく変更される可能性があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告を行ってください。
-> - ベクトルデータ型は[TiDB Self-Managed](/overview.md) および [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier/?plan=starter#starter)で使用できます。TiDB Self-Managed の場合、TiDB バージョンは v8.4.0 以降である必要があります（v8.5.0 以降を推奨）。
+> - ベクトルデータ型は[TiDB Self-Managed](/overview.md) および [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier/?plan=starter#starter)で使用できます。TiDB Self-Managed の場合、TiDB バージョンは v8.4.0 以降である必要があります（v8.5.0 以降を推奨）。
 
 現在、次のベクトルデータ型が利用可能です。
 
@@ -26,7 +26,7 @@ aliases: ['/ja/tidb/stable/vector-search-data-types/','/ja/tidbcloud/vector-sear
 
 ## 構文 {#syntax}
 
-次の構文の文字列を使用してベクトル値を表すことができます。
+次の構文の文字列を使用してベクトル値を表せます。
 
 ```sql
 '[<float>, <float>, ...]'
@@ -65,7 +65,7 @@ ERROR 1105 (HY000): vector has 2 dimensions, does not fit VECTOR(3)
 
 ## 異なる次元のベクトルを保存する {#store-vectors-with-different-dimensions}
 
-`VECTOR`型の次元パラメータを省略すると、同じ列に異なる次元のベクトルを保存できます。
+`VECTOR`型の次元パラメーターを省略すると、同じ列に異なる次元のベクトルを保存できます。
 
 ```sql
 CREATE TABLE vector_table (

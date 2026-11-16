@@ -258,7 +258,7 @@ tidb_client = TiDBClient.connect(
 
 ### ステップ2：APIキーを設定する {#step-2-configure-the-api-key}
 
-プライベート モデルを使用している場合、またはより高いレート制限が必要な場合は、Hugging Face API トークンを構成できます。[Hugging Faceトークン設定](https://huggingface.co/settings/tokens)ページからトークンを作成できます。
+プライベートモデルを使用している場合、またはより高いレート制限が必要な場合は、Hugging Face API トークンを構成できます。[Hugging Faceトークン設定](https://huggingface.co/settings/tokens)ページからトークンを作成できます。
 
 TiDBクライアントを使用して、Hugging FaceモデルのAPIトークンを設定します。
 

@@ -16,4 +16,4 @@ TiCDC は、TiCDC クラスターのクエリと操作用に次の2つのバー�
 >
 > TiCDC OpenAPI v1は将来削除される予定です。TiCDC OpenAPI v2のご利用をお勧めします。
 
-リクエストパラメータ、レスポンス例、使用方法など、各 API の詳細については、 [TiCDC OpenAPI v1](/ticdc/ticdc-open-api.md)および[TiCDC OpenAPI v2](/ticdc/ticdc-open-api-v2.md)を参照してください。
+リクエストパラメーター、レスポンス例、使用方法など、各 API の詳細については、 [TiCDC OpenAPI v1](/ticdc/ticdc-open-api.md)および[TiCDC OpenAPI v2](/ticdc/ticdc-open-api-v2.md)を参照してください。

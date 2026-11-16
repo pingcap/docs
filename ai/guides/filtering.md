@@ -13,13 +13,13 @@ summary: アプリケーションでフィルタリングを使用する方法�
 
 [`pytidb`](https://github.com/pingcap/pytidb)は TiDB の公式 Python SDK で、開発者が AI アプリケーションを効率的に構築できるように設計されています。
 
-`pytidb`を使用する場合、 `table.query()` 、 `table.delete()` 、 `table.update()` 、および`table.search()`メソッドに**filters**パラメータを渡すことでフィルタリングを適用できます。
+`pytidb`を使用する場合、 `table.query()` 、 `table.delete()` 、 `table.update()` 、および`table.search()`メソッドに**filters**パラメーターを渡すことでフィルタリングを適用できます。
 
-**filters**パラメータは、 [辞書フィルター](#dictionary-filters)と[SQL文字列フィルター](#sql-string-filters)の2つの形式をサポートします。
+**filters**パラメーターは、 [辞書フィルター](#dictionary-filters)と[SQL文字列フィルター](#sql-string-filters)の2つの形式をサポートします。
 
 ## 辞書フィルター {#dictionary-filters}
 
-`pytidb`では、**filters**パラメータとして演算子を含む Python 辞書を使用して、フィルター条件を定義できます。
+`pytidb`では、**filters**パラメーターとして演算子を含む Python 辞書を使用して、フィルター条件を定義できます。
 
 **filters**の辞書構造は次のとおりです。
 
@@ -86,7 +86,7 @@ results = (
 }
 ```
 
-`$eq`演算子は省略可能です。次のフィルタは前のフィルタと同等です。
+`$eq`演算子は省略可能です。次のフィルターは前のフィルターと同等です。
 
 ```python
 {

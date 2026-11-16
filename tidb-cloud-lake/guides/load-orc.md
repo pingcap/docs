@@ -1,13 +1,13 @@
 ---
 title: ORC を TiDB Cloud Lake にロードする
-summary: ORC (Optimized Row Columnar) は、データ分析で一般的に使用されるカラムナストレージ形式です。
+summary: ORC (Optimized Row Columnar) は、データ分析で一般的に使用されるカラムナーストレージ形式です。
 ---
 
 # ORC を TiDB Cloud Lake にロードする
 
 ## ORC とは何ですか？ {#what-is-orc}
 
-ORC (Optimized Row Columnar) は、データ分析で一般的に使用されるカラムナストレージ形式です。
+ORC (Optimized Row Columnar) は、データ分析で一般的に使用されるカラムナーストレージ形式です。
 
 ## ORC ファイルのロード {#loading-orc-file}
 

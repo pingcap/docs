@@ -5,7 +5,7 @@ summary: このドキュメントでは、TiDB でサポートされているシ
 
 # シーケンス関数 {#sequence-functions}
 
-TiDB のシーケンス関数は、 [`CREATE SEQUENCE`](/sql-statements/sql-statement-create-sequence.md)ステートメントを使用して作成されたシーケンス オブジェクトの値を返すか設定するために使用されます。
+TiDB のシーケンス関数は、 [`CREATE SEQUENCE`](/sql-statements/sql-statement-create-sequence.md)ステートメントを使用して作成されたシーケンスオブジェクトの値を返すか設定するために使用されます。
 
 | 関数名                                 | 説明                                   |
 | :---------------------------------- | :----------------------------------- |

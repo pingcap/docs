@@ -19,12 +19,12 @@ aliases: ['/ja/tidb/stable/vector-search-integrate-with-django-orm/','/ja/tidb/d
 
 - [Python 3.8以降](https://www.python.org/downloads/)がインストールされていること。
 - [Git](https://git-scm.com/downloads)がインストールされていること。
-- TiDBクラスタ。
+- TiDBクラスター。
 
-**TiDBクラスタをお持ちでない場合は、以下の手順で作成できます。**
+**TiDBクラスターをお持ちでない場合は、以下の手順で作成できます。**
 
 - (推奨) [{{{ .starter }}}インスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
-- [ローカルテスト用のTiDB Self-Managedクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスタをデプロイ](/production-deployment-using-tiup.md)
+- [ローカルテスト用のTiDB Self-Managedクラスターをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスターをデプロイ](/production-deployment-using-tiup.md)
 
 ## サンプルアプリを実行します {#run-the-sample-app}
 
@@ -99,16 +99,16 @@ mysqlclientのインストールで問題が発生した場合は、mysqlclient�
     >
     > プログラムがWindows Subsystem for Linux（WSL）上で実行されている場合は、対応するLinuxディストリビューションに切り替えてください。
 
-4. 接続ダイアログから接続パラメータをコピーしてください。
+4. 接続ダイアログから接続パラメーターをコピーしてください。
 
     > **Tip:**
     >
     > まだパスワードを設定していない場合は、 **Generate Password**をクリックしてランダムなパスワードを生成してください。
 
-5. Python プロジェクトのルートディレクトリに`.env`ファイルを作成し、接続パラメータを対応する環境変数に貼り付けます。
+5. Python プロジェクトのルートディレクトリに`.env`ファイルを作成し、接続パラメーターを対応する環境変数に貼り付けます。
 
-    - `TIDB_HOST` : TiDBクラスタのホスト。
-    - `TIDB_PORT` : TiDB クラスタのポート。
+    - `TIDB_HOST` : TiDBクラスターのホスト。
+    - `TIDB_PORT` : TiDB クラスターのポート。
     - `TIDB_USERNAME` : TiDBに接続するためのユーザー名。
     - `TIDB_PASSWORD` : TiDBに接続するためのパスワード。
     - `TIDB_DATABASE` : 接続するデータベース名。
@@ -128,7 +128,7 @@ mysqlclientのインストールで問題が発生した場合は、mysqlclient�
 </div>
 <div label="TiDB Self-Managed" value="tidb">
 
-TiDB Self-Managedクラスタの場合、Pythonプロジェクトのルートディレクトリに`.env`ファイルを作成します。次の内容を`.env`ファイルにコピーし、TiDBクラスタの接続パラメータに応じて環境変数の値を変更します。
+TiDB Self-Managedクラスターの場合、Pythonプロジェクトのルートディレクトリに`.env`ファイルを作成します。次の内容を`.env`ファイルにコピーし、TiDBクラスターの接続パラメーターに応じて環境変数の値を変更します。
 
 ```dotenv
 TIDB_HOST=127.0.0.1
@@ -140,12 +140,12 @@ TIDB_DATABASE=test
 
 TiDBをローカルマシンで実行している場合、 `TIDB_HOST`はデフォルトで`127.0.0.1`になります。初期の`TIDB_PASSWORD`は空なので、クラスターを初めて起動する場合は、このフィールドを省略できます。
 
-各パラメータの説明は以下のとおりです。
+各パラメーターの説明は以下のとおりです。
 
-- `TIDB_HOST` : TiDB Self-Managed クラスタのホスト。
-- `TIDB_PORT` : TiDB Self-Managed クラスタのポート。
-- `TIDB_USERNAME` : TiDB Self-Managed クラスタに接続するためのユーザー名。
-- `TIDB_PASSWORD` : TiDB Self-Managed クラスタに接続するためのパスワード。
+- `TIDB_HOST` : TiDB Self-Managed クラスターのホスト。
+- `TIDB_PORT` : TiDB Self-Managed クラスターのポート。
+- `TIDB_USERNAME` : TiDB Self-Managed クラスターに接続するためのユーザー名。
+- `TIDB_PASSWORD` : TiDB Self-Managed クラスターに接続するためのパスワード。
 - `TIDB_DATABASE` : 接続するデータベースの名前。
 
 </div>
@@ -166,7 +166,7 @@ Django開発サーバーを実行します。
 python manage.py runserver
 ```
 
-ブラウザを開いて`http://127.0.0.1:8000`にアクセスし、デモアプリケーションをお試しください。利用可能なAPIパスは以下のとおりです。
+ブラウザーを開いて`http://127.0.0.1:8000`にアクセスし、デモアプリケーションをお試しください。利用可能なAPIパスは以下のとおりです。
 
 | APIパス                                   | 説明                        |
 | --------------------------------------- | ------------------------- |

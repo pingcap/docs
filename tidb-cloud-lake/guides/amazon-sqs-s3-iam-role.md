@@ -390,7 +390,7 @@ aws sqs receive-message \
 
 AWS 側の設定が完了したら、{{{ .lake }}} でデータソースを作成する際に、以下の情報を入力します。
 
-| パラメータ | 説明 |
+| パラメーター | 説明 |
 |-----------|-------------|
 | `role_arn` | {{{ .lake }}} が引き受けることを許可された、AWS アカウント内の IAM Role ARN |
 | `external_id` | {{{ .lake }}} コンソールの Organization ID |

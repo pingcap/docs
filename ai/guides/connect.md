@@ -17,18 +17,18 @@ Pythonクライアントをインストールするには、次のコマンド�
 pip install pytidb
 ```
 
-## 接続パラメータを使用して接続する {#connect-with-connection-parameters}
+## 接続パラメーターを使用して接続する {#connect-with-connection-parameters}
 
 TiDBの導入タイプに基づいて手順を選択してください。
 
 <SimpleTab>
 <div label="TiDB Cloud Starter">
 
-[TiDB Cloud Starterインスタンスを作成](https://tidbcloud.com/free-trial/)し、次のように Web コンソールから接続パラメータを取得できます。
+[TiDB Cloud Starterインスタンスを作成](https://tidbcloud.com/free-trial/)し、次のように Web コンソールから接続パラメーターを取得できます。
 
-1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、次に、対象のTiDB Cloud Starterインスタンスの名前をクリックして、概要ページに移動します。
-2. 右上隅の**Connect**をクリックします。接続ダイアログが表示され、接続パラメータが表示されます。
-3. 接続パラメータをコードまたは環境変数にコピーしてください。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、次に、対象の{{{ .starter }}}インスタンスの名前をクリックして、概要ページに移動します。
+2. 右上隅の**Connect**をクリックします。接続ダイアログが表示され、接続パラメーターが表示されます。
+3. 接続パラメーターをコードまたは環境変数にコピーしてください。
 
 サンプルコード：
 
@@ -69,12 +69,12 @@ db = TiDBClient.connect(
 
 > **Note:**
 >
-> テスト用にTiDBクラスタをデプロイするために`tiup playground`を使用する場合、デフォルトのホストは`127.0.0.1`で、デフォルトのパスワードは空です。
+> テスト用にTiDBクラスターをデプロイするために`tiup playground`を使用する場合、デフォルトのホストは`127.0.0.1`で、デフォルトのパスワードは空です。
 
 </div>
 </SimpleTab>
 
-接続が完了すると、 `db`オブジェクトを使用して、テーブルの操作、データのクエリなどを行うことができます。
+接続が完了すると、 `db`オブジェクトを使用して、テーブルの操作、データのクエリなどを行えます。
 
 ## 接続文字列を使用して接続する {#connect-with-connection-string}
 
@@ -83,11 +83,11 @@ db = TiDBClient.connect(
 <SimpleTab>
 <div label="TiDB Cloud Starter">
 
-[TiDB Cloud Starterインスタンスを作成](https://tidbcloud.com/free-trial/)し、次のように Web コンソールから接続パラメータを取得できます。
+[TiDB Cloud Starterインスタンスを作成](https://tidbcloud.com/free-trial/)し、次のように Web コンソールから接続パラメーターを取得できます。
 
-1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、次に、対象のTiDB Cloud Starterインスタンスの名前をクリックして、概要ページに移動します。
-2. 右上隅の**Connect**をクリックします。接続ダイアログが表示され、接続パラメータが一覧表示されます。
-3. 接続パラメータをコピーし、以下の形式で接続文字列を作成してください。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、次に、対象の{{{ .starter }}}インスタンスの名前をクリックして、概要ページに移動します。
+2. 右上隅の**Connect**をクリックします。接続ダイアログが表示され、接続パラメーターが一覧表示されます。
+3. 接続パラメーターをコピーし、以下の形式で接続文字列を作成してください。
 
 ```python title="main.py"
 from pytidb import TiDBClient
@@ -116,7 +116,7 @@ db = TiDBClient.connect(
 
 > **Note:**
 >
-> `tiup playground`を使用してテスト用のTiDBクラスタをデプロイする場合、接続文字列は次のとおりです。
+> `tiup playground`を使用してテスト用のTiDBクラスターをデプロイする場合、接続文字列は次のとおりです。
 >
 > ```
 > mysql+pymysql://root:@127.0.0.1:4000/test
@@ -127,7 +127,7 @@ db = TiDBClient.connect(
 
 ## SQLAlchemy DBエンジンを使用して接続する {#connect-with-sqlalchemy-db-engine}
 
-アプリケーションに既に SQLAlchemy データベース エンジンが搭載されている場合は、 `db_engine`パラメータを使用してそれを再利用できます。
+アプリケーションに既に SQLAlchemy データベースエンジンが搭載されている場合は、 `db_engine`パラメーターを使用してそれを再利用できます。
 
 ```python title="main.py"
 from pytidb import TiDBClient
@@ -137,7 +137,7 @@ db = TiDBClient(db_engine=db_engine)
 
 ## 次のステップ {#next-steps}
 
-TiDBデータベースに接続後、以下のガイドを参照してデータの操作方法を学ぶことができます。
+TiDBデータベースに接続後、以下のガイドを参照してデータの操作方法を学べます。
 
 - [テーブルの操作](/ai/guides/tables.md): TiDB でテーブルを定義および管理する方法を学びます。
 - [ベクトル検索](/ai/guides/vector-search.md): ベクトル埋め込みを使用してセマンティック検索を実行します。

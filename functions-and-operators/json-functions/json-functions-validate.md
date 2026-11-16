@@ -15,7 +15,7 @@ TiDB は、MySQL 8.0 で利用可能な[JSONスキーマ検証関数](https://de
 
 `JSON_SCHEMA_VALID(schema, json_doc)`関数は、JSON ドキュメントをスキーマに対して検証し、データの整合性と一貫性を確保します。
 
-これは[チェック](/constraints.md#check)制約と組み合わせて使用することで、テーブルが変更されたときにスキーマの自動検証を行うことができます。
+これは[CHECK](/constraints.md#check)制約と組み合わせて使用することで、テーブルが変更されたときにスキーマの自動検証を行えます。
 
 この関数は[JSONスキーマ仕様](https://json-schema.org/specification)に準拠しています。
 
@@ -48,8 +48,8 @@ TiDB は、MySQL 8.0 で利用可能な[JSONスキーマ検証関数](https://de
 | `properties`           | `object`             | オブジェクトのプロパティに適用するスキーマ                         |
 | `patternProperties`    | `object`             | プロパティ名のパターンマッチングに基づいて特定のプロパティに適用するスキーマ        |
 | `additionalProperties` | `object`             | 追加のプロパティが許可されているかどうかに関わらず、 `true` / `false`   |
-| `minProperties`        | `object`             | オブジェクトが持つことができるプロパティの最小数をテストします。              |
-| `maxProperties`        | `object`             | オブジェクトが持つことができるプロパティの最大数をテストします。              |
+| `minProperties`        | `object`             | オブジェクトが持てるプロパティの最小数をテストします。              |
+| `maxProperties`        | `object`             | オブジェクトが持てるプロパティの最大数をテストします。              |
 | `required`             | `object`             | 指定されたプロパティ名がオブジェクト内に存在するかどうかをテストします。          |
 
 例：

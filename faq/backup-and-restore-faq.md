@@ -24,7 +24,7 @@ TiKVは[動的構成](/tikv-control.md#modify-the-tikv-configuration-dynamically
 
 さらに、自動チューニングにより、バックアップタスクで使用されるデフォルトのスレッド数が削減されます。詳細については、 `backup.num-threads` ](/tikv-configuration-file.md#num-threads-1) を参照してください。そのため、Grafana ダッシュボードでは、バックアップタスクで使用される速度、CPU 使用率、および I/O リソース使用率が、v5.4.0 より前のバージョンよりも低くなります。v5.4.0 より前では、デフォルト値`backup.num-threads`は`CPU * 0.75`でした。つまり、バックアップタスクで使用されるスレッド数は、論理 CPU コアの 75% を占めていました。その最大値は`32`でした。v5.4.0 以降、この設定項目のデフォルト値は`CPU * 0.5` 、最大値は`8`です。
 
-オフライン クラスターでバックアップタスクを実行する場合、バックアップを高速化するために、 `tikv-ctl`を使用して`backup.num-threads`の値をより大きな数値に変更できます。
+オフラインクラスターでバックアップタスクを実行する場合、バックアップを高速化するために、 `tikv-ctl`を使用して`backup.num-threads`の値をより大きな数値に変更できます。
 
 ## PITRの問題 {#pitr-issues}
 
@@ -32,7 +32,7 @@ TiKVは[動的構成](/tikv-control.md#modify-the-tikv-configuration-dynamically
 
 ユースケースの観点から見ると、PITRは通常、クラスターが完全にサービス停止状態になった場合、またはデータが破損して他のソリューションでは復旧できない場合に、クラスターのデータを特定の時点に復元するために使用されます。PITRを使用するには、データ復旧用の新しいクラスターが必要です。クラスターのフラッシュバック機能は、ユーザーの誤操作やその他の要因によって発生するデータエラーのシナリオ向けに特別に設計されており、データエラーが発生する前の最新のタイムスタンプにクラスターのデータをインプレースで復元できます。
 
-ほとんどの場合、人為的なミスによるデータエラーの場合、PITRよりもフラッシュバックの方が優れたリカバリソリューションとなります。これは、RPO（目標復旧時点）がはるかに短く（ほぼゼロ）、RTO（目標復旧時間）も短いためです。しかし、フラッシュバックを実行できないためにクラスタが完全に利用できなくなった場合、PITRがクラスタをリカバリする唯一のソリューションとなります。そのため、PITRは、RPO（最大5分）とRTOがフラッシュバックよりも長くなりますが、データベースのディザスタリカバリ戦略を策定する際には、常に必須のソリューションとなります。
+ほとんどの場合、人為的なミスによるデータエラーの場合、PITRよりもフラッシュバックの方が優れたリカバリソリューションとなります。これは、RPO（目標復旧時点）がはるかに短く（ほぼゼロ）、RTO（目標復旧時間）も短いためです。しかし、フラッシュバックを実行できないためにクラスターが完全に利用できなくなった場合、PITRがクラスターをリカバリする唯一のソリューションとなります。そのため、PITRは、RPO（最大5分）とRTOがフラッシュバックよりも長くなりますが、データベースのディザスターリカバリ戦略を策定する際には、常に必須のソリューションとなります。
 
 ### 上流データベースがTiDB Lightningを使用して物理インポートモードでデータをインポートすると、ログバックアップ機能が利用できなくなります。なぜですか？ {#when-the-upstream-database-imports-data-using-tidb-lightning-in-the-physical-import-mode-the-log-backup-feature-becomes-unavailable-why}
 
@@ -119,7 +119,7 @@ failed to refresh meta for database with schemaID=124, dbName=pitr_test: [ddl:82
 
 ### br コマンドラインツールを使用して復元されたデータが TiCDC のアップストリームクラスターに複製できないのはなぜですか? {#why-does-data-restored-using-br-command-line-tool-cannot-be-replicated-to-the-upstream-cluster-of-ticdc}
 
-- **BRを使用して復元されたデータは、ダウンストリームに複製できません**。これは、 BR がSST ファイルを直接インポートしますが、ダウンストリームクラスタがアップストリームからこれらのファイルを取得できないためです。
+- **BRを使用して復元されたデータは、ダウンストリームに複製できません**。これは、 BR がSST ファイルを直接インポートしますが、ダウンストリームクラスターがアップストリームからこれらのファイルを取得できないためです。
 
 - v4.0.3より前のバージョンでは、復元中に生成されたDDLジョブによって、TiCDCで予期しないDDL実行が発生する可能性があります。そのため、TiCDCの上流クラスターで復元を実行する必要がある場合は、brコマンドラインツールを使用して復元したすべてのテーブルをTiCDCのブロックリストに追加してください。
 
@@ -127,9 +127,9 @@ failed to refresh meta for database with schemaID=124, dbName=pitr_test: [ddl:82
 
 ### 復元中に`new_collation_enabled`不一致が報告されるのはなぜですか? {#why-is-new_collation_enabled-mismatch-reported-during-restore}
 
-TiDB v6.0.0以降、デフォルト値の[`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)は`false`から`true`に変更されました。BRは上流クラスタの`mysql.tidb`テーブルにある`new_collation_enabled`設定をバックアップし、この設定の値が上流クラスタと下流クラスタ間で一致しているかどうかを確認します。値が一致している場合、 BRは上流クラスタにバックアップされたデータを下流クラスタに安全に復元します。値が一致していない場合、 BRはデータの復元を実行せず、エラーを報告します。
+TiDB v6.0.0以降、デフォルト値の[`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)は`false`から`true`に変更されました。BRは上流クラスターの`mysql.tidb`テーブルにある`new_collation_enabled`設定をバックアップし、この設定の値が上流クラスターと下流クラスター間で一致しているかどうかを確認します。値が一致している場合、 BRは上流クラスターにバックアップされたデータを下流クラスターに安全に復元します。値が一致していない場合、 BRはデータの復元を実行せず、エラーを報告します。
 
-以前のバージョンのTiDBクラスタでデータをバックアップし、そのデータをv6.0.0以降のバージョンのTiDBクラスタにリストアするとします。この場合、上流クラスタと下流クラスタの間で値`new_collations_enabled_on_first_bootstrap`が一致しているかどうかを手動で確認する必要があります。
+v6.0.0より前のバージョンのTiDBクラスターでデータをバックアップし、そのデータをv6.0.0以降のバージョンのTiDBクラスターにリストアするとします。この場合、上流クラスターと下流クラスターの間で値`new_collations_enabled_on_first_bootstrap`が一致しているかどうかを手動で確認する必要があります。
 
 - 値が一貫している場合は、復元コマンドに`--check-requirements=false`を追加して、この構成チェックをスキップできます。
 - 値が矛盾している場合に強制的に復元を実行すると、 BR はデータ検証エラーを報告します。
@@ -142,23 +142,23 @@ v6.0.0より前では、 BRは[配置ルール](/placement-rules-in-sql.md)サ�
 
 ### `Io(Os...)`エラーを処理するにはどうすればよいですか? {#what-should-i-do-to-handle-the-ioos-error}
 
-これらの問題のほとんどは、TiKV がディスクにデータを書き込むときに発生するシステム コール エラーです (例: `Io(Os {code: 13, kind: PermissionDenied...})`または`Io(Os {code: 2, kind: NotFound...})` )。
+これらの問題のほとんどは、TiKV がディスクにデータを書き込むときに発生するシステムコールエラーです (例: `Io(Os {code: 13, kind: PermissionDenied...})`または`Io(Os {code: 2, kind: NotFound...})` )。
 
-このような問題に対処するには、まずバックアップディレクトリのマウント方法とファイルシステムを確認し、別のフォルダまたは別のハードディスクにデータをバックアップしてみます。
+このような問題に対処するには、まずバックアップディレクトリのマウント方法とファイルシステムを確認し、別のフォルダーまたは別のハードディスクにデータをバックアップしてみます。
 
-たとえば、 `samba`で構築されたネットワーク ディスクにデータをバックアップするときに、 `Code: 22(invalid argument)`エラーが発生する可能性があります。
+たとえば、 `samba`で構築されたネットワークディスクにデータをバックアップするときに、 `Code: 22(invalid argument)`エラーが発生する可能性があります。
 
 ### 復元中に発生した`rpc error: code = Unavailable desc =...`エラーを処理するにはどうすればよいですか? {#what-should-i-do-to-handle-the-rpc-error-code--unavailable-desc--error-occurred-in-restore}
 
 このエラーは、復元するクラスターの容量が不足している場合に発生する可能性があります。このクラスターの監視メトリックまたはTiKVログを確認することで、原因をさらに確認できます。
 
-この問題に対処するには、クラスター リソースをスケールアウトし、復元の値`tikv-max-restore-concurrency`を減らして、オプション`ratelimit`を有効にしてみてください。
+この問題に対処するには、クラスターリソースをスケールアウトし、復元の値`tikv-max-restore-concurrency`を減らして、オプション`ratelimit`を有効にしてみてください。
 
 ### `the entry too large, the max entry size is 6291456, the size of data is 7690800`というエラーメッセージが表示されて復元が失敗した場合は、どうすればよいですか？ {#what-should-i-do-if-the-restore-fails-with-the-error-message-the-entry-too-large-the-max-entry-size-is-6291456-the-size-of-data-is-7690800}
 
-`--ddl-batch-size`を`128`またはそれより小さい値に設定することで、バッチで作成されるテーブルの数を減らすことができます。
+`--ddl-batch-size`を`128`またはそれより小さい値に設定することで、バッチで作成されるテーブルの数を減らせます。
 
-BRを使用して[`--ddl-batch-size`](/br/br-batch-create-table.md#use-batch-create-table)の値が`1`より大きいバックアップデータを復元する場合、TiDB はテーブル作成の DDL ジョブを TiKV が管理する DDL ジョブキューに書き込みます。このとき、ジョブ メッセージの最大値がデフォルトで`6 MB`であるため (この値を変更することは**推奨されません**。詳細については、 [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v4010-and-v500)と[`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size)を参照してください)、TiDB が一度に送信するすべてのテーブルスキーマの合計サイズは 6 MB を超えてはなりません。したがって、 `--ddl-batch-size`を過度に大きな値に設定すると、TiDB が一度にバッチで送信するテーブルのスキーマ サイズが指定値を超え、 BR が`entry too large, the max entry size is 6291456, the size of data is 7690800`エラーを報告します。
+BRを使用して[`--ddl-batch-size`](/br/br-batch-create-table.md#use-batch-create-table)の値が`1`より大きいバックアップデータを復元する場合、TiDB はテーブル作成の DDL ジョブを TiKV が管理する DDL ジョブキューに書き込みます。このとき、ジョブメッセージの最大値がデフォルトで`6 MB`であるため (この値を変更することは**推奨されません**。詳細については、 [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v4010-and-v500)と[`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size)を参照してください)、TiDB が一度に送信するすべてのテーブルスキーマの合計サイズは 6 MB を超えてはなりません。したがって、 `--ddl-batch-size`を過度に大きな値に設定すると、TiDB が一度にバッチで送信するテーブルのスキーマサイズが指定値を超え、 BR が`entry too large, the max entry size is 6291456, the size of data is 7690800`エラーを報告します。
 
 ### `local`ストレージを使用する場合、バックアップされたファイルはどこに保存されますか? {#where-are-the-backed-up-files-stored-when-i-use-local-storage}
 
@@ -186,7 +186,7 @@ TiKVがバックアップディレクトリにアクセスできるかどうか�
 
 したがって、データを復元する前に、次の手順に従って権限を確認することをお勧めします。
 
-1. プロセス クエリ用の Linux コマンドを実行します。
+1. プロセスクエリ用の Linux コマンドを実行します。
 
     ```bash
     ps aux | grep tikv-server
@@ -275,7 +275,7 @@ br restore full -f 'mysql.usertable' -s $external_storage_url --with-sys-table
 
 ### 復元中に`cannot find rewrite rule`というエラーに対処するにはどうすればよいですか? {#how-to-deal-with-the-error-of-cannot-find-rewrite-rule-during-restoration}
 
-復元クラスタ内に、バックアップデータ内の他のテーブルと同じ名前を持ちながら構造が不整合なテーブルがないか確認してください。多くの場合、この問題は復元クラスタ内のテーブルでインデックスが欠落していることが原因です。推奨される方法は、まず復元クラスタ内のそのようなテーブルを削除してから、復元を再試行することです。
+復元クラスター内に、バックアップデータ内の他のテーブルと同じ名前を持ちながら構造が不整合なテーブルがないか確認してください。多くの場合、この問題は復元クラスター内のテーブルでインデックスが欠落していることが原因です。推奨される方法は、まず復元クラスター内のそのようなテーブルを削除してから、復元を再試行することです。
 
 ## バックアップと復元について知っておきたいこと {#other-things-you-may-want-to-know-about-backup-and-restore}
 
@@ -301,8 +301,8 @@ v4.0.9では、 BRはデフォルトで統計情報をバックアップしま�
 
 次の理由により、単一のクラスターのデータを復元するために複数の復元タスクを同時に開始することは**強く推奨されません**。
 
-- BR がデータを復元すると、PD のグローバル設定の一部が変更されます。そのため、複数の復元タスクを同時に実行すると、これらの設定が誤って上書きされ、クラスタの状態が異常になる可能性があります。
-- BR はデータの復元に大量のクラスター リソースを消費するため、実際には復元タスクを並列で実行しても復元速度は限られた範囲でしか向上しません。
+- BR がデータを復元すると、PD のグローバル設定の一部が変更されます。そのため、複数の復元タスクを同時に実行すると、これらの設定が誤って上書きされ、クラスターの状態が異常になる可能性があります。
+- BR はデータの復元に大量のクラスターリソースを消費するため、実際には復元タスクを並列で実行しても復元速度は限られた範囲でしか向上しません。
 - データの復元のために複数の復元タスクを並行して実行するテストは行われていないため、成功することは保証されません。
 
 ### BR はテーブルの`SHARD_ROW_ID_BITS`と`PRE_SPLIT_REGIONS`情報をバックアップしますか? 復元されたテーブルには複数のリージョンがありますか? {#does-br-back-up-the-shard_row_id_bits-and-pre_split_regions-information-of-a-table-does-the-restored-table-have-multiple-regions}

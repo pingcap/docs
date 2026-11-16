@@ -81,7 +81,7 @@ ADD ROW ACCESS POLICY rap_region_dept ON (office_region, department);
 
 ### ベクトル / RAG ドキュメント可視性 {#vector--rag-document-visibility}
 
-共有ナレッジベーステーブルとベクトル検索を組み合わせた例です。可視性を一度設定すれば、検索 SQL にドキュメント ID フィルタを含める必要はありません。[ベクトル検索](/tidb-cloud-lake/guides/vector-search-guide.md) を参照してください。
+共有ナレッジベーステーブルとベクトル検索を組み合わせた例です。可視性を一度設定すれば、検索 SQL にドキュメント ID フィルターを含める必要はありません。[ベクトル検索](/tidb-cloud-lake/guides/vector-search-guide.md) を参照してください。
 
 | ロール | 参照可能な内容 |
 |------|------|

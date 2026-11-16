@@ -47,7 +47,7 @@ class Item(TableModel):
 table = client.create_table(schema=Item, if_exists="overwrite")
 ```
 
-`create_table`メソッドは次のパラメータを受け入れます。
+`create_table`メソッドは次のパラメーターを受け入れます。
 
 - `schema` : テーブル構造を定義する`TableModel`のクラス。
 - `if_exists` : テーブル作成モード。
@@ -276,7 +276,7 @@ SELECT * FROM items LIMIT 10;
 <SimpleTab groupId="language">
 <div label="Python" value="python">
 
-`filters`パラメータを`table.query()`メソッドに渡します。
+`filters`パラメーターを`table.query()`メソッドに渡します。
 
 ```python
 result = table.query(
@@ -470,9 +470,9 @@ SHOW TABLES;
     pip install -r reqs.txt
     ```
 
-3. [TiDB Cloud コンソール](https://tidbcloud.com/) で [**My TiDB**](https://tidbcloud.com/tidbs) ページに移動し、{{{ .starter }}} インスタンスの名前をクリックしてから、右上隅の **Connect** をクリックして接続パラメータを取得します。
+3. [TiDB Cloud コンソール](https://tidbcloud.com/) で [**My TiDB**](https://tidbcloud.com/tidbs) ページに移動し、{{{ .starter }}} インスタンスの名前をクリックしてから、右上隅の **Connect** をクリックして接続パラメーターを取得します。
 
-4. `.env` ファイルを作成し、接続パラメータを設定します。
+4. `.env` ファイルを作成し、接続パラメーターを設定します。
 
     ```bash
     cat > .env <<'EOF'

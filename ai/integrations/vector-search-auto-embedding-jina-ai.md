@@ -225,7 +225,7 @@ LIMIT 2;
 
 ## オプション {#options}
 
-すべての[Jina AIのオプション](https://jina.ai/embeddings/)は`EMBED_TEXT()`関数の`additional_json_options`パラメータを通じてサポートされます。
+すべての[Jina AIのオプション](https://jina.ai/embeddings/)は`EMBED_TEXT()`関数の`additional_json_options`パラメーターを通じてサポートされます。
 
 **例：パフォーマンス向上のため「下流タスク」を指定してください**
 

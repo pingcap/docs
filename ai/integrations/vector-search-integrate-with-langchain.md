@@ -24,12 +24,12 @@ aliases: ['/ja/tidb/stable/vector-search-integrate-with-langchain/','/ja/tidb/de
 - [Python 3.8以降](https://www.python.org/downloads/)がインストールされていること。
 - [Jupyter Notebook](https://jupyter.org/install)がインストールされていること。
 - [Git](https://git-scm.com/downloads)がインストールされていること。
-- TiDBクラスタ。
+- TiDBクラスター。
 
-**TiDBクラスタをお持ちでない場合は、以下の手順で作成できます。**
+**TiDBクラスターをお持ちでない場合は、以下の手順で作成できます。**
 
 - (推奨) [{{{ .starter }}}インスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
-- [ローカルテスト用のTiDB Self-Managedクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスタをデプロイ](/production-deployment-using-tiup.md)
+- [ローカルテスト用のTiDB Self-Managedクラスターをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスターをデプロイ](/production-deployment-using-tiup.md)
 
 ## さあ始めましょう {#get-started}
 
@@ -123,21 +123,21 @@ tidb_connection_string = getpass.getpass("TiDB Connection String:")
 os.environ["OPENAI_API_KEY"] = getpass.getpass("OpenAI API Key:")
 ```
 
-macOSを例にとると、クラスタ接続文字列は次のようになります。
+macOSを例にとると、クラスター接続文字列は次のようになります。
 
 ```dotenv
 TIDB_DATABASE_URL="mysql+pymysql://<USERNAME>:<PASSWORD>@<HOST>:<PORT>/<DATABASE_NAME>"
 # For example: TIDB_DATABASE_URL="mysql+pymysql://root@127.0.0.1:4000/test"
 ```
 
-TiDBクラスタに合わせて接続パラメータの値を変更する必要があります。ローカルマシンでTiDBを実行している場合、 `<HOST>`はデフォルトで`127.0.0.1`になります。初期値の`<PASSWORD>`は空なので、クラスタを初めて起動する場合はこのフィールドを省略できます。
+TiDBクラスターに合わせて接続パラメーターの値を変更する必要があります。ローカルマシンでTiDBを実行している場合、 `<HOST>`はデフォルトで`127.0.0.1`になります。初期値の`<PASSWORD>`は空なので、クラスターを初めて起動する場合はこのフィールドを省略できます。
 
-各パラメータの説明は以下のとおりです。
+各パラメーターの説明は以下のとおりです。
 
 - `<USERNAME>` : TiDBに接続するためのユーザー名。
 - `<PASSWORD>` : TiDBに接続するためのパスワード。
-- `<HOST>` : TiDBクラスタのホスト。
-- `<PORT>` : TiDB クラスタのポート。
+- `<HOST>` : TiDBクラスターのホスト。
+- `<PORT>` : TiDB クラスターのポート。
 - `<DATABASE>` : 接続するデータベースの名前。
 
 </div>
@@ -168,7 +168,7 @@ docs = text_splitter.split_documents(documents)
 
 ### ステップ5．ドキュメントベクトルを埋め込んで保存する {#step-5-embed-and-store-document-vectors}
 
-TiDB ベクトル ストアは、ベクトル間の類似性を測定するために、コサイン距離 ( `cosine` ) とユークリッド距離 ( `l2` ) の両方をサポートしています。デフォルトの戦略はコサイン距離です。
+TiDB ベクトルストアは、ベクトル間の類似性を測定するために、コサイン距離 ( `cosine` ) とユークリッド距離 ( `l2` ) の両方をサポートしています。デフォルトの戦略はコサイン距離です。
 
 以下のコードは、ベクトル検索に最適化されたTiDBに`embedded_documents`という名前のテーブルを作成します。
 
@@ -354,7 +354,7 @@ TiDBベクトルストア内の各ドキュメントには、JSONオブジェク
 }
 ```
 
-### メタデータフィルタ構文 {#metadata-filter-syntax}
+### メタデータフィルター構文 {#metadata-filter-syntax}
 
 利用可能なフィルターは以下のとおりです。
 
@@ -378,7 +378,7 @@ TiDBベクトルストア内の各ドキュメントには、JSONオブジェク
 }
 ```
 
-このドキュメントに一致するメタデータフィルタは以下のとおりです。
+このドキュメントに一致するメタデータフィルターは以下のとおりです。
 
 ```json
 { "page": 12 }
@@ -411,7 +411,7 @@ TiDBベクトルストア内の各ドキュメントには、JSONオブジェク
 }
 ```
 
-メタデータフィルタでは、TiDB は各キーと値のペアを個別のフィルタ句として扱い、これらの句を`AND`論理演算子を使用して結合します。
+メタデータフィルターでは、TiDB は各キーと値のペアを個別のフィルター句として扱い、これらの句を`AND`論理演算子を使用して結合します。
 
 ### 例 {#example}
 

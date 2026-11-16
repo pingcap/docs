@@ -44,7 +44,7 @@ Kafka Consumer タスクを作成する前に、以下を確認してくださ�
 ### ステップ 1: 基本情報 {#step-1-basic-info}
 
 1. **Data** > **Data Integration** に移動し、**Create Task** をクリックします。
-2. Kafka データソースを選択し、基本パラメータを設定します。
+2. Kafka データソースを選択し、基本パラメーターを設定します。
 
     | フィールド | 必須 | 説明 |
     |-------|----------|-------------|
@@ -72,7 +72,7 @@ Kafka Consumer タスクを作成する前に、以下を確認してくださ�
 
 **Result Viewing** ステップで、Kafka Consumer タスクを実行する **Warehouse** を選択します。
 
-タスクの開始後、Kafka メッセージを読み取り、それらを内部オブジェクトストレージ（テナント Stage）に保存します。ページには SQL の例が表示されます。`LIST @kafka_consumer/<task_name>/` を使用して生成されたオブジェクトを確認し、stage クエリを使用してメッセージ内容を読み取ることができます。
+タスクの開始後、Kafka メッセージを読み取り、それらを内部オブジェクトストレージ（テナント Stage）に保存します。ページには SQL の例が表示されます。`LIST @kafka_consumer/<task_name>/` を使用して生成されたオブジェクトを確認し、stage クエリを使用してメッセージ内容を読み取れます。
 
 ```sql
 -- List stage objects:
