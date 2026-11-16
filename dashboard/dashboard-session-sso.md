@@ -23,7 +23,7 @@ TiDB Dashboardは、 [OIDC](https://openid.net/connect/)ベースのシングル
 
 4. フォームの**OIDC Client ID**と**OIDC Discovery URL**フィールドに入力します。
 
-    通常、SSO サービス プロバイダーから次の2つのフィールドを取得できます。
+    通常、SSO サービスプロバイダーから次の2つのフィールドを取得できます。
 
     - OIDC Client ID は、OIDC Token Issuer とも呼ばれます。
     - OIDC Discovery URL は、OIDC Token Audience とも呼ばれます。
@@ -84,7 +84,7 @@ SQLユーザーのパスワードを変更すると、SSOサインインは失�
 
 TiDB Dashboardに SSO が設定されると、次の手順に従って SSO 経由でサインインできます。
 
-1. TiDB Dashboardのサインイン ページで、 **Sign in via Company Account**をクリックします。
+1. TiDB Dashboardのサインインページで、 **Sign in via Company Account**をクリックします。
 
     ![Sample Step](/media/dashboard/dashboard-session-sso-signin.png)
 
@@ -122,7 +122,7 @@ TiDB Dashboardに SSO が設定されると、次の手順に従って SSO 経�
     http://DASHBOARD_IP:PORT/dashboard/?sso_callback=1
     ```
 
-    `DASHBOARD_IP:PORT`を、ブラウザで TiDB Dashboardにアクセスするために使用する実際のドメイン (または IP アドレス) とポートに置き換えます。
+    `DASHBOARD_IP:PORT`を、ブラウザーで TiDB Dashboardにアクセスするために使用する実際のドメイン (または IP アドレス) とポートに置き換えます。
 
 8. **Sign-out redirect URIs**を次のように入力します。
 
@@ -174,15 +174,15 @@ Oktaと同様に、 [Auth0](https://auth0.com/)もOIDC SSOアイデンティテ�
 
     ![Settings](/media/dashboard/dashboard-session-sso-auth0-settings-1.png)
 
-5. **許可されたコールバック URL**を次のように入力します。
+5. **Allowed Callback URLs**を次のように入力します。
 
     ```
     http://DASHBOARD_IP:PORT/dashboard/?sso_callback=1
     ```
 
-    `DASHBOARD_IP:PORT`を、ブラウザで TiDB Dashboardにアクセスするために使用する実際のドメイン (または IP アドレス) とポートに置き換えます。
+    `DASHBOARD_IP:PORT`を、ブラウザーで TiDB Dashboardにアクセスするために使用する実際のドメイン (または IP アドレス) とポートに置き換えます。
 
-6. **許可されたログアウト URL**を次のように入力します。
+6. **Allowed Logout URLs**を次のように入力します。
 
     ```
     http://DASHBOARD_IP:PORT/dashboard/
@@ -218,13 +218,13 @@ Oktaと同様に、 [Auth0](https://auth0.com/)もOIDC SSOアイデンティテ�
 
 4. **Name**と**Display name**を入力します (例: **TiDB Dashboard**)。
 
-5. 次のように**リダイレクト URL**を追加します。
+5. 次のように**Redirect URLs**を追加します。
 
     ```
     http://DASHBOARD_IP:PORT/dashboard/?sso_callback=1
     ```
 
-    `DASHBOARD_IP:PORT`を、ブラウザで TiDB Dashboardにアクセスするために使用する実際のドメイン (または IP アドレス) とポートに置き換えます。
+    `DASHBOARD_IP:PORT`を、ブラウザーで TiDB Dashboardにアクセスするために使用する実際のドメイン (または IP アドレス) とポートに置き換えます。
 
     ![Settings](/media/dashboard/dashboard-session-sso-casdoor-settings-2.png)
 

@@ -11,7 +11,7 @@ summary: このドキュメントは、TiDB Dashboardに関するよくある質
 
 ### ファイアウォールまたはリバースプロキシが設定されている場合、TiDB Dashboard以外の内部アドレスにリダイレクトされます {#when-the-firewall-or-reverse-proxy-is-configured-i-am-redirected-to-an-internal-address-other-than-tidb-dashboard}
 
-クラスター内に複数のPlacement Driver（PD）インスタンスがデプロイされている場合、TiDB Dashboardサービスを実際に実行するPDインスタンスは1つだけです。このPDインスタンスではなく他のPDインスタンスにアクセスすると、ブラウザは別のアドレスにリダイレクトします。TiDB Dashboardへのアクセス用にファイアウォールまたはリバースプロキシが適切に設定されていない場合、ダッシュボードにアクセスした際に、ファイアウォールまたはリバースプロキシによって保護されている内部アドレスにリダイレクトされる可能性があります。
+クラスター内に複数のPlacement Driver（PD）インスタンスがデプロイされている場合、TiDB Dashboardサービスを実際に実行するPDインスタンスは1つだけです。このPDインスタンスではなく他のPDインスタンスにアクセスすると、ブラウザーは別のアドレスにリダイレクトします。TiDB Dashboardへのアクセス用にファイアウォールまたはリバースプロキシが適切に設定されていない場合、ダッシュボードにアクセスした際に、ファイアウォールまたはリバースプロキシによって保護されている内部アドレスにリダイレクトされる可能性があります。
 
 - 複数の PD インスタンスを使用した TiDB Dashboardの動作原理については、 [TiDB Dashboardのマルチ PD インスタンスのデプロイ](/dashboard/dashboard-ops-deploy.md)を参照してください。
 - リバースプロキシを正しく構成する方法については、 [リバースプロキシ経由でTiDB Dashboardを使用する](/dashboard/dashboard-ops-reverse-proxy.md)を参照してください。
@@ -33,7 +33,7 @@ Prometheusインスタンスをデプロイしてもこの問題が引き続き�
 
 デプロイメントツールがTiUPの場合は、以下の手順に従って問題を解決してください。その他のデプロイメントツールについては、それぞれのツールのドキュメントを参照してください。
 
-1. TiUPおよびTiUPクラスタのアップグレード:
+1. TiUPおよびTiUPクラスターのアップグレード:
 
     ```bash
     tiup update --self
@@ -48,7 +48,7 @@ Prometheusインスタンスをデプロイしてもこの問題が引き続き�
     tiup cluster start CLUSTER_NAME
     ```
 
-    クラスタが起動している場合でも、このコマンドを実行してください。このコマンドはクラスタ内の通常のアプリケーションには影響を与えませんが、メトリクスアドレスを更新してレポートするため、TiDB Dashboardに監視メトリクスが正常に表示されるようになります。
+    クラスターが起動している場合でも、このコマンドを実行してください。このコマンドはクラスター内の通常のアプリケーションには影響を与えませんが、メトリクスアドレスを更新してレポートするため、TiDB Dashboardに監視メトリクスが正常に表示されるようになります。
 
 ### **Slow Queries**ページに`invalid connection`エラーが表示されます {#an-invalid-connection-error-is-shown-on-the-slow-queries-page}
 
@@ -56,7 +56,7 @@ Prometheusインスタンスをデプロイしてもこの問題が引き続き�
 
 ### `required component NgMonitoring is not started`というエラーが表示されます {#a-required-component-ngmonitoring-is-not-started-error-is-shown}
 
-NgMonitoringは、TiDB v5.4.0以降のバージョンに組み込まれた高度な監視コンポーネントで、**継続的プロファイリング**や**Top SQL**などのTiDB Dashboard機能をサポートします。TiUPの新しいバージョンを使用してクラスターをデプロイまたはアップグレードすると、NgMonitoringが自動的にデプロイされます。TiDB Operatorを使用してデプロイされたクラスターの場合は、 [継続的プロファイリングを有効にする](https://docs.pingcap.com/tidb-in-kubernetes/v1.6/access-dashboard/#enable-continuous-profiling)を参照してNgMonitoringを手動でデプロイできます。
+NgMonitoringは、TiDB v5.4.0以降のバージョンに組み込まれた高度な監視コンポーネントで、**Continuous Profiling**や**Top SQL**などのTiDB Dashboard機能をサポートします。TiUPの新しいバージョンを使用してクラスターをデプロイまたはアップグレードすると、NgMonitoringが自動的にデプロイされます。TiDB Operatorを使用してデプロイされたクラスターの場合は、 [継続的プロファイリングを有効にする](https://docs.pingcap.com/tidb-in-kubernetes/v1.6/access-dashboard/#enable-continuous-profiling)を参照してNgMonitoringを手動でデプロイできます。
 
 Web ページに`required component NgMonitoring is not started`が表示されている場合は、次のようにしてデプロイメントの問題をトラブルシューティングできます。
 
@@ -92,7 +92,7 @@ Web ページに`required component NgMonitoring is not started`が表示され�
     tiup cluster edit-config ${cluster-name}
     ```
 
-2. `monitoring_servers`の下に`ng_port:12020`パラメータを追加します。
+2. `monitoring_servers`の下に`ng_port:12020`パラメーターを追加します。
 
     ```
     monitoring_servers:
@@ -118,7 +118,7 @@ TiDB Operatorのドキュメントの[継続的プロファイリングを有効
 
 <details><summary>TiUP Playgroundを使用したクラスターの開始</summary>
 
-クラスタを起動すると、 TiUP Playground (&gt;= v1.8.0) は NgMonitoringコンポーネントを自動的に起動します。TiUP Playgroundを最新バージョンに更新するには、次のコマンドを実行します。
+クラスターを起動すると、 TiUP Playground (&gt;= v1.8.0) は NgMonitoringコンポーネントを自動的に起動します。TiUP Playgroundを最新バージョンに更新するには、次のコマンドを実行します。
 
 ```shell
 tiup update --self
@@ -129,15 +129,15 @@ tiup update playground
 
 ### **Slow Queries**ページに`unknown field`エラーが表示されます {#an-unknown-field-error-is-shown-on-the-slow-queries-page}
 
-クラスターのアップグレード後に**Slow Queries**ページにエラー`unknown field`が表示される場合、そのエラーはTiDB Dashboardのサーバーフィールド（更新される可能性があります）とユーザー設定フィールド（ブラウザキャッシュ内）の差異に起因する互換性の問題に関連しています。この問題は修正されています。クラスターのバージョンがv5.0.3またはv4.0.14より前の場合は、以下の手順に従ってブラウザキャッシュをクリアしてください。
+クラスターのアップグレード後に**Slow Queries**ページにエラー`unknown field`が表示される場合、そのエラーはTiDB Dashboardのサーバーフィールド（更新される可能性があります）とユーザー設定フィールド（ブラウザーキャッシュ内）の差異に起因する互換性の問題に関連しています。この問題は修正されています。クラスターのバージョンがv5.0.3またはv4.0.14より前の場合は、以下の手順に従ってブラウザーキャッシュをクリアしてください。
 
 1. TiDB Dashboard ページを開きます。
 
-2. 開発者ツールを開きます。ブラウザによって開発者ツールの開き方が異なります。**メニューバー**をクリックした後、以下の手順に従ってください。
+2. 開発者ツールを開きます。ブラウザーによって開発者ツールの開き方が異なります。**Menu Bar**をクリックした後、以下の手順に従ってください。
 
-    - Firefox:**メニュー** > **Web 開発** > **ツールの切り替え**、または**ツール** > **Web 開発** > **ツールの切り替え**。
-    - Chrome:**その他のツール** > **開発者ツール**。
-    - Safari:**開発** > **Webインスペクタを表示**。**開発**メニューが表示されない場合は、 **Safari** > **環境設定** > **詳細**に移動し、メニューバーに**開発メニューを表示**チェックボックスをオンにします。
+    - Firefox:**Menu** > **Web Developer** > **Toggle Tools**、または**Tools** > **Web Developer** > **Toggle Tools**。
+    - Chrome:**More tools** > **Developer tools**。
+    - Safari:**Develop** > **Show Web Inspector**。**Develop**メニューが表示されない場合は、 **Safari** > **Preferences** > **Advanced**に移動し、**Show Develop menu in menu bar**チェックボックスをオンにします。
 
     次の例では、Chrome が使用されています。
 

@@ -48,7 +48,7 @@ BRの使用方法は、TiDBの導入方法によって異なります。この�
 
 他の導入シナリオでこの機能を使用する方法については、以下のドキュメントを参照してください。
 
-- [TiDB CloudにデプロイされたTiDBのバックアップと復元](https://docs.pingcap.com/tidbcloud/backup-and-restore):[TiDB Cloud](https://www.pingcap.com/tidb-cloud/?from=en)上に TiDB クラスターを作成することをお勧めします。 TiDB Cloud は、アプリケーションに集中できるようにするフルマネージド データベースを提供します。
+- [TiDB CloudにデプロイされたTiDBのバックアップと復元](https://docs.pingcap.com/tidbcloud/backup-and-restore):[TiDB Cloud](https://www.pingcap.com/tidb-cloud/?from=en)上に TiDB クラスターを作成することをお勧めします。 TiDB Cloud は、アプリケーションに集中できるようにするフルマネージドデータベースを提供します。
 - [TiDB Operatorを使用してデータをバックアップおよび復元する](https://docs.pingcap.com/tidb-in-kubernetes/stable/backup-restore-overview): Kubernetes 上でTiDB Operator を使用して TiDB クラスターをデプロイする場合は、Kubernetes CustomResourceDefinition (CRD) を使用してデータをバックアップおよび復元することをお勧めします。
 
 ## BR機能 {#br-features}

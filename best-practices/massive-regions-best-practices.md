@@ -8,7 +8,7 @@ aliases: ['/ja/docs/dev/best-practices/massive-regions-best-practices/','/ja/doc
 
 TiDBでは、データはリージョンに分割され、各リージョンには特定のキー範囲のデータが格納されます。これらのリージョンは複数のTiKVインスタンスに分散されています。データがクラスターに書き込まれると、数百万ものリージョンが作成されることがあります。単一のTiKVインスタンスにリージョンが多すぎると、クラスターに大きな負荷がかかり、パフォーマンスに影響を与える可能性があります。
 
-このドキュメントでは、 Raftstore (TiKV のコア モジュール) のワークフローを紹介し、大量のリージョンがパフォーマンスに影響を与える理由を説明し、TiKV のパフォーマンスを調整する方法を示します。
+このドキュメントでは、 Raftstore (TiKV のコアモジュール) のワークフローを紹介し、大量のリージョンがパフォーマンスに影響を与える理由を説明し、TiKV のパフォーマンスを調整する方法を示します。
 
 ## Raftstoreワークフロー {#raftstore-workflow}
 
@@ -30,7 +30,7 @@ Raftstore のワークフロー図から、各リージョンのメッセージ�
 
 > **Note:**
 >
-> - 前述のRaftstoreのCPU使用率についてですが、 Raftstoreはシングルスレッドです。Raftstoreがマルチスレッドの場合は、CPU使用率のしきい値（85%）を比例的に増やすことができます。
+> - 前述のRaftstoreのCPU使用率についてですが、 Raftstoreはシングルスレッドです。Raftstoreがマルチスレッドの場合は、CPU使用率のしきい値（85%）を比例的に増やせます。
 > - Raftstoreスレッドには I/O 操作が存在するため、CPU 使用率は 100% に達することはありません。
 
 ### パフォーマンス監視 {#performance-monitoring}
@@ -72,9 +72,9 @@ Grafana の**TiKV-Details**ダッシュボードでは、次の監視メトリ�
 
 ### 方法1: Raftstoreの同時実行性を高める {#method-1-increase-raftstore-concurrency}
 
-Raftstore はTiDB v3.0 以降、マルチスレッド モジュールにアップグレードされており、 Raftstoreスレッドがボトルネックになる可能性が大幅に減少しています。
+Raftstore はTiDB v3.0 以降、マルチスレッドモジュールにアップグレードされており、 Raftstoreスレッドがボトルネックになる可能性が大幅に減少しています。
 
-TiKVでは、デフォルトで`raftstore.store-pool-size`は`2`に設定されています。Raftstoreでボトルネックが発生する場合は、実際の状況に応じてこの設定項目の値を適切に増やすことができます。ただし、不要なスレッド切り替えのオーバーヘッドを回避するため、この値を高くしすぎないことをお勧めします。
+TiKVでは、デフォルトで`raftstore.store-pool-size`は`2`に設定されています。Raftstoreでボトルネックが発生する場合は、実際の状況に応じてこの設定項目の値を適切に増やせます。ただし、不要なスレッド切り替えのオーバーヘッドを回避するため、この値を高くしすぎないことをお勧めします。
 
 ### 方法2: Hibernate Regionを有効にする {#method-2-enable-hibernate-region}
 
@@ -90,7 +90,7 @@ TiKVでは、デフォルトで`raftstore.store-pool-size`は`2`に設定され�
 
 `Region Merge`を有効にすることで、Regionの数を減らすこともできます。`Region Split`とは異なり、 `Region Merge`スケジュール設定によって隣接する小さなRegionを結合するプロセスです。データを削除した後、または`Drop Table`もしくは`Truncate Table`文を実行した後、小さなRegion、あるいは空のRegionを結合することで、リソース消費を削減できます。
 
-次のパラメータを設定して`Region Merge`を有効にします。
+次のパラメーターを設定して`Region Merge`を有効にします。
 
 ```
 config set max-merge-region-size 54
@@ -98,13 +98,13 @@ config set max-merge-region-keys 540000
 config set merge-schedule-limit 8
 ```
 
-詳細については、 [リージョン結合](https://tikv.org/docs/4.0/tasks/configure/region-merge/)および[PD設定ファイル](/pd-configuration-file.md#schedule)の次の3つの設定パラメータを参照してください。
+詳細については、 [リージョン結合](https://tikv.org/docs/4.0/tasks/configure/region-merge/)および[PD設定ファイル](/pd-configuration-file.md#schedule)の次の3つの設定パラメーターを参照してください。
 
 - [`max-merge-region-size`](/pd-configuration-file.md#max-merge-region-size)
 - [`max-merge-region-keys`](/pd-configuration-file.md#max-merge-region-keys)
 - [`merge-schedule-limit`](/pd-configuration-file.md#merge-schedule-limit)
 
-`Region Merge`パラメータのデフォルト設定はかなり保守的です。[PDスケジュールのベストプラクティス](/best-practices/pd-scheduling-best-practices.md#region-merge-is-slow)に記載されている方法を参考にすれば、 `Region Merge`プロセスを高速化できます。
+`Region Merge`パラメーターのデフォルト設定はやや保守的です。[PDスケジュールのベストプラクティス](/best-practices/pd-scheduling-best-practices.md#region-merge-is-slow)に記載されている方法を参考にすれば、 `Region Merge`プロセスを高速化できます。
 
 ### 方法4: TiKVインスタンスの数を増やす {#method-4-increase-the-number-of-tikv-instances}
 
@@ -112,14 +112,14 @@ I/O リソースと CPU リソースが十分な場合は、単一のマシン�
 
 ### 方法5: `raft-base-tick-interval`を調整する {#method-5-adjust-raft-base-tick-interval}
 
-リージョン数を減らすだけでなく、単位時間あたりに各リージョンに送信されるメッセージ数を減らすことで、 Raftstoreへの負荷を軽減することもできます。例えば、 `raft-base-tick-interval`設定項目の値を適切に増やすことができます。
+リージョン数を減らすだけでなく、単位時間あたりに各リージョンに送信されるメッセージ数を減らすことで、 Raftstoreへの負荷を軽減することもできます。例えば、 `raft-base-tick-interval`設定項目の値を適切に増やせます。
 
 ```
 [raftstore]
 raft-base-tick-interval = "2s"
 ```
 
-上記の設定では、 `raft-base-tick-interval`は、Raftstore が各リージョンのRaftステートマシンを駆動する時間間隔です。つまり、この時間間隔でRaftstore はRaftステートマシンにティックメッセージを送信します。この間隔を長くすることで、 Raftstoreからのメッセージ数を効果的に減らすことができます。
+上記の設定では、 `raft-base-tick-interval`は、Raftstore が各リージョンのRaftステートマシンを駆動する時間間隔です。つまり、この時間間隔でRaftstore はRaftステートマシンにティックメッセージを送信します。この間隔を長くすることで、 Raftstoreからのメッセージ数を効果的に減らせます。
 
 ティックメッセージ間のこの間隔は、 `election timeout`と`heartbeat`の間の間隔も決定することに注意してください。次の例をご覧ください。
 
@@ -132,7 +132,7 @@ raft-heartbeat-interval = raft-base-tick-interval * raft-heartbeat-ticks
 
 ### 方法6:リージョンのサイズを調整する {#method-6-adjust-region-size}
 
-リージョンのデフォルトサイズは256MiBです。リージョンのサイズを大きくすることで、リージョンの数を減らすことができます。詳細については、 [リージョンパフォーマンスの調整](/tune-region-performance.md)をご覧ください。
+リージョンのデフォルトサイズは256MiBです。リージョンのサイズを大きくすることで、リージョンの数を減らせます。詳細については、 [リージョンパフォーマンスの調整](/tune-region-performance.md)をご覧ください。
 
 > **Note:**
 >

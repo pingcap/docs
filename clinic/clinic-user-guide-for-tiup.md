@@ -63,7 +63,7 @@ PingCAP Clinicを使用する前に、Diag（ PingCAP Clinicが提供するデ�
         </div>
           <div label="Clinic Server for users in the Chinese mainland" value="clinic-cn">
 
-        [中国本土のユーザー向けClinic Server](https://clinic.pingcap.com.cn) : データは中国 (北京) リージョンの AWS に保存されます。
+        [中国本土のユーザー向けClinic Server](https://clinic.pingcap.com.cn) : データは China (Beijing) リージョンの AWS に保存されます。
 
         </div>
 

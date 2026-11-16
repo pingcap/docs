@@ -38,7 +38,7 @@ Debezium メッセージ形式を使用するための構成例は次のとお�
 cdc cli changefeed create --server=http://127.0.0.1:8300 --changefeed-id="kafka-debezium" --sink-uri="kafka://127.0.0.1:9092/topic-name?kafka-version=2.4.0&protocol=debezium"
 ```
 
-Debeziumの出力形式には、下流のコンシューマーが現在の行のデータ構造をより適切に理解できるように、現在の行のスキーマ情報が含まれています。スキーマ情報が不要なシナリオでは、changefeed設定ファイルまたは`sink-uri`で`debezium-disable-schema`パラメータを`true`に設定することで、スキーマ出力を無効にすることもできます。
+Debeziumの出力形式には、下流のコンシューマーが現在の行のデータ構造をより適切に理解できるように、現在の行のスキーマ情報が含まれています。スキーマ情報が不要なシナリオでは、changefeed設定ファイルまたは`sink-uri`で`debezium-disable-schema`パラメーターを`true`に設定することで、スキーマ出力を無効にすることもできます。
 
 さらに、元の Debezium 形式には、TiDB の `CommitTS` の一意なトランザクション識別子などの重要なフィールドが含まれていません。データの整合性を確保するために、TiCDC は Debezium 形式に `CommitTs` と `ClusterID` の 2つのフィールドを追加し、TiDB データ変更の関連情報を識別します。
 
@@ -802,13 +802,13 @@ TiCDC は WATERMARK イベントを Kafka メッセージにエンコードし�
 
 ### データ型マッピング {#data-type-mapping}
 
-TiCDC Debeziumメッセージのデータ形式マッピングは基本的に[Debeziumデータ型マッピングルール](https://debezium.io/documentation/reference/stable/connectors/mysql.html#mysql-data-types)に準拠しており、これはMySQL用Debeziumコネクタのネイティブメッセージと概ね一致しています。ただし、一部のデータ型については、TiCDC DebeziumメッセージとDebeziumコネクタメッセージの間に以下の違いがあります。
+TiCDC Debeziumメッセージのデータ形式マッピングは基本的に[Debeziumデータ型マッピングルール](https://debezium.io/documentation/reference/stable/connectors/mysql.html#mysql-data-types)に準拠しており、これはMySQL用Debeziumコネクターのネイティブメッセージと概ね一致しています。ただし、一部のデータ型については、TiCDC DebeziumメッセージとDebeziumコネクターメッセージの間に以下の違いがあります。
 
 - 現在、TiDB は、GEOMETRY、LINESTRING、POLYGON、MULTIPOINT、MULTILINESTRING、MULTIPOLYGON、GEOMETRYCOLLECTION などの空間データ型をサポートしていません。
 
-- Varchar、String、VarString、TinyBlob、MediumBlob、BLOB、LongBlobなどの文字列型データ型の場合、列にBINARYフラグが付いている場合、TiCDCはBase64でエンコードした後、String型としてエンコードします。列にBINARYフラグが付いていない場合は、TiCDCは直接String型としてエンコードします。ネイティブDebeziumコネクタは、 `binary.handling.mode`に従って異なる方法でエンコードします。
+- Varchar、String、VarString、TinyBlob、MediumBlob、BLOB、LongBlobなどの文字列型データ型の場合、列にBINARYフラグが付いている場合、TiCDCはBase64でエンコードした後、String型としてエンコードします。列にBINARYフラグが付いていない場合は、TiCDCは直接String型としてエンコードします。ネイティブDebeziumコネクターは、 `binary.handling.mode`に従って異なる方法でエンコードします。
 
-- TiCDCは、 DECIMALとNUMERICを含むDecimalデータ型をfloat64型で表現します。ネイティブのDebeziumコネクタは、データ型の精度に応じて、float32またはfloat64でエンコードします。
+- TiCDCは、 DECIMALとNUMERICを含むDecimalデータ型をfloat64型で表現します。ネイティブのDebeziumコネクターは、データ型の精度に応じて、float32またはfloat64でエンコードします。
 
 - TiCDC は REAL を DOUBLE に変換し、長さが 1 の場合は BOOLEAN を TINYINT(1) に変換します。
 

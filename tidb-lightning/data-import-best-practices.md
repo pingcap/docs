@@ -67,7 +67,7 @@ TiDB Lightning （ [物理インポートモード](/tidb-lightning/tidb-lightni
 
     v6.5.3、v7.1.0 以降のバージョンでは、次の問題が解決されています。
 
-    - [問題-14745](https://github.com/tikv/tikv/issues/14745) : インポートが完了すると、TiKV インポート ディレクトリに大量の一時ファイルが残ります。
+    - [問題-14745](https://github.com/tikv/tikv/issues/14745) : インポートが完了すると、TiKV インポートディレクトリに大量の一時ファイルが残ります。
     - [問題-6426](https://github.com/tikv/pd/issues/6426) : PD [レンジスケジュール](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#scope-of-pausing-scheduling-during-import)インターフェースがリージョンの分散に失敗し、タイムアウトの問題が発生する可能性があります。v6.2.0より前では、グローバルスケジューリングはデフォルトで無効になっているため、この問題の発生を回避できます。
     - [問題-43079](https://github.com/pingcap/tidb/pull/43079) : TiDB Lightning は、NotLeader エラーの再試行中にリージョンピア情報を更新できません。
     - [問題-43291](https://github.com/pingcap/tidb/issues/43291) : 一時ファイルが見つからない場合 (「No such file or directory」というエラー)、 TiDB Lightning は再試行しません。

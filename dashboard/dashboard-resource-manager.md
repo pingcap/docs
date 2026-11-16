@@ -1,19 +1,19 @@
 ---
 title: TiDB Dashboard Resource Manager Page
-summary: TiDB Dashboardのリソースマネージャページは、クラスタ管理者がリソースグループを作成し、クォータを設定することでリソース分離を実装するのに役立ちます。クラスタキャパシティを推定し、リソース消費量を監視するための方法を提供します。このページには、TiDB Dashboardまたはブラウザからアクセスできます。このページには、Configuration、Estimate Capacity、およびMetricsのセクションがあります。キャパシティ推定方法には、ハードウェアのデプロイと実際のワークロードが含まれます。監視メトリックには、消費されたRUの合計、リソースグループによる消費RU、TiDB CPUクォータと使用量、TiKV CPUクォータと使用量、TiKV IO MBpsが含まれます。
+summary: TiDB Dashboardのリソースマネージャーページは、クラスター管理者がリソースグループを作成し、クォータを設定することでリソース分離を実装するのに役立ちます。クラスターキャパシティを推定し、リソース消費量を監視するための方法を提供します。このページには、TiDB Dashboardまたはブラウザーからアクセスできます。このページには、Configuration、Estimate Capacity、およびMetricsのセクションがあります。キャパシティ推定方法には、ハードウェアのデプロイと実際のワークロードが含まれます。監視メトリックには、消費されたRUの合計、リソースグループによる消費RU、TiDB CPUクォータと使用量、TiKV CPUクォータと使用量、TiKV IO MBpsが含まれます。
 ---
 
 # TiDB Dashboardリソースマネージャーページ {#tidb-dashboard-resource-manager-page}
 
-[リソース管理](/tidb-resource-control-ru-groups.md)機能を使用してリソース分離を実装するには、クラスタ管理者がリソースグループを作成し、各グループにクォータを設定する必要があります。リソースプランニングを行う前に、クラスタ全体のキャパシティを把握しておく必要があります。このドキュメントでは、リソース制御に関する情報を参照することで、リソースプランニング前にクラスタのキャパシティを見積もり、より効果的にリソースを割り当てることができます。
+[リソース管理](/tidb-resource-control-ru-groups.md)機能を使用してリソース分離を実装するには、クラスター管理者がリソースグループを作成し、各グループにクォータを設定できます。リソースプランニングを行う前に、クラスター全体のキャパシティを把握しておく必要があります。このドキュメントでは、リソース制御に関する情報を参照することで、リソースプランニング前にクラスターのキャパシティを見積もり、より効果的にリソースを割り当てることができます。
 
 ## ページにアクセスする {#access-the-page}
 
-リソースマネージャー ページにアクセスするには、次の2つの方法のいずれかを使用できます。
+リソースマネージャーページにアクセスするには、次の2つの方法のいずれかを使用できます。
 
-- TiDB Dashboardにログインしたら、左側のナビゲーション メニューで**Resource Manager**をクリックします。
+- TiDB Dashboardにログインしたら、左側のナビゲーションメニューで**Resource Manager**をクリックします。
 
-- ブラウザで[http://127.0.0.1:2379/dashboard/#/resource_manager](http://127.0.0.1:2379/dashboard/#/resource_manager)にアクセスしてください。`127.0.0.1:2379`を実際のPDインスタンスのアドレスとポートに置き換えてください。
+- ブラウザーで[http://127.0.0.1:2379/dashboard/#/resource_manager](http://127.0.0.1:2379/dashboard/#/resource_manager)にアクセスしてください。`127.0.0.1:2379`を実際のPDインスタンスのアドレスとポートに置き換えてください。
 
 ## リソースマネージャーページ {#resource-manager-page}
 
@@ -21,7 +21,7 @@ summary: TiDB Dashboardのリソースマネージャページは、クラスタ
 
 ![TiDB Dashboard: Resource Manager](/media/dashboard/dashboard-resource-manager-info.png)
 
-リソースマネージャー ページには、次の3つのセクションがあります。
+リソースマネージャーページには、次の3つのセクションがあります。
 
 - Configuration: このセクションには、TiDBの`RESOURCE_GROUPS`テーブルから取得したデータが表示されます。すべてのリソースグループに関する情報が含まれています。詳細については、 [`RESOURCE_GROUPS`](/information-schema/information-schema-resource-groups.md)を参照してください。
 
@@ -38,7 +38,7 @@ summary: TiDB Dashboardのリソースマネージャページは、クラスタ
 
 - [ハードウェアのデプロイに基づいてキャパシティを見積もる](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-hardware-deployment)
 
-    TiDB は次のワークロード タイプを受け入れます。
+    TiDB は次のワークロードタイプを受け入れます。
 
     - `tpcc` : 大量のデータ書き込みを伴うワークロードに適用されます。これは`TPC-C`と同様のワークロードモデルに基づいて推定されます。
     - `oltp_write_only` : 大量のデータ書き込みを伴うワークロードに適用されます。これは`sysbench oltp_write_only`と同様のワークロードモデルに基づいて推定されます。
@@ -61,7 +61,7 @@ summary: TiDB Dashboardのリソースマネージャページは、クラスタ
 
     - 時間枠内のワークロードが低すぎる場合、または`resource_manager_resource_unit`と`process_cpu_usage`監視データが欠落している場合は、エラーが報告されます`Error 1105 (HY000): The workload in selected time window is too low, with which TiDB is unable to reach a capacity estimation; please select another time window with higher workload, or calibrate resource by hardware instead`また、TiKVはmacOSのCPU使用率を監視しないため、実際のワークロードに基づくキャパシティ推定をサポートしておらず、このエラーも報告されます。
 
-    [Metrics](#metrics)セクションの**CPU 使用率**を使用して適切な時間範囲を選択できます。
+    [Metrics](#metrics)セクションの**CPU Usage**を使用して適切な時間範囲を選択できます。
 
 > **Note:**
 >
@@ -74,9 +74,9 @@ summary: TiDB Dashboardのリソースマネージャページは、クラスタ
 - **Total RU Consumed**: リアルタイムでカウントされたリクエストユニットの合計消費量。
 - **RU Consumed by Resource Groups**: リソースグループによってリアルタイムで消費されたリクエストユニットの数。
 - TiDB
-    - CPU クォータ: TiDB の最大 CPU 使用量。
-    - CPU 使用率: すべての TiDB インスタンスの合計 CPU 使用率。
+    - CPU Quota: TiDB の最大 CPU 使用量。
+    - CPU Usage: すべての TiDB インスタンスの合計 CPU 使用率。
 - TiKV
-    - CPU クォータ: TiKV の最大 CPU 使用量。
-    - CPU 使用率: すべての TiKV インスタンスの合計 CPU 使用率。
+    - CPU Quota: TiKV の最大 CPU 使用量。
+    - CPU Usage: すべての TiKV インスタンスの合計 CPU 使用率。
     - IO MBps: すべての TiKV インスタンスの合計 I/O スループット。

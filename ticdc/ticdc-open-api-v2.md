@@ -26,7 +26,7 @@ API を使用して、TiCDC クラスターで次のメンテナンス操作を�
 - [レプリケーションタスクを再開する](#resume-a-replication-task)
 - [レプリケーションサブタスクリストを照会する](#query-the-replication-subtask-list)
 - [特定のレプリケーションサブタスクをクエリする](#query-a-specific-replication-subtask)
-- [TiCDC サービス プロセス リストを照会する](#query-the-ticdc-service-process-list)
+- [TiCDC サービスプロセスリストを照会する](#query-the-ticdc-service-process-list)
 - [所有者ノードの退去](#evict-an-owner-node)
 - [TiCDCサーバーのログレベルを動的に調整する](#dynamically-adjust-the-log-level-of-the-ticdc-server)
 
@@ -101,7 +101,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/status
 }
 ```
 
-上記の出力のパラメータは次のとおりです。
+上記の出力のパラメーターは次のとおりです。
 
 - `version` : TiCDC の現在のバージョン番号。
 - `git_hash` : Git ハッシュ値。
@@ -140,7 +140,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 
 `POST /api/v2/changefeeds`
 
-### パラメータの説明 {#parameter-descriptions}
+### パラメーターの説明 {#parameter-descriptions}
 
 ```json
 {
@@ -230,39 +230,39 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 }
 ```
 
-パラメータの説明は次のとおりです。
+パラメーターの説明は次のとおりです。
 
-| パラメータ名           | 説明                                                                                                     |
+| パラメーター名           | 説明                                                                                                     |
 | :--------------- | :----------------------------------------------------------------------------------------------------- |
 | `changefeed_id`  | `STRING`型。レプリケーションタスクのID。（オプション）                                                                       |
-| `replica_config` | レプリケーションタスクの設定パラメータ。(オプション)                                                                    |
+| `replica_config` | レプリケーションタスクの設定パラメーター。(オプション)                                                                    |
 | **`sink_uri`**   | `STRING`型。レプリケーションタスクのダウンストリームアドレス。（**必須**）                                                            |
 | `start_ts`       | `UINT64`型。変更フィードの開始TSOを指定します。TiCDCクラスターは、このTSOからデータのプルを開始します。デフォルト値は現在時刻です。（オプション）                     |
 | `target_ts`      | `UINT64`型。変更フィードのターゲットTSOを指定します。TiCDCクラスターは、このTSOに到達するとデータのプルを停止します。デフォルト値は空で、TiCDCは自動的に停止しません。(オプション) |
 
-`changefeed_id`、`start_ts`、`target_ts`、`sink_uri`の意味と形式は、 [`cdc cli`を使用してレプリケーションタスクを作成する](/ticdc/ticdc-manage-changefeed.md#create-a-replication-task)ドキュメントに記載されているものと同じです。これらのパラメータの詳細については、そのドキュメントを参照してください。`sink_uri`で証明書パスを指定する際は、対応する証明書が対応する TiCDCサーバーにアップロードされていることを確認してください。
+`changefeed_id`、`start_ts`、`target_ts`、`sink_uri`の意味と形式は、 [`cdc cli`を使用してレプリケーションタスクを作成する](/ticdc/ticdc-manage-changefeed.md#create-a-replication-task)ドキュメントに記載されているものと同じです。これらのパラメーターの詳細については、そのドキュメントを参照してください。`sink_uri`で証明書パスを指定する際は、対応する証明書が対応する TiCDCサーバーにアップロードされていることを確認してください。
 
-`replica_config`パラメータの説明は次のとおりです。
+`replica_config`パラメーターの説明は次のとおりです。
 
-| パラメータ名                    | 説明                                                                                                                                                                |
+| パラメーター名                    | 説明                                                                                                                                                                |
 | :------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `bdr_mode`                | `BOOLEAN`型。[双方向レプリケーション](/ticdc/ticdc-bidirectional-replication.md)を有効にするかどうかを決定します。デフォルト値は`false`です。（オプション）                                                     |
 | `case_sensitive`          | `BOOLEAN`型。テーブル名をフィルタリングする際に大文字と小文字を区別するかどうかを指定します。v6.5.6、v7.1.3、v7.5.0以降では、デフォルト値が`true`から`false`に変更されます。（オプション）                                                 |
 | `check_gc_safe_point`     | `BOOLEAN`型。レプリケーションタスクの開始時刻がGC時刻よりも前であるかどうかを確認するかどうかを指定します。デフォルト値は`true`です。（オプション）                                                                                |
-| `consistent`              | REDOログの設定パラメータ。(オプション)                                                                                                                                            |
+| `consistent`              | REDOログの設定パラメーター。(オプション)                                                                                                                                            |
 | `enable_sync_point`       | `BOOLEAN`型。`sync point`を有効にするかどうかを決定します。（オプション）                                                                                                                  |
-| `filter`                  | `filter`の設定パラメータ。(オプション)                                                                                                                                          |
+| `filter`                  | `filter`の設定パラメーター。(オプション)                                                                                                                                          |
 | `force_replicate`         | `BOOLEAN`型。デフォルト値は`false`です。`true`に設定すると、レプリケーションタスクは一意インデックスを持たないテーブルを強制的にレプリケートします。（オプション）                                                                      |
 | `ignore_ineligible_table` | `BOOLEAN`型。デフォルト値は`false`です。`true`に設定すると、レプリケーションタスクはレプリケートできないテーブルを無視します。（オプション）                                                                                  |
 | `memory_quota`            | `UINT64`型。レプリケーションタスクのメモリクォータ。（オプション）                                                                                                                             |
-| `mounter`                 | `mounter`の設定パラメータ。(オプション)                                                                                                                                         |
-| `sink`                    | `sink`の設定パラメータ。(オプション)                                                                                                                                            |
-| `sync_point_interval`     | `STRING`型。返される値は`UINT64`型のナノ秒単位の時間であることに注意してください。`sync point`が有効な場合、このパラメータは同期ポイントが上流と下流のスナップショットを同期させる間隔を指定します。デフォルト値は`10m`で、最小値は`30s`です。（オプション）               |
-| `sync_point_retention`    | `STRING`型。返される値は`UINT64`型のナノ秒単位の時間であることに注意してください。`sync point`が有効な場合、このパラメータは、下流テーブルにおける同期ポイントによるデータの保持期間を指定します。この期間を超えると、データはクリーンアップされます。デフォルト値は`24h`です。（オプション） |
+| `mounter`                 | `mounter`の設定パラメーター。(オプション)                                                                                                                                         |
+| `sink`                    | `sink`の設定パラメーター。(オプション)                                                                                                                                            |
+| `sync_point_interval`     | `STRING`型。返される値は`UINT64`型のナノ秒単位の時間であることに注意してください。`sync point`が有効な場合、このパラメーターは同期ポイントが上流と下流のスナップショットを同期させる間隔を指定します。デフォルト値は`10m`で、最小値は`30s`です。（オプション）               |
+| `sync_point_retention`    | `STRING`型。返される値は`UINT64`型のナノ秒単位の時間であることに注意してください。`sync point`が有効な場合、このパラメーターは、下流テーブルにおける同期ポイントによるデータの保持期間を指定します。この期間を超えると、データはクリーンアップされます。デフォルト値は`24h`です。（オプション） |
 
-`consistent`パラメータは次のように記述されます。
+`consistent`パラメーターは次のように記述されます。
 
-| パラメータ名                | 説明                                                                                      |
+| パラメーター名                | 説明                                                                                      |
 | :-------------------- | :-------------------------------------------------------------------------------------- |
 | `flush_interval`      | `UINT64`型。REDOログファイルをフラッシュする間隔。（オプション）                                                  |
 | `level`               | `STRING`型。複製されたデータの一貫性レベル。（オプション）                                                       |
@@ -274,17 +274,17 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 | `compression`         | `STRING`タイプ。REDOログファイルを圧縮する動作。使用可能なオプションは`""`と`"lz4"`です。デフォルト値は`""`で、圧縮なしを意味します。（オプション） |
 | `flush_concurrency`   | `INT`型。単一ファイルのアップロードにおける同時実行数。デフォルト値は`1`で、同時実行が無効であることを意味します。（オプション）                    |
 
-`filter`パラメータは次のように記述されます。
+`filter`パラメーターは次のように記述されます。
 
-| パラメータ名                | 説明                                                                                                                     |
+| パラメーター名                | 説明                                                                                                                     |
 | :-------------------- | :--------------------------------------------------------------------------------------------------------------------- |
 | `event_filters`       | イベントをフィルタリングするための設定。(オプション)                                                                                            |
 | `ignore_txn_start_ts` | `UINT64 ARRAY`型。これを指定すると、 `[1, 2]`など`start_ts`を指定するトランザクションは無視されます。（オプション）                                              |
 | `rules`               | `STRING ARRAY`型。テーブルスキーマフィルタリングのルール（例： `['foo*.*', 'bar*.*']` ）。詳細については、 [テーブルフィルター](/table-filter.md)を参照してください。（オプション） |
 
-`filter.event_filters`パラメータの説明は以下のとおりです。詳細については[変更フィードログフィルター](/ticdc/ticdc-filter.md)を参照してください。
+`filter.event_filters`パラメーターの説明は以下のとおりです。詳細については[変更フィードログフィルター](/ticdc/ticdc-filter.md)を参照してください。
 
-| パラメータ名                         | 説明                                                                                                                 |
+| パラメーター名                         | 説明                                                                                                                 |
 | :----------------------------- | :----------------------------------------------------------------------------------------------------------------- |
 | `ignore_delete_value_expr`     | `STRING ARRAY`型。例えば、 `"name = 'john'"`は、`name = 'john'`条件を含む DELETE DML 文を除外することを意味します。(オプション)                      |
 | `ignore_event`                 | `STRING ARRAY`型。例えば、 `["insert"]`は、INSERTイベントが除外されることを示します。（オプション）                                                  |
@@ -294,40 +294,40 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 | `ignore_update_old_value_expr` | `STRING ARRAY`型。例えば、 `"age < 18"`は、古い値`age < 18`を持つ UPDATE DML 文を除外することを意味します。（オプション）                                |
 | `matcher`                      | `STRING ARRAY`型。ホワイトリストとして機能します。例えば、 `["test.worker"]` 、フィルタールールが`test`データベースの`worker`テーブルにのみ適用されることを意味します。(オプション) |
 
-`mounter`パラメータは次のように記述されます。
+`mounter`パラメーターは次のように記述されます。
 
-| パラメータ名       | 説明                                                                          |
+| パラメーター名       | 説明                                                                          |
 | :----------- | :-------------------------------------------------------------------------- |
 | `worker_num` | `INT`型。Mounter スレッドの数。Mounter は TiKV から出力されたデータをデコードするために使用されます。デフォルト値は`16`です。（オプション） |
 
-`sink`パラメータは次のように記述されます。
+`sink`パラメーターは次のように記述されます。
 
-| パラメータ名                        | 説明                                                                                                                           |
+| パラメーター名                        | 説明                                                                                                                           |
 | :---------------------------- | :--------------------------------------------------------------------------------------------------------------------------- |
 | `column_selectors`            | 列セレクターの構成。(オプション)                                                                                                            |
 | `csv`                         | CSV 構成。(オプション)                                                                                                               |
 | `date_separator`              | `STRING`型。ファイルディレクトリの日付区切り文字の種類を示します。値の選択肢は`none` 、 `year` 、 `month` 、 `day`です。`none`がデフォルト値で、日付が区切られないことを意味します。(オプション)    |
 | `dispatchers`                 | イベントディスパッチ用の設定配列。(オプション)                                                                                                     |
-| `encoder_concurrency`         | `INT`型。MQシンク内のエンコーダスレッドの数。デフォルト値は`16`です。（オプション）                                                                              |
+| `encoder_concurrency`         | `INT`型。MQシンク内のエンコーダースレッドの数。デフォルト値は`16`です。（オプション）                                                                              |
 | `protocol`                    | `STRING`型。MQシンクの場合、メッセージのプロトコル形式を指定できます。現在サポートされているプロトコルは、 `canal-json` 、 `open-protocol` 、 `avro` 、 `debezium` 、 `simple`です。 |
 | `schema_registry`             | `STRING`型。スキーマレジストリアドレス。（オプション）                                                                                              |
-| `terminator`                  | `STRING`型。ターミネータは、2つのデータ変更イベントを区切るために使用されます。デフォルト値はnullで、 `"\r\n"`がターミネータとして使用されます。（オプション）                                    |
+| `terminator`                  | `STRING`型。ターミネーターは、2つのデータ変更イベントを区切るために使用されます。デフォルト値はnullで、 `"\r\n"`がターミネーターとして使用されます。（オプション）                                    |
 | `transaction_atomicity`       | `STRING`型。トランザクションのアトミック性レベル。（オプション）                                                                                         |
 | `only_output_updated_columns` | `BOOLEAN`型。`canal-json`または`open-protocol`プロトコルを使用するMQシンクの場合、変更された列のみを出力するかどうかを指定できます。デフォルト値は`false`です。（オプション）               |
 | `cloud_storage_config`        | ストレージシンクの構成。(オプション)                                                                                                        |
 | `open`                        | Open Protocolの構成。(オプション)                                                                                                         |
 | `debezium`                    | Debezium プロトコルの設定。(オプション)                                                                                                    |
 
-`sink.column_selectors`は配列です。パラメータは以下のとおりです。
+`sink.column_selectors`は配列です。パラメーターは以下のとおりです。
 
-| パラメータ名    | 説明                                              |
+| パラメーター名    | 説明                                              |
 | :-------- | :---------------------------------------------- |
 | `columns` | `STRING ARRAY`型。列配列。                            |
-| `matcher` | `STRING ARRAY`型。マッチャー設定。フィルタルールと同じマッチング構文を持ちます。 |
+| `matcher` | `STRING ARRAY`型。マッチャー設定。フィルタールールと同じマッチング構文を持ちます。 |
 
-`sink.csv`パラメータは次のように記述されます。
+`sink.csv`パラメーターは次のように記述されます。
 
-| パラメータ名                   | 説明                                                                           |
+| パラメーター名                   | 説明                                                                           |
 | :----------------------- | :--------------------------------------------------------------------------- |
 | `delimiter`              | `STRING`型。CSVファイル内のフィールドを区切るために使用される文字。値はASCII文字でなければならず、デフォルトは`,`です。        |
 | `include_commit_ts`      | `BOOLEAN`型。CSV行に commit-ts を含めるかどうか。デフォルト値は`false`です。                             |
@@ -335,42 +335,42 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 | `quote`                  | `STRING`型。CSVファイル内のフィールドを囲むために使用される引用符文字。値が空の場合、引用符は使用されません。デフォルト値は`"`です。    |
 | `binary_encoding_method` | `STRING`型。バイナリデータのエンコード方式。`"base64"`または`"hex"`を指定できます。デフォルト値は`"base64"`です。 |
 
-`sink.dispatchers` : MQタイプのシンクの場合、このパラメータを使用してイベントディスパッチャを設定できます。サポートされているディスパッチャは`default` 、 `ts` 、 `index-value` 、 `table`です。ディスパッチャのルールは以下のとおりです。
+`sink.dispatchers` : MQタイプのシンクの場合、このパラメーターを使用してイベントディスパッチャーを設定できます。サポートされているディスパッチャーは`default` 、 `ts` 、 `index-value` 、 `table`です。ディスパッチャーのルールは以下のとおりです。
 
 - `default` : `table`モードでイベントを送信します。
 - `ts` : 行変更の commitTs を使用してハッシュ値を作成し、イベントをディスパッチします。
 - `index-value` : 選択した HandleKey 列の名前と値を使用してハッシュ値を作成し、イベントをディスパッチします。
 - `table` : テーブルのスキーマ名とテーブル名を使用してハッシュ値を作成し、イベントをディスパッチします。
 
-`sink.dispatchers`は配列です。パラメータは以下のとおりです。
+`sink.dispatchers`は配列です。パラメーターは以下のとおりです。
 
-| パラメータ名      | 説明                                      |
+| パラメーター名      | 説明                                      |
 | :---------- | :-------------------------------------- |
 | `matcher`   | `STRING ARRAY`型。フィルタールールと同じ一致構文を持ちます。   |
-| `partition` | `STRING`タイプ。イベントをディスパッチするターゲット パーティション。 |
+| `partition` | `STRING`タイプ。イベントをディスパッチするターゲットパーティション。 |
 | `topic`     | `STRING`型。イベントをディスパッチするターゲットトピック。       |
 
-`sink.cloud_storage_config`パラメータは次のように記述されます。
+`sink.cloud_storage_config`パラメーターは次のように記述されます。
 
-| パラメータ名                    | 説明                                                                                                                                              |
+| パラメーター名                    | 説明                                                                                                                                              |
 | :------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------- |
 | `worker_count`            | `INT`型。データ変更を下流のクラウドストレージに保存する際の同時実行数。                                                                                                   |
 | `flush_interval`          | `STRING`型。データ変更を下流のクラウドストレージに保存する間隔。                                                                                                       |
-| `file_size`               | `INT`型。このファイル内のバイト数がこのパラメータの値を超えると、データ変更ファイルがクラウドストレージに保存されます。                                                                                |
+| `file_size`               | `INT`型。このファイル内のバイト数がこのパラメーターの値を超えると、データ変更ファイルがクラウドストレージに保存されます。                                                                                |
 | `file_expiration_days`    | `INT`タイプ。ファイルを保持する期間。`date-separator`が`day`に設定されている場合にのみ有効になります。                                                                              |
 | `file_cleanup_cron_spec`  | `STRING`型。crontab 設定と互換性のある、スケジュールされたクリーンアップタスクの実行サイクル。形式は`<Second> <Minute> <Hour> <Day of the month> <Month> <Day of the week (Optional)>`です。 |
 | `flush_concurrency`       | `INT`型。単一ファイルのアップロードの同時実行性。                                                                                                                     |
 | `output_raw_change_event` | `BOOLEAN`タイプ。MySQL 以外のシンクの元のデータ変更イベントを出力するかどうかを制御します。                                                                                           |
 
-`sink.open`パラメータは次のように記述されます。
+`sink.open`パラメーターは次のように記述されます。
 
-| パラメータ名             | 説明                                                                                                      |
+| パラメーター名             | 説明                                                                                                      |
 | :----------------- | :------------------------------------------------------------------------------------------------------ |
 | `output_old_value` | `BOOLEAN`型。行データが変更される前の値を出力するかどうかを制御します。デフォルト値は`true`です。無効にすると、UPDATE イベントは "p" フィールドを出力しません。 |
 
-`sink.debezium`パラメータは次のように記述されます。
+`sink.debezium`パラメーターは次のように記述されます。
 
-| パラメータ名             | 説明                                                                                            |
+| パラメーター名             | 説明                                                                                            |
 | :----------------- | :-------------------------------------------------------------------------------------------- |
 | `output_old_value` | `BOOLEAN`型。行データが変更される前の値を出力するかどうかを制御します。デフォルト値はtrueです。無効にすると、UPDATEイベントは"before"フィールドを出力しません。 |
 
@@ -494,9 +494,9 @@ curl -X POST -H "Content-type: application/json" http://127.0.0.1:8300/api/v2/ch
 }
 ```
 
-パラメータの説明は次のとおりです。
+パラメーターの説明は次のとおりです。
 
-| パラメータ名            | 説明                                                                                  |
+| パラメーター名            | 説明                                                                                  |
 | :---------------- | :---------------------------------------------------------------------------------- |
 | `admin_job_type`  | `INTEGER`タイプ。管理ジョブのタイプ。                                                             |
 | `checkpoint_time` | `STRING`タイプ。レプリケーションタスクの現在のチェックポイントのフォーマットされた時刻。                                    |
@@ -504,25 +504,25 @@ curl -X POST -H "Content-type: application/json" http://127.0.0.1:8300/api/v2/ch
 | `config`          | レプリケーションタスクの設定。構造と意味は、レプリケーションタスク作成時の`replica_config`の設定と同じです。                      |
 | `create_time`     | `STRING`型。レプリケーションタスクが作成された時刻。                                                      |
 | `creator_version` | `STRING`タイプ。レプリケーションタスク作成時の TiCDC バージョン。                                            |
-| `error`           | レプリケーションタスク エラー。                                                                   |
+| `error`           | レプリケーションタスクエラー。                                                                   |
 | `id`              | `STRING`タイプ。レプリケーションタスク ID。                                                        |
 | `resolved_ts`     | `UINT64`タイプ。レプリケーションタスクの resolved ts。                                               |
-| `sink_uri`        | `STRING`タイプ。レプリケーションタスク シンクの URI。                                                  |
+| `sink_uri`        | `STRING`タイプ。レプリケーションタスクシンクの URI。                                                  |
 | `start_ts`        | `UINT64`タイプ。レプリケーションタスクの start ts。                                                     |
 | `state`           | `STRING`型。レプリケーションタスクのステータス。`normal` 、 `stopped` 、 `error` 、 `failed` 、または`finished`になります。 |
 | `target_ts`       | `UINT64`タイプ。レプリケーションタスクのターゲット ts。                                                   |
 | `task_status`     | レプリケーションタスクのディスパッチの詳細なステータス。                                                       |
 
-`task_status`パラメータは次のように記述されます。
+`task_status`パラメーターは次のように記述されます。
 
-| パラメータ名       | 説明                                           |
+| パラメーター名       | 説明                                           |
 | :----------- | :------------------------------------------- |
 | `capture_id` | `STRING`型。キャプチャID。                           |
 | `table_ids`  | `UINT64 ARRAY`タイプ。このキャプチャでレプリケートされるテーブルの ID。 |
 
-`error`パラメータは次のように記述されます。
+`error`パラメーターは次のように記述されます。
 
-| パラメータ名    | 説明                   |
+| パラメーター名    | 説明                   |
 | :-------- | :------------------- |
 | `addr`    | `STRING`型。キャプチャアドレス。 |
 | `code`    | `STRING`型。エラーコード。    |
@@ -536,11 +536,11 @@ curl -X POST -H "Content-type: application/json" http://127.0.0.1:8300/api/v2/ch
 
 `DELETE /api/v2/changefeeds/{changefeed_id}`
 
-### パラメータの説明 {#parameter-descriptions}
+### パラメーターの説明 {#parameter-descriptions}
 
-#### パスパラメータ {#path-parameters}
+#### パスパラメーター {#path-parameters}
 
-| パラメータ名          | 説明                                  |
+| パラメーター名          | 説明                                  |
 | :-------------- | :---------------------------------- |
 | `changefeed_id` | 削除するレプリケーションタスク (changefeed) の ID。 |
 
@@ -564,15 +564,15 @@ changefeed 設定を変更するには、 `pause the replication task -> modify 
 
 `PUT /api/v2/changefeeds/{changefeed_id}`
 
-### パラメータの説明 {#parameter-descriptions}
+### パラメーターの説明 {#parameter-descriptions}
 
-#### パスパラメータ {#path-parameters}
+#### パスパラメーター {#path-parameters}
 
-| パラメータ名          | 説明                                  |
+| パラメーター名          | 説明                                  |
 | :-------------- | :---------------------------------- |
 | `changefeed_id` | 更新するレプリケーションタスク (changefeed) の ID。 |
 
-#### リクエスト本体のパラメータ {#parameters-for-the-request-body}
+#### リクエスト本体のパラメーター {#parameters-for-the-request-body}
 
 ```json
 {
@@ -662,13 +662,13 @@ changefeed 設定を変更するには、 `pause the replication task -> modify 
 
 現在、API 経由で変更できるのは次の構成のみです。
 
-| パラメータ名           | 説明                                          |
+| パラメーター名           | 説明                                          |
 | :--------------- | :------------------------------------------ |
 | `target_ts`      | `UINT64`タイプ。チェンジフィードのターゲットTSOを指定します。（オプション） |
 | `sink_uri`       | `STRING`型。レプリケーションタスクのダウンストリームアドレス。（オプション）  |
-| `replica_config` | シンクの設定パラメータ。すべて指定する必要があります。（オプション）          |
+| `replica_config` | シンクの設定パラメーター。すべて指定する必要があります。（オプション）          |
 
-上記のパラメータの意味は[レプリケーションタスクを作成する](#create-a-replication-task)セクションと同じです。詳細については、当該セクションを参照してください。
+上記のパラメーターの意味は[レプリケーションタスクを作成する](#create-a-replication-task)セクションと同じです。詳細については、当該セクションを参照してください。
 
 ### 例 {#example}
 
@@ -688,17 +688,17 @@ curl -X PUT -H "Content-type: application/json" http://127.0.0.1:8300/api/v2/cha
 
 `GET /api/v2/changefeeds`
 
-### パラメータの説明 {#parameter-descriptions}
+### パラメーターの説明 {#parameter-descriptions}
 
-#### クエリパラメータ {#query-parameter}
+#### クエリパラメーター {#query-parameter}
 
-| パラメータ名  | 説明                                                   |
+| パラメーター名  | 説明                                                   |
 | :------ | :--------------------------------------------------- |
-| `state` | このパラメータを指定すると、指定された状態にあるレプリケーションタスクの情報が返されます。（オプション） |
+| `state` | このパラメーターを指定すると、指定された状態にあるレプリケーションタスクの情報が返されます。（オプション） |
 
 `state`の値のオプションは`all` 、 `normal` 、 `stopped` 、 `error` 、 `failed` 、 `finished`です。
 
-このパラメータを指定しない場合は、 `normal` 、 `stopped` 、または`failed`状態のレプリケーションタスクの基本情報がデフォルトで返されます。
+このパラメーターを指定しない場合は、 `normal` 、 `stopped` 、または`failed`状態のレプリケーションタスクの基本情報がデフォルトで返されます。
 
 ### 例 {#example}
 
@@ -730,7 +730,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/changefeeds?state=normal
 }
 ```
 
-上記の返された結果のパラメータは次のように説明されます。
+上記の返された結果のパラメーターは次のように説明されます。
 
 - `id` : レプリケーションタスクの ID。
 - `state` : レプリケーションタスクの現在の[状態](/ticdc/ticdc-changefeed-overview.md#changefeed-state-transfer)。
@@ -746,11 +746,11 @@ curl -X GET http://127.0.0.1:8300/api/v2/changefeeds?state=normal
 
 `GET /api/v2/changefeeds/{changefeed_id}`
 
-### パラメータの説明 {#parameter-description}
+### パラメーターの説明 {#parameter-description}
 
-#### パスパラメータ {#path-parameter}
+#### パスパラメーター {#path-parameter}
 
-| パラメータ名          | 説明                                   |
+| パラメーター名          | 説明                                   |
 | :-------------- | :----------------------------------- |
 | `changefeed_id` | クエリするレプリケーションタスク (changefeed) の ID。 |
 
@@ -772,11 +772,11 @@ JSONレスポンスボディの意味は[レプリケーションタスクを作
 
 `GET /api/v2/changefeeds/{changefeed_id}/synced`
 
-### パラメータの説明 {#parameter-description}
+### パラメーターの説明 {#parameter-description}
 
-#### パスパラメータ {#path-parameter}
+#### パスパラメーター {#path-parameter}
 
-| パラメータ名          | 説明                                   |
+| パラメーター名          | 説明                                   |
 | :-------------- | :----------------------------------- |
 | `changefeed_id` | クエリするレプリケーションタスク (changefeed) の ID。 |
 
@@ -804,8 +804,8 @@ curl -X GET http://127.0.0.1:8300/api/v2/changefeeds/test1/synced
 応答には次のフィールドが含まれます。
 
 - `synced` : このレプリケーションタスクが完了したかどうか。`true`はタスクが完了したこと、 `false`はタスクが完了していない可能性があることを意味します。`false`の場合は、 `info`フィールドとその他のフィールドの両方で具体的なステータスを確認する必要があります。
-- `sink_checkpoint_ts` : シンク モジュールのチェックポイント ts 値 (PD 時間)。
-- `puller_resolved_ts` : PD 時間での、プラー モジュールのresolved-ts値。
+- `sink_checkpoint_ts` : シンクモジュールのチェックポイント ts 値 (PD 時間)。
+- `puller_resolved_ts` : PD 時間での、プラーモジュールのresolved-ts値。
 - `last_synced_ts` : TiCDC によって処理された最新のデータの commit-ts 値 (PD 時間)。
 - `now_ts` : 現在の PD 時間。
 - `info` : 特に`synced`が`false`の場合、同期ステータスの判別を支援する補足情報。
@@ -838,7 +838,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/changefeeds/test1/synced
 }
 ```
 
-このAPIを使用すると、上流クラスタで災害が発生した場合でも同期ステータスを照会できます。状況によっては、TiCDCの現在のデータレプリケーションタスクが完了しているかどうかを直接確認できない場合があります。そのような場合は、このAPIをリクエストし、レスポンスの`info`フィールドと上流クラスタの現在のステータスの両方を確認することで、具体的なステータスを確認できます。
+このAPIを使用すると、上流クラスターで災害が発生した場合でも同期ステータスを照会できます。状況によっては、TiCDCの現在のデータレプリケーションタスクが完了しているかどうかを直接確認できない場合があります。そのような場合は、このAPIをリクエストし、レスポンスの`info`フィールドと上流クラスターの現在のステータスの両方を確認することで、具体的なステータスを確認できます。
 
 この例では、 `sink_checkpoint_ts`が`now_ts`より遅れていますが、これは TiCDC がまだデータレプリケーションに追いついていないか、PD または TiKV に障害が発生しているためです。TiCDC がまだデータレプリケーションに追いついていない場合は、レプリケーションタスクがまだ完了していないことを意味します。PD または TiKV に障害が発生した場合は、レプリケーションタスクが完了していることを意味します。したがって、クラスターのステータスを確認するには、 `info`フィールドを確認する必要があります。
 
@@ -861,11 +861,11 @@ curl -X GET http://127.0.0.1:8300/api/v2/changefeeds/test1/synced
 
 `POST /api/v2/changefeeds/{changefeed_id}/pause`
 
-### パラメータの説明 {#parameter-description}
+### パラメーターの説明 {#parameter-description}
 
-#### パスパラメータ {#path-parameter}
+#### パスパラメーター {#path-parameter}
 
-| パラメータ名          | 説明                                    |
+| パラメーター名          | 説明                                    |
 | :-------------- | :------------------------------------ |
 | `changefeed_id` | 一時停止するレプリケーションタスク (changefeed) の ID。 |
 
@@ -887,15 +887,15 @@ curl -X POST http://127.0.0.1:8300/api/v2/changefeeds/test1/pause
 
 `POST /api/v2/changefeeds/{changefeed_id}/resume`
 
-### パラメータの説明 {#parameter-description}
+### パラメーターの説明 {#parameter-description}
 
-#### パスパラメータ {#path-parameter}
+#### パスパラメーター {#path-parameter}
 
-| パラメータ名          | 説明                                  |
+| パラメーター名          | 説明                                  |
 | :-------------- | :---------------------------------- |
 | `changefeed_id` | 再開するレプリケーションタスク (changefeed) の ID。 |
 
-#### リクエスト本体のパラメータ {#parameters-for-the-request-body}
+#### リクエスト本体のパラメーター {#parameters-for-the-request-body}
 
 ```json
 {
@@ -903,7 +903,7 @@ curl -X POST http://127.0.0.1:8300/api/v2/changefeeds/test1/pause
 }
 ```
 
-| パラメータ名                    | 説明                                                                    |
+| パラメーター名                    | 説明                                                                    |
 | :------------------------ | :-------------------------------------------------------------------- |
 | `overwrite_checkpoint_ts` | `UINT64`タイプ。レプリケーションタスク (changefeed) を再開するときにチェックポイント TSO を再割り当てします。 |
 
@@ -951,7 +951,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/processors
 }
 ```
 
-パラメータの説明は次のとおりです。
+パラメーターの説明は次のとおりです。
 
 - `changefeed_id` : 変更フィード ID。
 - `capture_id` : キャプチャ ID。
@@ -964,11 +964,11 @@ curl -X GET http://127.0.0.1:8300/api/v2/processors
 
 `GET /api/v2/processors/{changefeed_id}/{capture_id}`
 
-### パラメータの説明 {#parameter-descriptions}
+### パラメーターの説明 {#parameter-descriptions}
 
-#### パスパラメータ {#path-parameters}
+#### パスパラメーター {#path-parameters}
 
-| パラメータ名          | 説明                             |
+| パラメーター名          | 説明                             |
 | :-------------- | :----------------------------- |
 | `changefeed_id` | クエリするレプリケーションサブタスクの変更フィード ID。 |
 | `capture_id`    | クエリするレプリケーションサブタスクのキャプチャ ID。  |
@@ -989,11 +989,11 @@ curl -X GET http://127.0.0.1:8300/api/v2/processors/test/561c3784-77f0-4863-ad52
 }
 ```
 
-パラメータの説明は次のとおりです。
+パラメーターの説明は次のとおりです。
 
 - `table_ids` : このキャプチャで複製されるテーブル ID。
 
-## TiCDC サービス プロセス リストを照会する {#query-the-ticdc-service-process-list}
+## TiCDC サービスプロセスリストを照会する {#query-the-ticdc-service-process-list}
 
 このAPIは同期インターフェースです。リクエストが成功すると、すべてのレプリケーションプロセスの基本情報( `capture` )が返されます。
 
@@ -1020,7 +1020,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/captures
 }
 ```
 
-パラメータの説明は次のとおりです。
+パラメーターの説明は次のとおりです。
 
 - `id` : キャプチャ ID。
 - `is_owner` : キャプチャが所有者であるかどうか。
@@ -1052,11 +1052,11 @@ curl -X POST http://127.0.0.1:8300/api/v2/owner/resign
 
 `POST /api/v2/log`
 
-### リクエストパラメータ {#request-parameter}
+### リクエストパラメーター {#request-parameter}
 
-#### リクエスト本体のパラメータ {#parameter-for-the-request-body}
+#### リクエスト本体のパラメーター {#parameter-for-the-request-body}
 
-| パラメータ名      | 説明          |
+| パラメーター名      | 説明          |
 | :---------- | :---------- |
 | `log_level` | 設定するログレベル。 |
 

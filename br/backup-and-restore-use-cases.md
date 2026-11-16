@@ -12,11 +12,11 @@ AWS に TiDB本番クラスターをデプロイし、ビジネスチームが�
 - データの変更はタイムリーにバックアップしてください。データベースに災害が発生した場合でも、最小限のデータ損失（許容できるのは数分間のデータ損失のみ）でアプリケーションを迅速に復旧できます。
 - 毎月、特定の時間を定めずに業務監査を実施します。監査依頼を受けた場合、リクエストに応じて過去1ヶ月間の特定の時点のデータにクエリを実行するためのデータベースを提供する必要があります。
 
-PITR を使用すると、前述の要件を満たすことができます。
+PITR を使用すると、前述の要件を満たせます。
 
-## TiDBクラスタとBRをデプロイ {#deploy-the-tidb-cluster-and-br}
+## TiDBクラスターとBRをデプロイ {#deploy-the-tidb-cluster-and-br}
 
-PITRを使用するには、TiDBクラスタ（v6.2.0以上）をデプロイし、 BRをTiDBクラスタと同じバージョンにアップデートする必要があります。このドキュメントでは、例としてv{{{ .tidb-version }}}を使用しています。
+PITRを使用するには、TiDBクラスター（v6.2.0以上）をデプロイし、 BRをTiDBクラスターと同じバージョンにアップデートする必要があります。このドキュメントでは、例としてv{{{ .tidb-version }}}を使用しています。
 
 次の表は、TiDB クラスターで PITR を使用するために推奨されるハードウェアリソースを示しています。
 
@@ -35,8 +35,8 @@ PITRを使用するには、TiDBクラスタ（v6.2.0以上）をデプロイし
 
 TiUPを使用して TiDB クラスターをデプロイまたはアップグレードします。
 
-- 新しい TiDB クラスターをデプロイするには、 [TiDBクラスタをデプロイ](/production-deployment-using-tiup.md)を参照してください。
-- TiDB クラスターが v6.2.0 より前の場合は、 [TiDBクラスタのアップグレード](/upgrade-tidb-using-tiup.md)を参照してアップグレードしてください。
+- 新しい TiDB クラスターをデプロイするには、 [TiDBクラスターをデプロイ](/production-deployment-using-tiup.md)を参照してください。
+- TiDB クラスターが v6.2.0 より前の場合は、 [TiDBクラスターのアップグレード](/upgrade-tidb-using-tiup.md)を参照してアップグレードしてください。
 
 TiUPを使用してBRをインストールまたはアップグレードします。
 
@@ -65,7 +65,7 @@ TiUPを使用してBRをインストールまたはアップグレードしま�
 1. バックアップデータを保存するためのディレクトリをS3に作成します。この例ではディレクトリは`s3://tidb-pitr-bucket/backup-data`です。
 
     1. バケットを作成します。バックアップデータの保存先として既存のS3を選択できます。S3が存在しない場合は、 [AWSドキュメント: バケットの作成](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html)を参照してS3バケットを作成してください。この例では、バケット名は`tidb-pitr-bucket`です。
-    2. バックアップデータ用のディレクトリを作成します。バケット（ `tidb-pitr-bucket` ）内に`backup-data`という名前のディレクトリを作成します。詳細な手順は[AWS ドキュメント: Amazon S3 コンソールでフォルダを使用してオブジェクトを整理する](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html)を参照してください。
+    2. バックアップデータ用のディレクトリを作成します。バケット（ `tidb-pitr-bucket` ）内に`backup-data`という名前のディレクトリを作成します。詳細な手順は[AWS ドキュメント: Amazon S3 コンソールでフォルダーを使用してオブジェクトを整理する](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html)を参照してください。
 
 2. BRとTiKVがS3ディレクトリにアクセスするための権限を設定します。S3バケットにアクセスする最も安全な方法であるIAMメソッドを使用して権限を付与することをお勧めします。詳細な手順については、 [AWS ドキュメント: ユーザーポリシーによるバケットへのアクセスの制御](https://docs.aws.amazon.com/AmazonS3/latest/userguide/walkthrough1.html)を参照してください。必要な権限は次のとおりです。
 
@@ -79,7 +79,7 @@ TiUPを使用してBRをインストールまたはアップグレードしま�
 
 ## バックアップポリシーを決定する {#determine-the-backup-policy}
 
-最小限のデータ損失、迅速な回復、および 1 か月以内のビジネス監査の要件を満たすには、次のようにバックアップ ポリシーを設定できます。
+最小限のデータ損失、迅速な回復、および 1 か月以内のビジネス監査の要件を満たすには、次のようにバックアップポリシーを設定できます。
 
 - ログバックアップを実行して、データベース内のデータの変更を継続的にバックアップします。
 - 2 日ごとに午前 0 時にスナップショットバックアップを実行します。
@@ -94,7 +94,7 @@ tiup br log start --task-name=pitr --pd="${PD_IP}:2379" \
 --storage='s3://tidb-pitr-bucket/backup-data/log-backup'
 ```
 
-ログバックアップタスクの実行中に、バックアップ ステータスを照会できます。
+ログバックアップタスクの実行中に、バックアップステータスを照会できます。
 
 ```shell
 tiup br log status --task-name=pitr --pd="${PD_IP}:2379"

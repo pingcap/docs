@@ -1,11 +1,11 @@
 ---
 title: Performance Schema
-summary: TiDB は、システム メタデータを表示するための performance_schema を実装します。
+summary: TiDB は、システムメタデータを表示するための performance_schema を実装します。
 ---
 
 # パフォーマンススキーマ {#performance-schema}
 
-TiDB は、MySQL との互換性のためにパフォーマンス スキーマ テーブルを実装します。
+TiDB は、MySQL との互換性のためにパフォーマンススキーマテーブルを実装します。
 
 ## MySQL互換性のためのテーブル {#tables-for-mysql-compatibility}
 

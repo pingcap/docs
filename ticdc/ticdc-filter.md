@@ -30,13 +30,13 @@ rules = ['*.*', '!test.*']
 - `rules = ['scm1.tidb_*']`
     - `scm1`データベース内の、名前が`tidb_`で始まるすべてのテーブルを複製します。
 
-詳細については[テーブルフィルタ構文](/table-filter.md#syntax)を参照してください。
+詳細については[テーブルフィルター構文](/table-filter.md#syntax)を参照してください。
 
 ## イベントフィルタールール {#event-filter-rules}
 
 TiCDC v6.2.0以降では、イベントフィルターがサポートされています。イベントフィルタールールを設定することで、指定した条件を満たすDMLイベントとDDLイベントを除外できます。
 
-以下はイベントフィルタルールの例です。
+以下はイベントフィルタールールの例です。
 
 ```toml
 [filter]
@@ -52,9 +52,9 @@ ignore-update-old-value-expr = "age < 18 or name = 'lili'" # Ignore update DMLs 
 ignore-update-new-value-expr = "gender = 'male' and age > 18" # Ignore update DMLs whose new value contains "gender = 'male'" and "age > 18".
 ```
 
-設定パラメータの説明:
+設定パラメーターの説明:
 
-- `matcher` : このイベントフィルタルールが適用されるデータベースとテーブル。構文は[テーブルフィルター](/table-filter.md)と同じです。
+- `matcher` : このイベントフィルタールールが適用されるデータベースとテーブル。構文は[テーブルフィルター](/table-filter.md)と同じです。
 
     > **Note:**
     >
@@ -71,7 +71,7 @@ ignore-update-new-value-expr = "gender = 'male' and age > 18" # Ignore update DM
     >
     > データベース全体ではなく、指定されたテーブルのみをフィルター処理する場合は、 `ignore-sql`値を`["drop table"]`に変更します。
 
-- `ignore-event` : 無視するイベントの種類。このパラメータは文字列の配列を受け入れます。複数のイベントの種類を設定できます。現在、以下のイベントの種類がサポートされています。
+- `ignore-event` : 無視するイベントの種類。このパラメーターは文字列の配列を受け入れます。複数のイベントの種類を設定できます。現在、以下のイベントの種類がサポートされています。
 
     | イベント                | タイプ | エイリアス       | 説明                                                                      |
     | ------------------- | --- | ----------- | ----------------------------------------------------------------------- |
@@ -117,15 +117,15 @@ ignore-update-new-value-expr = "gender = 'male' and age > 18" # Ignore update DM
     >
     > TiDBのDDL文は、 `ALTER TABLE t MODIFY COLUMN a INT, ADD COLUMN b INT, DROP COLUMN c;`のように単一テーブルの複数の属性を同時に変更することをサポートしています。この操作はMultiSchemaChangeとして定義されています。このタイプのDDLを除外したい場合は、 `ignore-event`で`"multi schema change"`を設定する必要があります。
 
-- `ignore-sql` : フィルタリングするDDL文の正規表現。このパラメータは文字列の配列を受け付け、複数の正規表現を設定できます。この設定はDDLイベントにのみ適用されます。
+- `ignore-sql` : フィルタリングするDDL文の正規表現。このパラメーターは文字列の配列を受け付け、複数の正規表現を設定できます。この設定はDDLイベントにのみ適用されます。
 
-- `ignore-delete-value-expr` : このパラメータは、指定された値を持つ`DELETE`種類の DML イベントをフィルタリングするために使用される、デフォルトの SQL モードに従う SQL 式を受け入れます。
+- `ignore-delete-value-expr` : このパラメーターは、指定された値を持つ`DELETE`種類の DML イベントをフィルタリングするために使用される、デフォルトの SQL モードに従う SQL 式を受け入れます。
 
-- `ignore-insert-value-expr` : このパラメータは、指定された値を持つ`INSERT`種類の DML イベントをフィルタリングするために使用される、デフォルトの SQL モードに従う SQL 式を受け入れます。
+- `ignore-insert-value-expr` : このパラメーターは、指定された値を持つ`INSERT`種類の DML イベントをフィルタリングするために使用される、デフォルトの SQL モードに従う SQL 式を受け入れます。
 
-- `ignore-update-old-value-expr` : このパラメータは、デフォルトの SQL モードに従う SQL 式を受け入れ、指定された古い値を持つ`UPDATE`種類の DML イベントを除外するために使用されます。
+- `ignore-update-old-value-expr` : このパラメーターは、デフォルトの SQL モードに従う SQL 式を受け入れ、指定された古い値を持つ`UPDATE`種類の DML イベントを除外するために使用されます。
 
-- `ignore-update-new-value-expr` : このパラメータは、デフォルトの SQL モードに従う SQL 式を受け入れ、指定された新しい値を持つ`UPDATE` DML イベントを除外するために使用されます。
+- `ignore-update-new-value-expr` : このパラメーターは、デフォルトの SQL モードに従う SQL 式を受け入れ、指定された新しい値を持つ`UPDATE` DML イベントを除外するために使用されます。
 
 > **Note:**
 >

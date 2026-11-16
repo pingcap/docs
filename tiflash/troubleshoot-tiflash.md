@@ -3,7 +3,7 @@ title: Troubleshoot a TiFlash Cluster
 summary: TiFlashクラスターのトラブルシューティングを行う際の一般的な操作を学習します。
 ---
 
-# TiFlashクラスタのトラブルシューティング {#troubleshoot-a-tiflash-cluster}
+# TiFlashクラスターのトラブルシューティング {#troubleshoot-a-tiflash-cluster}
 
 このセクションでは、 TiFlashの使用時によく発生する問題、その原因、および解決策について説明します。
 
@@ -19,7 +19,7 @@ TiFlash は様々な理由により正常に起動しない場合があります
     dnf install libnsl
     ```
 
-2. システムの`ulimit`パラメータ設定を確認してください。
+2. システムの`ulimit`パラメーター設定を確認してください。
 
     ```shell
     ulimit -n 1000000
@@ -71,7 +71,7 @@ TiFlashのワークロードが大きすぎてTiFlashデータのレプリケー
 
     > **Note:**
     >
-    > テーブルのTiFlashレプリケーション ルールを手動で削除した後、このテーブルに対して`RECOVER TABLE`、 `FLASHBACK TABLE`、または`FLASHBACK DATABASE`操作を実行すると、このテーブルのTiFlashレプリカは復元されません。
+    > テーブルのTiFlashレプリケーションルールを手動で削除した後、このテーブルに対して`RECOVER TABLE`、 `FLASHBACK TABLE`、または`FLASHBACK DATABASE`操作を実行すると、このテーブルのTiFlashレプリカは復元されません。
 
     1. 現在の PD インスタンス内のTiFlashに関連するすべてのデータ複製ルールを表示します。
 
@@ -162,7 +162,7 @@ TiDB クラスターをデプロイした後、 TiFlashレプリカの作成が�
 
     - 値`count`がクラスター内の TiKV ノードの数以下の場合は、次の手順に進みます。
 
-    - `count`の値がクラスタ内の TiKV ノードの数より大きい場合（例えば、テストクラスタに TiKV ノードが 1つしかなく、 `count`が`3`の場合）、PD はTiFlashノードにリージョンピアを追加しません。この問題に対処するには、 `count`をクラスタ内の TiKV ノードの数以下の整数に変更してください。
+    - `count`の値がクラスター内の TiKV ノードの数より大きい場合（例えば、テストクラスターに TiKV ノードが 1つしかなく、 `count`が`3`の場合）、PD はTiFlashノードにリージョンピアを追加しません。この問題に対処するには、 `count`をクラスター内の TiKV ノードの数以下の整数に変更してください。
 
     > **Note:**
     >

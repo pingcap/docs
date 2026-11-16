@@ -17,22 +17,22 @@ cdc cli changefeed create --server=http://10.0.10.25:8300 --sink-uri="mysql://ro
 
 [新しいアーキテクチャにおけるTiCDC](/ticdc/ticdc-architecture.md)の監視ダッシュボードは**TiCDC-New-Arch**です。v8.5.4 以降のバージョンの TiDB クラスターでは、この監視ダッシュボードはクラスターのデプロイまたはアップグレード時に Grafana に統合されるため、手動操作は不要です。
 
-クラスターのバージョンが v8.5.4 より前の場合は、TiCDC 監視メトリック ファイルを手動でインポートする必要があります。
+クラスターのバージョンが v8.5.4 より前の場合は、TiCDC 監視メトリックファイルを手動でインポートする必要があります。
 
-1. 新しいアーキテクチャの TiCDC の監視メトリック ファイルをダウンロードします。
+1. 新しいアーキテクチャの TiCDC の監視メトリックファイルをダウンロードします。
 
     ```shell
     wget https://raw.githubusercontent.com/pingcap/ticdc/refs/heads/release-8.5/metrics/grafana/ticdc_new_arch.json
     ```
 
-2. ダウンロードしたメトリック ファイルを Grafana にインポートします。
+2. ダウンロードしたメトリックファイルを Grafana にインポートします。
 
     ![Import Metrics File](/media/ticdc/ticdc-new-arch-import-grafana.png)
 
 TiCDC の新しいアーキテクチャの監視ダッシュボードには、主に次のセクションが含まれます。
 
 - [**Summary**](#summary): TiCDCクラスターの概要情報
-- [**Server**](#server): TiDBクラスタ内のTiKVノードとTiCDCノードの概要情報
+- [**Server**](#server): TiDBクラスター内のTiKVノードとTiCDCノードの概要情報
 - [**Log Puller**](#log-puller): TiCDC Log Pullerモジュールの詳細情報
 - [**Event Store**](#event-store): TiCDCイベントストアモジュールの詳細情報
 - [**Sink**](#sink): TiCDCシンクモジュールの詳細情報
@@ -52,8 +52,8 @@ TiCDC の新しいアーキテクチャの監視ダッシュボードには、�
 - Sink Event Row Count/s: TiCDCが1秒あたりにダウンストリームに書き込む行数
 - Sink Write Bytes/s: TiCDCが1秒あたりにダウンストリームに書き込むデータの量
 - The Status of Changefeeds: 各チェンジフィードのステータス
-- Table Dispatcher Count: 各チェンジフィードに対応するディスパッチャの数
-- Memory Quota: イベントコレクタのメモリクォータと使用量。使用量が多すぎるとスロットリングが発生する可能性があります。
+- Table Dispatcher Count: 各チェンジフィードに対応するディスパッチャーの数
+- Memory Quota: イベントコレクターのメモリクォータと使用量。使用量が多すぎるとスロットリングが発生する可能性があります。
 
 ### Server {#server}
 
@@ -69,7 +69,7 @@ TiCDC の新しいアーキテクチャの監視ダッシュボードには、�
 - CPU Usage: TiCDCノードのCPU使用率
 - Memory Usage: TiCDCノードのメモリ使用量
 - Ownership History: TiCDC クラスター内の所有者ノードの履歴記録
-- PD Leader History:上流TiDBクラスタ内のPD Leaderノードの履歴記録
+- PD Leader History:上流TiDBクラスター内のPD Leaderノードの履歴記録
 
 ### Log Puller {#log-puller}
 
@@ -95,7 +95,7 @@ TiCDC の新しいアーキテクチャの監視ダッシュボードには、�
 **Event Store**パネルの各メトリックの説明は次のとおりです。
 
 - Resolved Ts Lag: イベントストアの処理の進行と上流データベース間のラグ
-- Register Dispatcher StartTs Lag:ディスパッチャ登録StartTsと現在の時刻のラグ
+- Register Dispatcher StartTs Lag:ディスパッチャー登録StartTsと現在の時刻のラグ
 - Subscriptions Resolved Ts Lag: サブスクリプション処理の進行と上流データベース間のラグ
 - Subscriptions Data GC Lag: サブスクリプションデータGCの進行状況と現在の時刻の間のラグ
 - Input Event Count/s: イベントストアが1秒あたりに処理するイベントの数
@@ -131,9 +131,9 @@ TiUPを使用して TiDB クラスターをデプロイすると、Grafana で�
 
 各パネルの説明は次のとおりです。
 
-- [**Server**](#server): TiDBクラスタ内のTiKVノードとTiCDCノードの概要情報
+- [**Server**](#server): TiDBクラスター内のTiKVノードとTiCDCノードの概要情報
 - [**Changefeed**](#changefeed): TiCDCレプリケーションタスクの詳細情報
-- [**Events**](#events): TiCDCクラスタ内のデータフローに関する詳細情報
+- [**Events**](#events): TiCDCクラスター内のデータフローに関する詳細情報
 - [**TiKV**](#tikv): TiCDCに関連するTiKV情報
 
 ### Server {#server}
@@ -159,7 +159,7 @@ TiUPを使用して TiDB クラスターをデプロイすると、Grafana で�
 ![TiCDC Dashboard - Changefeed metrics 1](/media/ticdc/ticdc-dashboard-changefeed-1.png)
 
 - Changefeed table count: 各 TiCDC ノードがレプリケーションタスクで複製する必要があるテーブルの数
-- Processor resolved ts: TiCDCクラスタで解決されたタイムスタンプ
+- Processor resolved ts: TiCDCクラスターで解決されたタイムスタンプ
 - Table resolved ts: レプリケーションタスク内の各テーブルのレプリケーションの進行状況
 - Changefeed checkpoint：下流へのデータ複製の進行状況。通常、緑色のバーは黄色の線とつながっています。
 - PD etcd requests/s: TiCDCノードがPDに送信するリクエスト数（1秒あたり）
@@ -182,7 +182,7 @@ TiUPを使用して TiDB クラスターをデプロイすると、Grafana で�
 
 ![TiCDC Dashboard - Changefeed metrics 4](/media/ticdc/ticdc-dashboard-changefeed-4.png)
 
-- Changefeed catch-up ETA: レプリケーションタスクが上流のクラスタデータに追いつくのに必要な推定時間です。上流の書き込み速度が TiCDC のレプリケーション速度よりも速い場合、この指標は非常に大きくなる可能性があります。TiCDC のレプリケーション速度は多くの要因に左右されるため、この指標は参考値であり、実際のレプリケーション時間とは異なる可能性があります。
+- Changefeed catch-up ETA: レプリケーションタスクが上流のクラスターデータに追いつくのに必要な推定時間です。上流の書き込み速度が TiCDC のレプリケーション速度よりも速い場合、この指標は非常に大きくなる可能性があります。TiCDC のレプリケーション速度は多くの要因に左右されるため、この指標は参考値であり、実際のレプリケーション時間とは異なる可能性があります。
 
 ### Events {#events}
 
@@ -201,14 +201,14 @@ TiUPを使用して TiDB クラスターをデプロイすると、Grafana で�
 - Sink flush rows/s: TiCDCノードが1秒あたりにダウンストリームに書き込む行数
 - Puller buffer size: TiCDCノードがPullerモジュールにキャッシュするイベントの数
 - Entry sorter buffer size: TiCDCノードがソーターモジュールにキャッシュするイベントの数
-- Processor/Mounter buffer size: TiCDCノードがプロセッサモジュールとマウントモジュールにキャッシュするイベントの数
+- Processor/Mounter buffer size: TiCDCノードがプロセッサーモジュールとマウントモジュールにキャッシュするイベントの数
 - Sink row buffer size: TiCDCノードがシンクモジュールにキャッシュするイベントの数
 - Entry sorter sort duration: TiCDCノードがイベントをソートするのにかかった時間のヒストグラム
 - Entry sorter sort duration percentile: TiCDCのソートイベントが1秒間に要した時間(P95、P99、P999)
 - Entry sorter merge duration: TiCDCノードがソートされたイベントをマージするのにかかった時間のヒストグラム
 - Entry sorter merge duration percentile: TiCDCがソートされたイベントを1秒以内にマージするのにかかる時間(P95、P99、P999)
 - Mounter unmarshal duration: TiCDCノードがイベントをアンマーシャリングするのにかかった時間のヒストグラム
-- Mounter unmarshal duration percentile: TiCDC アンマーシャリング イベントが 1秒間に要した時間 (P95、P99、および P999)
+- Mounter unmarshal duration percentile: TiCDC アンマーシャリングイベントが 1秒間に要した時間 (P95、P99、および P999)
 - KV client dispatch events/s: KVクライアントモジュールがTiCDCノード間で1秒あたりにディスパッチするイベント数
 - KV client batch resolved size: TiKVがTiCDCに送信する解決済みタイムスタンプメッセージのバッチサイズ
 

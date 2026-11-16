@@ -11,18 +11,18 @@ TiDB Lightning は、設定ファイルまたはコマンドラインから設�
 
 ### `tidb-lightning` {#tidb-lightning}
 
-`tidb-lightning`を使用して次のパラメータを設定できます。
+`tidb-lightning`を使用して次のパラメーターを設定できます。
 
-| パラメータ                                                 | 説明                                                                                                                                                                                | 対応する設定項目                       |
+| パラメーター                                                 | 説明                                                                                                                                                                                | 対応する設定項目                       |
 | :---------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------------- |
-| `--config <file>`                                     | ファイルからグローバル設定を読み取ります。このパラメータが指定されていない場合、 TiDB Lightningはデフォルト設定を使用します。                                                                                                            |                                |
+| `--config <file>`                                     | ファイルからグローバル設定を読み取ります。このパラメーターが指定されていない場合、 TiDB Lightningはデフォルト設定を使用します。                                                                                                            |                                |
 | `-V`                                                  | プログラムのバージョンを印刷します。                                                                                                                                                                |                                |
 | `-d <directory>`                                      | ローカルディレクトリまたはデータファイルの[外部ストレージURI](/external-storage-uri.md) 。                                                                                                                 | `mydumper.data-source-dir`     |
 | `-L <level>`                                          | ログレベル：`debug` 、 `info` 、 `warn` 、 `error` 、または`fatal` 。デフォルトは`info` 。                                                                                                                            | `lightning.level`              |
-| `-f <rule>`                                           | [テーブルフィルタルール](/table-filter.md) 。複数回指定できます。                                                                                                                                       | `mydumper.filter`              |
+| `-f <rule>`                                           | [テーブルフィルタールール](/table-filter.md) 。複数回指定できます。                                                                                                                                       | `mydumper.filter`              |
 | `--backend <backend>`                                 | インポートモードを選択します。`local`は[物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode.md)を、 `tidb`は[論理インポートモード](/tidb-lightning/tidb-lightning-logical-import-mode.md)を指します。 | `tikv-importer.backend`        |
 | `--log-file <file>`                                   | ログファイルのパス。デフォルトでは`/tmp/lightning.log.{timestamp}`です。'-'に設定すると、ログファイルは標準出力に出力されます。                                                                                                 | `lightning.log-file`           |
-| `--status-addr <ip:port>`                             | TiDB Lightning HTTPサーバーのリスニング アドレス                                                                                                                                                | `lightning.status-addr`        |
+| `--status-addr <ip:port>`                             | TiDB Lightning HTTPサーバーのリスニングアドレス                                                                                                                                                | `lightning.status-addr`        |
 | `--pd-urls <host1:port1,host2:port2,...,hostn:portn>` | PDエンドポイントアドレス。v7.6.0以降、TiDBは複数のPDアドレスの設定をサポートします。                                                                                                                                 | `tidb.pd-addr`                 |
 | `--tidb-host <host>`                                  | TiDBサーバーホスト                                                                                                                                                                       | `tidb.host`                    |
 | `--tidb-port <port>`                                  | TiDBサーバーポート (デフォルト = 4000)                                                                                                                                                        | `tidb.port`                    |
@@ -38,13 +38,13 @@ TiDB Lightning は、設定ファイルまたはコマンドラインから設�
 | `--key <file>`                                        | TLS接続の秘密鍵パス                                                                                                                                                                       | `security.key-path`            |
 | `--server-mode`                                       | TiDB Lightningをサーバーモードで起動します。このモードでは、TiDB Lightningはすぐにインポートを開始するのではなく、HTTP API を通じてインポートタスクが送信されるのを待機します。                                                                                         | `lightning.server-mode`        |
 
-コマンドラインパラメータと設定ファイル内の対応する設定の両方を指定した場合、コマンドラインパラメータが優先されます。例えば、 `tiup tidb-lightning -L debug --config cfg.toml`を実行すると、 `cfg.toml`の内容に関係なく、ログレベルは常に"debug"に設定されます。
+コマンドラインパラメーターと設定ファイル内の対応する設定の両方を指定した場合、コマンドラインパラメーターが優先されます。例えば、 `tiup tidb-lightning -L debug --config cfg.toml`を実行すると、 `cfg.toml`の内容に関係なく、ログレベルは常に"debug"に設定されます。
 
 ## `tidb-lightning-ctl` {#tidb-lightning-ctl}
 
-`tidb-lightning`のすべてのパラメータは`tidb-lightning-ctl`にも適用されます。さらに、 `tidb-lightning-ctl`を使用して以下のパラメータを設定することもできます。
+`tidb-lightning`のすべてのパラメーターは`tidb-lightning-ctl`にも適用されます。さらに、 `tidb-lightning-ctl`を使用して以下のパラメーターを設定することもできます。
 
-| パラメータ                                     | 説明                                               |
+| パラメーター                                     | 説明                                               |
 | :---------------------------------------- | :----------------------------------------------- |
 | `--compact`                               | 完全なコンパクションを実行します。                                     |
 | `--switch-mode <mode>`                    | すべての TiKV ストアを指定されたモード (通常またはインポート) に切り替えます。     |

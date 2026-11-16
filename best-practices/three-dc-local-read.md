@@ -10,7 +10,7 @@ aliases: ['/ja/tidb/stable/three-dc-local-read/']
 
 このドキュメントでは、 [ステイル読み取り](/stale-read.md)機能を使用して、センター間アクセスを回避し、リアルタイムのデータ可用性を犠牲にしてアクセスのレイテンシーを減らす方法について説明します。
 
-## 3つのデータセンターのTiDBクラスタをデプロイ {#deploy-a-tidb-cluster-of-three-data-centers}
+## 3つのデータセンターのTiDBクラスターをデプロイ {#deploy-a-tidb-cluster-of-three-data-centers}
 
 3 つのデータセンターのデプロイ方法については、 [1つの地域デプロイにおける複数のデータセンター](/multi-data-centers-in-one-city-deployment.md)を参照してください。
 
@@ -25,6 +25,6 @@ zone=dc-1
 
 [ステイル読み取り](/stale-read.md)は、TiDBがユーザーに履歴データ読み取りのために提供するメカニズムです。このメカニズムを使用することで、特定の時点または指定された時間範囲内の対応する履歴データを読み取ることができ、ストレージノード間のデータ複製によって生じるレイテンシーを削減できます。地理的に分散されたデプロイメントの一部のシナリオでステイル読み取りを使用する場合、TiDBはリアルタイムパフォーマンスを犠牲にして現在のデータセンター内のレプリカにアクセスし、対応するデータを読み取ります。これにより、センター間接続によって生じるネットワークレイテンシーを回避し、クエリプロセス全体のアクセスレイテンシーを削減します。
 
-TiDB がステイル読み取りクエリを受信すると、その TiDB ノードの`zone`ラベルが設定されていて、 [`tidb_replica_read`](/system-variables.md#tidb_replica_read-new-in-v40)が`closest-replicas`に設定されている場合、TiDB は対応するデータ レプリカが存在する同じ`zone`ラベルを持つ TiKV ノードにリクエストを送信します。
+TiDB がステイル読み取りクエリを受信すると、その TiDB ノードの`zone`ラベルが設定されていて、 [`tidb_replica_read`](/system-variables.md#tidb_replica_read-new-in-v40)が`closest-replicas`に設定されている場合、TiDB は対応するデータレプリカが存在する同じ`zone`ラベルを持つ TiKV ノードにリクエストを送信します。
 
 ステイル読み取り の実行方法については、 [`AS OF TIMESTAMP`句を使用してステイル読み取りを実行する](/as-of-timestamp.md)を参照してください。

@@ -25,7 +25,7 @@ cdc cli changefeed create --server=http://127.0.0.1:8300 --changefeed-id="kafka-
 
 > **Note:**
 >
-> Avroプロトコルを使用する場合、1つのKafkaトピックには1つのテーブルのデータのみを含めることができます。設定ファイルで[トピックディスパッチャ](/ticdc/ticdc-sink-to-kafka.md#topic-dispatchers)を設定する必要があります。
+> Avroプロトコルを使用する場合、1つのKafkaトピックには1つのテーブルのデータのみを含めることができます。設定ファイルで[トピックディスパッチャー](/ticdc/ticdc-sink-to-kafka.md#topic-dispatchers)を設定する必要があります。
 
 ```shell
 [sink]
@@ -82,7 +82,7 @@ TiCDC は DML イベントを Kafka イベントに変換し、イベントの�
 > - 挿入イベントの場合、Avro はすべての列データを値部分にエンコードします。
 > - 更新イベントの場合、Avro は値部分に更新されるすべての列データのみをエンコードします。
 >
-> Avroプロトコルは、UpdateイベントとDeleteイベントの古い値をエンコードしません。さらに、削除を識別するために`null`レコードを使用するほとんどのConfluentシンクコネクタ（ `delete.on.null` ）との互換性を確保するため、 `enable-tidb-extension`が有効になっている場合でも、Deleteイベントには`_tidb_commit_ts`などの拡張情報は含まれません。これらの機能が必要な場合は、Canal-JSONやDebeziumなどの他のプロトコルの使用を検討してください。
+> Avroプロトコルは、UpdateイベントとDeleteイベントの古い値をエンコードしません。さらに、削除を識別するために`null`レコードを使用するほとんどのConfluentシンクコネクター（ `delete.on.null` ）との互換性を確保するため、 `enable-tidb-extension`が有効になっている場合でも、Deleteイベントには`_tidb_commit_ts`などの拡張情報は含まれません。これらの機能が必要な場合は、Canal-JSONやDebeziumなどの他のプロトコルの使用を検討してください。
 
 ## TiDB拡張フィールド {#tidb-extension-fields}
 
@@ -205,7 +205,7 @@ dispatchers = [
 | DECIMAL            | DECIMAL           | bytes     | `avro-decimal-handling-mode`が string の場合、AVRO_TYPE は string です。                                              |
 | TiDBVECTORFloat32  | TiDBVECTORFloat32 | string    |  -                                                                                                                         |
 
-Avro プロトコルでは、他の 2つの`sink-uri`パラメータ`avro-decimal-handling-mode`と`avro-bigint-unsigned-handling-mode`もカラムデータ形式に影響する可能性があります。
+Avro プロトコルでは、他の 2つの`sink-uri`パラメーター`avro-decimal-handling-mode`と`avro-bigint-unsigned-handling-mode`もカラムデータ形式に影響する可能性があります。
 
 - `avro-decimal-handling-mode` 、Avro が小数フィールドを処理する方法を制御します。これには以下が含まれます。
 
@@ -293,11 +293,11 @@ AvroはDDLイベントとウォーターマークイベントを下流に送信�
 
 TiCDC Avro プロトコルは[`io.confluent.kafka.serializers.KafkaAvroDeserializer`](https://docs.confluent.io/platform/current/schema-registry/fundamentals/serdes-develop/serdes-avro.html#avro-deserializer)でデシリアライズできます。
 
-コンシューマー プログラムは[スキーマレジストリAPI](https://docs.confluent.io/platform/current/schema-registry/develop/api.html)を介して最新のスキーマを取得し、そのスキーマを使用して TiCDC Avro プロトコルによってエンコードされたデータをデシリアライズできます。
+コンシューマープログラムは[スキーマレジストリAPI](https://docs.confluent.io/platform/current/schema-registry/develop/api.html)を介して最新のスキーマを取得し、そのスキーマを使用して TiCDC Avro プロトコルによってエンコードされたデータをデシリアライズできます。
 
 ### イベントの種類を区別する {#distinguish-event-types}
 
-コンシューマー プログラムは、次のルールによって DML イベントタイプを区別できます。
+コンシューマープログラムは、次のルールによって DML イベントタイプを区別できます。
 
 - Key部分のみの場合はDeleteイベントになります。
 - キーと値の両方がある場合、挿入イベントまたは更新イベントのいずれかです。[TiDB拡張フィールド](#tidb-extension-fields)が有効になっている場合は、 `_tidb_op`フィールドを使用して挿入イベントか更新イベントかを識別できます。TiDB拡張フィールドが有効になっていない場合は、それらを区別できません。

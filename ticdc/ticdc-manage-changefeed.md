@@ -250,9 +250,9 @@ cdc cli changefeed resume -c test-cf --server=http://10.0.10.25:8300
 
     上記のコマンドでは、次のようになります。
 
-    - `status.tables` : 各キー番号はレプリケーション テーブルの ID を表し、TiDB のテーブルの`tidb_table_id`に相当します。
-    - `resolved-ts` : 現在のプロセッサ内のソートされたデータの中で最大の TSO。
-    - `checkpoint-ts` : 現在のプロセッサでダウンストリームに正常に書き込まれた最大の TSO。
+    - `status.tables` : 各キー番号はレプリケーションテーブルの ID を表し、TiDB のテーブルの`tidb_table_id`に相当します。
+    - `resolved-ts` : 現在のプロセッサー内のソートされたデータの中で最大の TSO。
+    - `checkpoint-ts` : 現在のプロセッサーでダウンストリームに正常に書き込まれた最大の TSO。
 
 ## 照合順序の新しいフレームワークを有効にしてテーブルを複製する {#replicate-tables-with-the-new-framework-for-collations-enabled}
 
@@ -283,7 +283,7 @@ force-replicate = true
 
 v4.0.13 以降に`cdc cli`を使用して作成された changefeed の場合、Unified Sorter はデフォルトで有効になっています。v4.0.13 より前に存在していた changefeed の場合、以前の構成が使用されます。
 
-変更フィードで Unified Sorter 機能が有効になっているかどうかを確認するには、次のサンプル コマンドを実行します (PD インスタンスの IP アドレスが`http://10.0.10.25:2379`であると仮定)。
+変更フィードで Unified Sorter 機能が有効になっているかどうかを確認するには、次のサンプルコマンドを実行します (PD インスタンスの IP アドレスが`http://10.0.10.25:2379`であると仮定)。
 
 ```shell
 cdc cli --server="http://10.0.10.25:8300" changefeed query --changefeed-id=simple-replication-task | grep 'sort_engine'
@@ -293,5 +293,5 @@ cdc cli --server="http://10.0.10.25:8300" changefeed query --changefeed-id=simpl
 
 > **Note:**
 >
-> - サーバーで、レイテンシーが長く、帯域幅が制限されている機械式ハード ドライブやその他のストレージデバイスが使用されている場合、Unified Sorter のパフォーマンスは大幅に低下します。
+> - サーバーで、レイテンシーが長く、帯域幅が制限されている機械式ハードドライブやその他のストレージデバイスが使用されている場合、Unified Sorter のパフォーマンスは大幅に低下します。
 > - デフォルトでは、Unified Sorter は一時ファイルの保存に`data_dir`を使用します。空きディスク容量が 500 GiB 以上であることを確認することをお勧めします。本番環境では、各ノードの空きディスク容量が（業務で許容される最大遅延時間`checkpoint-ts` ）×（業務ピーク時のアップストリーム書き込みトラフィック）よりも大きいことを確認することをお勧めします。また、 `changefeed`を作成した後に大量の履歴データを複製する予定がある場合は、各ノードの空き容量が複製データの量よりも大きいことを確認してください。

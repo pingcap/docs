@@ -32,7 +32,7 @@ Info: {"upstream_id":7171388873935111376,"namespace":"default","id":"simple-repl
 - `--sink-uri` : チェンジフィードのダウンストリームアドレス。詳細は[シンクURIを構成する](#configure-sink-uri)を参照してください。
 - `--start-ts` : チェンジフィードの開始TSO。TiCDCはこのTSOからデータのプルを開始します。デフォルト値は現在時刻です。
 - `--target-ts` : チェンジフィードの終了TSO。TiCDCはこのTSOまでデータのプルを停止します。デフォルト値は空で、TiCDCはデータのプルを自動的に停止しません。
-- `--config` : チェンジフィードの設定ファイル。詳細は[TiCDC チェンジフィード設定パラメータ](/ticdc/ticdc-changefeed-config.md)を参照してください。
+- `--config` : チェンジフィードの設定ファイル。詳細は[TiCDC チェンジフィード設定パラメーター](/ticdc/ticdc-changefeed-config.md)を参照してください。
 
 ## シンクURIを構成する {#configure-sink-uri}
 
@@ -42,23 +42,23 @@ Info: {"upstream_id":7171388873935111376,"namespace":"default","id":"simple-repl
 [scheme]://[host]/[path]?[query_parameters]
 ```
 
-URI の`[query_parameters]`には、次のパラメータを設定できます。
+URI の`[query_parameters]`には、次のパラメーターを設定できます。
 
-| パラメータ                   | 説明                                                                                                                                                                                                                                   | デフォルト値     | 値の範囲                   |
+| パラメーター                   | 説明                                                                                                                                                                                                                                   | デフォルト値     | 値の範囲                   |
 | :---------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------- | :--------------------- |
 | `worker-count`          | ダウンストリームのクラウドストレージにデータの変更を保存するための同時実行性。                                                                                                                                                                                            | `16`       | `[1, 512]`             |
 | `flush-interval`        | ダウンストリームのクラウドストレージにデータの変更を保存する間隔。                                                                                                                                                                                                  | `5s`       | `[2s, 10m]`            |
-| `file-size`             | バイト数がこのパラメータの値を超えると、データ変更ファイルはクラウドストレージに保存されます。                                                                                                                                                                                    | `67108864` | `[1048576, 536870912]` |
+| `file-size`             | バイト数がこのパラメーターの値を超えると、データ変更ファイルはクラウドストレージに保存されます。                                                                                                                                                                                    | `67108864` | `[1048576, 536870912]` |
 | `protocol`              | ダウンストリームに送信されるメッセージのプロトコル形式。                                                                                                                                                                                                         | 該当なし       | `canal-json`と`csv`     |
 | `enable-tidb-extension` | `protocol`が`canal-json`に設定され、`enable-tidb-extension`が`true`に設定されている場合、TiCDC は[ウォーターマークイベント](/ticdc/ticdc-canal-json.md#watermark-event)を送信し、[TiDB拡張フィールド](/ticdc/ticdc-canal-json.md#tidb-extension-field)を Canal-JSON メッセージに追加します。 | `false`    | `false`と`true`         |
 
 > **Note:**
 >
-> データ変更ファイルは、 `flush-interval`または`file-size`のいずれかが要件を満たしている場合に下流に保存されます。`protocol`パラメータは必須です。TiCDCが変更フィードの作成時にこのパラメータを受け取らない場合は、 `CDC:ErrSinkUnknownProtocol`エラーが返されます。
+> データ変更ファイルは、 `flush-interval`または`file-size`のいずれかが要件を満たしている場合に下流に保存されます。`protocol`パラメーターは必須です。TiCDCが変更フィードの作成時にこのパラメーターを受け取らない場合は、 `CDC:ErrSinkUnknownProtocol`エラーが返されます。
 
 ### 外部ストレージのシンクURIを構成する {#configure-sink-uri-for-external-storage}
 
-クラウドストレージシステムにデータを保存する場合、クラウドサービスプロバイダーに応じて異なる認証パラメータを設定する必要があります。このセクションでは、Amazon S3、Google Cloud Storage（GCS）、Azure Blob Storage を使用する場合の認証方法と、それぞれのストレージサービスにアクセスするためのアカウントの設定方法について説明します。
+クラウドストレージシステムにデータを保存する場合、クラウドサービスプロバイダーに応じて異なる認証パラメーターを設定する必要があります。このセクションでは、Amazon S3、Google Cloud Storage（GCS）、Azure Blob Storage を使用する場合の認証方法と、それぞれのストレージサービスにアクセスするためのアカウントの設定方法について説明します。
 
 <SimpleTab groupId="storage">
 <div label="Amazon S3" value="amazon">
@@ -77,7 +77,7 @@ URI の`[query_parameters]`には、次のパラメータを設定できます�
     - `s3:ListMultipartUploadParts`
     - `s3:ListBucketMultipartUploads`
 
-レプリケーションデータストレージディレクトリを作成していない場合は、 [バケットを作成する](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html)を参照して指定リージョンに S3 バケットを作成してください。必要に応じて、 [フォルダを使用して Amazon S3 コンソールでオブジェクトを整理する](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-folder.html)を参照してバケット内にフォルダを作成することもできます。
+レプリケーションデータストレージディレクトリを作成していない場合は、 [バケットを作成する](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html)を参照して指定リージョンに S3 バケットを作成してください。必要に応じて、 [フォルダーを使用して Amazon S3 コンソールでオブジェクトを整理する](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-folder.html)を参照してバケット内にフォルダーを作成することもできます。
 
 次の方法で Amazon S3 にアクセスできるようにアカウントを設定できます。
 
@@ -126,7 +126,7 @@ GCSへのアクセスに使用するアカウントは、アクセスキーを�
 
 - 方法2: アクセスキーを指定する
 
-    URIで`account-name`と`account-key`を設定した場合、このパラメータで指定されたストレージアカウント名とキーが使用されます。URIでキーファイルを指定するだけでなく、TiCDCは環境変数`$AZURE_STORAGE_KEY`からキーを読み取ることもできます。
+    URIで`account-name`と`account-key`を設定した場合、このパラメーターで指定されたストレージアカウント名とキーが使用されます。URIでキーファイルを指定するだけでなく、TiCDCは環境変数`$AZURE_STORAGE_KEY`からキーを読み取ることもできます。
 
 - 方法3: Azure ADを使用してバックアップを復元する
 
@@ -137,7 +137,7 @@ GCSへのアクセスに使用するアカウントは、アクセスキーを�
 
 > **Tip:**
 >
-> TiCDC における Amazon S3、GCS、Azure Blob Storage の URI パラメータの詳細については、 [外部ストレージサービスのURI形式](/external-storage-uri.md)を参照してください。
+> TiCDC における Amazon S3、GCS、Azure Blob Storage の URI パラメーターの詳細については、 [外部ストレージサービスのURI形式](/external-storage-uri.md)を参照してください。
 
 ### NFSのシンクURIを構成する {#configure-sink-uri-for-nfs}
 
@@ -175,7 +175,7 @@ GCSへのアクセスに使用するアカウントは、アクセスキーを�
 
 > **Note:**
 >
-> テーブル バージョンは次のシナリオで変更されます。
+> テーブルバージョンは次のシナリオで変更されます。
 >
 > - アップストリーム TiDB はテーブルに対して DDL 操作を実行します。
 > - TiCDC はノード間でテーブルをスケジュールします。
@@ -221,7 +221,7 @@ CDC000005.csv
 
 ### テーブルレベルのDDLイベント {#ddl-events-at-the-table-level}
 
-アップストリームテーブルの DDL イベントによってテーブル バージョンが変更されると、TiCDC は自動的に次の処理を実行します。
+アップストリームテーブルの DDL イベントによってテーブルバージョンが変更されると、TiCDC は自動的に次の処理を実行します。
 
 - データ変更レコードを書き込むための新しいパスに切り替えます。例えば、バージョン`test.table1`が`441349361156227074`に変更されると、TiCDCはデータ変更レコードを書き込むためのパスを`s3://bucket/bbb/ccc/test/table1/441349361156227074/2022-01-02/`に変更します。
 - テーブルスキーマ情報を格納するために、次のパスにスキーマファイルを生成します。
@@ -273,7 +273,7 @@ CDC000005.csv
 
 - `Table` : テーブル名。
 - `Schema` : スキーマ名。
-- `Version` :ストレージシンクのプロトコル バージョン。
+- `Version` :ストレージシンクのプロトコルバージョン。
 - `TableVersion` : テーブルバージョン。
 - `Query` : DDL文。
 - `Type` : DDL タイプ。
@@ -289,7 +289,7 @@ CDC000005.csv
 
 ### データベースレベルのDDLイベント {#ddl-events-at-the-database-level}
 
-アップストリーム データベースでデータベースレベルの DDL イベントが実行されると、TiCDC は次のパスにスキーマファイルを自動的に生成し、データベーススキーマ情報を格納します。
+アップストリームデータベースでデータベースレベルの DDL イベントが実行されると、TiCDC は次のパスにスキーマファイルを自動的に生成し、データベーススキーマ情報を格納します。
 
 ```shell
 {scheme}://{prefix}/{schema}/meta/schema_{table-version}_{hash}.json

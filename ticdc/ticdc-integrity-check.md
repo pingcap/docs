@@ -19,7 +19,7 @@ TiCDCはデフォルトでデータ整合性検証を無効にしています。
 
     この構成は新しく作成されたセッションに対してのみ有効になるため、TiDB に再接続する必要があります。
 
-2. changefeed の作成時に`--config`パラメータで指定する[設定ファイル](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)に、次の設定を追加します。
+2. changefeed の作成時に`--config`パラメーターで指定する[設定ファイル](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)に、次の設定を追加します。
 
     ```toml
     [integrity]
@@ -43,7 +43,7 @@ TiCDCはデフォルトでデータ整合性検証を無効にしています。
 
 TiCDC ではデータ整合性の検証はデフォルトで無効になっています。この機能を有効にした後に無効にするには、次の手順を実行します。
 
-1. [タスク構成の更新](/ticdc/ticdc-manage-changefeed.md#update-task-configuration)で説明した`Pause Task -> Modify Configuration -> Resume Task`プロセスに従い、changefeed の`--config`パラメータで指定された設定ファイル内の`[integrity]`構成をすべて削除します。
+1. [タスク構成の更新](/ticdc/ticdc-manage-changefeed.md#update-task-configuration)で説明した`Pause Task -> Modify Configuration -> Resume Task`プロセスに従い、changefeed の`--config`パラメーターで指定された設定ファイル内の`[integrity]`構成をすべて削除します。
 
     ```toml
     [integrity]

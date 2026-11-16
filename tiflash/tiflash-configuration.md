@@ -5,11 +5,11 @@ summary: TiFlash の設定方法を学びます。
 
 # TiFlashの設定 {#configure-tiflash}
 
-このドキュメントでは、 TiFlashのデプロイと使用に関連する設定パラメータについて説明します。
+このドキュメントでは、 TiFlashのデプロイと使用に関連する設定パラメーターについて説明します。
 
-## TiFlash設定パラメータ {#tiflash-configuration-parameters}
+## TiFlash設定パラメーター {#tiflash-configuration-parameters}
 
-このセクションでは、 TiFlashの設定パラメータについて説明します。
+このセクションでは、 TiFlashの設定パラメーターについて説明します。
 
 > **Tip:**
 >
@@ -19,7 +19,7 @@ summary: TiFlash の設定方法を学びます。
 
 #### `listen_host` {#listen_host}
 
-- TPC/HTTP などのサービスをサポートするためのリスニング ホスト。
+- TPC/HTTP などのサービスをサポートするためのリスニングホスト。
 - これを`"0.0.0.0"`に設定することをお勧めします。これは、このマシンのすべての IP アドレスをリッスンすることを意味します。
 
 #### `tcp_port` {#tcp_port}
@@ -88,7 +88,7 @@ summary: TiFlash の設定方法を学びます。
 ##### `dir` {#dir}
 
 - メインデータを保存するディレクトリのリスト。例： `[ "/tidb-data/tiflash-9000" ]`または`[ "/ssd0/tidb-data/tiflash", "/ssd1/tidb-data/tiflash" ]` 。
-- 全データの 90% 以上がディレクトリ リストに保存されます。
+- 全データの 90% 超がディレクトリリストに保存されます。
 
 ##### `capacity` {#capacity}
 
@@ -140,28 +140,28 @@ I/O トラフィック制限設定を構成します。
 
 <!-- The following  default configurations indicate that each type of traffic gets a weight of 25% (25 / (25 + 25 + 25 + 25) = 25%) -->
 
-- TiFlashは内部的にI/Oリクエストを4つのタイプに分類します。フォアグラウンド書き込み、バックグラウンド書き込み、フォアグラウンド読み取り、バックグラウンド読み取りです。`foreground_write_weight`はフォアグラウンド書き込みI/Oトラフィックタイプに割り当てられる帯域幅の重みを制御します。通常、これらのパラメータを調整する必要はありません。
+- TiFlashは内部的にI/Oリクエストを4つのタイプに分類します。フォアグラウンド書き込み、バックグラウンド書き込み、フォアグラウンド読み取り、バックグラウンド読み取りです。`foreground_write_weight`はフォアグラウンド書き込みI/Oトラフィックタイプに割り当てられる帯域幅の重みを制御します。通常、これらのパラメーターを調整する必要はありません。
 - I/O トラフィック制限が初期化されると、 TiFlash は`foreground_write_weight` 、 [`background_write_weight`](/tiflash/tiflash-configuration.md#background_write_weight) 、 [`foreground_read_weight`](/tiflash/tiflash-configuration.md#foreground_read_weight) 、 [`background_read_weight`](/tiflash/tiflash-configuration.md#background_read_weight)の比率に従って、これら4種類のリクエストに帯域幅を割り当てます。
 - 重みが`0`に設定されている場合、対応する I/O トラフィックは制限されません。
 - デフォルト値: `25` 、帯域幅の 25% の割り当てを表します。
 
 ##### `background_write_weight` {#background_write_weight}
 
-- TiFlashは内部的にI/Oリクエストを4つのタイプ（フォアグラウンド書き込み、バックグラウンド書き込み、フォアグラウンド読み取り、バックグラウンド読み取り）に分類します。`background_write_weight`は、バックグラウンド書き込みI/Oトラフィックタイプに割り当てられる帯域幅の重みを制御します。通常、これらのパラメータを調整する必要はありません。
+- TiFlashは内部的にI/Oリクエストを4つのタイプ（フォアグラウンド書き込み、バックグラウンド書き込み、フォアグラウンド読み取り、バックグラウンド読み取り）に分類します。`background_write_weight`は、バックグラウンド書き込みI/Oトラフィックタイプに割り当てられる帯域幅の重みを制御します。通常、これらのパラメーターを調整する必要はありません。
 - I/O トラフィック制限が初期化されると、 TiFlash は[`foreground_write_weight`](/tiflash/tiflash-configuration.md#foreground_write_weight) 、 `background_write_weight` 、 [`foreground_read_weight`](/tiflash/tiflash-configuration.md#foreground_read_weight) 、 [`background_read_weight`](/tiflash/tiflash-configuration.md#background_read_weight)の比率に従って、これら4種類のリクエストに帯域幅を割り当てます。
 - 重みが`0`に設定されている場合、対応する I/O トラフィックは制限されません。
 - デフォルト値: `25` 、帯域幅の 25% の割り当てを表します。
 
 ##### `foreground_read_weight` {#foreground_read_weight}
 
-- TiFlashは内部的にI/Oリクエストを4つのタイプ（フォアグラウンド書き込み、バックグラウンド書き込み、フォアグラウンド読み取り、バックグラウンド読み取り）に分類します。`foreground_read_weight`は、フォアグラウンド読み取りI/Oトラフィックタイプに割り当てられる帯域幅の重みを制御します。通常、これらのパラメータを調整する必要はありません。
+- TiFlashは内部的にI/Oリクエストを4つのタイプ（フォアグラウンド書き込み、バックグラウンド書き込み、フォアグラウンド読み取り、バックグラウンド読み取り）に分類します。`foreground_read_weight`は、フォアグラウンド読み取りI/Oトラフィックタイプに割り当てられる帯域幅の重みを制御します。通常、これらのパラメーターを調整する必要はありません。
 - I/O トラフィック制限が初期化されると、 TiFlash は[`foreground_write_weight`](/tiflash/tiflash-configuration.md#foreground_write_weight) 、 [`background_write_weight`](/tiflash/tiflash-configuration.md#background_write_weight) 、 `foreground_read_weight` 、 [`background_read_weight`](/tiflash/tiflash-configuration.md#background_read_weight)の比率に従って、これら4種類のリクエストに帯域幅を割り当てます。
 - 重みが`0`に設定されている場合、対応する I/O トラフィックは制限されません。
 - デフォルト値: `25` 、帯域幅の 25% の割り当てを表します。
 
 ##### `background_read_weight` {#background_read_weight}
 
-- TiFlashは内部的にI/Oリクエストを4つのタイプ（フォアグラウンド書き込み、バックグラウンド書き込み、フォアグラウンド読み取り、バックグラウンド読み取り）に分類します。`background_read_weight`は、バックグラウンド読み取りI/Oトラフィックタイプに割り当てられる帯域幅の重みを制御します。通常、これらのパラメータを調整する必要はありません。
+- TiFlashは内部的にI/Oリクエストを4つのタイプ（フォアグラウンド書き込み、バックグラウンド書き込み、フォアグラウンド読み取り、バックグラウンド読み取り）に分類します。`background_read_weight`は、バックグラウンド読み取りI/Oトラフィックタイプに割り当てられる帯域幅の重みを制御します。通常、これらのパラメーターを調整する必要はありません。
 - I/O トラフィック制限が初期化されると、 TiFlash は[`foreground_write_weight`](/tiflash/tiflash-configuration.md#foreground_write_weight) 、 [`background_write_weight`](/tiflash/tiflash-configuration.md#background_write_weight) 、 [`foreground_read_weight`](/tiflash/tiflash-configuration.md#foreground_read_weight) 、 `background_read_weight`の比率に従って、これら4種類のリクエストに帯域幅を割り当てます。
 - 重みが`0`に設定されている場合、対応する I/O トラフィックは制限されません。
 - デフォルト値: `25` 、帯域幅の 25% の割り当てを表します。
@@ -201,7 +201,7 @@ I/O トラフィック制限設定を構成します。
 
 ##### `dir` {#dir-2}
 
-- ストレージとコンピューティングの分離アーキテクチャ内のコンピューティングノードのローカルデータ キャッシュ ディレクトリ。
+- ストレージとコンピューティングの分離アーキテクチャ内のコンピューティングノードのローカルデータキャッシュディレクトリ。
 
 <!-- Example: `"/data1/tiflash/cache"` -->
 
@@ -213,7 +213,7 @@ I/O トラフィック制限設定を構成します。
 
 ##### `service_addr` {#service_addr}
 
-- TiFlashコプロセッサ サービスのリスニング アドレス。
+- TiFlashコプロセッサーサービスのリスニングアドレス。
 
 <!-- Example: `"0.0.0.0:3930"` -->
 
@@ -252,7 +252,7 @@ I/O トラフィック制限設定を構成します。
 
 ##### `addr` {#addr}
 
-- プロキシのリスニング アドレス。
+- プロキシのリスニングアドレス。
 - デフォルト値: `"127.0.0.1:20170"`
 
 ##### `advertise-addr` {#advertise-addr}
@@ -262,7 +262,7 @@ I/O トラフィック制限設定を構成します。
 
 ##### `status-addr` {#status-addr}
 
-- プロキシがメトリックまたはステータス情報を取得するリスニング アドレス。
+- プロキシがメトリックまたはステータス情報を取得するリスニングアドレス。
 - デフォルト値: `"127.0.0.1:20292"`
 
 ##### `advertise-status-addr` {#advertise-status-addr}
@@ -272,7 +272,7 @@ I/O トラフィック制限設定を構成します。
 
 ##### `engine-addr` {#engine-addr}
 
-- TiFlashコプロセッサ サービスの外部アクセス アドレス。
+- TiFlashコプロセッサーサービスの外部アクセスアドレス。
 
 <!-- Example: `"10.0.1.20:3930"` -->
 
@@ -290,13 +290,13 @@ I/O トラフィック制限設定を構成します。
 
 ##### `log-file` {#log-file}
 
-- プロキシのログ パス。
+- プロキシのログパス。
 
 <!-- Example: `"/tidb-deploy/tiflash-9000/log/tiflash_tikv.log"` -->
 
 #### logger {#logger}
 
-以下のパラメータはTiFlashログとTiFlashエラーログにのみ有効です。TiFlashのログパラメータを設定する必要がある場合は、 [`tiflash-learner.toml`](#configure-the-tiflash-learnertoml-file)で指定してください。
+以下のパラメーターはTiFlashログとTiFlashエラーログにのみ有効です。TiFlash Proxyのログパラメーターを設定する必要がある場合は、 [`tiflash-learner.toml`](#configure-the-tiflash-learnertoml-file)で指定してください。
 
 ##### `level` {#level}
 
@@ -330,7 +330,7 @@ I/O トラフィック制限設定を構成します。
 
 ##### `pd_addr` {#pd_addr}
 
-- PD サービス アドレス。
+- PD サービスアドレス。
 - 複数のアドレスはカンマで区切られます。例： `"10.0.1.11:2379,10.0.1.12:2379,10.0.1.13:2379"` 。
 
 #### status {#status}
@@ -351,7 +351,7 @@ I/O トラフィック制限設定を構成します。
 ##### `max_threads` {#max_threads}
 
 - `max_threads`は、 TiFlash がMPP タスクを実行する際の内部スレッド同時実行数を示します。`0`に設定すると、 TiFlash は論理 CPU コアの数を同時実行数として使用します。
-- このパラメータは、システム変数[`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610) `-1`に設定されている場合にのみ有効になります。
+- このパラメーターは、システム変数[`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610)が`-1`に設定されている場合にのみ有効になります。
 - デフォルト値: `0`
 
 ##### `max_memory_usage` {#max_memory_usage}
@@ -444,17 +444,17 @@ I/O トラフィック制限設定を構成します。
 
 ##### `task_scheduler_thread_soft_limit`<span class="version-mark">バージョン6.0.0の新機能</span> {#task_scheduler_thread_soft_limit-new-in-v600}
 
-- この項目はMinTSOスケジューラで使用されます。1つのリソースグループが使用できるスレッドの最大数を指定します。詳細については、 [TiFlash MinTSO スケジューラ](/tiflash/tiflash-mintso-scheduler.md)を参照してください。
+- この項目はMinTSOスケジューラーで使用されます。1つのリソースグループが使用できるスレッドの最大数を指定します。詳細については、 [TiFlash MinTSO スケジューラー](/tiflash/tiflash-mintso-scheduler.md)を参照してください。
 - デフォルト値: `5000`
 
 ##### `task_scheduler_thread_hard_limit`<span class="version-mark">バージョン6.0.0の新機能</span> {#task_scheduler_thread_hard_limit-new-in-v600}
 
-- この項目はMinTSOスケジューラで使用されます。グローバルスコープ内のスレッドの最大数を指定します。詳細については、 [TiFlash MinTSO スケジューラ](/tiflash/tiflash-mintso-scheduler.md)を参照してください。
+- この項目はMinTSOスケジューラーで使用されます。グローバルスコープ内のスレッドの最大数を指定します。詳細については、 [TiFlash MinTSO スケジューラー](/tiflash/tiflash-mintso-scheduler.md)を参照してください。
 - デフォルト値: `10000`
 
 ##### `task_scheduler_active_set_soft_limit`<span class="version-mark">バージョン6.4.0の新機能</span> {#task_scheduler_active_set_soft_limit-new-in-v640}
 
-- この項目はMinTSOスケジューラに使用されます。TiFlashで同時に実行できるクエリの最大数を指定します。詳細については、 [TiFlash MinTSO スケジューラ](/tiflash/tiflash-mintso-scheduler.md)を参照してください。
+- この項目はMinTSOスケジューラーに使用されます。TiFlashで同時に実行できるクエリの最大数を指定します。詳細については、 [TiFlash MinTSO スケジューラー](/tiflash/tiflash-mintso-scheduler.md)を参照してください。
 - デフォルト値: バージョン7.4.0より前のバージョンでは、デフォルト値は`vcpu * 0.25`で、これはvCPU数の4分の1を意味します。バージョン7.4.0以降では、デフォルト値は`vcpu * 2`で、これはvCPU数の2倍を意味します。
 
 #### security<span class="version-mark">v4.0.5 の新機能</span> {#security-new-in-v405}
@@ -491,7 +491,7 @@ I/O トラフィック制限設定を構成します。
 
 ### `tiflash-learner.toml`ファイルを設定する {#configure-the-tiflash-learnertoml-file}
 
-`tiflash-learner.toml`のパラメータは基本的にTiKVと同じです。TiFlashの設定については[TiKV構成](/tikv-configuration-file.md)を参照してください。以下はよく使用されるパラメータのみを示しています。ご注意ください。
+`tiflash-learner.toml`のパラメーターは基本的にTiKVと同じです。TiFlash Proxyの設定については[TiKV構成](/tikv-configuration-file.md)を参照してください。以下はよく使用されるパラメーターのみを示しています。ご注意ください。
 
 - TiKV と比較して、 TiFlash Proxy には[`raftstore.snap-handle-pool-size`](#snap-handle-pool-size-new-in-v400)という追加パラメーターがあります。
 - キーが`engine`の`label`は予約されており、手動で設定できません。
@@ -509,15 +509,15 @@ I/O トラフィック制限設定を構成します。
 ##### `max-backups` <span class="version-mark">5.4.0の新機能</span> {#max-backups-new-in-v540}
 
 - 保存するログファイルの最大数。
-- このパラメータが設定されていないか、デフォルト値`0`に設定されている場合、 TiFlash Proxy はすべてのログファイルを保存します。
-- このパラメータを0以外の値に設定すると、 TiFlash Proxyは最大で`max-backups`で指定された数の古いログファイルを保持します。例えば、 `7`に設定すると、 TiFlash Proxyは最大で7つの古いログファイルを保持します。
+- このパラメーターが設定されていないか、デフォルト値`0`に設定されている場合、 TiFlash Proxy はすべてのログファイルを保存します。
+- このパラメーターを0以外の値に設定すると、 TiFlash Proxyは最大で`max-backups`で指定された数の古いログファイルを保持します。例えば、 `7`に設定すると、 TiFlash Proxyは最大で7つの古いログファイルを保持します。
 - デフォルト値: `0`
 
 ##### `max-days` <span class="version-mark">v5.4.0 の新機能</span> {#max-days-new-in-v540}
 
 - ログファイルが保持される最大日数。
-- このパラメータが設定されていないか、デフォルト値`0`に設定されている場合、 TiFlash Proxy はすべてのログファイルを保持します。
-- このパラメータがゼロ以外の値に設定されている場合、 TiFlash Proxy は`max-days`で指定された日数後に古いログファイルをクリーンアップします。
+- このパラメーターが設定されていないか、デフォルト値`0`に設定されている場合、 TiFlash Proxy はすべてのログファイルを保持します。
+- このパラメーターがゼロ以外の値に設定されている場合、 TiFlash Proxy は`max-days`で指定された日数後に古いログファイルをクリーンアップします。
 - デフォルト値: `0`
 
 #### raftstore {#raftstore}
@@ -580,7 +580,7 @@ I/O トラフィック制限設定を構成します。
 
 ### マルチディスクデプロイ {#multi-disk-deployment}
 
-TiFlashはマルチディスク構成をサポートしています。TiFlashノードに複数のディスクがある場合、以下のセクションで説明するパラメータを設定することで、それらのディスクを最大限に活用できます。TiUPで使用するTiUPの設定テンプレートについては、 [TiFlashトポロジの複雑なテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/complex-tiflash.yaml)を参照してください。
+TiFlashはマルチディスク構成をサポートしています。TiFlashノードに複数のディスクがある場合、以下のセクションで説明するパラメーターを設定することで、それらのディスクを最大限に活用できます。TiUPで使用するTiFlashの設定テンプレートについては、 [TiFlashトポロジーの複雑なテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/complex-tiflash.yaml)を参照してください。
 
 v4.0.9以降のバージョンのTiDBクラスターでは、 TiFlashはストレージエンジンのメインデータと最新データを複数のディスクに保存することをサポートしています。TiFlashノードを複数のディスクにデプロイする場合は、ノードのI/Oパフォーマンスを最大限に活用するために、 `[storage]`セクションでストレージディレクトリを指定することをお勧めします。
 
@@ -590,4 +590,4 @@ TiFlashノード上にI/Oメトリックが異なる複数のディスクがあ�
 
 > **Warning:**
 >
-> `[storage]`設定はTiUP v1.2.5 以降でサポートされています。TiDB クラスタのバージョンが v4.0.9 以降の場合は、 TiUPのバージョンが v1.2.5 以降であることを確認してください。そうでない場合、 `[storage]`で定義されているデータディレクトリはTiUPによって管理されません。
+> `[storage]`設定はTiUP v1.2.5 以降でサポートされています。TiDB クラスターのバージョンが v4.0.9 以降の場合は、 TiUPのバージョンが v1.2.5 以降であることを確認してください。そうでない場合、 `[storage]`で定義されているデータディレクトリはTiUPによって管理されません。

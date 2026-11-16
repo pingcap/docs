@@ -7,7 +7,7 @@ summary: TiCDC の新しいアーキテクチャにおけるテーブルルー�
 
 TiCDC のテーブルルーティングを使用すると、changefeed の設定を通じて、上流テーブルを特定の下流データベース名またはテーブル名にマッピングできます。この機能は [TiCDC new architecture](/ticdc/ticdc-architecture.md) にのみ適用され、[TiCDC classic architecture](/ticdc/ticdc-classic-architecture.md) ではサポートされません。
 
-テーブルルーティングは、TiCDC が下流に出力するデータベース名とテーブル名のみを変更します。行データ、カラム名、テーブルスキーマ、テーブルフィルタルール、トピックディスパッチルール、パーティションディスパッチルール、またはカラムセレクタルールは変更しません。
+テーブルルーティングは、TiCDC が下流に出力するデータベース名とテーブル名のみを変更します。行データ、カラム名、テーブルスキーマ、テーブルフィルタールール、トピックディスパッチルール、パーティションディスパッチルール、またはカラムセレクタールールは変更しません。
 
 ## 使用シナリオ {#usage-scenarios}
 
@@ -15,7 +15,7 @@ TiCDC のテーブルルーティングを使用すると、changefeed の設定
 
 - `sales.orders` を `archive.sales_orders` にレプリケートする場合、または他の下流命名規則に従うテーブルにレプリケートする場合。
 - 複数のソースデータベースを同じターゲットデータベースにレプリケートしつつ、ソースデータベースを区別できるようにターゲットテーブル名を一意に保つ場合。たとえば、`tenant_001.orders` を `tenant_mirror.tenant_001_orders` にレプリケートする場合。
-- マイグレーション、ディザスタリカバリ、アーカイブ、またはシャドウトラフィック用の changefeed を構築し、上流と同じ名前の下流オブジェクトへの書き込みを避ける場合。
+- マイグレーション、ディザスターリカバリ、アーカイブ、またはシャドウトラフィック用の changefeed を構築し、上流と同じ名前の下流オブジェクトへの書き込みを避ける場合。
 - MQ コンシューマーアプリケーションまたはストレージサービスに対して、安定したデータベース名とテーブル名を公開する場合。
 
 > **Note:**
@@ -233,7 +233,7 @@ changefeed の実行中に、`CREATE TABLE` や `RENAME TABLE` などの DDL 文
 
 ## 関連ドキュメント {#related-documentation}
 
-- [TiCDC Changefeed の CLI と設定パラメータ](/ticdc/ticdc-changefeed-config.md)
+- [TiCDC Changefeed の CLI と設定パラメーター](/ticdc/ticdc-changefeed-config.md)
 - [Changefeed Log Filters](/ticdc/ticdc-filter.md)
 - [MySQL-compatible Databases へのデータレプリケーション](/ticdc/ticdc-sink-to-mysql.md)
 - [Kafka へのデータレプリケーション](/ticdc/ticdc-sink-to-kafka.md)

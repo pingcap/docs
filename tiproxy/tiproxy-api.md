@@ -23,9 +23,9 @@ curl http://127.0.0.1:3080/api/admin/config/
 
 `GET /api/admin/config/`
 
-### パラメータの説明 {#parameter-descriptions}
+### パラメーターの説明 {#parameter-descriptions}
 
-クエリパラメータは次のとおりです。
+クエリパラメーターは次のとおりです。
 
 - `format` : (オプション) 返される設定の形式を指定します。値のオプションは`json`と`toml`です。デフォルト値は`toml`です。
 

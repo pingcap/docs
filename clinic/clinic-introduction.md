@@ -22,7 +22,7 @@ PingCAP Clinic は、クラスターの問題を診断するために次の2つ�
     Clinic Serverはクラウド上にデプロイされるクラウドサービスです。SaaSモデルで診断サービスを提供することで、Clinic Serverはアップロードされた診断データを受信するだけでなく、データの保存、閲覧、クラスター診断レポートの提供など、オンライン診断環境として機能します。Clinic Serverは、ストレージの場所に応じて2つの独立したサービスを提供します。
 
     - [国際ユーザー向けClinic Server](https://clinic.pingcap.com) : データは米国の AWS に保存されます。
-    - [中国本土のユーザー向けClinic Server](https://clinic.pingcap.com.cn) : データは中国 (北京) リージョンの AWS に保存されます。
+    - [中国本土のユーザー向けClinic Server](https://clinic.pingcap.com.cn) : データは China (Beijing) リージョンの AWS に保存されます。
 
 ## ユーザーシナリオ {#user-scenarios}
 
