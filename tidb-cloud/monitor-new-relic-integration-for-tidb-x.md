@@ -9,7 +9,7 @@ TiDB Cloud は New Relic との統合をサポートしています。TiDB Cloud
 
 ## 前提条件 {#prerequisites}
 
-- TiDB Cloud を New Relic と統合するには、[New Relic](https://newrelic.com/) アカウントを所有し、`Ingest - License` タイプの [New Relic API key を作成](https://one.newrelic.com/admin-portal/api-keys/home?) している必要があります。
+- TiDB Cloud を New Relic と統合するには、[New Relic](https://newrelic.com/) アカウントを所有し、`Ingest - License` タイプの [New Relic APIキーを作成](https://one.newrelic.com/admin-portal/api-keys/home?) している必要があります。
 
     New Relic アカウントを持っていない場合は、[https://newrelic.com/signup](https://newrelic.com/signup) でサインアップしてください。
 
@@ -23,7 +23,7 @@ TiDB Cloud は New Relic との統合をサポートしています。TiDB Cloud
 
 ## 手順 {#steps}
 
-### 手順 1. 事前構築済みの New Relic ダッシュボードをインポートする {#step-1-import-the-pre-built-new-relic-dashboard}
+### ステップ 1. 事前構築済みの New Relic ダッシュボードをインポートする {#step-1-import-the-pre-built-new-relic-dashboard}
 
 現在、<CustomContent plan="essential">{{{ .essential }}}</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> 用の TiDB Cloud ダッシュボードは、まだ New Relic マーケットプレイスでは利用できません。公開されるまでは、ダッシュボード JSON ファイルを手動でダウンロードし、New Relic にインポートする必要があります。
 
@@ -60,14 +60,14 @@ TiDB Cloud は New Relic との統合をサポートしています。TiDB Cloud
 
 4. 表示されたダイアログで、準備した JSON ファイルの内容をテキストエリアに貼り付け、権限設定を選択してから **Save** をクリックします。
 
-### 手順 2. New Relic API key と統合する {#step-2-integrate-with-your-new-relic-api-key}
+### ステップ 2. New Relic APIキーと統合する {#step-2-integrate-with-your-new-relic-api-key}
 
 <CustomContent plan="essential">
 
-1. [TiDB Cloud console](https://tidbcloud.com/) で [**My TiDB**](https://tidbcloud.com/tidbs) ページに移動し、対象の {{{ .essential }}} インスタンス名をクリックして概要ページを開きます。
+1. [TiDB Cloud コンソール](https://tidbcloud.com/) で [**My TiDB**](https://tidbcloud.com/tidbs) ページに移動し、対象の {{{ .essential }}} インスタンス名をクリックして概要ページを開きます。
 2. 左側のナビゲーションペインで **Integrations** をクリックします。
 3. **Integrations** ページで **New Relic (PREVIEW)** 統合を見つけ、**Connect** をクリックします。
-4. New Relic API key を入力し、New Relic アカウントがホストされているリージョンを選択してから、**Test Integration** をクリックします。
+4. New Relic APIキーを入力し、New Relic アカウントがホストされているリージョンを選択してから、**Test Integration** をクリックします。
 
     - テストが成功すると、**Confirm** ボタンが表示されます。
     - テストが失敗すると、エラーメッセージが表示されます。メッセージに従ってトラブルシューティングを行い、統合を再試行してください。
@@ -78,10 +78,10 @@ TiDB Cloud は New Relic との統合をサポートしています。TiDB Cloud
 
 <CustomContent plan="premium">
 
-1. [TiDB Cloud console](https://tidbcloud.com/) で [**My TiDB**](https://tidbcloud.com/tidbs) ページに移動し、対象の {{{ .premium }}} インスタンス名をクリックして概要ページを開きます。
+1. [TiDB Cloud コンソール](https://tidbcloud.com/) で [**My TiDB**](https://tidbcloud.com/tidbs) ページに移動し、対象の {{{ .premium }}} インスタンス名をクリックして概要ページを開きます。
 2. 左側のナビゲーションペインで **Settings** > **Integrations** をクリックします。
 3. **Integrations** ページで **New Relic (PREVIEW)** 統合を見つけ、**Connect** をクリックします。
-4. New Relic API key を入力し、New Relic アカウントがホストされているリージョンを選択してから、**Test Integration** をクリックします。
+4. New Relic APIキーを入力し、New Relic アカウントがホストされているリージョンを選択してから、**Test Integration** をクリックします。
 
     - テストが成功すると、**Confirm** ボタンが表示されます。
     - テストが失敗すると、エラーメッセージが表示されます。メッセージに従ってトラブルシューティングを行い、統合を再試行してください。
@@ -92,9 +92,9 @@ TiDB Cloud は New Relic との統合をサポートしています。TiDB Cloud
 
 ## 事前構築済みダッシュボードを表示する {#view-the-pre-built-dashboard}
 
-統合後に事前構築済みダッシュボードを表示するには、[New Relic](https://one.newrelic.com/) で **Dashboards** > **Dashboard List** に移動し、[手順 1](#step-1-import-the-pre-built-new-relic-dashboard) でインポートしたダッシュボードを選択します。ダッシュボードページでは、対象のインスタンス名またはインスタンス ID でフィルタリングして、メトリクスを表示できます。
+統合後に事前構築済みダッシュボードを表示するには、[New Relic](https://one.newrelic.com/) で **Dashboards** > **Dashboard List** に移動し、[ステップ 1](#step-1-import-the-pre-built-new-relic-dashboard) でインポートしたダッシュボードを選択します。ダッシュボードページでは、対象のインスタンス名またはインスタンス ID でフィルタリングして、メトリクスを表示できます。
 
-[TiDB Cloud console](https://tidbcloud.com/) から New Relic の **Dashboard List** ページにアクセスすることもできます。対象インスタンスの **Integrations** ページに移動し、**New Relic (PREVIEW)** をクリックしてから **Dashboard** をクリックします。
+[TiDB Cloud コンソール](https://tidbcloud.com/) から New Relic の **Dashboard List** ページにアクセスすることもできます。対象インスタンスの **Integrations** ページに移動し、**New Relic (PREVIEW)** をクリックしてから **Dashboard** をクリックします。
 
 ## New Relic で利用可能なメトリクス {#metrics-available-to-new-relic}
 
@@ -110,7 +110,7 @@ New Relic は、<CustomContent plan="essential">{{{ .essential }}}</CustomConten
 |:--- |:--- |:--- |:--- |
 | `tidb_cloud.db_total_connection` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | TiDB サーバー内の現在の接続数 |
 | `tidb_cloud.db_active_connections` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | アクティブな接続数 |
-| `tidb_cloud.db_disconnections` | gauge | `result: Error\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | 接続結果ごとに切断されたクライアント数 |
+| `tidb_cloud.db_disconnections` | gauge | `result: Error\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | 切断されたクライアント数（接続結果別） |
 | `tidb_cloud.db_database_time` | gauge | `sql_type: Select\|Insert\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | TiDB で実行中のすべての SQL 文が 1 秒あたりに消費した合計時間。すべてのプロセスの CPU 時間と、アイドル状態ではない待機時間を含みます |
 | `tidb_cloud.db_query_per_second` | gauge | `type: Select\|Insert\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | 文のタイプ別に集計された、1 秒あたりに実行された SQL 文の数 |
 | `tidb_cloud.db_failed_queries` | gauge | `type: planner:xxx\|executor:2345\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | SQL 文の実行時に 1 秒あたりに発生するエラータイプ（構文エラーや主キー競合など）の統計 |
@@ -132,7 +132,7 @@ New Relic は、<CustomContent plan="essential">{{{ .essential }}}</CustomConten
 |:--- |:--- |:--- |:--- |
 | `tidb_cloud.db_total_connection` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | TiDB サーバー内の現在の接続数 |
 | `tidb_cloud.db_active_connections` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | アクティブな接続数 |
-| `tidb_cloud.db_disconnections` | gauge | `result: Error\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | 接続結果ごとに切断されたクライアント数 |
+| `tidb_cloud.db_disconnections` | gauge | `result: Error\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | 切断されたクライアント数（接続結果別） |
 | `tidb_cloud.db_database_time` | gauge | `sql_type: Select\|Insert\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | TiDB で実行中のすべての SQL 文が 1 秒あたりに消費した合計時間。すべてのプロセスの CPU 時間と、アイドル状態ではない待機時間を含みます |
 | `tidb_cloud.db_query_per_second` | gauge | `type: Select\|Insert\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | 文のタイプ別に集計された、1 秒あたりに実行された SQL 文の数 |
 | `tidb_cloud.db_failed_queries` | gauge | `type: planner:xxx\|executor:2345\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | SQL 文の実行時に 1 秒あたりに発生するエラータイプ（構文エラーや主キー競合など）の統計 |

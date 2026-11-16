@@ -22,17 +22,17 @@ TiDB Cloudのモニタリング機能は、TiDBのパフォーマンスを監視
 
 </CustomContent>
 
-## 内蔵アラート機能 {#built-in-alerting}
+## 組み込みアラート機能 {#built-in-alerting}
 
-組み込みアラートとは、 TiDB Cloud EssentialインスタンスおよびTiDB Cloud Dedicatedクラスタの監視を支援するためにTiDB Cloudが提供するアラートメカニズムのことです。現在、 TiDB Cloudは以下の3種類のアラートを提供しています。
+組み込みアラートとは、 TiDB Cloud EssentialインスタンスおよびTiDB Cloud Dedicatedクラスターの監視を支援するためにTiDB Cloudが提供するアラートメカニズムのことです。現在、 TiDB Cloudは以下の3種類のアラートを提供しています。
 
 - リソース使用状況アラート
 
-- データ移行に関する警告
+- データ移行アラート
 
 - 変更フィードアラート
 
-TiDB Cloudコンソールの**Alerts**ページでは、 TiDB Cloud EssentialインスタンスまたはTiDB Cloud Dedicatedクラスタのアラートを表示したり、アラートルールを編集したり、アラート通知メールを購読したりできます。
+TiDB Cloudコンソールの**Alerts**ページでは、 TiDB Cloud EssentialインスタンスまたはTiDB Cloud Dedicatedクラスターのアラートを表示したり、アラートルールを編集したり、アラート通知メールを購読したりできます。
 
 詳細については、 [TiDB Cloudの組み込みアラート機能](/tidb-cloud/monitor-built-in-alerting.md)を参照してください。
 
@@ -41,7 +41,7 @@ TiDB Cloudコンソールの**Alerts**ページでは、 TiDB Cloud Essentialイ
 TiDB Cloudでは、イベントはTiDB Cloudリソースの変更を示します。
 
 - TiDB Cloud Starter、EssentialおよびPremiumインスタンスの場合、 TiDB Cloudはインスタンスレベルで履歴イベントをログに記録します。
-- TiDB Cloud Dedicatedクラスタの場合、 TiDB Cloudはクラスタレベルで履歴イベントをログに記録します。
+- TiDB Cloud Dedicatedクラスターの場合、 TiDB Cloudはクラスターレベルで履歴イベントをログに記録します。
 
 **Events**ページでは、イベントの種類、ステータス、メッセージ、トリガー時刻、トリガーユーザーなど、記録されたイベントを確認できます。
 
@@ -51,7 +51,7 @@ TiDB Cloudでは、イベントはTiDB Cloudリソースの変更を示します
 
 ## サードパーティ製メトリクスの統合 {#third-party-metrics-integrations}
 
-TiDB Cloudでは、以下のサードパーティ製メトリクスサービスのいずれかを統合して、 TiDB Cloudアラートを受信したり、 TiDB Cloud Dedicatedクラスタのパフォーマンスメトリクスを表示したりできます。
+TiDB Cloudでは、以下のサードパーティ製メトリクスサービスのいずれかを統合して、 TiDB Cloudアラートを受信したり、 TiDB Cloud Dedicatedクラスターのパフォーマンスメトリクスを表示したりできます。
 
 - [Datadogとの連携](/tidb-cloud/monitor-datadog-integration.md)
 
@@ -65,7 +65,7 @@ TiDB Cloudでは、以下のサードパーティ製メトリクスサービス�
 
 ## Datadog との統合 {#datadog-integration}
 
-TiDB Cloud では、Datadog と統合して TiDB Cloud のアラートを受信し、対象インスタンスのパフォーマンスメトリクスを表示できます。詳細については、[Integrate TiDB Cloud with Datadog](/tidb-cloud/monitor-datadog-integration-for-tidb-x.md) を参照してください。
+TiDB Cloud では、Datadog と統合して TiDB Cloud のアラートを受信し、対象インスタンスのパフォーマンスメトリクスを表示できます。詳細については、[TiDB CloudとDatadogを統合する (PREVIEW)](/tidb-cloud/monitor-datadog-integration-for-tidb-x.md) を参照してください。
 
 ## New Relic との統合 {#new-relic-integration}
 

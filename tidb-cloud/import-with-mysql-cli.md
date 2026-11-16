@@ -11,14 +11,14 @@ summary: MySQL CLIを使用してTiDB Cloud Dedicatedにデータをインポー
 
 MySQL CLI を介してTiDB Cloud Dedicatedにデータをインポートするには、以下の前提条件を満たす必要があります。
 
-- TiDB Cloud Dedicatedクラスターにアクセスできるようになりました。お持ちでない場合は、 [TiDB Cloud Dedicatedクラスターを作成する](/tidb-cloud/create-tidb-cluster.md)の手順に従って作成してください。
-- ローカルコンピュータにMySQL CLIをインストールしてください。
+- TiDB Cloud Dedicatedクラスターにアクセスできます。お持ちでない場合は、 [TiDB Cloud Dedicatedクラスターを作成する](/tidb-cloud/create-tidb-cluster.md)の手順に従って作成してください。
+- ローカルコンピューターにMySQL CLIをインストールしてください。
 
 ## ステップ1. TiDB Cloud Dedicatedクラスターに接続する {#step-1-connect-to-your-tidb-cloud-dedicated-cluster}
 
 TiDB Cloud Dedicatedクラスターに接続してください。
 
-1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスタの名前をクリックして概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動します。
 
 2. 左側のナビゲーションペインで、 **Settings** > **Networking**をクリックします。
 
@@ -30,7 +30,7 @@ TiDB Cloud Dedicatedクラスターに接続してください。
 
     接続文字列を取得する方法の詳細については、 [パブリック接続経由でTiDB Cloud Dedicatedに接続します](/tidb-cloud/connect-via-standard-connection.md)を参照してください。
 
-## ステップ2：テーブルを定義し、サンプルデータを挿入する {#step-2-define-the-table-and-insert-sample-data}
+## ステップ2. テーブルを定義し、サンプルデータを挿入する {#step-2-define-the-table-and-insert-sample-data}
 
 データをインポートする前に、テーブル構造を準備し、実際のサンプルデータを挿入する必要があります。以下は、テーブルを作成してサンプルデータを挿入するために使用できるSQLファイルの例です（ `product_data.sql` ）。
 

@@ -50,7 +50,7 @@ CSVファイルをインポートする際は、データファイルに以下�
 
 `${db_name}.${table_name}${suffix}.csv.${compress}`
 
-`${suffix}`はオプションであり、 *`xxx`*任意の数字で、以下のいずれかの形式になります。
+`${suffix}`はオプションであり、 *`xxx`*は任意の数字で、以下のいずれかの形式になります。
 
 - *`.xxx`* 、例えば`.01`
 - *`._xxx_xxx_xxx`* 、例えば`._0_0_01`
@@ -68,7 +68,7 @@ CSVファイルをインポートする際は、データファイルに以下�
 
 > **Note:**
 >
-> Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)に存在する必要があります。 その他の Snappy 圧縮形式はサポートされていません。
+> Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)である必要があります。 その他の Snappy 圧縮形式はサポートされていません。
 
 ### Parquet {#parquet}
 
@@ -83,7 +83,7 @@ Parquetファイルをインポートする際は、データファイルに以�
 
 ### Auroraのスナップショット {#aurora-snapshot}
 
-Aurora Snapshot ファイルの場合、 `.parquet`フォルダー内の`${db_name}.${table_name}/`サフィックスを持つすべてのファイルは、命名規則に準拠します。データファイル名には、"a-z, 0-9, - , _ , ."で構成される任意のプレフィックスとサフィックス".parquet"を含めることができます。
+Aurora Snapshot ファイルの場合、 `${db_name}.${table_name}/`フォルダー内の`.parquet`サフィックスを持つすべてのファイルは、命名規則に準拠します。データファイル名には、"a-z, 0-9, - , _ , ."で構成される任意のプレフィックスとサフィックス".parquet"を含めることができます。
 
 例えば：
 
@@ -97,7 +97,7 @@ SQLファイルをインポートする際は、データファイルに以下�
 
 `${db_name}.${table_name}${suffix}.sql.${compress}`
 
-`${suffix}`はオプションであり、 *`xxx`*任意の数字で、以下のいずれかの形式になります。
+`${suffix}`はオプションであり、 *`xxx`*は任意の数字で、以下のいずれかの形式になります。
 
 - *`.xxx`* 、例えば`.01`
 - *`._xxx_xxx_xxx`* 、例えば`._0_0_01`
@@ -115,7 +115,7 @@ TiDB Dumplingを使用してデフォルト設定でSQLファイルをエクス�
 
 > **Note:**
 >
-> Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)に存在する必要があります。 その他の Snappy 圧縮形式はサポートされていません。
+> Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)である必要があります。 その他の Snappy 圧縮形式はサポートされていません。
 
 ## ファイルパターン {#file-pattern}
 

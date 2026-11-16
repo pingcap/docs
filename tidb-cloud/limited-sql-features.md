@@ -5,7 +5,7 @@ summary: TiDB Cloud Dedicatedの制限された SQL 機能について説明し�
 
 # TiDB Cloud Dedicatedで制限されたSQL機能 {#limited-sql-features-on-tidb-cloud-dedicated}
 
-TiDB Cloud Dedicated はTiDB がサポートするほぼすべてのワークロードで動作しますが、TiDB Self-Managed とTiDB Cloud Dedicatedには機能面で若干の違いがあります。このドキュメントでは、TiDB Cloud Dedicatedにおける SQL 機能の制限事項について説明します。TiDB Self-Managed とTiDB Cloud Dedicatedの機能ギャップは継続的に埋められています。これらの機能やギャップを埋める必要がある場合は、機能リクエストについて[お問い合わせ](/tidb-cloud/tidb-cloud-support.md)ください。
+TiDB Cloud Dedicated はTiDB がサポートするほぼすべてのワークロードで動作しますが、TiDB Self-Managed とTiDB Cloud Dedicatedには機能面で若干の違いがあります。このドキュメントでは、TiDB Cloud Dedicatedにおける SQL 機能の制限事項について説明します。TiDB Self-Managed とTiDB Cloud Dedicatedの機能ギャップは継続的に埋められています。これらの機能やギャップ部分の機能が必要な場合は、機能リクエストについて[お問い合わせ](/tidb-cloud/tidb-cloud-support.md)ください。
 
 > **Note:**
 >

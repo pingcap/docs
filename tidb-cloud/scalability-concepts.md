@@ -14,7 +14,7 @@ TiDB Cloudは、さまざまなワークロードのニーズに対応できる�
 
 > **Tip:**
 >
-> TiDB Cloud Dedicatedクラスターのサイズを決定する方法については、 [TiDBサイズを決定する](/tidb-cloud/size-your-cluster.md)を参照してください。
+> TiDB Cloud Dedicatedクラスターのサイズを決定する方法については、 [TiDBのサイズを決定する](/tidb-cloud/size-your-cluster.md)を参照してください。
 
 ## 垂直方向および水平方向のスケーリング {#vertical-and-horizontal-scaling}
 
@@ -41,4 +41,4 @@ TiDB Cloudは、耐久性と高可用性を実現するために、選択した�
 
 TiFlashは、列指向データの保存を担当します。TiFlashはTiKVからリアルタイムでデータを同期し、リアルタイム分析ワークロードをすぐにサポートします。TiFlashのノード数、vCPU、RAM、ストレージは設定可能です。
 
-TiDB Cloudは、リージョン内の異なるアベイラビリティゾーンにTiFlashノードを均等に配置します。本番環境での高可用性を確保するため、各TiDB Cloud Dedicatedクラスタに少なくとも2つのTiFlashノードを設定し、データのレプリカを少なくとも2つ作成することをお勧めします。
+TiDB Cloudは、リージョン内の異なるアベイラビリティゾーンにTiFlashノードを均等に配置します。本番環境での高可用性を確保するため、各TiDB Cloud Dedicatedクラスターに少なくとも2つのTiFlashノードを設定し、データのレプリカを少なくとも2つ作成することをお勧めします。

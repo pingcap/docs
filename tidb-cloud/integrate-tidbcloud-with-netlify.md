@@ -7,7 +7,7 @@ summary: TiDB CloudクラスターをNetlifyプロジェクトに接続する方
 
 [Netlify](https://netlify.com/)は、最新のWebプロジェクトを自動化するためのオールインワンプラットフォームです。ホスティングインフラストラクチャ、継続的インテグレーション、デプロイメントパイプラインを単一のワークフローに置き換え、プロジェクトの成長に合わせてサーバーレス関数、ユーザー認証、フォーム処理などの動的な機能を統合します。
 
-このドキュメントでは、データベースバックエンドとしてTiDB Cloudを使用してNetlify上にフルスタックアプリをデプロイする方法について説明します。また、 TiDB Cloud Serverless Driverを使用してNetlifyエッジ関数を利用する方法についても学ぶことができます。
+このドキュメントでは、データベースバックエンドとしてTiDB Cloudを使用してNetlify上にフルスタックアプリをデプロイする方法について説明します。また、 TiDB Cloud Serverless Driverを使用してNetlifyエッジ関数を利用する方法についても学べます。
 
 ## 前提条件 {#prerequisites}
 
@@ -24,16 +24,16 @@ NetlifyアカウントとCLIをお持ちであることが前提となります�
 
 アカウントとTiDB Cloudリソースをお持ちであることが前提となります。お持ちでない場合は、以下の手順に従って作成してください。
 
-- [TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスを作成します](/tidb-cloud/create-tidb-cluster-serverless.md)
+- [TiDB Cloud StarterまたはEssentialインスタンスを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)
 - [TiDB Cloud Dedicatedクラスターを作成する](/tidb-cloud/create-tidb-cluster.md)
 
 TiDB Cloudのリソース1つで、複数のNetlifyサイトに接続できます。
 
-### TiDB Cloudのトラフィックフィルタで許可されているすべてのIPアドレス {#all-ip-addresses-allowed-for-traffic-filter-in-tidb-cloud}
+### TiDB Cloudのトラフィックフィルターで許可されているすべてのIPアドレス {#all-ip-addresses-allowed-for-traffic-filter-in-tidb-cloud}
 
 TiDB Cloud Dedicatedクラスターの場合、**Settings** > **Networking** で **Public Endpoint** が無効になっている場合は有効にし、クラスターのトラフィックフィルターで、すべての IP アドレスからの接続を許可する設定（ `0.0.0.0/0`に設定）になっていることを確認してください。これは、Netlify のデプロイメントでは動的 IP アドレスが使用されるためです。
 
-TiDB Cloud StarterおよびTiDB Cloud Essentialインスタンスは、デフォルトで全てのIPアドレスからの接続を許可するため、トラフィックフィルタを設定する必要はありません。
+TiDB Cloud StarterおよびTiDB Cloud Essentialインスタンスは、デフォルトで全てのIPアドレスからの接続を許可するため、トラフィックフィルターを設定する必要はありません。
 
 ## ステップ1. サンプルプロジェクトと接続文字列を取得する {#step-1-get-the-example-project-and-the-connection-string}
 
@@ -50,11 +50,11 @@ TiDB Cloudは、すぐに開発を始められるように、TypeScriptとNext.j
     cd nextjs-prisma-example/
     ```
 
-### TiDB Cloud接続文字列を取得します {#get-the-tidb-cloud-connection-string}
+### TiDB Cloud接続文字列を取得する {#get-the-tidb-cloud-connection-string}
 
 TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスの場合、接続文字列は[TiDB Cloud CLI](/tidb-cloud/cli-reference.md)または[TiDB Cloudコンソール](https://tidbcloud.com/)から取得できます。
 
-TiDB Cloud Dedicatedクラスタの場合、接続文字列はTiDB Cloudコンソールからのみ取得できます。
+TiDB Cloud Dedicatedクラスターの場合、接続文字列はTiDB Cloudコンソールからのみ取得できます。
 
 <SimpleTab>
 <div label="TiDB Cloud CLI">
@@ -63,7 +63,7 @@ TiDB Cloud Dedicatedクラスタの場合、接続文字列はTiDB Cloudコン�
 >
 > Cloud CLI をインストールしていない場合は、次の手順を実行する前に、 [TiDB Cloud CLI クイックスタート](/tidb-cloud/get-started-with-cli.md)を参照して簡単にインストールしてください。
 
-1. TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスの接続文字列を対話モードで取得します。
+1. TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスの接続文字列を対話型モードで取得します。
 
     ```shell
     ticloud cluster connect-info
@@ -93,20 +93,20 @@ TiDB Cloud Dedicatedクラスタの場合、接続文字列はTiDB Cloudコン�
     >
     > 後で接続文字列を使用する際は、以下の点に注意してください。
     >
-    > - 接続文字列内のパラメータを実際の値に置き換えてください。
+    > - 接続文字列内のパラメーターを実際の値に置き換えてください。
     > - このドキュメントのサンプルアプリでは新しいデータベースが必要なので、 `<Database>`を固有の新しい名前に置き換える必要があります。
 
 </div>
 <div label="TiDB Cloud console">
 
-1. [TiDB Cloudコンソール](https://tidbcloud.com/)では、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットリソースの名前をクリックして概要ページに移動し、右上隅の**Connect**をクリックします。表示されたダイアログで、接続文字列から以下の接続パラメータを取得できます。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)では、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットリソースの名前をクリックして概要ページに移動し、右上隅の**Connect**をクリックします。表示されたダイアログで、接続文字列から以下の接続パラメーターを取得できます。
 
     - `${host}`
     - `${port}`
     - `${user}`
     - `${password}`
 
-2. 以下の接続文字列に接続パラメータを入力してください。
+2. 以下の接続文字列に接続パラメーターを入力してください。
 
     ```shell
     mysql://<User>:<Password>@<Host>:<Port>/<Database>?sslaccept=strict
@@ -116,13 +116,13 @@ TiDB Cloud Dedicatedクラスタの場合、接続文字列はTiDB Cloudコン�
     >
     > 後で接続文字列を使用する際は、以下の点に注意してください。
     >
-    > - 接続文字列内のパラメータを実際の値に置き換えてください。
+    > - 接続文字列内のパラメーターを実際の値に置き換えてください。
     > - このドキュメントのサンプルアプリでは新しいデータベースが必要なので、 `<Database>`を固有の新しい名前に置き換える必要があります。
 
 </div>
 </SimpleTab>
 
-## ステップ2. サンプルアプリをNetlifyにデプロイ {#step-2-deploy-the-example-app-to-netlify}
+## ステップ2. サンプルアプリをNetlifyにデプロイする {#step-2-deploy-the-example-app-to-netlify}
 
 1. Netlify CLIで、Netlifyアカウントを認証し、アクセストークンを取得します。
 
@@ -214,7 +214,7 @@ TiDB Cloud Dedicatedクラスタの場合、接続文字列はTiDB Cloudコン�
     netlify dev
     ```
 
-    次に、ブラウザで`http://localhost:3000/`にアクセスして、そのUIを探索してください。
+    次に、ブラウザーで`http://localhost:3000/`にアクセスして、そのUIを探索してください。
 
 6. アプリを Netlify にデプロイ。ローカルプレビューで問題がなければ、次のコマンドを使用してサイトを Netlify にデプロイできます。 `--trigger`は、ローカルファイルをアップロードせずにデプロイすることを意味します。ローカルで変更を加えた場合は、GitHub リポジトリにコミットされていることを確認してください。
 
