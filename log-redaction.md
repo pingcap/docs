@@ -69,7 +69,11 @@ Starting from v8.5.9, [`security.redact-info-log`](/tikv-configuration-file.md#r
 
 Starting from v8.5.9, [`security.redact-info-log`](/pd-configuration-file.md#redact-info-log-new-in-v50) defaults to `true`. If this item is omitted, PD redacts user data in logs, including after an upgrade. Set it to `false` to disable log redaction, or set it to `"marker"` to enclose sensitive values in `‹` and `›` while preserving their original values. Before v8.5.9, the default value is `false`.
 
-The TSO and Scheduling services use the same default for [`security.redact-info-log`](/tso-configuration-file.md#redact-info-log) and [`security.redact-info-log`](/scheduling-configuration-file.md#redact-info-log).
+Redaction applies to PD logs, operator additional info, [Online Unsafe Recovery](/online-unsafe-recovery.md) plans, and some error messages returned to clients. Request parameters and bodies in audit logs are also redacted.
+
+This configuration item cannot be changed online. Restart PD after changing it.
+
+The TSO and Scheduling services use the same default for `security.redact-info-log` in their configuration files. See [TSO](/tso-configuration-file.md#redact-info-log) and [Scheduling](/scheduling-configuration-file.md#redact-info-log).
 
 ## Log redaction in TiFlash side
 

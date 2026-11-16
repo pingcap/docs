@@ -110,7 +110,9 @@ The following describes the configuration file specified by the `config` option 
 #### `redact-info-log` <span class="version-mark">New in v8.5.6</span>
 
 - Controls log redaction. This parameter is supported only in the [TiCDC new architecture](/ticdc/ticdc-architecture.md).
-- Default value: Before v8.5.9, the default value is `false`. Starting from v8.5.9, the default value is `true` when this parameter is not set. To keep logs unredacted, set this parameter to `false`.
+- Default value: `true`. Before v8.5.9, the default value is `false`.
+- If this parameter is omitted, log redaction is enabled, including after an upgrade. To keep logs unredacted, set this parameter to `false`.
+- This configuration item cannot be changed online. Restart TiCDC after changing it.
 - Set the value to `true` to replace sensitive values in logs with `?`, or set it to `"marker"` to enclose sensitive values in `‹` and `›` while preserving their original values.
 
 ### `capture-session-ttl`
