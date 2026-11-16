@@ -57,6 +57,17 @@ TiDB Lightning has two configuration classes: "global" and "task", and they have
     - `false`: only the logs related to the import are output, and the logs of other dependent components are not output.
     - `true`: logs from both the import process and other dependent components are output, and gRPC debugging is enabled, which can be used for diagnosis.
 
+### security
+
+#### `redact-info-log`
+
+- Controls whether to redact sensitive information in TiDB Lightning logs. When the value is `true`, sensitive information is replaced with `?`.
+- Log redaction is controlled by the global configuration loaded at startup or the `--redact-info-log=<bool>` command-line flag. In server mode, a submitted task cannot change this setting. To change it, restart TiDB Lightning with the desired global configuration or command-line flag.
+- Default value: `true`. Before v8.5.9, the default value is `false`.
+- If this item is omitted from the global configuration, log redaction is enabled, including after an upgrade. To keep logs unredacted, set this item to `false` in the global configuration.
+- Value options: `false`, `true`
+- Starting from v8.5.9, an explicit command-line value overrides the global configuration file. In v8.5.8 and earlier versions, `--redact-info-log=false` leaves `redact-info-log = true` in the configuration file unchanged. To disable log redaction in those versions, set `redact-info-log = false` in the configuration file.
+
 ## TiDB Lightning (Task)
 
 ### lightning
@@ -115,7 +126,7 @@ TiDB Lightning has two configuration classes: "global" and "task", and they have
 
 ### security
 
-The `security` section specifies certificates and keys for TLS connections within the cluster, and controls log redaction.
+The `security` section specifies certificates and keys for TLS connections within the cluster.
 
 #### `ca-path`
 
@@ -134,14 +145,6 @@ The `security` section specifies certificates and keys for TLS connections withi
 - Specifies the private key of this service.
 
 <!-- Example: `"/path/to/lightning.key"` -->
-
-#### `redact-info-log`
-
-- Controls whether to redact sensitive information in TiDB Lightning logs. When the value is `true`, sensitive information is replaced with `?`.
-- Default value: `true`. Before v8.5.9, the default value is `false`.
-- If this item is omitted, log redaction is enabled, including after an upgrade. To keep logs unredacted, set this item to `false`.
-- Value options: `false`, `true`
-- You can also set this item with the `--redact-info-log=<bool>` command-line flag. Starting from v8.5.9, an explicit command-line value overrides the configuration file. In v8.5.8 and earlier versions, `--redact-info-log=false` leaves `redact-info-log = true` in the configuration file unchanged. To disable log redaction in those versions, set `redact-info-log = false` in the configuration file.
 
 ### checkpoint
 

@@ -91,6 +91,8 @@ Starting from v8.5.9, [`security.redact-info-log`](/ticdc/ticdc-server-config.md
 
 Starting from v8.5.9, [`security.redact-info-log`](/tidb-lightning/tidb-lightning-configuration.md#redact-info-log) defaults to `true`. TiDB Lightning then replaces sensitive information in logs with `?`. Set it to `false`, or pass `--redact-info-log=false`, to disable log redaction. Starting from v8.5.9, an explicit command-line value overrides the configuration file. In v8.5.8 and earlier versions, `--redact-info-log=false` leaves `redact-info-log = true` in the configuration file unchanged, so set `redact-info-log = false` in the configuration file to disable log redaction. Before v8.5.9, the default value is `false`.
 
+Log redaction is controlled by the global configuration loaded at startup or the `--redact-info-log=<bool>` command-line flag. In server mode, a submitted task cannot change this setting. To change it, restart TiDB Lightning with the desired global configuration or command-line flag.
+
 ## Log redaction in DM-worker side
 
 Starting from v8.5.9, [`redact-info-log`](/dm/dm-worker-configuration-file.md#redact-info-log-new-in-v859-and-v900) defaults to `true`. DM-worker then replaces sensitive information in logs, including detailed query arguments, with `?`. Set it to `false`, or pass `--redact-info-log=false`, to disable log redaction. An explicit command-line value overrides the configuration file. This configuration item and flag are introduced in v8.5.9 and v9.0.0.
