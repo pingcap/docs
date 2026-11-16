@@ -88,6 +88,6 @@ summary: "{{{ .lake }}} は、あらゆる種類のデータ処理に対応す�
 | [Scalar Function (SQL)](/tidb-cloud-lake/sql/create-scalar-function.md)              | SQL 式をクエリ間で再利用したい場合（数式、文字列フォーマットなど）。 |
 | [Scalar Function (Python/JavaScript)](/tidb-cloud-lake/sql/create-scalar-function.md) | 制御フロー、外部ライブラリ、または高度なアルゴリズムがロジックに必要な場合。   |
 | [Aggregate Function](/tidb-cloud-lake/sql/create-aggregate-function.md)       | 組み込みの集計では表現できないカスタム集計が必要な場合。        |
-| [Table Function](/tidb-cloud-lake/sql/create-table-function.md)               | 結果セットを返す、再利用可能でパラメータ化されたクエリが必要な場合。          |
+| [Table Function](/tidb-cloud-lake/sql/create-table-function.md)               | 結果セットを返す、再利用可能でパラメーター化されたクエリが必要な場合。          |
 
 UDF の種類と構文の完全な比較については、[ユーザー定義関数](/tidb-cloud-lake/sql/user-defined-function.md) を参照してください。

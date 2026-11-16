@@ -26,7 +26,7 @@ summary: このページでは、{{{ .lake }}} のシステム管理コマンド
 
 | コマンド | 説明 |
 |---------|-------------|
-| **[SET](/tidb-cloud-lake/sql/set.md)** | グローバル設定パラメータを設定します |
+| **[SET](/tidb-cloud-lake/sql/set.md)** | グローバル設定パラメーターを設定します |
 | **[UNSET](/tidb-cloud-lake/sql/unset.md)** | 設定を削除します |
 | **[SET VARIABLE](/tidb-cloud-lake/sql/set-var.md)** | ユーザー定義変数を管理します |
 | **[SHOW SETTINGS](/tidb-cloud-lake/sql/show-settings.md)** | 現在のシステム設定を表示します |

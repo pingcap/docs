@@ -80,7 +80,7 @@ ALTER TABLE stores RECLUSTER FINAL;
 
 ### `ST_WITHIN`、`ST_INTERSECTS`、`ST_CONTAINS` によるフィルタリング {#filter-with-st_within-st_intersects-and-st_contains}
 
-これらの述語は、ジオフェンス形式のフィルタとして一般的であり、空間インデックスの恩恵を受けられます。
+これらの述語は、ジオフェンス形式のフィルターとして一般的であり、空間インデックスの恩恵を受けられます。
 
 ```sql
 -- Rows whose locations are within a polygon

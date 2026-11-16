@@ -25,7 +25,7 @@ TO_NULLABLE(x);
 
 ## 戻り値の型 {#return-type}
 
-入力値と同じデータ型の値を返します。ただし、入力値がすでに nullable でない場合は、nullable コンテナでラップされます。
+入力値と同じデータ型の値を返します。ただし、入力値がすでに nullable でない場合は、nullable コンテナーでラップされます。
 
 ## 例 {#examples}
 

@@ -15,9 +15,9 @@ RENAME DICTIONARY [ IF EXISTS ]
     TO [ <new_catalog_name>. ][ <new_database_name>. ]<new_dictionary_name>
 ```
 
-## パラメータ {#parameters}
+## パラメーター {#parameters}
 
-| パラメータ | 説明 |
+| パラメーター | 説明 |
 |-----------|-------------|
 | `IF EXISTS` | 任意。ソース辞書が存在しない場合のエラーを抑制します。 |
 | `<dictionary_name>` | 現在の辞書名です。 |

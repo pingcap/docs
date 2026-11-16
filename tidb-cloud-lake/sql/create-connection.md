@@ -9,7 +9,7 @@ summary: 外部ストレージへの接続を作成します。
 
 > **Warning:**
 >
-> 重要: オブジェクト（stage、テーブルなど）が Connection を使用する場合、その Connection のパラメータはコピーされ、永続的に保存されます。後で CREATE OR REPLACE CONNECTION を使用して Connection を変更しても、既存のオブジェクトは引き続き古いパラメータを使用します。新しい接続パラメータでオブジェクトを更新するには、それらのオブジェクトを削除して再作成する必要があります。
+> 重要: オブジェクト（stage、テーブルなど）が Connection を使用する場合、その Connection のパラメーターはコピーされ、永続的に保存されます。後で CREATE OR REPLACE CONNECTION を使用して Connection を変更しても、既存のオブジェクトは引き続き古いパラメーターを使用します。新しい接続パラメーターでオブジェクトを更新するには、それらのオブジェクトを削除して再作成する必要があります。
 
 ## 構文 {#syntax}
 
@@ -19,16 +19,16 @@ CREATE [ OR REPLACE ] CONNECTION [ IF NOT EXISTS ] <connection_name>
     [ <storage_params> ]
 ```
 
-| パラメータ        | 説明                                                                                                                                        |
+| パラメーター        | 説明                                                                                                                                        |
 |------------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
 | STORAGE_TYPE     | ストレージサービスの種類です。指定可能な値には `s3`、`azblob`、`gcs`、`oss`、`cos` があります。                                                         |
-| storage_params   | ストレージの種類と認証方法によって異なります。完全な一覧については [接続パラメータ](/tidb-cloud-lake/sql/connection-parameters.md) を参照してください。 |
+| storage_params   | ストレージの種類と認証方法によって異なります。完全な一覧については [接続パラメーター](/tidb-cloud-lake/sql/connection-parameters.md) を参照してください。 |
 
-## 接続パラメータ {#connection-parameters}
+## 接続パラメーター {#connection-parameters}
 
-接続には、特定のストレージバックエンドに対する認証情報と設定が含まれます。接続を作成する際は、適切な `STORAGE_TYPE` を選択し、必要なパラメータを指定してください。次の表は一般的なオプションを示しています。
+接続には、特定のストレージバックエンドに対する認証情報と設定が含まれます。接続を作成する際は、適切な `STORAGE_TYPE` を選択し、必要なパラメーターを指定してください。次の表は一般的なオプションを示しています。
 
-| STORAGE_TYPE | 一般的なパラメータ | 説明 |
+| STORAGE_TYPE | 一般的なパラメーター | 説明 |
 |--------------|-------------------|-------------|
 | `s3`         | `ACCESS_KEY_ID`/`SECRET_ACCESS_KEY`、または `ROLE_ARN`/`EXTERNAL_ID`、任意で `ENDPOINT_URL`、`REGION` | Amazon S3 および S3 互換サービス（MinIO、Cloudflare R2 など）。 |
 | `azblob`     | `ACCOUNT_NAME`、`ACCOUNT_KEY`、`ENDPOINT_URL` | Azure Blob Storage。 |
@@ -37,7 +37,7 @@ CREATE [ OR REPLACE ] CONNECTION [ IF NOT EXISTS ] <connection_name>
 | `cos`        | `SECRET_ID`、`SECRET_KEY`、`ENDPOINT_URL` | Tencent Cloud Object Storage。 |
 | `hf`         | `REPO_TYPE`、`REVISION`、任意で `TOKEN` | Hugging Face Hub のデータセットおよびモデル。 |
 
-パラメータの意味、任意フラグ、追加のストレージタイプについては、[接続パラメータ](/tidb-cloud-lake/sql/connection-parameters.md) を参照してください。以下のタブを展開すると、ストレージ固有の例を確認できます。
+パラメーターの意味、任意フラグ、追加のストレージタイプについては、[接続パラメーター](/tidb-cloud-lake/sql/connection-parameters.md) を参照してください。以下のタブを展開すると、ストレージ固有の例を確認できます。
 
 <SimpleTab groupId="connection-storage-types">
 
@@ -56,7 +56,7 @@ CREATE CONNECTION <connection_name>
     SECRET_ACCESS_KEY = '<your-secret-access-key>';
 ```
 
-| パラメータ | 説明 |
+| パラメーター | 説明 |
 |-----------|-------------|
 | ACCESS_KEY_ID | AWS アクセスキー ID。 |
 | SECRET_ACCESS_KEY | AWS シークレットアクセスキー。 |
@@ -71,7 +71,7 @@ CREATE CONNECTION <connection_name>
     ROLE_ARN = '<your-role-arn>';
 ```
 
-| パラメータ | 説明 |
+| パラメーター | 説明 |
 |-----------|-------------|
 | ROLE_ARN  | {{{ .lake }}} が S3 リソースにアクセスするために引き受ける IAM ロールの Amazon Resource Name (ARN)。 |
 

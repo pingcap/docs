@@ -20,7 +20,7 @@ SHOW USER FUNCTIONS
 | `name` | 関数名 |
 | `is_aggregate` | 集計関数かどうか（UDF の場合は NULL） |
 | `description` | 指定されている場合の関数の説明 |
-| `arguments` | JSON 形式の関数パラメータ |
+| `arguments` | JSON 形式の関数パラメーター |
 | `language` | プログラミング言語: SQL、python、javascript、wasm、または external |
 | `created_on` | 関数の作成タイムスタンプ |
 

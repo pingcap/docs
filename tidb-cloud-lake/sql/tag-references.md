@@ -15,7 +15,7 @@ summary: 指定したデータベースオブジェクトに割り当てられ�
 SELECT * FROM TAG_REFERENCES('<object_name>', '<domain>')
 ```
 
-| パラメータ       | 説明                                                        |
+| パラメーター       | 説明                                                        |
 |-----------------|--------------------------------------------------------------------|
 | `object_name`   | オブジェクトの名前。テーブル/ビュー/ストリームの場合は、`db.name` 形式を使用します。プロシージャの場合は、型シグネチャ（例: `my_proc(INT)`）を含めます。 |
 | `domain`        | オブジェクトタイプ: `DATABASE`, `TABLE`, `VIEW`, `STREAM`, `STAGE`, `CONNECTION`, `USER`, `ROLE`, `UDF`, または `PROCEDURE`。        |

@@ -8,7 +8,7 @@ summary: COPY INTO を使用すると、テーブルまたはクエリからデ�
 COPY INTO を使用すると、テーブルまたはクエリからデータを、以下のいずれかの場所にある 1 つ以上のファイルへアンロードできます。
 
 - ユーザー / 内部 / 外部 stage: {{{ .lake }}} の stage については、[Stage とは？](/tidb-cloud-lake/guides/stage-overview.md) を参照してください。
-- ストレージサービスで作成されたバケットまたはコンテナ。
+- ストレージサービスで作成されたバケットまたはコンテナー。
 
 関連情報: [`COPY INTO <table>`](/tidb-cloud-lake/sql/copy-into-table.md)
 
@@ -53,7 +53,7 @@ externalLocation ::=
   )
 ```
 
-Amazon S3 互換ストレージサービスへのアクセスに使用できる接続パラメータについては、[接続パラメータ](/tidb-cloud-lake/sql/connection-parameters.md) を参照してください。
+Amazon S3 互換ストレージサービスへのアクセスに使用できる接続パラメーターについては、[接続パラメーター](/tidb-cloud-lake/sql/connection-parameters.md) を参照してください。
 
 </div>
 
@@ -67,7 +67,7 @@ externalLocation ::=
   )
 ```
 
-Azure Blob Storage へのアクセスに使用できる接続パラメータについては、[接続パラメータ](/tidb-cloud-lake/sql/connection-parameters.md) を参照してください。
+Azure Blob Storage へのアクセスに使用できる接続パラメーターについては、[接続パラメーター](/tidb-cloud-lake/sql/connection-parameters.md) を参照してください。
 
 </div>
 
@@ -81,7 +81,7 @@ externalLocation ::=
   )
 ```
 
-Google Cloud Storage へのアクセスに使用できる接続パラメータについては、[接続パラメータ](/tidb-cloud-lake/sql/connection-parameters.md) を参照してください。
+Google Cloud Storage へのアクセスに使用できる接続パラメーターについては、[接続パラメーター](/tidb-cloud-lake/sql/connection-parameters.md) を参照してください。
 
 </div>
 
@@ -95,7 +95,7 @@ externalLocation ::=
   )
 ```
 
-Alibaba Cloud OSS へのアクセスに使用できる接続パラメータについては、[接続パラメータ](/tidb-cloud-lake/sql/connection-parameters.md) を参照してください。
+Alibaba Cloud OSS へのアクセスに使用できる接続パラメーターについては、[接続パラメーター](/tidb-cloud-lake/sql/connection-parameters.md) を参照してください。
 
 </div>
 
@@ -109,7 +109,7 @@ externalLocation ::=
   )
 ```
 
-Tencent Cloud Object Storage へのアクセスに使用できる接続パラメータについては、[接続パラメータ](/tidb-cloud-lake/sql/connection-parameters.md) を参照してください。
+Tencent Cloud Object Storage へのアクセスに使用できる接続パラメーターについては、[接続パラメーター](/tidb-cloud-lake/sql/connection-parameters.md) を参照してください。
 
 </div>
 </SimpleTab>
@@ -122,9 +122,9 @@ Tencent Cloud Object Storage へのアクセスに使用できる接続パラメ
 
 ### PARTITION BY {#partition-by}
 
-アンロードされたデータを個別のフォルダに分割するために使用する式を指定します。この式は `STRING` 型として評価される必要があります。式によって生成される値ごとに、宛先パスの下にサブフォルダが作成され、対応する行はそのサブフォルダ配下のファイルに書き込まれます。
+アンロードされたデータを個別のフォルダーに分割するために使用する式を指定します。この式は `STRING` 型として評価される必要があります。式によって生成される値ごとに、宛先パスの下にサブフォルダーが作成され、対応する行はそのサブフォルダー配下のファイルに書き込まれます。
 
-- 式が `NULL` と評価された場合、行は特別な `_NULL_` フォルダに配置されます。
+- 式が `NULL` と評価された場合、行は特別な `_NULL_` フォルダーに配置されます。
 - この式では、ソーステーブルまたはクエリの任意のカラムを参照できます。
 - パーティション値でのパストラバーサル (`..`) は許可されません。
 
@@ -147,7 +147,7 @@ copyOptions ::=
   [ USE_RAW_PATH = true | false ]
 ```
 
-| パラメータ       | デフォルト             | 説明                                                                                                                                                                           |
+| パラメーター       | デフォルト             | 説明                                                                                                                                                                           |
 | ---------------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | SINGLE           | false                  | `true` の場合、このコマンドはデータを 1 つの単一ファイルにアンロードします。                                                                                                   |
 | MAX_FILE_SIZE    | 67108864 bytes (64 MB) | 作成される各ファイルの最大サイズ（バイト単位）です。`SINGLE` が false の場合に有効です。                                                                                       |
@@ -315,7 +315,7 @@ COPY INTO 's3://lake'
 
 ### 例 4: PARTITION BY を使用したアンロード (unload) {#example-4-unloading-with-partition-by}
 
-この例では、導出式に基づいてデータをパーティション化されたフォルダにアンロードします。
+この例では、導出式に基づいてデータをパーティション化されたフォルダーにアンロードします。
 
 ```sql
 -- Create a sample table
@@ -354,7 +354,7 @@ SELECT name FROM list_stage(location => '@partitioned_stage') ORDER BY name;
 └──────────────────────────────────────────────────────────────────┘
 ```
 
-パーティション式の評価結果が `NULL` の場合、データは `_NULL_` フォルダに配置されます。各一意のパーティション値ごとに、それぞれ対応するデータファイルを含む独自のサブフォルダが作成されます。
+パーティション式の評価結果が `NULL` の場合、データは `_NULL_` フォルダーに配置されます。各一意のパーティション値ごとに、それぞれ対応するデータファイルを含む独自のサブフォルダーが作成されます。
 
 ### 例 5: Lance データセットへのアンロード (unload) {#example-5-unloading-to-a-lance-dataset}
 

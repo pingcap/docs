@@ -13,9 +13,9 @@ summary: 辞書の作成に使用された SQL 文を表示します。
 SHOW CREATE DICTIONARY [ <catalog_name>. ][ <database_name>. ]<dictionary_name>
 ```
 
-## パラメータ {#parameters}
+## パラメーター {#parameters}
 
-| パラメータ | 説明 |
+| パラメーター | 説明 |
 |-----------|-------------|
 | `<dictionary_name>` | 辞書名です。カタログ名およびデータベース名で修飾できます。 |
 

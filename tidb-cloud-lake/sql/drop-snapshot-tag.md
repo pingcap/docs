@@ -18,9 +18,9 @@ FUSE テーブルから名前付きスナップショットタグを削除しま
 ALTER TABLE [<database_name>.]<table_name> DROP TAG <tag_name>
 ```
 
-## パラメータ {#parameters}
+## パラメーター {#parameters}
 
-| パラメータ | 説明 |
+| パラメーター | 説明 |
 |-----------|-------------|
 | tag_name  | 削除するスナップショットタグの名前です。タグが存在しない場合はエラーが返されます。 |
 

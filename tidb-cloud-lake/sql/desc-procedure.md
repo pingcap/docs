@@ -13,8 +13,8 @@ summary: 特定のストアドプロシージャに関する詳細情報を表�
 DESC | DESCRIBE PROCEDURE <procedure_name>([<parameter_type1>, <parameter_type2>, ...])
 ```
 
-- プロシージャにパラメータがない場合は、空の括弧を使用します: `DESC PROCEDURE <procedure_name>()`;
-- パラメータがあるプロシージャの場合は、エラーを避けるために正確な型を指定してください。
+- プロシージャにパラメーターがない場合は、空の括弧を使用します: `DESC PROCEDURE <procedure_name>()`;
+- パラメーターがあるプロシージャの場合は、エラーを避けるために正確な型を指定してください。
 
 ## 例 {#examples}
 

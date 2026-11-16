@@ -13,8 +13,8 @@ summary: 既存のストアドプロシージャを削除します。
 DROP PROCEDURE <procedure_name>([<parameter_type1>, <parameter_type2>, ...])
 ```
 
-- プロシージャにパラメータがない場合は、空の括弧を使用します: `DROP PROCEDURE <procedure_name>()`;
-- パラメータがあるプロシージャでは、エラーを避けるために正確な型を指定してください。
+- プロシージャにパラメーターがない場合は、空の括弧を使用します: `DROP PROCEDURE <procedure_name>()`;
+- パラメーターがあるプロシージャでは、エラーを避けるために正確な型を指定してください。
 
 ## 例 {#examples}
 

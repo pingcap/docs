@@ -26,9 +26,9 @@ ALTER TABLE [<database_name>.]<table_name> CREATE TAG <tag_name>
     [ RETAIN <n> { DAYS | SECONDS } ]
 ```
 
-## パラメータ {#parameters}
+## パラメーター {#parameters}
 
-| パラメータ | 説明 |
+| パラメーター | 説明 |
 |-----------|-------------|
 | tag_name  | タグの名前です。テーブル内で一意である必要があります。 |
 | AT        | タグが参照するスナップショットを指定します。省略した場合、タグは現在の（最新の）スナップショットを参照します。[AT](/tidb-cloud-lake/sql/at.md) 句と同じオプションに加えて、既存のタグからコピーするための `TAG` もサポートします。 |

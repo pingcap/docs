@@ -38,7 +38,7 @@ summary: "{{{ .lake }}} は強い型付けを持つカラムにデータを格�
 | [ARRAY](/tidb-cloud-lake/sql/array.md)     | `[1, 2, 3]`                            | 同じ内部型を持つ値の順序付きリストです。 |
 | [TUPLE](/tidb-cloud-lake/sql/tuple.md)     | `('2023-02-14','Valentine's Day')`     | 要素型が宣言された固定長の順序付きリストです。 |
 | [MAP](/tidb-cloud-lake/sql/map.md)         | `{'a': 1, 'b': 2}`                     | キーと値のコレクションです（内部的にはキー型と値型のタプル）。 |
-| [VARIANT](/tidb-cloud-lake/sql/variant.md) | `[1, {"name":"datalake"}]`             | プリミティブ、配列、オブジェクトを混在できる JSON ライクなコンテナです。 |
+| [VARIANT](/tidb-cloud-lake/sql/variant.md) | `[1, {"name":"datalake"}]`             | プリミティブ、配列、オブジェクトを混在できる JSON ライクなコンテナーです。 |
 | [BITMAP](/tidb-cloud-lake/sql/bitmap.md)   | `<bitmap binary>`                      | メンバーシップ判定と集合演算向けに最適化された圧縮ビットマップです。 |
 
 ## ドメイン固有型 {#domain-specific-types}

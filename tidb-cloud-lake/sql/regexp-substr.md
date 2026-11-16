@@ -20,7 +20,7 @@ SELECT SUBSTRING('abc123', REGEXP_INSTR('abc123', '\d+'));
 -- Returns '123' (extracts the digits).
 ```
 
-- REGEXP_SUBSTR は、`e` パラメータ（Snowflake でキャプチャグループを抽出するために使用）や、返すキャプチャグループを指定する `group_num` パラメータをサポートしていません。
+- REGEXP_SUBSTR は、`e` パラメーター（Snowflake でキャプチャグループを抽出するために使用）や、返すキャプチャグループを指定する `group_num` パラメーターをサポートしていません。
 
 ```sql
 SELECT REGEXP_SUBSTR('abc123', '(\w+)(\d+)', 1, 1, 'e', 1);

@@ -11,9 +11,9 @@ summary: "{{{ .lake }}} の Warehouse 関連 SQL コマンド。"
 
 - **Warehouse の命名**: 3～63 文字で、使用できるのは `A-Z`、`a-z`、`0-9`、`-` のみです。
 - **文字列と識別子**: スペースを含まない場合、裸の識別子では引用符を省略できます。それ以外の場合は、単一引用符で囲みます。文法上はキーワードや数値/ブールリテラルを名前として使用できますが、実行時の検証は引き続き適用されます。
-- **数値パラメータ**: `nullable_unsigned_number` / `nullable_signed_number` は整数または `NULL` を受け付けます。`NULL` を指定すると値がリセットされます（たとえば、`AUTO_SUSPEND = NULL` は `0` と同じです）。
-- **時間パラメータ**: `QUERY_HISTORY` は `YYYY-MM-DD HH:MM:SS`（UTC または明示的なタイムゾーン）を使用します。小数秒が省略された場合は、秒単位の値として解釈されます。
-- **ブールパラメータ**: `TRUE`/`FALSE` のみ受け付けます。
+- **数値パラメーター**: `nullable_unsigned_number` / `nullable_signed_number` は整数または `NULL` を受け付けます。`NULL` を指定すると値がリセットされます（たとえば、`AUTO_SUSPEND = NULL` は `0` と同じです）。
+- **時間パラメーター**: `QUERY_HISTORY` は `YYYY-MM-DD HH:MM:SS`（UTC または明示的なタイムゾーン）を使用します。小数秒が省略された場合は、秒単位の値として解釈されます。
+- **ブールパラメーター**: `TRUE`/`FALSE` のみ受け付けます。
 - **`WITH` キーワード**: オプションリスト全体の前、または各オプションの前に指定できます。オプションは空白で区切られ、カンマは文法の一部ではありません。
 
 ## Warehouse 管理 {#warehouse-management}
@@ -47,8 +47,8 @@ summary: "{{{ .lake }}} の Warehouse 関連 SQL コマンド。"
 | `ALTER WAREHOUSE`  | 一時停止/再開/変更/名前変更  | `SUSPEND`/`RESUME`、`SET <options>`、または `RENAME TO <name>` |
 | `DROP WAREHOUSE`   | Warehouse を削除             | `IF EXISTS` は省略可能                                     |
 | `USE WAREHOUSE`    | 現在のセッションにバインド   | 存在確認のみを行います                                     |
-| `SHOW WAREHOUSES`  | Warehouse を一覧表示         | `LIKE` フィルタは省略可能                                  |
-| `QUERY_HISTORY`    | クエリログを確認             | Warehouse、時間範囲、件数制限でフィルタ可能                |
+| `SHOW WAREHOUSES`  | Warehouse を一覧表示         | `LIKE` フィルターは省略可能                                  |
+| `QUERY_HISTORY`    | クエリログを確認             | Warehouse、時間範囲、件数制限でフィルター可能                |
 
 ## Warehouse SQL コマンド {#warehouse-sql-commands}
 
@@ -56,7 +56,7 @@ summary: "{{{ .lake }}} の Warehouse 関連 SQL コマンド。"
 | --------------------------------------- | ------------------------------------------------- |
 | [CREATE WAREHOUSE](/tidb-cloud-lake/sql/create-warehouse.md) | 新しい Warehouse を作成します                     |
 | [USE WAREHOUSE](/tidb-cloud-lake/sql/use-warehouse.md)       | セッションの現在の Warehouse を設定します         |
-| [SHOW WAREHOUSES](/tidb-cloud-lake/sql/show-warehouses.md)   | オプションのフィルタ付きですべての Warehouse を一覧表示します |
+| [SHOW WAREHOUSES](/tidb-cloud-lake/sql/show-warehouses.md)   | オプションのフィルター付きですべての Warehouse を一覧表示します |
 | [ALTER WAREHOUSE](/tidb-cloud-lake/sql/alter-warehouse.md)   | Warehouse の一時停止、再開、または設定変更を行います |
 | [ALTER WAREHOUSE ASSIGN NODES](/tidb-cloud-lake/sql/alter-warehouse-assign-nodes.md) | Warehouse クラスターにノードを割り当てます |
 | [ALTER WAREHOUSE UNASSIGN NODES](/tidb-cloud-lake/sql/alter-warehouse-unassign-nodes.md) | Warehouse クラスターから割り当て済みノードを削除します |

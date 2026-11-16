@@ -42,9 +42,9 @@ INFER_SCHEMA(
 )
 ```
 
-## パラメータ {#parameters}
+## パラメーター {#parameters}
 
-| パラメータ | 説明 | デフォルト | 例 |
+| パラメーター | 説明 | デフォルト | 例 |
 |-----------|-------------|---------|---------|
 | `LOCATION` | stage の場所: `@<stage_name>[/<path>]` | 必須 | `'@my_stage/data/'` |
 | `PATTERN` | stage 済みファイルに一致する正規表現パターンです。`@<stage_name>[/<path>]` の後のファイルパス部分に対してマッチします。[PATTERN を使用した stage ファイルのフィルタリング](/tidb-cloud-lake/guides/stage-overview.md#filtering-staged-files-with-pattern) を参照してください。 | すべてのファイル | `'.*[.]csv'`, `'.*[.]parquet'` |

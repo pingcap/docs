@@ -13,9 +13,9 @@ summary: 配列に指定した要素が含まれている場合に true を返�
 ARRAY_CONTAINS(array, element)
 ```
 
-## パラメータ {#parameters}
+## パラメーター {#parameters}
 
-| パラメータ | 説明 |
+| パラメーター | 説明 |
 |-----------|-------------|
 | array     | 検索対象の配列です。 |
 | element   | 検索する要素です。 |

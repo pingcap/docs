@@ -74,7 +74,7 @@ SELECT ST_ASWKB(geo), ST_ASEWKT(geo), ST_ASGEOJSON(geo) FROM ...;
 
 ## 例 {#examples}
 
-以下の各例では、1 つのオブジェクト型、その解決するシナリオ、それを生成する SQL、およびサンプル結果テーブルを示します。`CAST('…' AS GEOMETRY)` はインラインの WKT リテラルを解析するため、テーブルを作成しなくても試すことができます。
+以下の各例では、1 つのオブジェクト型、その解決するシナリオ、それを生成する SQL、およびサンプル結果テーブルを示します。`CAST('…' AS GEOMETRY)` はインラインの WKT リテラルを解析するため、テーブルを作成しなくても試せます。
 
 ### Point — 単一のセンサー位置を特定する {#point--pinpoint-a-single-sensor}
 

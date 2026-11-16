@@ -32,7 +32,7 @@ CREATE STAGE [ IF NOT EXISTS ] <external_stage_name>
 
 > **Tip:**
 >
-> 外部 stage では、インライン認証情報の代わりに、事前設定済みの接続オブジェクトを参照する `CONNECTION` パラメータの使用を推奨します。この方法により、セキュリティと管理性が向上します。
+> 外部 stage では、インライン認証情報の代わりに、事前設定済みの接続オブジェクトを参照する `CONNECTION` パラメーターの使用を推奨します。この方法により、セキュリティと管理性が向上します。
 
 ```sql
 externalStageParams ::=
@@ -46,7 +46,7 @@ externalStageParams ::=
   );
 ```
 
-異なるストレージサービスで使用可能な接続パラメータについては、[接続パラメータ](/tidb-cloud-lake/sql/connection-parameters.md) を参照してください。
+異なるストレージサービスで使用可能な接続パラメーターについては、[接続パラメーター](/tidb-cloud-lake/sql/connection-parameters.md) を参照してください。
 
 `CONNECTION_NAME` の詳細については、[CREATE CONNECTION](/tidb-cloud-lake/sql/create-connection.md) を参照してください。
 
@@ -116,7 +116,7 @@ DESC STAGE my_s3_stage;
 1. AWS Management Console にログインし、**Services** > **Security, Identity, & Compliance** > **IAM** を選択します。
 2. 左側のナビゲーションペインで **Account settings** を選択し、右側のページで **Security Token Service (STS)** セクションに移動します。アカウントが属する AWS リージョンのステータスが **Active** であることを確認してください。
 3. 左側のナビゲーションペインで **Policies** を選択し、右側のページで **Create policy** を選択します。
-4. **JSON** タブをクリックし、次のコードをエディタにコピー＆ペーストして、ポリシーを *lake_access* として保存します。
+4. **JSON** タブをクリックし、次のコードをエディターにコピー＆ペーストして、ポリシーを *lake_access* として保存します。
 
 ```json
 {

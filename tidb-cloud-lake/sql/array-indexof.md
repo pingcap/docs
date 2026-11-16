@@ -13,9 +13,9 @@ summary: 配列内で要素が最初に出現する位置のインデックス�
 ARRAY_INDEXOF(array, element)
 ```
 
-## パラメータ {#parameters}
+## パラメーター {#parameters}
 
-| パラメータ | 説明 |
+| パラメーター | 説明 |
 |-----------|-------------|
 | array     | 検索対象の配列です。 |
 | element   | 検索する要素です。 |

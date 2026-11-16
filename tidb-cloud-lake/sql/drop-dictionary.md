@@ -13,9 +13,9 @@ summary: 辞書を削除します。
 DROP DICTIONARY [ IF EXISTS ] [ <catalog_name>. ][ <database_name>. ]<dictionary_name>
 ```
 
-## パラメータ {#parameters}
+## パラメーター {#parameters}
 
-| パラメータ | 説明 |
+| パラメーター | 説明 |
 |-----------|-------------|
 | `IF EXISTS` | 任意。辞書が存在しない場合のエラーを抑制します。 |
 | `<dictionary_name>` | 辞書名です。catalog 名およびデータベース名で修飾できます。 |

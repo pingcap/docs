@@ -11,7 +11,7 @@ summary: "参照しやすいように機能別に整理した、{{{ .lake }}} �
 
 | コマンド | 説明 |
 |---------|-------------|
-| [CREATE ROW ACCESS POLICY](/tidb-cloud-lake/sql/create-row-access-policy.md) | 行レベルのフィルタポリシーを作成します |
+| [CREATE ROW ACCESS POLICY](/tidb-cloud-lake/sql/create-row-access-policy.md) | 行レベルのフィルターポリシーを作成します |
 | [DESCRIBE ROW ACCESS POLICY](/tidb-cloud-lake/sql/desc-row-access-policy.md) | 行アクセスポリシーの詳細を表示します |
 | [DROP ROW ACCESS POLICY](/tidb-cloud-lake/sql/drop-row-access-policy.md) | 行アクセスポリシーを削除します |
 

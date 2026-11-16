@@ -15,7 +15,7 @@ summary: 実行時に名前付きキャッシュの容量を調整します。
 CALL system$set_cache_capacity('<cache_name>', <new_capacity>)
 ```
 
-| パラメータ   | 説明                                                              |
+| パラメーター   | 説明                                                              |
 |--------------|-------------------------------------------------------------------|
 | cache_name   | キャッシュ名（[system.caches](/tidb-cloud-lake/sql/system-caches.md) のキャッシュ一覧を参照） |
 | new_capacity | 新しい容量の値。単位（件数またはバイト）はキャッシュの種類によって異なります。                                                                 |

@@ -163,7 +163,7 @@ WHERE QUERY('meta.detections.label:IN [pedestrian cyclist] AND meta.detections.c
 -- Returns ids 1 and 3
 ```
 
-### 例: フレーズでフィルタする {#example-filter-by-phrase}
+### 例: フレーズでフィルターする {#example-filter-by-phrase}
 
 ```sql
 SELECT id, meta['frame']['timestamp'] AS ts
@@ -172,7 +172,7 @@ WHERE QUERY('meta.scene.summary:"vehicle stopped at red traffic light"');
 -- Returns id 2
 ```
 
-### 例: スクールゾーンフィルタ {#example-school-zone-filter}
+### 例: スクールゾーンフィルター {#example-school-zone-filter}
 
 ```sql
 SELECT id, meta['frame']['timestamp'] AS ts

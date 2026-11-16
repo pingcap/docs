@@ -13,7 +13,7 @@ summary: 現在のロールから参照可能なタスクを一覧表示しま�
 SHOW TASKS [LIKE '<pattern>' | WHERE <expr>]
 ```
 
-| パラメータ | 説明 |
+| パラメーター | 説明 |
 |-----------|-------------|
 | LIKE      | `%` ワイルドカードを使用した大文字小文字を区別するパターンマッチングで、タスク名を絞り込みます。 |
 | WHERE     | 出力カラムに対する式を使用して結果セットを絞り込みます。               |
@@ -38,7 +38,7 @@ SHOW TASKS [LIKE '<pattern>' | WHERE <expr>]
 - `next_schedule_time`: 次回のスケジュール実行時刻のタイムスタンプ。
 - `last_committed_on`: タスク定義が最後に更新された時刻のタイムスタンプ。
 - `last_suspended_on`: タスクが最後に一時停止された時刻のタイムスタンプ（存在する場合）。
-- `session_parameters`: タスク実行時に適用されるセッションパラメータ。
+- `session_parameters`: タスク実行時に適用されるセッションパラメーター。
 
 ## 例 {#examples}
 

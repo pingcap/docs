@@ -15,9 +15,9 @@ SHOW DICTIONARIES [ FROM <database_name> | IN <database_name> ]
     [ LIKE '<pattern>' | WHERE <expr> ]
 ```
 
-## パラメータ {#parameters}
+## パラメーター {#parameters}
 
-| パラメータ | 説明 |
+| パラメーター | 説明 |
 |-----------|-------------|
 | `FROM <database_name>` / `IN <database_name>` | 任意。指定したデータベースの辞書を一覧表示します。 |
 | `LIMIT <limit>` | 任意。返される行数を制限します。 |

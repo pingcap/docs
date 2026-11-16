@@ -17,7 +17,7 @@ summary: 日付またはタイムスタンプを指定した精度に切り捨�
 TRUNC(<date_or_timestamp>, <datetime_interval_type>)
 ```
 
-| パラメータ | 説明 |
+| パラメーター | 説明 |
 |----------------------------|------------------------------------------------------------------------------------------------------------|
 | `<date_or_timestamp>`      | `DATE` または `TIMESTAMP` 型の値です。                                                                     |
 | `<datetime_interval_type>` | 次のいずれかの値である必要があります: `YEAR`, `QUARTER`, `MONTH`, `WEEK`, `DAY`, `HOUR`, `MINUTE`, `SECOND`。 |
