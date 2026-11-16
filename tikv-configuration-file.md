@@ -2246,7 +2246,7 @@ Configuration items related to security.
 + If the configuration item is set to `"marker"`, all user data in the log is wrapped in `‹ ›`. If user data contains `‹` or `›`, `‹` is escaped as `‹‹`, and `›` is escaped as `››`. Based on the marked logs, you can decide whether to desensitize the marked information when the logs are displayed.
 + Default value: `true`. Before v8.5.9, the default value is `false`.
 + If this item is omitted, log redaction is enabled, including after an upgrade. To keep logs unredacted, set this item to `false` or `"off"`.
-+ This configuration item cannot be changed online. Restart TiKV after changing it.
++ This configuration item can be changed online. The new value takes effect after the online configuration change is applied.
 + For details on how to use it, see [Log redaction in TiKV side](/log-redaction.md#log-redaction-in-tikv-side).
 
 ## security.encryption
