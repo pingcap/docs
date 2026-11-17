@@ -23,7 +23,8 @@ env:
 
 jobs:
   authorize:
-    uses: ./.github/workflows/authorize-privileged-workflow.yml
+    # Use the reviewed gate independently of the caller ref.
+    uses: pingcap/docs/.github/workflows/authorize-privileged-workflow.yml@47da5e8cbbead79f1ade55bede2b8f2798f1cdcd
     permissions:
       actions: read
 
