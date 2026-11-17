@@ -3,9 +3,6 @@
 |:---|:---|:---|
 | 2xlarge | 2xlarge | Instance type, keep in English. |
 | 4xlarge | 4xlarge | Instance type, keep in English. |
-| 8xlarge | 8xlarge | Instance type, keep in English. |
-| 12xlarge | 12xlarge | Instance type, keep in English. |
-| 16xlarge | 16xlarge | Instance type, keep in English. |
 | ACID | ACID | Do not translate to 「酸」. |
 | architecture | アーキテクチャ | Do not translate to 「建築」. |
 | atomic | アトミック |  |
@@ -17,7 +14,6 @@
 | bloom filter | ブルームフィルター |  |
 | BR | BR | Product name, keep in English. Do not translate to 「ブラジル」. |
 | bucket | バケット |  |
-| Candidate | Candidate | Raft role, keep in English. |
 | Chunk | Chunk | Technical term, keep in English. |
 | Cluster | クラスター | Use long vowel mark. |
 | cluster key | クラスターキー | A feature in TiDB Cloud Lake to improve query performance on large tables. |
@@ -33,7 +29,6 @@
 | data lineage | データリネージ |  |
 | Dedicated | Dedicated | TiDB Cloud plan name, keep in English. |
 | Deploy | デプロイ | Do not translate to 「配備」. |
-| disaster recovery | ディザスタリカバリ | No long vowel mark at end. |
 | DM WebUI | DM WebUI | Keep space between DM and WebUI. |
 | Drainer | Drainer | TiDB Binlog component name, keep in English. Do not translate to 「ドレイナー」. |
 | druid | druid | Library name, keep in English. Do not translate to 「ドルイド」. |
@@ -57,32 +52,25 @@
 | Golang | Golang | Programming language name, keep in English. Do not translate to 「ゴラン」. |
 | heartbeat | ハートビート |  |
 | HikariCP | HikariCP | Library name, keep in English. Do not translate to 「光CP」. |
-| Highly Resilient | 高い耐障害性 |  |
 | Homebrew | Homebrew | Tool name, keep in English. Do not translate to 「自作」. |
 | Hotspot | ホットスポット |  |
 | IAM | IAM | Keep in English. Do not translate to 「わたし」. |
 | Ingest | 取り込み |  |
 | Java | Java | Programming language name, keep in English. Do not translate to 「ジャワ」. |
-| Joins | テーブル結合 |  |
 | lakehouse | lakehouse | Keep in English. Do not translate to 「レイクハウス」. |
 | LakeSQL | LakeSQL | Keep in English. Do not translate to 「レイクSQL」. LakeSQL is a command line tool designed specifically for TiDB Cloud Lake. See <https://github.com/tidbcloud/lakesql>. |
 | latency | レイテンシー |  |
 | layer | レイヤー |  |
 | Leader | Leader | Raft role, keep in English. |
 | Learner | Learner | Raft role, keep in English. |
-| List COLUMNS partitioning | List COLUMNS パーティショニング |  |
-| List partitioning | List パーティショニング |  |
 | load | ロード | In TiDB Cloud Lake docs, keep both the English and Japanese terms "ロード (load)" when it first appears in a document. |
-| Maintain | 管理 |  |
 | memory | メモリ |  |
-| Multiple Data Centers in One City Deployment | 1 つの地域に配置された複数のデータセンター |  |
 | **Note:** | **Note:** | Keep in English, do not translate. |
 | online unsafe recovery | オンラインアンセーフリカバリ |  |
 | optimistic | 楽観的 |  |
 | panic | panic | Go language term, keep in English. |
 | partitioned table | パーティションテーブル | Do not translate to 「仕切りテーブル」. |
 | PD Control | PD Control | Tool name, keep in English. Do not translate to 「PD制御」. |
-| Performance Tuning | 性能チューニング |  |
 | pessimistic | 悲観的 |  |
 | PingCAP | PingCAP | Company name, keep exact capitalization. |
 | Placement rules | 配置ルール |  |
@@ -104,7 +92,6 @@
 | Release Date | リリース日 | Do not translate to 「発売日」. |
 | Reparo | Reparo | Tool name, keep in English. Do not translate to 「レパロ」. |
 | Scale in | スケールイン |  |
-| Scattering | Scattering | Technical term, keep in English. |
 | Schema Evolution | Schema Evolution | Feature name. Keep in English. Do not translate to 「スキーマ進化」. A feature that allows TiDB Cloud Lake to automatically add columns that exist in source files but are missing from the target table during `COPY INTO` file loads when `ENABLE_SCHEMA_EVOLUTION` is enabled. |
 | Secondary Cluster | セカンダリクラスター |  |
 | Sequence | シーケンス |  |
@@ -131,9 +118,7 @@
 | TiDB On-Premises | TiDB On-Premises | Product name, keep in English. |
 | TiDB Operator | TiDB Operator | Product name, keep in English. |
 | TiDB Playground | TiDB Playground | Product name, keep in English. |
-| TiDB Self-Hosted | TiDB Self-Hosted | Product name, keep in English. |
 | TiDB Self-Managed | TiDB Self-Managed | Product name, keep in English. |
-| TiDB Serverless | TiDB Serverless | Product name, keep in English. |
 | TiDB SQL | TiDB SQL | Keep space between TiDB and SQL. |
 | TiDB Toolkit | TiDB Toolkit | Product name, keep in English. |
 | TiFlash | TiFlash | Product name, keep in English. Do not translate to 「ティフラッシュ」. |
@@ -151,4 +136,3 @@
 | Warehouse | Warehouse | Keep in English. Do not translate. A concept in TiDB Cloud Lake that represents a set of compute resources including CPU, memory, and local caches. |
 | **Warning:** | **Warning:** | Keep in English, do not translate. |
 | Worksheet | Worksheet | Keep in English. Do not translate. A concept name. Worksheets in TiDB Cloud Lake are used to organize, run, and save SQL statements.  |
-| write-ahead logging | write-ahead logging | Technical term, keep in English. |
