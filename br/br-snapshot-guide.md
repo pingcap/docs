@@ -173,7 +173,7 @@ When you perform a snapshot backup, BR backs up system tables as tables with the
 
 **BR does not restore the following system tables:**
 
-- Statistics tables (`mysql.stat_*`). But statistics can be restored. See [Back up statistics](/br/br-snapshot-manual.md#back-up-statistics).
+- Statistics tables (`mysql.stats_*`). However, statistics can still be restored separately. BR backs up statistics only when `--ignore-stats=false` and restores them according to `--load-stats`. See [Back up statistics](/br/br-snapshot-manual.md#back-up-statistics).
 - System variable tables (`mysql.tidb` and `mysql.global_variables`)
 - Other system tables
 
