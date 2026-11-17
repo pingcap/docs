@@ -36,7 +36,7 @@ ALTER TABLE my_table SET OPTIONS(ENABLE_SCHEMA_EVOLUTION = false);
 
 ## 権限 {#privileges}
 
-`COPY INTO <table>` が stage または外部ロケーションからファイルをロード (load) し、Schema Evolution の推論を実行する場合、ロードを実行するロールにはターゲットテーブルに対する `INSERT` 権限と `ALTER` 権限の両方が必要です。`ALTER` が必要なのは、{{{ .lake }}} がロード前に新しいカラムを追加する可能性があるためです。
+`COPY INTO <table>` が stage または外部ロケーションからファイルをロードし、Schema Evolution の推論を実行する場合、ロードを実行するロールにはターゲットテーブルに対する `INSERT` 権限と `ALTER` 権限の両方が必要です。`ALTER` が必要なのは、{{{ .lake }}} がロード前に新しいカラムを追加する可能性があるためです。
 
 クエリベースの COPY は影響を受けません。たとえば、`COPY INTO <table> FROM (SELECT ... FROM @stage)` では、既存の権限要件がそのまま適用されます。
 

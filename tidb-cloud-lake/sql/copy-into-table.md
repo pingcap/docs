@@ -5,7 +5,7 @@ summary: COPY INTO を使用すると、以下のいずれかの場所にある�
 
 # `COPY INTO <table>`
 
-COPY INTO を使用すると、以下のいずれかの場所にあるファイルからデータをロード (load) できます。
+COPY INTO を使用すると、以下のいずれかの場所にあるファイルからデータをロードできます。
 
 - ユーザー / 内部 / 外部 stage: {{{ .lake }}} の stage については、[Stage とは？](/tidb-cloud-lake/guides/stage-overview.md) を参照してください。
 - ストレージサービスで作成されたバケットまたはコンテナー。
@@ -687,7 +687,7 @@ FILE_FORMAT=(FORMAT_NAME='my_csv_format');
 
 ### 例 7: 無効な JSON のロード {#example-7-loading-invalid-json}
 
-Variant カラムにデータをロード (load) する際、{{{ .lake }}} はデータの妥当性を自動的にチェックし、無効なデータがある場合はエラーを返します。たとえば、ユーザー stage に `invalid_json_string.parquet` という名前の Parquet ファイルがあり、その中に次のような無効な JSON データが含まれているとします。
+Variant カラムにデータをロードする際、{{{ .lake }}} はデータの妥当性を自動的にチェックし、無効なデータがある場合はエラーを返します。たとえば、ユーザー stage に `invalid_json_string.parquet` という名前の Parquet ファイルがあり、その中に次のような無効な JSON データが含まれているとします。
 
 ```sql
 SELECT *

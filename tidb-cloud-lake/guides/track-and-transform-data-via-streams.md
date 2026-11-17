@@ -110,7 +110,7 @@ Standard ストリームは、コンテキスト付きで各変更をキャプ�
 
 ## 例 3: 増分ストリーム結合 {#example-3-incremental-stream-join}
 
-複数の append-only ストリームを結合して、増分 KPI を生成します。{{{ .lake }}} のストリームは消費されるまで新しい行を保持するため、各ロード (load) の後に同じクエリを実行できます。各実行では、[`WITH CONSUME`](/tidb-cloud-lake/sql/with-consume.md) により新しい行だけが消費されるため、異なるタイミングで到着した更新も次の反復で引き続きマッチします。
+複数の append-only ストリームを結合して、増分 KPI を生成します。{{{ .lake }}} のストリームは消費されるまで新しい行を保持するため、各ロードの後に同じクエリを実行できます。各実行では、[`WITH CONSUME`](/tidb-cloud-lake/sql/with-consume.md) により新しい行だけが消費されるため、異なるタイミングで到着した更新も次の反復で引き続きマッチします。
 
 ### 1. テーブルとストリームを作成する {#1-create-tables-and-streams}
 

@@ -18,7 +18,7 @@ NDJSON は JSON を基にした形式であり、JSON の厳密なサブセッ�
 
 ## NDJSON ファイルのロード {#loading-ndjson-file}
 
-NDJSON ファイルをロード (load) する一般的な構文は次のとおりです。
+NDJSON ファイルをロードする一般的な構文は次のとおりです。
 
 ```sql
 COPY INTO [<database>.]<table_name>

@@ -18,7 +18,7 @@ Title_1,Author_1
 
 ## CSV ファイルのロード {#loading-csv-file}
 
-CSV ファイルをロード (load) する一般的な構文は次のとおりです。
+CSV ファイルをロードする一般的な構文は次のとおりです。
 
 ```sql
 COPY INTO [<database>.]<table_name>

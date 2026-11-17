@@ -9,7 +9,7 @@ Warehouse は {{{ .lake }}} の重要なコンポーネントです。Warehouse 
 
 - SELECT 文を使用したデータのクエリ
 - INSERT、UPDATE、または DELETE 文を使用したデータの変更
-- COPY INTO コマンドを使用したテーブルへのデータのロード (load)
+- COPY INTO コマンドを使用したテーブルへのデータのロード
 
 Warehouse を実行すると費用が発生します。詳細は、[Warehouse の料金](/tidb-cloud-lake/guides/pricing-billing.md) を参照してください。
 

@@ -33,7 +33,7 @@ summary: 3 つのステップで TiDB Cloud Lake を使い始めましょう。�
 2. ホームページの各エントリポイントを使って次に進みます。
 
     - **Connect**: 接続情報を取得します。
-    - **Load Data** または **Load from Cloud Storage**: データのロード (load) を開始します。
+    - **Load Data** または **Load from Cloud Storage**: データのロードを開始します。
     - **Query Data**: SQL Worksheet を作成します。
 
 ## 次のステップ {#whats-next}

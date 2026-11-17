@@ -147,7 +147,7 @@ TPC-H ベンチマークは、複雑なクエリとデータメンテナンス�
 
     - [Snowflake アカウント](https://app.snowflake.com/) にログインします。
     - TPC-H スキーマに対応するテーブルを作成します。[SQL スクリプト](https://lakesql-bin.tidbcloud.com/datasets/tpch/tpch-100/snowflake/setup.sql)。
-    - `COPY INTO` コマンドを使用して AWS S3 からデータをロード (load) します。[SQL スクリプト](https://lakesql-bin.tidbcloud.com/datasets/tpch/tpch-100/snowflake/setup.sql)。
+    - `COPY INTO` コマンドを使用して AWS S3 からデータをロードします。[SQL スクリプト](https://lakesql-bin.tidbcloud.com/datasets/tpch/tpch-100/snowflake/setup.sql)。
 
 2. **{{{ .lake }}} のデータロード**:
 

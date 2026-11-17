@@ -55,7 +55,7 @@ Tasks は SQL をラップし、{{{ .lake }}} がスケジュールに従って�
 
 ## 例 1: スケジュールされたコピー {#example-1-scheduled-copy}
 
-センサーデータを継続的に生成し、Parquet として保存して、テーブルにロード (load) します。すべての `CREATE/ALTER TASK` 文で、`'etl_wh_small'` を**ご自身の** Warehouse 名に置き換えてください。
+センサーデータを継続的に生成し、Parquet として保存して、テーブルにロードします。すべての `CREATE/ALTER TASK` 文で、`'etl_wh_small'` を**ご自身の** Warehouse 名に置き換えてください。
 
 ### ステップ 1. デモ用オブジェクトを準備する {#step-1-prepare-demo-objects}
 

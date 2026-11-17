@@ -81,7 +81,7 @@ SELECT * FROM system.settings;
 | enable_materialized_cte | 1 | 1 | DEFAULT | materialized common table expression を有効にします。 | UInt64 |
 | enable_merge_into_row_fetch | 1 | 1 | DEFAULT | merge into row fetch 最適化を有効にします。 | UInt64 |
 | enable_mutation_block_id_repartition | 1 | 1 | DEFAULT | join ベースの mutation で row fetch 前にローカル block_id repartition を有効にし、重複したブロック読み取りを減らします。 | UInt64 |
-| enable_new_copy_for_text_formats | 1 | 1 | DEFAULT | CSV ファイルのロード (load) に新しい実装を使用します。 | UInt64 |
+| enable_new_copy_for_text_formats | 1 | 1 | DEFAULT | CSV ファイルのロードに新しい実装を使用します。 | UInt64 |
 | enable_optimizer_trace | 0 | 0 | DEFAULT | optimizer trace を有効にします。 | UInt64 |
 | enable_parallel_multi_merge_sort | 1 | 1 | DEFAULT | parallel multi merge sort を有効にします。 | UInt64 |
 | enable_parallel_union_all | 0 | 0 | DEFAULT | 並列 UNION ALL を有効にします。デフォルトは 0、1 で有効です。 | UInt64 |
@@ -150,7 +150,7 @@ SELECT * FROM system.settings;
 | join_spilling_partition_bits | 4 | 4 | DEFAULT | join spilling のパーティション数を設定します。デフォルト値は 4 で、2^4 パーティションを意味します。 | UInt64 |
 | lazy_read_across_join_threshold | 10 | 10 | DEFAULT | join をまたぐ lazy read 最適化を有効にするクエリ内の最大 LIMIT を設定します。0 に設定するとこの最適化を無効にします。 | UInt64 |
 | lazy_read_threshold | 1000 | 1000 | DEFAULT | lazy read 最適化を有効にするクエリ内の最大 LIMIT を設定します。0 に設定するとこの最適化を無効にします。 | UInt64 |
-| load_file_metadata_expire_hours | 24 | 24 | DEFAULT | COPY INTO でロード (load) されたファイルのメタデータが期限切れになるまでの時間を時間単位で設定します。 | UInt64 |
+| load_file_metadata_expire_hours | 24 | 24 | DEFAULT | COPY INTO でロードされたファイルのメタデータが期限切れになるまでの時間を時間単位で設定します。 | UInt64 |
 | materialized_cte_spilling_memory_ratio | 60 | 60 | DEFAULT | materialized CTE 実行がデータをストレージにスピルする前に使用できる最大メモリ比率をバイト単位で設定します。0 は無制限です。 | UInt64 |
 | max_aggregate_restore_worker | 16 | 16 | DEFAULT | aggregate restore の最大 worker 数を設定します。 | UInt64 |
 | max_aggregate_spill_level | 3 | 3 | DEFAULT | aggregate spill の最大再帰深度です。各レベルでデータは 4 つのより小さい部分に再パーティション化されます。 | UInt64 |

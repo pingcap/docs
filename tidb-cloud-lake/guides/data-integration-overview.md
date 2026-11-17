@@ -20,7 +20,7 @@ summary: "{{{ .lake }}} の Data Integration 機能は、外部システムか�
 >
 > Data Integration タスクの実行には、サービスホスティング料金が発生します。{{{ .lake }}} は、サービスの実際の実行時間に基づいて、これらの料金を秒単位で課金します。詳細は、[サービスホスティング料金](/tidb-cloud-lake/guides/pricing-billing.md#service-hosting-pricing) を参照してください。
 
-すべてのデータソースが取り込みタスクに対応するわけではありません。たとえば、`FeiShuBot` は、ソースデータを {{{ .lake }}} にロード (load) するためではなく、通知のために使用されます。
+すべてのデータソースが取り込みタスクに対応するわけではありません。たとえば、`FeiShuBot` は、ソースデータを {{{ .lake }}} にロードするためではなく、通知のために使用されます。
 
 ## サポートされる統合タスクの種類 {#supported-integration-task-types}
 

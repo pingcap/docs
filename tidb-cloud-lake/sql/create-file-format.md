@@ -17,7 +17,7 @@ CREATE [ OR REPLACE ] FILE FORMAT [ IF NOT EXISTS ] <format_name> FileFormatOpti
 
 ## ファイルフォーマットを使用する {#use-the-file-format}
 
-一度作成すれば、クエリとロード (load) の両方でフォーマットを再利用できます。
+一度作成すれば、クエリとロードの両方でフォーマットを再利用できます。
 
 ```sql
 -- 1) Create a reusable format
