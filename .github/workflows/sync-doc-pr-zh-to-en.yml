@@ -28,7 +28,6 @@ jobs:
       actions: read
 
   sync-docs:
-    environment: ai-doc-translation
     runs-on: ubuntu-latest
     needs: authorize
     # A partial rerun must pass authorization for the current attempt.

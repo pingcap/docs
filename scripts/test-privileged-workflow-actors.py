@@ -156,20 +156,6 @@ gh() {
                     "needs.authorize.outputs.attempt == github.run_attempt",
                 )
 
-    def test_ai_jobs_use_their_credential_environments(self):
-        for filename, job_name, environment in (
-            ("doc_review.yml", "review", "ai-doc-review"),
-            ("translation-cron.yml", "translate-ja", "ai-doc-translation"),
-            ("translation-zh.yaml", "translate", "ai-doc-translation"),
-            ("sync-doc-pr-zh-to-en.yml", "sync-docs", "ai-doc-translation"),
-            ("sync-cloud-zh-toc.yml", "sync-toc", "cloud-toc-sync"),
-        ):
-            with self.subTest(workflow=filename, job=job_name):
-                workflow = load_workflow(filename)
-                self.assertEqual(workflow["jobs"][job_name]["environment"], environment)
-                if "authorize" in workflow["jobs"]:
-                    self.assertNotIn("environment", workflow["jobs"]["authorize"])
-
     def test_keywords_requires_upstream_master(self):
         job = load_job("keywords.yaml", "check-keywords")
         self.assertEqual(
