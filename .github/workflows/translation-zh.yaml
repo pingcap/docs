@@ -45,15 +45,23 @@ env:
   COMMIT_SYNC_RUN_TYPE: ${{ (github.event_name == 'schedule' || inputs.translation_scope == 'Translate all updated files') && 'schedule' || 'workflow_dispatch' }}
 
 jobs:
-  authorize:
-    # Use the reviewed gate independently of the caller ref.
-    uses: pingcap/docs/.github/workflows/authorize-privileged-workflow.yml@47da5e8cbbead79f1ade55bede2b8f2798f1cdcd
-    permissions:
-      actions: read
-
   translate:
-    needs: authorize
-    if: needs.authorize.outputs.attempt == github.run_attempt
+    if: >
+      github.repository == 'pingcap/docs' &&
+      (
+        (
+          github.event_name == 'schedule' &&
+          (
+            github.run_attempt == 1 ||
+            contains(fromJson('["lilin90","qiancai","seominjea1942"]'), github.triggering_actor)
+          )
+        ) ||
+        (
+          github.event_name == 'workflow_dispatch' &&
+          contains(fromJson('["lilin90","qiancai","seominjea1942"]'), github.actor) &&
+          contains(fromJson('["lilin90","qiancai","seominjea1942"]'), github.triggering_actor)
+        )
+      )
     runs-on: ubuntu-latest
 
     permissions:

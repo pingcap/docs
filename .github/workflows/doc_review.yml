@@ -13,20 +13,19 @@ permissions:
   issues: write
 
 jobs:
-  authorize:
-    if: >-
-      github.event_name == 'workflow_dispatch' ||
-      (github.event_name == 'issue_comment' && github.event.issue.pull_request &&
-      contains(github.event.comment.body, '/bot-review'))
-    # Use the reviewed gate independently of the caller ref.
-    uses: pingcap/docs/.github/workflows/authorize-privileged-workflow.yml@47da5e8cbbead79f1ade55bede2b8f2798f1cdcd
-    permissions:
-      actions: read
-
   review:
     runs-on: ubuntu-latest
-    needs: authorize
-    if: needs.authorize.outputs.attempt == github.run_attempt
+    if: >
+      github.repository == 'pingcap/docs' &&
+      contains(fromJson('["lilin90","qiancai","seominjea1942"]'), github.actor) &&
+      contains(fromJson('["lilin90","qiancai","seominjea1942"]'), github.triggering_actor) &&
+      (
+        github.event_name == 'workflow_dispatch' ||
+        (
+          github.event_name == 'issue_comment' &&
+          contains(github.event.comment.body, '/bot-review')
+        )
+      )
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v6

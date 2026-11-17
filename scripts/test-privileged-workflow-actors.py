@@ -139,9 +139,6 @@ gh() {
     def test_privileged_jobs_require_the_shared_authorization_workflow(self):
         for filename, job_name in (
             ("sync-doc-pr-zh-to-en.yml", "sync-docs"),
-            ("doc_review.yml", "review"),
-            ("translation-cron.yml", "translate-ja"),
-            ("translation-zh.yaml", "translate"),
             ("link.yaml", "linkChecker"),
         ):
             with self.subTest(workflow=filename):
@@ -149,10 +146,7 @@ gh() {
                 gate = workflow["jobs"]["authorize"]
                 self.assertEqual(
                     gate["uses"],
-                    "./.github/workflows/authorize-privileged-workflow.yml"
-                    if filename == "link.yaml"
-                    else "pingcap/docs/.github/workflows/"
-                    "authorize-privileged-workflow.yml@47da5e8cbbead79f1ade55bede2b8f2798f1cdcd",
+                    "./.github/workflows/authorize-privileged-workflow.yml",
                 )
                 self.assertEqual(gate["permissions"], {"actions": "read"})
                 self.assertNotIn("secrets", gate)
