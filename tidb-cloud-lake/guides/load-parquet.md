@@ -67,7 +67,7 @@ LIST @my_parquet_stage;
 └──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-データを stage にアンロードする詳細については、[COPY INTO location](/tidb-cloud-lake/sql/copy-into-location.md) を参照してください。
+データを stage にアンロード (unload) する詳細については、[COPY INTO location](/tidb-cloud-lake/sql/copy-into-location.md) を参照してください。
 
 ### ステップ 3. ターゲットテーブルを作成する {#step-3-create-target-table}
 

@@ -157,7 +157,7 @@ summary: このページでは、TPC-H SF100 データセットのロード、Cl
     );
     ```
 
-2. データを外部 stage にアンロードします。
+2. データを外部 stage にアンロード (unload) します。
 
     ```sql
     CREATE or REPLACE FILE FORMAT tsv_unload_format_gzip

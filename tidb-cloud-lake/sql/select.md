@@ -261,7 +261,7 @@ FROM numbers(3) SELECT number;
 +--------+
 ```
 
-FROM 句では場所を指定することもでき、さまざまなソースのデータをテーブルに最初にロードすることなく直接クエリできます。詳細は、[stage 上のファイルのクエリ](/tidb-cloud-lake/sql/stage.md) を参照してください。
+FROM 句では場所を指定することもでき、さまざまなソースのデータをテーブルに最初にロード (load) することなく直接クエリできます。詳細は、[stage 上のファイルのクエリ](/tidb-cloud-lake/sql/stage.md) を参照してください。
 
 ## AT 句 {#at-clause}
 

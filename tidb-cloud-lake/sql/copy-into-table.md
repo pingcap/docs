@@ -5,7 +5,7 @@ summary: COPY INTO を使用すると、以下のいずれかの場所にある�
 
 # `COPY INTO <table>`
 
-COPY INTO を使用すると、以下のいずれかの場所にあるファイルからデータをロードできます。
+COPY INTO を使用すると、以下のいずれかの場所にあるファイルからデータをロード (load) できます。
 
 - ユーザー / 内部 / 外部 stage: {{{ .lake }}} の stage については、[Stage とは？](/tidb-cloud-lake/guides/stage-overview.md) を参照してください。
 - ストレージサービスで作成されたバケットまたはコンテナー。

@@ -81,7 +81,7 @@ SELECT * FROM system.settings;
 | enable_materialized_cte | 1 | 1 | DEFAULT | materialized common table expression を有効にします。 | UInt64 |
 | enable_merge_into_row_fetch | 1 | 1 | DEFAULT | merge into row fetch 最適化を有効にします。 | UInt64 |
 | enable_mutation_block_id_repartition | 1 | 1 | DEFAULT | join ベースの mutation で row fetch 前にローカル block_id repartition を有効にし、重複したブロック読み取りを減らします。 | UInt64 |
-| enable_new_copy_for_text_formats | 1 | 1 | DEFAULT | CSV ファイルのロードに新しい実装を使用します。 | UInt64 |
+| enable_new_copy_for_text_formats | 1 | 1 | DEFAULT | CSV ファイルのロード (load) に新しい実装を使用します。 | UInt64 |
 | enable_optimizer_trace | 0 | 0 | DEFAULT | optimizer trace を有効にします。 | UInt64 |
 | enable_parallel_multi_merge_sort | 1 | 1 | DEFAULT | parallel multi merge sort を有効にします。 | UInt64 |
 | enable_parallel_union_all | 0 | 0 | DEFAULT | 並列 UNION ALL を有効にします。デフォルトは 0、1 で有効です。 | UInt64 |

@@ -11,7 +11,7 @@ summary: このページでは、{{{ .lake }}} におけるファイル形式の
 
 | コマンド | 説明 |
 |---------|-------------|
-| [CREATE FILE FORMAT](/tidb-cloud-lake/sql/create-file-format.md) | データのロードおよびアンロードで使用する名前付きのファイル形式オブジェクトを作成します |
+| [CREATE FILE FORMAT](/tidb-cloud-lake/sql/create-file-format.md) | データのロード (load) およびアンロード (unload) で使用する名前付きのファイル形式オブジェクトを作成します |
 | [DROP FILE FORMAT](/tidb-cloud-lake/sql/drop-file-format.md) | ファイル形式オブジェクトを削除します |
 
 ## ファイル形式の情報 {#file-format-information}

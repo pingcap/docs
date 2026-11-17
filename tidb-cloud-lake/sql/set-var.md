@@ -87,7 +87,7 @@ SELECT
 
 {{{ .lake }}} では、*max_threads* 設定は、リクエストの実行に使用できるスレッドの最大数を指定します。デフォルトでは、この値は通常、マシンで使用可能な CPU コア数に一致するように設定されます。
 
-COPY INTO を使用して {{{ .lake }}} にデータをロードする際は、COPY INTO コマンドにヒントを埋め込み、*max_threads* パラメーターを設定することで、並列処理能力を制御できます。例:
+COPY INTO を使用して {{{ .lake }}} にデータをロード (load) する際は、COPY INTO コマンドにヒントを埋め込み、*max_threads* パラメーターを設定することで、並列処理能力を制御できます。例:
 
 ```sql
 COPY /*+ set_var(max_threads=6) */ INTO mytable FROM @mystage/ pattern='.*[.]parq' FILE_FORMAT=(TYPE=parquet);
