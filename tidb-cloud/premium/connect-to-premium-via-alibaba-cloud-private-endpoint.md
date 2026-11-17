@@ -48,11 +48,11 @@ To use the Alibaba Cloud Management Console to create a VPC interface endpoint, 
 8. Click **OK** to create the endpoint.
 9. Wait until the endpoint status becomes **Active**. The connection status might remain **Disconnected** until you complete Step 3. Proceed to Step 3 without waiting for **Connected**.
 
-After creating the interface endpoint, navigate to the **EndPoints** page and select the newly created endpoint.
+After creating the interface endpoint, navigate to the **Endpoints** page and select the newly created endpoint.
 
 - In the **Basic Information** section, copy the **Endpoint ID**. You will use this value later as the *Endpoint Resource ID*.
 
-- In the **Domain name of Endpoint Service** section, copy the **Default Domain Name**. You will use this value later as the *Domain Name*.
+- In the **Domain Name of Endpoint Service** section, copy the **Default Domain Name**. You will use this value later as the *Domain Name*.
 
     ![Alibaba Cloud endpoint details showing the Endpoint ID and Default Domain Name](/media/tidb-cloud/private-endpoint/alicloud-private-endpoint-details.jpg)
 
