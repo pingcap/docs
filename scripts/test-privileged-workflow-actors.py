@@ -140,7 +140,6 @@ gh() {
         for filename, job_name in (
             ("sync-doc-pr-zh-to-en.yml", "sync-docs"),
             ("doc_review.yml", "review"),
-            ("sync-cloud-zh-toc.yml", "sync-toc"),
             ("translation-cron.yml", "translate-ja"),
             ("translation-zh.yaml", "translate"),
             ("link.yaml", "linkChecker"),
