@@ -29,9 +29,13 @@ TiDB materialized views are backed by stored data derived from a query. This pag
 
 ### Create a materialized view
 
+Use `IF NOT EXISTS` to skip creation if the specified name is already in use.
+
 For the syntax of this statement, see [`CREATE MATERIALIZED VIEW`](/sql-statements/sql-statement-create-materialized-view.md).
 
 ### Create a materialized view log
+
+Use `IF NOT EXISTS` to skip creation if a materialized view log already exists on the base table.
 
 For the syntax of this statement, see [`CREATE MATERIALIZED VIEW LOG`](/sql-statements/sql-statement-create-materialized-view-log.md).
 
@@ -78,6 +82,8 @@ Use [`REFRESH MATERIALIZED VIEW`](/sql-statements/sql-statement-refresh-material
 | `COMPLETE IN PLACE` | Deletes all existing rows from the materialized view and inserts the complete recomputed result. | Runs the delete and insert operations in one transaction. |
 | `COMPLETE DELTA APPLY` | Recomputes the complete result, compares it with the current materialized view by its grouping keys, and applies only inserted, deleted, and changed rows. The materialized view must have an explicit `PRIMARY KEY` or `UNIQUE KEY` so that TiDB can uniquely locate existing rows. | Runs the comparison and row changes in one transaction. |
 | `COMPLETE OUT OF PLACE` | Creates a shadow table, builds the complete recomputed result in that table, and then switches the materialized view to the replacement table. | Does not run as a single transaction. The existing materialized view remains available while TiDB builds the shadow table. If the build fails before cutover, the existing materialized view is not changed. |
+
+If an abandoned shadow table remains after a failed `COMPLETE OUT OF PLACE` refresh, you can manually drop it when the creation timestamp encoded in its name is valid and at least 7 days old. For details, see [`COMPLETE OUT OF PLACE`](/sql-statements/sql-statement-refresh-materialized-view.md#complete-out-of-place).
 
 Use `DRY RUN` to view the planned refresh steps without refreshing the materialized view. Use `WITH PROFILE` to execute the refresh and return step-level runtime information. To cancel a running refresh, use [`CANCEL MATERIALIZED VIEW REFRESH JOB`](/sql-statements/sql-statement-cancel-materialized-view-refresh-job.md) with the job ID in [`mysql.tidb_mview_refresh_hist`](/mysql-schema/mysql-schema-tidb-mview-refresh-hist.md).
 
@@ -179,6 +185,7 @@ Both variables default to `168` hours (7 days) and accept values from `1` to `87
 
 ## Limitations
 
+- You cannot drop, rename, or make invisible the automatically created index on a materialized view's grouping columns, including when this index is a primary key. Refresh operations require this index. You can manage additional user-created non-unique indexes. For details, see [Index restrictions](/sql-statements/sql-statement-create-materialized-view.md#index-restrictions).
 - <!-- TODO: list unsupported DDL, DML, replication, or optimizer cases from the spec. -->
 - <!-- TODO: add size, freshness, or compatibility limits if they exist. -->
 

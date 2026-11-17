@@ -63,6 +63,16 @@ The clauses must appear in the order shown in the syntax. `AS OF TIMESTAMP` is s
 
 This method is non-transactional: building the shadow table and switching to it are not one transaction. If the shadow-table build fails before cutover, TiDB keeps the original materialized view unchanged.
 
+TiDB attempts to remove the shadow table after a failed build. If an abandoned shadow table remains, you can remove it manually with `DROP TABLE` when its creation timestamp is at least 7 days old.
+
+Shadow table names have the format `__mv_shadow_<mview_id>_<creation_timestamp>`, where `<creation_timestamp>` is a Unix timestamp in nanoseconds. TiDB uses this timestamp to determine the table's age. Manual deletion is rejected if the timestamp is invalid or less than 7 days old. This age restriction applies only to manual deletion; internal cleanup can remove shadow tables earlier.
+
+To remove an abandoned shadow table that meets this requirement, replace `<shadow_table_name>` with its actual name:
+
+```sql
+DROP TABLE `<shadow_table_name>`;
+```
+
 ## Observe a refresh
 
 Use `DRY RUN` to build and return the planned refresh steps without executing the refresh. Use `WITH PROFILE` to execute the refresh and return the execution time and plan information for each refresh step.

@@ -11,7 +11,10 @@ The `CREATE MATERIALIZED VIEW LOG` statement defines a materialized view log on 
 
 ```ebnf+diagram
 CreateMaterializedViewLogStmt ::=
-    'CREATE' 'MATERIALIZED' 'VIEW' 'LOG' 'ON' TableName '(' ColumnList ')' MLogCreateOptionListOpt MLogPurgeClauseOpt MLogAccumulationAlertClauseOpt
+    'CREATE' 'MATERIALIZED' 'VIEW' 'LOG' IfNotExists 'ON' TableName '(' ColumnList ')' MLogCreateOptionListOpt MLogPurgeClauseOpt MLogAccumulationAlertClauseOpt
+
+IfNotExists ::=
+    ( 'IF' 'NOT' 'EXISTS' )?
 
 MLogCreateOptionListOpt ::=
     MLogCreateOptionList?
@@ -46,6 +49,10 @@ The clauses in `CREATE MATERIALIZED VIEW LOG` must appear in the following order
 3. The `PURGE` clause, if any.
 4. The `ALERT ROWS` clause, if any.
 
+### IF NOT EXISTS
+
+Place `IF NOT EXISTS` after `LOG` and before `ON`. If a materialized view log already exists on the base table, TiDB skips creation and returns `Note 1050`, which you can view with `SHOW WARNINGS`. The existing log's column list, data, purge schedule, and alert settings remain unchanged. Without `IF NOT EXISTS`, duplicate creation returns error 1050.
+
 ## Examples
 
 Create a materialized view log with immediate purging and an accumulation alert:
@@ -62,6 +69,15 @@ Create a materialized view log with scheduled purging:
 CREATE MATERIALIZED VIEW LOG ON t (a)
     PURGE NEXT DATE_ADD(NOW(), INTERVAL 1 HOUR);
 ```
+
+Create a materialized view log only if one does not already exist on the base table:
+
+```sql
+CREATE MATERIALIZED VIEW LOG IF NOT EXISTS ON t (a);
+SHOW WARNINGS;
+```
+
+If the log already exists, `SHOW WARNINGS` reports a note with code `1050`.
 
 ## See also
 
