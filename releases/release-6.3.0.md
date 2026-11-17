@@ -103,7 +103,7 @@ TiDBバージョン: 6.3.0-DMR
 
 - TiFlash は個々の`COUNT(DISTINCT)`の 3 段階集約をサポートしています [#37202](https://github.com/pingcap/tidb/issues/37202) @[fixdb](https://github.com/fixdb)
 
-    TiFlashは`COUNT(DISTINCT)`を1つだけ含むクエリを[3段階集計](/system-variables.md#tidb_opt_three_stage_distinct_agg-new-in-v630)に書き換えることをサポートしています。 これにより、同時実行性とパフォーマンスが向上します。
+    TiFlashは`COUNT(DISTINCT)`を1つだけ含むクエリを[3段階集計](/system-variables.md#tidb_opt_three_stage_distinct_agg-new-in-v630)に書き換えることをサポートしています。これにより、同時実行性とパフォーマンスが向上します。
 
 - TiKVはログのリサイクルをサポートしています [#214](https://github.com/tikv/raft-engine/issues/214) @[LykxSassinator](https://github.com/LykxSassinator)
 

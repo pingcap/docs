@@ -399,7 +399,7 @@ AWS は RDS またはAuroraへの PrivateLink による直接アクセスをサ�
     - **Listener port**： `3306` 。ウィザードのデフォルト値は`80`です。リスナーを作成する前に変更してください。
     - **Target group**：対象タイプは**IP addresses**、プロトコルは**TCP** 、ポートは**3306** 、データベースと同じVPC内。RDSエンドポイントを直接登録できないため、代わりにデータベースのプライベートIPアドレスを登録してください。
 
-        [Amazon EC2 コンソール](https://console.aws.amazon.com/ec2/)でデータベースのプライベート IP アドレスを見つけるには、 左側のナビゲーションペインで**Network Interfaces**をクリックし、 **Description** = `RDSNetworkInterface`と**VPC** = ご使用の VPC でフィルタリングします。一致するネットワークインターフェイスに表示されている**Primary private IPv4 address**を使用します。
+        [Amazon EC2 コンソール](https://console.aws.amazon.com/ec2/)でデータベースのプライベート IP アドレスを見つけるには、左側のナビゲーションペインで**Network Interfaces**をクリックし、 **Description** = `RDSNetworkInterface`と**VPC** = ご使用の VPC でフィルタリングします。一致するネットワークインターフェイスに表示されている**Primary private IPv4 address**を使用します。
         > **Note:**
         >
         > RDS プライベート IP は、フェールオーバー、メンテナンス、またはストレージの拡張時に変更される可能性があります。実稼働デプロイメントについては、IP の自動ローテーションパターンについて、AWS データベースブログの[AWS PrivateLinkとネットワークロードバランサーを使用して、VPCをまたいでAmazon RDSにアクセスします](https://aws.amazon.com/blogs/database/access-amazon-rds-across-vpcs-using-aws-privatelink-and-network-load-balancer/)を参照してください。
@@ -484,7 +484,7 @@ AWS は RDS またはAuroraへの PrivateLink による直接アクセスをサ�
     - **Listener port**： `3306` 。ウィザードのデフォルト値は`80`です。リスナーを作成する前に変更してください。
     - **Target group**：対象タイプは**IP addresses**、プロトコルは**TCP** 、ポートは**3306** 、データベースと同じVPC内。RDSエンドポイントを直接登録できないため、代わりにデータベースのプライベートIPアドレスを登録してください。
 
-        [Amazon EC2 コンソール](https://console.aws.amazon.com/ec2/)でデータベースのプライベート IP アドレスを見つけるには、 左側のナビゲーションペインで**Network Interfaces**をクリックし、 **Description** = `RDSNetworkInterface`と**VPC** = ご使用の VPC でフィルタリングします。一致するネットワークインターフェイスに表示されている**Primary private IPv4 address**を使用します。
+        [Amazon EC2 コンソール](https://console.aws.amazon.com/ec2/)でデータベースのプライベート IP アドレスを見つけるには、左側のナビゲーションペインで**Network Interfaces**をクリックし、 **Description** = `RDSNetworkInterface`と**VPC** = ご使用の VPC でフィルタリングします。一致するネットワークインターフェイスに表示されている**Primary private IPv4 address**を使用します。
         > **Note:**
         >
         > RDS プライベート IP は、フェールオーバー、メンテナンス、またはストレージの拡張時に変更される可能性があります。実稼働デプロイメントについては、IP の自動ローテーションパターンについて、AWS データベースブログの[AWS PrivateLinkとネットワークロードバランサーを使用して、VPCをまたいでAmazon RDSにアクセスします](https://aws.amazon.com/blogs/database/access-amazon-rds-across-vpcs-using-aws-privatelink-and-network-load-balancer/)を参照してください。

@@ -815,7 +815,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
     - プライベートエンドポイントの許可リストの設定をサポートします。
 
-        [TiDB Cloudコンソール](https://tidbcloud.com)で許可リストを設定することで、プライベートエンドポイントへのアクセスをより簡単に保護および管理できるようになりました。 許可リストでは、接続を許可するAWS VPCエンドポイントIDとAlibaba CloudエンドポイントIDを指定できます。
+        [TiDB Cloudコンソール](https://tidbcloud.com)で許可リストを設定することで、プライベートエンドポイントへのアクセスをより簡単に保護および管理できるようになりました。許可リストでは、接続を許可するAWS VPCエンドポイントIDとAlibaba CloudエンドポイントIDを指定できます。
 
         詳細については、以下の資料を参照してください。
 

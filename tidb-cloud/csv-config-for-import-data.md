@@ -67,7 +67,7 @@ summary: TiDB Cloudの Import Data サービスで CSV 構成を使用する方�
 
     `{"key1": "val1", "key2": "val2"}`
 
-    CSVソースファイルの内容が以下のようにJSON形式で保存されている場合は、 以下のように`Backslash escape = True`を設定することを検討してください。ただし、これはCSVの標準形式ではありません。
+    CSVソースファイルの内容が以下のようにJSON形式で保存されている場合は、以下のように`Backslash escape = True`を設定することを検討してください。ただし、これはCSVの標準形式ではありません。
 
     `"{\"key1\": \"val1\", \"key2\":\"val2\" }"`
 

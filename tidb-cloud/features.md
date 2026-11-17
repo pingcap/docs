@@ -21,4 +21,4 @@ summary: TiDB Cloudの各プランにおける機能サポート状況につい�
 
 > **Tip:**
 >
-> プライベートプレビューで機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下隅にある**?**をクリックします。 次に、 **Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。チケットを作成し、**Description**フィールドに"Apply for `<feature_name>`"と入力して、 **Submit**をクリックします。
+> プライベートプレビューで機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下隅にある**?**をクリックします。次に、 **Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。チケットを作成し、**Description**フィールドに"Apply for `<feature_name>`"と入力して、 **Submit**をクリックします。

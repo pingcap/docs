@@ -158,7 +158,7 @@ TiDBは汎用的な用途向けのデータベースであり、データ分布�
 SPLIT TABLE TEST_HOTSPOT BETWEEN (0) AND (9223372036854775807) REGIONS 128;
 ```
 
-事前分割操作の後、 `SHOW TABLE test_hotspot REGIONS;`のステートメントを実行して、 リージョン scattering の状態を確認します。`SCATTERING`の列の値がすべて`0`であれば、スケジューリングは成功です。
+事前分割操作の後、 `SHOW TABLE test_hotspot REGIONS;`のステートメントを実行して、リージョン scattering の状態を確認します。`SCATTERING`の列の値がすべて`0`であれば、スケジューリングは成功です。
 
 次のSQL文を使用して、リージョンリーダーの分布を確認することもできます。`table_name`を実際のテーブル名に置き換えてください。
 

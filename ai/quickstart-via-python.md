@@ -179,7 +179,7 @@ table.bulk_insert([
 
 ## 最近傍を検索 {#search-for-nearest-neighbors}
 
-指定されたクエリの最近傍を検索するには、 `table.search()`メソッドを使用できます。このメソッドは、 デフォルトで[ベクトル検索](/ai/guides/vector-search.md)を実行します。
+指定されたクエリの最近傍を検索するには、 `table.search()`メソッドを使用できます。このメソッドは、デフォルトで[ベクトル検索](/ai/guides/vector-search.md)を実行します。
 
 ```python
 table.search(

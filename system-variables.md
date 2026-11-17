@@ -1539,7 +1539,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - 型: Boolean
 - デフォルト値: `OFF`
 - この変数は楽観的トランザクションにのみ適用されます。悲観的トランザクションの場合は、代わりに[`tidb_constraint_check_in_place_pessimistic`](#tidb_constraint_check_in_place_pessimistic-new-in-v630)を使用してください。
-- この変数が`OFF`に設定されている場合、一意インデックス内の重複値のチェックはトランザクションがコミットされるまで延期されます。これによりパフォーマンスが向上しますが、一部のアプリケーションでは予期しない動作となる可能性があります。 詳細[制約](/constraints.md#optimistic-transactions)を参照してください。
+- この変数が`OFF`に設定されている場合、一意インデックス内の重複値のチェックはトランザクションがコミットされるまで延期されます。これによりパフォーマンスが向上しますが、一部のアプリケーションでは予期しない動作となる可能性があります。詳細は[制約](/constraints.md#optimistic-transactions)を参照してください。
 
     - `tidb_constraint_check_in_place`を`OFF`に設定し、楽観的トランザクションを使用する場合：
 
@@ -1581,7 +1581,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 </CustomContent>
 
 - この変数は悲観的トランザクションにのみ適用されます。楽観的トランザクションの場合は、代わりに[`tidb_constraint_check_in_place`](#tidb_constraint_check_in_place)を使用してください。
-- この変数が`OFF`に設定されている場合、TiDB は一意インデックスの一意制約チェックを延期します (インデックスへのロックを必要とするステートメントを実行する次回の時点、またはトランザクションをコミットする時点まで)。これによりパフォーマンスが向上しますが、一部のアプリケーションでは予期しない動作となる可能性があります。 詳細は[制約](/constraints.md#pessimistic-transactions)を参照してください。
+- この変数が`OFF`に設定されている場合、TiDB は一意インデックスの一意制約チェックを延期します (インデックスへのロックを必要とするステートメントを実行する次回の時点、またはトランザクションをコミットする時点まで)。これによりパフォーマンスが向上しますが、一部のアプリケーションでは予期しない動作となる可能性があります。詳細は[制約](/constraints.md#pessimistic-transactions)を参照してください。
 - この変数を無効にすると、TiDB が悲観的トランザクションで`LazyUniquenessCheckFailure`エラーを返す可能性があります。このエラーが発生すると、TiDB は現在のトランザクションをロールバックします。
 - この変数が無効になっている場合、悲観的トランザクションで[`SAVEPOINT`](/sql-statements/sql-statement-savepoint.md)を使用できません。
 - この変数が無効になっている場合、悲観的トランザクションをコミットすると、 `Write conflict`または`Duplicate entry`エラーが返される可能性があります。このようなエラーが発生した場合、TiDB は現在のトランザクションをロールバックします。
@@ -3007,7 +3007,7 @@ Query OK, 0 rows affected (0.09 sec)
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用: いいえ
 - 型: Boolean
 - デフォルト値: `ON`
-- この変数は、 [ウィンドウ関数](/functions-and-operators/window-functions.md)のサポートを有効にするかどうかを制御するために使用されます。 ウィンドウ関数は予約語を使用する可能性があることに注意してください。これにより、TiDB のアップグレード後に、通常実行できる SQL文の解析が失敗する可能性があります。この場合、 `tidb_enable_window_function`を`OFF`に設定できます。
+- この変数は、 [ウィンドウ関数](/functions-and-operators/window-functions.md)のサポートを有効にするかどうかを制御するために使用されます。ウィンドウ関数は予約語を使用する可能性があることに注意してください。これにより、TiDB のアップグレード後に、通常実行できる SQL文の解析が失敗する可能性があります。この場合、 `tidb_enable_window_function`を`OFF`に設定できます。
 
 ### `tidb_enable_row_level_checksum` <span class="version-mark">New in v7.1.0</span>
 
@@ -4056,7 +4056,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 - 範囲: `[0, 9223372036854775807]`
 - 単位: バイト
 - この変数は`Apply`オペレーターのローカルキャッシュのメモリ使用量しきい値を設定するために使用されます。
-- `Apply`オペレーターのローカルキャッシュは`Apply`オペレーターの計算を高速化するために使用されます。 変数を`0`に設定すると、 `Apply`キャッシュ機能を無効にできます。
+- `Apply`オペレーターのローカルキャッシュは`Apply`オペレーターの計算を高速化するために使用されます。変数を`0`に設定すると、 `Apply`キャッシュ機能を無効にできます。
 
 ### tidb_mem_quota_binding_cache <span class="version-mark">New in v6.0.0</span>
 
@@ -4559,7 +4559,7 @@ mysql> desc select count(distinct a) from test.t;
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用: はい
 - 型: Boolean
 - デフォルト値: `ON`
-- この変数は、 [`HASH_JOIN()`ヒント](/optimizer-hints.md#hash_joint1_name--tl_name-)や[`MERGE_JOIN()`ヒント](/optimizer-hints.md#merge_joint1_name--tl_name-)などの結合方法ヒントが、 [`LEADING()`ヒント](/optimizer-hints.md#leadingt1_name--tl_name-)の使用を含む結合順序の並べ替え最適化プロセスに影響を与えるかどうかを制御するために使用されます。 デフォルト値は`ON`で、これは影響を与えないことを意味します。 `OFF`に設定すると、結合方法ヒントと`LEADING()`ヒントが同時に使用されるシナリオで競合が発生する可能性があります。
+- この変数は、 [`HASH_JOIN()`ヒント](/optimizer-hints.md#hash_joint1_name--tl_name-)や[`MERGE_JOIN()`ヒント](/optimizer-hints.md#merge_joint1_name--tl_name-)などの結合方法ヒントが、 [`LEADING()`ヒント](/optimizer-hints.md#leadingt1_name--tl_name-)の使用を含む結合順序の並べ替え最適化プロセスに影響を与えるかどうかを制御するために使用されます。デフォルト値は`ON`で、これは影響を与えないことを意味します。 `OFF`に設定すると、結合方法ヒントと`LEADING()`ヒントが同時に使用されるシナリオで競合が発生する可能性があります。
 
 > **Note:**
 >
@@ -5516,7 +5516,7 @@ SHOW WARNINGS;
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用: はい
 - デフォルト値: `OFF`
-- この変数は、TiDBが[MPPハッシュ結合アルゴリズム](/tiflash/use-tiflash-mpp-mode.md#algorithm-support-for-the-mpp-mode)を選択する際に、ネットワーク伝送のオーバーヘッドが最小となるアルゴリズムを使用するかどうかを制御します。 この変数が有効になっている場合、TiDBは`Broadcast Hash Join`と`Shuffled Hash Join`を使用してネットワークで交換されるデータのサイズをそれぞれ推定し、より小さいサイズのものを選択します。
+- この変数は、TiDBが[MPPハッシュ結合アルゴリズム](/tiflash/use-tiflash-mpp-mode.md#algorithm-support-for-the-mpp-mode)を選択する際に、ネットワーク伝送のオーバーヘッドが最小となるアルゴリズムを使用するかどうかを制御します。この変数が有効になっている場合、TiDBは`Broadcast Hash Join`と`Shuffled Hash Join`を使用してネットワークで交換されるデータのサイズをそれぞれ推定し、より小さいサイズのものを選択します。
 - この変数が有効になった後は、 [`tidb_broadcast_join_threshold_count`](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50)と[`tidb_broadcast_join_threshold_size`](/system-variables.md#tidb_broadcast_join_threshold_size-new-in-v50)は有効になりません。
 
 ### tidb_prepared_plan_cache_memory_guard_ratio <span class="version-mark">New in v6.1.0</span>

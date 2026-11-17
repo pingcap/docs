@@ -75,7 +75,7 @@ TiDB HTAPの機能を検討する前に、TiDBとその列指向ストレージ�
 TiFlashがデプロイされた後、TiKVは自動的にTiFlashにデータを複製しません。TiFlashに複製する必要のあるテーブルを手動で指定する必要があります。その後、TiDBが対応するTiFlashレプリカを作成します。
 
 - TiDBクラスターにデータがない場合は、まずデータを TiDB に移行します。詳細については、[データ移行](/migration-overview.md)を参照してください。
-- TiDBクラスターに既にアップストリームからレプリケートされたデータが存在する場合、 TiFlashのデプロイ後、データレプリケーションは自動的に開始されません。TiFlashにレプリケートするテーブルを手動で指定する必要があります。詳細については、 TiFlash[TiFlashを使用する](/tiflash/tiflash-overview.md#use-tiflash)を参照してください。 。
+- TiDBクラスターに既にアップストリームからレプリケートされたデータが存在する場合、 TiFlashのデプロイ後、データレプリケーションは自動的に開始されません。TiFlashにレプリケートするテーブルを手動で指定する必要があります。詳細については、 [TiFlashを使用する](/tiflash/tiflash-overview.md#use-tiflash)を参照してください。
 
 ## データ処理 {#data-processing}
 

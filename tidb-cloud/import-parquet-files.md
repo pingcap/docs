@@ -42,7 +42,7 @@ summary: Amazon S3、GCS、またはAzure Blob StorageからTiDB Cloud Dedicated
     > **Note:**
     >
     > - 前述のルールに従って Parquet ファイル名を更新できない場合 (たとえば、Parquet ファイルリンクが他のプログラムでも使用されている場合)、ファイル名を変更せずに、 [ステップ4](#step-4-import-parquet-files-to-tidb-cloud)の**Destination Mapping**サブステップで**Use [TiDB file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping**の選択を解除して、ソースファイルを単一のターゲットテーブルに手動でマッピングできます。
-    > - Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)である必要があります。 その他の Snappy 圧縮形式はサポートされていません。
+    > - Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)である必要があります。その他の Snappy 圧縮形式はサポートされていません。
 
 ## ステップ2. 対象テーブルのスキーマを作成する {#step-2-create-the-target-table-schemas}
 

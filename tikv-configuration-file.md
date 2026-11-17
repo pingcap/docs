@@ -1701,7 +1701,7 @@ Titanに関連する設定項目。
 
 ### `target-file-size-base` {#target-file-size-base}
 
-- ベースレベルでのターゲットファイルのサイズ。 この値は、 `enable-compaction-guard`の値が`true`の場合、 `compaction-guard-max-output-file-size`によって上書きされます。
+- ベースレベルでのターゲットファイルのサイズ。この値は、 `enable-compaction-guard`の値が`true`の場合、 `compaction-guard-max-output-file-size`によって上書きされます。
 - デフォルト値: None。これは、デフォルトでは`"8MiB"`を意味します。
 - 最小値: `0`
 - 単位：KiB｜MiB｜GiB
@@ -1860,7 +1860,7 @@ Titanに関連する設定項目。
 
 > **Note:**
 >
-> - Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)になければなりません。 その他の Snappy 圧縮形式はサポートされていません。
+> - Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)になければなりません。その他の Snappy 圧縮形式はサポートされていません。
 > - TiDB v7.6.0以降、 `blob-file-compression`のデフォルト値が`"lz4"`から`"zstd"`に変更されます。
 
 - Blobファイルで使用される圧縮アルゴリズム
