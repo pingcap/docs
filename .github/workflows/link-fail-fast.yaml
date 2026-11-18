@@ -16,33 +16,40 @@ jobs:
       - uses: actions/checkout@v6
         with:
           fetch-depth: 2
+          persist-credentials: false
 
       - name: Collect changed markdown lines with links
         id: changed-lines
         run: |
-          git -c core.quotePath=false diff --unified=0 --diff-filter=AM --no-ext-diff --no-color HEAD^1 HEAD -- '*.md' |
-            perl .github/scripts/extract-changed-markdown-lines.pl .lychee-pr-changed-lines .lychee-pr-inputs.txt
+          # Keep generated files outside the PR checkout and its symlinks.
+          link_check_temp=$(mktemp -d "$RUNNER_TEMP/link-check.XXXXXXXXXX")
+          echo "temp_dir=$link_check_temp" >> "$GITHUB_OUTPUT"
 
-          count=$(wc -l < .lychee-pr-inputs.txt | tr -d ' ')
+          git -c core.quotePath=false diff --unified=0 --diff-filter=AM --no-ext-diff --no-color HEAD^1 HEAD -- '*.md' |
+            perl .github/scripts/extract-changed-markdown-lines.pl "$link_check_temp/changed-lines" "$link_check_temp/inputs.txt"
+
+          count=$(wc -l < "$link_check_temp/inputs.txt" | tr -d ' ')
           echo "count=${count}" >> "$GITHUB_OUTPUT"
 
           if [ "$count" -gt 0 ]; then
             echo "has_inputs=true" >> "$GITHUB_OUTPUT"
-            sed 's/^/- /' .lychee-pr-inputs.txt
+            sed 's/^/- /' "$link_check_temp/inputs.txt"
           else
             echo "has_inputs=false" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Collect doc site href URLs
         if: ${{ steps.changed-lines.outputs.has_inputs == 'true' }}
+        env:
+          LINK_CHECK_TEMP: ${{ steps.changed-lines.outputs.temp_dir }}
         run: |
-          tr '\n' '\0' < .lychee-pr-inputs.txt |
-            perl .github/scripts/extract-site-hrefs.pl .lychee-site-hrefs .lychee-site-href-files.txt
+          tr '\n' '\0' < "$LINK_CHECK_TEMP/inputs.txt" |
+            perl .github/scripts/extract-site-hrefs.pl "$LINK_CHECK_TEMP/site-hrefs" "$LINK_CHECK_TEMP/site-href-files.txt"
 
-          count=$(wc -l < .lychee-site-href-files.txt | tr -d ' ')
+          count=$(wc -l < "$LINK_CHECK_TEMP/site-href-files.txt" | tr -d ' ')
           if [ "$count" -gt 0 ]; then
-            cat .lychee-site-href-files.txt >> .lychee-pr-inputs.txt
-            sed 's/^/- /' .lychee-site-href-files.txt
+            cat "$LINK_CHECK_TEMP/site-href-files.txt" >> "$LINK_CHECK_TEMP/inputs.txt"
+            sed 's/^/- /' "$LINK_CHECK_TEMP/site-href-files.txt"
           fi
 
       - name: Link Checker
@@ -51,6 +58,8 @@ jobs:
         with:
           fail: true
           failIfEmpty: false
-          args: --root-dir $(pwd) --exclude '^file://' -E -i -n -t 45 --files-from .lychee-pr-inputs.txt
+          args: --root-dir "$(pwd)" --exclude '^file://' -E -i -n -t 45 --files-from "$LINK_CHECK_TEMP/inputs.txt"
+          output: ${{ steps.changed-lines.outputs.temp_dir }}/report.md
         env:
+          LINK_CHECK_TEMP: ${{ steps.changed-lines.outputs.temp_dir }}
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}

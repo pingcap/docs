@@ -9,21 +9,31 @@ die "usage: $0 OUT_ROOT LIST_PATH\n" unless defined $out_root && defined $list_p
 my %added_lines_by_file;
 my %has_link_candidate;
 my $file;
+my $in_hunk = 0;
 
 while (my $line = <STDIN>) {
   chomp $line;
 
-  if ($line =~ m{^\+\+\+ b/(.+)$}) {
+  if ($line =~ /^diff --git /) {
+    undef $file;
+    $in_hunk = 0;
+    next;
+  }
+
+  # Inside a hunk, "+++ b/..." can be an ordinary added line.
+  if (!$in_hunk && $line =~ m{^\+\+\+ b/(.+?)\t?$}) {
     $file = $1;
     next;
   }
 
-  next unless defined $file;
-  next unless $line =~ /^\+(?!\+\+)(.*)$/;
+  if ($line =~ /^@@ /) {
+    $in_hunk = 1;
+    next;
+  }
 
-  my $content = $1;
-  push @{$added_lines_by_file{$file}}, $content;
-  $has_link_candidate{$file} = 1 if $content =~ m{https?://}i || $content =~ /\bhref\s*=/i;
+  next unless $in_hunk && defined $file && $line =~ s/^\+//;
+  push @{$added_lines_by_file{$file}}, $line;
+  $has_link_candidate{$file} = 1 if $line =~ m{https?://}i || $line =~ /\bhref\s*=/i;
 }
 
 make_path($out_root);
