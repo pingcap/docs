@@ -181,4 +181,4 @@ Zonal HA recovery objectives apply to single-node failures. Regional HA recovery
 
 For zonal HA, database service remains available when one of multiple TiDB compute replicas fails, while failure of the only replica can cause up to 600 seconds of downtime until a replacement is ready.
 
-Throughput might temporarily decrease during recovery. Follow the [safe retry guidance](#impact-on-sessions-during-failures) for interrupted requests, especially writes with an unknown commit outcome.
+Throughput might temporarily decrease during recovery even when RTO is 0. Follow the [safe retry guidance](#impact-on-sessions-during-failures) for interrupted requests, especially writes with an unknown commit outcome.
