@@ -117,6 +117,21 @@ SHOW GRANTS FOR 'newuser'@'%';
 +---------------------------------------------------------------+
 ```
 
+<CustomContent platform="tidb-cloud" plan="premium">
+
+Reconnect as the test user and query `INFORMATION_SCHEMA.COLUMN_PRIVILEGES` to see which column privileges the account still has on `test.tbl`.
+
+```sql
+SELECT COLUMN_NAME, PRIVILEGE_TYPE
+FROM INFORMATION_SCHEMA.COLUMN_PRIVILEGES
+WHERE TABLE_SCHEMA = 'test' AND TABLE_NAME = 'tbl'
+ORDER BY COLUMN_NAME, PRIVILEGE_TYPE;
+```
+
+The result lists `SELECT` on `col1` and `UPDATE` on `col3`.
+
+</CustomContent>
+
 ## Example: Column-level privilege access control
 
 After granting or revoking column-level privileges, TiDB performs privilege checks on columns referenced in SQL statements. For example:

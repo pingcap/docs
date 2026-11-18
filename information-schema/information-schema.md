@@ -63,7 +63,7 @@ Many `INFORMATION_SCHEMA` tables have a corresponding `SHOW` statement. The bene
 | [`COLLATIONS`](/information-schema/information-schema-collations.md)                    | Provides a list of collations that the server supports. |
 | [`COLLATION_CHARACTER_SET_APPLICABILITY`](/information-schema/information-schema-collation-character-set-applicability.md) | Explains which collations apply to which character sets. |
 | [`COLUMNS`](/information-schema/information-schema-columns.md)                          | Provides a list of columns for all tables. |
-| `COLUMN_PRIVILEGES`                                                                     | Not implemented by TiDB. Returns zero rows. |
+| `COLUMN_PRIVILEGES`                                                                     | On {{{ .premium }}}, lists the column privileges visible to the current user. Returns zero rows on other plans. |
 | `COLUMN_STATISTICS`                                                                     | Not implemented by TiDB. Returns zero rows. |
 | [`ENGINES`](/information-schema/information-schema-engines.md)                          | Provides a list of supported storage engines. |
 | `EVENTS`                                                                                | Not implemented by TiDB. Returns zero rows. |
