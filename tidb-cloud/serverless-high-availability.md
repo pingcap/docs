@@ -60,7 +60,7 @@ In zonal high availability architecture:
 
 ### Failover process
 
-TiDB Cloud ensures a transparent failover process for your applications. During a failover:
+TiDB Cloud automatically performs the following recovery steps after a node failure.
 
 <CustomContent language="en,zh">
 
@@ -68,7 +68,7 @@ TiDB Cloud ensures a transparent failover process for your applications. During 
 
 - Servers providing storage services recover local caches from persisted data on Amazon S3 or Alibaba Cloud OSS (depending on your cloud provider), restoring the system to a consistent state with the replicas.
 
-In the storage layer, persisted data is regularly pushed to Amazon S3 or Alibaba Cloud OSS (depending on your cloud provider) for high durability. Moreover, immediate updates are not only replicated across multiple TiKV servers but also stored on the EBS of each server, which further replicates the data for additional durability. TiDB automatically resolves issues by backing off and retrying in milliseconds, ensuring the failover process remains seamless for client applications.
+In the storage layer, persisted data is regularly pushed to Amazon S3 or Alibaba Cloud OSS (depending on your cloud provider) for high durability. Moreover, immediate updates are not only replicated across multiple TiKV servers but also stored on the EBS of each server, which further replicates the data for additional durability. TiDB automatically retries recoverable operations with backoff.
 
 </CustomContent>
 
@@ -78,11 +78,11 @@ In the storage layer, persisted data is regularly pushed to Amazon S3 or Alibaba
 
 - Servers providing storage services recover local caches from persisted data on Amazon S3 (depending on your cloud provider), restoring the system to a consistent state with the replicas.
 
-In the storage layer, persisted data is regularly pushed to Amazon S3 for high durability. Moreover, immediate updates are not only replicated across multiple TiKV servers but also stored on the EBS of each server, which further replicates the data for additional durability. TiDB automatically resolves issues by backing off and retrying in milliseconds, ensuring the failover process remains seamless for client applications.
+In the storage layer, persisted data is regularly pushed to Amazon S3 for high durability. Moreover, immediate updates are not only replicated across multiple TiKV servers but also stored on the EBS of each server, which further replicates the data for additional durability. TiDB automatically retries recoverable operations with backoff.
 
 </CustomContent>
 
-The gateway and computing layers are stateless, so failover involves restarting them elsewhere immediately. Applications should implement retry logic for their connections. While the zonal setup provides high availability, it cannot handle an entire zone failure. If the zone becomes unavailable, downtime will occur until the zone and its dependent services are restored.
+The gateway and computing layers are stateless and can be restarted to restore database service. Applications should reconnect after recoverable connection failures and retry only requests that are safe to repeat, following the [retry guidance](#impact-on-sessions-during-failures). While the zonal setup provides high availability, it cannot handle an entire zone failure. If the zone becomes unavailable, downtime will occur until the zone and its dependent services are restored.
 
 ## Regional high availability architecture
 
@@ -129,7 +129,7 @@ TiDB Cloud minimizes service disruption and ensures business continuity during a
 
 In addition to providing high availability through TiKV replication, TiKV instances are deployed and configured to place each data replica in a different availability zone. The system remains available as long as two availability zones are operating normally. For high durability, data persistence is ensured by regularly backing up data to S3. Even if two zones fail, data stored in S3 remains accessible and recoverable.
 
-Applications are unaffected by failures in non-primary zones and remain unaware of such events. During a primary zone failure, Gateway and TiDB are launched in the standby availability zone to handle workloads. Ensure that your applications implement retry logic to redirect new requests to active servers in the standby availability zone.
+During an availability-zone failure, connections or requests might be interrupted, and throughput might temporarily decrease. If the primary zone fails, Gateway and TiDB are launched in the standby availability zone to handle workloads. Applications should reconnect to active servers and follow the [retry guidance](#impact-on-sessions-during-failures).
 
 ## Automatic backups and durability
 
@@ -160,23 +160,25 @@ These automated backups enable you to restore your database either from a full b
 
 ## Impact on sessions during failures
 
-During a failure, ongoing transactions on the failed server might be interrupted. Although failover is transparent to applications, you must implement logic to handle recoverable failures during active transactions. Different failure scenarios are handled as follows:
+During a failure, ongoing transactions on the failed server might be interrupted. Applications must handle recoverable failures during active transactions. Different failure scenarios are handled as follows:
 
-- **TiDB failures**: If a TiDB node fails, client connections are unaffected because TiDB Cloud automatically reroutes traffic through the gateway. While transactions on the failed TiDB node might be interrupted, the system ensures that committed data is preserved, and new transactions are handled by another available TiDB node.
-- **Gateway failures**: If the Gateway fails, client connections are disrupted. However, TiDB Cloud gateways are stateless and can restart immediately in a new zone or server. Traffic is automatically redirected to the new gateway, minimizing downtime.
+- **TiDB failures**: If a TiDB node fails and another TiDB compute replica is available for the instance, TiDB Cloud reroutes traffic through the gateway. Transactions on the failed node might be interrupted, and new transactions are handled by the available replica. If the instance is served by a single TiDB compute replica, failure of that replica makes the database service unavailable during recovery. Successfully committed data is preserved in both cases.
+- **Gateway failures**: If the Gateway fails, client connections are disrupted. TiDB Cloud gateways are stateless and can be restarted on another server. Traffic is automatically redirected to a healthy gateway.
 
-It is recommended to implement retry logic in your application to handle recoverable failures. For implementation details, refer to your driver or ORM documentation (for example, [JDBC](https://dev.mysql.com/doc/connector-j/en/connector-j-config-failover.html)).
+Reconnect after recoverable connection failures and retry only requests that are safe to repeat. For writes with an unknown commit outcome, use application-level idempotency to prevent duplicate effects or verify that the write did not commit before retrying. For more information about connection handling, see your driver or ORM documentation (for example, [JDBC](https://dev.mysql.com/doc/connector-j/en/connector-j-config-failover.html)).
 
 ## RTO and RPO
 
-When creating your business continuity plan, consider these two key metrics:
+- **Recovery Time Objective (RTO)** is the maximum acceptable duration of complete database service unavailability after a failure. An RTO of 0 means the database service remains available, although individual connections or requests might still require retries.
+- **Recovery Point Objective (RPO)** is the maximum acceptable time window of data loss. An RPO of 0 means all successfully committed data is preserved.
 
-- Recovery Time Objective (RTO): The maximum acceptable time it takes for the application to fully recover after a disruptive event.
-- Recovery Point Objective (RPO): The maximum acceptable time interval of recent data updates that the application can tolerate losing during recovery from an unplanned disruptive event.
+Zonal HA recovery objectives apply to single-node failures. Regional HA recovery objectives apply to the failure of a single availability zone.
 
-The following table compares the RTO and RPO for each high availability option:
+| High availability architecture | RTO (seconds) | RPO (seconds) |
+|--------------------------------|---------------|---------------|
+| Zonal high availability        | ≤ 600         | 0             |
+| Regional high availability     | 0             | 0             |
 
-| High availability architecture | RTO (downtime)                | RPO (data loss) |
-|--------------------------------|-------------------------------|-----------------|
-| Zonal high availability                         | Near 0 seconds                      | 0               |
-| Regional high availability                      | Typically less than 600 seconds | 0               |
+For zonal HA, database service remains available when one of multiple TiDB compute replicas fails, while failure of the only replica can cause up to 600 seconds of downtime until a replacement is ready.
+
+Throughput might temporarily decrease during recovery even when RTO is 0. Follow the [safe retry guidance](#impact-on-sessions-during-failures) for interrupted requests, especially writes with an unknown commit outcome.
