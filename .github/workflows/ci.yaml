@@ -19,11 +19,12 @@ jobs:
           persist-credentials: false
       - name: Verify duplicated file names
         run: ./scripts/verify-duplicated-file-name.sh
+      - name: Install Python test dependencies
+        run: python3 -m pip install --disable-pip-version-check --no-deps PyYAML==6.0.3
       - name: Verify safer defaults
         run: python3 scripts/test-safer-defaults.py
       - name: Verify media workflow
         run: |
-          python3 -m pip install --disable-pip-version-check --no-deps PyYAML==6.0.3
           python3 scripts/test-media-workflow.py
           python3 scripts/test-privileged-workflow-actors.py
 

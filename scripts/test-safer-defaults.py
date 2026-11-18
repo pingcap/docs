@@ -8,6 +8,8 @@ import shutil
 import subprocess
 import tempfile
 
+import yaml
+
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -15,13 +17,18 @@ ROOT = Path(__file__).resolve().parents[1]
 ci_workflow = (ROOT / ".github/workflows/ci.yaml").read_text()
 assert "on: [pull_request]" in ci_workflow
 assert "permissions:\n  contents: read\n" in ci_workflow
-checkout_steps = re.findall(
-    r"^        uses: actions/checkout@[^\n]+\n(.*?)(?=^      -|\Z)",
-    ci_workflow,
-    re.MULTILINE | re.DOTALL,
-)
+workflow = yaml.safe_load(ci_workflow)
+checkout_steps = [
+    step
+    for job in workflow["jobs"].values()
+    for step in job.get("steps", [])
+    if step.get("uses", "").startswith("actions/checkout@")
+]
 assert checkout_steps
-assert all("persist-credentials: false" in step for step in checkout_steps)
+assert all(
+    step.get("with", {}).get("persist-credentials") is False
+    for step in checkout_steps
+)
 
 install_commands = [
     line.split("#", 1)[0]
