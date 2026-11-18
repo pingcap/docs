@@ -1,7 +1,11 @@
 """Check that the media workflow pins tools and keeps credentials out of argv."""
 
+import json
 import os
 from pathlib import Path
+import shlex
+import shutil
+import stat
 import subprocess
 import tempfile
 import unittest
@@ -9,7 +13,8 @@ import unittest
 import yaml
 
 
-WORKFLOW = Path(__file__).resolve().parents[1] / ".github/workflows/media.yml"
+REPO_ROOT = Path(__file__).resolve().parents[1]
+WORKFLOW = REPO_ROOT / ".github/workflows/media.yml"
 
 
 class MediaWorkflowTest(unittest.TestCase):
@@ -124,7 +129,7 @@ class MediaWorkflowTest(unittest.TestCase):
         self.assertNotIn("--secret-id", upload)
         self.assertNotIn("--secret-key", upload)
         self.assertIn('--config-path "$COSCLI_CONFIG"', upload)
-        self.assertIn("0o600", upload)
+        self.assertIn('python3 -I "$GITHUB_WORKSPACE/scripts/write-media-cos-config.py"', upload)
         self.assertIn("trap 'rm -f", upload)
 
     def test_upload_uses_and_removes_private_config(self):
@@ -160,6 +165,7 @@ Path(os.environ["MOCK_RESULT"]).write_text(str(config_path))
                 cwd=temp_dir,
                 env={
                     **os.environ,
+                    "GITHUB_WORKSPACE": str(REPO_ROOT),
                     "COSCLI_PATH": str(mock_coscli),
                     "MEDIA_UPLOAD_DIR": str(temp_dir / "media-upload"),
                     "MOCK_RESULT": str(result_file),
@@ -174,6 +180,44 @@ Path(os.environ["MOCK_RESULT"]).write_text(str(config_path))
             )
             self.assertEqual(result.returncode, 0, result.stderr)
             self.assertFalse(Path(result_file.read_text()).exists())
+
+    def test_config_writer_ignores_checkout_modules_and_python_environment(self):
+        with tempfile.TemporaryDirectory(prefix="media-import-test-") as directory:
+            workspace = Path(directory) / "repo with spaces"
+            scripts = workspace / "scripts"
+            scripts.mkdir(parents=True)
+            helper = scripts / "write-media-cos-config.py"
+            shutil.copyfile(REPO_ROOT / "scripts/write-media-cos-config.py", helper)
+            for location in (workspace, scripts):
+                (location / "json.py").write_text(
+                    'raise RuntimeError("checkout module imported")\n'
+                )
+            command = next(
+                line.strip() for line in self.upload_step["run"].splitlines()
+                if "write-media-cos-config.py" in line
+            ).replace("$GITHUB_WORKSPACE", str(workspace))
+            config_path = Path(directory) / "coscli.yaml"
+            config_path.touch(mode=0o600)
+            result = subprocess.run(
+                shlex.split(command),
+                cwd=workspace,
+                env={
+                    **os.environ,
+                    "PYTHONPATH": str(workspace),
+                    "PYTHONHOME": str(workspace / "invalid-python-home"),
+                    "COSCLI_CONFIG": str(config_path),
+                    "TENCENTCLOUD_SECRET_ID": "dummy-id",
+                    "TENCENTCLOUD_SECRET_KEY": "dummy-key",
+                },
+                capture_output=True,
+                text=True,
+                timeout=5,
+            )
+            self.assertEqual(result.returncode, 0, result.stderr)
+            config = json.loads(config_path.read_text())["cos"]["base"]
+            self.assertEqual(config["secretid"], "dummy-id")
+            self.assertEqual(config["secretkey"], "dummy-key")
+            self.assertEqual(stat.S_IMODE(config_path.stat().st_mode), 0o600)
 
     def test_tccli_version_is_pinned(self):
         install = next(
