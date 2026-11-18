@@ -155,7 +155,7 @@ When you perform a snapshot backup, BR backs up system tables as tables with the
 - Starting from v7.6.0, BR enables `--with-sys-table` by default, which means that BR restores **data in some system tables** by default.
 - Starting from v8.5.5 and v9.0.0, BR lets you specify `--fast-load-sys-tables` to restore system tables physically. This approach uses the `RENAME TABLE` DDL statement to atomically swap the system tables in the `__TiDB_BR_Temporary_mysql` database with the system tables in the `mysql` database. Unlike the logical restoration of system tables using the `REPLACE INTO` SQL statement, physical restoration completely overwrites the existing data in the system tables.
 
-**BR can restore data in the following system tables:**
+**System tables that `--with-sys-table` can restore:**
 
 ```
 +----------------------------------+
@@ -171,9 +171,8 @@ When you perform a snapshot backup, BR backs up system tables as tables with the
 +----------------------------------+
 ```
 
-**BR does not restore the following system tables:**
+**System tables that `--with-sys-table` does not restore:**
 
-- Statistics tables (`mysql.stats_*`). However, statistics can still be restored separately. BR backs up statistics only when `--ignore-stats=false` and restores them according to `--load-stats`. See [Back up statistics](/br/br-snapshot-manual.md#back-up-statistics).
 - System variable tables (`mysql.tidb` and `mysql.global_variables`)
 - Other system tables
 
@@ -232,6 +231,12 @@ When you restore data related to system privilege, note that before restoring da
 - The target cluster has the same system tables as the backup data.
 - The **number of columns** in the system privilege table of the target cluster is the same as that in the backup data. The column order is not important.
 - The columns in the system privilege table of the target cluster are compatible with that in the backup data. If the data type of the column is a type with a length (such as integer and string), the length in the target cluster must be >= the length in the backup data. If the data type of the column is an `ENUM` type, the number of `ENUM` values in the target cluster must be a superset of that in the backup data.
+
+**Restore statistics**
+
+Statistics are data that the query optimizer uses to estimate row counts and choose execution plans. They are stored in statistics tables, such as `mysql.stats_histograms` and `mysql.stats_buckets`. The `--load-stats` option controls whether to restore statistics, independently of the system tables restored by `--with-sys-table`.
+
+To restore statistics through logical import, set `--ignore-stats=false` during backup to export statistics as JSON and include them in the backup. When the conditions for physical restore are met, BR can also use `--fast-load-sys-tables` to restore the relevant statistics tables from the backup. Physical restore does not require setting `--ignore-stats=false` during backup. For the conditions and restore methods, see [Back up statistics](/br/br-snapshot-manual.md#back-up-statistics).
 
 ## Performance and impact
 

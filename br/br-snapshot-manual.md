@@ -110,7 +110,7 @@ tiup br backup full \
 
 Starting from TiDB v7.5.0, the `br` command-line tool introduces the `--ignore-stats` parameter. When you set this parameter to `false`, the `br` command-line tool supports backing up statistics of columns, indexes, and tables. In this case, you do not need to manually run the statistics collection task for the TiDB database restored from the backup, or wait for the completion of the automatic collection task. This feature simplifies the database maintenance work and improves the query performance.
 
-If you do not set this parameter to `false`, the `br` command-line tool uses the default setting `--ignore-stats=true`, which means statistics are not backed up during data backup.
+The `--ignore-stats` parameter defaults to `true`, which means BR does not export statistics as JSON by default. This parameter does not control the backup of statistics table data in a full backup. When the conditions described below are met, BR can restore these tables physically.
 
 The following is an example of backing up cluster snapshot data and backing up table statistics with `--ignore-stats=false`:
 
@@ -131,7 +131,7 @@ tiup br restore full \
 >
 > Starting from v8.5.5 and v9.0.0, when the `--load-stats` parameter is set to `false`, BR no longer writes statistics for the restored tables to the `mysql.stats_meta` table. After the restore is complete, you can manually execute the [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) SQL statement to update the relevant statistics.
 
-When the backup and restore feature backs up data, it stores statistics in JSON format within the `backupmeta` file. When restoring data, it loads statistics in JSON format into the cluster. For more information, see [LOAD STATS](/sql-statements/sql-statement-load-stats.md).
+For logical import, BR uses `--ignore-stats=false` during backup to include statistics in JSON format in the backup. During restore, BR imports the statistics in JSON format into the cluster. For more information, see [LOAD STATS](/sql-statements/sql-statement-load-stats.md).
 
 Starting from v8.5.5 and v9.0.0, BR introduces the `--fast-load-sys-tables` parameter, which is enabled by default. When restoring data to a new cluster using the `br` command-line tool, and the IDs of tables and partitions between the upstream and downstream clusters can be reused (otherwise, BR will automatically fall back to logically load statistics), enabling `--fast-load-sys-tables` lets BR to first restore the statistics-related system tables to the temporary system database `__TiDB_BR_Temporary_mysql`, and then atomically swap these tables with the corresponding tables in the `mysql` database using the `RENAME TABLE` statement.
 
@@ -182,7 +182,7 @@ tiup br restore full \
 
 In the preceding command:
 
-- `--with-sys-table`: BR restores **data in some system tables**, including account permission data and SQL bindings. Statistics are controlled separately: BR backs them up only when `--ignore-stats=false` and restores them according to `--load-stats`. The `--with-sys-table` option does not restore the statistics tables (`mysql.stats_*`) or the system variable tables (`mysql.tidb` and `mysql.global_variables`). For more information, see [Restore tables in the `mysql` schema](/br/br-snapshot-guide.md#restore-tables-in-the-mysql-schema).
+- `--with-sys-table`: BR restores **data in some system tables**, including account permission data and SQL bindings, but excludes system variable tables (`mysql.tidb` and `mysql.global_variables`). The `--load-stats` option controls whether to restore statistics from the backup and defaults to `true`, independently of `--with-sys-table`. Logical import requires setting `--ignore-stats=false` during backup. For more information, see [Back up statistics](#back-up-statistics) and [Restore tables in the `mysql` schema](/br/br-snapshot-guide.md#restore-tables-in-the-mysql-schema).
 - `--ratelimit`: The maximum speed **per TiKV** performing restore tasks. The unit is in MiB/s.
 - `--log-file`: The target file where the `br` log is written.
 
