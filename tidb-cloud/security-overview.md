@@ -49,6 +49,12 @@ With {{{ .byoc }}}, the TiDB data plane runs in your cloud account. You can use 
 
 TiDB Cloud provides a user- and role-based access control mechanism, combining static and dynamic privileges. You can assign roles to users to manage and distribute permissions in a more fine-grained way.
 
+<CustomContent plan="premium">
+
+On {{{ .premium }}}, you can restrict which columns a SQL user can read or modify within a table. See [Column-Level Privilege Management](/column-privilege-management.md).
+
+</CustomContent>
+
 For [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters, you can [configure and manage the root account password](/tidb-cloud/configure-security-settings.md) and restrict access through [IP access lists](/tidb-cloud/configure-ip-access-list.md) to protect sensitive accounts.
 
 ## Audit logging

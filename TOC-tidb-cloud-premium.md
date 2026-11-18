@@ -171,6 +171,8 @@
   - Data Access Control
     - [Dual-Layer Data Encryption](/tidb-cloud/premium/dual-layer-data-encryption-premium.md)
     - [User-Controlled Log Redaction](/tidb-cloud/tidb-cloud-log-redaction.md)
+  - Database Access Control
+    - [Column-Level Privilege Management](/column-privilege-management.md)
   - Audit Management
     - [Database Audit Logging](/tidb-cloud/premium/tidb-cloud-auditing-premium.md)
     - [Console Audit Logging](/tidb-cloud/tidb-cloud-console-auditing.md)

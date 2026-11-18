@@ -5,7 +5,17 @@ summary: TiDB supports a MySQL-compatible column-level privilege management mech
 
 # Column-Level Privilege Management
 
+<CustomContent platform="tidb">
+
 Starting from v8.5.6, TiDB supports a MySQL-compatible column-level privilege management mechanism. With column-level privileges, you can grant or revoke `SELECT`, `INSERT`, `UPDATE`, and `REFERENCES` privileges on specific columns in a specified table, achieving finer-grained data access control.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud" plan="premium">
+
+In TiDB Cloud, column-level privileges are available only on {{{ .premium }}} instances. Use SQL to grant `SELECT`, `INSERT`, `UPDATE`, or `REFERENCES` on named columns. For example, a user can read two columns and update a third column in the same table.
+
+</CustomContent>
 
 > **Note:**
 >
@@ -44,6 +54,8 @@ GRANT SELECT(col1, col2), UPDATE(col3) ON test.tbl TO 'user'@'host';
 
 The following example grants user `newuser` the `SELECT` privilege on `col1` and `col2` in table `test.tbl`, and grants the same user the `UPDATE` privilege on `col3`:
 
+<CustomContent platform="tidb">
+
 ```sql
 CREATE DATABASE IF NOT EXISTS test;
 USE test;
@@ -57,6 +69,24 @@ CREATE USER 'newuser'@'%';
 GRANT SELECT(col1, col2), UPDATE(col3) ON test.tbl TO 'newuser'@'%';
 SHOW GRANTS FOR 'newuser'@'%';
 ```
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud" plan="premium">
+
+[Connect to your {{{ .premium }}} instance](/tidb-cloud/premium/connect-to-tidb-instance.md) as a SQL administrator. To delegate privileges, the administrator needs the privileges being granted and `GRANT OPTION` for the table. Use an existing test account in place of `'newuser'@'%'` and use its actual host part. Choose an account that has no broader access to the table through other grants or active roles. Revoking a column grant leaves those other privileges in effect.
+
+Create the example table in a scratch database and grant the column privileges. The examples use `test` as the current database in each session.
+
+```sql
+CREATE DATABASE IF NOT EXISTS test;
+USE test;
+CREATE TABLE tbl (col1 INT, col2 INT, col3 INT);
+GRANT SELECT(col1, col2), UPDATE(col3) ON test.tbl TO 'newuser'@'%';
+SHOW GRANTS FOR 'newuser'@'%';
+```
+
+</CustomContent>
 
 ```
 +---------------------------------------------------------------------+
@@ -126,6 +156,8 @@ When performing `SELECT` privilege checks on views, MySQL and TiDB differ as fol
 - MySQL first prunes columns in the view's internal query and then checks the column privileges of the internal tables, making the checks relatively lenient in some scenarios. 
 - TiDB does not perform column pruning before privilege checks, so additional column privileges might be required.
 
+<CustomContent platform="tidb">
+
 ```sql
 -- Prepare the environment by logging in as root
 DROP USER IF EXISTS 'u'@'%';
@@ -165,8 +197,28 @@ SELECT * FROM v;
 -- TiDB: Success
 ```
 
+</CustomContent>
+
+<CustomContent platform="tidb-cloud" plan="premium">
+
+For example, suppose a `SQL SECURITY INVOKER` view selects columns `a` and `b` from a table, filters on `c`, and orders by `d`. A user who selects only `a` from the view still needs `SELECT` on the view column and on all four columns referenced in the underlying table.
+
+</CustomContent>
+
 ## See also
+
+<CustomContent platform="tidb">
 
 * [Privilege Management](/privilege-management.md)
 * [`GRANT <privileges>`](/sql-statements/sql-statement-grant-privileges.md)
 * [`REVOKE <privileges>`](/sql-statements/sql-statement-revoke-privileges.md)
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud" plan="premium">
+
+* [`GRANT <privileges>`](/sql-statements/sql-statement-grant-privileges.md)
+* [`REVOKE <privileges>`](/sql-statements/sql-statement-revoke-privileges.md)
+* [`SHOW GRANTS`](/sql-statements/sql-statement-show-grants.md)
+
+</CustomContent>
