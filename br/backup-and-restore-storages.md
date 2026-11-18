@@ -110,7 +110,9 @@ Before backup, configure the following privileges to access the backup directory
 - Minimum privileges for TiKV and Backup & Restore (BR) to access the backup directories during backup: `s3:ListBucket`, `s3:GetObject`, `s3:DeleteObject`, `s3:PutObject`, and `s3:AbortMultipartUpload`
 - Minimum privileges for TiKV and BR to access the backup directories during a read-only restore: `s3:ListBucket` and `s3:GetObject`.
 
-If you use IAM policies, scope them to the bucket or prefix in the `s3://bucket-name/prefix` URI used by `--storage`. If the path is the bucket root, use a bucket-scoped policy. If the path includes a folder or prefix, add an `s3:prefix` condition to `s3:ListBucket` and scope object access to that prefix.
+If you use IAM policies, scope object access to the bucket or prefix in the `s3://bucket-name/prefix` URI used by `--storage`. Use a bucket-scoped policy for the bucket root, or a prefix-scoped policy for a folder or prefix. Replace `<bucket-name>` with the bucket name and `<prefix>` with the path without leading or trailing slashes. For example, for `s3://my-bucket/backup/`, use `my-bucket` and `backup`.
+
+For point-in-time recovery (PITR), grant read access to both the log backup location specified by `--storage` and the snapshot backup location specified by `--full-backup-storage`, if used. Add policy statements for each required bucket or prefix.
 
 **Bucket-scoped policy for backup**
 
@@ -141,20 +143,17 @@ If you use IAM policies, scope them to the bucket or prefix in the `s3://bucket-
 
 **Prefix-scoped policy for backup**
 
+This policy restricts object access to the backup prefix but allows listing all object keys in the bucket. BR checks whether `backupmeta` exists before starting a backup. Without an unconditional `s3:ListBucket` grant, S3 can return `403 Forbidden` for a missing object, causing the backup to fail. Use a dedicated backup bucket if other object keys must remain hidden.
+
 ```json
 {
     "Version": "2012-10-17",
     "Statement": [
         {
-            "Sid": "ListBackupPrefix",
+            "Sid": "ListBackupBucket",
             "Effect": "Allow",
             "Action": "s3:ListBucket",
-            "Resource": "arn:aws:s3:::<bucket-name>",
-            "Condition": {
-                "StringLike": {
-                    "s3:prefix": "<prefix>/*"
-                }
-            }
+            "Resource": "arn:aws:s3:::<bucket-name>"
         },
         {
             "Sid": "AccessBackupObjectsInPrefix",
@@ -220,7 +219,11 @@ If you use IAM policies, scope them to the bucket or prefix in the `s3://bucket-
 }
 ```
 
-If BR writes checkpoint metadata to S3, add `s3:PutObject` and `s3:DeleteObject` to the restore policy. Starting from BR v8.5.5, if the target cluster does not contain `mysql.tidb_pitr_id_map` and `--checkpoint-storage` is not specified, PITR writes the ID map to the log backup directory. If that directory is in S3, add `s3:PutObject` to the restore policy. If the same IAM user or role is shared by both backup and restore, you can combine the required actions into a single policy.
+If BR writes checkpoint metadata to S3, grant `s3:ListBucket`, `s3:GetObject`, `s3:PutObject`, and `s3:DeleteObject` for the checkpoint storage location. When `--checkpoint-storage` points to a different bucket or prefix, add policy statements for that location instead of adding write permissions to the backup location. Keep `s3:ListBucket` unconditional on the checkpoint bucket so that checks for missing checkpoint objects can succeed.
+
+Starting from BR v8.5.5, if the target cluster does not contain `mysql.tidb_pitr_id_map` and `--checkpoint-storage` is not specified, PITR writes the ID map to the log backup directory. If that directory is in S3, add `s3:PutObject` for the log backup location and keep `s3:ListBucket` unconditional on that bucket so that BR can check whether the ID map exists.
+
+If the same IAM user or role is shared by both backup and restore, you can combine the required actions into a single policy.
 
 If you have not yet created a backup directory, refer to [Create a bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html) to create an S3 bucket in the specified region. If necessary, you can also create a folder in the bucket by referring to [Create a folder](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html).
 
