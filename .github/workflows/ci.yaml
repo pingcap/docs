@@ -15,6 +15,8 @@ jobs:
     steps:
       - name: Check out
         uses: actions/checkout@v6
+        with:
+          persist-credentials: false
       - name: Verify duplicated file names
         run: ./scripts/verify-duplicated-file-name.sh
       - name: Verify safer defaults
@@ -30,6 +32,8 @@ jobs:
     steps:
       - name: Check out
         uses: actions/checkout@v6
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@v6
         with:
           node-version: "18"
@@ -45,6 +49,8 @@ jobs:
     steps:
       - name: Check out
         uses: actions/checkout@v6
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@v6
         with:
           node-version: "18"
@@ -60,6 +66,8 @@ jobs:
     steps:
       - name: Check out
         uses: actions/checkout@v6
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@v6
         with:
           node-version: "18"
@@ -75,6 +83,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+        with:
+          persist-credentials: false
       - name: Vale Linter
         uses: errata-ai/vale-action@518a9136acc6e6668ce7c00d367051e0941e87ff # reviewdog
         with:
