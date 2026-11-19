@@ -76,6 +76,8 @@ By default, TiDB installation includes several privileged interfaces for inter-c
 | TiFlash           | 20170       | Protocol   |
 | TiFlash           | 20292       | HTTP       |
 | TiFlash           | 8234        | HTTP       |
+| TiProxy           | 6000        | MySQL      |
+| TiProxy           | 3080        | HTTP       |
 | DM master         | 8261        | HTTP       |
 | DM master         | 8291        | HTTP       |
 | DM worker         | 8262        | HTTP       |
