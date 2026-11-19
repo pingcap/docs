@@ -780,12 +780,7 @@ To return the detailed information in TOML, set the `Accept` request header to `
 curl -X GET -H "Accept: application/toml" http://127.0.0.1:8300/api/v2/changefeeds/test1
 ```
 
-If the request is successful, the response header is `Content-Type: application/toml; charset=utf-8`. The TOML response contains the same changefeed information as the JSON response, except for the following formatting differences:
-
-- Field names use kebab-case instead of snake_case.
-- The changefeed configuration is under the `[config]` table and its nested tables.
-- Durations and timestamps are formatted as human-readable strings.
-- The internal runtime field `gid` is omitted.
+If the request is successful, the response header is `Content-Type: application/toml; charset=utf-8`. TiCDC returns the changefeed details in TOML format, with field names in kebab-case.
 
 ## Query whether a specific replication task is completed
 
