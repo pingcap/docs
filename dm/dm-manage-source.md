@@ -98,7 +98,23 @@ The following is an example of the returned result:
 >
 > The `config` command is only supported in DM v6.0 and later versions. For earlier versions, you must use the `get-config` command.
 
-If you know the `source-id`, you can run `dmctl --master-addr <master-addr> config source <source-id>` to get the data source configuration. To print the YAML with line breaks or save it to a file, pipe the output to `jq -r '.cfg'`, for example, `dmctl --master-addr <master-addr> config source <source-id> | jq -r '.cfg' > source-config-output.yaml`. Before DM v6.0, use `get-config source <source-id>` instead of `config source <source-id>`.
+If you know the `source-id`, you can run `dmctl --master-addr <master-addr> config source <source-id>` to get the data source configuration. The following example checks the command result before saving the YAML. It writes to a temporary file and replaces the output file only after a successful lookup, so an invalid `source-id` or a failed `dmctl` command does not overwrite an existing file. Replace the example address and source ID with your own values. The `cfg` output masks the password as `******`; restore the actual password before using the saved YAML to create a data source.
+
+```bash
+set -o pipefail
+output_file="source-config-output.yaml"
+tmp_file=$(mktemp "${output_file}.tmp.XXXXXX") || exit 1
+
+if dmctl --master-addr 127.0.0.1:8261 config source mysql-replica-01 \
+    | jq -er 'if .result then .cfg else error(.msg) end' > "$tmp_file"; then
+  mv "$tmp_file" "$output_file" || { rm -f "$tmp_file"; exit 1; }
+else
+  rm -f "$tmp_file"
+  exit 1
+fi
+```
+
+Before DM v6.0, use `get-config source <source-id>` instead of `config source <source-id>`.
 
 {{< copyable "" >}}
 
