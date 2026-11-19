@@ -21,29 +21,25 @@ jobs:
     if: github.repository == 'pingcap/docs' && github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         with:
           fetch-depth: 0
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.x"
-
-      - name: Install dependencies
-        run: pip install requests
 
       - name: Check keywords for all branches
         id: check
         run: |
           mkdir -p /tmp/kw-results
           has_failure=false
+          # Use the checked-in workflow's checker for every documentation branch.
+          checker=$(mktemp)
+          trap 'rm -f "$checker"' EXIT
+          cp scripts/check-keywords.py "$checker"
 
           for branch in $CHECK_BRANCHES; do
             git checkout "$branch" --quiet
 
             set +e
-            output=$(python ./scripts/check-keywords.py \
+            output=$(python3 "$checker" \
               --download_from_url \
               --parser_url "https://github.com/pingcap/tidb/raw/refs/heads/${branch}/pkg/parser/parser.y" 2>&1)
             exit_code=$?
@@ -113,7 +109,7 @@ jobs:
 
       - name: Create issue
         if: steps.check.outputs.has_failure == 'true'
-        uses: peter-evans/create-issue-from-file@v6
+        uses: peter-evans/create-issue-from-file@fca9117c27cdc29c6c4db3b86c48e4115a786710 # v6
         with:
           title: "Weekly keywords check: mismatches found"
           content-filepath: keywords-report.md
