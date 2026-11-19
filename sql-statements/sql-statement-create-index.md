@@ -122,17 +122,11 @@ Query OK, 0 rows affected (0.31 sec)
 
 ## Manual Region pre-splitting
 
-You can specify `PRE_SPLIT_REGIONS` to choose split boundaries before index backfilling begins. The manual forms accept a Region count, a range with a Region count, or a list of split values. For example, to split at the specified index values when adding `idx_a` to an existing table `t`:
-
-```sql
-CREATE INDEX idx_a ON t (a) PRE_SPLIT_REGIONS = (BY (10000), (20000), (30000));
-```
-
-For details on the manual forms and their syntax, see [Manual Region pre-splitting](/sql-statements/sql-statement-add-index.md#manual-region-pre-splitting).
+For manual Region pre-splitting with `PRE_SPLIT_REGIONS`, see [Manual Region pre-splitting](/sql-statements/sql-statement-add-index.md#manual-region-pre-splitting).
 
 ## Automatic Region pre-splitting
 
-<span class="version-mark">New in v9.0.0 for classic TiDB and in CLOUD.202609 for TiDB X</span>
+<span class="version-mark">New in v8.5.9 and v9.0.0 for classic TiDB and in CLOUD.202609 for TiDB X</span>
 
 You can specify `PRE_SPLIT_REGIONS [=] AUTO` to derive Region split boundaries from existing Version 2 statistics on the leading index column.
 
@@ -140,12 +134,12 @@ When [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_re
 
 When `tidb_ddl_enable_fast_reorg` is `OFF`, TiDB uses the `txn` backfill mode. In this mode, `AUTO` pre-splits the normal index Regions used to build the index from existing table data.
 
-For an existing non-partitioned table `t` with at least 1,000,000 rows, use [`SHOW STATS_HEALTHY`](/sql-statements/sql-statement-show-stats-healthy.md) to check that the statistics health score is at least 80. If needed, run `ANALYZE TABLE` to collect or refresh statistics before adding the index:
+For an existing non-partitioned table `t` with at least 1,000,000 rows, use [`SHOW STATS_HEALTHY`](/sql-statements/sql-statement-show-stats-healthy.md) to check that the statistics health score is at least 80. Also ensure that the leading index column has usable Version 2 statistics. If needed, run `ANALYZE TABLE` with `ALL COLUMNS` before adding the index; see [Requirements and limitations](/sql-statements/sql-statement-add-index.md#requirements-and-limitations) for column selection and persistence effects:
 
 ```sql
 SHOW STATS_HEALTHY WHERE Table_name = 't';
--- Refresh statistics if needed.
-ANALYZE TABLE t;
+-- Collect or refresh statistics for all columns if needed.
+ANALYZE TABLE t ALL COLUMNS;
 CREATE INDEX idx_a ON t (a) PRE_SPLIT_REGIONS AUTO;
 ```
 

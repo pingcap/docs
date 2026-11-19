@@ -121,7 +121,7 @@ These manual forms use encoded index keys to calculate split points rather than 
 
 ## Automatic Region pre-splitting
 
-<span class="version-mark">New in v9.0.0 for classic TiDB and in CLOUD.202609 for TiDB X</span>
+<span class="version-mark">New in v8.5.9 and v9.0.0 for classic TiDB and in CLOUD.202609 for TiDB X</span>
 
 When adding an index to a large existing table, you can specify `PRE_SPLIT_REGIONS AUTO` to let TiDB derive Region split boundaries from existing column statistics. This can reduce initial write hotspots without requiring you to choose split boundaries manually.
 
@@ -136,12 +136,12 @@ In `ingest` and `txn-merge` modes, this optimization aims to reduce hotspots fro
 
 The `PRE_SPLIT_REGIONS [=] AUTO` option is supported by `ALTER TABLE ... ADD INDEX`, `ALTER TABLE ... ADD PRIMARY KEY`, and [`CREATE INDEX`](/sql-statements/sql-statement-create-index.md). The equals sign (`=`) is optional. For primary keys, the existing restriction that only `NONCLUSTERED` primary keys can be added still applies.
 
-For an existing non-partitioned table `t` with at least 1,000,000 rows, use [`SHOW STATS_HEALTHY`](/sql-statements/sql-statement-show-stats-healthy.md) to check that the statistics health score is at least 80. If needed, run [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) to collect or refresh Version 2 statistics before adding the index:
+For an existing non-partitioned table `t` with at least 1,000,000 rows, use [`SHOW STATS_HEALTHY`](/sql-statements/sql-statement-show-stats-healthy.md) to check that the statistics health score is at least 80. Also ensure that the leading index column has usable Version 2 statistics. If needed, run [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) with `ALL COLUMNS` before adding the index; see [Requirements and limitations](#requirements-and-limitations) for column selection and persistence effects:
 
 ```sql
 SHOW STATS_HEALTHY WHERE Table_name = 't';
--- Refresh statistics if needed.
-ANALYZE TABLE t;
+-- Collect or refresh statistics for all columns if needed.
+ANALYZE TABLE t ALL COLUMNS;
 ALTER TABLE t ADD INDEX idx_a (a) PRE_SPLIT_REGIONS AUTO;
 ```
 
@@ -162,7 +162,7 @@ TiDB skips automatic pre-splitting for an index if any of the following conditio
 - The table is partitioned, or the index is a partial index.
 - The leading index column is a string column with an index prefix, such as `INDEX idx (a(10))`.
 - The table has fewer than 1,000,000 rows according to statistics, or its [statistics health score](/statistics.md#health-state-of-tables) is unavailable or below 80. You can use [`SHOW STATS_HEALTHY`](/sql-statements/sql-statement-show-stats-healthy.md) to check the health score.
-- The leading index column does not have usable [Version 2 statistics](/statistics.md#versions-of-statistics). Missing, pseudo, or outdated statistics cannot provide reliable split boundaries. If needed, run `ANALYZE TABLE` to refresh the statistics before adding the index.
+- The leading index column does not have usable [Version 2 statistics](/statistics.md#versions-of-statistics). Missing, pseudo, or outdated statistics cannot provide reliable split boundaries. Before adding the index, ensure that statistics collection includes the leading column. `ANALYZE TABLE` can omit this column if it reuses a persisted column selection or collects only predicate columns. If needed, use `ANALYZE TABLE t ALL COLUMNS` to collect statistics for all columns. When [`tidb_persist_analyze_options`](/system-variables.md#tidb_persist_analyze_options-new-in-v540) is `ON`, this also persists `ALL COLUMNS` for subsequent analysis.
 - The leading column distribution does not provide a usable split boundary.
 
 Automatic pre-splitting uses only the leading column of a composite index. It does not use later columns to further split rows that share the same leading-column value. Columnar, vector, and full-text indexes are outside the scope of this option. `AUTO` cannot be used as a `CREATE TABLE` table option.
