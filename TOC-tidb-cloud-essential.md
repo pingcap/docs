@@ -549,6 +549,7 @@
   - [TiDB Limitations](/tidb-limitations.md)
   - [System Variables](/system-variables.md)
   - [Server Status Variables](/status-variables.md)
+  - [Privilege Management](/privilege-management.md)
   - [Table Filter](/table-filter.md)
   - [URI Formats of External Storage Services](/external-storage-uri.md)
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
