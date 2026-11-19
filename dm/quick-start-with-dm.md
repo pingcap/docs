@@ -189,7 +189,7 @@ CentOS などのEnterprise Linux ディストリビューションでは、MySQL
     sudo yum install -y mysql-community-server
     ```
 
-    インストーラーで GPG 署名の検証エラーが報告された場合は、[MySQL Yum repository documentation](https://dev.mysql.com/doc/mysql-yum-repo-quick-guide/en/) に従ってリポジトリ設定を更新するか、公式の GPG キーをインポートしてください。署名検証を無効にしてこのエラーを回避しないでください。
+    インストーラーで GPG 署名の検証エラーが報告された場合は、[MySQL Yum リポジトリのドキュメント](https://dev.mysql.com/doc/mysql-yum-repo-quick-guide/en/) に従ってリポジトリ設定を更新するか、公式の GPG キーをインポートしてください。署名検証を無効にしてこのエラーを回避しないでください。
 
 3. MySQLを起動します。
 
