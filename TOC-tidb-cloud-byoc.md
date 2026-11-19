@@ -169,7 +169,6 @@
   - 网络访问控制
     - [配置 IP 访问列表](/tidb-cloud/premium/configure-ip-access-list-premium.md)
     - [通过 AWS Private Endpoint 连接](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)
-    - [通过 Alibaba Cloud Private Endpoint 连接](/tidb-cloud/premium/connect-to-premium-via-alibaba-cloud-private-endpoint.md)
     - [到 TiDB Cloud 的 TLS 连接](/tidb-cloud/premium/tidb-cloud-tls-connect-to-premium.md)
   - 数据访问控制
     - [用户控制的日志脱敏](/tidb-cloud/tidb-cloud-log-redaction.md)
