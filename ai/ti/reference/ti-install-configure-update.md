@@ -185,7 +185,7 @@ Install a specific release:
 ti update --target-version <version>
 ```
 
-When the update command installs a different `ti` version, it replaces both `ti` and `ti-drive9` in a user-owned installation. If `ti` is already at the requested version, the command does not refresh `ti-drive9`. To refresh an outdated companion, rerun the [shell installer](/ai/ti/reference/ti-install-configure-update.md#install-tidb-cloud-cli); use `--install-dir` to retain a custom installation directory.
+When the update command installs a different `ti` version, it replaces both `ti` and `ti-drive9` in a user-owned installation. If `ti` is already at the requested version, the command does not refresh `ti-drive9`. To refresh an outdated companion, rerun the [installer for your platform](/ai/ti/reference/ti-install-configure-update.md#install-tidb-cloud-cli). On macOS or Linux, use `--install-dir` to retain a custom installation directory.
 
 The update command does not modify installations in protected or package-manager-owned locations. To migrate an older `/usr/local/bin` installation to `~/.ti/bin`, run the installer once.
 

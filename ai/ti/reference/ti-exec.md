@@ -51,7 +51,7 @@ The Filesystem is available at `/workspace`. Files outside `/workspace` are temp
 
 ## Example: process and read back a file
 
-Requires Bash locally and Python 3 remotely.
+Requires a POSIX-compatible shell locally and Python 3 remotely.
 
 ```bash
 export TI_REGION_CODE=aws-us-east-1
@@ -98,7 +98,7 @@ ti fs delete-file --path "/$workdir" --recursive
 | `--read-only` | Prevent writes to the Filesystem during execution. |
 | `-v`, `--verbose` | Show execution details on standard error. |
 
-Inside a matching local FUSE mount, omitting `-w` uploads pending local writes and follows the current directory. Explicit `-w` does not upload local changes first. For a WebDAV mount, pass `-w` explicitly.
+Inside a matching `ti`-created FUSE mount, omitting `-w` uploads pending local writes and follows the current directory. Explicit `-w` does not upload local changes first. For a WebDAV mount, pass `-w` explicitly.
 
 ## Failures and limitations
 
