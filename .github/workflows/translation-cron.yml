@@ -72,7 +72,7 @@ jobs:
           contains(fromJson('["lilin90","qiancai","seominjea1942"]'), github.triggering_actor)
         )
       )
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
 
     permissions:
       contents: write
@@ -141,7 +141,7 @@ jobs:
       - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         name: Setup Python
         with:
-          python-version: "3.9"
+          python-version: "3.12"
           cache: pip
           cache-dependency-path: ai-markdown-translator/scripts/requirements.txt
 
