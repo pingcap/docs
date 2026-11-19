@@ -987,6 +987,11 @@ Configuration items related to read isolation.
 - Possible values: `true`, `false`
 - The value of this configuration will initialize the value of the system variable [`tidb_enable_stats_owner`](/system-variables.md#tidb_enable_stats_owner-new-in-v840).
 
+### `tidb_service_scope` <span class="version-mark">New in v7.4.0</span>
+
+- This configuration specifies the initial value of the system variable [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) for the current TiDB instance.
+- Default value: `""`
+
 ### `tidb_stmt_summary_enable_persistent` <span class="version-mark">New in v6.6.0</span>
 
 > **Warning:**
