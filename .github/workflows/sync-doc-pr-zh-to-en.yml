@@ -28,7 +28,7 @@ jobs:
       actions: read
 
   sync-docs:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: authorize
     # A partial rerun must pass authorization for the current attempt.
     if: needs.authorize.outputs.attempt == github.run_attempt
