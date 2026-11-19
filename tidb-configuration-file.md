@@ -943,21 +943,11 @@ Configuration items related to read isolation.
 - The value of this configuration will initialize the value of the system variable [`tidb_enable_ddl`](/system-variables.md#tidb_enable_ddl-new-in-v630)
 - Before v6.3.0, this configuration is set by `run-ddl`.
 
-<<<<<<< HEAD
-=======
-### `tidb_enable_stats_owner` <span class="version-mark">New in v8.4.0</span>
-
-- This configuration controls whether the corresponding TiDB instance can run [automatic statistics update](/statistics.md#automatic-update) tasks.
-- Default value: `true`
-- Possible values: `true`, `false`
-- The value of this configuration will initialize the value of the system variable [`tidb_enable_stats_owner`](/system-variables.md#tidb_enable_stats_owner-new-in-v840).
-
 ### `tidb_service_scope` <span class="version-mark">New in v7.4.0</span>
 
 - This configuration item controls the initial value of the system variable [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) for the current TiDB instance.
 - Default value: `""`
 
->>>>>>> 7e47d47a78 (docs: add tidb_service_scope to config reference (#24716))
 ### `tidb_stmt_summary_enable_persistent` <span class="version-mark">New in v6.6.0</span>
 
 > **Warning:**
