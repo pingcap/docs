@@ -758,7 +758,7 @@ This API is a synchronous interface. If the request is successful, the detailed 
 
 | Header name | Description |
 | :---------- | :---------- |
-| `Accept` | The response format. Set this header to `application/toml` to return TOML. If this header is omitted or set to `application/json`, the response is returned in JSON. (Optional) |
+| `Accept` | The response format. Starting from v8.5.9, this API supports returning responses in TOML format. Set this header to `application/toml` to return TOML. If this header is omitted or set to `application/json`, the response is returned in JSON. (Optional) |
 
 ### Examples
 
