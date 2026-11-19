@@ -41,31 +41,36 @@ summary: 了解如何通过 Alibaba Cloud 上的私有端点连接到你的 {{{ 
     - **Endpoint Service**：选择 **Other Endpoint Services**。
 5. 在 **Endpoint Service Name** 字段中，粘贴你从 TiDB Cloud 复制的服务名称。
 6. 点击 **Verify**。出现绿色对勾表示该服务有效。
-7. 选择要与端点关联的 **VPC**、**Security Group** 和 **Zone**。
+7. 配置网络设置：
+    - **VPC**：选择部署应用程序的 VPC。
+    - **Zone and vSwitch**：从 TiDB Cloud 在步骤 1 中提供的 **Availability Zone ID** 值中，至少选择两个不同的可用区。对于每个选定的可用区，选择该可用区中且位于所选 VPC 内的一个 vSwitch。
+    - **Security Group**：选择一个安全组，该安全组允许从你的应用程序到 TiDB 连接端口的入站 TCP 流量，默认端口为 `4000`。
 8. 点击 **OK** 创建端点。
-9. 等待端点状态变为 **Active**，且连接状态变为 **Connected**。
+9. 等待端点状态变为 **Active**。在你完成步骤 3 之前，连接状态可能会保持为 **Disconnected**。无需等待 **Connected**，直接继续执行步骤 3。
 
-创建接口端点后，导航到 **EndPoints** 页面并选择新创建的端点。
+创建接口端点后，导航到 **Endpoints** 页面并选择新创建的端点。
 
 - 在 **Basic Information** 部分，复制 **Endpoint ID**。你稍后将使用该值作为 *Endpoint Resource ID*。
 
-- 在 **Domain name of Endpoint Service** 部分，复制 **Default Domain Name**。你稍后将使用该值作为 *Domain Name*。
+- 在 **Domain Name of Endpoint Service** 部分，复制 **Default Domain Name**。你稍后将使用该值作为 *Domain Name*。
 
-    ![AliCloud private endpoint Information](/media/tidb-cloud/private-endpoint/alicloud-private-endpoint-info.png)
+    ![Alibaba Cloud 端点详细信息，显示 Endpoint ID 和 Default Domain Name](/media/tidb-cloud/private-endpoint/alicloud-private-endpoint-details.jpg)
 
 ### 步骤 3. 接受端点并创建端点连接 {#step-3-accept-the-endpoint-and-create-the-endpoint-connection}
 
 1. 返回 TiDB Cloud 控制台中的 **Create Alibaba Cloud Private Endpoint Connection** 对话框。
 
-2. 将之前复制的 *Endpoint Resource ID* 和 *Domain Name* 粘贴到对应字段中。
+2. 在 **Private Endpoint Resource ID** 中输入来自 Alibaba Cloud 的 **Endpoint ID**，并在 **Private Endpoint Default Domain Name** 中输入 **Default Domain Name**。
 
-3. 点击 **Create Private Endpoint Connection**，以接受来自你的私有端点的连接。
+3. 点击 **Create** 提交私有端点连接请求。
 
 ### 步骤 4. 连接到你的 {{{ .premium }}} 实例 {#step-4-connect-to-your-premium-instance}
 
 接受端点连接后，你将被重定向回连接对话框。
 
 1. 等待私有端点连接状态变为 **Active**（大约 5 分钟）。要检查状态，请在左侧导航栏中点击 **Settings** > **Networking**，进入 **Networking** 页面。
+
+    返回 Alibaba Cloud 控制台，刷新端点详细信息页面，并确认 **Connection Status** 变为 **Connected**。
 
 2. 在 **Connect With** 下拉列表中，选择你偏好的连接方式。对应的连接字符串会显示在对话框底部。
 
