@@ -19,6 +19,7 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.base.sha }}
           fetch-depth: 0
+          persist-credentials: false
       - name: Fetch head
         env:
           HEAD_CLONE_URL: ${{ github.event.pull_request.head.repo.clone_url }}

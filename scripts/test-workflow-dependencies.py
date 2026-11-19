@@ -30,6 +30,17 @@ class WorkflowDependenciesTest(unittest.TestCase):
                         else:
                             self.assertRegex(uses, r"^[^@]+@[0-9a-f]{40}$")
 
+    def test_checkouts_do_not_persist_credentials(self):
+        for path in sorted(WORKFLOW_DIR.iterdir()):
+            if path.suffix not in {".yaml", ".yml"}:
+                continue
+            workflow = yaml.safe_load(path.read_text())
+            for job_name, job in workflow["jobs"].items():
+                for step in job.get("steps", []):
+                    if step.get("uses", "").startswith("actions/checkout@"):
+                        with self.subTest(workflow=path.name, job=job_name, step=step.get("name")):
+                            self.assertIs(step.get("with", {}).get("persist-credentials"), False)
+
     def test_translation_workflows_use_the_hash_locked_install(self):
         for name, job, prefix in (
             ("translation-cron.yml", "translate-ja", "workflow-dependencies/"),
