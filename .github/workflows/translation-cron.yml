@@ -72,7 +72,7 @@ jobs:
           contains(fromJson('["lilin90","qiancai","seominjea1942"]'), github.triggering_actor)
         )
       )
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     permissions:
       contents: write
