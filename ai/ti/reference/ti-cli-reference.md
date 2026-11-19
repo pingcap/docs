@@ -25,7 +25,7 @@ ti configure --profile staging
 ti db list-db-clusters --db-cluster-type starter
 ```
 
-The `ti` executable accepts long options only. A one-letter option such as `-p` is rejected.
+Most commands accept long options only. [`ti exec`](/ai/ti/reference/ti-exec.md) also accepts its documented short options, such as `-w` and `-t`. A one-letter option such as `-p` remains unsupported.
 
 In generated usage, specify required options before optional options, and use square brackets to enclose optional options:
 
@@ -51,6 +51,7 @@ Use the following table to find the reference for a top-level command or command
 | --- | --- | --- |
 | `configure` | Configure local profiles, API keys, and the default region. | [`ti configure`](/ai/ti/reference/ti-configure.md) |
 | `update` | Check for and install TiDB Cloud CLI updates. | [`ti update`](/ai/ti/reference/ti-update.md) |
+| `exec` | Run a remote command against a Filesystem. | [`ti exec`](/ai/ti/reference/ti-exec.md) |
 | `db` | Manage TiDB Cloud Starter instances, branches, SQL users, connections, and SQL statements. | [`ti db` commands](/ai/ti/reference/ti-starter-database.md) |
 | `fs` | Manage file system resources, AI providers, tokens, data, layers, and mounts. | [`ti fs` commands](/ai/ti/reference/ti-filesystem.md) |
 | `fs-git` | Manage Git workspaces on mounted file systems. | [`ti fs-git` commands](/ai/ti/reference/ti-filesystem-git.md) |
@@ -82,6 +83,8 @@ Use text output for a human-readable representation:
 ```bash
 ti db list-db-clusters --db-cluster-type starter --output text
 ```
+
+`ti exec` streams remote stdout and stderr unchanged and does not support `--output`, `--query`, or `--dry-run`.
 
 Raw byte-oriented commands such as `ti fs read-file` and `ti fs copy-file --to-stdout` write file content directly.
 
