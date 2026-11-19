@@ -12,38 +12,42 @@ env:
   # Edit this space-separated list to add or remove branches.
   CHECK_BRANCHES: "master release-8.5"
 
-permissions:
-  contents: read
-  issues: write
+permissions: {}
 
 jobs:
+  authorize:
+    uses: ./.github/workflows/authorize-privileged-workflow.yml
+    permissions:
+      actions: read
+
   check-keywords:
-    if: github.repository == 'pingcap/docs' && github.ref == 'refs/heads/master'
+    needs: authorize
+    # A partial rerun must pass authorization for the current attempt.
+    if: needs.authorize.outputs.attempt == github.run_attempt
+    permissions:
+      contents: read
+      issues: write
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         with:
           fetch-depth: 0
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.x"
-
-      - name: Install dependencies
-        run: pip install requests
+          persist-credentials: false
 
       - name: Check keywords for all branches
         id: check
         run: |
           mkdir -p /tmp/kw-results
           has_failure=false
+          keywords_file=$(mktemp "${RUNNER_TEMP}/keywords.XXXXXX")
+          trap 'rm -f "$keywords_file"' EXIT
 
           for branch in $CHECK_BRANCHES; do
-            git checkout "$branch" --quiet
+            git show "refs/remotes/origin/${branch}:keywords.md" > "$keywords_file"
 
             set +e
-            output=$(python ./scripts/check-keywords.py \
+            output=$(python3 -I ./scripts/check-keywords.py \
+              --keywords-file "$keywords_file" \
               --download_from_url \
               --parser_url "https://github.com/pingcap/tidb/raw/refs/heads/${branch}/pkg/parser/parser.y" 2>&1)
             exit_code=$?
@@ -113,7 +117,7 @@ jobs:
 
       - name: Create issue
         if: steps.check.outputs.has_failure == 'true'
-        uses: peter-evans/create-issue-from-file@v6
+        uses: peter-evans/create-issue-from-file@fca9117c27cdc29c6c4db3b86c48e4115a786710 # v6
         with:
           title: "Weekly keywords check: mismatches found"
           content-filepath: keywords-report.md

@@ -140,6 +140,7 @@ gh() {
         for filename, job_name in (
             ("sync-doc-pr-zh-to-en.yml", "sync-docs"),
             ("link.yaml", "linkChecker"),
+            ("keywords.yaml", "check-keywords"),
         ):
             with self.subTest(workflow=filename):
                 workflow = load_workflow(filename)
@@ -156,12 +157,38 @@ gh() {
                     "needs.authorize.outputs.attempt == github.run_attempt",
                 )
 
-    def test_keywords_requires_upstream_master(self):
-        job = load_job("keywords.yaml", "check-keywords")
-        self.assertEqual(
-            job["if"],
-            "github.repository == 'pingcap/docs' && github.ref == 'refs/heads/master'",
-        )
+    def test_keywords_uses_branch_data_without_switching_worktrees(self):
+        workflow = load_workflow("keywords.yaml")
+        self.assertEqual(workflow["permissions"], {})
+        job = workflow["jobs"]["check-keywords"]
+        self.assertEqual(job["permissions"], {"contents": "read", "issues": "write"})
+        checkout = job["steps"][0]
+        self.assertTrue(checkout["uses"].startswith("actions/checkout@"))
+        self.assertIs(checkout["with"]["persist-credentials"], False)
+        check = next(step["run"] for step in job["steps"] if step.get("id") == "check")
+        self.assertIn('git show "refs/remotes/origin/${branch}:keywords.md"', check)
+        self.assertIn('python3 -I ./scripts/check-keywords.py', check)
+        self.assertIn('--keywords-file "$keywords_file"', check)
+        self.assertNotRegex(check, r"\bgit\s+(?:checkout|switch|worktree)\b")
+        self.assertNotIn("pip install", "\n".join(step.get("run", "") for step in job["steps"]))
+
+    def test_keyword_checker_reads_the_explicit_data_file(self):
+        with TemporaryDirectory() as directory:
+            fixture = Path(directory)
+            parser = fixture / "parser.y"
+            parser.write_text('The following tokens belong to ReservedKeyword\n\tSELECT "SELECT"\n')
+            branch_keywords = fixture / "release-keywords.md"
+            branch_keywords.write_text("- SELECT (R)\n")
+            (fixture / "keywords.md").write_text("- SELECT\n")
+            command = [
+                "python3", "-I", str(ROOT / "scripts/check-keywords.py"),
+                "--download_from_url", "--parser_url", parser.as_uri(),
+            ]
+            for arguments, expected in (([], 1), (["--keywords-file", str(branch_keywords)], 0)):
+                result = subprocess.run(
+                    command + arguments, cwd=fixture, capture_output=True, text=True, timeout=5,
+                )
+                self.assertEqual(result.returncode, expected, result.stdout + result.stderr)
 
     def test_ci_uses_read_only_repository_permissions(self):
         permissions = load_workflow("ci.yaml")["permissions"]
