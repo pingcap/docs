@@ -1,5 +1,6 @@
 """Test the actual exclusion helper embedded in the Japanese translation workflow."""
 
+import json
 import os
 from pathlib import Path
 import subprocess
@@ -88,6 +89,29 @@ class TocExclusionsTest(unittest.TestCase):
     def test_absent_source_exclusion_does_not_restore_anything(self):
         self.assertEqual(RESTORE(TARGET, TARGET, FILES, TRANSLATIONS), TARGET)
 
+    def test_renamed_hidden_group_reuses_translation_in_later_rounds(self):
+        head = BASE.replace("Data Access Control", "Log Management")
+        translated = RESTORE(BASE, TARGET, FILES, TRANSLATIONS).replace(
+            "データアクセス制御", "ログ管理")
+        remembered = MODULE["remember_group_translations"](head, translated, FILES)
+        self.assertEqual(remembered, {"Log Management": "ログ管理"})
+        first = REMOVE(translated, FILES)
+        second = RESTORE(head, first, FILES, remembered)
+        self.assertEqual(second, translated)
+        second_with_sibling = second.replace("  - 監査管理", "    - [Other](/other.md)\n  - 監査管理")
+        self.assertIn("  - ログ管理\n    - [Other]", REMOVE(second_with_sibling, FILES))
+
+    def test_incomplete_translation_structure_does_not_supply_cached_titles(self):
+        self.assertEqual(MODULE["remember_group_translations"](BASE, TARGET, FILES), {})
+
+    def test_english_removes_link_but_leaves_its_empty_parent(self):
+        head = BASE.replace("    - [Redaction](/tidb-cloud/tidb-cloud-log-redaction.md)\n", "")
+        translated = RESTORE(BASE, TARGET, FILES, TRANSLATIONS).replace(
+            "    - [Redaction](/tidb-cloud/tidb-cloud-log-redaction.md)\n", "")
+        self.assertEqual(REMOVE(translated, FILES, TRANSLATIONS.values()), TARGET)
+        restored_next_round = RESTORE(head, TARGET, FILES, TRANSLATIONS)
+        self.assertEqual(restored_next_round, translated)
+
     def test_cleanup_runs_after_sync_failure_and_gates_pr_preparation(self):
         cleanup = next(step for step in STEPS if step.get("id") == "cleanup_tocs")
         changes = next(step for step in STEPS if step.get("id") == "changes")
@@ -105,6 +129,7 @@ class TocExclusionsTest(unittest.TestCase):
             source.mkdir()
             target.mkdir()
             subprocess.run(["git", "init", "-q", str(source)], check=True)
+            subprocess.run(["git", "init", "-q", str(target)], check=True)
             (source / "TOC.md").write_text(BASE)
             subprocess.run(["git", "-C", str(source), "add", "TOC.md"], check=True)
             subprocess.run([
@@ -112,8 +137,11 @@ class TocExclusionsTest(unittest.TestCase):
                 "user.email=test@example.com", "commit", "-qm", "base",
             ], check=True)
             (target / "TOC.md").write_text(TARGET)
+            cursor = target / "latest_translation_commit.json"
+            cursor.write_text('{"target": "release-8.5", "sha": "old"}')
             env = {**os.environ, "PATH": str(root / "bin") + os.pathsep + os.environ["PATH"],
-                   "RUNNER_TEMP": directory, "BASE_REF": "HEAD",
+                   "RUNNER_TEMP": directory, "BASE_REF": "HEAD", "HEAD_REF": "HEAD",
+                   "SYNC_OUTCOME": "success",
                    "DOCS_SOURCE_PATH": str(source), "DOCS_TARGET_PATH": str(target),
                    "SOURCE_FILES": "TOC.md", "TOC_EXCLUSIONS":
                    '{"tidb-cloud-log-redaction.md": ["TOC.md"]}',
@@ -126,6 +154,24 @@ class TocExclusionsTest(unittest.TestCase):
             subprocess.run(["bash", "-c", cleanup["run"]], env=env, check=True,
                            capture_output=True, text=True)
             self.assertEqual((target / "TOC.md").read_text(), TARGET)
+
+            self.assertEqual(json.loads(cursor.read_text())["sha"], "old")
+            remembered = json.loads(cursor.read_text())["toc_exclusion_group_translations"]
+            self.assertEqual(remembered["TOC.md"], TRANSLATIONS)
+
+            # Even matching structure cannot justify caching labels after failure
+            # or when this TOC was outside the selected translation scope.
+            for extra_env in ({"SYNC_OUTCOME": "failure"}, {"SOURCE_FILES": "other.md"}):
+                with self.subTest(cache_guard=extra_env):
+                    (target / "TOC.md").write_text(
+                        RESTORE(BASE, TARGET, FILES, TRANSLATIONS).replace(
+                            "データアクセス制御", "SHOULD NOT BE CACHED"))
+                    subprocess.run(["bash", "-c", cleanup["run"]],
+                                   env={**env, **extra_env}, check=True,
+                                   capture_output=True, text=True)
+                    self.assertEqual(json.loads(cursor.read_text())[
+                        "toc_exclusion_group_translations"], remembered)
+                    self.assertEqual((target / "TOC.md").read_text(), TARGET)
 
             for extra_env in ({"SOURCE_FILES": "other.md"},
                               {"SOURCE_FILES_TRANSLATION_MODE": "full"}):
@@ -150,6 +196,16 @@ class TocExclusionsTest(unittest.TestCase):
             self.assertNotEqual(failed.returncode, 0)
             self.assertIn("bad.md: Cannot uniquely align", failed.stderr)
             self.assertEqual((target / "TOC.md").read_text(), TARGET)
+
+            changes = next(step for step in STEPS if step.get("id") == "changes")
+            subprocess.run(["bash", "-c", changes["run"]], cwd=target,
+                env={**env, "GITHUB_OUTPUT": str(root / "outputs"),
+                     "SOURCE_BRANCH": "release-8.5", "COMMIT_SYNC_RUN_TYPE": "schedule",
+                     "FAILURE_REPORT": str(root / "absent-failure-report")},
+                check=True, capture_output=True, text=True)
+            saved = json.loads(cursor.read_text())
+            self.assertEqual(saved["sha"], "HEAD")
+            self.assertEqual(saved["toc_exclusion_group_translations"], remembered)
 
 
 if __name__ == "__main__":

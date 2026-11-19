@@ -48,7 +48,7 @@ env:
         "TOC-tidb-cloud-byoc.md"
       ]
     }
-  # Restored group titles must be Japanese if new HEAD entries keep a group non-empty.
+  # Seed Japanese titles for groups excluded before their translations were recorded.
   TOC_EXCLUSION_GROUP_TRANSLATIONS: '{"Data Access Control": "データアクセス制御"}'
   INDEX_FILES: _index.md,ai/_index.md,api/_index.md,best-practices/_index.md,develop/_index.md,releases/_index.md,tidb-cloud/dedicated/_index.md,tidb-cloud/essential/_index.md,tidb-cloud/premium/_index.md,tidb-cloud/byoc/_index.md,tidb-cloud/releases/_index.md,tidb-cloud/starter/_index.md,tidb-cloud-lake/_index.md,tidb-cloud-filesystem/_index.md
   AI_TRANSLATOR_REPO: qiancai/ai-markdown-translator
@@ -250,7 +250,7 @@ jobs:
               return nodes
 
 
-          def excluded_nodes(lines, nodes, files):
+          def excluded_nodes(lines, nodes, files, empty_group_titles=()):
               patterns = [
                   re.compile(r"\]\(\s*(?:[^)\s]*/)?" + re.escape(name) + r"(?:#[^)\s]*)?\s*\)")
                   for name in files
@@ -263,6 +263,10 @@ jobs:
               for i, node in enumerate(nodes):
                   if node[2] is not None:
                       children.setdefault(node[2], []).append(i)
+              # A known excluded group can already be empty if English removed its link.
+              removed.update(i for i, node in enumerate(nodes)
+                             if node[1][0] == "group" and not children.get(i)
+                             and node[3] in empty_group_titles)
               # Remove only plain list groups made empty by these exclusions.
               for i in reversed(range(len(nodes))):
                   if (nodes[i][1][0] == "group" and children.get(i)
@@ -271,10 +275,10 @@ jobs:
               return removed
 
 
-          def remove_exclusions(content, files):
+          def remove_exclusions(content, files, empty_group_titles=()):
               lines = content.splitlines(keepends=True)
               nodes = parse_nodes(lines)
-              removed_lines = {nodes[i][0] for i in excluded_nodes(lines, nodes, files)}
+              removed_lines = {nodes[i][0] for i in excluded_nodes(lines, nodes, files, empty_group_titles)}
               return "".join(line for i, line in enumerate(lines) if i not in removed_lines)
 
 
@@ -283,7 +287,7 @@ jobs:
               target_lines = target.splitlines(keepends=True)
               source_nodes = parse_nodes(source_lines)
               target_nodes = parse_nodes(target_lines)
-              optional = excluded_nodes(source_lines, source_nodes, files)
+              optional = excluded_nodes(source_lines, source_nodes, files, group_translations)
               if not optional:
                   return target
 
@@ -332,6 +336,21 @@ jobs:
               return "".join(result)
 
 
+          def remember_group_translations(source, target, files, group_translations=None):
+              source_lines = source.splitlines(keepends=True)
+              source_nodes = parse_nodes(source_lines)
+              target_nodes = parse_nodes(target.splitlines(keepends=True))
+              if [node[1] for node in source_nodes] != [node[1] for node in target_nodes]:
+                  # A failed or partial sync can leave the target at BASE. Do not label
+                  # those old translations with HEAD group titles.
+                  return {}
+              removed = excluded_nodes(source_lines, source_nodes, files, group_translations or {})
+              return {
+                  source_nodes[i][3]: target_nodes[i][3]
+                  for i in removed if source_nodes[i][1][0] == "group"
+              }
+
+
           def main():
               mode = sys.argv[1]
               if mode not in ("prepare", "cleanup"):
@@ -350,11 +369,16 @@ jobs:
 
               updates = []
               target_root = Path(os.environ["DOCS_TARGET_PATH"])
+              cursor_path = target_root / "latest_translation_commit.json"
+              cursor = json.loads(cursor_path.read_text(encoding="utf-8"))
+              remembered = cursor.get("toc_exclusion_group_translations", {})
+              original_remembered = json.dumps(remembered, sort_keys=True)
               for toc_file, files in by_toc.items():
                   target_path = target_root / toc_file
                   if not target_path.is_file():
                       continue
                   original = target_path.read_text(encoding="utf-8")
+                  group_translations = {**translations, **remembered.get(toc_file, {})}
                   if mode == "prepare":
                       if (toc_file not in selected
                               or os.environ.get("SOURCE_FILES_TRANSLATION_MODE") == "full"):
@@ -371,11 +395,24 @@ jobs:
                           print(f"No BASE TOC for {toc_file}; skipping temporary restoration")
                           continue
                       try:
-                          updated = restore_exclusions(snapshot.stdout, original, files, translations)
+                          updated = restore_exclusions(
+                              snapshot.stdout, original, files,
+                              group_translations,
+                          )
                       except ValueError as error:
                           raise ValueError(f"{toc_file}: {error}") from error
                   else:
-                      updated = remove_exclusions(original, files)
+                      snapshot = subprocess.run(
+                          ["git", "-C", os.environ["DOCS_SOURCE_PATH"], "show",
+                           f"{os.environ['HEAD_REF']}:{toc_file}"],
+                          capture_output=True, text=True, encoding="utf-8",
+                      )
+                      if (snapshot.returncode == 0 and toc_file in selected
+                              and os.environ.get("SYNC_OUTCOME") == "success"):
+                          group_titles = remember_group_translations(snapshot.stdout, original, files, group_translations)
+                          if group_titles:
+                              remembered.setdefault(toc_file, {}).update(group_titles)
+                      updated = remove_exclusions(original, files, group_translations.values())
                   if updated != original:
                       updates.append((target_path, updated))
 
@@ -383,6 +420,9 @@ jobs:
               for target_path, updated in updates:
                   target_path.write_text(updated, encoding="utf-8")
                   print(f"{mode}: updated {target_path.name}")
+              if mode == "cleanup" and json.dumps(remembered, sort_keys=True) != original_remembered:
+                  cursor["toc_exclusion_group_translations"] = remembered
+                  cursor_path.write_text(json.dumps(cursor, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
           if __name__ == "__main__":
@@ -429,8 +469,13 @@ jobs:
         if: always() && steps.prepare_tocs.outcome == 'success'
         shell: bash
         env:
+          DOCS_SOURCE_PATH: ${{ github.workspace }}/docs-source
+          HEAD_REF: ${{ steps.commits.outputs.head_ref }}
+          SOURCE_FILES: ${{ steps.source_files.outputs.files }}
+          SYNC_OUTCOME: ${{ steps.sync.outcome }}
           DOCS_TARGET_PATH: ${{ github.workspace }}/docs
           TOC_EXCLUSIONS: ${{ env.TOC_EXCLUSIONS }}
+          TOC_EXCLUSION_GROUP_TRANSLATIONS: ${{ env.TOC_EXCLUSION_GROUP_TRANSLATIONS }}
         run: |
           set -euo pipefail
           python "${RUNNER_TEMP}/translation-toc-exclusions.py" cleanup
@@ -465,9 +510,18 @@ jobs:
           # Intentionally advance the cursor even on partial sync failure.
           # Most files are translated successfully; failed files are listed in the PR body so reviewers can manually translate or rerun them with the specified-files scope and file_names. Do NOT gate this on sync outcome.
           if [ "${COMMIT_SYNC_RUN_TYPE}" = "schedule" ]; then
-            python -c 'import json, os; from pathlib import Path; Path("latest_translation_commit.json").write_text(json.dumps({"target": os.environ["SOURCE_BRANCH"], "sha": os.environ["HEAD_REF"]}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")'
+            python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          path = Path("latest_translation_commit.json")
+          data = json.loads(path.read_text(encoding="utf-8"))
+          data.update(target=os.environ["SOURCE_BRANCH"], sha=os.environ["HEAD_REF"])
+          path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+          PY
           else
-            echo "Skipping latest_translation_commit.json update for ${COMMIT_SYNC_RUN_TYPE} run."
+            echo "Skipping source cursor advancement for ${COMMIT_SYNC_RUN_TYPE} run."
           fi
 
           echo "has_changes=true" >> "${GITHUB_OUTPUT}"
