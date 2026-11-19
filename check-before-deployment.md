@@ -158,14 +158,19 @@ TiDBの一部の操作では、サーバーへの一時ファイルの書き込�
     >
     > アプリケーション内に大きなオブジェクトに対する DDL 操作が存在する場合は、 [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630)用に独立した大きなファイルシステムを構成することを強くお勧めします。
 
+    次の例では、TiDB が `tidb` ユーザーおよびグループで実行され、各対象 TiDB ノードにそのユーザーとグループがすでに存在していることを前提としています。別のアカウントを使用する場合は、コマンド内のユーザーとグループを適宜置き換え、トポロジ設定の `global.user` および `global.group` と一致することを確認してください。
+
+    TiDB の実行アカウントを TiUP に自動作成させる場合は、`tiup cluster deploy` の完了後、初回の `tiup cluster start` を実行する前に、次のコマンドを実行してディレクトリを作成し、その権限を設定してください。
+
     ```shell
-    sudo mkdir -p /data/tidb-deploy/tempdir
+    sudo install -d -o tidb -g tidb -m 700 /data/tidb-deploy/tempdir
     ```
 
-    `/data/tidb-deploy/tempdir`ディレクトリがすでに存在する場合は、書き込み権限が付与されていることを確認してください。
+    `/data/tidb-deploy/tempdir`ディレクトリがすでに存在する場合は、TiDB を実行するユーザーに所有権を付与し、他のユーザーのアクセスを削除してください。
 
     ```shell
-    sudo chmod -R 777 /data/tidb-deploy/tempdir
+    sudo chown -R tidb:tidb /data/tidb-deploy/tempdir
+    sudo chmod -R u=rwX,go= /data/tidb-deploy/tempdir
     ```
 
     > **Note:**

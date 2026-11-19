@@ -41,31 +41,36 @@ Alibaba Cloud管理コンソールを使用してVPCインターフェースエ�
     - **Endpoint Service**： **Other Endpoint Services**を選択します。
 5. **Endpoint Service Name**フィールドに、 TiDB Cloudからコピーしたサービス名を貼り付けます。
 6. **Verify**をクリックしてください。緑色のチェックマークが表示されれば、サービスが有効であることを示します。
-7. エンドポイントに関連付ける**VPC** 、**Security Group**、および**Zone**を選択してください。
+7. ネットワーク設定を構成します。
+    - **VPC**：アプリケーションがデプロイされているVPCを選択してください。
+    - **Zone and vSwitch**：ステップ1でTiDB Cloudから提供された**Availability Zone ID**の値から、少なくとも2つの異なるゾーンを選択してください。選択した各ゾーンについて、そのゾーン内かつ選択したVPC内のvSwitchを選択してください。
+    - **Security Group**：アプリケーションからTiDB接続ポート（デフォルトでは`4000`）へのTCP受信トラフィックを許可するセキュリティグループを選択してください。
 8. エンドポイントを作成するには、 **OK**をクリックしてください。
-9. エンドポイントの状態が**Active**になり、接続の状態が**Connected**になるまで待ちます。
+9. エンドポイントの状態が**Active**になるまで待ちます。ステップ3を完了するまでは、接続の状態が**Disconnected**のままになる場合があります。**Connected**になるのを待たずにステップ3に進んでください。
 
-インターフェースエンドポイントを作成したら、**EndPoints**ページに移動し、新しく作成したエンドポイントを選択します。
+インターフェースエンドポイントを作成したら、**Endpoints**ページに移動し、新しく作成したエンドポイントを選択します。
 
 - **Basic Information**セクションで、**Endpoint ID**をコピーしてください。この値は後で*エンドポイントリソースID*として使用します。
 
-- **Domain name of Endpoint Service**セクションで、 **Default Domain Name**をコピーしてください。この値は後で*ドメイン名*として使用します。
+- **Domain Name of Endpoint Service**セクションで、 **Default Domain Name**をコピーしてください。この値は後で*ドメイン名*として使用します。
 
-    ![AliCloud private endpoint Information](/media/tidb-cloud/private-endpoint/alicloud-private-endpoint-info.png)
+    ![Alibaba Cloud endpoint details showing the Endpoint ID and Default Domain Name](/media/tidb-cloud/private-endpoint/alicloud-private-endpoint-details.jpg)
 
 ### ステップ3. エンドポイントを受け入れ、エンドポイント接続を作成する {#step-3-accept-the-endpoint-and-create-the-endpoint-connection}
 
 1. TiDB Cloudコンソールの**Create Alibaba Cloud Private Endpoint Connection**ダイアログに戻ります。
 
-2. 先ほどコピーした*エンドポイントリソースID*と*ドメイン名*を、それぞれのフィールドに貼り付けてください。
+2. Alibaba Cloudの**Endpoint ID**を**Private Endpoint Resource ID**に入力し、**Default Domain Name**を**Private Endpoint Default Domain Name**に入力します。
 
-3. プライベートエンドポイントからの接続を受け入れるには、 **Create Private Endpoint Connection**をクリックしてください。
+3. **Create**をクリックして、プライベートエンドポイント接続リクエストを送信します。
 
 ### ステップ4. TiDB Cloud Premiumインスタンスに接続する {#step-4-connect-to-your-tidb-cloud-premium-instance}
 
 エンドポイント接続を承認すると、接続ダイアログにリダイレクトされます。
 
 1. プライベートエンドポイントの接続ステータスが**Active**になるまでお待ちください（約5分）。ステータスを確認するには、左側のナビゲーションペインで**Settings** > **Networking**をクリックして、 **Networking**ページに移動してください。
+
+    Alibaba Cloudコンソールに戻り、エンドポイント詳細ページを更新して、**Connection Status**が**Connected**になることを確認してください。
 
 2. **Connect With**ドロップダウンリストから、希望する接続方法を選択してください。対応する接続文字列がダイアログの下部に表示されます。
 
