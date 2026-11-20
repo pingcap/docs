@@ -54,6 +54,8 @@ env:
   # Manual all-updated runs use the same global cursor behavior as scheduled runs.
   COMMIT_SYNC_RUN_TYPE: ${{ (github.event_name == 'schedule' || inputs.translation_scope == 'Translate all updated files') && 'schedule' || 'workflow_dispatch' }}
 
+permissions: {}
+
 jobs:
   translate-ja:
     if: >
