@@ -12,13 +12,21 @@ env:
   # Edit this space-separated list to add or remove branches.
   CHECK_BRANCHES: "master release-8.5"
 
-permissions:
-  contents: read
-  issues: write
+permissions: {}
 
 jobs:
+  authorize:
+    uses: ./.github/workflows/authorize-privileged-workflow.yml
+    permissions:
+      actions: read
+
   check-keywords:
-    if: github.repository == 'pingcap/docs' && github.ref == 'refs/heads/master'
+    needs: authorize
+    # A partial rerun must pass authorization for the current attempt.
+    if: needs.authorize.outputs.attempt == github.run_attempt
+    permissions:
+      contents: read
+      issues: write
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
@@ -31,16 +39,15 @@ jobs:
         run: |
           mkdir -p /tmp/kw-results
           has_failure=false
-          # Use the checked-in workflow's checker for every documentation branch.
-          checker=$(mktemp)
-          trap 'rm -f "$checker"' EXIT
-          cp scripts/check-keywords.py "$checker"
+          keywords_file=$(mktemp "${RUNNER_TEMP}/keywords.XXXXXX")
+          trap 'rm -f "$keywords_file"' EXIT
 
           for branch in $CHECK_BRANCHES; do
-            git checkout "$branch" --quiet
+            git show "refs/remotes/origin/${branch}:keywords.md" > "$keywords_file"
 
             set +e
-            output=$(python3 "$checker" \
+            output=$(python3 -I ./scripts/check-keywords.py \
+              --keywords-file "$keywords_file" \
               --download_from_url \
               --parser_url "https://github.com/pingcap/tidb/raw/refs/heads/${branch}/pkg/parser/parser.y" 2>&1)
             exit_code=$?
