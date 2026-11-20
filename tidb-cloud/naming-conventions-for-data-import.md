@@ -68,7 +68,7 @@ CSVファイルをインポートする際は、データファイルに以下�
 
 > **Note:**
 >
-> Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)である必要があります。 その他の Snappy 圧縮形式はサポートされていません。
+> Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)である必要があります。その他の Snappy 圧縮形式はサポートされていません。
 
 ### Parquet {#parquet}
 
@@ -115,7 +115,7 @@ TiDB Dumplingを使用してデフォルト設定でSQLファイルをエクス�
 
 > **Note:**
 >
-> Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)である必要があります。 その他の Snappy 圧縮形式はサポートされていません。
+> Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)である必要があります。その他の Snappy 圧縮形式はサポートされていません。
 
 ## ファイルパターン {#file-pattern}
 

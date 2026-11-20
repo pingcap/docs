@@ -18,7 +18,7 @@ Title_1 Author_1
 
 ## TSV ファイルのロード {#loading-tsv-file}
 
-TSV ファイルをロード (load) する一般的な構文は次のとおりです。
+TSV ファイルをロードする一般的な構文は次のとおりです。
 
 ```sql
 COPY INTO [<database>.]<table_name>

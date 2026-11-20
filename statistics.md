@@ -93,7 +93,7 @@ TiDBは、テーブルへの変更回数に基づいて、自動的に[`ANALYZE`
 
 ![Equal-depth Histogram Example](/media/statistics-1.png)
 
-ヒストグラムのバケット数の上限を決定するパラメーターの詳細については[手動収集](#manual-collection)を参照してください。 バケット数が多いほどヒストグラムの精度は高くなりますが、精度が高いほどメモリリソースの使用量が増加します。実際の状況に応じて、この数値を適切に調整してください。
+ヒストグラムのバケット数の上限を決定するパラメーターの詳細については[手動収集](#manual-collection)を参照してください。バケット数が多いほどヒストグラムの精度は高くなりますが、精度が高いほどメモリリソースの使用量が増加します。実際の状況に応じて、この数値を適切に調整してください。
 
 ### カウントミニスケッチ {#count-min-sketch}
 
@@ -300,7 +300,7 @@ auto analyze操作に使用される特定のテーブルに保持されてい�
 SELECT sample_num, sample_rate, buckets, topn, column_choice, column_ids FROM mysql.analyze_options opt JOIN information_schema.tables tbl ON opt.table_id = tbl.tidb_table_id WHERE tbl.table_schema = '{db_name}' AND tbl.table_name = '{table_name}';
 ```
 
-TiDB は、最新の`ANALYZE`文で指定された新しい構成を使用して、以前に記録された永続構成を上書きします。たとえば、 `ANALYZE TABLE t WITH 200 TOPN;`を実行すると、 `ANALYZE`文の上位 200 個の値が設定されます。その後、 `ANALYZE TABLE t WITH 0.1 SAMPLERATE;`を実行すると、 自動`ANALYZE`文に上位200個の値とサンプリングレート0.1の両方を設定します。これは`ANALYZE TABLE t WITH 200 TOPN, 0.1 SAMPLERATE;`と同様です。
+TiDB は、最新の`ANALYZE`文で指定された新しい構成を使用して、以前に記録された永続構成を上書きします。たとえば、 `ANALYZE TABLE t WITH 200 TOPN;`を実行すると、 `ANALYZE`文の上位 200 個の値が設定されます。その後、 `ANALYZE TABLE t WITH 0.1 SAMPLERATE;`を実行すると、自動`ANALYZE`文に上位200個の値とサンプリングレート0.1の両方を設定します。これは`ANALYZE TABLE t WITH 200 TOPN, 0.1 SAMPLERATE;`と同様です。
 
 ### ANALYZE構成の永続化を無効にする {#disable-analyze-configuration-persistence}
 

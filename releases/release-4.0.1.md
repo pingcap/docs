@@ -13,7 +13,7 @@ TiDB バージョン: 4.0.1
 
 - TiKV
 
-    - `--advertise-status-addr`開始フラグを追加して、 アドバタイズするステータスアドレスを指定します。 [#8046](https://github.com/tikv/tikv/pull/8046)
+    - `--advertise-status-addr`開始フラグを追加して、アドバタイズするステータスアドレスを指定します。 [#8046](https://github.com/tikv/tikv/pull/8046)
 
 - PD
 

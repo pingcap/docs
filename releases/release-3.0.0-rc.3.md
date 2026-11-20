@@ -60,7 +60,7 @@ TiDB Ansible バージョン: 3.0.0-rc.3
 ## PD {#pd}
 
 - 一方向のマージのみを許可する`enable-two-way-merge`設定項目を追加します[#1583](https://github.com/pingcap/pd/pull/1583)
-- `AddLightLearner`と`AddLightPeer`スケジューリング操作を追加して、 リージョン Scatterスケジューリングを制限メカニズムによって制限されないようにします。 [#1563](https://github.com/pingcap/pd/pull/1563)
+- `AddLightLearner`と`AddLightPeer`スケジューリング操作を追加して、リージョン Scatterスケジューリングを制限メカニズムによって制限されないようにします。 [#1563](https://github.com/pingcap/pd/pull/1563)
 - システムの起動時にデータのレプリカレプリケーションが 1つしか存在しないため信頼性が不十分になる問題を修正しました[#1581](https://github.com/pingcap/pd/pull/1581)
 - 構成チェックロジックを最適化して設定項目エラーを回避する[#1585](https://github.com/pingcap/pd/pull/1585)
 - `store-balance-rate`構成の定義を、1分あたりに生成される balance operator 数の上限に調整します。 [#1591](https://github.com/pingcap/pd/pull/1591)

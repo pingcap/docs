@@ -687,7 +687,7 @@ FILE_FORMAT=(FORMAT_NAME='my_csv_format');
 
 ### 例 7: 無効な JSON のロード {#example-7-loading-invalid-json}
 
-Variant カラムにデータをロード (load) する際、{{{ .lake }}} はデータの妥当性を自動的にチェックし、無効なデータがある場合はエラーを返します。たとえば、ユーザー stage に `invalid_json_string.parquet` という名前の Parquet ファイルがあり、その中に次のような無効な JSON データが含まれているとします。
+Variant カラムにデータをロードする際、{{{ .lake }}} はデータの妥当性を自動的にチェックし、無効なデータがある場合はエラーを返します。たとえば、ユーザー stage に `invalid_json_string.parquet` という名前の Parquet ファイルがあり、その中に次のような無効な JSON データが含まれているとします。
 
 ```sql
 SELECT *

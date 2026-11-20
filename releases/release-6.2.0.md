@@ -224,7 +224,7 @@ TiDBバージョン: 6.2.0-DMR
 
     [ユーザー向けドキュメント](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#scope-of-pausing-scheduling-during-import) [#35148](https://github.com/pingcap/tidb/issues/35148) @[sleepymole](https://github.com/sleepymole)
 
-- [TiDB Lightningのユーザー向けドキュメント](/tidb-lightning/tidb-lightning-overview.md)をリファクタリングして、その構造をより合理的かつ明確にします。 「バックエンド」の用語も、新規ユーザーの理解の障壁を下げるために変更されています。
+- [TiDB Lightningのユーザー向けドキュメント](/tidb-lightning/tidb-lightning-overview.md)をリファクタリングして、その構造をより合理的かつ明確にします。「バックエンド」の用語も、新規ユーザーの理解の障壁を下げるために変更されています。
 
     - "local backend"を"physical import mode"に置き換えました。
     - "tidb backend"を"logical import mode"に置き換えました。

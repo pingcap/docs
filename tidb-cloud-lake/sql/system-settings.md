@@ -150,7 +150,7 @@ SELECT * FROM system.settings;
 | join_spilling_partition_bits | 4 | 4 | DEFAULT | join spilling のパーティション数を設定します。デフォルト値は 4 で、2^4 パーティションを意味します。 | UInt64 |
 | lazy_read_across_join_threshold | 10 | 10 | DEFAULT | join をまたぐ lazy read 最適化を有効にするクエリ内の最大 LIMIT を設定します。0 に設定するとこの最適化を無効にします。 | UInt64 |
 | lazy_read_threshold | 1000 | 1000 | DEFAULT | lazy read 最適化を有効にするクエリ内の最大 LIMIT を設定します。0 に設定するとこの最適化を無効にします。 | UInt64 |
-| load_file_metadata_expire_hours | 24 | 24 | DEFAULT | COPY INTO でロード (load) されたファイルのメタデータが期限切れになるまでの時間を時間単位で設定します。 | UInt64 |
+| load_file_metadata_expire_hours | 24 | 24 | DEFAULT | COPY INTO でロードされたファイルのメタデータが期限切れになるまでの時間を時間単位で設定します。 | UInt64 |
 | materialized_cte_spilling_memory_ratio | 60 | 60 | DEFAULT | materialized CTE 実行がデータをストレージにスピルする前に使用できる最大メモリ比率をバイト単位で設定します。0 は無制限です。 | UInt64 |
 | max_aggregate_restore_worker | 16 | 16 | DEFAULT | aggregate restore の最大 worker 数を設定します。 | UInt64 |
 | max_aggregate_spill_level | 3 | 3 | DEFAULT | aggregate spill の最大再帰深度です。各レベルでデータは 4 つのより小さい部分に再パーティション化されます。 | UInt64 |

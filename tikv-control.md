@@ -291,7 +291,7 @@ mvcc.max_row_versions: 0
 middle_key_by_approximate_size:
 ```
 
-これらのプロパティは、 リージョンが正常かどうかをチェックするために使用できます。正常でない場合は、これらのプロパティを使用してリージョン を修正できます。例えば、 リージョン を手動で`middle_key_approximate_size`ずつ分割するなどです。
+これらのプロパティは、リージョンが正常かどうかをチェックするために使用できます。正常でない場合は、これらのプロパティを使用してリージョンを修正できます。例えば、リージョンを手動で`middle_key_approximate_size`ずつ分割するなどです。
 
 ### 各TiKVのデータを手動でコンパクションする {#compact-data-of-each-tikv-manually}
 
@@ -685,4 +685,4 @@ Resolver:
     stopped: false,
 ```
 
-このサブコマンドは、 ステイル読み取りおよびsafe-tsに関連する問題の診断に役立ちます。詳細については、 [TiKV におけるステイル読み取りと safe-ts の理解](/troubleshoot-stale-read.md)を参照してください。
+このサブコマンドは、ステイル読み取りおよびsafe-tsに関連する問題の診断に役立ちます。詳細については、 [TiKV におけるステイル読み取りと safe-ts の理解](/troubleshoot-stale-read.md)を参照してください。

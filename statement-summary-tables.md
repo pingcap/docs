@@ -82,7 +82,7 @@ select * from employee where id in (...) and salary between ? and ?;
 > **Note:**
 >
 > - TiDBでは、ステートメントサマリーテーブルのフィールドの時間単位はナノ秒（ns）ですが、MySQLではピコ秒（ps）です。
-> - v7.5.1 および v7.6.0 以降、 が有効に[リソース制御](/tidb-resource-control-ru-groups.md)ているクラスターでは、 `statements_summary`リソースグループごとに集約されます。たとえば、異なるリソースグループで実行された同じステートメントは、異なるレコードとして収集されます。
+> - v7.5.1 および v7.6.0 以降、[リソース制御](/tidb-resource-control-ru-groups.md)が有効になっているクラスターでは、 `statements_summary`リソースグループごとに集約されます。たとえば、異なるリソースグループで実行された同じステートメントは、異なるレコードとして収集されます。
 
 ## `statements_summary_history` {#statements_summary_history}
 

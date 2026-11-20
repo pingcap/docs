@@ -264,7 +264,7 @@ TiDB Self-ManagedクラスターからAmazon S3にデータをエクスポート
     }
     ```
 
-4. ロールを設定します。 [IAMロールの作成（コンソール）](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html)を参照してください。 「アカウント ID」フィールドに、ステップ 1 で書き留めたTiDB Cloudアカウント ID とTiDB Cloud外部 ID を入力します。
+4. ロールを設定します。 [IAMロールの作成（コンソール）](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html)を参照してください。「アカウント ID」フィールドに、ステップ 1 で書き留めたTiDB Cloudアカウント ID とTiDB Cloud外部 ID を入力します。
 
 5. ロール ARN を取得します。 [AWSコンソール > IAM > アクセス管理 > ロール](https://console.aws.amazon.com/iamv2/home#/roles)に移動します。リージョンに切り替えてください。作成したロールをクリックし、ARN をメモします。これは、データをTiDB Cloudにインポートするときに使用します。
 

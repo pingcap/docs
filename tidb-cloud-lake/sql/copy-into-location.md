@@ -210,7 +210,7 @@ VALUES
 ('Halifax', 403390);
 ```
 
-### 例 1: 内部 stage へのアンロード (unload) {#example-1-unloading-to-internal-stage}
+### 例 1: 内部 stage へのアンロード {#example-1-unloading-to-internal-stage}
 
 この例では、データを内部 stage にアンロードします。
 
@@ -238,7 +238,7 @@ LIST @my_internal_stage;
 └────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 例 2: 圧縮ファイルへのアンロード (unload) {#example-2-unloading-to-compressed-file}
+### 例 2: 圧縮ファイルへのアンロード {#example-2-unloading-to-compressed-file}
 
 この例では、データを圧縮ファイルにアンロードします。
 
@@ -290,7 +290,7 @@ LIST @my_internal_stage;
 └───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 例 3: バケットへのアンロード (unload) {#example-3-unloading-to-bucket}
+### 例 3: バケットへのアンロード {#example-3-unloading-to-bucket}
 
 この例では、データを MinIO 上のバケットにアンロードします。
 
@@ -313,7 +313,7 @@ COPY INTO 's3://lake'
 └────────────────────────────────────────────┘
 ```
 
-### 例 4: PARTITION BY を使用したアンロード (unload) {#example-4-unloading-with-partition-by}
+### 例 4: PARTITION BY を使用したアンロード {#example-4-unloading-with-partition-by}
 
 この例では、導出式に基づいてデータをパーティション化されたフォルダーにアンロードします。
 
@@ -356,7 +356,7 @@ SELECT name FROM list_stage(location => '@partitioned_stage') ORDER BY name;
 
 パーティション式の評価結果が `NULL` の場合、データは `_NULL_` フォルダーに配置されます。各一意のパーティション値ごとに、それぞれ対応するデータファイルを含む独自のサブフォルダーが作成されます。
 
-### 例 5: Lance データセットへのアンロード (unload) {#example-5-unloading-to-a-lance-dataset}
+### 例 5: Lance データセットへのアンロード {#example-5-unloading-to-a-lance-dataset}
 
 この例では、データを単独のファイルではなく、Lance データセットディレクトリとしてアンロードします。
 

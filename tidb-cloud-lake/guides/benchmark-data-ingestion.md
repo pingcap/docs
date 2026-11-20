@@ -173,7 +173,7 @@ summary: このページでは、TPC-H SF100 データセットのロード、Cl
     DETAILED_OUTPUT = true;
     ```
 
-3. 外部 stage から `hits` テーブルにデータをロード (load) します。
+3. 外部 stage から `hits` テーブルにデータをロードします。
 
     ```sql
     COPY INTO hits

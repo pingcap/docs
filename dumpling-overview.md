@@ -159,7 +159,7 @@ tiup dumpling -u root -P 4000 -h 127.0.0.1 -o /tmp/test --filetype csv --sql 'se
 
 > **Note:**
 >
-> Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)に存在する必要があります。 その他の Snappy 圧縮形式はサポートされていません。
+> Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)に存在する必要があります。その他の Snappy 圧縮形式はサポートされていません。
 
 ### エクスポートされたファイルの形式 {#format-of-exported-files}
 
@@ -401,7 +401,7 @@ SET GLOBAL tidb_gc_life_time = '10m';
 
 ## 出力ファイル名テンプレート {#output-filename-template}
 
-`--output-filename-template`引数は、ファイル拡張子を除いた出力ファイルの命名規則を定義します。Go[Go `text/template`構文](https://golang.org/pkg/text/template/)内の文字列を受け入れます。 。
+`--output-filename-template`引数は、ファイル拡張子を除いた出力ファイルの命名規則を定義します。[Go `text/template`構文](https://golang.org/pkg/text/template/)内の文字列を受け入れます。
 
 テンプレートには以下のフィールドが利用可能です。
 

@@ -216,7 +216,7 @@ Readings in Database Systems|Michael Stonebraker|2004|
 
 ### ステップ 3. テーブルにデータをコピーする {#step-3-copy-data-into-table-1}
 
-1. [COPY INTO](/tidb-cloud-lake/sql/copy-into-table.md) コマンドを使用して、対象テーブルにデータをロード (load) します。
+1. [COPY INTO](/tidb-cloud-lake/sql/copy-into-table.md) コマンドを使用して、対象テーブルにデータをロードします。
 
     ```sql
     COPY INTO books
