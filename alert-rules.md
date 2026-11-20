@@ -538,7 +538,7 @@ This section gives the alert rules for the TiKV component.
 
 * Solution:
 
-    1. Watch the [**TiKV-Details** > **Raft propose** dashboard](/grafana-tikv-dashboard.md#raft-propose) and see whether the **99% Propose wait duration per server** metric of the alerted TiKV node is significantly higher than that of other TiKV nodes. If so, it indicates that hotspots exist on this TiKV node, and you need to check whether the hotspot scheduling works properly.
+    1. Watch the [**TiKV-Details** > **Raft Propose** dashboard](/grafana-tikv-dashboard.md#raft-propose) and see whether the **99% Propose wait duration per server** metric of the alerted TiKV node is significantly higher than that of other TiKV nodes. If so, it indicates that hotspots exist on this TiKV node, and you need to check whether the hotspot scheduling works properly.
     2. Watch the [**TiKV-Details** > **Raft IO** dashboard](/grafana-tikv-dashboard.md#raft-io) and see whether the latency increases. If the latency is high, it means a bottleneck might exist in the disk.
     3. For further analysis of performance issues of the alerted TiKV node and tuning methods, see [Performance analysis and tuning](/performance-tuning-methods.md#storage-async-write-duration-store-duration-and-apply-duration).
 
