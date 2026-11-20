@@ -169,7 +169,6 @@
   - ネットワークアクセス制御
     - [IP アクセスリストを設定する](/tidb-cloud/premium/configure-ip-access-list-premium.md)
     - [AWS のプライベートエンドポイント経由で接続する](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)
-    - [Alibaba Cloud のプライベートエンドポイント経由で接続する](/tidb-cloud/premium/connect-to-premium-via-alibaba-cloud-private-endpoint.md)
     - [TiDB Cloud への TLS 接続](/tidb-cloud/premium/tidb-cloud-tls-connect-to-premium.md)
   - 監査管理
     - [データベース監査ログ](/tidb-cloud/premium/tidb-cloud-auditing-premium.md)
