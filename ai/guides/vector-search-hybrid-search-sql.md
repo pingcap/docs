@@ -11,7 +11,7 @@ This document shows how to do hybrid search in a single SQL query. TiDB automati
 
 ## Prerequisites
 
-Full-text search is still in the early stages and is being rolled out to more customers. Currently, full-text search is only available on {{{ .starter }}}.
+Currently, full-text search is in public preview and only available on {{{ .starter }}}.
 
 Auto Embedding is only available on {{{ .starter }}} instances hosted on AWS.
 
