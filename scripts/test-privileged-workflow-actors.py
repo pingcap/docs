@@ -139,6 +139,21 @@ gh() {
                     expected = f"attempt={env['GITHUB_RUN_ATTEMPT']}\n" if allowed else ""
                     self.assertEqual(output.read_text(), expected)
 
+    def test_authorization_summary_documents_full_reruns(self):
+        step = next(
+            step for step in load_job("authorize-privileged-workflow.yml", "authorize")["steps"]
+            if step.get("name") == "Show safe rerun instructions"
+        )
+        with TemporaryDirectory() as directory:
+            summary = Path(directory) / "summary"
+            subprocess.run(
+                ["bash", "-e", "-c", step["run"]],
+                env={**os.environ, "GITHUB_STEP_SUMMARY": str(summary)},
+                check=True,
+                timeout=5,
+            )
+            self.assertIn("**Re-run all jobs**", summary.read_text())
+
     def test_review_authorizes_only_manual_runs_or_review_comments(self):
         gate = load_job("doc_review.yml", "authorize")
         self.assertEqual(

@@ -54,7 +54,7 @@ jobs:
 
   translate:
     needs: authorize
-    # A partial rerun must pass authorization for the current attempt.
+    # Use Re-run all jobs so authorization runs again for the new attempt.
     if: needs.authorize.outputs.attempt == github.run_attempt
     runs-on: ubuntu-24.04
 
@@ -237,7 +237,7 @@ jobs:
               echo "failure_summary<<EOF"
               cat "${FAILURE_REPORT}"
               echo
-              echo "> Before merging this PR, manually translate the failed files above or rerun this workflow with translation_scope set to 'Translate only specified files' and file_names set to those paths."
+              echo "> Before merging this PR, manually translate the failed files above or start a new manual workflow run with translation_scope set to 'Translate only specified files' and file_names set to those paths."
               echo "EOF"
             } >> "${GITHUB_OUTPUT}"
           fi

@@ -82,3 +82,12 @@ jobs:
           fi
 
           echo "attempt=$GITHUB_RUN_ATTEMPT" >> "$GITHUB_OUTPUT"
+
+      - name: Show safe rerun instructions
+        run: |
+          printf '%s\n' \
+            '### Rerun this workflow' \
+            '' \
+            'Select **Re-run all jobs** to authorize the new attempt before running privileged jobs.' \
+            'Re-running only failed or individual jobs can reuse a previous authorization result, so privileged jobs that require fresh authorization are skipped.' \
+            >> "$GITHUB_STEP_SUMMARY"
