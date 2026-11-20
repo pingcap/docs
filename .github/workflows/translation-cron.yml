@@ -351,6 +351,21 @@ jobs:
               }
 
 
+          def effective_toc_base(content, toc_file, global_base, cursor, run_type):
+              # Match the pinned translator: file markers override the global
+              # cursor, and scheduled retries use their persisted baseline.
+              marker = re.search(
+                  r"<!--\s*Corresponding EN commit:\s*([0-9a-fA-F]{7,64})\s*-->", content
+              )
+              base = marker[1] if marker else global_base
+              if run_type in ("schedule", "scheduled"):
+                  pending = cursor.get("pending") or {}
+                  retry = pending.get(toc_file) if isinstance(pending, dict) else None
+                  if isinstance(retry, str) and re.fullmatch(r"[0-9a-fA-F]{7,64}", retry.strip()):
+                      base = retry.strip()
+              return base
+
+
           def main():
               mode = sys.argv[1]
               if mode not in ("prepare", "cleanup"):
@@ -384,7 +399,10 @@ jobs:
                               or os.environ.get("SOURCE_FILES_TRANSLATION_MODE") == "full"):
                           continue
                       source_root = os.environ["DOCS_SOURCE_PATH"]
-                      base = os.environ["BASE_REF"]
+                      base = effective_toc_base(
+                          original, toc_file, os.environ["BASE_REF"], cursor,
+                          os.environ.get("COMMIT_SYNC_RUN_TYPE", ""),
+                      )
                       subprocess.run(["git", "-C", source_root, "cat-file", "-e", base], check=True)
                       snapshot = subprocess.run(
                           ["git", "-C", source_root, "show", f"{base}:{toc_file}"],

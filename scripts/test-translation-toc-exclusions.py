@@ -119,6 +119,91 @@ class TocExclusionsTest(unittest.TestCase):
         self.assertNotIn("continue-on-error", cleanup)
         self.assertIn("steps.cleanup_tocs.outcome == 'success'", changes["if"])
 
+    def test_effective_baseline_keeps_global_fallback_and_retry_semantics(self):
+        resolve = MODULE["effective_toc_base"]
+        global_base, marker, retry = "a" * 40, "b" * 40, "c" * 40
+        content = f"# 目次 <!-- Corresponding EN commit: {marker} -->"
+        pending = {"pending": {"TOC.md": retry}}
+        for run_type in ("schedule", "workflow_dispatch"):
+            with self.subTest(run_type=run_type):
+                self.assertEqual(resolve(TARGET, "TOC.md", global_base, {}, run_type), global_base)
+                self.assertEqual(resolve(content, "TOC.md", global_base, {}, run_type), marker)
+                malformed = "<!--Corresponding EN commit: invalid-->" + TARGET
+                self.assertEqual(resolve(malformed, "TOC.md", global_base, {}, run_type), global_base)
+        self.assertEqual(resolve(content, "TOC.md", global_base, pending, "schedule"), retry)
+        self.assertEqual(resolve(content, "TOC.md", global_base, pending, "workflow_dispatch"), marker)
+        for invalid in (None, [], {"TOC.md": 123}, {"TOC.md": "bad"}):
+            self.assertEqual(resolve(content, "TOC.md", global_base, {"pending": invalid}, "schedule"), marker)
+
+    def test_prepare_uses_per_file_baseline_after_manual_translation(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            source = root / "source"
+            target = root / "target"
+            source.mkdir()
+            target.mkdir()
+            (root / "bin").mkdir()
+            (root / "bin/python").symlink_to(sys.executable)
+            subprocess.run(["git", "init", "-q", str(source)], check=True)
+
+            def commit(content):
+                (source / "TOC.md").write_text(content)
+                subprocess.run(["git", "-C", str(source), "add", "TOC.md"], check=True)
+                subprocess.run([
+                    "git", "-C", str(source), "-c", "user.name=Test", "-c",
+                    "user.email=test@example.com", "commit", "-qm", "source change",
+                ], check=True)
+                return subprocess.check_output(
+                    ["git", "-C", str(source), "rev-parse", "HEAD"], text=True).strip()
+
+            global_base = commit(BASE)
+            manual_source = BASE + "- [New](/new.md)\n"
+            manual_base = commit(manual_source)
+            head = commit(manual_source + "- [Later](/later.md)\n")
+            manual_target = TARGET + "- [新規](/new.md)\n"
+            cursor_path = target / "latest_translation_commit.json"
+            target_path = target / "TOC.md"
+            env = {**os.environ, "PATH": str(root / "bin") + os.pathsep + os.environ["PATH"],
+                   "RUNNER_TEMP": directory, "BASE_REF": global_base, "HEAD_REF": head,
+                   "DOCS_SOURCE_PATH": str(source), "DOCS_TARGET_PATH": str(target),
+                   "SOURCE_FILES": "TOC.md", "TOC_EXCLUSIONS":
+                   '{"tidb-cloud-log-redaction.md": ["TOC.md"]}',
+                   "TOC_EXCLUSION_GROUP_TRANSLATIONS": json.dumps(TRANSLATIONS)}
+
+            # The global snapshot really is too old for this target.
+            with self.assertRaisesRegex(ValueError, "Cannot uniquely align"):
+                RESTORE(BASE, manual_target, FILES, TRANSLATIONS)
+
+            for run_type in ("schedule", "workflow_dispatch"):
+                for marker in (manual_base, manual_base[:12]):
+                    with self.subTest(run_type=run_type, marker=marker):
+                        marked_target = manual_target.replace(
+                            "# 目次", f"# 目次 <!--Corresponding EN commit: {marker}-->")
+                        target_path.write_text(marked_target)
+                        cursor_path.write_text(json.dumps({"sha": global_base}))
+                        result = subprocess.run(["bash", "-c", PREPARE["run"]],
+                            env={**env, "COMMIT_SYNC_RUN_TYPE": run_type},
+                            capture_output=True, text=True)
+                        self.assertEqual(result.returncode, 0, result.stderr)
+                        restored = target_path.read_text()
+                        self.assertIn("データアクセス制御", restored)
+                        self.assertIn("/new.md", restored)
+                        self.assertNotIn("/later.md", restored)
+                        self.assertEqual(REMOVE(restored, FILES), marked_target)
+                        self.assertEqual(json.loads(cursor_path.read_text())["sha"], global_base)
+
+            for run_type, baseline_target in (("schedule", manual_target),
+                                              ("workflow_dispatch", TARGET)):
+                with self.subTest(retry_run_type=run_type):
+                    target_path.write_text(baseline_target)
+                    cursor_path.write_text(json.dumps({
+                        "sha": global_base, "pending": {"TOC.md": manual_base}}))
+                    result = subprocess.run(["bash", "-c", PREPARE["run"]],
+                        env={**env, "COMMIT_SYNC_RUN_TYPE": run_type},
+                        capture_output=True, text=True)
+                    self.assertEqual(result.returncode, 0, result.stderr)
+                    self.assertEqual(REMOVE(target_path.read_text(), FILES), baseline_target)
+
     def test_shell_prepare_and_cleanup_round_trip(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
