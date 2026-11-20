@@ -128,7 +128,7 @@ TiDBをローカルマシンで実行している場合、 `<HOST>`はデフォ�
 from sentence_transformers import SentenceTransformer
 
 print("Downloading and loading the embedding model...")
-embed_model = SentenceTransformer("sentence-transformers/msmarco-MiniLM-L12-cos-v5", trust_remote_code=True)
+embed_model = SentenceTransformer("sentence-transformers/msmarco-MiniLM-L12-cos-v5", trust_remote_code=False)
 embed_model_dims = embed_model.get_sentence_embedding_dimension()
 
 def text_to_embedding(text):
@@ -136,6 +136,8 @@ def text_to_embedding(text):
     embedding = embed_model.encode(text)
     return embedding.tolist()
 ```
+
+Hugging Face HubのモデルIDを使用する場合、`trust_remote_code=False`はモデルリポジトリが提供するカスタムコードの動的な読み込みを防ぎます。この設定を使用しても、ローカルモデルディレクトリの内容を確認する必要があります。ローカルディレクトリ、またはカスタムコードを必要とする別のモデルに切り替える場合は、リモートコードを有効にするかどうかを判断する前に、設定ファイルとコードファイルを確認し、モデルのリビジョンを固定してください。
 
 ### ステップ5．TiDBに接続する {#step-5-connect-to-tidb}
 
