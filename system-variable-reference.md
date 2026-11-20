@@ -1344,6 +1344,13 @@ Referenced in:
 - [TiDB 5.0 Release Notes](/releases/release-5.0.0.md)
 - [TiDB 4.0 Beta Release Notes](/releases/release-4.0.0-beta.md)
 
+### tidb_dml_max_execution_time
+
+Referenced in:
+
+- [System Variables](/system-variables.md#tidb_dml_max_execution_time-new-in-v859-and-v900)
+- [Timeouts in TiDB](/develop/dev-guide-timeouts-in-tidb.md)
+
 ### tidb_dml_type
 
 Referenced in:
