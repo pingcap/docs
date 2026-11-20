@@ -26,6 +26,8 @@ The whole migration has two processes:
 
 This section describes how to export the schema file from Amazon Aurora and import it to TiDB. If you have manually created the table in the target database, you can skip this step.
 
+The schema must match the snapshot selected in [Step 2.1](#21-export-an-amazon-aurora-snapshot-to-amazon-s3). If the live source schema has changed since that snapshot, first restore the snapshot to a temporary cluster as described in Step 2.1, then use that cluster as the Dumpling source (`${host}`) below. Keep the restored schema unchanged until the export completes. This requirement also applies to tables created manually in TiDB.
+
 #### 1.1 Export the schema file from Amazon Aurora
 
 Because the snapshot file from Amazon Aurora does not contain the DDL statements, you need to export the schema using Dumpling and create the schema in the target database using TiDB Lightning.
@@ -103,9 +105,11 @@ This section describes how to export an Amazon Aurora snapshot to Amazon S3 and 
 
     Skip this step if you only need full data migration.
 
-2. Create or select the Aurora DB cluster snapshot to export. If you plan to use DM, obtain the binlog file name and position corresponding to this snapshot: restore the snapshot to a temporary Aurora cluster using the same parameter groups as the source, then find the `Binlog position from crash recovery is <binlog-file-name> <binlog-position>` message in the restored writer instance's **Recent Events**. For detailed instructions, see [Setting up binary log replication for Aurora MySQL](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Replication.MySQL.SettingUp.html). Record these values for the DM task, which must connect to the original source cluster. You can then delete the temporary cluster.
+2. Create or select the Aurora DB cluster snapshot to export. If you plan to use DM, obtain the binlog file name and position corresponding to this snapshot: restore the snapshot to a temporary Aurora cluster using the same parameter groups as the source, then find the `Binlog position from crash recovery is <binlog-file-name> <binlog-position>` message in the restored writer instance's **Recent Events**. For detailed instructions, see [Setting up binary log replication for Aurora MySQL](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Replication.MySQL.SettingUp.html). Record these values for the DM task, which must connect to the original source cluster. Delete the temporary cluster only after recording the position and exporting any schema needed in Step 1.
 
     For incremental replication, the required binlog settings must have been in effect when the snapshot was created. On the original source, use `SHOW BINARY LOGS;` to confirm that the required binlog file is still available, and retain all binlogs from that position until DM has processed them. If an existing snapshot does not meet these conditions, create a new snapshot after completing step 1. Do not use the current position from `SHOW MASTER STATUS` as a substitute for the snapshot position, because changes can be replayed or skipped.
+
+    If the source uses enhanced binlog (`aurora_enhanced_binlog=1`) on Aurora MySQL version 3 earlier than 3.14.0, snapshot restoration can report incorrect binlog coordinates when transactions have been rolled back. Before using this procedure, upgrade the source to version 3.14.0 or later and create a new snapshot. For details, see the [Aurora MySQL 3.14.0 release notes](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraMySQLReleaseNotes/AuroraMySQL.Updates.3140.html).
 
 3. Export the snapshot selected in step 2 to Amazon S3. For detailed steps, see [Exporting DB cluster snapshot data to Amazon S3](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-export-snapshot.html). The exported data reflects the snapshot's point in time, regardless of when the export task starts.
 
@@ -212,7 +216,11 @@ If you encounter any problem during the import, refer to [TiDB Lightning FAQ](/t
 
 ### Step 2: Create the migration task
 
-Create the `task1.yaml` file as follows. Set `meta.binlog-name` and `meta.binlog-pos` to the snapshot-aligned values recorded in [Step 2.1](#21-export-an-amazon-aurora-snapshot-to-amazon-s3), and configure DM to read from the original source Aurora cluster:
+Create the `task1.yaml` file as follows. Set `meta.binlog-name` and `meta.binlog-pos` to the snapshot-aligned values recorded in [Step 2.1](#21-export-an-amazon-aurora-snapshot-to-amazon-s3), and configure DM to read from the original source Aurora cluster.
+
+If you set `enable-gtid: true`, also set `meta.binlog-gtid` to the GTID set corresponding to the recorded snapshot position. To obtain this set, use [`mysqlbinlog`](https://dev.mysql.com/doc/refman/8.0/en/mysqlbinlog.html) to read the recorded source binlog file from its beginning with `--stop-position=<binlog-position>`. Combine the file's `Previous_gtids` set with the GTIDs of transactions completed before that position. Do not substitute the live source's current `gtid_executed` value, which can include transactions after the snapshot. For the configuration requirement, see [DM Advanced Task Configuration File](/dm/task-configuration-file-full.md).
+
+Create the task configuration as follows:
 
 ```yaml
 # Task name. Multiple tasks that are running at the same time must each have a unique name.
