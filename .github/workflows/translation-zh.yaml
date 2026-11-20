@@ -47,23 +47,15 @@ env:
 permissions: {}
 
 jobs:
+  authorize:
+    uses: ./.github/workflows/authorize-privileged-workflow.yml
+    permissions:
+      actions: read
+
   translate:
-    if: >
-      github.repository == 'pingcap/docs' &&
-      (
-        (
-          github.event_name == 'schedule' &&
-          (
-            github.run_attempt == 1 ||
-            contains(fromJson('["lilin90","qiancai","seominjea1942"]'), github.triggering_actor)
-          )
-        ) ||
-        (
-          github.event_name == 'workflow_dispatch' &&
-          contains(fromJson('["lilin90","qiancai","seominjea1942"]'), github.actor) &&
-          contains(fromJson('["lilin90","qiancai","seominjea1942"]'), github.triggering_actor)
-        )
-      )
+    needs: authorize
+    # Use Re-run all jobs so authorization runs again for the new attempt.
+    if: needs.authorize.outputs.attempt == github.run_attempt
     runs-on: ubuntu-24.04
 
     permissions:
@@ -255,7 +247,7 @@ jobs:
               echo "failure_summary<<EOF"
               cat "${FAILURE_REPORT}"
               echo
-              echo "> Before merging this PR, manually translate the failed files above or rerun this workflow with translation_scope set to 'Translate only specified files' and file_names set to those paths."
+              echo "> Before merging this PR, manually translate the failed files above or start a new manual workflow run with translation_scope set to 'Translate only specified files' and file_names set to those paths."
               echo "EOF"
             } >> "${GITHUB_OUTPUT}"
           fi
