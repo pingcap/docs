@@ -15,7 +15,7 @@ Full-text search is still in the early stages and is being rolled out to more cu
 
 Auto Embedding is only available on {{{ .starter }}} instances hosted on AWS.
 
-To complete this tutorial, make sure you have a {{{ .starter }}} instance in one of the preceding regions, and a MySQL client connected to it. If you don't have an instance, follow [Creating a {{{ .starter }}} instance](/develop/dev-guide-build-cluster-in-cloud.md) to create one.
+To complete this tutorial, make sure you have a {{{ .starter }}} instance hosted on AWS and a MySQL client connected to it. If you don't have an instance, follow [Creating a {{{ .starter }}} instance](/develop/dev-guide-build-cluster-in-cloud.md) to create one.
 
 ## Step 1. Create a table
 
