@@ -910,7 +910,7 @@ Configuration items related to read isolation.
 
 ### `tidb_general_log`
 
-- Specifies the initial value of the [`tidb_general_log`](/system-variables.md#tidb_general_log) system variable for the current TiDB instance.
+- This configuration controls the initial value of the [`tidb_general_log`](/system-variables.md#tidb_general_log) system variable for the current TiDB instance.
 - Default value: `false`
 - Value options: `true` or `false`
 
