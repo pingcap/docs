@@ -82,6 +82,9 @@ gh() {
                 "GITHUB_EVENT_NAME": "workflow_dispatch", "GITHUB_REF": "refs/heads/test",
             }, False),
             ("first scheduled run", {"GITHUB_EVENT_NAME": "schedule", "ACTOR_ID": "42"}, True),
+            ("authorized scheduled rerun", {
+                "GITHUB_EVENT_NAME": "schedule", "GITHUB_RUN_ATTEMPT": "2", "ACTOR_ID": "42",
+            }, True),
             ("non-master scheduled run", {
                 "GITHUB_EVENT_NAME": "schedule", "GITHUB_REF": "refs/heads/test",
             }, False),
@@ -136,8 +139,29 @@ gh() {
                     expected = f"attempt={env['GITHUB_RUN_ATTEMPT']}\n" if allowed else ""
                     self.assertEqual(output.read_text(), expected)
 
+    def test_review_authorizes_only_manual_runs_or_review_comments(self):
+        gate = load_job("doc_review.yml", "authorize")
+        self.assertEqual(
+            " ".join(gate["if"].split()),
+            "github.event_name == 'workflow_dispatch' || ( "
+            "github.event_name == 'issue_comment' && "
+            "contains(github.event.comment.body, '/bot-review') )",
+        )
+
+    def test_translation_schedules_reach_the_shared_gate(self):
+        for filename in ("translation-zh.yaml", "translation-cron.yml"):
+            with self.subTest(workflow=filename):
+                workflow = load_workflow(filename)
+                events = workflow.get("on", workflow.get(True))
+                self.assertTrue(events["schedule"])
+                self.assertIn("workflow_dispatch", events)
+                self.assertNotIn("if", workflow["jobs"]["authorize"])
+
     def test_privileged_jobs_require_the_shared_authorization_workflow(self):
         for filename, job_name in (
+            ("doc_review.yml", "review"),
+            ("translation-zh.yaml", "translate"),
+            ("translation-cron.yml", "translate-ja"),
             ("sync-doc-pr-zh-to-en.yml", "sync-docs"),
             ("link.yaml", "linkChecker"),
         ):
