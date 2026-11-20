@@ -35,7 +35,7 @@ If you are in the `Organization Owner` role of your organization, you can create
 
 To create a CMEK-enabled project, take the following steps:
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, and then click **Create Project**.
+1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization. In the upper-right corner, click **...**, and then click **Create Project**.
 2. In the displayed dialog, enter a project name.
 3. Select the **Create for Dedicated Cluster** option.
 4. Choose to enable the CMEK capability of the project.
