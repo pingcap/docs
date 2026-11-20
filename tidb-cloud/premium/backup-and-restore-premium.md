@@ -322,14 +322,14 @@ Before you begin, ensure that you have an access key and secret key with suffici
 
 To restore backups from cloud storage, do the following:
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com), and then navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page. In the upper-right corner, click **...** , and then click **Restore from Cloud Storage**.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com), and then navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page. In the upper-right corner, click **...**, and then click <CustomContent plan="premium">**Restore from Cloud Storage to Premium**</CustomContent><CustomContent plan="byoc">**Restore from Cloud Storage to BYOC**</CustomContent>.
 
-2. On the **Select Backup Storage Location** page, provide the following information:
+2. In the **Select Backup** section, provide the following information:
 
     <CustomContent plan="premium">
 
     - **Cloud Provider**: select the cloud provider where your backup files are stored.
-    - **Region**: if your cloud provider is Alibaba Cloud OSS, select a region.
+    - **Region**: if your backup files are stored in Alibaba Cloud OSS, select or enter the bucket region.
     - **Backup Files URI**: enter the URI of the top-level folder that contains your backup files.
     - **Access Key ID**: enter your access key ID.
     - **Access Key Secret**: enter your access key secret.
@@ -338,7 +338,7 @@ To restore backups from cloud storage, do the following:
 
     <CustomContent plan="byoc">
 
-    - **Cloud Provider**: select the cloud provider where your backup files are stored.
+    - **Cloud Provider**: this field is fixed to **Amazon S3**. Currently, BYOC supports restoring backups only from Amazon S3.
     - **Backup Files URI**: enter the URI of the top-level folder that contains your backup files.
     - **Access Key ID**: enter your access key ID.
     - **Access Key Secret**: enter your access key secret.
@@ -349,9 +349,15 @@ To restore backups from cloud storage, do the following:
     >
     > To create an access key for your storage bucket, see [Configure Amazon S3 access using an AWS access key](#configure-amazon-s3-access-using-an-aws-access-key)<CustomContent plan="premium"> and [Configure Alibaba Cloud OSS access](#configure-alibaba-cloud-oss-access)</CustomContent>.
 
-3. Click **Verify Backup and Next**.
+3. Click **Verify Backup**. After verification succeeds, review the backup region, backup time, and TiDB version in the summary on the right.
 
-4. If the verification is successful, the **Restore to a New Instance** page appears. Review the backup information displayed at the top of the page, and then follow the steps in <CustomContent plan="premium">[Create a {{{ .premium }}} Instance](/tidb-cloud/premium/create-tidb-instance-premium.md)</CustomContent><CustomContent plan="byoc">[Create a {{{ .byoc }}} Instance](/tidb-cloud/byoc/create-tidb-instance-byoc.md)</CustomContent> to restore the backup to a new instance.
+4. On the same page, configure the new instance in the <CustomContent plan="premium">**Restore to a New Premium Instance**</CustomContent><CustomContent plan="byoc">**Restore to a New BYOC Instance**</CustomContent> section. Select a destination project as needed, enter an instance name, and configure the region and capacity. The cloud provider must match the backup storage provider. For more information about the settings, see <CustomContent plan="premium">[Create a {{{ .premium }}} Instance](/tidb-cloud/premium/create-tidb-instance-premium.md)</CustomContent><CustomContent plan="byoc">[Create a {{{ .byoc }}} Instance](/tidb-cloud/byoc/create-tidb-instance-byoc.md)</CustomContent>.
+
+    <CustomContent plan="premium">
+
+    Configure high availability for the new instance as needed.
+
+    </CustomContent>
 
     <CustomContent plan="byoc">
 
@@ -365,7 +371,7 @@ To restore backups from cloud storage, do the following:
 
     </CustomContent>
 
-    If the backup information is incorrect, click **Previous** to return to the previous page, and then enter the correct information.
+    If the backup information is incorrect, update the fields in **Select Backup**, and then click **Verify Backup** again before restoring.
 
 5. Click **Restore** to restore the backup.
 
