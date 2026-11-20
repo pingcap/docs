@@ -283,13 +283,8 @@ Dynamic privileges include:
 * `RESTRICTED_USER_ADMIN` prohibits privilege owners to have their access revoked by SUPER users when SEM is enabled.
 * `RESTRICTED_CONNECTION_ADMIN` allows privilege owners to kill connections of `RESTRICTED_USER_ADMIN` users. This privilege affects `KILL` and `KILL TIDB` statements.
 * `RESTRICTED_REPLICA_WRITER_ADMIN` allows privilege owners to perform write or update operations without being affected when the read-only mode is enabled in the TiDB cluster. For details, see [`tidb_restricted_read_only`](/system-variables.md#tidb_restricted_read_only-new-in-v520).
-<<<<<<< HEAD
-=======
-* `TRAFFIC_CAPTURE_ADMIN` allows privilege owners to create, view, and cancel traffic capture jobs. For details, see [TiProxy traffic replay](/tiproxy/tiproxy-traffic-replay.md).
-* `TRAFFIC_REPLAY_ADMIN` allows privilege owners to create, view, and cancel traffic replay jobs. For details, see [TiProxy traffic replay](/tiproxy/tiproxy-traffic-replay.md).
 * `AUDIT_ADMIN` allows managing database audit logs when [Security Enhanced Mode (SEM)](https://docs.pingcap.com/tidb/stable/glossary/#security-enhanced-mode-sem) is disabled, including modifying system variables related to audit logs, manually rotating audit logs, creating or deleting audit log filters, and creating, deleting, enabling, or disabling audit log filtering rules. This privilege is available only in products that provide the database audit logging feature, including TiDB Self-Managed Enterprise Edition, {{{ .dedicated }}}, {{{ .premium }}}, and {{{ .essential }}}. The [database audit logging feature of {{{ .essential }}}](https://docs.pingcap.com/tidbcloud/essential-database-audit-logging/?plan=essential) is currently in Private Preview and requires application for access. {{{ .starter }}} does not support database audit logging.
 * `RESTRICTED_AUDIT_ADMIN` allows managing database audit logs when SEM is enabled. The scope of operations controlled and applicable products are the same as those of `AUDIT_ADMIN`.
->>>>>>> a0a5f92bb1 (privilege-management: add AUDIT_ADMIN and RESTRICTED_AUDIT_ADMIN (#24666))
 
 To see the full set of dynamic privileges, execute the `SHOW PRIVILEGES` statement. Because plugins are permitted to add new privileges, the list of privileges that are assignable might differ based on your TiDB installation.
 
