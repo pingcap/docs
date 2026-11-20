@@ -613,6 +613,7 @@
       - [Sysbench Performance Test Report](/tidb-cloud/v6.5-performance-benchmarking-with-sysbench.md)
   - [System Variables](/system-variables.md)
   - [Server Status Variables](/status-variables.md)
+  - [Privilege Management](/privilege-management.md)
   - [Table Filter](/table-filter.md)
   - [URI Formats of External Storage Services](/external-storage-uri.md)
   - [`ANALYZE` Embedded in DDL Statements](/ddl_embedded_analyze.md)
