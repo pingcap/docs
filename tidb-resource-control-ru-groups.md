@@ -424,7 +424,9 @@ TiKV also records the request QPS from different resource groups in Grafana's **
 
 ## Tool compatibility
 
-The resource control feature does not impact the regular usage of data import, export, and other replication tools. BR, TiDB Lightning, and TiCDC do not currently support processing DDL operations related to resource control, and their resource consumption is not limited by resource control.
+The resource control feature does not impact the regular usage of data import, export, and other replication tools. BR, TiDB Lightning, and TiCDC do not currently support processing DDL operations related to resource control.
+
+Starting from TiDB v8.5.6, setting resource usage limits for background tasks is generally available (GA). Resource control can limit the TiKV CPU and I/O resources used by BR backup and restore tasks and data import tasks, including [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) and TiDB Lightning. Background task resource control does not support TiCDC replication or point-in-time recovery (PITR). For configuration details and limitations, see [Use Resource Control to Manage Background Tasks](/tidb-resource-control-background-tasks.md).
 
 ## FAQ
 
