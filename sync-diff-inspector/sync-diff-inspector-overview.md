@@ -79,7 +79,7 @@ To access table schemas and query data, sync-diff-inspector requires specific da
 
 The configuration of sync-diff-inspector consists of the following parts:
 
-- `Global config`: General configurations, such as number of threads to check, whether to export SQL statement to fix inconsistent tables, whether to compare the data, and whether to skip checking tables that do not exist in the upstream or downstream.
+- `Global config`: General configurations, such as number of threads to check, whether to export SQL statement to fix inconsistent tables, whether to compare the data, whether to redact logs, and whether to skip checking tables that do not exist in the upstream or downstream.
 - `Databases config`: Configures the instances of the upstream and downstream databases.
 - `Routes`: Rules for upstream multiple schema names to match downstream single schema names **(optional)**.
 - `Task config`: Configures the tables for checking. If some tables have a certain mapping relationship between the upstream and downstream databases or have some special requirements, you must configure these tables.
@@ -95,6 +95,11 @@ Below is the description of a complete configuration file:
 ######################### Global config #########################
 # The number of goroutines created to check data. The number of connections between sync-diff-inspector and upstream/downstream databases is slightly greater than this value.
 check-thread-count = 4
+
+# Starting from v8.5.9, log redaction is enabled by default.
+# For v8.5.9 and later, set this to false to disable redaction. An explicit --redact-info-log=false flag overrides this setting.
+# Versions earlier than v8.5.9 do not recognize this key, so keep it commented out unless you use v8.5.9 or later.
+# redact-info-log = true
 
 # If enabled, SQL statements is exported to fix inconsistent tables.
 export-fix-sql = true
@@ -191,6 +196,14 @@ chunk-size = 0
 # (optional) Specifies the "collation" for the table. If not specified, this configuration can be deleted or be set as an empty string.
 collation = ""
 ```
+
+## Log redaction <span class="version-mark">New in v8.5.9 and v9.0.0</span>
+
+Starting from v8.5.9, sync-diff-inspector enables log redaction by default. Set the top-level configuration item `redact-info-log` to `false`, or pass `--redact-info-log=false`, to disable it. An explicit command-line value overrides the configuration file.
+
+When log redaction is enabled, sync-diff-inspector replaces sensitive log fields with `?`. This includes SQL statements and their arguments, row values, chunk and histogram bounds, configuration dumps, column metadata, and comparison errors. SQL text can contain literals from a configured `range`, and column definitions can contain default values, generated expressions, and enum or set literals. Queries sent to the database, checkpoints, and generated fix SQL keep the original values. Console and report errors still include connection addresses and file paths. Other annotations and data-bearing messages are replaced with `details redacted`.
+
+If the configuration file has a syntax error, sync-diff-inspector cannot read `redact-info-log` from that file. Pass `--redact-info-log=false` on the command line to show the details of a configuration parsing error.
 
 ## Run sync-diff-inspector
 
