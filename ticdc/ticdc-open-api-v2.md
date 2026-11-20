@@ -754,7 +754,15 @@ This API is a synchronous interface. If the request is successful, the detailed 
 | :-------------- | :----------------------------------- |
 | `changefeed_id` | The ID of the replication task (changefeed) to be queried. |
 
-### Example
+#### Request header
+
+| Header name | Description |
+| :---------- | :---------- |
+| `Accept` | The response format. Starting from v8.5.9, this API supports returning responses in TOML format. Set this header to `application/toml` to return TOML. If this header is omitted or set to `application/json`, the response is returned in JSON. (Optional) |
+
+### Examples
+
+#### Return JSON
 
 The following request queries the detailed information of the replication task with the ID `test1`.
 
@@ -763,6 +771,16 @@ curl -X GET http://127.0.0.1:8300/api/v2/changefeeds/test1
 ```
 
 The meanings of the JSON response body are the same as those in the [Create a replication task](#create-a-replication-task) section. See that section for details.
+
+#### Return TOML
+
+To return the detailed information in TOML, set the `Accept` request header to `application/toml`:
+
+```shell
+curl -X GET -H "Accept: application/toml" http://127.0.0.1:8300/api/v2/changefeeds/test1
+```
+
+If the request is successful, the response header is `Content-Type: application/toml; charset=utf-8`. TiCDC returns the changefeed details in TOML format, with field names in kebab-case.
 
 ## Query whether a specific replication task is completed
 
