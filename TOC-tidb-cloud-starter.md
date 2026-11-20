@@ -34,6 +34,7 @@
 - [Manage TiDB Cloud Resources and Projects](/tidb-cloud/manage-projects-and-resources.md)
 - Manage {{{ .starter }}} Instances
   - [Create a {{{ .starter }}} Instance](/tidb-cloud/create-tidb-cluster-serverless.md)
+  - [Best Practices for One Instance per Application](/tidb-cloud/starter-instance-per-application-best-practices.md)
   - Connect to Your {{{ .starter }}} Instance
     - [Network Connection Overview](/tidb-cloud/connect-to-tidb-cluster-serverless.md)
     - [Connect via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md)
