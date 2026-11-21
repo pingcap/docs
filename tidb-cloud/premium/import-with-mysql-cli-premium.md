@@ -135,6 +135,7 @@ Do the following to import data from a CSV file:
       -u '<your_username>' -h <your_instance_host> -P 4000 -D test \
       --ssl-mode=VERIFY_IDENTITY --ssl-ca=<your_ca_path> \
       -p<your_password> \
+      --local-infile \
       -e "LOAD DATA LOCAL INFILE '<your_csv_path>' INTO TABLE products
           FIELDS TERMINATED BY ','
           LINES TERMINATED BY '\n'
