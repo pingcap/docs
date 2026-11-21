@@ -31,7 +31,7 @@ CREATE DATABASE IF NOT EXISTS `bookshop`;
 
 For more information and examples of the `CREATE DATABASE` statement, see the [`CREATE DATABASE`](/sql-statements/sql-statement-create-database.md) document.
 
-To execute the library build statement as the `root` user, run the following command:
+To execute the database creation statement as the `root` user, run the following command:
 
 ```shell
 mysql

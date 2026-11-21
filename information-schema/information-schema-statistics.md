@@ -59,7 +59,7 @@ Fields in the `STATISTICS` table are described as follows:
 * `COMMENT`: Other information related to the index.
 * `INDEX_COMMENT`: Any comment with comment attribute provided for the index when creating the index.
 * `IS_VISIBLE`: Whether this index is visible or not. See also [Invisible index](/sql-statements/sql-statement-create-index.md#invisible-index).
-* `Expression` For the index key of the non-expression part, this value is `NULL`; for the index key of the expression part, this value is the expression itself. Refer to [Expression Index](/sql-statements/sql-statement-create-index.md#expression-index).
+* `Expression`: For the index key of the non-expression part, this value is `NULL`; for the index key of the expression part, this value is the expression itself. Refer to [Expression Index](/sql-statements/sql-statement-create-index.md#expression-index).
 
 The following statements are equivalent:
 
