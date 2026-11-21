@@ -3887,6 +3887,92 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - This variable is used to set the update interval of the cached timestamp used in the low-precision TSO feature, in milliseconds.
 - This variable is only available when [`tidb_low_resolution_tso`](#tidb_low_resolution_tso) is enabled.
 
+### tidb_mlog_auto_analyze_ratio
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Float
+- Default value: `10`
+- Range: `[0.00001, 18446744073709551615]`
+- This variable sets the modification ratio threshold for automatically collecting statistics on materialized view logs. For a log that has already been analyzed, TiDB schedules analysis when the number of modifications since the last analysis divided by the row count recorded by that analysis is greater than this value. If the last analyzed row count is unavailable or zero, TiDB uses the current estimated row count instead.
+- The default value `10` means that the modification count must exceed ten times the row count. A smaller value causes more frequent statistics collection. Materialized view logs with fewer than 1,000 estimated rows are skipped. Logs that have never been analyzed are eligible for initial analysis once they reach this minimum, regardless of the ratio. For details, see [Collect statistics on materialized view logs](/materialized-views.md#collect-statistics-on-materialized-view-logs).
+
+### tidb_mlog_log_slow_purge
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Boolean
+- Default value: `OFF`
+- This variable controls whether TiDB records materialized view log purge statements in the slow query log.
+
+### tidb_mlog_purge_batch_size
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Integer
+- Default value: `10000`
+- Range: `[1, 1000000]`
+- Unit: Rows
+- This variable sets the maximum number of materialized view log rows deleted in each batch of a `PURGE MATERIALIZED VIEW LOG` statement.
+
+### tidb_mlog_purge_delete_tiflash_threads
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Integer
+- Default value: `0`
+- Range: `[0, 256]`
+- Unit: Threads
+- This variable sets the TiFlash thread count used by the `DELETE` statements of a materialized view log purge. A value of `0` uses the current value of [`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610).
+
+### tidb_mlog_purge_hist_time
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Integer
+- Default value: `168` (7 days)
+- Range: `[1, 8760]`
+- Unit: Hours
+- This variable sets the retention time for records in [`mysql.tidb_mlog_purge_hist`](/mysql-schema/mysql-schema-tidb-mlog-purge-hist.md#history-retention). TiDB periodically deletes expired records for purge jobs that are no longer running. Cleanup also removes older non-running records when the table exceeds 1,000,000 rows, so records can be removed before the configured retention time expires.
+- This variable controls the retention of purge job history. To purge data from a materialized view log, use [`PURGE MATERIALIZED VIEW LOG`](/sql-statements/sql-statement-purge-materialized-view-log.md) or configure a purge schedule.
+
+### tidb_mlog_purge_min_rate
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Integer
+- Default value: `2000`
+- Range: `[1, 2147483647]`
+- Unit: Rows per second
+- This variable sets the lower bound of the target delete rate for adaptive materialized view log purge throttling. TiDB calculates the target rate from the number of pending rows and the configured delete time budget. If the calculated rate is lower than this value, TiDB uses this value as the target rate instead.
+- Increasing this value can cause a purge with a small backlog to delete rows faster and consume more resources. Decreasing this value does not reduce the target rate when the current backlog needs a higher rate to meet the configured delete time budget. For the calculation, see [Purge throttling](/materialized-views.md#purge-throttling).
+
+### tidb_mlog_purge_rate_budget_ratio
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Float
+- Default value: `0.5`
+- Range: `(0, 1]`
+- This variable sets the fraction of the time before the purge deadline that TiDB uses as the initial delete time budget. For example, the default value `0.5` gives a purge half of the available time to delete its pending rows.
+- A smaller value shortens the delete time budget, which increases the calculated target delete rate and can increase resource usage. A larger value gives TiDB more time to delete rows, which lowers the calculated target rate. For the calculation, see [Purge throttling](/materialized-views.md#purge-throttling).
+
+### tidb_mview_enable
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Boolean
+- Default value: `OFF`
+- This variable controls whether to allow [`CREATE MATERIALIZED VIEW`](/sql-statements/sql-statement-create-materialized-view.md) and [`CREATE MATERIALIZED VIEW LOG`](/sql-statements/sql-statement-create-materialized-view-log.md) statements.
+
 ### tidb_max_auto_analyze_time <span class="version-mark">New in v6.1.0</span>
 
 - Scope: GLOBAL
@@ -4378,6 +4464,102 @@ As shown in this diagram, when [`tidb_enable_paging`](#tidb_enable_paging-new-in
 > * [go-sql-driver](https://github.com/go-sql-driver/mysql#multistatements) (`multiStatements`)
 > * [Connector/J](https://dev.mysql.com/doc/connector-j/en/connector-j-reference-configuration-properties.html) (`allowMultiQueries`)
 > * PHP [mysqli](https://www.php.net/manual/en/mysqli.quickstart.multiple-statement.php) (`mysqli_multi_query`)
+
+### tidb_mview_maintain_isolation_read_engines
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: String
+- Default value: The value of [`isolation-read.engines`](/tidb-configuration-file.md#isolation-read) in the TiDB configuration.
+- Possible values: Any combination of `tikv`, `tiflash`, and `tidb`.
+- This variable specifies the storage engines that internal materialized view maintenance sessions can use to read data.
+
+### tidb_mview_maintain_mem_quota
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Integer
+- Default value: `2147483648` (2 GiB)
+- Range: `[-1, 9223372036854775807]`
+- Unit: Bytes
+- This variable sets the memory quota for internal materialized view maintenance sessions. When the value is greater than `0` but less than `128`, TiDB changes the value to `128` and returns a warning.
+
+### tidb_mview_maintain_import_disk_quota
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: String
+- Default value: `""`
+- This variable sets the disk quota passed to the `IMPORT INTO` operation used by the initial materialized view build. Set this variable to a positive size with a unit, such as `100GiB`. When the value is empty, TiDB does not pass an explicit disk quota to `IMPORT INTO`.
+
+### tidb_mview_maintain_import_threads
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Integer
+- Default value: `0`
+- Range: `[0, 256]`
+- Unit: Threads
+- This variable sets the thread count passed to the `IMPORT INTO` operation used by the initial materialized view build. A value of `0` means that TiDB does not pass an explicit thread count to `IMPORT INTO`.
+
+### tidb_mview_refresh_hist_time
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Integer
+- Default value: `168` (7 days)
+- Range: `[1, 8760]`
+- Unit: Hours
+- This variable sets the retention time for records in [`mysql.tidb_mview_refresh_hist`](/mysql-schema/mysql-schema-tidb-mview-refresh-hist.md#history-retention). TiDB periodically deletes expired records for refresh jobs that are no longer running. Cleanup also removes older non-running records when the table exceeds 1,000,000 rows, so records can be removed before the configured retention time expires.
+
+### tidb_mview_task_max
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Integer
+- Default value: `0`
+- Range: `[0, 256]`
+- This variable sets the total concurrency limit for background materialized view refresh and materialized view log purge tasks on each TiDB server. A value of `0` uses the Go runtime's `GOMAXPROCS` value, with a minimum of `2`. A value of `1` also results in an effective limit of `2`, because refresh and purge tasks each require at least one execution slot.
+- TiDB divides this limit between refresh and purge tasks according to [`tidb_mview_task_refresh_ratio`](#tidb_mview_task_refresh_ratio). For a configuration example, see [Configure background maintenance](/materialized-views.md#configure-background-maintenance).
+
+### tidb_mview_task_refresh_ratio
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Float
+- Default value: `0.6`
+- Range: `(0, 1)`
+- This variable sets the fraction of [`tidb_mview_task_max`](#tidb_mview_task_max) allocated to background materialized view refresh tasks. TiDB rounds the effective total concurrency multiplied by this ratio to the nearest integer, then adjusts the result so that refresh and purge tasks each have at least one execution slot. The remaining slots are allocated to materialized view log purge tasks.
+- For example, when the effective total concurrency is `10` and this variable is `0.6`, TiDB allows up to `6` refresh tasks and `4` purge tasks to run concurrently on each TiDB server.
+
+### tidb_mview_task_threshold_cpu
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Float
+- Default value: `0.8`
+- Range: `[0, 1]`
+- This variable sets the CPU utilization threshold for starting background materialized view refresh, materialized view log purge, and materialized view log statistics collection tasks. When the TiDB process's CPU utilization reaches or exceeds this threshold, TiDB temporarily stops starting new tasks. Utilization is measured relative to the CPU capacity available to the process. The default value `0.8` represents 80% utilization.
+- A value of `0` disables the CPU check. Running tasks continue to execute. TiDB resumes starting tasks when CPU utilization falls below the threshold and the [memory check](#tidb_mview_task_threshold_memory) also permits execution.
+
+### tidb_mview_task_threshold_memory
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Float
+- Default value: `0.8`
+- Range: `[0, 1]`
+- This variable sets the memory usage threshold for starting background materialized view refresh, materialized view log purge, and materialized view log statistics collection tasks. The ratio is the TiDB instance's heap memory usage divided by the total memory available to the host or container. When this ratio reaches or exceeds the threshold, TiDB temporarily stops starting new tasks. The default value `0.8` represents 80% memory usage.
+- A value of `0` disables the memory check. Running tasks continue to execute. TiDB resumes starting tasks when memory usage falls below the threshold and the [CPU check](#tidb_mview_task_threshold_cpu) also permits execution.
 
 ### tidb_nontransactional_ignore_error <span class="version-mark">New in v6.1.0</span>
 
