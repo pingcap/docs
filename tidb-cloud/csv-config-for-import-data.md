@@ -67,7 +67,7 @@ The following is the CSV Configuration window when you use the Import Data servi
 
     `{"key1": "val1", "key2": "val2"}`
 
-    If the content of the CSV source file is saved as JSON in the following way, then consider setting `Backslash escape = True` as follows. But this is not the standard format for CSV.
+    If a JSON field in the CSV source file is stored in the following way, consider setting `Backslash escape = True`. Note that this is not the standard format for CSV.
 
     `"{\"key1\": \"val1\", \"key2\":\"val2\" }"`
 
