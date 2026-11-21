@@ -169,6 +169,9 @@ This interface is used to submit a replication task to TiCDC. If the request is 
           ],
           "ignore_update_new_value_expr": "string",
           "ignore_update_old_value_expr": "string",
+          "ignore_update_only_columns": [
+            "string"
+          ],
           "matcher": [
             "string"
           ]
@@ -292,6 +295,7 @@ The `filter.event_filters` parameters are described as follows. For more informa
 | `ignore_sql`                   | `STRING ARRAY` type. For example, `["^drop", "add column"]` means to filter out DDL statements that start with `DROP` or contain `ADD COLUMN`. (Optional)  |
 | `ignore_update_new_value_expr` | `STRING ARRAY` type. For example, `"gender = 'male'"` means to filter out the UPDATE DML statements with the new value `gender = 'male'`. (Optional)          |
 | `ignore_update_old_value_expr` | `STRING ARRAY` type. For example, `"age < 18"` means to filter out the UPDATE DML statements with the old value `age < 18`. (Optional)                  |
+| `ignore_update_only_columns`   | `STRING ARRAY` type. Introduced in v8.5.9 and applicable only to Kafka downstreams. If all columns whose values are changed in an UPDATE event are included in this array, TiCDC filters out the event. For example, `["version", "updated_at"]`. (Optional) |
 | `matcher`                      | `STRING ARRAY` type. It works as an allowlist. For example, `["test.worker"]` means that the filter rule applies only to the `worker` table in the `test` database. (Optional)          |
 
 The `mounter` parameter is described as follows:
@@ -415,6 +419,9 @@ If the request is successful, `200 OK` is returned. If the request fails, an err
           ],
           "ignore_update_new_value_expr": "string",
           "ignore_update_old_value_expr": "string",
+          "ignore_update_only_columns": [
+            "string"
+          ],
           "matcher": [
             "string"
           ]
@@ -600,6 +607,9 @@ To modify the changefeed configuration, follow the steps of `pause the replicati
           ],
           "ignore_update_new_value_expr": "string",
           "ignore_update_old_value_expr": "string",
+          "ignore_update_only_columns": [
+            "string"
+          ],
           "matcher": [
             "string"
           ]
