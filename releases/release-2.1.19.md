@@ -18,7 +18,7 @@ TiDB Ansible version: 2.1.19
     - Optimize the scenario of `select max(_tidb_rowid) from t` to avoid full table scan [#13294](https://github.com/pingcap/tidb/pull/13294)
     - Fix the incorrect results caused by the incorrect value assigned to the user variable in the query and the push-down of predicates [#13230](https://github.com/pingcap/tidb/pull/13230)
     - Fix the issue that the statistics are not accurate because a data race occurs when statistics are updated [#13690](https://github.com/pingcap/tidb/pull/13690)
-    - Fix the issue that the result is incorrect when the `UPDATE` statement contains both a sub-query and a stored generated column; fix the `UPDATE` statement execution error when this statement contains two same-named tables from different databases [#13357](https://github.com/pingcap/tidb/pull/13357)
+    - Fix the issue that the result is incorrect when the `UPDATE` statement contains both a subquery and a stored generated column; fix the `UPDATE` statement execution error when this statement contains two same-named tables from different databases [#13357](https://github.com/pingcap/tidb/pull/13357)
     - Fix the issue that the query plan might be incorrectly selected because the `PhysicalUnionScan` operator incorrectly sets the statistics [#14134](https://github.com/pingcap/tidb/pull/14134)
     - Remove the `minAutoAnalyzeRatio` constraint to make the automatic `ANALYZE` more timely [#14013](https://github.com/pingcap/tidb/pull/14013)
     - Fix the issue that the estimated number of rows is greater than `1` when the `WHERE` clause contains an equal condition on the unique key [#13385](https://github.com/pingcap/tidb/pull/13385)

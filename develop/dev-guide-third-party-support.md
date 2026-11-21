@@ -46,8 +46,8 @@ If you encounter problems when connecting to TiDB using the tools listed in this
 | Java                    | [jOOQ](https://github.com/jOOQ/jOOQ)      | v3.16.7 (Open Source) | Full      | N/A           | N/A |
 | Ruby                    | [Active Record](https://guides.rubyonrails.org/active_record_basics.html) | v7.0 | Full | N/A | [Connect to TiDB with Rails Framework and ActiveRecord ORM](/develop/dev-guide-sample-application-ruby-rails.md) |
 | JavaScript / TypeScript | [Sequelize](https://sequelize.org/)       | v6.20.1               | Full      | N/A           | [Connect to TiDB with Sequelize](/develop/dev-guide-sample-application-nodejs-sequelize.md) |
-| JavaScript / Typescript | [Prisma](https://www.prisma.io/)          | 4.16.2                | Full      | N/A           | [Connect to TiDB with Prisma](/develop/dev-guide-sample-application-nodejs-prisma.md) |
-| JavaScript / Typescript | [TypeORM](https://typeorm.io/)            | v0.3.17               | Full      | N/A           | [Connect to TiDB with TypeORM](/develop/dev-guide-sample-application-nodejs-typeorm.md) |
+| JavaScript / TypeScript | [Prisma](https://www.prisma.io/)          | 4.16.2                | Full      | N/A           | [Connect to TiDB with Prisma](/develop/dev-guide-sample-application-nodejs-prisma.md) |
+| JavaScript / TypeScript | [TypeORM](https://typeorm.io/)            | v0.3.17               | Full      | N/A           | [Connect to TiDB with TypeORM](/develop/dev-guide-sample-application-nodejs-typeorm.md) |
 | Python                  | [Django](https://www.djangoproject.com/)  | v4.2                  | Full      | [django-tidb](https://github.com/pingcap/django-tidb) | [Connect to TiDB with Django](/develop/dev-guide-sample-application-python-django.md) |
 | Python                  | [SQLAlchemy](https://www.sqlalchemy.org/) | v1.4.37               | Full      | N/A           | [Connect to TiDB with SQLAlchemy](/develop/dev-guide-sample-application-python-sqlalchemy.md) |
 

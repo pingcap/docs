@@ -269,7 +269,7 @@ To monitor encryption at rest, if you deploy TiKV with Grafana, you can look at 
 * Encryption initialized: 1 if encryption is initialized during TiKV startup, 0 otherwise. In case of master key rotation, after encryption is initialized, TiKV do not need access to the previous master key.
 * Encryption data keys: number of existing data keys. The number is bumped by 1 after each time data key rotation happened. Use this metrics to monitor if data key rotation works as expected.
 * Encrypted files: number of encrypted data files currently exists. Compare this number to existing data files in the data directory to estimate portion of data being encrypted, when turning on encryption for a previously unencrypted cluster.
-* Encryption meta file size: size of the encryption meta data files.
+* Encryption meta file size: size of the encryption metadata files.
 * Read/Write encryption meta duration: the extra overhead to operate on metadata for encryption.
 
 For debugging, the `tikv-ctl` command can be used to dump encryption metadata such as encryption method and data key id used to encryption the file, as well as list of data keys. Since the operation can expose sensitive data, it is not recommended to use in production. Please refer to [TiKV Control](/tikv-control.md#dump-encryption-metadata) document.

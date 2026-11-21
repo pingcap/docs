@@ -32,7 +32,7 @@ On March 9, 2018, TiDB 2.0 RC1 is released. This release has great improvement i
 
 ## TiKV
 
-- Fix the issue that gRPC call is not cancelled when PD leaders switch
+- Fix the issue that gRPC call is not canceled when PD leaders switch
 - Protect important configuration which cannot be changed after initial configuration
 - Add gRPC APIs used to obtain metrics
 - Check whether SSD is used when you start the cluster

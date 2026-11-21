@@ -241,11 +241,11 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
 
     For more information, see [Extract table, schema, and source information and write into the merged table](/dm/dm-table-routing.md#extract-table-schema-and-source-information-and-write-into-the-merged-table).
 
-* DM optimizes the pre-check mechanism by changing some mandatory check items to optional ones [#7333](https://github.com/pingcap/tiflow/issues/7333) @[lichunzhu](https://github.com/lichunzhu)
+* DM optimizes the precheck mechanism by changing some mandatory check items to optional ones [#7333](https://github.com/pingcap/tiflow/issues/7333) @[lichunzhu](https://github.com/lichunzhu)
 
     To run a data migration task smoothly, DM triggers [a precheck](/dm/dm-precheck.md) automatically at the start of the task and returns the check results. DM starts the migration only after the precheck is passed.
 
-    In v6.4.0, DM changes the following three check items from mandatory to optional, which improves the pass rate of the pre-check:
+    In v6.4.0, DM changes the following three check items from mandatory to optional, which improves the pass rate of the precheck:
 
     - Check whether the upstream tables use character sets that are incompatible with TiDB.
     - Check whether the upstream tables have primary key constraints or unique key constraints

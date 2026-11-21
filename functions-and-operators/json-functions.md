@@ -60,7 +60,7 @@ You can use JSON functions to work with data in the [JSON data type](/data-type-
 | --------------------------------- | ----------- |
 | [JSON_PRETTY()](/functions-and-operators/json-functions/json-functions-utility.md#json_pretty) | Pretty formatting of a JSON document |
 | [JSON_STORAGE_FREE()](/functions-and-operators/json-functions/json-functions-utility.md#json_storage_free) | Returns how much storage space was freed in the binary representation of the JSON value after it was updated in place. |
-| [JSON_STORAGE_SIZE()](/functions-and-operators/json-functions/json-functions-utility.md#json_storage_size) | Returns an approximate size of bytes required to store the json value. As the size does not account for TiKV using compression, the output of this function is not strictly compatible with MySQL. |
+| [JSON_STORAGE_SIZE()](/functions-and-operators/json-functions/json-functions-utility.md#json_storage_size) | Returns an approximate size of bytes required to store the JSON value. As the size does not account for TiKV using compression, the output of this function is not strictly compatible with MySQL. |
 
 ## Aggregate functions
 

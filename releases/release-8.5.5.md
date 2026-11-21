@@ -20,7 +20,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
     The optimization strategies are as follows:
 
-    - In strict SQL mode, TiDB pre-checks for potential data truncation risks during type conversion.
+    - In strict SQL mode, TiDB prechecks for potential data truncation risks during type conversion.
     - If no data truncation risk is detected, TiDB updates only the metadata and avoids index rebuilding whenever possible.
     - If index rebuilding is required, TiDB uses a more efficient ingest process to significantly improve index rebuild performance.
 
@@ -265,7 +265,7 @@ For TiDB clusters newly deployed in v8.5.4 (that is, not upgraded from versions 
     - Fix the issue that admin check does not report errors when index records are missing [#63698](https://github.com/pingcap/tidb/issues/63698) @[wjhuang2016](https://github.com/wjhuang2016)
     - Fix the issue that modifying the collation via `MODIFY COLUMN` results in data index inconsistency [#61668](https://github.com/pingcap/tidb/issues/61668) @[tangenta](https://github.com/tangenta)
     - Fix the issue that the embedded `ANALYZE` feature in DDL might not be triggered when performing multiple schema changes [#65040](https://github.com/pingcap/tidb/issues/65040) @[joechenrh](https://github.com/joechenrh)
-    - Fix the issue that the Distributed eXecution Framework (DXF) task is not cancelled after canceling the `ADD INDEX` job [#64129](https://github.com/pingcap/tidb/issues/64129) @[tangenta](https://github.com/tangenta)
+    - Fix the issue that the Distributed eXecution Framework (DXF) task is not canceled after canceling the `ADD INDEX` job [#64129](https://github.com/pingcap/tidb/issues/64129) @[tangenta](https://github.com/tangenta)
     - Fix the issue that the validation logic is incorrect when determining whether to load the table information for tables that contain foreign keys [#60044](https://github.com/pingcap/tidb/issues/60044) @[JQWong7](https://github.com/JQWong7)
     - Fix the issue that initialization for foreign key related fields is incorrect when copying table information [#60044](https://github.com/pingcap/tidb/issues/60044) @[JQWong7](https://github.com/JQWong7)
     - Fix the issue that the auto ID is set incorrectly after renaming a table across different databases [#64561](https://github.com/pingcap/tidb/issues/64561) @[joechenrh](https://github.com/joechenrh)
