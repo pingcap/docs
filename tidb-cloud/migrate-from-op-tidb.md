@@ -219,14 +219,15 @@ After you export data from the TiDB Self-Managed cluster to Amazon S3, you need 
 
 3. Configure the access policy. Go to the [AWS Console > IAM > Access Management > Policies](https://console.aws.amazon.com/iamv2/home#/policies) and switch to your region to check if the access policy for TiDB Cloud exists already. If it does not exist, create a policy following this document [Creating policies on the JSON tab](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html).
 
-    The following is an example template for the JSON policy.
+    The following is an example template for the JSON policy. Replace the placeholders as follows:
+
+    - `<Your customized directory>`: the bucket name and the path to the folder containing the data files, followed by `/*`. For example, use `my-bucket/mydata/*`, or `my-bucket/*` for all objects in the bucket.
+    - `<Your S3 bucket ARN>`: the ARN of the S3 bucket. You can click the **Copy ARN** button on the S3 bucket **Overview** page to get it.
+    - `<Your AWS KMS ARN>`: the ARN of the S3 bucket KMS key. You can get it from **S3 bucket** > **Properties** > **Default encryption** > **AWS KMS Key ARN**. For more information, see the [Amazon S3 documentation](https://docs.aws.amazon.com/AmazonS3/latest/userguide/viewing-bucket-key-settings.html).
+
+    The last statement (`kms:Decrypt`) is required only if you have enabled SSE-KMS for the S3 bucket. Otherwise, remove it and the comma after the preceding statement.
 
     ```json
-    ## Create a json policy template
-    ##<Your customized directory>: fill in the path to the folder in the S3 bucket where the data files to be imported are located.
-    ##<Your S3 bucket ARN>: fill in the ARN of the S3 bucket. You can click the Copy ARN button on the S3 Bucket Overview page to get it.
-    ##<Your AWS KMS ARN>: fill in the ARN for the S3 bucket KMS key. You can get it from S3 bucket > Properties > Default encryption > AWS KMS Key ARN. For more information, see https://docs.aws.amazon.com/AmazonS3/latest/userguide/viewing-bucket-key-settings.html
-
     {
         "Version": "2012-10-17",
         "Statement": [
@@ -245,19 +246,12 @@ After you export data from the TiDB Self-Managed cluster to Amazon S3, you need 
                     "s3:GetBucketLocation"
                 ],
                 "Resource": "<Your S3 bucket ARN>"
-            }
-            // If you have enabled SSE-KMS for the S3 bucket, you need to add the following permissions.
+            },
             {
                 "Effect": "Allow",
                 "Action": [
                     "kms:Decrypt"
                 ],
-                "Resource": "<Your AWS KMS ARN>"
-            }
-            ,
-            {
-                "Effect": "Allow",
-                "Action": "kms:Decrypt",
                 "Resource": "<Your AWS KMS ARN>"
             }
         ]
