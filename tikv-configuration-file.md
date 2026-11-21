@@ -2724,6 +2724,13 @@ Configuration items related to resource metering.
 > - Logical I/O refers to the logical amount of data processed by requests at the TiKV storage layer, such as data scanned or processed during reads and data written by write requests.
 > - Physical I/O refers to the actual disk read/write traffic on the underlying storage device, which is affected by block cache, compaction, flush, and other factors.
 
+### `enable-detailed-io-collection` <span class="version-mark">New in v8.5.9</span>
+
++ Controls whether to enable detailed TiKV I/O dimensions for [Top SQL](/dashboard/top-sql.md). This configuration item takes effect only when `enable-network-io-collection` is also enabled.
++ When enabled, TiKV selects the Top N records separately by logical read bytes, logical write bytes, and the number of RocksDB block reads, and reports these metrics to Top SQL.
++ Top SQL displays the number of RocksDB block reads recorded in foreground TiKV request contexts as `Read IOPS`. This metric is not the actual IOPS of the underlying storage device.
++ Default value: `false`
+
 ## resource-control
 
 Configuration items related to resource control of the TiKV storage layer.
