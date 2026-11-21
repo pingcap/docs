@@ -111,7 +111,7 @@ The consumer traverses the directory for the first time. The following is an exa
 The consumer parses the table schema of the `schema.json` file and obtains the DDL Query statements:
 
 - If no Query statement is found or `TableVersion` is less than the consumer checkpoint, the consumer skips this statement.
-- If Query statements exist or `TableVersion` is equal to or greater than the consumer checkpoint, the consumer executes the DDL statements in the downstream MySQL.
+- If Query statements exist and `TableVersion` is equal to or greater than the consumer checkpoint, the consumer executes the DDL statements in the downstream MySQL.
 
 Then the consumer starts replicating the `CDC000001.json` file.
 

@@ -268,7 +268,7 @@ If the PD cluster is already initialized, you need to use the pd-ctl tool to mak
 pd-ctl config set isolation-level zone
 ```
 
-The `location-level` configuration is an array of strings, which needs to correspond to a key of `location-labels`. This parameter limits the minimum and mandatory isolation level requirements on TiKV topology clusters.
+The `isolation-level` configuration is a string, which needs to correspond to a key of `location-labels`. This parameter limits the minimum and mandatory isolation level requirements on TiKV topology clusters.
 
 > **Note:**
 >

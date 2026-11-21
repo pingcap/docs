@@ -233,7 +233,7 @@ In the preceding command, `--db` specifies the name of the database to be restor
 
 > **Note:**
 >
-> When you restore the backup data, the database name specified by `--db` must be the same as the one specified by `-- db` in the backup command. Otherwise, the restore fails. This is because the metafile of the backup data (`backupmeta` file) records the database name, and you can only restore data to the database with the same name. The recommended method is to restore the backup data to the database with the same name in another cluster.
+> When you restore the backup data, the database name specified by `--db` must be the same as the one specified by `--db` in the backup command. Otherwise, the restore fails. This is because the metafile of the backup data (`backupmeta` file) records the database name, and you can only restore data to the database with the same name. The recommended method is to restore the backup data to the database with the same name in another cluster.
 
 ### Restore a table
 
