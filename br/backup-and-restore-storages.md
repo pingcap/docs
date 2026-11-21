@@ -105,10 +105,125 @@ When storing backup data in a cloud storage system, you need to configure authen
 <SimpleTab groupId="storage">
 <div label="Amazon S3" value="amazon">
 
-Before backup, configure the following privileges to access the backup directory on S3.
+Before backup, configure the following privileges to access the backup directory on S3. You do not need to grant `AmazonS3FullAccess` if the IAM user or role only needs the backup bucket or prefix.
 
 - Minimum privileges for TiKV and Backup & Restore (BR) to access the backup directories during backup: `s3:ListBucket`, `s3:GetObject`, `s3:DeleteObject`, `s3:PutObject`, and `s3:AbortMultipartUpload`
-- Minimum privileges for TiKV and BR to access the backup directories during restore: `s3:ListBucket` and `s3:GetObject`.
+- Minimum privileges for TiKV and BR to access the backup directories during a read-only restore: `s3:ListBucket` and `s3:GetObject`.
+
+If you use IAM policies, scope object access to the bucket or prefix in the `s3://bucket-name/prefix` URI used by `--storage`. Use a bucket-scoped policy for the bucket root, or a prefix-scoped policy for a folder or prefix. Replace `<bucket-name>` with the bucket name and `<prefix>` with the path without leading or trailing slashes. For example, for `s3://my-bucket/backup/`, use `my-bucket` and `backup`.
+
+For point-in-time recovery (PITR), grant read access to both the log backup location specified by `--storage` and the snapshot backup location specified by `--full-backup-storage`, if used. Add policy statements for each required bucket or prefix.
+
+**Bucket-scoped policy for backup**
+
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "ListBackupBucket",
+            "Effect": "Allow",
+            "Action": "s3:ListBucket",
+            "Resource": "arn:aws:s3:::<bucket-name>"
+        },
+        {
+            "Sid": "AccessBackupObjects",
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject",
+                "s3:PutObject",
+                "s3:DeleteObject",
+                "s3:AbortMultipartUpload"
+            ],
+            "Resource": "arn:aws:s3:::<bucket-name>/*"
+        }
+    ]
+}
+```
+
+**Prefix-scoped policy for backup**
+
+This policy restricts object access to the backup prefix but allows listing all object keys in the bucket. BR checks whether `backupmeta` exists before starting a backup. Without an unconditional `s3:ListBucket` grant, S3 can return `403 Forbidden` for a missing object, causing the backup to fail. Use a dedicated backup bucket if other object keys must remain hidden.
+
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "ListBackupBucket",
+            "Effect": "Allow",
+            "Action": "s3:ListBucket",
+            "Resource": "arn:aws:s3:::<bucket-name>"
+        },
+        {
+            "Sid": "AccessBackupObjectsInPrefix",
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject",
+                "s3:PutObject",
+                "s3:DeleteObject",
+                "s3:AbortMultipartUpload"
+            ],
+            "Resource": "arn:aws:s3:::<bucket-name>/<prefix>/*"
+        }
+    ]
+}
+```
+
+**Bucket-scoped policy for a read-only restore**
+
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "ListBackupBucket",
+            "Effect": "Allow",
+            "Action": "s3:ListBucket",
+            "Resource": "arn:aws:s3:::<bucket-name>"
+        },
+        {
+            "Sid": "ReadBackupObjects",
+            "Effect": "Allow",
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::<bucket-name>/*"
+        }
+    ]
+}
+```
+
+**Prefix-scoped policy for a read-only restore**
+
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "ListBackupPrefix",
+            "Effect": "Allow",
+            "Action": "s3:ListBucket",
+            "Resource": "arn:aws:s3:::<bucket-name>",
+            "Condition": {
+                "StringLike": {
+                    "s3:prefix": "<prefix>/*"
+                }
+            }
+        },
+        {
+            "Sid": "ReadBackupObjectsInPrefix",
+            "Effect": "Allow",
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::<bucket-name>/<prefix>/*"
+        }
+    ]
+}
+```
+
+If BR writes checkpoint metadata to S3, grant `s3:ListBucket`, `s3:GetObject`, `s3:PutObject`, and `s3:DeleteObject` for the checkpoint storage location. When `--checkpoint-storage` points to a different bucket or prefix, add policy statements for that location instead of adding write permissions to the backup location. Keep `s3:ListBucket` unconditional on the checkpoint bucket so that checks for missing checkpoint objects can succeed.
+
+Starting from BR v8.5.5, if the target cluster does not contain `mysql.tidb_pitr_id_map` and `--checkpoint-storage` is not specified, PITR writes the ID map to the log backup directory. If that directory is in S3, add `s3:PutObject` for the log backup location and keep `s3:ListBucket` unconditional on that bucket so that BR can check whether the ID map exists.
+
+If the same IAM user or role is shared by both backup and restore, you can combine the required actions into a single policy.
 
 If you have not yet created a backup directory, refer to [Create a bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html) to create an S3 bucket in the specified region. If necessary, you can also create a folder in the bucket by referring to [Create a folder](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html).
 
