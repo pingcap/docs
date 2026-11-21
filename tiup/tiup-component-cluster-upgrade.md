@@ -30,7 +30,7 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 
 ### --transfer-timeout
 
-- When upgrading PD or TiKV, the leader of the upgraded node is migrated to other nodes first. The migration process takes some time, and you can set the maximum wait time (in seconds) by the `-transfer-timeout` option. After the timeout, the wait is skipped and the service is upgraded directly.
+- When upgrading PD or TiKV, the leader of the upgraded node is migrated to other nodes first. The migration process takes some time, and you can set the maximum wait time (in seconds) by the `--transfer-timeout` option. After the timeout, the wait is skipped and the service is upgraded directly.
 - Data type: `uint`
 - Default: 600
 
