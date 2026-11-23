@@ -271,7 +271,7 @@ For more information, see [Encryption at Rest Using Customer-Managed Encryption 
 
 - Tracks key status and usage, and prevents removal of keys that are still required by instances, backup snapshots, or in-progress restores.
 
-For more information, see [Enhanced Data Encryption](/tidb-cloud/premium/dual-layer-data-encryption-premium.md).
+For more information, see [Enhanced Data Encryption](/tidb-cloud/premium/enhanced-data-encryption-premium.md).
 
 </CustomContent>
 

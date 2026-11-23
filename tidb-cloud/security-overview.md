@@ -35,7 +35,7 @@ For more information, see [Encryption at Rest Using Customer-Managed Encryption 
 
 For {{{ .premium }}} instances, Enhanced Data Encryption adds database-layer encryption on top of the default storage-layer encryption to protect database data and backup data at rest. You can register a Customer-Managed Encryption Key (CMEK) from AWS KMS or Alibaba Cloud KMS once in your organization and reuse it across instances in the same cloud provider and region. You control master key authorization, rotation, and lifecycle in your cloud account, while TiDB Cloud tracks key status and usage.
 
-For more information, see [Enhanced Data Encryption](/tidb-cloud/premium/dual-layer-data-encryption-premium.md).
+For more information, see [Enhanced Data Encryption](/tidb-cloud/premium/enhanced-data-encryption-premium.md).
 
 </CustomContent>
 

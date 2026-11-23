@@ -615,7 +615,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
         You can use your own keys in Alibaba Cloud Key Management Service (KMS) to encrypt data at rest, giving you greater control over data security and compliance.
 
-        This feature is now available upon request. For more information, see [Dual-Layer Data Encryption](/tidb-cloud/premium/dual-layer-data-encryption-premium.md).
+        This feature is now available upon request. For more information, see [Enhanced Data Encryption](/tidb-cloud/premium/enhanced-data-encryption-premium.md).
 
     - Provide two new TTL monitoring metrics on the **Metrics** page (**Instance Overview** tab) for TiDB Cloud Premium instances.
 

@@ -1,6 +1,7 @@
 ---
 title: Enhanced Data Encryption
 summary: Learn how to register a Customer-Managed Encryption Key (CMEK) and enable Enhanced Data Encryption for your {{{ .premium }}} instances.
+aliases: ['tidbcloud/dual-layer-data-encryption-premium']
 ---
 
 # Enhanced Data Encryption
