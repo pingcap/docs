@@ -44,6 +44,8 @@ The DXF can only schedule up to 16 tasks (including [`ADD INDEX`](/sql-statement
 
 ## Prerequisites
 
+Use the same number of CPU cores and the same amount of memory on all TiDB nodes eligible to run DXF tasks. The DXF assumes these nodes have the same resource capacity when scheduling tasks.
+
 Before using the DXF to execute [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) tasks, you need to enable the [Fast Online DDL](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) mode.
 
 <CustomContent platform="tidb">
