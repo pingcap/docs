@@ -353,12 +353,6 @@ To restore backups from cloud storage, do the following:
 
 4. On the same page, configure the new instance in the <CustomContent plan="premium">**Restore to a New Premium Instance**</CustomContent><CustomContent plan="byoc">**Restore to a New BYOC Instance**</CustomContent> section. Select a destination project as needed, enter an instance name, and configure the region and capacity. The cloud provider must match the backup storage provider. For more information about the settings, see <CustomContent plan="premium">[Create a {{{ .premium }}} Instance](/tidb-cloud/premium/create-tidb-instance-premium.md)</CustomContent><CustomContent plan="byoc">[Create a {{{ .byoc }}} Instance](/tidb-cloud/byoc/create-tidb-instance-byoc.md)</CustomContent>.
 
-    <CustomContent plan="premium">
-
-    Configure high availability for the new instance as needed.
-
-    </CustomContent>
-
     <CustomContent plan="byoc">
 
     For {{{ .byoc }}}, select an active resource pool that matches the target cloud provider and region. The restored instance inherits the high availability mode of the selected resource pool. You can restore the same backup to a zonal or regional resource pool. If no suitable resource pool is available, an `Organization Owner` can create one before restoring the instance. Other roles cannot create resource pools. For more information, see [Create a Resource Pool](/tidb-cloud/byoc/create-resource-pool-byoc.md).
