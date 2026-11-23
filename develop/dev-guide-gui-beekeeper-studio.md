@@ -50,7 +50,7 @@ Connect to TiDB depending on the TiDB deployment option you've selected.
     >
     > If you have created a password before, you can either use the original password or click **Reset Password** to generate a new one.
 
-5. Launch Beekeeper Studio. On the connections screen, click **New Connection**, select **TiDB** from the **Connection Type** list, and fill in the connection form: copy the **Host**, **Port**, and **User** exactly as shown in the TiDB Cloud connection dialog (the **User** value includes an instance-specific prefix, such as `2iYY8v31zGuWG83.root`, not just `root`), and enter the **Password** from step 4.
+5. Launch Beekeeper Studio. On the connections screen, click **New Connection**, select **TiDB** from the **Connection Type** list, and fill in the connection form. Copy **HOST**, **PORT**, and **USERNAME** from the TiDB Cloud connection dialog into the **Host**, **Port**, and **User** fields, and enter the **Password** from step 4. For {{{ .starter }}}, and for {{{ .essential }}} instances that use the endpoint shared model, the user name includes an instance-specific prefix, such as `3pTAoNNegb47Uc8.root`, not just `root`.
 
     ![Beekeeper Studio: configure a TiDB connection](/media/develop/beekeeper-studio-connection-settings.png)
 
