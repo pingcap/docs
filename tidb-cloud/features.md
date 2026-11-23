@@ -351,7 +351,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
-    <td rowspan="6" style="background-color: white;">Security</td>
+    <td rowspan="5" style="background-color: white;">Security</td>
     <td>Database audit logging</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center;">🔒</td>
@@ -376,20 +376,12 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
-    <td>CMEK</td>
-    <td style="text-align:center; font-size: 14px;">❌</td>
-    <td style="text-align:center; font-size: 14px;">❌</td>
-    <td style="text-align:center;">🔒</td>
+    <td>Enhanced Data Encryption (dual-layer encryption)</td>
+    <td style="text-align:center;">✅</td>
+    <td style="text-align:center;">✅</td>
+    <td style="text-align:center;">✅<br/><span style="font-size: 14px; white-space: nowrap;">(CMEK)</span></td>
     <td style="text-align:center;">🚧</td>
-    <td style="text-align:center;">✅</td>
-  </tr>
-  <tr>
-    <td>Dual-layer encryption</td>
-    <td style="text-align:center;">✅</td>
-    <td style="text-align:center;">✅</td>
-    <td style="text-align:center;">🔒</td>
-    <td style="text-align:center;">🚧</td>
-    <td style="text-align:center;">✅</td>
+    <td style="text-align:center;">✅<br/><span style="font-size: 14px; white-space: nowrap;">(CMEK supported)</span></td>
   </tr>
   <tr>
     <td>IAM (including email and password login, standard SSO, and organization SSO)</td>
