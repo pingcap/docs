@@ -261,15 +261,17 @@ For more information, see [Encryption at Rest Using Customer-Managed Encryption 
 
 <CustomContent plan="premium">
 
-**Dual-Layer Data Encryption**
+**Enhanced Data Encryption**
 
-- Combines storage-layer encryption (provided by the cloud provider) with database-layer encryption to add an additional layer of data-at-rest protection for {{{ .premium }}} instances hosted on AWS.
+- Adds database-layer encryption on top of storage-layer encryption for {{{ .premium }}} instances, with support for AWS KMS and Alibaba Cloud KMS.
 
-- Encrypts data stored by TiKV, changefeed data, and backup data when enabled.
+- Protects database data and backup data at rest when enabled.
 
-- Lets you choose between a Customer-Managed Encryption Key (CMEK) and a Service-Managed Encryption Key, depending on your security and operational requirements.
+- Lets you register a Customer-Managed Encryption Key (CMEK) once in your organization and reuse it across instances in the same cloud provider and region.
 
-For more information, see [Dual-Layer Data Encryption](/tidb-cloud/premium/dual-layer-data-encryption-premium.md).
+- Tracks key status and usage, and prevents removal of keys that are still required by instances, backup snapshots, or in-progress restores.
+
+For more information, see [Enhanced Data Encryption](/tidb-cloud/premium/dual-layer-data-encryption-premium.md).
 
 </CustomContent>
 

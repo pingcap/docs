@@ -1,181 +1,191 @@
 ---
-title: Dual-Layer Data Encryption
-summary: Learn how to enable and manage Dual-Layer Data Encryption for your {{{ .premium }}} instance.
+title: Enhanced Data Encryption
+summary: Learn how to register a Customer-Managed Encryption Key (CMEK) and enable Enhanced Data Encryption for your {{{ .premium }}} instances.
 ---
 
-# Dual-Layer Data Encryption
+# Enhanced Data Encryption
 
-This document describes how to enable and manage Dual-Layer Data Encryption for your {{{ .premium }}} instance.
+Enhanced Data Encryption adds database-layer encryption on top of default cloud storage-layer encryption to protect your {{{ .premium }}} database data and backup data at rest. With a Customer-Managed Encryption Key (CMEK), you control master key authorization, rotation, and lifecycle in your own cloud account.
 
-> **Note:**
->
-> Currently, the Dual-Layer Data Encryption feature is only available upon request. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), and then click **Support Tickets** to go to the [Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals). Create a ticket, fill in "Apply for Dual-Layer Data Encryption" in the **Description** field, and then click **Submit**.
+You register a key once at the TiDB Cloud organization level and reuse it across {{{ .premium }}} instances in the same cloud provider and region. Key material stays in your cloud KMS; TiDB Cloud stores only the key reference, authorization relationship, status, and usage references.
 
 ## Overview
 
-By default, {{{ .premium }}} encrypts data at rest on instance storage and snapshot volumes, providing a baseline level of data security. In addition, {{{ .premium }}} supports combining TiDB storage engine encryption with your cloud provider's Key Management Service (KMS). This additional layer is called **Dual-Layer Data Encryption**.
+| Task | Where to start | Result |
+| --- | --- | --- |
+| Register and authorize a key | **Organization Settings** > **CMEK** | Registers and verifies the key in your organization before any instance uses it. |
+| Enable encryption | Instance creation or the instance **Security** page | Enables CMEK using a registered key in the same cloud provider and region. |
+| View key status and usage | **Organization Settings** > **CMEK** | Displays each registered key's status and associated instances and backups. |
+| Restore an encrypted backup | The backup restore flow | Uses the required CMEK for restoring an encrypted backup. |
+| Remove an unused key | **Organization Settings** > **CMEK** | Removes the key registration from TiDB Cloud after all usage references are cleared. |
 
-### Encryption mechanism
+## Before you begin
 
-To provide a higher level of data security, {{{ .premium }}} uses a two-layer architecture for data-at-rest encryption. Both storage-layer and database-layer encryption protect your data.
+- Prepare a symmetric encryption key in AWS KMS or Alibaba Cloud KMS in the same cloud provider and region as your target {{{ .premium }}} instances, and ensure that you have permission to update its key policy.
+    - For AWS, see [Create a symmetric encryption KMS key](https://docs.aws.amazon.com/kms/latest/developerguide/create-symmetric-cmk.html).
+    - For Alibaba Cloud, see [Understanding KMS keys](https://www.alibabacloud.com/help/en/kms/key-management-service/user-guide/overview-of-key-management). You must also be able to share your KMS instance through Alibaba Cloud Resource Directory (Resource Sharing) and enable **Alibaba Cloud Gateway** for the shared TiDB Cloud account.
+- Ensure that you have the required TiDB Cloud role. For more information, see [User roles](/tidb-cloud/manage-user-access.md#user-roles).
+    - **Manage and view organization keys** (**Organization Settings** > **CMEK**): `Organization Owner`.
+    - **Select a registered key** when creating, enabling encryption on, or restoring an instance: the role required for that resource operation (`Organization Owner`, `Project Owner`, or `Instance Manager`).
 
-- **Storage-layer encryption**
+## Register a key
 
-    - The underlying cloud service provider provides storage-layer encryption on its storage infrastructure. For example, on AWS, this includes Amazon Elastic Block Store (EBS) volume encryption and Amazon Simple Storage Service (S3) bucket encryption.
-    - This layer is enabled by default for all {{{ .premium }}} instances and cannot be disabled. It provides the foundational security baseline for data at rest.
+You can register and authorize a key before creating any {{{ .premium }}} instance. Registering a key makes it available to your organization; it does not enable encryption on an instance.
 
-- **Database-layer encryption**
+1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization, navigate to **Organization Settings** > **CMEK**, and start adding a key.
+2. Select the cloud provider and region, and copy all generated authorization statements (and on Alibaba Cloud, note the displayed TiDB Cloud account).
+3. Configure access in your cloud provider console:
 
-    - In addition to storage-layer encryption, {{{ .premium }}} supports an optional database-layer encryption feature (labeled **Dual-Layer Data Encryption** in the TiDB Cloud console). When you enable it, the feature encrypts data stored in TiKV, changefeed data, and backup data.
-    - This mechanism keeps data encrypted within the database system, which reduces the risk of data leakage during internal processing and data movement.
-    - Unlike storage-layer encryption, database-layer encryption is user-configurable. You can choose either a Customer-Managed Encryption Key (CMEK) or a Service-Managed Encryption Key, depending on your security compliance and operational requirements.
-
-### Backup and restore considerations
-
-When you enable Dual-Layer Data Encryption, the backup data for your {{{ .premium }}} instance is also encrypted. Any new instance restored from this backup inherits the encryption attributes and KMS master key of the original instance.
-
-Because backup data requires the original KMS master key for access, make sure that you meet the following requirements:
-
-- **Maintain key availability**: even if you delete the original {{{ .premium }}} instance, keep the associated KMS master key active so that you can recover the backup data.
-- **Ensure correct authorization**: during a restore operation, configure the exact same KMS master key that is associated with the backup, and make sure that the key has the required permissions for data access.
-
-### Key management options
-
-Dual-Layer Data Encryption uses your cloud provider KMS to manage master keys for data-at-rest encryption. You can choose between two key management options:
-
-- **Customer-Managed Encryption Key (CMEK)**
-
-    You create, own, and manage your KMS master key. This option provides full control over encryption and is suitable for organizations with strict security requirements.
+    - **AWS KMS**: Open the key policy of the selected symmetric key and append all generated statements to the existing `Statement` array. Preserve the generated `Principal`, `Action`, and `Condition` fields as well as your existing key administration statements. For more information, see [Key policies in AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html).
+    - **Alibaba Cloud KMS**:
+        1. In Alibaba Cloud Resource Directory (Resource Sharing), share the KMS instance with the TiDB Cloud account displayed in the TiDB Cloud console.
+        2. In the shared list, enable **Alibaba Cloud Gateway** for that TiDB Cloud account.
+        3. Open the key policy of the selected symmetric key and append all generated statements to the existing `Statement` array, preserving existing key administration statements. For more information, see [Manage Keys in Alibaba Cloud KMS](https://www.alibabacloud.com/help/en/kms/key-management-service/user-guide/manage-keys-2).
 
     > **Warning:**
     >
-    > You are fully responsible for maintaining the key's security and availability. If your CMEK is deleted or permanently damaged, your instance becomes unusable and the encrypted data is permanently unrecoverable.
+    > Append the generated statements to the key policy of the selected KMS key. Do not replace the entire key policy with only the TiDB Cloud statements, or you might lose administrative access to your key.
 
-- **Service-Managed Encryption Key**
+4. Return to the TiDB Cloud console, enter the key ARN, run the access check to verify that TiDB Cloud can perform the required KMS operations, and save the key.
+5. Confirm that the key appears in **Organization Settings** > **CMEK** with status **Idle**. Eligible instances in the same organization, cloud provider, and region can now select this key.
 
-    {{{ .premium }}} automatically creates and manages the KMS master key on your behalf. This option offers a balance of security and convenience with no maintenance overhead.
+## Enable Enhanced Data Encryption
 
-    - The key is a symmetric encryption key.
-    - The key is generated automatically when you create your first encrypted {{{ .premium }}} instance in a given region.
-    - A single key is created per organization per region and is shared across all {{{ .premium }}} instances in that region.
-    - The key is automatically deleted only after all data encrypted with it has been removed from your organization.
+You can enable Enhanced Data Encryption when creating a {{{ .premium }}} instance or on an existing instance. Once enabled, CMEK cannot be disabled or switched to a different key in place.
 
-## Limitations
-
-- Currently, this feature supports AWS KMS and Alibaba Cloud KMS.
-- Data encryption applies to data stored by TiKV, changefeed data, and backup data. Support for TiFlash data encryption is planned for a future release.
-- After you enable Dual-Layer Data Encryption, you cannot modify the encryption configuration of the {{{ .premium }}} instance.
-- Custom encryption algorithms are not supported. You can rotate only the KMS master key. Rotating other encryption keys is not supported.
-- Your cloud provider KMS key must reside in the same region as your {{{ .premium }}} instance. As a result, cross-region restore operations are not supported for backups that use a CMEK.
-
-## Enable Dual-Layer Data Encryption
-
-You can enable Dual-Layer Data Encryption either when you create a {{{ .premium }}} instance or after instance creation.
+Reusing a registered key requires no additional changes to your cloud KMS key policy.
 
 ### Enable encryption during instance creation
 
-When you create a {{{ .premium }}} instance, you can enable Dual-Layer Data Encryption. Depending on your security and operational requirements, choose either a **Customer-Managed Encryption Key (CMEK)** or a **Service-Managed Encryption Key**.
-
-#### Option 1: Customer-Managed Encryption Key (CMEK)
-
-To use your own encryption key, take the following steps:
-
-1. Create a symmetric encryption key in your cloud provider KMS.
-
-    The key must be in the **same region** as the planned {{{ .premium }}} instance.
-
-    - For AWS, see [Create a symmetric encryption KMS key](https://docs.aws.amazon.com/kms/latest/developerguide/create-symmetric-cmk.html).
-    - For Alibaba Cloud, see [Understanding KMS keys](https://www.alibabacloud.com/help/en/kms/key-management-service/user-guide/overview-of-key-management).
-
-2. Configure the CMEK in the [TiDB Cloud console](https://tidbcloud.com):
-
-    1. On the [**My TiDB**](https://tidbcloud.com/tidbs) page, click **Create Resource**.
-    2. Select the {{{ .premium }}} plan and complete the basic configuration.
-    3. In the **Dual-Layer Data Encryption** section, click **Enable**.
-    4. Select **Customer-Managed Encryption Key (CMEK)**, and then click **Add KMS Key ARN**.
-    5. Copy the displayed JSON policy statement. This policy statement defines the required key access permissions for TiDB Cloud.
-    6. In your cloud provider KMS console, append this policy statement to your key policy.
-
-        - For AWS, see [Key policies in AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html).
-        - For Alibaba Cloud, see [Manage Keys](https://www.alibabacloud.com/help/en/kms/key-management-service/user-guide/manage-keys-2).
-
-    7. Return to the TiDB Cloud console, scroll to the bottom of the key creation page, and enter the **KMS Key ARN** that you obtained from your cloud provider KMS.
-    8. To verify the trust relationship, click **Test and Add KMS Key ARN**.
-    9. After the verification succeeds, click **Create** to finish creating your {{{ .premium }}} instance.
-
-#### Option 2: Service-Managed Encryption Key
-
-To let TiDB Cloud manage the encryption key on your behalf, take the following steps:
-
-1. On the [**My TiDB**](https://tidbcloud.com/tidbs) page, click **Create Resource**.
-2. Select the {{{ .premium }}} plan and complete the basic configuration.
-3. In the **Dual-Layer Data Encryption** section, click **Enable**.
-4. Select **Service-Managed Encryption Key**.
-5. Click **Create** to finish creating your {{{ .premium }}} instance.
+1. On the [**My TiDB**](https://tidbcloud.com/tidbs) page, click **Create Resource**, select **Premium**, and choose the cloud provider and region.
+2. In the **Enhanced Data Encryption** section, enable CMEK and select a registered key in the selected cloud provider and region.
+3. If no suitable key is registered, an `Organization Owner` can open the **CMEK** page from the creation flow (opens in a new tab) to register one, and then return to instance creation to select the new key.
+4. Complete the remaining settings and click **Create**. TiDB Cloud verifies key access before enabling CMEK.
 
 ### Enable encryption for an existing instance
 
-If you do not enable encryption when creating an instance, you can enable it later. Depending on your requirements, choose either a Customer-Managed Encryption Key (CMEK) or a Service-Managed Encryption Key.
+1. In the [TiDB Cloud console](https://tidbcloud.com), open your target {{{ .premium }}} instance, click **Security** in the left navigation pane, and then click **Enable** in the **Enhanced Data Encryption** section.
+2. Select a registered key in the instance's cloud provider and region. If no suitable key is registered, an `Organization Owner` can register one in **Organization Settings** > **CMEK** first.
+3. Confirm the configuration and check the encryption status after enablement completes.
+
+## View encryption and key status
+
+- **Instance level**: Open the instance **Overview** or **Security** page to view whether Enhanced Data Encryption is enabled and which CMEK protects the instance.
+- **Organization level**: Open **Organization Settings** > **CMEK** (requires `Organization Owner`) to view each registered key's status, cloud provider, region, and associated instances and backups.
+
+| Key status | Meaning and next action |
+| --- | --- |
+| **Verifying** | An access check is running. Wait for verification to complete. |
+| **Idle** | The key is registered and verified, and is not currently used by any instance or backup. Eligible instances in the same cloud provider and region can select it. |
+| **Applied** | The key is currently used by one or more instances or backups in the same cloud provider and region, and can be reused by other eligible instances. |
+| **Error** | The key is unavailable or access verification failed. Restore key availability or authorization in your cloud KMS and verify access again. |
+
+## Manage registered keys
+
+### Handle unavailable keys
+
+If a registered key changes to **Error** or access fails:
+
+1. Review the affected key and resources in **Organization Settings** > **CMEK**.
+2. Restore the required key state, policy, or (on Alibaba Cloud) KMS instance sharing and **Alibaba Cloud Gateway** configuration in your cloud KMS.
+3. Verify that the key recovers from **Error** and review any affected instances or restore operations.
+
+Because the database caches internal keys in memory for local data operations, a disabled or revoked CMEK takes effect when the database next calls KMS for protected keys. All instances and backups using the same CMEK share this availability dependency.
+
+### Remove a key
+
+1. In **Organization Settings** > **CMEK**, review the key's associated instances and backup snapshots.
+2. Remove the key registration. TiDB Cloud blocks removal while any instance, backup snapshot, or in-progress restore still depends on the key, even when the key status is **Error**.
+3. After all dependent instances, backup snapshots, and in-progress restores are cleared, retry and confirm removal.
 
 > **Note:**
 >
-> Enabling encryption on an existing instance might take some time to complete.
-
-#### Option 1: Customer-Managed Encryption Key (CMEK)
-
-Before you begin, make sure that you have created a symmetric encryption key in your cloud provider KMS. Then, take the following steps:
-
-1. On the **Security** page of your {{{ .premium }}} instance, click **Enable** in the **Dual-Layer Data Encryption** section.
-2. Select **Customer-Managed Encryption Key (CMEK)**, and then click **Add KMS Key ARN**.
-3. Copy the displayed JSON policy statement. This policy statement defines the required key access permissions for TiDB Cloud.
-4. In your cloud provider KMS console, append this policy statement to your key policy.
-
-    - For AWS, see [Key policies in AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html).
-    - For Alibaba Cloud, see [Manage Keys](https://www.alibabacloud.com/help/en/kms/key-management-service/user-guide/manage-keys-2).
-
-5. Return to the TiDB Cloud console, scroll to the bottom of the page, and enter the **KMS Key ARN** that you obtained from your cloud provider KMS.
-6. Click **Test and Add KMS Key ARN** to verify the key access configuration and enable Dual-Layer Data Encryption.
-
-#### Option 2: Service-Managed Encryption Key
-
-To let TiDB Cloud manage the encryption key on your behalf, take the following steps:
-
-1. On the **Security** page of your {{{ .premium }}} instance, click **Enable** in the **Dual-Layer Data Encryption** section.
-2. Select **Service-Managed Encryption Key**.
-3. Click **Enable**.
-
-## View encryption status
-
-After you enable encryption, check the status in the following places:
-
-- On the **Overview** page of your {{{ .premium }}} instance, the **Encryption** field shows the active key management method: either **Enabled with Customer-Managed Encryption Key (CMEK)** or **Enabled with Service-Managed Encryption Key**.
-- On the **Security** page, you can view detailed configuration of Dual-Layer Data Encryption.
+> Removing a key removes only its registration in TiDB Cloud. It does not delete, disable, or modify the key or its policy in your cloud KMS. Keep the key and its authorization in your cloud KMS for as long as any data or backup still requires it.
 
 ## Restore from an encrypted backup
 
-Backups created from an encrypted {{{ .premium }}} instance are also encrypted. When you restore an encrypted backup, the new instance must use consistent encryption settings.
+When you restore a {{{ .premium }}} backup, TiDB Cloud checks its encryption metadata and applies the corresponding key requirements in the target region:
+
+| Backup encryption state | Restore behavior and required action |
+| --- | --- |
+| Encrypted with a CMEK; source key is registered and available | TiDB Cloud matches the source key. Review it and continue; the restored instance uses the same key. |
+| Encrypted with a CMEK; source key is not registered | An `Organization Owner` must register and authorize the original key before continuing. Another key cannot decrypt the {{{ .premium }}} backup. |
+| Encrypted with a CMEK; source key is in **Error** | Restore key availability or authorization in your cloud KMS and verify access before continuing. |
+| Encrypted with a TiDB Cloud-managed key | The restored instance inherits the original encryption configuration. You cannot disable encryption or switch to a CMEK during restore. |
+| Database-layer encryption not enabled | Continue without Enhanced Data Encryption, or select a registered key in the target region to enable CMEK on the new instance. |
+
+For a CMEK-protected {{{ .premium }}} backup, you cannot select another key or disable CMEK for the restored instance, and the restore must stay in the original cloud provider and region.
+
+When restoring a CMEK-protected {{{ .dedicated }}} backup to a new {{{ .premium }}} instance (cross-plan restore) in the same cloud provider and region, you can either authorize and use the original key or select another registered key in the same cloud provider and region for the new instance. For more information about supported restore sources and steps, see [Backup and Restore for {{{ .premium }}}](/tidb-cloud/premium/backup-and-restore-premium.md).
 
 > **Warning:**
-> 
-> - Currently, you can only restore an encrypted backup to the **same account** and the **same region** as the original instance. Cross-region and cross-account restore operations are not supported.
-> - You are responsible for maintaining the key's security and availability. If your CMEK is deleted or permanently damaged, any backup data associated with this key also becomes unrecoverable.
-
-### Restore a backup encrypted with a CMEK
-
-If the backup is encrypted with a CMEK, make sure that the new instance can access the KMS master key during the restore. The key ARN remains unchanged.
-
-To verify access, click **Check** to start the trust policy verification. TiDB Cloud then checks whether the authorized TiDB Cloud account in the key policy matches the account that is associated with the original backup:
-
-- If the accounts match, no further authorization is required.
-- If the accounts do not match, copy the provided key policy and update it in your cloud provider KMS. This update re-authorizes the key and ensures that the new instance can access it.
-
-### Restore a backup encrypted with a Service-Managed Encryption Key
-
-If the backup is encrypted with a Service-Managed Encryption Key, the restored instance automatically inherits the same key type. During restore, encryption is enabled by default, and the key type is set to **Service-Managed Encryption Key**.
+>
+> Keep the original CMEK active and authorized for as long as you need to restore its backups, even after deleting the source instance. If the required key material is permanently deleted or destroyed, backups encrypted with that key cannot be recovered.
 
 ## Rotate a Customer-Managed Encryption Key (CMEK)
 
-You can configure automatic CMEK rotation in your cloud provider KMS. No configuration updates are required in TiDB Cloud.
+Configure key material rotation directly in your cloud KMS. In AWS KMS and Alibaba Cloud KMS, rotating key material keeps the key ID and ARN unchanged, so no configuration update is needed in TiDB Cloud.
 
-- For AWS, see [automatic CMEK rotation](https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html).
-- For Alibaba Cloud, see [Key rotation](https://www.alibabacloud.com/help/en/kms/key-management-service/user-guide/configure-key-rotation).
+Key material rotation updates the underlying material of the same CMEK. It does not switch the instance to a different CMEK, re-encrypt existing data, or remediate an already compromised data encryption key (DEK).
+
+- For AWS, see [Rotate AWS KMS keys](https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html).
+- For Alibaba Cloud, see [Key rotation in Alibaba Cloud KMS](https://www.alibabacloud.com/help/en/kms/key-management-service/user-guide/configure-key-rotation).
+
+## How encryption protects your data
+
+### Encryption mechanism
+
+By default, the cloud provider encrypts data at rest at the storage layer (for example, EBS volume encryption and S3 server-side encryption on AWS). Enhanced Data Encryption adds an independent database encryption layer that encrypts database data and backup data before writing it to storage.
+
+Because storage access and database-layer key permissions are managed separately, obtaining a storage object (such as an S3 file after server-side decryption) is not enough to read the data—the database-layer protected contents remain encrypted without the corresponding key chain and KMS authorization.
+
+Enhanced Data Encryption protects data at rest. Because the database processes plaintext during query execution, use [TLS connections](/tidb-cloud/premium/tidb-cloud-tls-connect-to-premium.md) and database access controls to protect data in transit and control query access.
+
+### Key hierarchy
+
+The database encryption layer uses envelope encryption with a three-tier key hierarchy, which is distinct from the two data encryption layers. A keyspace is the logical storage namespace for an instance.
+
+| Key | Protects | Management |
+| --- | --- | --- |
+| Customer-managed KMS master key (CMEK) | Keyspace Master Key | Managed and authorized in your cloud KMS account. |
+| Keyspace Master Key | Data encryption keys (DEKs) for the keyspace | Persisted copy is encrypted with the CMEK. |
+| Data encryption key (DEK) | Database data and logs | Persisted copy is encrypted with the Keyspace Master Key. |
+
+Each instance maintains its own internal key chain, and a single DEK can encrypt multiple files. The database performs high-frequency data encryption and decryption locally using internal keys in memory, while calling your cloud KMS to protect and unwrap upper-level keys.
+
+For symmetric keys generated by AWS KMS, plaintext master key material remains within the KMS hardware security module (HSM) boundary. For more information, see [Data protection in AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/data-protection.html).
+
+### Key authorization on AWS
+
+On AWS, the generated key policy grants the displayed TiDB Cloud principal access to your key under an encryption-context condition containing your organization's External ID. AWS KMS evaluates this condition on cryptographic operations and binds the encryption context to the encrypted key material, requiring the exact same context for decryption.
+
+Because TiDB Cloud derives the External ID from your authenticated organization, requests from another organization carry a different context and are rejected by AWS KMS even if your key ARN is submitted.
+
+The External ID is an organization identifier, not a secret. Preserve the generated principal, actions, and conditions when appending the statements to your key policy. For more information, see [Encryption context](https://docs.aws.amazon.com/kms/latest/developerguide/encrypt_context.html) in the AWS KMS documentation.
+
+## Audit key usage
+
+- **Key management in TiDB Cloud**: Enable [console audit logging](/tidb-cloud/tidb-cloud-console-auditing.md) to track key management and instance encryption actions in the TiDB Cloud console.
+- **KMS API activity**: On AWS, use [AWS CloudTrail](https://docs.aws.amazon.com/kms/latest/developerguide/logging-using-cloudtrail.html) to review KMS key operations. Cross-account requests rejected for access denial are logged only in the calling account, and KMS events record key operations rather than individual SQL queries.
+- **Database access**: Enable [database audit logging](/tidb-cloud/premium/tidb-cloud-auditing-premium.md) to audit SQL queries and database user activity.
+
+## Limitations
+
+- Enhanced Data Encryption for {{{ .premium }}} supports AWS KMS and Alibaba Cloud KMS.
+- A registered key is selectable only within its organization, cloud provider, and region. Cross-region restore of CMEK-protected backups is not supported, and restoring a CMEK-protected {{{ .premium }}} backup cannot switch to another key.
+- Once enabled, CMEK cannot be disabled or replaced with another key on the same instance.
+- Exported data and downstream systems are not covered by the instance CMEK and must be encrypted separately.
+- Deleting an instance does not remove its retained backup snapshots or their key dependencies. Permanently losing the required key material makes the dependent encrypted data unrecoverable.
+
+## Troubleshoot key access verification
+
+- **Key registration or verification fails**:
+    - Confirm that the key is a symmetric encryption key in the selected cloud provider and region.
+    - Confirm that the key is enabled (not disabled or pending deletion) in your cloud KMS.
+    - Verify that all generated statements were appended to the key policy without modifying the `Principal`, `Action`, or `Condition` fields.
+    - **Alibaba Cloud only**: Confirm that the KMS instance is shared with the displayed TiDB Cloud account through Resource Directory (Resource Sharing) and that **Alibaba Cloud Gateway** is enabled for that account in the shared list.
+    - Correct the configuration in your cloud KMS and run the access check again.
+- **Registration succeeds, but instance creation, enablement, or restore fails**:
+    - Review the error message. If your key policy adds restrictions (such as VPC, IP, or service conditions) that block access, update the policy and retry.
+- **Unresolved issues**:
+    - Contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) with the cloud provider, region, key ARN, operation timestamp, and error message.
