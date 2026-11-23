@@ -31,7 +31,7 @@ We are constantly filling in the feature gaps between {{{ .starter }}}/Essential
 
 ### Encryption
 
-- Data persisted in your {{{ .starter }}} or {{{ .essential }}} instance is encrypted using the encryption tool provided by the cloud provider that manages your instance. For {{{ .starter }}} (with spending limit > 0) and {{{ .essential }}} instances, an optional second layer of encryption is available during the instance creation process, providing an additional level of security beyond the default encryption at rest.
+- Data persisted in your {{{ .starter }}} or {{{ .essential }}} instance is encrypted using the encryption tool provided by the cloud provider that manages your instance. For {{{ .essential }}} instances, an additional database layer of encryption (dual-layer encryption) is enabled by default. Dual-layer encryption is not supported for {{{ .starter }}} instances.
 - Using [customer-managed encryption keys (CMEK)](/tidb-cloud/tidb-cloud-encrypt-cmek-aws.md) is currently unavailable.
 
 ### Maintenance window
