@@ -6,7 +6,7 @@ aliases: ['/tidb/stable/dev-guide-gui-beekeeper-studio/','/tidb/dev/dev-guide-gu
 
 # Connect to TiDB with Beekeeper Studio
 
-TiDB is a MySQL-compatible database, and [Beekeeper Studio](https://www.beekeeperstudio.io/) is a free, open-source SQL editor and database manager with a modern, easy-to-use interface for Windows, macOS, and Linux. Beekeeper Studio has a built-in, native **TiDB** connection type.
+[Beekeeper Studio](https://www.beekeeperstudio.io/) is a free, open-source SQL editor and database manager with a modern, easy-to-use interface for Windows, macOS, and Linux. Beekeeper Studio has a built-in, native **TiDB** connection type.
 
 In this tutorial, you can learn how to connect to TiDB using Beekeeper Studio Community Edition.
 
@@ -56,7 +56,7 @@ Connect to TiDB depending on the TiDB deployment option you've selected.
 
 6. Turn on the **Enable SSL** toggle, since {{{ .starter }}} and Essential require an encrypted connection.
 
-    By default, Beekeeper Studio trusts the server's certificate without requiring you to download or select a CA certificate, which is convenient for a quick connection. For stronger protection against man-in-the-middle attacks, you can instead click **CA Cert** in the TiDB Cloud connection dialog to download the certificate, select the downloaded file in Beekeeper Studio's **CA Cert (optional)** field, and check the **Reject Unauthorized** box so Beekeeper Studio actually validates the server against it.
+    With only **Enable SSL** turned on, Beekeeper Studio encrypts the connection but does not verify the server's certificate. To check the certificate against a CA, click the arrow next to **Enable SSL** to expand the section, select the [ISRG Root X1 certificate](https://letsencrypt.org/certs/isrgrootx1.pem) in **CA Cert (optional)**, and keep **Reject Unauthorized** checked. Beekeeper Studio then checks the server certificate against this CA, but it does not check that the certificate matches the host name. For a {{{ .essential }}} instance that uses the endpoint exclusive model, click **CA cert** in the connection dialog to download its CA certificate, and select that file instead.
 
 7. Click **Test** to validate the connection to your target {{{ .starter }}} or Essential instance.
 
