@@ -379,7 +379,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td>Enhanced Data Encryption (dual-layer encryption)</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center;">✅</td>
-    <td style="text-align:center;">✅<br/><span style="font-size: 14px; white-space: nowrap;">(CMEK)</span></td>
+    <td style="text-align:center;">✅<br/><span style="font-size: 14px; white-space: nowrap;">(CMEK supported)</span></td>
     <td style="text-align:center;">🚧</td>
     <td style="text-align:center;">✅<br/><span style="font-size: 14px; white-space: nowrap;">(CMEK supported)</span></td>
   </tr>
