@@ -55,7 +55,7 @@ If you have the `Organization Owner` role, you can create a {{{ .premium }}} ins
 
 6. For {{{ .premium }}} instances, only regional high availability is enabled, and it is not configurable. For more information, see [High Availability](/tidb-cloud/serverless-high-availability.md).
 
-7. (Optional) In the **Enhanced Data Encryption** section, enable CMEK and select a registered key in your organization for the selected cloud provider and region. If no suitable key is available, an `Organization Owner` can open the **CMEK** page from the creation page (opens in a new tab) to register one, and then return to select it. For more information, see [Enhanced Data Encryption](/tidb-cloud/premium/enhanced-data-encryption-premium.md).
+7. (Optional) In the **Enhanced Data Encryption** section, enable CMEK and select a registered key in your organization for the selected cloud provider and region. If no suitable key is available, an `Organization Owner` can open the **CMEK** page in a new tab from the creation page to register one, and then return to instance creation to select it. For more information, see [Enhanced Data Encryption](/tidb-cloud/premium/enhanced-data-encryption-premium.md).
 
 8. Click **Create**.
 
