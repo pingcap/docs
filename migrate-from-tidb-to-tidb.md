@@ -268,14 +268,17 @@ After setting up the environment, you can use the backup and restore functions o
 
 After creating a changefeed, data written to the upstream cluster is replicated to the downstream cluster with low latency. You can migrate read traffic to the downstream cluster gradually. Observe for a period. If the downstream cluster is stable, you can migrate write traffic to the downstream cluster by performing the following steps:
 
-1. Stop write services in the upstream cluster. Make sure that all upstream data are replicated to downstream before stopping the changefeed.
+1. Stop write services in the upstream cluster. After stopping writes, view the changefeed status and confirm that the `checkpoint` time is later than the time of stopping writes. Then stop the changefeed from the upstream cluster to the downstream cluster.
 
     ```shell
+    # View the changefeed status and confirm that the checkpoint time is later than the time of stopping writes
+    tiup cdc cli changefeed list --server=http://172.16.6.122:8300
+
     # Stop the changefeed from the upstream cluster to the downstream cluster
     tiup cdc cli changefeed pause -c "upstream-to-downstream" --server=http://172.16.6.122:8300
 
-    # View the changefeed status
-    tiup cdc cli changefeed list
+    # View the changefeed status again
+    tiup cdc cli changefeed list --server=http://172.16.6.122:8300
     ```
 
     ```

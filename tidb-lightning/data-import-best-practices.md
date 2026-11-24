@@ -77,7 +77,7 @@ When you import data, some key factors can affect import performance and might e
 - When generating source files, it is preferable to sort them by the primary key within a single file. If the table definition does not have a primary key, you can add an auto-increment primary key. In this case, the order of the file content does not matter.
 - When assigning source files to multiple TiDB Lightning instances, try to avoid the situation where overlapping primary keys or non-null unique indexes exist between multiple source files. If the generated files are globally sorted, they can be distributed into different TiDB Lightning instances based on ranges to achieve optimal import performance.
 - Control each file to be less than 96 MiB in size during file generation.
-- If a file is exceptionally large and exceeds 256 MiB, enable [`strict-format`](/migrate-from-csv-files-to-tidb.md#step-4-tune-the-import-performance-optional).
+- If a file is exceptionally large and exceeds 256 MiB, and no CSV field contains embedded line breaks (including quoted values), enable [`strict-format`](/migrate-from-csv-files-to-tidb.md#step-4-tune-the-import-performance-optional).
 
 ## Estimate storage space
 
@@ -103,7 +103,7 @@ Conflicts might occur during data validation. The error message is "checksum mis
 
 1. In the source data, check for conflicted primary keys or unique keys, and resolve the conflicts before reimporting. In most cases, this is the most common cause.
 2. Check if the table primary key or unique key definition is reasonable. If not, modify the table definition and reimport data.
-3. If the issue persists after following the preceding two steps, further examination is required to determine whether a small amount (less than 10%) of unexpected conflicting data exists in the source data. To let TiDB Lightning detect and resolve conflicting data, enable [conflict detection](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#conflict-detection).
+3. If the issue persists after following the preceding two steps, further examination is required to determine whether a small amount (less than 10%) of unexpected conflicting data exists in the source data. To let TiDB Lightning detect and resolve conflicting data, enable [conflict detection](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#conflict-detection). When `conflict.strategy` is `"replace"` or `"ignore"`, [`conflict.threshold`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) defaults to `10000`. If you expect more conflicts than that, set `conflict.threshold` explicitly. Values larger than `10000` might degrade import performance.
 
 ## Enable checkpoint
 
@@ -126,7 +126,7 @@ Follow the steps outlined in the [Prepare source files](#prepare-source-files).
 
 For a large single table, if global sorting is not achievable but sorting within each file based on the primary key is possible, and the file is a standard CSV file, it is recommended to generate large single files with each around 20 GiB.
 
-Then, enable `strict-format`. This approach reduces the overlap of primary and unique keys in the imported files between TiDB Lightning instances, and TiDB Lightning instances can split the large files before importing to achieve optimal import performance.
+Then, if no CSV field contains embedded line breaks (including quoted values), enable `strict-format`. This approach reduces the overlap of primary and unique keys in the imported files between TiDB Lightning instances, and TiDB Lightning instances can split the large files before importing to achieve optimal import performance.
 
 ### Plan cluster topology
 
