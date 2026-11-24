@@ -33,6 +33,12 @@ This document describes how to import the sample data (SQL files) into TiDB Clou
 
 5. In the **Destination Mapping** section, keep **Use [TiDB file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** selected, and then select **SQL** as the data format.
 
+    - **Advanced options**: expand the panel to view the `Ignore compatibility checks (advanced)` toggle. Leave it disabled unless you intentionally want to bypass compatibility validation.
+
+        > **Note:**
+        >
+        > When you enable `Ignore compatibility checks`, all pre-import safety checks are skipped, including the local disk space check. Make sure the import node has enough free disk space. Imported data bypasses CDC and log backups. If Point-in-time Restore is enabled, perform a full table backup immediately after the import completes.
+
 6. Click **Next**. TiDB Cloud scans the source files.
 
 7. Review the scan results, check the data files found and corresponding target tables, and then click **Start Import**.
@@ -63,6 +69,12 @@ This document describes how to import the sample data (SQL files) into TiDB Clou
 4. Click **Next**.
 
 5. In the **Destination Mapping** section, keep **Use [TiDB file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** selected, and then select **SQL** as the data format.
+
+    - **Advanced options**: expand the panel to view the `Ignore compatibility checks (advanced)` toggle. Leave it disabled unless you intentionally want to bypass compatibility validation.
+
+        > **Note:**
+        >
+        > When you enable `Ignore compatibility checks`, all pre-import safety checks are skipped, including the local disk space check. Make sure the import node has enough free disk space. Imported data bypasses CDC and log backups. If Point-in-time Restore is enabled, perform a full table backup immediately after the import completes.
 
 6. Click **Next**. TiDB Cloud scans the source files.
 
@@ -118,6 +130,12 @@ This document describes how to import the sample data (SQL files) into TiDB Clou
     > If the endpoint is not yet approved, TiDB Cloud displays a message indicating that the connection is pending approval. Approve the request in the [Azure portal](https://portal.azure.com/) and retry.
 
 5. In the **Destination Mapping** section, keep **Use [TiDB file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** selected, and then select **SQL** as the data format.
+
+    - **Advanced options**: expand the panel to view the `Ignore compatibility checks (advanced)` toggle. Leave it disabled unless you intentionally want to bypass compatibility validation.
+
+        > **Note:**
+        >
+        > When you enable `Ignore compatibility checks`, all pre-import safety checks are skipped, including the local disk space check. Make sure the import node has enough free disk space. Imported data bypasses CDC and log backups. If Point-in-time Restore is enabled, perform a full table backup immediately after the import completes.
 
 6. Click **Next**. TiDB Cloud scans the source files.
 

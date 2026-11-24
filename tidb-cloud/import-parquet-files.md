@@ -148,6 +148,12 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 
         - **Target Database** and **Target Table**: enter the target database and table to import the data to.
 
+    - **Advanced options**: expand the panel to view the `Ignore compatibility checks (advanced)` toggle. Leave it disabled unless you intentionally want to bypass compatibility validation.
+
+        > **Note:**
+        >
+        > When you enable `Ignore compatibility checks`, all pre-import safety checks are skipped, including the local disk space check. Make sure the import node has enough free disk space. Imported data bypasses CDC and log backups. If Point-in-time Restore is enabled, perform a full table backup immediately after the import completes.
+
 6. Click **Next**. TiDB Cloud scans the source files.
 
 7. Review the scan results, check the data files found and corresponding target tables, and then click **Start Import**.
@@ -198,6 +204,12 @@ To import the Parquet files to TiDB Cloud, take the following steps:
             - `my-data*.parquet`: matches all Parquet files that start with `my-data`, such as `my-data10.parquet` and `my-data100.parquet`.
 
         - **Target Database** and **Target Table**: enter the target database and table to import the data to.
+
+    - **Advanced options**: expand the panel to view the `Ignore compatibility checks (advanced)` toggle. Leave it disabled unless you intentionally want to bypass compatibility validation.
+
+        > **Note:**
+        >
+        > When you enable `Ignore compatibility checks`, all pre-import safety checks are skipped, including the local disk space check. Make sure the import node has enough free disk space. Imported data bypasses CDC and log backups. If Point-in-time Restore is enabled, perform a full table backup immediately after the import completes.
 
 6. Click **Next**. TiDB Cloud scans the source files.
 
@@ -269,6 +281,12 @@ To import the Parquet files to TiDB Cloud, take the following steps:
             - `my-data*.parquet`: matches all Parquet files that start with `my-data`, such as `my-data10.parquet` and `my-data100.parquet`.
 
         - **Target Database** and **Target Table**: enter the target database and table to import the data to.
+
+    - **Advanced options**: expand the panel to view the `Ignore compatibility checks (advanced)` toggle. Leave it disabled unless you intentionally want to bypass compatibility validation.
+
+        > **Note:**
+        >
+        > When you enable `Ignore compatibility checks`, all pre-import safety checks are skipped, including the local disk space check. Make sure the import node has enough free disk space. Imported data bypasses CDC and log backups. If Point-in-time Restore is enabled, perform a full table backup immediately after the import completes.
 
 6. Click **Next**. TiDB Cloud scans the source files.
 
