@@ -21,7 +21,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
       When restoring a CMEK-protected Premium backup, TiDB Cloud automatically matches the original key, which must be registered and available in the original cloud provider and region. TiDB Cloud also prevents you from removing a key while it is still required by an instance, backup snapshot, or in-progress restore.
 
-      For more information, see [Enhanced Data Encryption](https://docs.pingcap.com/tidbcloud/premium/enhanced-data-encryption-premium/).
+      For more information, see [Enhanced Data Encryption](https://docs.pingcap.com/tidbcloud/enhanced-data-encryption-premium/?plan=premium).
 
 - **TiDB Cloud Dedicated**
 
