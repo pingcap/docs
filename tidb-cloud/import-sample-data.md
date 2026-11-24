@@ -33,7 +33,7 @@ This document describes how to import the sample data (SQL files) into TiDB Clou
 
 5. In the **Destination Mapping** section, keep **Use [TiDB file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** selected, and then select **SQL** as the data format.
 
-    **Advanced options**: expand the panel to view the **Ignore compatibility checks (advanced)** option. Leave it disabled unless you need to import data into a cluster that has a changefeed or Point-in-time Restore enabled. Enabling this option skips all pre-import safety checks, including the local disk space check. Make sure the target cluster has enough free disk space before enabling it.
+    **Advanced options**: expand the panel to view the **Ignore compatibility checks (advanced)** option. Leave it disabled unless you need to import data into a cluster that has a changefeed or Point-in-time Restore enabled. Enabling this option skips all pre-import safety checks, including the local disk space check. Before enabling it, verify that the target cluster's available disk space can accommodate the imported data.
 
     > **Note:**
     >
@@ -70,7 +70,7 @@ This document describes how to import the sample data (SQL files) into TiDB Clou
 
 5. In the **Destination Mapping** section, keep **Use [TiDB file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** selected, and then select **SQL** as the data format.
 
-    **Advanced options**: expand the panel to view the **Ignore compatibility checks (advanced)** option. Leave it disabled unless you need to import data into a cluster that has a changefeed or Point-in-time Restore enabled. Enabling this option skips all pre-import safety checks, including the local disk space check. Make sure the target cluster has enough free disk space before enabling it.
+    **Advanced options**: expand the panel to view the **Ignore compatibility checks (advanced)** option. Leave it disabled unless you need to import data into a cluster that has a changefeed or Point-in-time Restore enabled. Enabling this option skips all pre-import safety checks, including the local disk space check. Before enabling it, verify that the target cluster's available disk space can accommodate the imported data.
 
     > **Note:**
     >
@@ -131,7 +131,7 @@ This document describes how to import the sample data (SQL files) into TiDB Clou
 
 5. In the **Destination Mapping** section, keep **Use [TiDB file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** selected, and then select **SQL** as the data format.
 
-    **Advanced options**: expand the panel to view the **Ignore compatibility checks (advanced)** option. Leave it disabled unless you need to import data into a cluster that has a changefeed or Point-in-time Restore enabled. Enabling this option skips all pre-import safety checks, including the local disk space check. Make sure the target cluster has enough free disk space before enabling it.
+    **Advanced options**: expand the panel to view the **Ignore compatibility checks (advanced)** option. Leave it disabled unless you need to import data into a cluster that has a changefeed or Point-in-time Restore enabled. Enabling this option skips all pre-import safety checks, including the local disk space check. Before enabling it, verify that the target cluster's available disk space can accommodate the imported data.
 
     > **Note:**
     >
