@@ -61,7 +61,44 @@ The benchmark executor sends SQL queries to the TiDB cluster. The executor used 
 The tests used [sysbench](https://github.com/akopytov/sysbench) with 32 tables and 10,000,000 rows per table.
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), create a TiDB Cloud Premium cluster that meets the [test environment](#test-environment) requirements.
-2. Use BR to restore the test data to the `test` database, and wait until the Regions are healthy.
+2. Prepare the test data in the `test` database.
+
+    The benchmark environment restored a pre-generated dataset using BR. The following command runs inside the BR Job container in the cluster namespace. It requires access to the benchmark S3 bucket, the internal PD endpoint, and the mounted client certificates. Set `${ACCESS_KEY}`, `${SECRET_KEY}`, and `${KEYSPACE_NAME}` to the values for the test environment.
+
+    ```shell
+    ./br restore db \
+      --db test \
+      --storage "s3://qa-workload-datasets/benchmark/sysbench_32t_10m?access-key=${ACCESS_KEY}&secret-access-key=${SECRET_KEY}" \
+      --pd "db-pd:2379" \
+      --send-credentials-to-tikv=true \
+      --keyspace-name="${KEYSPACE_NAME}" \
+      --with-sys-table=false \
+      --check-requirements=false \
+      --checksum=false \
+      --key /var/lib/cluster-client-tls/tls.key \
+      --ca /var/lib/cluster-client-tls/ca.crt \
+      --cert /var/lib/cluster-client-tls/tls.crt
+    ```
+
+    This command describes the internal benchmark setup. If you do not have access to that setup, create the `test` database and use `sysbench prepare` to generate a dataset with the same table and row counts:
+
+    ```sql
+    CREATE DATABASE test;
+    ```
+
+    ```shell
+    sysbench oltp_common \
+      --threads=${THREAD} \
+      --db-driver=mysql \
+      --mysql-db=test \
+      --mysql-host=${HOST} \
+      --mysql-port=${PORT} \
+      --mysql-user=root \
+      --mysql-password="${PASSWORD}" \
+      prepare --tables=32 --table-size=10000000
+    ```
+
+    Set the connection variables and preparation thread count for your environment before running the command. The generated dataset has the same scale as the restored dataset, but is not the original benchmark backup. After loading the data, wait until the Regions are healthy.
 3. Run `ANALYZE TABLE` to collect statistics for the test tables, and warm up the cluster.
 4. Run the following command for each workload: `oltp_point_select`, `oltp_read_write`, `oltp_update_non_index`, `oltp_update_index`, and `oltp_insert`. Replace `${WORKLOAD}`, `${HOST}`, `${PORT}`, and `${PASSWORD}` with your actual values. For each workload, set `${THREAD}` to `100`, `200`, and `400` in separate tests. Each test at a given concurrency level lasts 20 minutes.
 
