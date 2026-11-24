@@ -21,7 +21,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
       When restoring a CMEK-protected Premium backup, TiDB Cloud automatically matches the original key, which must be registered and available in the original cloud provider and region. TiDB Cloud also prevents you from removing a key while it is still required by an instance, backup snapshot, or in-progress restore.
 
-      For more information, see Enhanced Data Encryption.
+      For more information, see [Enhanced Data Encryption](https://docs.pingcap.com/tidbcloud/premium/enhanced-data-encryption-premium/).
 
 - **TiDB Cloud Dedicated**
 
@@ -32,9 +32,9 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
       For more information, see the import documentation:
 
-        - <a href="https://docs.pingcap.com/tidbcloud/import-sample-data/">Import Sample Data (SQL Files) from Cloud Storage into TiDB Cloud Dedicated</a>
-        - <a href="https://docs.pingcap.com/tidbcloud/import-csv-files/">Import CSV Files from Cloud Storage into TiDB Cloud Dedicated</a>
-        - <a href="https://docs.pingcap.com/tidbcloud/import-parquet-files/">Import Apache Parquet Files from Cloud Storage into TiDB Cloud Dedicated</a>
+        - [Import Sample Data (SQL Files) from Cloud Storage into TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/import-sample-data/)
+        - [Import CSV Files from Cloud Storage into TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/import-csv-files/)
+        - [Import Apache Parquet Files from Cloud Storage into TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/import-parquet-files/)
 
 **Console changes**
 
@@ -44,8 +44,8 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     For more information, see the following documentation:
 
-    - Restore backups from a different plan type to a new TiDB Cloud Essential instance
-    - Restore backups from a different plan type to a new TiDB Cloud Premium instance
+    - [Restore backups from a different plan type to a new TiDB Cloud Essential instance](https://docs.pingcap.com/tidbcloud/backup-and-restore-serverless/?plan=essential)
+    - [Restore backups from a different plan type to a new TiDB Cloud Premium instance](https://docs.pingcap.com/tidbcloud/premium/backup-and-restore-premium/)
 
 ## November 10, 2026
 
