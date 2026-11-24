@@ -197,6 +197,37 @@ To restore a deleted {{{ .essential }}} instance from the Recycle Bin, take the 
 
 5. On the **Restore** page, follow the same steps as [Restore to a new instance](#restore-to-a-new-instance) to restore the backup to a new instance.
 
+<CustomContent plan="essential">
+
+### Restore backups from a different plan type
+
+You can use **Cross Plan Restore** to restore a backup snapshot from an active or deleted {{{ .dedicated }}} cluster hosted on AWS to a new {{{ .essential }}} instance. The new instance must use the same cloud provider and region as the backup. Currently, only backups for {{{ .dedicated }}} clusters are supported as the source.
+
+1. On the [**My TiDB**](https://tidbcloud.com/tidbs) page, click **...** in the upper-right corner, and then click **Cross Plan Restore**.
+
+2. In the **Select Backup** step, configure the following fields, and then click **Next**:
+
+    - **From**: select **Active** for an existing cluster or **Recycle Bin (Deleted)** for a deleted cluster.
+    - **Plan** and **Cloud Provider**: these fields are fixed to **Dedicated** and **AWS**.
+    - **Project**: select the project that contains the source cluster.
+    - **Cluster Name**: select the source cluster.
+    - **Backup Snapshot**: select the snapshot to restore.
+
+3. Review **Backup Information**, and then configure **Restore to New Instance**:
+
+    - **Plan**: select **Essential**.
+    - **Project** and **Instance Name**: select a destination project as needed and enter a name for the new instance. If your role is `Organization Owner`, selecting a project is optional. If your role is `Project Owner`, you must select a project you own.
+    - **Cloud Provider** and **Region**: these fields are inherited from the backup and cannot be changed.
+    - Configure capacity, encryption, and high availability as needed. For more information, see [Create a {{{ .starter }}} or Essential Instance](/tidb-cloud/create-tidb-cluster-serverless.md).
+
+    > **Note:**
+    >
+    > If {{{ .essential }}} is unavailable in the selected backup region, you cannot proceed with the restore. Contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) to enable {{{ .essential }}} in that region, or click **Previous** and select another backup.
+
+4. Review the estimated monthly price and configuration, and then click **Restore** to begin restoring the backup to a new instance.
+
+</CustomContent>
+
 ## Limitations
 
 - If a TiFlash replica is enabled, it will be unavailable for a period after the restore, because the data needs to be rebuilt in TiFlash.
