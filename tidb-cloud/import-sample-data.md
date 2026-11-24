@@ -37,7 +37,7 @@ This document describes how to import the sample data (SQL files) into TiDB Clou
 
         > **Note:**
         >
-        > To import data to a cluster that has a changefeed or Point-in-time Restore enabled, enable `Ignore compatibility checks (advanced)`. All pre-import safety checks are then skipped, including the local disk space check, so make sure the import node has enough free disk space. Imported data does not generate change logs, so it bypasses CDC and log backups and cannot be automatically detected and backed up. After the import completes, take a manual snapshot backup of the cluster before you enable or rely on Point-in-time Restore. For more information, see [Perform a manual backup](/tidb-cloud/backup-and-restore.md#perform-a-manual-backup).
+        > To import data to a cluster that has a changefeed or Point-in-time Restore enabled, enable `Ignore compatibility checks (advanced)`. All pre-import safety checks are then skipped, including the local disk space check, so make sure the import node has enough free disk space. Imported data does not generate change logs, so it bypasses CDC and log backups and cannot be automatically detected and backed up. After the import completes, take a manual snapshot backup of the cluster before you enable or rely on Point-in-time Restore. Until that snapshot is taken, a Point-in-time Restore target between the import and the manual snapshot cannot recover the imported rows. For more information, see [Perform a manual backup](/tidb-cloud/backup-and-restore.md#perform-a-manual-backup).
 
 6. Click **Next**. TiDB Cloud scans the source files.
 
@@ -74,7 +74,7 @@ This document describes how to import the sample data (SQL files) into TiDB Clou
 
         > **Note:**
         >
-        > To import data to a cluster that has a changefeed or Point-in-time Restore enabled, enable `Ignore compatibility checks (advanced)`. All pre-import safety checks are then skipped, including the local disk space check, so make sure the import node has enough free disk space. Imported data does not generate change logs, so it bypasses CDC and log backups and cannot be automatically detected and backed up. After the import completes, take a manual snapshot backup of the cluster before you enable or rely on Point-in-time Restore. For more information, see [Perform a manual backup](/tidb-cloud/backup-and-restore.md#perform-a-manual-backup).
+        > To import data to a cluster that has a changefeed or Point-in-time Restore enabled, enable `Ignore compatibility checks (advanced)`. All pre-import safety checks are then skipped, including the local disk space check, so make sure the import node has enough free disk space. Imported data does not generate change logs, so it bypasses CDC and log backups and cannot be automatically detected and backed up. After the import completes, take a manual snapshot backup of the cluster before you enable or rely on Point-in-time Restore. Until that snapshot is taken, a Point-in-time Restore target between the import and the manual snapshot cannot recover the imported rows. For more information, see [Perform a manual backup](/tidb-cloud/backup-and-restore.md#perform-a-manual-backup).
 
 6. Click **Next**. TiDB Cloud scans the source files.
 
@@ -135,7 +135,7 @@ This document describes how to import the sample data (SQL files) into TiDB Clou
 
         > **Note:**
         >
-        > To import data to a cluster that has a changefeed or Point-in-time Restore enabled, enable `Ignore compatibility checks (advanced)`. All pre-import safety checks are then skipped, including the local disk space check, so make sure the import node has enough free disk space. Imported data does not generate change logs, so it bypasses CDC and log backups and cannot be automatically detected and backed up. After the import completes, take a manual snapshot backup of the cluster before you enable or rely on Point-in-time Restore. For more information, see [Perform a manual backup](/tidb-cloud/backup-and-restore.md#perform-a-manual-backup).
+        > To import data to a cluster that has a changefeed or Point-in-time Restore enabled, enable `Ignore compatibility checks (advanced)`. All pre-import safety checks are then skipped, including the local disk space check, so make sure the import node has enough free disk space. Imported data does not generate change logs, so it bypasses CDC and log backups and cannot be automatically detected and backed up. After the import completes, take a manual snapshot backup of the cluster before you enable or rely on Point-in-time Restore. Until that snapshot is taken, a Point-in-time Restore target between the import and the manual snapshot cannot recover the imported rows. For more information, see [Perform a manual backup](/tidb-cloud/backup-and-restore.md#perform-a-manual-backup).
 
 6. Click **Next**. TiDB Cloud scans the source files.
 
