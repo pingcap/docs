@@ -20,8 +20,6 @@ if [ ! -x "$ROOT/node_modules/.bin/markdown-link-check" ]; then
     echo "error: local markdown-link-check is missing or not executable. Run npm ci --ignore-scripts --include=dev." >&2
     exit 1
 fi
-MLC_CMD=("$ROOT/node_modules/.bin/markdown-link-check")
-
 VERBOSE=${VERBOSE:-}
 CONFIG_TMP=$(mktemp)
 ERROR_REPORT=$(mktemp)
@@ -50,21 +48,10 @@ sed \
 if [ -n "$VERBOSE" ]; then
     cat $CONFIG_TMP
 fi
-# TODO simplify this if markdown-link-check can process multiple files together
-while read -r tasks; do
-    for task in $tasks; do
-        (
-            output=$("${MLC_CMD[@]}" --config "$CONFIG_TMP" "$task" -q)
-            if [ $? -ne 0 ]; then
-                printf "$output" >> $ERROR_REPORT
-            fi
-            if [ -n "$VERBOSE" ]; then
-                echo "$output"
-            fi
-        ) &
-    done
-    wait
-done <<<"$(find "." -type f -name '*.md' -not -path './node_modules/*' -not -path './tmp/*' -not -path './.*/*' | xargs -n 10)"
+# Check all files in one Node.js process. See scripts/verify-links.js.
+find "." -type f -name '*.md' -not -path './node_modules/*' -not -path './tmp/*' -not -path './.*/*' -print0 |
+    VERBOSE="$VERBOSE" node "$ROOT/scripts/verify-links.js" "$CONFIG_TMP" > $ERROR_REPORT
+check_status=$?
 
 error_files=$(cat $ERROR_REPORT | grep 'FILE: ' | wc -l)
 error_output=$(cat $ERROR_REPORT)
@@ -78,6 +65,9 @@ if [ "$error_files" -gt 0 ]; then
     echo ""
     echo "=== ERROR REPORT == ":
     echo "$error_output"
+    exit 1
+elif [ "$check_status" -ne 0 ]; then
+    echo "error: link check failed to run (exit code $check_status)." >&2
     exit 1
 else
     echo "Link check report: All files are ok. No deadlink found!"

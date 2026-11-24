@@ -76,6 +76,18 @@ with tempfile.TemporaryDirectory(prefix="docs-tool-check-") as directory:
     local_bin.mkdir(parents=True)
     (fixture / "test.md").write_text("# Test\n")
     (scripts / "markdown-link-check.tpl").write_text("{}\n")
+    shutil.copyfile(ROOT / "scripts" / "verify-links.js", scripts / "verify-links.js")
+    (fixture / "package.json").write_text('{"type": "module"}\n')
+    # verify-links.js loads the local markdown-link-check package as a library.
+    local_module = fixture / "node_modules/markdown-link-check"
+    local_module.mkdir(parents=True)
+    (local_module / "index.js").write_text(
+        "const fs = require('fs');\n"
+        "module.exports = (markdown, opts, callback) => {\n"
+        "  fs.writeFileSync(process.env.LOCAL_TOOL_MARKER, markdown);\n"
+        "  callback(null, []);\n"
+        "};\n"
+    )
 
     global_bin = Path(directory) / "bin"
     global_bin.mkdir()
@@ -119,7 +131,7 @@ with tempfile.TemporaryDirectory(prefix="docs-tool-check-") as directory:
         assert result.returncode == 0, (filename, result)
         assert local_marker.exists(), filename
         arguments = local_marker.read_text().splitlines()
-        assert ("./test.md" if binary == "markdown-link-check" else "--frail") in arguments
+        assert ("# Test" if binary == "markdown-link-check" else "--frail") in arguments
         assert not forbidden_marker.exists(), filename
         local_marker.unlink()
 
