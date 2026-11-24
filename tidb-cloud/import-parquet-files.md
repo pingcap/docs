@@ -146,7 +146,7 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 
         - **Target Database** and **Target Table**: enter the target database and table to import the data to.
 
-    **Advanced options**: expand the panel to view the **Ignore compatibility checks (advanced)** option. Leave it disabled unless you need to import data into a cluster that has a changefeed or Point-in-time Restore enabled. Enabling this option skips all pre-import safety checks, including the local disk space check. Make sure the target cluster has enough free disk space before enabling it.
+    **Advanced options**: expand the panel to view the **Ignore compatibility checks (advanced)** option. Leave it disabled unless you need to import data into a cluster that has a changefeed or Point-in-time Restore enabled. Enabling this option skips all pre-import safety checks, including the local disk space check. Before enabling it, verify that the target cluster's available disk space can accommodate the imported data.
 
     > **Note:**
     >
@@ -203,7 +203,7 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 
         - **Target Database** and **Target Table**: enter the target database and table to import the data to.
 
-    **Advanced options**: expand the panel to view the **Ignore compatibility checks (advanced)** option. Leave it disabled unless you need to import data into a cluster that has a changefeed or Point-in-time Restore enabled. Enabling this option skips all pre-import safety checks, including the local disk space check. Make sure the target cluster has enough free disk space before enabling it.
+    **Advanced options**: expand the panel to view the **Ignore compatibility checks (advanced)** option. Leave it disabled unless you need to import data into a cluster that has a changefeed or Point-in-time Restore enabled. Enabling this option skips all pre-import safety checks, including the local disk space check. Before enabling it, verify that the target cluster's available disk space can accommodate the imported data.
 
     > **Note:**
     >
@@ -280,7 +280,7 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 
         - **Target Database** and **Target Table**: enter the target database and table to import the data to.
 
-    **Advanced options**: expand the panel to view the **Ignore compatibility checks (advanced)** option. Leave it disabled unless you need to import data into a cluster that has a changefeed or Point-in-time Restore enabled. Enabling this option skips all pre-import safety checks, including the local disk space check. Make sure the target cluster has enough free disk space before enabling it.
+    **Advanced options**: expand the panel to view the **Ignore compatibility checks (advanced)** option. Leave it disabled unless you need to import data into a cluster that has a changefeed or Point-in-time Restore enabled. Enabling this option skips all pre-import safety checks, including the local disk space check. Before enabling it, verify that the target cluster's available disk space can accommodate the imported data.
 
     > **Note:**
     >
