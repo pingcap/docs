@@ -44,8 +44,8 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     For more information, see the following documentation:
 
-    - [Restore backups from a different plan type to a new TiDB Cloud Essential instance](https://docs.pingcap.com/tidbcloud/backup-and-restore-serverless/?plan=essential)
-    - [Restore backups from a different plan type to a new TiDB Cloud Premium instance](https://docs.pingcap.com/tidbcloud/backup-and-restore-premium/?plan=premium)
+    - [Restore backups from a different plan type to a new TiDB Cloud Essential instance](https://docs.pingcap.com/tidbcloud/backup-and-restore-serverless/?plan=essential#restore-backups-from-a-different-plan-type)
+    - [Restore backups from a different plan type to a new TiDB Cloud Premium instance](https://docs.pingcap.com/tidbcloud/backup-and-restore-premium/?plan=premium#restore-backups-from-a-different-plan-type)
 
 ## November 10, 2026
 
