@@ -11,13 +11,11 @@ This document shows how to do hybrid search in a single SQL query. TiDB automati
 
 ## Prerequisites
 
-Full-text search is still in the early stages and is being rolled out to more customers. Currently, full-text search is only available on {{{ .starter }}} in the following regions:
-
-- AWS: `Oregon (us-west-2)`, `N. Virginia (us-east-1)`, `Tokyo (ap-northeast-1)`, `Frankfurt (eu-central-1)`, and `Singapore (ap-southeast-1)`
+Currently, full-text search is in public preview and only available on {{{ .starter }}}.
 
 Auto Embedding is only available on {{{ .starter }}} instances hosted on AWS.
 
-To complete this tutorial, make sure you have a {{{ .starter }}} instance in one of the preceding regions, and a MySQL client connected to it. If you don't have an instance, follow [Creating a {{{ .starter }}} instance](/develop/dev-guide-build-cluster-in-cloud.md) to create one.
+To complete this tutorial, make sure you have a {{{ .starter }}} instance hosted on AWS and a MySQL client connected to it. If you don't have an instance, follow [Creating a {{{ .starter }}} instance](/develop/dev-guide-build-cluster-in-cloud.md) to create one.
 
 ## Step 1. Create a table
 
