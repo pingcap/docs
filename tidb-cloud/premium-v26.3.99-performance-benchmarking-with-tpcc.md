@@ -48,7 +48,26 @@ The benchmark executor sends SQL queries to the TiDB cluster. The executor used 
 The tests used [go-tpc](https://github.com/pingcap/go-tpc) with 1,000 warehouses.
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), create a TiDB Cloud Premium cluster that meets the [test environment](#test-environment) requirements.
-2. Use BR to restore the test data to the `tpcc` database, and wait until the Regions are healthy.
+2. Use BR to restore the pre-generated dataset to the `tpcc` database. The dataset contains 1,000 warehouses and uses clustered indexes. The reported tests restored this dataset rather than running `go-tpc prepare`.
+
+    The following command runs inside the BR Job container in the cluster namespace. It requires access to the benchmark S3 bucket, the internal PD endpoint, and the mounted client certificates. Set `${ACCESS_KEY}`, `${SECRET_KEY}`, and `${KEYSPACE_NAME}` to the values for the test environment.
+
+    ```shell
+    ./br restore db \
+      --db tpcc \
+      --storage "s3://qa-workload-datasets/benchmark/tpcc-1k-with-clustered-index?access-key=${ACCESS_KEY}&secret-access-key=${SECRET_KEY}" \
+      --pd "db-pd:2379" \
+      --send-credentials-to-tikv=true \
+      --keyspace-name="${KEYSPACE_NAME}" \
+      --with-sys-table=false \
+      --check-requirements=false \
+      --checksum=false \
+      --key /var/lib/cluster-client-tls/tls.key \
+      --ca /var/lib/cluster-client-tls/ca.crt \
+      --cert /var/lib/cluster-client-tls/tls.crt
+    ```
+
+    This command describes the internal benchmark setup and requires access to that environment. After restoring the data, wait until the Regions are healthy.
 3. Run `ANALYZE TABLE` to collect statistics for the test tables, and warm up the cluster.
 4. Run the following command to stress test the cluster. Replace `${HOST}` and `${PASSWORD}` with your actual values. Set `${THREAD}` to `100`, `200`, and `400` in separate tests. Each test at a given concurrency level lasts two hours.
 
