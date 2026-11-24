@@ -90,7 +90,7 @@ printf '\n'
     This command describes the internal benchmark setup. If you do not have access to that setup, create the `test` database and use `sysbench prepare` to generate a dataset with the same table and row counts:
 
     ```sql
-    CREATE DATABASE test;
+    CREATE DATABASE IF NOT EXISTS test;
     ```
 
     ```shell
@@ -106,6 +106,7 @@ printf '\n'
     ```
 
     Set the connection variables and preparation thread count for your environment before running the command. The generated dataset has the same scale as the restored dataset, but is not the original benchmark backup. After loading the data, wait until the Regions are healthy.
+
 3. Run `ANALYZE TABLE` to collect statistics for the test tables, and warm up the cluster.
 4. Run the following command for each workload: `oltp_point_select`, `oltp_read_write`, `oltp_update_non_index`, `oltp_update_index`, and `oltp_insert`. Set `${WORKLOAD}`, `${HOST}`, and `${PORT}` to your actual values. Use the `PASSWORD` variable set earlier. For each workload, set `${THREAD}` to `100`, `200`, and `400` in separate tests. Each test at a given concurrency level lasts 20 minutes.
 

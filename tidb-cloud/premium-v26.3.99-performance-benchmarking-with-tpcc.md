@@ -75,6 +75,7 @@ printf '\n'
     ```
 
     This command describes the internal benchmark setup and requires access to that environment. After restoring the data, wait until the Regions are healthy.
+
 3. Run `ANALYZE TABLE` to collect statistics for the test tables, and warm up the cluster.
 4. Run the following command to stress test the cluster. Set `${HOST}` to your actual host. Use the `PASSWORD` variable set earlier. Set `${THREAD}` to `100`, `200`, and `400` in separate tests. Each test at a given concurrency level lasts two hours.
 
