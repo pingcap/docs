@@ -50,7 +50,7 @@ Syntax sugar mode is equivalent to column-property mode with a single parser att
 
 > **Note:**
 >
-> - In syntax sugar mode, specifying an index name is optional for the `MULTILINGUAL` parser. If you use the `NGRAM` parser or column-property mode, you must specify an index name explicitly. See [Index naming](#index-naming).
+> - Specifying an index name is optional in both syntax sugar mode and column-property mode. If you omit it, TiDB generates a name for the index. See [Index naming](#index-naming).
 > - The `ADD_COLUMNAR_REPLICA_ON_DEMAND` clause is optional. When specified, TiDB creates a TiFlash replica for the table on demand. If you omit it, make sure that a TiFlash replica is already created for the table before you use full-text search.
 
 ### Column-property mode
@@ -221,7 +221,8 @@ You can also query `INFORMATION_SCHEMA`:
 
 - `INFORMATION_SCHEMA.STATISTICS`: `INDEX_TYPE` returns `FULLTEXT`.
 - `INFORMATION_SCHEMA.TIDB_INDEXES`: `index_type` returns `FULLTEXT`.
-- `INFORMATION_SCHEMA.TIDB_INDEX_USAGE`: reports access statistics for full-text indexes.
+
+Full-text indexes do not report usage statistics, so they do not appear in `INFORMATION_SCHEMA.TIDB_INDEX_USAGE`. See [Observability limitations](/ai/reference/full-text-search-limitations.md#observability-limitations).
 
 To drop a full-text index:
 

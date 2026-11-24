@@ -22,7 +22,7 @@ The full-text search feature in TiDB provides the following capabilities:
 
 - **Substring matching**: with the NGRAM parser, queries can match prefixes and substrings, such as matching `panic_handler` when searching for `panic`.
 
-- **SQL-native**: you can combine full-text search with filter conditions, aggregation, joins, and subqueries in ordinary SQL statements, without maintaining a separate search engine.
+- **SQL-native**: you can combine full-text search with filter conditions, aggregation, inner joins, and subqueries in ordinary SQL statements, without maintaining a separate search engine.
 
 > **Tip:**
 >
@@ -334,7 +334,7 @@ ALTER TABLE stock_items DROP INDEX title;
 
 ## Advanced example: Join search results with other tables
 
-You can combine full-text search with other SQL features such as joins and subqueries.
+You can combine full-text search with other SQL features such as inner joins and subqueries.
 
 Assume you have a `users` table and a `tickets` table, and want to find tickets created by authors based on a full-text search of their names:
 

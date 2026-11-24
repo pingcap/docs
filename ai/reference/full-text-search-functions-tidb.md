@@ -162,7 +162,7 @@ WHERE FTS_MATCH_WORD('database', content_text);
 
 The `WITH PARSER` clause is accepted only in an index definition, as part of `FULLTEXT INDEX (col) WITH PARSER parser_name`. It is not supported inside `FTS_MATCH_WORD()`, and writing it there returns a syntax error.
 
-Declaring two parser attributes on one column of the same index, such as `content_text WITH (multilingual, ngram(min_gram=3, max_gram=3))`, succeeds but is not usable: the query can run on only one of the parsers, and you have no way to select the other one. To search a column with both parsers, use separate indexes.
+An index provides only one parser per column, so separate indexes are the only way to search one column with both complete-token and substring matching. For the underlying restriction, see [Index limitations](/ai/reference/full-text-search-limitations.md#index-limitations).
 
 > **Note:**
 >
@@ -190,8 +190,8 @@ FROM t WHERE FTS_MATCH_WORD('database', content_text);
 | :-- | :-- |
 | The indexes differ only in parser | The hint selects the parser, so the result set changes. This is the supported way to route a query between parsers. |
 | The indexes use the same parser | A pure execution-path choice. The result set is unchanged. |
-| The specified index does not exist | The hint is silently ignored, and the optimizer selects an index automatically. This follows the convention for optimizer hints. |
-| The specified index does not cover a column that the query uses | TiDB returns an error, for example: `ERROR 1221 (HY000): full-text search index idx_fts_ngram does not cover column test.docs.ext`. |
+| The specified index does not exist | The hint is silently ignored, and the optimizer selects an index automatically. |
+| The specified index does not cover a column that the query uses | TiDB reports the index and the column in the error, for example: `ERROR 1221 (HY000): full-text search index idx_fts_ng does not cover column test.docs.ext`. |
 
 ### IGNORE_INDEX: exclude an index
 
