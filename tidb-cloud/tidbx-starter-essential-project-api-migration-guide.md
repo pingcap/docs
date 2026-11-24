@@ -68,8 +68,6 @@ If you already have a {{{ .starter }}} or Essential instance and only need its c
 
     - `GET /api/v1beta/projects/{project_id}/clusters/{cluster_id}`
     - `DELETE /api/v1beta/projects/{project_id}/clusters/{cluster_id}`
-    - `GET /api/v1beta/projects/{project_id}/clusters/{cluster_id}/imports`
-    - `POST /api/v1beta/projects/{project_id}/clusters/{cluster_id}/imports`
 
 > **Note:**
 >
