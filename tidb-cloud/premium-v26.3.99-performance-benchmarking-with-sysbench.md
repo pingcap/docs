@@ -129,7 +129,7 @@ printf '\n'
 
 ## Test results
 
-TPS means transactions per second. P95 is the client-side 95th-percentile latency in milliseconds.
+TPS means transactions per second. P95 is the ninety-fifth percentile of client-side latency, measured in milliseconds.
 
 ### Point select performance
 
