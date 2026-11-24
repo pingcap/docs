@@ -60,10 +60,17 @@ The benchmark executor sends SQL queries to the TiDB cluster. The executor used 
 
 The tests used [sysbench](https://github.com/akopytov/sysbench) with 32 tables and 10,000,000 rows per table.
 
+Before running the benchmark commands, use the following command in Bash on the benchmark executor to read the database password into the `PASSWORD` variable without shell interpretation. Run the benchmark commands in the same shell, keeping `"${PASSWORD}"` quoted.
+
+```shell
+read -r -s -p "Enter database password: " PASSWORD
+printf '\n'
+```
+
 1. In the [TiDB Cloud console](https://tidbcloud.com/), create a TiDB Cloud Premium cluster that meets the [test environment](#test-environment) requirements.
 2. Prepare the test data in the `test` database.
 
-    The benchmark environment restored a pre-generated dataset using BR. The following command runs inside the BR Job container in the cluster namespace. It requires access to the benchmark S3 bucket, the internal PD endpoint, and the mounted client certificates. Set `${ACCESS_KEY}`, `${SECRET_KEY}`, and `${KEYSPACE_NAME}` to the values for the test environment.
+    The benchmark environment restored a pre-generated dataset using BR. The following command runs inside the BR Job container in the cluster namespace. It requires access to the benchmark S3 bucket, the internal PD endpoint, and the mounted client certificates. Set `${ACCESS_KEY}`, `${SECRET_KEY}`, and `${KEYSPACE_NAME}` to the values for the test environment. Replace `/path/to/client-key.pem`, `/path/to/ca.pem`, and `/path/to/client.pem` with the paths to the client private key, CA certificate, and client certificate mounted in the BR container, respectively.
 
     ```shell
     ./br restore db \
@@ -75,9 +82,9 @@ The tests used [sysbench](https://github.com/akopytov/sysbench) with 32 tables a
       --with-sys-table=false \
       --check-requirements=false \
       --checksum=false \
-      --key /var/lib/cluster-client-tls/tls.key \
-      --ca /var/lib/cluster-client-tls/ca.crt \
-      --cert /var/lib/cluster-client-tls/tls.crt
+      --key /path/to/client-key.pem \
+      --ca /path/to/ca.pem \
+      --cert /path/to/client.pem
     ```
 
     This command describes the internal benchmark setup. If you do not have access to that setup, create the `test` database and use `sysbench prepare` to generate a dataset with the same table and row counts:
@@ -100,7 +107,7 @@ The tests used [sysbench](https://github.com/akopytov/sysbench) with 32 tables a
 
     Set the connection variables and preparation thread count for your environment before running the command. The generated dataset has the same scale as the restored dataset, but is not the original benchmark backup. After loading the data, wait until the Regions are healthy.
 3. Run `ANALYZE TABLE` to collect statistics for the test tables, and warm up the cluster.
-4. Run the following command for each workload: `oltp_point_select`, `oltp_read_write`, `oltp_update_non_index`, `oltp_update_index`, and `oltp_insert`. Replace `${WORKLOAD}`, `${HOST}`, `${PORT}`, and `${PASSWORD}` with your actual values. For each workload, set `${THREAD}` to `100`, `200`, and `400` in separate tests. Each test at a given concurrency level lasts 20 minutes.
+4. Run the following command for each workload: `oltp_point_select`, `oltp_read_write`, `oltp_update_non_index`, `oltp_update_index`, and `oltp_insert`. Set `${WORKLOAD}`, `${HOST}`, and `${PORT}` to your actual values. Use the `PASSWORD` variable set earlier. For each workload, set `${THREAD}` to `100`, `200`, and `400` in separate tests. Each test at a given concurrency level lasts 20 minutes.
 
     ```shell
     sysbench ${WORKLOAD} run \
@@ -116,7 +123,7 @@ The tests used [sysbench](https://github.com/akopytov/sysbench) with 32 tables a
       --table-size=10000000 \
       --mysql-ignore-errors=1062,2013,8028,9007 \
       --auto-inc=false \
-      --mysql-password=${PASSWORD}
+      --mysql-password="${PASSWORD}"
     ```
 
 ## Test results
