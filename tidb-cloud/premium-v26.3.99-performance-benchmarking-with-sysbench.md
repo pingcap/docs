@@ -63,7 +63,7 @@ The tests used [sysbench](https://github.com/akopytov/sysbench) with 32 tables a
 Before running the benchmark commands, use the following command in Bash on the benchmark executor to read the database password into the `PASSWORD` variable without shell interpretation. Run the benchmark commands in the same shell, keeping `"${PASSWORD}"` quoted.
 
 ```shell
-read -r -s -p "Enter database password: " PASSWORD
+IFS= read -r -s -p "Enter database password: " PASSWORD
 printf '\n'
 ```
 

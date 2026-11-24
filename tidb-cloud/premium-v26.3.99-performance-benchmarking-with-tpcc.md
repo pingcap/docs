@@ -50,7 +50,7 @@ The tests used [go-tpc](https://github.com/pingcap/go-tpc) with 1,000 warehouses
 Before running the benchmark commands, use the following command in Bash on the benchmark executor to read the database password into the `PASSWORD` variable without shell interpretation. Run the benchmark commands in the same shell, keeping `"${PASSWORD}"` quoted.
 
 ```shell
-read -r -s -p "Enter database password: " PASSWORD
+IFS= read -r -s -p "Enter database password: " PASSWORD
 printf '\n'
 ```
 
