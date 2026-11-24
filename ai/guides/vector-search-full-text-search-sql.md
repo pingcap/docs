@@ -22,7 +22,7 @@ The full-text search feature in TiDB provides the following capabilities:
 
 - **Substring matching**: with the NGRAM parser, queries can match prefixes and substrings, such as matching `panic_handler` when searching for `panic`.
 
-- **Fully compatible with SQL**: all SQL features, such as pre-filtering, post-filtering, grouping, and joining, can be used with full-text search.
+- **SQL-native**: you can combine full-text search with filter conditions, aggregation, joins, and subqueries in ordinary SQL statements, without maintaining a separate search engine.
 
 > **Tip:**
 >
@@ -181,6 +181,10 @@ SELECT * FROM stock_items
 +------+---------------------------------------------------------------------------------------------------------------+
 ```
 
+> **Note:**
+>
+> When you order results by `fts_match_word()`, the statement must include a `LIMIT` clause. To return the complete ranking, specify a large `LIMIT` value. See [Query limitations](/ai/reference/full-text-search-limitations.md#query-limitations).
+
 **Example: count the number of documents matching the user query**
 
 ```sql
@@ -236,7 +240,7 @@ FROM code_files
     ORDER BY fts_match_word('handle', content_text) DESC LIMIT 10;
 ```
 
-A table can have multiple full-text indexes, and the same column can participate in several of them with different parsers. Use the `USE_INDEX` hint to select an index at query time, or let the optimizer choose automatically. For parameters and query semantics, see [The NGRAM parser](/ai/reference/full-text-search-index.md#the-ngram-parser) and [Choose a full-text index at query time](/ai/reference/full-text-search-functions-tidb.md#choose-a-full-text-index-at-query-time).
+A table can have multiple full-text indexes, and the same column can participate in several of them with different parsers. Specify the index with the `USE_INDEX` hint, because the hinted index determines the parser and therefore the result set. Without a hint, the optimizer selects an index automatically and does not compare parsers. For parameters and query semantics, see [The NGRAM parser](/ai/reference/full-text-search-index.md#the-ngram-parser) and [Choose a full-text index at query time](/ai/reference/full-text-search-functions-tidb.md#choose-a-full-text-index-at-query-time).
 
 #### Filter pushdown
 
@@ -359,7 +363,7 @@ You can use a subquery to find matching user IDs based on the author's name, and
 
 ```sql
 SELECT t.title AS TICKET_TITLE, u.id AS AUTHOR_ID, u.name AS AUTHOR_NAME FROM tickets t
-LEFT JOIN users u ON t.author_id = u.id
+INNER JOIN users u ON t.author_id = u.id
 WHERE t.author_id IN
 (
     SELECT id FROM users

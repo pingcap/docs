@@ -59,7 +59,8 @@ In column-property mode, each column declares one or more attributes in a `WITH 
 
 ```sql
 ALTER TABLE t ADD FULLTEXT INDEX idx_fts (
-    content_text WITH (multilingual, ngram(min_gram=3, max_gram=3)),
+    content_text WITH (multilingual),
+    description  WITH (multilingual),
     path         WITH (exact, path_hierarchy),
     name         WITH (exact),
     ext          WITH (exact)
@@ -73,7 +74,8 @@ Attributes fall into two categories:
 
 Rules for column attributes:
 
-- A column can have multiple attributes, separated by commas inside `WITH (...)`. For example, `content_text WITH (multilingual, ngram(...))` builds two tokenizer structures for the same column, and `path WITH (exact, path_hierarchy)` makes the column support both equality filters and path prefix filters.
+- A column can have multiple attributes, separated by commas inside `WITH (...)`. For example, `path WITH (exact, path_hierarchy)` makes the column support both equality filters and path prefix filters.
+- Assign one parser attribute to each scored column. Declaring two parsers on one column, such as `content_text WITH (multilingual, ngram(...))`, creates the index without an error, but a query can run on only one of them and there is no way to select the other, so a query that expects the unused parser returns no rows. To search one column with several parsers, create a separate full-text index for each parser. See [Multiple indexes on one table](#multiple-indexes-on-one-table).
 - The same type of parser can appear only once per column. You cannot define two parsers of the same type with different parameters on one column.
 - Parser attributes and filter attributes cannot coexist on the same column. A column is either a scored column or a filter column, not both.
 - Attribute parameters have default values. You can omit any parameter to use its default. See [Column attribute reference](#column-attribute-reference).
@@ -86,7 +88,7 @@ Rules for column attributes:
 | `multilingual` | None | - | Language-aware tokenizer that matches complete tokens. Case-insensitive. |
 | `ngram` | `min_gram`, `max_gram`, `granularity`, `lower_case` | `min_gram=3`, `max_gram=3`, `granularity='word'`, `lower_case=true` | Character-level n-gram tokenizer that supports prefix, infix, and suffix substring matching. See [The NGRAM parser](#the-ngram-parser). |
 | `exact` | None | - | Exact-value matching using inverted posting lists. Supports `=` and `IN`. Used for tenant IDs, status, tags, and other low-cardinality filters. |
-| `path_hierarchy` | `delimiter` | `delimiter='/'` | Hierarchical prefix matching for path-like values. Supports `col LIKE '/src/%'` and `col UNDER '/src/'`. The prefix must align with a delimiter boundary.
+| `path_hierarchy` | `delimiter` | `delimiter='/'` | Hierarchical prefix matching for path-like values. Supports prefix matching such as `col LIKE '/src/%'`. The prefix must align with a delimiter boundary. |
 
 To customize the delimiter of `path_hierarchy`:
 
@@ -175,7 +177,7 @@ ALTER TABLE t ADD FULLTEXT INDEX idx_fts_ng
     (content_text) WITH PARSER NGRAM(min_gram=3, max_gram=3);
 ```
 
-At query time, you can select the index with the `USE_INDEX` or `IGNORE_INDEX` optimizer hint, or let the optimizer choose automatically. See [Choose a full-text index at query time](/ai/reference/full-text-search-functions-tidb.md#choose-a-full-text-index-at-query-time).
+At query time, select the index with the `USE_INDEX` or `IGNORE_INDEX` optimizer hint. When indexes on the same column use different parsers, specify the index explicitly: automatic selection does not compare parsers, so the matching behavior of the query is not what you intend. See [Choose a full-text index at query time](/ai/reference/full-text-search-functions-tidb.md#choose-a-full-text-index-at-query-time).
 
 ### Index naming
 

@@ -1,11 +1,11 @@
 ---
 title: TiDB Full-Text Search Functions
-summary: Learn the full-text search functions in TiDB, including query syntax, multi-column search, parser selection, and index selection hints.
+summary: Learn how to search text with the FTS_MATCH_WORD() function, including multi-column queries and full-text index selection.
 ---
 
 # TiDB Full-Text Search Functions
 
-This document describes the `FTS_MATCH_WORD()` function for full-text search in TiDB, including multi-column search, query semantics with different parsers, parser selection, and index selection hints.
+This document describes the `FTS_MATCH_WORD()` function for full-text search in TiDB, including multi-column search, multi-word queries, and how to select the full-text index that a query runs on.
 
 For how to create the full-text indexes that these functions use, see [Full-Text Search Index](/ai/reference/full-text-search-index.md).
 
@@ -18,14 +18,15 @@ For how to create the full-text indexes that these functions use, see [Full-Text
 `FTS_MATCH_WORD()` performs a keyword search against one or more scored columns of a full-text index and returns a BM25 relevance score.
 
 ```
-FTS_MATCH_WORD('query' [WITH PARSER parser_name], col [, col...])
+FTS_MATCH_WORD('query', col [, col...])
 ```
 
 | Parameter | Description |
 | :-- | :-- |
-| `query` | The search text. It is tokenized according to the parser rules of the matched index. |
-| `WITH PARSER parser_name` | Optional. Explicitly selects which parser to use when the scored column has multiple parsers. Only a parser name is accepted, such as `multilingual` or `ngram`. Parser parameters are not allowed. See [Select a parser explicitly](#select-a-parser-explicitly). |
+| `query` | The search text. It is tokenized according to the parser of the full-text index that the query runs on. |
 | `col [, col...]` | One or more scored columns. The columns can be a subset of the scored columns of a full-text index. |
+
+To search the same column with different parsers, create one full-text index per parser and select the index with the `USE_INDEX` hint. See [Select a parser for a scored column](#select-a-parser-for-a-scored-column).
 
 Filter conditions on filter columns are written outside the function, as independent `WHERE` conditions:
 
@@ -51,12 +52,12 @@ ORDER BY FTS_MATCH_WORD('database', content_text, description) DESC
 LIMIT 10;
 ```
 
-To require all columns to match (**AND** semantics), combine multiple `FTS_MATCH_WORD()` calls with `AND` in the `WHERE` clause:
+A single call is the way to search several columns at once, because multiple calls in one `WHERE` clause can only be combined with `OR`. To require all columns to match (**AND** semantics), intersect the row set of one call per column:
 
 ```sql
-SELECT * FROM t
-WHERE FTS_MATCH_WORD('database', content_text)
-  AND FTS_MATCH_WORD('database', description);
+SELECT id FROM t WHERE FTS_MATCH_WORD('database', content_text)
+INTERSECT
+SELECT id FROM t WHERE FTS_MATCH_WORD('database', description);
 ```
 
 In a multi-column query, each column is tokenized by the parser defined for that column in the index, and the BM25 scores are fused at the index level. A query can also use a subset of the scored columns of an index. For example, if an index covers `content_text` and `description`, `FTS_MATCH_WORD('query', content_text)` still uses that index.
@@ -71,20 +72,43 @@ When the query string contains multiple words, it is tokenized according to the 
 SELECT * FROM users WHERE FTS_MATCH_WORD('Alice Smith', name);
 ```
 
-To require multiple words to match (**AND** semantics), combine multiple `FTS_MATCH_WORD()` calls with `AND`. The optimizer merges the conditions into a single index scan:
+Multiple calls combined with `OR` are merged into one index scan:
 
 ```sql
 SELECT * FROM t
 WHERE FTS_MATCH_WORD('database', content_text)
-  AND FTS_MATCH_WORD('vector', content_text);
+   OR FTS_MATCH_WORD('vector', content_text);
 ```
 
-Similarly, multiple calls combined with `OR` are merged into one scan with OR semantics:
+Combining multiple calls with `AND` at the top level of `WHERE` is not supported. TiDB reports the following error, even when the two calls use different words or different columns:
+
+```
+ERROR 1221 (HY000): Currently 'FTS_MATCH_WORD()' must be used alone. It cannot be placed inside any other function or expression as a parameter, or used multiple times.
+```
+
+To require multiple words to match (**AND** semantics), or to exclude documents that match a word (**NOT** semantics), use a compound statement:
+
+```sql
+-- AND: both words match
+SELECT id FROM t WHERE FTS_MATCH_WORD('database', content_text)
+INTERSECT
+SELECT id FROM t WHERE FTS_MATCH_WORD('vector', content_text);
+
+-- NOT: matches the first word but not the second
+SELECT id FROM t WHERE FTS_MATCH_WORD('database', content_text)
+EXCEPT
+SELECT id FROM t WHERE FTS_MATCH_WORD('obsolete', content_text);
+```
+
+To keep the table columns in the output, put the compound statement in a subquery:
 
 ```sql
 SELECT * FROM t
-WHERE FTS_MATCH_WORD('database', content_text)
-  OR FTS_MATCH_WORD('vector', content_text);
+WHERE id IN (
+    SELECT id FROM t WHERE FTS_MATCH_WORD('database', content_text)
+    INTERSECT
+    SELECT id FROM t WHERE FTS_MATCH_WORD('vector', content_text)
+);
 ```
 
 ## Query semantics with the NGRAM parser
@@ -116,32 +140,33 @@ If the query string contains repeated terms, the term frequency of that term is 
 
 For the full scoring formula and parameters, see [Relevance scoring algorithm](/ai/guides/vector-search-full-text-search-sql.md#relevance-scoring-algorithm).
 
-## Select a parser explicitly
+## Select a parser for a scored column
 
-When a scored column has multiple parsers (for example, `content_text WITH (multilingual, ngram(...))`), use the `WITH PARSER` clause inside the function to select one explicitly. Only a parser name is accepted. Parser parameters such as `WITH PARSER ngram(min_gram=5)` are not allowed and return an error.
+A query is tokenized by the parser of the full-text index it runs on. To search one column with more than one parser, create a separate full-text index for each parser, then select the index with the `USE_INDEX` hint:
 
 ```sql
--- Use the ngram parser explicitly
-SELECT * FROM t
-WHERE FTS_MATCH_WORD('handle' WITH PARSER ngram, content_text);
+ALTER TABLE t ADD FULLTEXT INDEX idx_fts_ml (content_text) WITH PARSER MULTILINGUAL;
+ALTER TABLE t ADD FULLTEXT INDEX idx_fts_ngram (content_text)
+    WITH PARSER NGRAM(min_gram=3, max_gram=3);
+```
 
--- Without WITH PARSER, the first compatible parser in the index definition is used
-SELECT * FROM t
+```sql
+-- Substring matching: the NGRAM index matches 'hand' inside 'HandleRequest'
+SELECT /*+ USE_INDEX(t, idx_fts_ngram) */ * FROM t
+WHERE FTS_MATCH_WORD('hand', content_text);
+
+-- Complete token matching: the MULTILINGUAL index matches whole tokens only
+SELECT /*+ USE_INDEX(t, idx_fts_ml) */ * FROM t
 WHERE FTS_MATCH_WORD('database', content_text);
 ```
 
-Parser selection rules:
+The `WITH PARSER` clause is accepted only in an index definition, as part of `FULLTEXT INDEX (col) WITH PARSER parser_name`. It is not supported inside `FTS_MATCH_WORD()`, and writing it there returns a syntax error.
 
-| Scenario | Behavior |
-| :-- | :-- |
-| `WITH PARSER parser_name` is specified, and the column has an index with that parser | The specified parser is used. |
-| `WITH PARSER parser_name` is specified, but the column has no index with that parser | An error is returned: `ERROR: Parser 'xxx' not found for column 'yyy' in fts_match_word`. TiDB does not silently fall back to another parser. |
-| `WITH PARSER` is omitted, and the column has one compatible parser | That parser is used. |
-| `WITH PARSER` is omitted, and the column has multiple compatible parsers | The first compatible parser in the index definition is used. If `USE_INDEX` is also specified, the parser of the specified index is used. See [Choose a full-text index at query time](#choose-a-full-text-index-at-query-time). |
+Declaring two parser attributes on one column of the same index, such as `content_text WITH (multilingual, ngram(min_gram=3, max_gram=3))`, succeeds but is not usable: the query can run on only one of the parsers, and you have no way to select the other one. To search a column with both parsers, use separate indexes.
 
 > **Note:**
 >
-> Parser selection is part of query semantics, not performance tuning. Different parsers return different results. For this reason, you select a parser with `WITH PARSER` inside the function, not with an optimizer hint. If the specified parser does not exist, TiDB reports an error instead of falling back silently, so that results always match the parser you requested.
+> Selecting the index selects the parser, which changes the result set. This makes parser selection part of query semantics, not performance tuning. Automatic index selection does not compare parsers, so when a scored column has indexes with different parsers, always specify the index with `USE_INDEX`. See [Automatic index selection](#automatic-index-selection).
 
 ## Choose a full-text index at query time
 
@@ -163,16 +188,22 @@ FROM t WHERE FTS_MATCH_WORD('database', content_text);
 
 | Scenario | Behavior |
 | :-- | :-- |
-| Intended use case | Select among multiple indexes that use the same parser. This is a pure execution-path choice. |
-| Conflicts with `WITH PARSER` in the function (the specified index does not contain that parser) | `USE_INDEX` is ignored. The parser in `WITH PARSER` takes precedence, and TiDB selects another index that contains that parser. |
-| `WITH PARSER` is not specified | TiDB follows `USE_INDEX` and uses the specified index and its parser. |
-| The specified index does not exist | The hint is silently ignored, and the optimizer selects an index automatically. |
+| The indexes differ only in parser | The hint selects the parser, so the result set changes. This is the supported way to route a query between parsers. |
+| The indexes use the same parser | A pure execution-path choice. The result set is unchanged. |
+| The specified index does not exist | The hint is silently ignored, and the optimizer selects an index automatically. This follows the convention for optimizer hints. |
+| The specified index does not cover a column that the query uses | TiDB returns an error, for example: `ERROR 1221 (HY000): full-text search index idx_fts_ngram does not cover column test.docs.ext`. |
 
 ### IGNORE_INDEX: exclude an index
 
 ```sql
 SELECT /*+ IGNORE_INDEX(t, idx_fts_ngram) */ *
 FROM t WHERE FTS_MATCH_WORD('handle', content_text);
+```
+
+If `IGNORE_INDEX` excludes every full-text index that could serve the query, TiDB returns an error instead of scanning the table:
+
+```
+ERROR 1221 (HY000): full text search can only be used with a matching current TiFlash full-text index path
 ```
 
 ### Automatic index selection
@@ -185,7 +216,9 @@ Without hints, the optimizer selects a full-text index by the following prioriti
 | 2 | Filter column coverage: prefer the index that matches more filter conditions in the `WHERE` clause. |
 | 3 | Index size: prefer the smaller index to reduce scan cost. |
 
-The optimizer also compares the full-text index scan against a full table scan or a regular index scan, and chooses the path with the lowest estimated cost.
+These priorities do not compare parsers. When one column has full-text indexes with different parsers, the automatically selected index determines the matching behavior of the query without any warning, so specify the index with `USE_INDEX`.
+
+A query that uses `FTS_MATCH_WORD()` always runs on a full-text index. If no full-text index covers the queried columns, TiDB returns an error rather than falling back to a table scan or a regular index scan.
 
 ## Supported query patterns
 
@@ -198,6 +231,14 @@ The optimizer also compares the full-text index scan against a full table scan o
     SELECT * FROM t WHERE FTS_MATCH_WORD('query', content_text)
     ORDER BY FTS_MATCH_WORD('query', content_text) DESC LIMIT 10;
     ```
+
+    Ordering by `FTS_MATCH_WORD()` requires a `LIMIT` clause. Without one, TiDB reports:
+
+    ```
+    ERROR 1221 (HY000): 'FTS_MATCH_WORD()' in ORDER BY without a LIMIT clause is not supported, try specify a very large LIMIT as a workaround
+    ```
+
+    To return the complete ranking in a single statement, specify a large `LIMIT` value. Ordering by a regular column needs no `LIMIT`.
 
 - `INNER JOIN`, where the full-text search runs on the driving table and the join runs on the result set:
 
