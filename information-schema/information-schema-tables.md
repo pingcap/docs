@@ -120,7 +120,7 @@ The description of columns in the `TABLES` table is as follows:
 * `CHECK_TIME`: The time at which the table is checked.
 * `TABLE_COLLATION`: The collation of strings in the table.
 * `CHECKSUM`: Checksum.
-* `CREATE_OPTIONS`: Creates options.
+* `CREATE_OPTIONS`: Extra options used with `CREATE TABLE`.
 * `TABLE_COMMENT`: The comments and notes of the table.
 
 Most of the information in the table is the same as MySQL. The following columns are newly defined by TiDB:
