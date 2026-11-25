@@ -189,7 +189,7 @@ This document lists the feature support status for TiDB Cloud BYOC.
     <td style="text-align:center;">🔒</td>
   </tr>
   <tr>
-    <td rowspan="7" style="background-color: white;">Security</td>
+    <td rowspan="6" style="background-color: white;">Security</td>
     <td>Database audit logging</td>
     <td style="text-align:center;">🔒</td>
   </tr>
@@ -206,11 +206,7 @@ This document lists the feature support status for TiDB Cloud BYOC.
     <td style="text-align:center;">🔒</td>
   </tr>
   <tr>
-    <td>CMEK</td>
-    <td style="text-align:center;">🚧</td>
-  </tr>
-  <tr>
-    <td>Dual-layer encryption</td>
+    <td>Enhanced Data Encryption (dual-layer encryption)</td>
     <td style="text-align:center;">🚧</td>
   </tr>
   <tr>

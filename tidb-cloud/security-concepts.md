@@ -233,7 +233,7 @@ TiDB Cloud safeguards static data with advanced encryption capabilities, ensurin
 
 - Encrypts static data and backups with CMEK keys when enabled.
 
-- For TiDB Cloud Dedicated clusters without CMEK, TiDB Cloud uses escrow keys; {{{ .starter }}} and {{{ .essential }}} instances rely exclusively on escrow keys.
+- For TiDB Cloud Dedicated clusters without CMEK, TiDB Cloud uses escrow keys; {{{ .essential }}} instances rely exclusively on escrow keys.
 
 **Dual-layer encryption**
 
@@ -243,7 +243,7 @@ TiDB Cloud safeguards static data with advanced encryption capabilities, ensurin
 
     - On top of the cloud provider's encryption, TiDB Cloud adds a second encryption layer by automatically encrypting data at rest using either customer-managed encryption keys (CMEK) or escrow keys.
 
-- Dual-layer encryption is [**disabled** by default](/tidb-cloud/ticloud-cluster-create.md#flags) for {{{ .starter }}} instances and **enabled** by default for {{{ .essential }}} instances.
+- Dual-layer encryption is [**enabled** by default](/tidb-cloud/ticloud-cluster-create.md#flags) for {{{ .essential }}} instances and is not supported for {{{ .starter }}} instances.
 
 - {{{ .dedicated }}} clusters **always use** dual-layer encryption. If CMEK is not enabled, TiDB Cloud uses an escrow key to encrypt all data in your cluster at rest.
 
@@ -261,15 +261,17 @@ For more information, see [Encryption at Rest Using Customer-Managed Encryption 
 
 <CustomContent plan="premium">
 
-**Dual-Layer Data Encryption**
+**Enhanced Data Encryption**
 
-- Combines storage-layer encryption (provided by the cloud provider) with database-layer encryption to add an additional layer of data-at-rest protection for {{{ .premium }}} instances hosted on AWS.
+- Adds database-layer encryption on top of storage-layer encryption for {{{ .premium }}} instances, with support for AWS KMS and Alibaba Cloud KMS.
 
-- Encrypts data stored by TiKV, changefeed data, and backup data when enabled.
+- Protects database data and backup data at rest when enabled.
 
-- Lets you choose between a Customer-Managed Encryption Key (CMEK) and a Service-Managed Encryption Key, depending on your security and operational requirements.
+- Lets you register a Customer-Managed Encryption Key (CMEK) once in your organization and reuse it across instances in the same cloud provider and region.
 
-For more information, see [Dual-Layer Data Encryption](/tidb-cloud/premium/dual-layer-data-encryption-premium.md).
+- Tracks key status and usage, and prevents removal of keys that are still required by instances, backup snapshots, or in-progress restores.
+
+For more information, see [Enhanced Data Encryption](/tidb-cloud/premium/enhanced-data-encryption-premium.md).
 
 </CustomContent>
 

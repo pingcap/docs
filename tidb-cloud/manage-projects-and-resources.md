@@ -106,7 +106,7 @@ To create a new project, take the following steps:
 
         > **Note:**
         >
-        > For {{{ .premium }}} instances, encryption is configured per instance rather than per project. After you create the instance, you can enable [Dual-Layer Data Encryption](/tidb-cloud/premium/dual-layer-data-encryption-premium.md) to add a database-layer encryption on top of the default storage-layer encryption.
+        > For {{{ .premium }}} instances, Customer-Managed Encryption Keys (CMEKs) are registered at the organization level, and you can enable [Enhanced Data Encryption](/tidb-cloud/premium/enhanced-data-encryption-premium.md) for each instance when creating it or afterward.
 
         </CustomContent>
 
@@ -115,7 +115,7 @@ To create a new project, take the following steps:
         > **Note:**
         >
         > - For {{{ .byoc }}} instances, projects are optional. The data plane runs in your own cloud account, and BYOC environment-level settings are configured during BYOC onboarding.
-        > - For {{{ .premium }}} instances, encryption is configured per instance rather than per project. After you create the instance, you can enable [Dual-Layer Data Encryption](/tidb-cloud/premium/dual-layer-data-encryption-premium.md) to add a database-layer encryption on top of the default storage-layer encryption.
+        > - For {{{ .premium }}} instances, Customer-Managed Encryption Keys (CMEKs) are registered at the organization level, and you can enable [Enhanced Data Encryption](/tidb-cloud/premium/enhanced-data-encryption-premium.md) for each instance when creating it or afterward.
 
         </CustomContent>
 
