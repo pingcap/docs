@@ -11,13 +11,11 @@ summary: TiDB で、挿入時に自動生成される埋め込みを使って、
 
 ## 前提条件 {#prerequisites}
 
-全文検索はまだ初期段階にあり、より多くの顧客に向けて順次提供されています。現在、全文検索は次のリージョンの {{{ .starter }}} でのみ利用できます。
-
-- AWS: `Oregon (us-west-2)` 、 `N. Virginia (us-east-1)` 、 `Tokyo (ap-northeast-1)` 、 `Frankfurt (eu-central-1)` 、および`Singapore (ap-southeast-1)`
+現在、全文検索はパブリックプレビュー段階であり、{{{ .starter }}} でのみ利用できます。
 
 Auto Embedding は、AWS でホストされている {{{ .starter }}} インスタンスでのみ利用できます。
 
-このチュートリアルを完了するには、前述のリージョンのいずれかにある {{{ .starter }}} インスタンスと、それに接続された MySQL クライアントが必要です。インスタンスがない場合は、[{{{ .starter }}} インスタンスの作成](/develop/dev-guide-build-cluster-in-cloud.md) に従って作成してください。
+このチュートリアルを完了するには、AWS でホストされている {{{ .starter }}} インスタンスと、それに接続された MySQL クライアントが必要です。インスタンスがない場合は、[{{{ .starter }}} インスタンスの作成](/develop/dev-guide-build-cluster-in-cloud.md) に従って作成してください.
 
 ## ステップ 1. テーブルを作成する {#step-1-create-a-table}
 

@@ -33,9 +33,9 @@ TLSを使用してすべての通信を暗号化することで、転送中の�
 
 <CustomContent plan="premium">
 
-AWS 上でホストされているTiDB Cloud Premium インスタンスでは、二重層データ暗号化を有効にすることで、デフォルトのストレージレイヤー暗号化に加えてデータベースレイヤー暗号化を追加できます。二重層データ暗号化を有効にすると、 TiDB Cloud はTiKV に保存されたデータ、変更フィードデータ、およびバックアップデータを暗号化し、顧客管理暗号化キー (CMEK) またはサービス管理暗号化キーのいずれかを選択できます。
+TiDB Cloud Premium インスタンスでは、Enhanced Data Encryption により、デフォルトのストレージレイヤー暗号化に加えてデータベースレイヤー暗号化が追加され、保存中のデータベースデータとバックアップデータが保護されます。組織内で AWS KMS または Alibaba Cloud KMS の顧客管理暗号化キー (CMEK) を一度登録すると、同じクラウドプロバイダーおよびリージョン内のインスタンス間で再利用できます。マスターキーの認可、ローテーション、ライフサイクルはクラウドアカウントで制御し、TiDB Cloud はキーのステータスと使用状況を追跡します。
 
-詳細については、 [二重層データ暗号化](/tidb-cloud/premium/dual-layer-data-encryption-premium.md)を参照してください。
+詳細については、 [Enhanced Data Encryption](/tidb-cloud/premium/enhanced-data-encryption-premium.md)を参照してください。
 
 </CustomContent>
 

@@ -25,7 +25,7 @@ ti configure --profile staging
 ti db list-db-clusters --db-cluster-type starter
 ```
 
-`ti` 実行ファイルはロングオプションのみを受け付けます。`-p` のような 1 文字のオプションは拒否されます。
+ほとんどのコマンドはロングオプションのみを受け付けます。[`ti exec`](/ai/ti/reference/ti-exec.md) は、`-w` や `-t` など、ドキュメント化されているショートオプションも受け付けます。`-p` のような 1 文字のオプションは引き続きサポートされません。
 
 生成される usage では、必須オプションを任意オプションより前に指定し、任意オプションは角括弧で囲みます。
 
@@ -51,6 +51,7 @@ ti db describe-db-cluster
 | --- | --- | --- |
 | `configure` | ローカルプロファイル、API キー、デフォルトのリージョンを設定します。 | [`ti configure`](/ai/ti/reference/ti-configure.md) |
 | `update` | TiDB Cloud CLI の更新を確認してインストールします。 | [`ti update`](/ai/ti/reference/ti-update.md) |
+| `exec` | Filesystem に対してリモートコマンドを実行します。 | [`ti exec`](/ai/ti/reference/ti-exec.md) |
 | `db` | TiDB Cloud Starter インスタンス、ブランチ、SQL ユーザー、接続、SQL ステートメントを管理します。 | [`ti db` コマンド](/ai/ti/reference/ti-starter-database.md) |
 | `fs` | ファイルシステムリソース、AI プロバイダー、トークン、データ、レイヤー、マウントを管理します。 | [`ti fs` コマンド](/ai/ti/reference/ti-filesystem.md) |
 | `fs-git` | マウントされたファイルシステム上の Git ワークスペースを管理します。 | [`ti fs-git` コマンド](/ai/ti/reference/ti-filesystem-git.md) |
@@ -82,6 +83,8 @@ ti db list-db-clusters --db-cluster-type starter
 ```bash
 ti db list-db-clusters --db-cluster-type starter --output text
 ```
+
+`ti exec` はリモートの stdout と stderr を変更せずにストリーミングし、`--output`、`--query`、`--dry-run` をサポートしません。
 
 `ti fs read-file` や `ti fs copy-file --to-stdout` のような生バイト指向のコマンドは、ファイル内容を直接書き出します。
 

@@ -169,7 +169,7 @@
     - [Alibaba Cloudとプライベートエンドポイント経由で接続](/tidb-cloud/premium/connect-to-premium-via-alibaba-cloud-private-endpoint.md)
     - [TiDB CloudへのTLS接続](/tidb-cloud/premium/tidb-cloud-tls-connect-to-premium.md)
   - データアクセス制御
-    - [二重層データ暗号化](/tidb-cloud/premium/dual-layer-data-encryption-premium.md)
+    - [Enhanced Data Encryption](/tidb-cloud/premium/enhanced-data-encryption-premium.md)
   - 監査管理
     - [データベース監査ログ](/tidb-cloud/premium/tidb-cloud-auditing-premium.md)
     - [コンソール監査ログ](/tidb-cloud/tidb-cloud-console-auditing.md)
@@ -484,6 +484,7 @@
   - [TiDBの制限事項](/tidb-limitations.md)
   - [システム変数](/system-variables.md)
   - [サーバーステータス変数](/status-variables.md)
+  - [権限管理](/privilege-management.md)
   - [テーブルフィルター](/table-filter.md)
   - [外部ストレージサービスのURI形式](/external-storage-uri.md)
   - [DDL文に埋め込まれた `ANALYZE`](/ddl_embedded_analyze.md)

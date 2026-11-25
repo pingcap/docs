@@ -1,4 +1,8 @@
 {
   "target": "release-8.5",
-  "sha": "207406884e240c95ff8e480c642bdd37eab807ba"
+  "sha": "ecad3ce2bd7e3a253bac7fe9028ecdd8c9509815",
+  "pending": {
+    "ai/ti/reference/ti-exec.md": "207406884e240c95ff8e480c642bdd37eab807ba",
+    "tidb-cloud/premium/enhanced-data-encryption-premium.md": "207406884e240c95ff8e480c642bdd37eab807ba"
+  }
 }

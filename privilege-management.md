@@ -283,6 +283,8 @@ SHOW GRANTS FOR `rw_user`@`192.168.%`;
 - `RESTRICTED_USER_ADMIN` SEM が有効になっている場合、特権所有者が SUPER ユーザーによってアクセス権を取り消されることを禁止します。
 - `RESTRICTED_CONNECTION_ADMIN`権限所有者が`RESTRICTED_USER_ADMIN`ユーザーの接続を強制終了することを許可します。この権限は`KILL`および`KILL TIDB`文に影響します。
 - `RESTRICTED_REPLICA_WRITER_ADMIN`を使用すると、TiDB クラスターで読み取り専用モードが有効になっている場合でも、権限所有者は影響を受けることなく書き込みまたは更新操作を実行できます。詳細については、 [`tidb_restricted_read_only`](/system-variables.md#tidb_restricted_read_only-new-in-v520)を参照してください。
+- `AUDIT_ADMIN`は、[Security Enhanced Mode (SEM)](https://docs.pingcap.com/tidb/stable/glossary/#security-enhanced-mode-sem) が無効な場合に、監査ログに関連するシステム変数の変更、監査ログの手動ローテーション、監査ログフィルターの作成または削除、監査ログフィルタリングルールの作成、削除、有効化、無効化など、データベース監査ログの管理を可能にします。この権限は、TiDB Self-Managed Enterprise Edition、{{{ .dedicated }}}, {{{ .premium }}}, {{{ .essential }}} を含む、データベース監査ログ機能を提供する製品でのみ使用できます。[{{{ .essential }}} のデータベース監査ログ機能](https://docs.pingcap.com/tidbcloud/essential-database-audit-logging/?plan=essential) は現在 Private Preview であり、アクセスには申請が必要です。{{{ .starter }}} はデータベース監査ログをサポートしていません。
+- `RESTRICTED_AUDIT_ADMIN`は、SEM が有効な場合にデータベース監査ログの管理を可能にします。制御される操作の範囲と適用される製品は、`AUDIT_ADMIN` と同じです。
 
 動的権限の全セットを確認するには、 `SHOW PRIVILEGES`文を実行してください。プラグインは新しい権限を追加できるため、割り当て可能な権限のリストは、TiDB のインストール環境によって異なる場合があります。
 

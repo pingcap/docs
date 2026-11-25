@@ -221,6 +221,12 @@ TiDB Cloudは、新しいインスタンスへのデータ復元をサポート�
 
 4. **Next**をクリックして、 **Restore to a New Instance**ページに進んでください。
 
+    <CustomContent plan="premium">
+
+    CMEK で保護された {{{ .premium }}} バックアップの場合は、新しいインスタンスを設定する前に、対応するソースキーを確認してください。このキーは、元のクラウドプロバイダーとリージョンで登録済みかつ利用可能である必要があります。登録されていない場合は、続行する前に `Organization Owner` が元のキーを登録して認可する必要があります。復元後のインスタンスに対して別のキーを選択したり、CMEK を無効にしたりすることはできません。詳細については、[Restore from an encrypted backup](/tidb-cloud/premium/enhanced-data-encryption-premium.md#restore-from-an-encrypted-backup)を参照してください。
+
+    </CustomContent>
+
 5. 復元用に新しい {{{ .premium }}} または {{{ .byoc }}} インスタンスを構成します。<CustomContent plan="premium">[{{{ .premium }}}インスタンスを作成する](/tidb-cloud/premium/create-tidb-instance-premium.md)</CustomContent><CustomContent plan="byoc">[{{{ .byoc }}} インスタンスを作成する](/tidb-cloud/byoc/create-tidb-instance-byoc.md)</CustomContent> の手順に従ってください。
 
     <CustomContent plan="byoc">
@@ -265,20 +271,34 @@ TiDB Cloudは、新しいインスタンスへのデータ復元をサポート�
 
 ### 別のプランタイプからバックアップを復元する {#restore-backups-from-a-different-plan-type}
 
-現在、AWS上でホストされている{{{ .dedicated }}}クラスターから新しい{{{ .premium }}}インスタンスへのバックアップ復元のみが可能です。
+**Cross Plan Restore** を使用すると、AWS でホストされているアクティブまたは削除済みの {{{ .dedicated }}} クラスターのバックアップスナップショットを、新しい {{{ .premium }}} インスタンスに復元できます。新しいインスタンスは、バックアップと同じクラウドプロバイダーおよびリージョンを使用する必要があります。現在、ソースとしてサポートされているのは {{{ .dedicated }}} クラスターのバックアップのみです。
+
+CMEK で保護された {{{ .dedicated }}} バックアップの場合は、同じクラウドプロバイダーおよびリージョン内の新しい {{{ .premium }}} インスタンスに復元してください。TiDB Cloud は元の {{{ .dedicated }}} キーを使用してソースバックアップを復号し、新しいインスタンス用に登録済みの {{{ .premium }}} キーを使用してデータを再暗号化します。元の {{{ .dedicated }}} キーは有効な状態に保ち、復号のために認可しておいてください。また、同じクラウドプロバイダーおよびリージョン内の登録済み {{{ .premium }}} キーを選択してください（同じキーでも別のキーでもかまいません）。バックアップでデータベースレイヤー暗号化を使用していない場合は、登録済みキーを選択することで、新しいインスタンスに対して任意で CMEK を有効にできます。詳細については、[Restore from an encrypted backup](/tidb-cloud/premium/enhanced-data-encryption-premium.md#restore-from-an-encrypted-backup)を参照してください。
 
 {{{ .dedicated }}}クラスターによって生成されたバックアップを復元するには、次の手順に従ってください。
 
-1. [TiDB Cloudコンソール](https://tidbcloud.com)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。右上隅にある**...**をクリックし、 **Restore from Another Plan**をクリックします。
+1. [**My TiDB**](https://tidbcloud.com/tidbs) ページで、右上隅の **...** をクリックし、**Cross Plan Restore** をクリックします。
 
-2. **Select Backup**ページで、対象の{{{ .dedicated }}}クラスターを含むプロジェクトを選択します。{{{ .dedicated }}}クラスターを選択し、復元するバックアップスナップショットを選択して、 **Next**をクリックします。
+2. **Select Backup** ステップで、以下のフィールドを設定し、**Next** をクリックします。
+
+    - **From**: 既存のクラスターの場合は **Active** を、削除済みクラスターの場合は **Recycle Bin (Deleted)** を選択します。
+    - **Plan** と **Cloud Provider**: これらのフィールドは **Dedicated** と **AWS** に固定されています。
+    - **Project**: ソースクラスターを含むプロジェクトを選択します。
+    - **Cluster Name**: ソースクラスターを選択します。
+    - **Backup Snapshot**: 復元するスナップショットを選択します。
+
+3. **Backup Information** を確認し、**Restore to New Instance** を設定します。
+
+    - **Plan**: **Premium** を選択します。
+    - **Project** と **Instance Name**: 必要に応じて復元先プロジェクトを選択し、新しいインスタンスの名前を入力します。ロールが `Organization Owner` の場合、プロジェクトの選択は任意です。ロールが `Project Owner` の場合、自分が所有するプロジェクトを選択する必要があります。
+    - **Cloud Provider** と **Region**: これらのフィールドはバックアップから引き継がれ、変更できません。
+    - 必要に応じて、容量、暗号化、および高可用性を設定します。詳細については、[TiDB Cloud Premiumインスタンスを作成する](/tidb-cloud/premium/create-tidb-instance-premium.md)を参照してください。
 
     > **Note:**
     >
-    > - バックアップスナップショットを含む{{{ .dedicated }}}クラスターが、選択したプロジェクト内で**Active**または**Deleted**のいずれかの状態になっていることを確認してください。
-    > - スナップショットは、 {{{ .premium }}}がサポートするリージョン内に配置する必要があります。リージョンがサポートされていない場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)に連絡して{{{ .premium }}}用の新しいリージョンを開設するか、別のバックアップスナップショットを選択してください。
+    > 選択したバックアップリージョンで {{{ .premium }}} を利用できない場合、復元を続行できません。そのリージョンで {{{ .premium }}} を有効にするには [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md) に連絡するか、**Previous** をクリックして別のバックアップを選択してください。
 
-3. **Restore**ページで、[新しいインスタンスに復元する](#restore-to-a-new-instance)と同じ手順に従って、バックアップを新しいインスタンスに復元します。
+4. 推定月額料金と設定を確認し、**Restore** をクリックしてバックアップの新しいインスタンスへの復元を開始します。
 
 </CustomContent>
 
@@ -301,8 +321,9 @@ TiDB Cloudは、新しいインスタンスへのデータ復元をサポート�
 > **Note:**
 >
 > - 現在、復元対象としてサポートされているのは、**Amazon S3** および **Alibaba Cloud OSS** に保存されているバックアップのみです。
-> - バックアップの復元は、ストレージバケットと同じクラウドプロバイダーがホストする新しいインスタンスにのみ可能です。
-> - インスタンスとストレージバケットが異なるリージョンに配置されている場合、リージョン間データ転送料金が別途発生する可能性があります。
+> - バックアップの復元は、ストレージバケットと同じクラウドプロバイダーでホストされている新しいインスタンスにのみ可能です。
+> - CMEK で保護された {{{ .dedicated }}} バックアップの場合は、元のキーを有効な状態に保ち、バックアップを復号できるよう認可しておいてください。また、元のクラウドプロバイダーおよびリージョン内の新しい {{{ .premium }}} インスタンスに、登録済みの {{{ .premium }}} キー（同じキーまたはそのリージョン内の別の登録済みキー）を使用して復元してください。詳細については、[Restore from an encrypted backup](/tidb-cloud/premium/enhanced-data-encryption-premium.md#restore-from-an-encrypted-backup)を参照してください。
+> - データベースレイヤー暗号化を使用していないバックアップの場合、インスタンスとストレージバケットが異なるリージョンにあると、追加のリージョン間データ転送料金が発生する可能性があります。
 
 </CustomContent>
 
@@ -322,26 +343,26 @@ TiDB Cloudは、新しいインスタンスへのデータ復元をサポート�
 
 クラウドストレージからバックアップを復元するには、以下の手順を実行してください。
 
-1. [TiDB Cloudコンソール](https://tidbcloud.com)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。右上隅にある**...**をクリックし、**Restore from Cloud Storage**をクリックします。
+1. [TiDB Cloudコンソール](https://tidbcloud.com)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs) ページに移動します。右上隅の **...** をクリックし、<CustomContent plan="premium">**Restore from Cloud Storage to Premium**</CustomContent><CustomContent plan="byoc">**Restore from Cloud Storage to BYOC**</CustomContent> をクリックします。
 
-2. **Select Backup Storage Location**ページで、以下の情報を入力してください。
+2. **Select Backup** セクションで、以下の情報を入力します。
 
     <CustomContent plan="premium">
 
-    - **Cloud Provider**：バックアップファイルが保存されているクラウドプロバイダーを選択してください。
-    - **Region**：クラウドプロバイダーがAlibaba Cloud OSSの場合は、リージョンを選択してください。
-    - **Backup Files URI**：バックアップファイルが格納されている最上位フォルダーのURIを入力してください。
-    - **Access Key ID**：アクセスキーIDを入力してください。
-    - **Access Key Secret**：アクセスキーシークレットを入力してください。
+    - **Cloud Provider**: バックアップファイルが保存されているクラウドプロバイダーを選択します。
+    - **Region**: バックアップファイルが Alibaba Cloud OSS に保存されている場合は、バケットのリージョンを選択または入力します。
+    - **Backup Files URI**: バックアップファイルを含む最上位フォルダーの URI を入力します。
+    - **Access Key ID**: アクセスキー ID を入力します。
+    - **Access Key Secret**: アクセスキーシークレットを入力します。
 
     </CustomContent>
 
     <CustomContent plan="byoc">
 
-    - **Cloud Provider**：バックアップファイルが保存されているクラウドプロバイダーを選択してください。
-    - **Backup Files URI**：バックアップファイルが格納されている最上位フォルダーのURIを入力してください。
-    - **Access Key ID**：アクセスキーIDを入力してください。
-    - **Access Key Secret**：アクセスキーシークレットを入力してください。
+    - **Cloud Provider**: このフィールドは **Amazon S3** に固定されています。現在、BYOC は Amazon S3 からのバックアップ復元のみをサポートしています。
+    - **Backup Files URI**: バックアップファイルを含む最上位フォルダーの URI を入力します。
+    - **Access Key ID**: アクセスキー ID を入力します。
+    - **Access Key Secret**: アクセスキーシークレットを入力します。
 
     </CustomContent>
 
@@ -349,9 +370,9 @@ TiDB Cloudは、新しいインスタンスへのデータ復元をサポート�
     >
     > ストレージバケットのアクセスキーを作成するには、[AWSアクセスキーを使用してAmazon S3へのアクセスを設定する](#configure-amazon-s3-access-using-an-aws-access-key)<CustomContent plan="premium">および[Alibaba Cloud OSSへのアクセスを設定する](#configure-alibaba-cloud-oss-access)</CustomContent>を参照してください。
 
-3. **Verify Backup and Next**をクリックします。
+3. **Verify Backup** をクリックします。検証が成功したら、右側の概要でバックアップリージョン、バックアップ時刻、および TiDB バージョンを確認します。
 
-4. 検証が成功すると、**Restore to a New Instance**ページが表示されます。ページ上部に表示されるバックアップ情報を確認し、<CustomContent plan="premium">[{{{ .premium }}} インスタンスの作成](/tidb-cloud/premium/create-tidb-instance-premium.md)</CustomContent><CustomContent plan="byoc">[{{{ .byoc }}} インスタンスを作成する](/tidb-cloud/byoc/create-tidb-instance-byoc.md)</CustomContent>の手順に従って、バックアップを新しいインスタンスに復元します。
+4. 同じページの <CustomContent plan="premium">**Restore to a New Premium Instance**</CustomContent><CustomContent plan="byoc">**Restore to a New BYOC Instance**</CustomContent> セクションで、新しいインスタンスを設定します。必要に応じて復元先プロジェクトを選択し、インスタンス名を入力して、リージョンと容量を設定します。クラウドプロバイダーはバックアップストレージのプロバイダーと一致している必要があります。設定の詳細については、<CustomContent plan="premium">[TiDB Cloud Premiumインスタンスを作成する](/tidb-cloud/premium/create-tidb-instance-premium.md)</CustomContent><CustomContent plan="byoc">[{{{ .byoc }}} インスタンスを作成する](/tidb-cloud/byoc/create-tidb-instance-byoc.md)</CustomContent>を参照してください。
 
     <CustomContent plan="byoc">
 
@@ -365,7 +386,7 @@ TiDB Cloudは、新しいインスタンスへのデータ復元をサポート�
 
     </CustomContent>
 
-    バックアップ情報が正しくない場合は、**Previous**をクリックして前のページに戻り、正しい情報を入力してください。
+    バックアップ情報が正しくない場合は、**Select Backup** のフィールドを更新し、復元する前に **Verify Backup** をもう一度クリックしてください。
 
 5. バックアップを復元するには、**Restore**をクリックします。
 

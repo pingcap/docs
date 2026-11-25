@@ -561,6 +561,7 @@
   - [TiDBの制限事項](/tidb-limitations.md)
   - [システム変数](/system-variables.md)
   - [サーバーステータス変数](/status-variables.md)
+  - [権限管理](/privilege-management.md)
   - [テーブルフィルター](/table-filter.md)
   - [外部ストレージサービスのURI形式](/external-storage-uri.md)
   - [スロークエリのトリガールールを設定する](/config-slow-query-trigger-rules.md)

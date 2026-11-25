@@ -106,7 +106,7 @@ TiDB Cloudのリソースをプロジェクトごとにグループ化して表�
 
         > **Note:**
         >
-        > TiDB Cloud Premium インスタンスの場合、暗号化はプロジェクトごとではなくインスタンスごとに構成されます。インスタンスを作成した後、 [二重層データ暗号化](/tidb-cloud/premium/dual-layer-data-encryption-premium.md)を有効にして、デフォルトのストレージ層の暗号化に加えてデータベース層の暗号化を追加できます。
+        > {{{ .premium }}} インスタンスでは、顧客管理型暗号化キー（CMEK）は組織レベルで登録され、インスタンスの作成時または作成後に各インスタンスで [Enhanced Data Encryption](/tidb-cloud/premium/enhanced-data-encryption-premium.md) を有効にできます。
 
         </CustomContent>
 
@@ -115,7 +115,7 @@ TiDB Cloudのリソースをプロジェクトごとにグループ化して表�
         > **Note:**
         >
         > - {{{ .byoc }}} インスタンスでは、プロジェクトは任意です。データプレーンはお客様自身のクラウドアカウントで実行され、BYOC 環境レベルの設定は BYOC オンボーディング時に構成されます。
-        > - {{{ .premium }}} インスタンスでは、暗号化はプロジェクト単位ではなくインスタンス単位で構成されます。インスタンスの作成後、[二重層データ暗号化](/tidb-cloud/premium/dual-layer-data-encryption-premium.md) を有効にして、デフォルトのストレージレイヤー暗号化の上にデータベースレイヤー暗号化を追加できます。
+        > - {{{ .premium }}} インスタンスでは、顧客管理型暗号化キー（CMEK）は組織レベルで登録され、インスタンスの作成時または作成後に各インスタンスで [Enhanced Data Encryption](/tidb-cloud/premium/enhanced-data-encryption-premium.md) を有効にできます。
 
         </CustomContent>
 
