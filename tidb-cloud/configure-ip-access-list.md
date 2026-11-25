@@ -22,7 +22,7 @@ To add an IP address to the IP access list for your TiDB Cloud Dedicated cluster
     > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
 2. In the left navigation pane, click **Settings** > **Networking**.
-3. On the **Networking** page, click **Add IP Address**.
+3. On the **Networking** page, select the target TiDB node group in the upper-right corner if your cluster has multiple [node groups](/tidb-cloud/tidb-node-group-overview.md), enable **Public Endpoint** if it is disabled, and then click **Add IP Address**.
 4. In the **Add IP Address** dialog, add IP addresses with an optional description. For each TiDB Cloud Dedicated cluster, you can add up to 100 IP addresses.
 
     - To add a custom IP address, click the **+** icon, enter the IP address in CIDR notation (for example, `192.168.1.1/32`), and add a description.

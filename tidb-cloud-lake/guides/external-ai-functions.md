@@ -23,6 +23,22 @@ Build powerful AI/ML capabilities by connecting {{{ .lake }}} with your own infr
 2. **Register Function**: Connect your server to {{{ .lake }}} with `CREATE FUNCTION`
 3. **Use in SQL**: Call your custom AI functions directly in SQL queries
 
+## Network Requirements
+
+External functions use **Arrow Flight over gRPC/HTTP2**, not REST.
+
+1. Expose the UDF server on HTTPS with a public TLS certificate and gRPC/HTTP2 support.
+2. Click **Support** in the upper-right corner, select **Submit a request**, and request that the server hostname be added to your tenant's **UDF server allowlist**.
+3. If your firewall is locked down, submit a support request to obtain the {{{ .lake }}} egress addresses, and allow them on TCP 443.
+
+`CREATE FUNCTION` fails with `Unallowed UDF server address` until the host is allowlisted, and it also verifies the remote schema, so the endpoint must be online.
+
+Keep the local `UDFServer` gRPC listener private; terminate TLS at a gRPC load balancer:
+
+```text
+{{{ .lake }}} → HTTPS/HTTP2 :443 → UDFServer gRPC :8815
+```
+
 ## Example: Text Embedding Function
 
 ```python

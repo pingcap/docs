@@ -22,7 +22,7 @@ ST_POINTN(<geometry_or_geography>, <index>)
 
 > **Note:**
 >
-> The index is 1-based, and a negative index is uesed as the offset from the end of LineString. If index is out of bounds, the function returns an error.
+> The index is 1-based, and a negative index is used as the offset from the end of LineString. If index is out of bounds, the function returns an error.
 
 ## Return Type
 

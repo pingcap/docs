@@ -260,13 +260,13 @@ The YAML file above is the minimum configuration required for the migration task
 Before you start the migration task, to reduce the probability of errors, it is recommended to confirm that the configuration meets the requirements of DM by running the `check-task` command:
 
 ```shell
-tiup dmctl --master-addr ${advertise-addr} check-task task.yaml
+tiup dmctl --master-addr ${advertise-addr} check-task task1.yaml
 ```
 
 After that, start the migration task by running `tiup dmctl`:
 
 ```shell
-tiup dmctl --master-addr ${advertise-addr} start-task task.yaml
+tiup dmctl --master-addr ${advertise-addr} start-task task1.yaml
 ```
 
 The parameters used in the command above are described as follows:

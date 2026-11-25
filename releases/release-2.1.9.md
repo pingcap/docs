@@ -53,7 +53,7 @@ TiDB Ansible version: 2.1.9
 
 - TiDB Binlog
     - Fix the issue that data replication is interrupted because data in the unsigned int type of primary key column are minus numbers [#574](https://github.com/pingcap/tidb-binlog/pull/574)
-    - Remove the compression option when the downstream is `pb` and change the downstream name from `pb` to `file` [#597](https://github.com/pingcap/tidb-binlog/pull/575)
+    - Remove the compression option when the downstream is `pb` and change the downstream name from `pb` to `file` [#575](https://github.com/pingcap/tidb-binlog/pull/575)
     - Fix the bug that Reparo introduced in 2.1.7 generates wrong `UPDATE` statements [#576](https://github.com/pingcap/tidb-binlog/pull/576)
 - TiDB Lightning
     - Fix the bug that the bit type of column data is incorrectly parsed by the parser [#164](https://github.com/pingcap/tidb-lightning/pull/164)

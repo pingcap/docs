@@ -5,4 +5,4 @@ summary: Alias for SIPHASH64.
 
 # SIPHASH
 
-Alias for [SIPHASH64](/tidb-cloud-lake/sql/siphash.md).
+Alias for [SIPHASH64](/tidb-cloud-lake/sql/siphash-sql.md).

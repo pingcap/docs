@@ -121,7 +121,7 @@ For detailed information on obtaining connection details, see [Connecting to a W
 
 ## Using Custom Plugin (Alternative)
 
-For advanced use cases requiring direct SQL access or when working with self-hosted {{{ .lake }}}, you can use the Grafana {{{ .lake }}} Data Source Plugin.
+For advanced use cases requiring direct SQL access, you can use the Grafana {{{ .lake }}} Data Source Plugin.
 
 ### Step 1. Set up Environment
 

@@ -364,7 +364,7 @@ In TiDB, there is a [typical processing flow](/sql-optimization-concepts.md) fro
 
 SQL processing in TiDB consists of four phases, `get token`, `parse`, `compile`, and `execute`.
 
-- `get token`: Usually only a few microseconds and can be ignored. The token is limited only when the number of connections to a single TiDB instance reaches the [token-limit](/tidb-configuration-file.md) limit.
+- `get token`: Usually only a few microseconds and can be ignored. When the number of sessions executing requests concurrently on a single TiDB instance reaches [`token-limit`](/tidb-configuration-file.md#token-limit), subsequent requests wait until a token becomes available.
 - `parse`: The query statements are parsed into abstract syntax tree (AST).
 - `compile`: Execution plans are compiled based on the AST from the `parse` phase and statistics. The `compile` phase contains logical optimization and physical optimization. Logical optimization optimizes query plans by rules, such as column pruning based on relational algebra. Physical optimization estimates the cost of the execution plans by statistics by a cost-based optimizer and selects a physical execution plan with the lowest cost.
 - `execute`: The time consumption to execute a SQL statement. TiDB first waits for the globally unique timestamp TSO. Then the executor constructs the TiKV API request based on the Key range of the operator in the execution plan and distributes it to TiKV. `execute` time includes the TSO wait time, the KV request time, and the time spent by TiDB executor in processing data.
@@ -409,7 +409,7 @@ The TSO wait time is recorded as `TSO WAIT` and the network time of the TSO requ
 The indicators in this section correspond to the following three panels.
 
 - Avg TiDB KV Request Duration: The average latency of KV requests measured by TiDB
-- Avg TiKV GRPC Duration: The average latency in processing gPRC messages in TiKV
+- Avg TiKV GRPC Duration: The average latency in processing gRPC messages in TiKV
 - PD TSO Wait/RPC Duration: TiDB executor TSO wait time and network latency for TSO requests (RPC)
 
 The relationship between `Avg TiDB KV Request Duration` and `Avg TiKV GRPC Duration` is as follows:
@@ -474,7 +474,7 @@ According to the preceding formula, the QPS of a write-heavy OLTP workload in v5
 - v5.3.0: 24.4 ms ~= 17.7 ms + 6.59 ms
 - v5.4.0: 21.4 ms ~= 14.0 ms + 7.33 ms
 
-In v5.4.0, the gPRC module has been optimized to accelerate Raft log replication, which reduces `Store Duration` compared with v5.3.0.
+In v5.4.0, the gRPC module has been optimized to accelerate Raft log replication, which reduces `Store Duration` compared with v5.3.0.
 
 v5.3.0:
 
@@ -521,7 +521,7 @@ The QPS of a write-heavy OLTP workload in v5.4.0 is improved by 14% compared wit
 | Commit Log Duration | 13 | 8.68 |
 | Apply Log Duration | 0.457|0.514 |
 
-In v5.4.0, the gPRC module has been optimized to accelerate Raft log replication, which reduces `Commit Log Duration` and `Store Duration` compared with v5.3.0.
+In v5.4.0, the gRPC module has been optimized to accelerate Raft log replication, which reduces `Commit Log Duration` and `Store Duration` compared with v5.3.0.
 
 v5.3.0:
 

@@ -908,6 +908,12 @@ Configuration items related to read isolation.
 - Default value: `true`
 - Before v6.1.0, this configuration is set by `enable-collect-execution-info`.
 
+### `tidb_general_log`
+
+- This configuration controls the initial value of the [`tidb_general_log`](/system-variables.md#tidb_general_log) system variable for the current TiDB instance.
+- Default value: `false`
+- Value options: `true` or `false`
+
 ### `tidb_enable_slow_log`
 
 - This configuration is used to control whether to enable the slow log feature.
@@ -986,6 +992,11 @@ Configuration items related to read isolation.
 - Default value: `true`
 - Possible values: `true`, `false`
 - The value of this configuration will initialize the value of the system variable [`tidb_enable_stats_owner`](/system-variables.md#tidb_enable_stats_owner-new-in-v840).
+
+### `tidb_service_scope` <span class="version-mark">New in v7.4.0</span>
+
+- This configuration item controls the initial value of the system variable [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) for the current TiDB instance.
+- Default value: `""`
 
 ### `tidb_stmt_summary_enable_persistent` <span class="version-mark">New in v6.6.0</span>
 

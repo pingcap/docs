@@ -5,7 +5,7 @@ summary: An overview of the usage of SHOW GRANTS for the TiDB database.
 
 # SHOW GRANTS
 
-This statement shows a list of privileges associated with a user. As in MySQL, the `USAGE` privileges denotes the ability to login to TiDB.
+This statement shows a list of privileges associated with a user. As in MySQL, the `USAGE` privilege denotes the ability to log in to TiDB.
 
 ## Synopsis
 

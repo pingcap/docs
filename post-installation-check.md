@@ -25,7 +25,13 @@ Expected output: If the `Status` information of each node is `Up`, the cluster r
 
 ### Use TiDB Dashboard
 
-1. Log in to TiDB Dashboard at `${pd-ip}:${pd-port}/dashboard`. The username and password is the same as that of the TiDB `root` user. If you have modified the `root` password, enter the modified password. The password is empty by default.
+1. Log in to TiDB Dashboard at `${pd-ip}:${pd-port}/dashboard` using the TiDB `root` account and its current password.
+
+    > **Note:**
+    >
+    > If you initialized the cluster with `--init`, TiUP generates the initial root password. Otherwise, the initial password is empty.
+    >
+    > If you have changed the password, use the updated password. Restarting the cluster without `--init` does not reset an existing password.
 
     ![TiDB-Dashboard](/media/tiup/tidb-dashboard.png)
 
@@ -47,9 +53,15 @@ Expected output: If the `Status` information of each node is `Up`, the cluster r
 >
 > Install the MySQL client before you log in to the database.
 
-Log in to the database by running the following command:
+To log in with a root password, run the following command and enter the password when prompted. If you used the recommended [safe start method](/production-deployment-using-tiup.md#step-7-start-a-tidb-cluster) (`tiup cluster start tidb-test --init`), use the password displayed in the TiUP command output, unless you have since changed it:
 
 {{< copyable "shell-regular" >}}
+
+```shell
+mysql -u root -p -h ${tidb_server_host_IP_address} -P 4000
+```
+
+If the cluster was initially started without `--init` and no root password has been set, omit `-p`:
 
 ```shell
 mysql -u root -h ${tidb_server_host_IP_address} -P 4000

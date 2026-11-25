@@ -20,6 +20,7 @@ This page provides a comprehensive overview of Hash functions in {{{ .lake }}}, 
 
 | Function | Description | Example |
 |----------|-------------|--------|
+| [BUCKET](/tidb-cloud-lake/sql/bucket.md) | Maps a value to a stable bucket for physical partitioning | `BUCKET(16, customer_id)` → an integer from `0` to `15` |
 | [XXHASH32](/tidb-cloud-lake/sql/xxhash.md) | Calculates an xxHash32 32-bit hash value | `XXHASH32('1234567890')` → `3768853052` |
 | [XXHASH64](/tidb-cloud-lake/sql/xxhash.md) | Calculates an xxHash64 64-bit hash value | `XXHASH64('1234567890')` → `12237639266330420150` |
 | [SIPHASH64](/tidb-cloud-lake/sql/siphash.md) / [SIPHASH](/tidb-cloud-lake/sql/siphash.md) | Calculates a SipHash-2-4 64-bit hash value | `SIPHASH64('1234567890')` → `2917646445633666330` |

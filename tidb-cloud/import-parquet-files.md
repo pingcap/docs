@@ -15,8 +15,6 @@ This document describes how to import Apache Parquet files from Amazon Simple St
 
 - To ensure data consistency, TiDB Cloud allows to import Parquet files into empty tables only. To import data into an existing table that already contains data, you can use TiDB Cloud to import the data into a temporary empty table by following this document, and then use the `INSERT SELECT` statement to copy the data to the target existing table.
 
-- If a TiDB Cloud Dedicated cluster has a [changefeed](/tidb-cloud/changefeed-overview.md) or has [Point-in-time Restore](/tidb-cloud/backup-and-restore.md#turn-on-point-in-time-restore) enabled, you cannot import data to the cluster (the **Import Data** button will be disabled) because the current data import feature uses the [physical import mode](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode). In this mode, the imported data does not generate change logs, so the changefeed and Point-in-time Restore cannot detect the imported data.
-
 ## Step 1. Prepare the Parquet files
 
 > **Note:**
@@ -148,6 +146,12 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 
         - **Target Database** and **Target Table**: enter the target database and table to import the data to.
 
+    **Advanced options**: expand the panel to view the **Ignore compatibility checks (advanced)** option. Leave it disabled unless you need to import data into a cluster that has a changefeed or Point-in-time Restore enabled. Enabling this option skips all pre-import safety checks, including the local disk space check. Before enabling it, verify that the target cluster's available disk space can accommodate the imported data.
+
+    > **Note:**
+    >
+    > Imported data does not generate change logs, so it is not captured by changefeeds or log backups and cannot be automatically detected and backed up. After the import completes, take a manual snapshot backup of the cluster before relying on Point-in-time Restore. Until then, Point-in-time Restore cannot recover the imported rows from a time between the import and the manual snapshot. For more information, see [Perform a manual backup](/tidb-cloud/backup-and-restore.md#perform-a-manual-backup).
+
 6. Click **Next**. TiDB Cloud scans the source files.
 
 7. Review the scan results, check the data files found and corresponding target tables, and then click **Start Import**.
@@ -198,6 +202,12 @@ To import the Parquet files to TiDB Cloud, take the following steps:
             - `my-data*.parquet`: matches all Parquet files that start with `my-data`, such as `my-data10.parquet` and `my-data100.parquet`.
 
         - **Target Database** and **Target Table**: enter the target database and table to import the data to.
+
+    **Advanced options**: expand the panel to view the **Ignore compatibility checks (advanced)** option. Leave it disabled unless you need to import data into a cluster that has a changefeed or Point-in-time Restore enabled. Enabling this option skips all pre-import safety checks, including the local disk space check. Before enabling it, verify that the target cluster's available disk space can accommodate the imported data.
+
+    > **Note:**
+    >
+    > Imported data does not generate change logs, so it is not captured by changefeeds or log backups and cannot be automatically detected and backed up. After the import completes, take a manual snapshot backup of the cluster before relying on Point-in-time Restore. Until then, Point-in-time Restore cannot recover the imported rows from a time between the import and the manual snapshot. For more information, see [Perform a manual backup](/tidb-cloud/backup-and-restore.md#perform-a-manual-backup).
 
 6. Click **Next**. TiDB Cloud scans the source files.
 
@@ -269,6 +279,12 @@ To import the Parquet files to TiDB Cloud, take the following steps:
             - `my-data*.parquet`: matches all Parquet files that start with `my-data`, such as `my-data10.parquet` and `my-data100.parquet`.
 
         - **Target Database** and **Target Table**: enter the target database and table to import the data to.
+
+    **Advanced options**: expand the panel to view the **Ignore compatibility checks (advanced)** option. Leave it disabled unless you need to import data into a cluster that has a changefeed or Point-in-time Restore enabled. Enabling this option skips all pre-import safety checks, including the local disk space check. Before enabling it, verify that the target cluster's available disk space can accommodate the imported data.
+
+    > **Note:**
+    >
+    > Imported data does not generate change logs, so it is not captured by changefeeds or log backups and cannot be automatically detected and backed up. After the import completes, take a manual snapshot backup of the cluster before relying on Point-in-time Restore. Until then, Point-in-time Restore cannot recover the imported rows from a time between the import and the manual snapshot. For more information, see [Perform a manual backup](/tidb-cloud/backup-and-restore.md#perform-a-manual-backup).
 
 6. Click **Next**. TiDB Cloud scans the source files.
 

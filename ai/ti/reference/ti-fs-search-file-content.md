@@ -1,6 +1,6 @@
 ---
 title: ti fs search-file-content
-summary: Search file content in a TiDB Cloud Filesystem.
+summary: Search file content in a file system.
 ---
 
 # ti fs search-file-content
@@ -29,7 +29,7 @@ ti fs search-file-content
 
 - `--pattern <string>`: Text query used for full-text and, when configured, semantic search over extracted file content and descriptions. The value is not a regular expression or glob. \[required]
 - `--file-system-id <string>`: Select the file system. You can also set `TI_FS_FILE_SYSTEM_ID`.
-- `--fs-token <string>`: Set the Filesystem token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected Filesystem.
+- `--fs-token <string>`: Set the file system token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected file system.
 - `--help`: Display help information.
 - `--layer-id <string>`: Search within a file system layer.
 - `--limit <int32>`: Maximum number of search results; 0 uses the service default.
@@ -40,7 +40,7 @@ For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli
 
 ## Examples
 
-- Search base Filesystem content:
+- Search base file system content:
 
     ```bash
     # Find matching text under a remote directory and limit the result count.
@@ -50,7 +50,7 @@ For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli
 - Search content in a layer:
 
     ```bash
-    # Inspect uncommitted layer content separately from the base Filesystem.
+    # Inspect uncommitted layer content separately from the base file system.
     ti fs search-file-content --file-system-id <file-system-id> --path /workspace --pattern "deprecated" --layer-id "<layer-id>"
     ```
 

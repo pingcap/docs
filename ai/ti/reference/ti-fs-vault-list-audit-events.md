@@ -1,6 +1,6 @@
 ---
 title: ti fs-vault list-audit-events
-summary: List Filesystem Vault audit events.
+summary: List file system Vault audit events.
 ---
 
 # ti fs-vault list-audit-events
@@ -29,7 +29,7 @@ ti fs-vault list-audit-events
 
 - `--agent-id <string>`: Filter by agent ID.
 - `--file-system-id <string>`: Select the file system. You can also set `TI_FS_FILE_SYSTEM_ID`.
-- `--fs-token <string>`: Set the Filesystem token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected Filesystem.
+- `--fs-token <string>`: Set the file system token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected file system.
 - `--help`: Display help information.
 - `--limit <int32>`: Maximum events to return. \[default: 100]
 - `--secret-name <string>`: Filter by Vault secret name.

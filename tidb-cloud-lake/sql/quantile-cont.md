@@ -22,7 +22,7 @@ QUANTILE_CONT(level1, level2, ...)(<expr>)
 
 | Arguments   | Description                                                                                                                                     |
 |-------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
-| `<level(s)` | level(s) of quantile. Each level is constant floating-point number from 0 to 1. We recommend using a level value in the range of [0.01, 0.99]   |
+| `<levels>` | level(s) of quantile. Each level is constant floating-point number from 0 to 1. We recommend using a level value in the range of [0.01, 0.99]   |
 | `<expr>`    | Any numerical expression                                                                                                                        |
 
 ## Return Type

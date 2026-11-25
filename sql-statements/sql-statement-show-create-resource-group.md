@@ -51,6 +51,6 @@ This statement is a TiDB extension for MySQL.
 ## See also
 
 * [TiDB RESOURCE CONTROL](/tidb-resource-control-ru-groups.md)
-* [CREATE RESOURCE GROUP](/sql-statements/sql-statement-alter-resource-group.md)
+* [CREATE RESOURCE GROUP](/sql-statements/sql-statement-create-resource-group.md)
 * [ALTER RESOURCE GROUP](/sql-statements/sql-statement-alter-resource-group.md)
 * [DROP RESOURCE GROUP](/sql-statements/sql-statement-drop-resource-group.md)

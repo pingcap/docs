@@ -58,6 +58,22 @@ Github: https://github.com/tidbcloud/lakesql
 >>> More information at https://github.com/tidbcloud/lakesql
 ```
 
+The installer places the `lakesql` binary in `~/.lakesql/bin` and appends a line like the following to `~/.zprofile` and `~/.profile`:
+
+```bash
+export PATH="$PATH:$HOME/.lakesql/bin"
+```
+
+These files are not automatically reloaded in the current shell. To use `lakesql` in the current terminal, run the following command:
+
+```bash
+source ~/.profile
+```
+
+> **Note:**
+>
+> If you use Bash and `~/.bash_profile` exists, which is the default on many Linux distributions such as CentOS, RHEL, and Alibaba Cloud Linux, Bash does not read `~/.profile` at login. The same applies if `~/.bash_login` exists and `~/.bash_profile` does not. In either case, add the preceding `export PATH` command to the file Bash reads.
+
 #### Custom Installation with `--prefix`
 
 Install LakeSQL to a specified directory (e.g., /usr/local):

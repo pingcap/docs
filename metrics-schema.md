@@ -93,7 +93,7 @@ SHOW TABLES;
 626 rows in set (0.00 sec)
 ```
 
-The `METRICS_SCHEMA` is used as a data source for monitoring-related summary tables such as ([`metrics_summary`](/information-schema/information-schema-metrics-summary.md), [`metrics_summary_by_label`](/information-schema/information-schema-metrics-summary.md) and [`inspection_summary`](/information-schema/information-schema-inspection-summary.md).
+The `METRICS_SCHEMA` is used as a data source for monitoring-related summary tables such as [`metrics_summary`](/information-schema/information-schema-metrics-summary.md), [`metrics_summary_by_label`](/information-schema/information-schema-metrics-summary.md) and [`inspection_summary`](/information-schema/information-schema-inspection-summary.md).
 
 ## Additional Examples
 

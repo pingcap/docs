@@ -1,27 +1,17 @@
 ---
-title: Back Up and Restore {{{ .premium }}} Data
-summary: Learn how to back up and restore your {{{ .premium }}} instances.
+title: Back Up and Restore {{{ .premium }}} or {{{ .byoc }}} Data
+summary: Learn how to back up and restore your {{{ .premium }}} or {{{ .byoc }}} instances.
 aliases: ['/tidbcloud/restore-deleted-tidb-cluster']
 ---
 
-# Back Up and Restore {{{ .premium }}} Data
-
-<CustomContent plan="premium">
-
-This document describes how to back up and restore your data on {{{ .premium }}} instances. {{{ .premium }}} supports both automatic backups and manual backups, and lets you restore backup data to a new instance as needed.
-
-</CustomContent>
-
-<CustomContent plan="byoc">
+# Back Up and Restore {{{ .premium }}} or {{{ .byoc }}} Data
 
 This document describes how to back up and restore your data on {{{ .premium }}} or {{{ .byoc }}} instances. {{{ .premium }}} and {{{ .byoc }}} support both automatic backups and manual backups, and let you restore backup data to a new instance as needed.
 
-</CustomContent>
-
 Backup files can originate from the following sources:
 
-- Active {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instances
-- The Recycle Bin for backups from deleted {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instances
+- Active {{{ .premium }}} or {{{ .byoc }}} instances
+- The Recycle Bin for backups from deleted {{{ .premium }}} or {{{ .byoc }}} instances
 
 > **Tip:**
 >
@@ -30,7 +20,7 @@ Backup files can originate from the following sources:
 
 ## View the Backup page
 
-1. On the [**My TiDB**](https://tidbcloud.com/tidbs) page, click the name of your target {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance to go to its overview page.
+1. On the [**My TiDB**](https://tidbcloud.com/tidbs) page, click the name of your target {{{ .premium }}} or {{{ .byoc }}} instance to go to its overview page.
 
     > **Tip:**
     >
@@ -40,17 +30,7 @@ Backup files can originate from the following sources:
 
 ## Automatic backups
 
-<CustomContent plan="premium">
-
-{{{ .premium }}} provides enhanced automatic backup capabilities for production environments. It combines high-frequency snapshots with log backups to ensure data reliability.
-
-</CustomContent>
-
-<CustomContent plan="byoc">
-
 {{{ .premium }}} and {{{ .byoc }}} provide enhanced automatic backup capabilities for production environments. They combine high-frequency snapshots with log backups to ensure data reliability.
-
-</CustomContent>
 
 ### Automatic backup modes
 
@@ -78,7 +58,7 @@ PITR lets you restore data to any point in time within the retention period. A s
 
 ### Configure automatic backups
 
-1. On the [**My TiDB**](https://tidbcloud.com/tidbs) page, click the name of your target {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance.
+1. On the [**My TiDB**](https://tidbcloud.com/tidbs) page, click the name of your target {{{ .premium }}} or {{{ .byoc }}} instance.
 
 2. In the left navigation pane, click **Data** > **Backup**.
 
@@ -102,7 +82,8 @@ PITR lets you restore data to any point in time within the retention period. A s
 
 > **Note:**
 >
-> If you [switch between backup modes](#switch-between-automatic-backup-modes) or reduce the retention period, TiDB Cloud might permanently delete existing automatic backups that are older than the new retention period. This action cannot be undone.
+> - For BYOC instances, TiDB Cloud does not charge for backup or restore operations. You are responsible for the storage and data transfer costs of backup files in your cloud account. A restore operation might provision nodes in your cloud account, and you are responsible for their provisioned vCPU costs.
+> - If you [switch between backup modes](#switch-between-automatic-backup-modes) or reduce the retention period, TiDB Cloud might permanently delete existing automatic backups that are older than the new retention period. This action cannot be undone.
 
 </CustomContent>
 
@@ -110,7 +91,7 @@ PITR lets you restore data to any point in time within the retention period. A s
 
 > **Note:**
 >
-> - Custom Retention Mode pricing is based on snapshot size and retention duration. PITR is temporarily free during the public preview period. See [TiDB Cloud pricing](https://www.pingcap.com/tidb-cloud-premium-pricing-details) for more information.
+> - Custom Retention Mode pricing is based on snapshot size and retention duration. PITR is temporarily free during the public preview period. See [TiDB Cloud Premium Pricing Details](https://www.pingcap.com/tidb-cloud-premium-pricing-details) for more information.
 > - If you [switch between backup modes](#switch-between-automatic-backup-modes) or reduce the retention period, TiDB Cloud might permanently delete existing automatic backups that are older than the new retention period. This action cannot be undone.
 
 </CustomContent>
@@ -142,7 +123,7 @@ To help prevent data loss and preserve a recovery point, TiDB Cloud protects **t
 
 ### Delete backup files
 
-To delete an existing backup file for your {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance, perform the following steps:
+To delete an existing backup file for your {{{ .premium }}} or {{{ .byoc }}} instance, perform the following steps:
 
 1. Navigate to the [**Backup**](#view-the-backup-page) page of your instance.
 
@@ -155,25 +136,27 @@ To delete an existing backup file for your {{{ .premium }}}<CustomContent plan="
 
 ## Manual backups
 
-<CustomContent plan="premium">
-
-In addition to automatic backups, {{{ .premium }}} supports manual backups. A manual backup provides a controlled, guaranteed restore point. It is highly recommended that you create a manual backup before you perform high-risk operations such as system upgrades, critical data deletion, or irreversible schema or configuration changes.
-
-</CustomContent>
-
-<CustomContent plan="byoc">
-
 In addition to automatic backups, {{{ .premium }}} and {{{ .byoc }}} support manual backups. A manual backup provides a controlled, guaranteed restore point. It is highly recommended that you create a manual backup before you perform high-risk operations such as system upgrades, critical data deletion, or irreversible schema or configuration changes.
-
-</CustomContent>
 
 ### Key characteristics
 
 - **Retention and deletion**: unlike automatic backups, manual backups are not automatically deleted based on retention policies. They are retained until you explicitly delete them. If you delete the instance, its manual backups move to the recycle bin and remain there until you manually delete them.
 
+<CustomContent plan="premium">
+
 - **Storage location**: manual backups are stored in cloud storage managed by TiDB.
 
 - **Cost**: manual backups incur additional charges because they are retained until you delete them.
+
+</CustomContent>
+
+<CustomContent plan="byoc">
+
+- **Storage location**: manual backups are stored in your cloud account.
+
+- **Cost**: TiDB Cloud does not charge for backup or restore operations. You are responsible for the storage and data transfer costs of backup files in your cloud account.
+
+</CustomContent>
 
 - **Limitations**: manual backups do not support point-in-time recovery (PITR) or partial backups (for example, table-level or database-level backups). You cannot restore a manual backup to an existing instance. Each restore operation creates a new instance.
 
@@ -185,7 +168,7 @@ In addition to automatic backups, {{{ .premium }}} and {{{ .byoc }}} support man
 
 2. In the upper-right corner, click **...**, and then click **Manual Backup**.
 
-3. Confirm the operation. The backup is stored in TiDB Cloud and will appear in the **Backup List**.
+3. Confirm the operation. After the backup is created, it appears in the **Backup List**.
 
 You can restore a manual backup directly in the TiDB Cloud console without providing external storage credentials.
 
@@ -201,15 +184,15 @@ TiDB Cloud supports snapshot restore and point-in-time restore for your instance
 
 - **Point-in-Time Restore**: restores your instance to a specific point in time.
 
-    - Premium<CustomContent plan="byoc"> or BYOC</CustomContent> instances: can be restored to any time within the last 7 days, but not earlier than the instance creation time or later than one minute before the current time. Note that PITR is not supported for manual backups.
+    - Premium or BYOC instances: can be restored to any time within the last 7 days, but not earlier than the instance creation time or later than one minute before the current time. Note that PITR is not supported for manual backups.
 
 ### Restore destination
 
 TiDB Cloud supports restoring data to a new instance.
 
-### Restore to a new {{{ .premium }}} instance {#restore-to-a-new-instance}
+### Restore to a new {{{ .premium }}} or {{{ .byoc }}} instance {#restore-to-a-new-instance}
 
-To restore your data to a new {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance, take the following steps:
+To restore your data to a new {{{ .premium }}} or {{{ .byoc }}} instance, take the following steps:
 
 1. Navigate to the [**Backup**](#view-the-backup-page) page of your instance.
 
@@ -228,7 +211,7 @@ To restore your data to a new {{{ .premium }}}<CustomContent plan="byoc"> or {{{
     </div>
     <div label="Point-in-Time Restore">
 
-    To restore to a specific point in time for a Premium<CustomContent plan="byoc"> or BYOC</CustomContent> instance, take the following steps:
+    To restore to a specific point in time for a Premium or BYOC instance, take the following steps:
 
     1. Click **Point-in-Time Restore**.
     2. Select the date and time you want to restore to.
@@ -238,7 +221,13 @@ To restore your data to a new {{{ .premium }}}<CustomContent plan="byoc"> or {{{
 
 4. Click **Next** to proceed to the **Restore to a New Instance** page.
 
-5. Configure your new {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance for restoration. Follow the steps in <CustomContent plan="premium">[Create a {{{ .premium }}} Instance](/tidb-cloud/premium/create-tidb-instance-premium.md)</CustomContent><CustomContent plan="byoc">[Create a {{{ .byoc }}} Instance](/tidb-cloud/byoc/create-tidb-instance-byoc.md)</CustomContent>.
+    <CustomContent plan="premium">
+
+    For a CMEK-protected {{{ .premium }}} backup, review the matched source key before configuring the new instance. The key must be registered and available in the original cloud provider and region. If it is not registered, an `Organization Owner` must register and authorize the original key before continuing. You cannot select another key or disable CMEK for the restored instance. For more information, see [Restore from an encrypted backup](/tidb-cloud/premium/enhanced-data-encryption-premium.md#restore-from-an-encrypted-backup).
+
+    </CustomContent>
+
+5. Configure your new {{{ .premium }}} or {{{ .byoc }}} instance for restoration. Follow the steps in <CustomContent plan="premium">[Create a {{{ .premium }}} Instance](/tidb-cloud/premium/create-tidb-instance-premium.md)</CustomContent><CustomContent plan="byoc">[Create a {{{ .byoc }}} Instance](/tidb-cloud/byoc/create-tidb-instance-byoc.md)</CustomContent>.
 
     <CustomContent plan="byoc">
 
@@ -262,7 +251,7 @@ To restore your data to a new {{{ .premium }}}<CustomContent plan="byoc"> or {{{
 
 ### Restore from Recycle Bin
 
-To restore a deleted {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance from the Recycle Bin, take the following steps:
+To restore a deleted {{{ .premium }}} or {{{ .byoc }}} instance from the Recycle Bin, take the following steps:
 
 1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, click **...** in the upper-right corner, and then click **Recycle Bin**.
 
@@ -282,20 +271,34 @@ To restore a deleted {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}
 
 ### Restore backups from a different plan type
 
-Currently, you can only restore backups from a {{{ .dedicated }}} cluster hosted on AWS to a new {{{ .premium }}} instance.
+You can use **Cross Plan Restore** to restore a backup snapshot from an active or deleted {{{ .dedicated }}} cluster hosted on AWS to a new {{{ .premium }}} instance. The new instance must use the same cloud provider and region as the backup. Currently, only backups for {{{ .dedicated }}} clusters are supported as the source.
+
+For a CMEK-protected {{{ .dedicated }}} backup, restore to a new {{{ .premium }}} instance in the same cloud provider and region. TiDB Cloud uses the original {{{ .dedicated }}} key to decrypt the source backup and re-encrypts the data using a registered {{{ .premium }}} key for the new instance. Keep the original {{{ .dedicated }}} key active and authorized for decryption, and select a registered {{{ .premium }}} key in the same cloud provider and region (which can be the same key or a different key). If the backup does not use database-layer encryption, you can optionally enable CMEK for the new instance by selecting a registered key. For more information, see [Restore from an encrypted backup](/tidb-cloud/premium/enhanced-data-encryption-premium.md#restore-from-an-encrypted-backup).
 
 To restore a backup generated by a {{{ .dedicated }}} cluster, follow these steps:
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com), and then navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page. In the upper-right corner, click **...**, and then click **Restore from Another Plan**.
+1. On the [**My TiDB**](https://tidbcloud.com/tidbs) page, click **...** in the upper-right corner, and then click **Cross Plan Restore**.
 
-2. On the **Select Backup** page, select the project that contains the target {{{ .dedicated }}} cluster. Select the {{{ .dedicated }}} cluster, select the backup snapshot that you want to restore, and then click **Next**.
+2. In the **Select Backup** step, configure the following fields, and then click **Next**:
+
+    - **From**: select **Active** for an existing cluster or **Recycle Bin (Deleted)** for a deleted cluster.
+    - **Plan** and **Cloud Provider**: these fields are fixed to **Dedicated** and **AWS**.
+    - **Project**: select the project that contains the source cluster.
+    - **Cluster Name**: select the source cluster.
+    - **Backup Snapshot**: select the snapshot to restore.
+
+3. Review **Backup Information**, and then configure **Restore to New Instance**:
+
+    - **Plan**: select **Premium**.
+    - **Project** and **Instance Name**: select a destination project as needed and enter a name for the new instance. If your role is `Organization Owner`, selecting a project is optional. If your role is `Project Owner`, you must select a project you own.
+    - **Cloud Provider** and **Region**: these fields are inherited from the backup and cannot be changed.
+    - Configure capacity, encryption, and high availability as needed. For more information, see [Create a {{{ .premium }}} Instance](/tidb-cloud/premium/create-tidb-instance-premium.md).
 
     > **Note:**
     >
-    > - Ensure that the {{{ .dedicated }}} cluster that contains the backup snapshot is in either the **Active** or **Deleted** status within the selected project.
-    > - The snapshot must be located in a region that {{{ .premium }}} supports. If the region is not supported, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) to open a new region for {{{ .premium }}}, or select another backup snapshot.
+    > If {{{ .premium }}} is unavailable in the selected backup region, you cannot proceed with the restore. Contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) to enable {{{ .premium }}} in that region, or click **Previous** and select another backup.
 
-3. On the **Restore** page, follow the same steps as [Restore to a new instance](#restore-to-a-new-instance) to restore the backup to a new instance.
+4. Review the estimated monthly price and configuration, and then click **Restore** to begin restoring the backup to a new instance.
 
 </CustomContent>
 
@@ -319,7 +322,8 @@ To restore a backup generated by a {{{ .dedicated }}} cluster, follow these step
 >
 > - Currently, only backups located in **Amazon S3** and **Alibaba Cloud OSS** are supported for restore.
 > - You can restore backups only to a new instance hosted by the same cloud provider as your storage bucket.
-> - If the instance and the storage bucket are located in different regions, additional cross-region data transfer fees might apply.
+> - For a CMEK-protected {{{ .dedicated }}} backup, keep the original key active and authorized to decrypt the backup, and restore to a new {{{ .premium }}} instance in the original cloud provider and region using a registered {{{ .premium }}} key (the same key or another registered key in that region). For more information, see [Restore from an encrypted backup](/tidb-cloud/premium/enhanced-data-encryption-premium.md#restore-from-an-encrypted-backup).
+> - For backups without database-layer encryption, additional cross-region data transfer fees might apply if the instance and the storage bucket are in different regions.
 
 </CustomContent>
 
@@ -339,14 +343,14 @@ Before you begin, ensure that you have an access key and secret key with suffici
 
 To restore backups from cloud storage, do the following:
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com), and then navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page. In the upper-right corner, click **...** , and then click **Restore from Cloud Storage**.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com), and then navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page. In the upper-right corner, click **...**, and then click <CustomContent plan="premium">**Restore from Cloud Storage to Premium**</CustomContent><CustomContent plan="byoc">**Restore from Cloud Storage to BYOC**</CustomContent>.
 
-2. On the **Select Backup Storage Location** page, provide the following information:
+2. In the **Select Backup** section, provide the following information:
 
     <CustomContent plan="premium">
 
     - **Cloud Provider**: select the cloud provider where your backup files are stored.
-    - **Region**: if your cloud provider is Alibaba Cloud OSS, select a region.
+    - **Region**: if your backup files are stored in Alibaba Cloud OSS, select or enter the bucket region.
     - **Backup Files URI**: enter the URI of the top-level folder that contains your backup files.
     - **Access Key ID**: enter your access key ID.
     - **Access Key Secret**: enter your access key secret.
@@ -355,7 +359,7 @@ To restore backups from cloud storage, do the following:
 
     <CustomContent plan="byoc">
 
-    - **Cloud Provider**: select the cloud provider where your backup files are stored.
+    - **Cloud Provider**: this field is fixed to **Amazon S3**. Currently, BYOC supports restoring backups only from Amazon S3.
     - **Backup Files URI**: enter the URI of the top-level folder that contains your backup files.
     - **Access Key ID**: enter your access key ID.
     - **Access Key Secret**: enter your access key secret.
@@ -366,9 +370,9 @@ To restore backups from cloud storage, do the following:
     >
     > To create an access key for your storage bucket, see [Configure Amazon S3 access using an AWS access key](#configure-amazon-s3-access-using-an-aws-access-key)<CustomContent plan="premium"> and [Configure Alibaba Cloud OSS access](#configure-alibaba-cloud-oss-access)</CustomContent>.
 
-3. Click **Verify Backup and Next**.
+3. Click **Verify Backup**. After verification succeeds, review the backup region, backup time, and TiDB version in the summary on the right.
 
-4. If the verification is successful, the **Restore to a New Instance** page appears. Review the backup information displayed at the top of the page, and then follow the steps in <CustomContent plan="premium">[Create a {{{ .premium }}} Instance](/tidb-cloud/premium/create-tidb-instance-premium.md)</CustomContent><CustomContent plan="byoc">[Create a {{{ .byoc }}} Instance](/tidb-cloud/byoc/create-tidb-instance-byoc.md)</CustomContent> to restore the backup to a new instance.
+4. On the same page, configure the new instance in the <CustomContent plan="premium">**Restore to a New Premium Instance**</CustomContent><CustomContent plan="byoc">**Restore to a New BYOC Instance**</CustomContent> section. Select a destination project as needed, enter an instance name, and configure the region and capacity. The cloud provider must match the backup storage provider. For more information about the settings, see <CustomContent plan="premium">[Create a {{{ .premium }}} Instance](/tidb-cloud/premium/create-tidb-instance-premium.md)</CustomContent><CustomContent plan="byoc">[Create a {{{ .byoc }}} Instance](/tidb-cloud/byoc/create-tidb-instance-byoc.md)</CustomContent>.
 
     <CustomContent plan="byoc">
 
@@ -382,7 +386,7 @@ To restore backups from cloud storage, do the following:
 
     </CustomContent>
 
-    If the backup information is incorrect, click **Previous** to return to the previous page, and then enter the correct information.
+    If the backup information is incorrect, update the fields in **Select Backup**, and then click **Verify Backup** again before restoring.
 
 5. Click **Restore** to restore the backup.
 
@@ -404,7 +408,7 @@ Take the following steps to configure an access key:
 
 2. Grant permissions to the IAM user.
 
-    Create a policy with only the permissions required for your task and attach it to the IAM user. To restore data to a {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance, grant the `s3:GetObject`, `s3:GetBucketLocation`, and `s3:ListBucket` permissions.
+    Create a policy with only the permissions required for your task and attach it to the IAM user. To restore data to a {{{ .premium }}} or {{{ .byoc }}} instance, grant the `s3:GetObject`, `s3:GetBucketLocation`, and `s3:ListBucket` permissions.
 
     The following is an example policy that allows TiDB Cloud to restore data from a specific folder in your Amazon S3 bucket.
 

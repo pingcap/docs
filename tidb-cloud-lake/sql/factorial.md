@@ -1,11 +1,11 @@
 ---
 title: FACTORIAL
-summary: Returns the factorial logarithm of x. If x is less than or equal to 0, the function returns 0.
+summary: Returns the factorial of x. If x is less than or equal to 0, the function returns 0.
 ---
 
 # FACTORIAL
 
-Returns the factorial logarithm of `x`. If `x` is less than or equal to 0, the function returns 0.
+Returns the factorial of `x`. If `x` is less than or equal to 0, the function returns 0.
 
 ## Syntax
 

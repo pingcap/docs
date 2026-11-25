@@ -199,7 +199,7 @@ Encoding format for `Binary` column.
 
 Encoding format for `Geometry` column.
 
-**Available Values**: `EWKT`, `WKB`, `WKB`, `EWKB`, `GEOJSON`
+**Available Values**: `EWKT`, `WKT`, `WKB`, `EWKB`, `GEOJSON`
 
 **Default**: `EWKT`
 

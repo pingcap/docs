@@ -22,7 +22,7 @@ This document uses a {{{ .starter }}} instance as an example.
 
 To begin with, create a table `test.repository` in your {{{ .starter }}} instance or {{{ .dedicated }}} cluster and insert some sample data into it. The following example inserts some open source projects developed by PingCAP as data for demonstration purposes.
 
-To execute the SQL statements, you can use [SQL Editor](/tidb-cloud/explore-data-with-chat2query.md) in the [TiDB Cloud console](https://tidbcloud.com).
+To execute the SQL statements, you can use [SQL Editor](/tidb-cloud/explore-data-with-sql-editor.md) in the [TiDB Cloud console](https://tidbcloud.com).
 
 ```sql
 -- Select the database
@@ -192,7 +192,7 @@ You can use the generated client code to develop your Next.js application.
     >    });
     >  ```
     >
-    > Make sure to replace `basePath` with the actual endpoint path of your Data App. To get `${YOUR_REGION}` and `{YOUR_DATA_APP_ID}`, check the **Endpoint URL** in the endpoint **Properties** panel.
+    > Make sure to replace `basePath` with the actual endpoint path of your Data App. To get `${YOUR_REGION}` and `${YOUR_DATA_APP_ID}`, check the **Endpoint URL** in the endpoint **Properties** panel.
 
 ## Step 5. Preview your Next.js application
 

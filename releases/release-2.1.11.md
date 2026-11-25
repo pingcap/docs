@@ -26,7 +26,7 @@ TiDB Ansible version: 2.1.11
 
 ## PD
 
-- Fix the issue that hots Region may fail to be scheduled due to `balance-region` [#1551](https://github.com/pingcap/pd/pull/1551)
+- Fix the issue that hot Regions may fail to be scheduled due to `balance-region` [#1551](https://github.com/pingcap/pd/pull/1551)
 - Set hotspot related scheduling priorities to high [#1551](https://github.com/pingcap/pd/pull/1551)
 - Add two configuration items [#1551](https://github.com/pingcap/pd/pull/1551)
     - `hot-region-schedule-limit` to control the maximum number of concurrent hotspot scheduling tasks

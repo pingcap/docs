@@ -9,19 +9,15 @@ TiProxy v1.0.0 only supports status-based and connection count-based load balanc
 
 By default, TiProxy applies these policies with the following priorities:
 
-1. Status-based load balancing: when a TiDB server is shutting down, TiProxy migrates connections from that TiDB server to an online TiDB server.
-2. Label-based load balancing: TiProxy prioritizes routing requests to TiDB servers that share the same label as the TiProxy instance, enabling resource isolation at the computing layer.
+1. Label-based load balancing: TiProxy prioritizes routing connection requests to TiDB servers that share the same label as the TiProxy instance, enabling resource isolation at the computing layer.
+2. Status-based load balancing: when a TiDB server cannot provide service normally or is shutting down, TiProxy migrates connections from that TiDB server to an online TiDB server.
 3. Health-based load balancing: when the health of a TiDB server is abnormal, TiProxy migrates connections from that TiDB server to a healthy TiDB server.
 4. Memory-based load balancing: when a TiDB server is at risk of running out of memory (OOM), TiProxy migrates connections from that TiDB server to a TiDB server with lower memory usage.
 5. CPU-based load balancing: when the CPU usage of a TiDB server is much higher than that of other TiDB servers, TiProxy migrates connections from that TiDB server to a TiDB server with lower CPU usage.
-6. Location-based load balancing: TiProxy prioritizes routing requests to the TiDB server geographically closest to TiProxy.
+6. Location-based load balancing: TiProxy prioritizes routing requests to TiDB servers that are geographically closer to TiProxy.
 7. Connection count-based load balancing: when the connection count of a TiDB server is much higher than that of other TiDB servers, TiProxy migrates connections from that TiDB server to a TiDB server with fewer connections.
 
 To adjust the priorities of load balancing policies, see [Configure load balancing policies](#configure-load-balancing-policies).
-
-## Status-based load balancing
-
-TiProxy periodically checks whether a TiDB server is offline or shutting down using the SQL port and status port.
 
 ## Label-based load balancing
 
@@ -99,6 +95,10 @@ pd_servers:
   - host: pd-host-2
   - host: pd-host-3
 ```
+
+## Status-based load balancing
+
+TiProxy periodically checks whether a TiDB server can provide services normally using the SQL port and status port, such as whether it is offline or shutting down.
 
 ## Health-based load balancing
 
@@ -189,7 +189,7 @@ In the preceding configuration, the TiProxy instance on `tiproxy-host-1` priorit
 
 ## Connection count-based load balancing
 
-TiProxy migrates connections from a TiDB server with more connections to a server with fewer connections. This policy is not configurable and has the lowest priority.
+TiProxy migrates connections from a TiDB server with more connections to a server with fewer connections. This policy has the lowest priority.
 
 Typically, TiProxy identifies the load on TiDB servers based on CPU usage. This policy usually takes effect in the following scenarios:
 
@@ -200,9 +200,11 @@ Typically, TiProxy identifies the load on TiDB servers based on CPU usage. This 
 
 TiProxy lets you configure the combination and priority of load balancing policies through the [`policy`](/tiproxy/tiproxy-configuration.md#policy) configuration item.
 
-- `resource`: the resource priority policy performs load balancing based on the following priority order: status, label, health, memory, CPU, location, and connection count.
-- `location`: the location priority policy performs load balancing based on the following priority order: status, label, location, health, memory, CPU, and connection count.
-- `connection`: the minimum connection count policy performs load balancing based on the following priority order: status, label, and connection count.
+- `resource`: the resource priority policy performs load balancing based on the following priority order: label, status, health, memory, CPU, location, and connection count.
+- `location`: the location priority policy performs load balancing based on the following priority order: label, status, location, health, memory, CPU, and connection count.
+- `connection`: the minimum connection count policy performs load balancing based on the following priority order: label, status, and connection count.
+
+For more configuration items related to load balancing, see [`balance`](/tiproxy/tiproxy-configuration.md#balance).
 
 ## More resources
 

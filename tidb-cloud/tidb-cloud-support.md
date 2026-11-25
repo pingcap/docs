@@ -7,6 +7,10 @@ summary: Learn how to contact the support team of TiDB Cloud.
 
 TiDB Cloud offers tiered support plan offerings tailored to meet customers' needs. For more information about our support offerings, see [Connected Care Details](/tidb-cloud/connected-care-detail.md).
 
+> **Warning:**
+>
+> Before creating a support ticket or attaching logs or files, remove or mask credentials such as passwords and API keys, personally identifiable information (PII), and other sensitive data. Replace them with asterisks (****) or other placeholders. If you accidentally submit such information, contact TiDB Cloud Support immediately and ask them to delete it. <CustomContent language="en,zh">If TiDB Cloud Support still needs information from the deleted attachment to resolve the ticket, you can reattach a sanitized version to the original ticket.</CustomContent>
+
 ## Support channels
 
 TiDB Cloud provides multiple support channels. The available options depend on the type of issue and your [support plan](/tidb-cloud/connected-care-detail.md).
@@ -109,11 +113,7 @@ To check or upgrade your support plan, perform the following steps:
 
     On this page, you can find your current plan. By default, the **Basic** free plan is selected.
 
-    <CustomContent plan="byoc">
-
     For {{{ .byoc }}}, **Enterprise** is the minimum required support plan.
-
-    </CustomContent>
 
 2. Choose your desired support plan.
 
@@ -150,8 +150,4 @@ To downgrade your support plan, perform the following steps:
 1. In the [TiDB Cloud console](https://tidbcloud.com/), click **Support** in the lower-left corner.
 2. Choose the support plan you want to switch to, and then click **Downgrade**.
 
-    <CustomContent plan="byoc">
-
     For {{{ .byoc }}}, you can downgrade only to **Enterprise** or a higher support plan.
-
-    </CustomContent>

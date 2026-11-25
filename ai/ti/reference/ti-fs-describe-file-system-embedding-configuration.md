@@ -1,11 +1,11 @@
 ---
 title: ti fs describe-file-system-embedding-configuration
-summary: Describe embedding configuration for a TiDB Cloud Filesystem.
+summary: Describe embedding configuration for a file system.
 ---
 
 # ti fs describe-file-system-embedding-configuration
 
-Shows the embedding configuration for a Filesystem. This configuration is optional and does not affect normal Filesystem operations when it is not customized. This command requires TiDB Cloud API credentials and does not use a Filesystem token.
+Shows the embedding configuration for a file system. This configuration is optional and does not affect normal file system operations when it is not customized. This command requires TiDB Cloud API credentials and does not use a file system token.
 
 The `source` field reports whether the configuration is `custom`, `default`, `none`, or `database_auto`.
 
@@ -24,7 +24,7 @@ ti fs describe-file-system-embedding-configuration
 
 ## Options
 
-- `--file-system-id <string>`: Set the immutable Filesystem ID. \[required]
+- `--file-system-id <string>`: Set the immutable file system ID. \[required]
 - `--help`: Display help information.
 - `--version`: Display version information.
 

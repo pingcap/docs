@@ -5,7 +5,7 @@ summary: Returns the H3 index of the hexagon cell where the given location resid
 
 # GEO_TO_H3
 
-Returns the [H3](https://eng.uber.com/h3/) index of the hexagon cell where the given location resides. Returning 0 means an error occurred.
+Returns the [H3](https://h3geo.org/) index of the hexagon cell where the given location resides. Returning 0 means an error occurred.
 
 ## Syntax
 

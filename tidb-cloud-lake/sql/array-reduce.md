@@ -15,7 +15,7 @@ ARRAY_REDUCE(<json_array>, <lambda_expression>)
 
 ## Examples
 
-This example multiplies all the elements in the array (2 _3_ 4):
+This example multiplies all the elements in the array (`2 * 3 * 4`):
 
 ```sql
 SELECT ARRAY_REDUCE(

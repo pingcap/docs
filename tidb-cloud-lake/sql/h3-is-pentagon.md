@@ -5,7 +5,7 @@ summary: Checks if the given H3 index represents a pentagonal cell.
 
 # H3_IS_PENTAGON
 
-Checks if the given [H3](https://eng.uber.com/h3/) index represents a pentagonal cell.
+Checks if the given [H3](https://h3geo.org/) index represents a pentagonal cell.
 
 ## Syntax
 

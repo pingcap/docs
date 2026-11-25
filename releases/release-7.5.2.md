@@ -30,7 +30,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
     - Remove stores without Regions during MPP load balancing [#52313](https://github.com/pingcap/tidb/issues/52313) @[xzhangxian1008](https://github.com/xzhangxian1008)
     - Support loading Regions in batch from PD to speed up the conversion process from the KV range to Regions when querying large tables [#51326](https://github.com/pingcap/tidb/issues/51326) @[SeaRise](https://github.com/SeaRise)
     - On the `Resource Control` monitoring page, add a new panel `RU(Max)` to show the maximum RU consumption rate for each resource group [#49318](https://github.com/pingcap/tidb/issues/49318) @[nolouch](https://github.com/nolouch)
-    - Improve sync load performance to reduce latency in loading statistics [#52994](https://github.com/pingcap/tidb/issues/52294) [hawkingrei](https://github.com/hawkingrei)
+    - Improve sync load performance to reduce latency in loading statistics [#52294](https://github.com/pingcap/tidb/issues/52294) [hawkingrei](https://github.com/hawkingrei)
     - Increase concurrency of statistics initialization to speed up startup [#52466](https://github.com/pingcap/tidb/issues/52466) [#52102](https://github.com/pingcap/tidb/issues/52102) [#52553](https://github.com/pingcap/tidb/issues/52553) [hawkingrei](https://github.com/hawkingrei)
 
 + TiKV

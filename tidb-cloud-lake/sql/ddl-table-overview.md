@@ -42,8 +42,8 @@ This page provides a comprehensive overview of table operations in {{{ .lake }}}
 |---------|-------------|----------------|
 | [TRUNCATE TABLE](/tidb-cloud-lake/sql/truncate-table.md) | Removes all data from a table while preserving the table's schema | [FLASHBACK TABLE](/tidb-cloud-lake/sql/flashback-table.md) |
 | [DROP TABLE](/tidb-cloud-lake/sql/drop-table.md) | Deletes a table | [UNDROP TABLE](/tidb-cloud-lake/sql/undrop-table.md) |
-| [VACUUM TABLE](/tidb-cloud-lake/sql/vacuum-table.md) | Permanently removes historical data files of a table (Enterprise Edition) | Not recoverable |
-| [VACUUM DROP TABLE](/tidb-cloud-lake/sql/vacuum-drop-table.md) | Permanently removes data files of dropped tables (Enterprise Edition) | Not recoverable |
+| [VACUUM TABLE](/tidb-cloud-lake/sql/vacuum-table.md) | Permanently removes historical data files of a table | Not recoverable |
+| [VACUUM DROP TABLE](/tidb-cloud-lake/sql/vacuum-drop-table.md) | Permanently removes data files of dropped tables | Not recoverable |
 
 ## Table Optimization
 

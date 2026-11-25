@@ -170,7 +170,7 @@ CREATE STAGE iam_external_stage
 
 ### Example 4: Create External Stage on Cloudflare R2
 
-[Cloudflare R2](https://www.cloudflare.com/en-ca/products/r2/) is an object storage service introduced by Cloudflare that is fully compatible with Amazon's AWS S3 service. This example creates an external stage named *r2_stage* on Cloudflare R2.
+[Cloudflare R2](https://www.cloudflare.com/products/r2/) is an object storage service introduced by Cloudflare that is fully compatible with Amazon's AWS S3 service. This example creates an external stage named *r2_stage* on Cloudflare R2.
 
 #### Step 1: Create Bucket
 

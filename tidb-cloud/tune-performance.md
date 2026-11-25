@@ -46,6 +46,14 @@ TiDB Cloud provides [Slow Query](#slow-query) and [Statement Analysis](#statemen
 
 By default, SQL queries that take more than 300 milliseconds are considered as slow queries.
 
+<CustomContent plan="essential,premium">
+
+> **Note:**
+>
+> You can also configure trigger rules for slow queries to filter target statements based on specific metric combinations. For more information, see [Configure Trigger Rules for Slow Queries](/config-slow-query-trigger-rules.md).
+
+</CustomContent>
+
 To view slow queries in a <CustomContent plan="starter">{{{ .starter }}} instance</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent>, perform the following steps:
 
 1. [Navigate to the **Diagnosis** page](#view-the-diagnosis-page).

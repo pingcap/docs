@@ -66,6 +66,7 @@
       - [Subscribe via Lark](/tidb-cloud/monitor-alert-lark.md)
     - [Events](/tidb-cloud/tidb-cloud-events.md)
     - [Integrate TiDB Cloud with Datadog](/tidb-cloud/monitor-datadog-integration-for-tidb-x.md)
+    - [Integrate TiDB Cloud with New Relic](/tidb-cloud/monitor-new-relic-integration-for-tidb-x.md)
   - Tune Performance
     - [Overview](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
     - [Analyze Performance](/tidb-cloud/tune-performance.md)
@@ -139,14 +140,21 @@
     - [Troubleshoot Access Denied Errors during Data Import from Amazon S3](/tidb-cloud/troubleshoot-import-access-denied-error.md)
     - [Connect AWS DMS to TiDB Cloud](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
 - Stream Data
-  - [Changefeed Overview](/tidb-cloud/changefeed-overview.md)
+  - [Overview](/tidb-cloud/stream-data-overview.md)
+  - [Changefeed](/tidb-cloud/changefeed-overview.md)
+  - [Data Pipeline](/tidb-cloud/data-pipeline.md)
   - [To MySQL Sink](/tidb-cloud/changefeed-sink-to-mysql.md)
   - [To Kafka Sink](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
   - [To Cloud Storage](/tidb-cloud/changefeed-sink-to-cloud-storage.md)
+  - [To TiDB Cloud Lake](/tidb-cloud/data-pipeline-sink-to-lake.md)
   - Reference
     - [Set Up Self-Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md)
     - [Set Up Private Endpoint for Changefeeds](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md)
     - [Set Up an Amazon MSK Provisioned Cluster via AWS PrivateLink](/tidb-cloud/setup-aws-msk-provisioned-private-link-service.md)
+    - [Set Up an External Stage for TiDB Cloud Data Pipeline (AWS)](/tidb-cloud/data-pipeline-configure-external-stage-aws.md)
+    - [Set Up an External Stage for TiDB Cloud Data Pipeline (Alibaba Cloud)](/tidb-cloud/data-pipeline-configure-external-stage-alibaba-cloud.md)
+    - [SQL Compatibility for TiDB Cloud Lake Integration](/tidb-cloud/data-pipeline-lake-sql-compatibility.md)
+    - [Data Pipeline FAQ](/tidb-cloud/data-pipeline-lake-faq.md)
 - Security
   - [Security Overview](/tidb-cloud/security-overview.md)
   - Identity Access Control
@@ -161,7 +169,7 @@
     - [Connect via Private Endpoint with Alibaba Cloud](/tidb-cloud/premium/connect-to-premium-via-alibaba-cloud-private-endpoint.md)
     - [TLS Connections to TiDB Cloud](/tidb-cloud/premium/tidb-cloud-tls-connect-to-premium.md)
   - Data Access Control
-    - [Dual-Layer Data Encryption](/tidb-cloud/premium/dual-layer-data-encryption-premium.md)
+    - [Enhanced Data Encryption](/tidb-cloud/premium/enhanced-data-encryption-premium.md)
     - [User-Controlled Log Redaction](/tidb-cloud/tidb-cloud-log-redaction.md)
   - Audit Management
     - [Database Audit Logging](/tidb-cloud/premium/tidb-cloud-auditing-premium.md)
@@ -184,6 +192,7 @@
   - [Gitpod](/develop/dev-guide-playground-gitpod.md)
   - [n8n](/tidb-cloud/integrate-tidbcloud-with-n8n.md)
   - [Netlify](/tidb-cloud/integrate-tidbcloud-with-netlify.md)
+  - [New Relic](/tidb-cloud/monitor-new-relic-integration-for-tidb-x.md)
   - [ProxySQL](/develop/dev-guide-proxysql-integration.md)
   - [Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md)
   - [Zapier](/tidb-cloud/integrate-tidbcloud-with-zapier.md)
@@ -476,9 +485,11 @@
   - [TiDB Limitations](/tidb-limitations.md)
   - [System Variables](/system-variables.md)
   - [Server Status Variables](/status-variables.md)
+  - [Privilege Management](/privilege-management.md)
   - [Table Filter](/table-filter.md)
   - [URI Formats of External Storage Services](/external-storage-uri.md)
   - [`ANALYZE` Embedded in DDL Statements](/ddl_embedded_analyze.md)
+  - [Configure Trigger Rules for Slow Queries](/config-slow-query-trigger-rules.md)
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
   - [Notifications](/tidb-cloud/notifications.md)
 - Support Plan
@@ -503,3 +514,12 @@
 - FAQs
   - [TiDB Cloud FAQs](/tidb-cloud/tidb-cloud-faq.md)
 - [Glossary](/tidb-cloud/tidb-cloud-glossary.md)
+
+## _BUILD_ALLOWLIST
+
+- Use Tiered Storage
+  - [Overview](/tidb-cloud/tiered-storage-overview.md)
+  - [Configure and Manage](/tidb-cloud/tiered-storage-guide.md)
+  - [Observability](/tidb-cloud/tiered-storage-observability.md)
+  - [Limitations](/tidb-cloud/tiered-storage-limitations.md)
+  - [FAQ](/tidb-cloud/tiered-storage-faq.md)

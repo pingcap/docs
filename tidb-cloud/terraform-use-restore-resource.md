@@ -177,7 +177,7 @@ After creating a backup of a cluster, you can restore the cluster by creating a 
 
     You can see the restore task's status is `PENDING` and the cluster's status is `INITIALIZING`.
 
-5. Wait for some minutes. Then use `terraform refersh` to update the status.
+5. Wait for some minutes. Then use `terraform refresh` to update the status.
 
 6. After the cluster status changes to `AVAILABLE`, the restore task will be `RUNNING` and turn to `SUCCESS` at last.
 

@@ -15,15 +15,13 @@ A general workflow of hybrid search in TiDB is as follows:
 
 ![Hybrid Search](/media/vector-search/hybrid-search-overview.svg)
 
-This tutorial demonstrates how to use hybrid search in TiDB with the [pytidb](https://github.com/pingcap/pytidb) Python SDK, which provides built-in support for embedding and reranking. Using pytidb is completely optional — you can perform a search using SQL directly and use your own reranking model as you like.
+This tutorial demonstrates how to use hybrid search in TiDB with the [pytidb](https://github.com/pingcap/pytidb) Python SDK, which provides built-in support for embedding and reranking. Using pytidb is completely optional; you can perform a search using SQL directly and use your own reranking model as you like. For a hybrid search written entirely in SQL, see [Hybrid Search with SQL](/ai/guides/vector-search-hybrid-search-sql.md).
 
 ## Prerequisites
 
-Full-text search is still in the early stages, and we are continuously rolling it out to more customers. Currently, full-text search is only available on {{{ .starter }}} in the following regions:
+Currently, full-text search is in public preview and only available on {{{ .starter }}}.
 
-- AWS: `Oregon (us-west-2)`, `N. Virginia (us-east-1)`, `Tokyo (ap-northeast-1)`, `Frankfurt (eu-central-1)`, and `Singapore (ap-southeast-1)`
-
-To complete this tutorial, make sure you have a {{{ .starter }}} instance in a supported region. If you don't have one, follow [Creating a {{{ .starter }}} instance](/develop/dev-guide-build-cluster-in-cloud.md) to create it.
+To complete this tutorial, make sure you have a {{{ .starter }}} instance. If you don't have one, follow [Creating a {{{ .starter }}} instance](/develop/dev-guide-build-cluster-in-cloud.md) to create it.
 
 ## Get started
 

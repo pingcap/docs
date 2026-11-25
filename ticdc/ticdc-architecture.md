@@ -76,6 +76,49 @@ In table split mode, pay attention to the following settings:
 - [`scheduler.region-count-per-span`](/ticdc/ticdc-changefeed-config.md#region-count-per-span-new-in-v854): the default value is `100`. During changefeed initialization, TiCDC splits tables that meet the split conditions according to this parameter. After splitting, each sub-table contains at most `region-count-per-span` Regions.
 - [`scheduler.write-key-threshold`](/ticdc/ticdc-changefeed-config.md#write-key-threshold): the default value is `0` (disabled). When the sink write throughput of a table exceeds this threshold, TiCDC triggers table splitting. In most cases, keep this parameter at `0`.
 
+## Storage Sink file name changes and consumption instructions
+
+Starting from v8.5.5, when table-level task splitting is enabled in the new TiCDC architecture, [Storage Sink](/ticdc/ticdc-sink-to-cloud-storage.md) data files use the naming format `CDC_{uuid}_{num}.{extension}` instead of `CDC{num}.{extension}`, and Index files use `CDC_{uuid}.index` instead of `CDC.index`. Here, `uuid` identifies the replication subtask after table splitting, and `num` indicates the file sequence number.
+
+- Data change record path
+
+  ```
+  {scheme}://{prefix}/{schema}/{table}/{table-version-separator}/{partition-separator}/{date-separator}/CDC_{uuid}_{num}.{extension}
+  ```
+
+- Index file path
+
+  ```
+  {scheme}://{prefix}/{schema}/{table}/{table-version-separator}/{partition-separator}/{date-separator}/meta/CDC_{uuid}.index
+  ```
+
+After table-level task splitting is enabled, under the `{schema}/{table}/{table-version-separator}/` directory, the same table might have multiple data files with different `uuid` values but the same sequence number. For example:
+
+  ```
+  ├── metadata
+  └── test
+      ├── tbl_1
+      │   ├── 437752935075545091
+      │   │   ├── CDC_11_000001.json
+      │   │   ├── CDC_11_000002.json
+      │   │   ├── CDC_22_000001.json
+      │   │   └── meta
+      │   │       ├── CDC_11.index
+      │   │       └── CDC_22.index
+      │   ├── 437752935075546092
+      │   │   ├── CDC_33_000001.json
+      │   │   ├── CDC_44_000001.json
+      │   │   └── meta
+      │   │       ├── CDC_33.index
+      │   │       └── CDC_44.index
+  ```
+
+Because multiple replication subtasks write files in parallel, a downstream consumer might read a data file before it is fully written, causing some data to be missed. To avoid this situation, when writing a downstream consumer program, read the data in the following order:
+
+1. Read the `meta/CDC_{uuid}.index` file corresponding to each replication subtask (for example, `CDC_11.index`) to obtain the name of the file that has been completely written (for example, `CDC_11_000002.json`).
+2. Read data files in sequence number order, selecting only those with the same `uuid` as the Index file and sequence numbers less than or equal to the sequence number in the file name recorded in that Index file (for example, `CDC_11_000001.json` and `CDC_11_000002.json`).
+3. After reading DML events from all replication subtasks, sort them by `commit-ts` and process them in the resulting order in the downstream system.
+
 ## Compatibility
 
 Except as described in the following special cases, the TiCDC new architecture is fully compatible with the classic architecture.
@@ -86,26 +129,16 @@ In the TiCDC classic architecture, DDL replication operations are strictly seria
 
 ### Changes in DDL replication behavior
 
-- The classic TiCDC architecture does not support DDLs that swap table names (for example, `RENAME TABLE a TO c, b TO a, c TO b;`). The new architecture supports such DDLs.
+The TiCDC new and classic architectures differ in the replication behavior of `RENAME` DDLs as follows:
 
-- The new architecture unifies and simplifies the filtering rules for `RENAME` DDLs.
+- **Swapping table names**: For DDLs that use an intermediate table name to swap two table names (for example, `RENAME TABLE a TO c, b TO a, c TO b;`), the classic architecture does not support replication, while the new architecture does. During replication, all interdependent renaming steps must be preserved.
+- **Table filtering**: In both architectures, whether to replicate a `RENAME` statement is determined by whether the old table name matches the filter rule. If the old table name does not match but the new table name does, the changefeed reports an error and stops replicating. For multi-table `RENAME`, the classic architecture also requires the target database to be within the replication scope, while the new architecture evaluates each renaming step separately. For example, when `filter.rules = ['test.t*']`, the new architecture can replicate `RENAME TABLE test.t1 TO ignore.t1, test.t2 TO test.t22;` and then stop replicating the renamed `ignore.t1`. For more information, see [DDL replication considerations for renaming tables](/ticdc/ticdc-ddl.md#ddl-replication-considerations-for-renaming-tables).
 
-    - In the classic architecture, the filtering logic is as follows:
+### Differences in DDL SQL text
 
-        - Single-table renaming: a DDL statement is replicated only if the old table name matches the filter rule.
-        - Multi-table renaming: a DDL statement is replicated only if both old and new table names match the filter rules.
+The DDL SQL text that TiCDC replicates downstream might differ from the original upstream statement or the output of the classic architecture. The new architecture rewrites single-table rename statements as `RENAME TABLE` statements with fully qualified database and table names. When splitting multi-table rename or batch table creation events, it also adds a trailing semicolon to each resulting statement. SQL rewriting might also occur for views, cross-database `CREATE TABLE ... LIKE ...` statements, unnamed indexes, and table routing.
 
-    - In the new architecture, for both single-table and multi-table renaming, a DDL statement is replicated as long as old table names in the statement match the filter rules.
-
-        Take the following filter rule as an example:
-
-        ```toml
-        [filter]
-        rules = ['test.t*']
-        ```
-
-        - In the classic architecture: for single-table renaming, such as `RENAME TABLE test.t1 TO ignore.t1`, the old table name `test.t1` matches the rule, so it will be replicated. For a multi-table renaming, such as `RENAME TABLE test.t1 TO ignore.t1, test.t2 TO test.t22;`, because the new table name `ignore.t1` does not match the rule, it will not be replicated.
-        - In the new TiCDC architecture: because the old table names in both `RENAME TABLE test.t1 TO ignore.t1` and `RENAME TABLE test.t1 TO ignore.t1, test.t2 TO test.t22;` match the rules, both DDL statements will be replicated.
+If downstream consumers need to parse DDL SQL, or if you need to compare the outputs of the new and classic architectures during an upgrade, see [Handling DDL SQL text](/ticdc/ticdc-ddl.md#handling-of-ddl-sql-text).
 
 ## Limitations
 

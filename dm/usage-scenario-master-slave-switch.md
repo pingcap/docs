@@ -29,7 +29,7 @@ To switch one upstream MySQL instance (when DM-worker connects to it via a VIP) 
 1. Use the `query-status` command to get the GTID sets (`syncerBinlogGtid`) corresponding to the binlog that the current processing unit of binlog replication has replicated to the downstream. Mark the sets as `gtid-S`.
 2. Use the `SELECT @@GLOBAL.gtid_purged;` command on the new MySQL instance to get the GTID sets corresponding to the purged binlogs. Mark the sets as `gtid-P`.
 3. Use the `SELECT @@GLOBAL.gtid_executed;` command on the new MySQL instance to get the GTID sets corresponding to all successfully executed transactions. Mark the sets as `gtid-E`.
-4. Make sure that the following conditions are met. Otherwise, you cannot switch the DM-work connection to the new MySQL instance:
+4. Make sure that the following conditions are met. Otherwise, you cannot switch the DM-worker connection to the new MySQL instance:
     - `gtid-S` contains `gtid-P`. `gtid-P` can be empty.
     - `gtid-E` contains `gtid-S`.
 5. Use `pause-task` to pause all running tasks of data migration.
@@ -43,10 +43,10 @@ To make DM-worker connect to a new MySQL instance in the upstream by modifying t
 1. Use the `query-status` command to get the GTID sets (`syncerBinlogGtid`) corresponding to the binlog that the current processing unit of binlog replication has replicated to the downstream. Mark this sets as `gtid-S`.
 2. Use the `SELECT @@GLOBAL.gtid_purged;` command on the new MySQL instance to get the GTID sets corresponding to the purged binlogs. Mark this sets as `gtid-P`.
 3. Use the `SELECT @@GLOBAL.gtid_executed;` command on the new MySQL instance to get the GTID sets corresponding to all successfully executed transactions. Mark this sets as `gtid-E`.
-4. Make sure that the following conditions are met. Otherwise, you cannot switch the DM-work connection to the new MySQL instance:
+4. Make sure that the following conditions are met. Otherwise, you cannot switch the DM-worker connection to the new MySQL instance:
     - `gtid-S` contains `gtid-P`. `gtid-P` can be empty.
     - `gtid-E` contains `gtid-S`.
 5. Use `stop-task` to stop all running tasks of data migration.
-6. Use the `operator-source stop` command to remove the source configuration corresponding to the address of the old MySQL instance from the DM cluster.
+6. Use the `operate-source stop` command to remove the source configuration corresponding to the address of the old MySQL instance from the DM cluster.
 7. Update the address of the MySQL instance in the source configuration file and use the `operate-source create` command to reload the new source configuration in the DM cluster.
 8. Use `start-task` to restart the migration task.

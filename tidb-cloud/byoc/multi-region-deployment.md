@@ -151,7 +151,7 @@ bash tidbcloud-byoc-update.sh \
 
 The existing resources will continue to be used by all enabled regions.
 
-A plain \--stack all update is safe when no new multi-region resource values are required.
+A plain `--stack all` update is safe when no new multi-region resource values are required.
 
 ### Use dedicated resources for the new regions
 
@@ -216,4 +216,4 @@ After the update succeeds:
 1. Share the script execution result with your TiDB Cloud representative.
 2. TiDB Cloud verifies the updated IAM and regional resource configuration.
 3. TiDB Cloud initiates automated infrastructure provisioning for the new regions.
-4. After provisioning completes, perform the joint validation described in Section 5 for each new region.
+4. After provisioning completes, perform the joint validation described in [TiDB Cloud BYOC Joint Validation](/tidb-cloud/byoc/joint-validation.md) for each new region.

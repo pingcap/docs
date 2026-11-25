@@ -1,9 +1,9 @@
 ---
-title: NOT ] IN
+title: "[ NOT ] IN"
 summary: Checks whether a value is (or is not) in an explicit list.
 ---
 
-# NOT ] IN
+# [ NOT ] IN
 
 Checks whether a value is (or is not) in an explicit list.
 

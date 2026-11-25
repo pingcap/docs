@@ -5,7 +5,7 @@ summary: Returns the number of unique H3 indexes at the given resolution.
 
 # H3_NUM_HEXAGONS
 
-Returns the number of unique [H3](https://eng.uber.com/h3/) indexes at the given resolution.
+Returns the number of unique [H3](https://h3geo.org/) indexes at the given resolution.
 
 ## Syntax
 

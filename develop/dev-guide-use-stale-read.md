@@ -447,7 +447,7 @@ public class BookDAO {
 
 ## Session level
 
-To support reading historical data, TiDB has introduced a new system variable `tidb_read_staleness` since v5.4. you can use it to set the range of historical data that the current session is allowed to read. Its data type is `int` and its scope is `SESSION`.
+To support reading historical data, TiDB has introduced a new system variable `tidb_read_staleness` since v5.4. You can use it to set the range of historical data that the current session is allowed to read. Its data type is `int` and its scope is `SESSION`.
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">

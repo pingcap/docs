@@ -32,7 +32,7 @@ implementation 'com.tidbcloud:lake-jdbc:0.4.6'
 - ✅ **JDBC 4.0 Compatible**: Standard JDBC interface support
 - ✅ **Connection Pooling**: Built-in connection management
 - ✅ **Prepared Statements**: Efficient parameterized queries
-- ✅ **Batch Operations**: Bulk insert and update supportations
+- ✅ **Batch Operations**: Bulk insert and update support
 
 ## Data Type Mappings
 

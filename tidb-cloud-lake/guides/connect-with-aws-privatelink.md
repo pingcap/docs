@@ -32,7 +32,7 @@ Grab the PrivateLink service name from the **Connect to {{{ .lake }}}** dialog, 
 
    ![Security Group](/media/tidb-cloud-lake/security-group.png)
 
-4. Goto AWS Console:
+4. Go to AWS Console:
 
    <https://us-east-2.console.aws.amazon.com/vpcconsole/home?region=us-east-2#Endpoints>:
 

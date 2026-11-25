@@ -24,11 +24,11 @@ After {{{ .lake }}} support shares the trusted principal information for your or
 
    For example: `arn:aws:iam::123456789012:role/xxxxxxx/tnabcdefg/xxxxxxx-tnabcdefg`
 
-2. Goto AWS Console:
+2. Go to AWS Console:
 
    <https://us-east-2.console.aws.amazon.com/iam/home?region=us-east-2#/policies>
 
-   Click `Create policy`, and select `Custom trust policy`, and input the policy document for S3 bucket access:
+   Click `Create policy`. In the `Policy editor` section, click `JSON`, and input the policy document for S3 bucket access:
 
    ```json
    {
@@ -48,9 +48,9 @@ After {{{ .lake }}} support shares the trusted principal information for your or
    }
    ```
 
-   Click `Next`, and input the policy name: `lake-test`, and click `Create policy`
+   Click `Next`, and input the policy name: `lake-test`, and click `Create policy`.
 
-3. Goto AWS Console:
+3. Go to AWS Console:
 
    <https://us-east-2.console.aws.amazon.com/iam/home?region=us-east-2#/roles>
 
@@ -58,7 +58,7 @@ After {{{ .lake }}} support shares the trusted principal information for your or
 
    ![Create Role](/media/tidb-cloud-lake/create-role.png)
 
-   Input the the trust policy document:
+   Input the trust policy document:
 
    ```json
    {

@@ -1,6 +1,6 @@
 ---
 title: ti fs read-file
-summary: Read a file from a TiDB Cloud Filesystem.
+summary: Read a file from a file system.
 ---
 
 # ti fs read-file
@@ -28,7 +28,7 @@ ti fs read-file
 
 - `--path <string>`: File path in the selected file system. \[required]
 - `--file-system-id <string>`: Select the file system. You can also set `TI_FS_FILE_SYSTEM_ID`.
-- `--fs-token <string>`: Set the Filesystem token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected Filesystem.
+- `--fs-token <string>`: Set the file system token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected file system.
 - `--help`: Display help information.
 - `--length <int64>`: Byte length for a ranged read.
 - `--offset <int64>`: Zero-based byte offset for a ranged read.

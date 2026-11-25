@@ -11,7 +11,7 @@ This tutorial walks you through how to use [peewee](https://docs.peewee-orm.com/
 > **Note:**
 >
 > - The vector search feature in public preview. It might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-> - The vector search feature is available on [TiDB Self-Managed](/overview.md) and [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter). For TiDB Self-Managed, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
+> - The vector search feature is available on [TiDB Self-Managed](/overview.md) and [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier/?plan=starter#starter). For TiDB Self-Managed, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
 
 ## Prerequisites
 
@@ -207,7 +207,7 @@ db = MySQLDatabase(
 
 #### Define a vector column
 
-Create a table with a column named `peewee_demo_documents` that stores a 3-dimensional vector.
+Create a table named `peewee_demo_documents` with a column that stores a 3-dimensional vector.
 
 ```python
 class Document(Model):

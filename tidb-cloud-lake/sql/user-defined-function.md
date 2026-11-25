@@ -28,7 +28,6 @@ User-Defined Functions (UDFs) in {{{ .lake }}} allow you to create custom operat
 | **Return Type** | Single value | Single value | Single value | Table/ResultSet |
 | **Language** | SQL expressions | Python/JavaScript | JavaScript/Python runtimes | SQL queries |
 | **Performance** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
-| **Enterprise Required** | No | Python runtime only | Python runtime only | No |
 | **Package Support** | No | Python: Yes (PACKAGES) | Python: Yes (PACKAGES) | No |
 | **Best For** | Math calculations<br/>String operations<br/>Data formatting | Advanced algorithms<br/>External libraries<br/>Control flow logic | Custom aggregations that need scripting logic | Complex queries<br/>Multi-row results<br/>Data transformations |
 

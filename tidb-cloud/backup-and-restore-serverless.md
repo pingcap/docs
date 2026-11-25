@@ -36,16 +36,23 @@ Automatic backup settings vary between {{{ .starter }}} instances and {{{ .essen
 | Backup Retention | 1 day                      | Up to 30 days              | Up to 30 days              |
 | Backup Time      | Fixed time                 | Configurable               | Configurable               |
 
+> **Note:**
+>
+> PostgreSQL-compatible {{{ .starter }}} instances are currently free during the public preview, but their automatic backup settings are the same as those of {{{ .starter }}} instances with a spending limit greater than 0:
+>
+> - Backup retention is configurable from 1 to 30 days.
+> - Backup time is configurable.
+
 - **Backup Cycle** is the frequency at which backups are taken.
 
 - **Backup Retention** is the duration for which backups are retained. Expired backups cannot be restored.
 
-    - For a free {{{ .starter }}} instance, the backup retention is 1 day.
+    - For a free MySQL-compatible {{{ .starter }}} instance, the backup retention is 1 day.
     - For a {{{ .starter }}} (with spending limit > 0) or {{{ .essential }}} instance, you can configure the backup retention to any value between 1 and 30 days. The default retention is 14 days.
 
 - **Backup Time** is the time when the backup starts to be scheduled. Note that the final backup time might fall behind the configured backup time.
 
-    - For a free {{{ .starter }}} instance, the backup time is a randomly fixed time.
+    - For a free MySQL-compatible {{{ .starter }}} instance, the backup time is a randomly fixed time.
     - For a {{{ .starter }}} (with spending limit > 0) or {{{ .essential }}} instance, you can configure the backup time to every half an hour. The default value is a randomly fixed time.
 
 ### Configure the backup setting
@@ -60,6 +67,37 @@ To set the backup time for a {{{ .essential }}} instance, perform the following 
 
 4. Click **Confirm**.
 
+## Manual backups
+
+For {{{ .essential }}} instances with TiDB version `CLOUD.202603.x` or later, you can create a manual backup before high-risk operations, such as critical data deletion or irreversible schema changes.
+
+> **Note:**
+>
+> - You can check the TiDB version of an {{{ .essential }}} instance on its overview page in the TiDB Cloud console.
+> - {{{ .essential }}} instances with TiDB version `v8.5.3` or earlier and {{{ .starter }}} do not support manual backups.
+
+### Retention and deletion
+
+Manual backups are retained until you explicitly delete them. The automatic backup retention setting does not apply to manual backups. If you delete an {{{ .essential }}} instance, its manual backups move to the Recycle Bin and remain there until you manually delete them. Backups in the Recycle Bin continue to incur charges until deleted. For more information, see [Delete a TiDB Cloud Resource](/tidb-cloud/delete-tidb-cluster.md).
+
+### Create a manual backup in the console
+
+1. Navigate to the [**Backup**](#view-the-backup-page) page of your {{{ .essential }}} instance.
+
+2. In the upper-right corner, click **...**, and then click **Manual Backup**.
+
+3. Confirm the operation. The backup appears in the **Backup List**.
+
+4. Wait until the backup completes successfully before using it for a [snapshot restore](#restore-to-a-new-instance).
+
+### Delete a manual backup
+
+1. Navigate to the [**Backup**](#view-the-backup-page) page of your {{{ .essential }}} instance. If the instance has been deleted, locate its backups in the [Recycle Bin](#restore-from-recycle-bin).
+
+2. Locate the manual backup you want to delete, click **...** in its row, and then click **Delete**.
+
+3. Confirm the deletion. The deleted backup can no longer be used to restore your data.
+
 ## Restore
 
 TiDB Cloud offer restore functionality to help recover data in case of accidental loss or corruption.
@@ -68,12 +106,14 @@ TiDB Cloud offer restore functionality to help recover data in case of accidenta
 
 TiDB Cloud supports snapshot restore and point-in-time restore for your {{{ .starter }}} or Essential instance.
 
-- **Snapshot Restore**: restores your {{{ .starter }}} or Essential instance from a specific backup snapshot.
+- **Snapshot Restore**: restores data from a specific backup snapshot to a new {{{ .starter }}} or Essential instance. For {{{ .essential }}} instances with TiDB version `CLOUD.202603.x` or later, you can restore from either an automatic or a manual backup.
 
 - **Point-in-Time Restore (PREVIEW)**: restores your {{{ .essential }}} instance to a specific time.
 
     - {{{ .starter }}} instances: not supported.
     - {{{ .essential }}} instances: restores to any time within the backup retention, but not earlier than the {{{ .essential }}} instance creation time or later than one minute before the current time.
+
+    Point-in-time restore applies to automatic backups and is not supported for manual backups.
 
 ### Restore destination
 
@@ -105,7 +145,7 @@ To restore your data to a new {{{ .starter }}} or Essential instance, take the f
     To restore from a selected backup snapshot, take the following steps:
 
     1. Click **Snapshot Restore**.
-    2. Select the backup snapshot you want to restore from.
+    2. Select the backup snapshot you want to restore from. To restore a manual backup of an {{{ .essential }}} instance, select the completed manual backup.
 
     </div>
     <div label="Point-in-Time Restore">
@@ -121,8 +161,11 @@ To restore your data to a new {{{ .starter }}} or Essential instance, take the f
 4. Enter a name for the new instance.
 5. Update the capacity as needed.
 
-    - For a {{{ .starter }}} instance, if you need more resources than the [free quota](/tidb-cloud/select-cluster-tier.md#usage-quota), set a monthly spending limit.
-    - For a {{{ .essential }}} instance, set the minimum RCU and maximum RCU, and then configure advanced settings as needed.
+    - For a MySQL-compatible {{{ .starter }}} instance, if you need more resources than the [free quota](/tidb-cloud/select-cluster-tier.md#usage-quota), set a monthly spending limit.
+    - For a new {{{ .essential }}} instance, configure the following capacity settings based on the TiDB kernel version, and then configure advanced settings as needed.
+
+        - For a new {{{ .essential }}} instance running on CLOUD.202603.x or later, **Elastic Mode** is selected by default and uses a fixed **Baseline RCU** of 2,000 RCUs. If you need to limit capacity, switch to **Limited Mode** and set the maximum RCU; the minimum billing RCU is calculated automatically.
+        - For a new {{{ .essential }}} instance running on earlier TiDB versions, set the minimum RCU and maximum RCU.
 
 6. Click **Restore** to begin the restore process.
 
@@ -144,7 +187,7 @@ To restore a deleted {{{ .essential }}} instance from the Recycle Bin, take the 
 
 2. On the **Recycle Bin** page, click the **Essential** tab to go to the recycle bin of {{{ .essential }}} instances.
 
-3. Locate the {{{ .essential }}} instance you want to restore, and then click the **>** button to expand the available backups of the instance.
+3. Locate the {{{ .essential }}} instance you want to restore, and then click the **>** button to expand the available backups of the instance. For instances with TiDB version `CLOUD.202603.x` or later, this list can include manual backups. Manual backups remain available until you explicitly delete them.
 
     > **Note:**
     >
@@ -154,8 +197,40 @@ To restore a deleted {{{ .essential }}} instance from the Recycle Bin, take the 
 
 5. On the **Restore** page, follow the same steps as [Restore to a new instance](#restore-to-a-new-instance) to restore the backup to a new instance.
 
+<CustomContent plan="essential">
+
+### Restore backups from a different plan type
+
+You can use **Cross Plan Restore** to restore a backup snapshot from an active or deleted {{{ .dedicated }}} cluster hosted on AWS to a new {{{ .essential }}} instance. The new instance must use the same cloud provider and region as the backup. Currently, only backups for {{{ .dedicated }}} clusters are supported as the source.
+
+1. On the [**My TiDB**](https://tidbcloud.com/tidbs) page, click **...** in the upper-right corner, and then click **Cross Plan Restore**.
+
+2. In the **Select Backup** step, configure the following fields, and then click **Next**:
+
+    - **From**: select **Active** for an existing cluster or **Recycle Bin (Deleted)** for a deleted cluster.
+    - **Plan** and **Cloud Provider**: these fields are fixed to **Dedicated** and **AWS**.
+    - **Project**: select the project that contains the source cluster.
+    - **Cluster Name**: select the source cluster.
+    - **Backup Snapshot**: select the snapshot to restore.
+
+3. Review **Backup Information**, and then configure **Restore to New Instance**:
+
+    - **Plan**: select **Essential**.
+    - **Project** and **Instance Name**: select a destination project as needed and enter a name for the new instance. If your role is `Organization Owner`, selecting a project is optional. If your role is `Project Owner`, you must select a project you own.
+    - **Cloud Provider** and **Region**: these fields are inherited from the backup and cannot be changed.
+    - Configure capacity, encryption, and high availability as needed. For more information, see [Create a {{{ .starter }}} or Essential Instance](/tidb-cloud/create-tidb-cluster-serverless.md).
+
+    > **Note:**
+    >
+    > If {{{ .essential }}} is unavailable in the selected backup region, you cannot proceed with the restore. Contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) to enable {{{ .essential }}} in that region, or click **Previous** and select another backup.
+
+4. Review the estimated monthly price and configuration, and then click **Restore** to begin restoring the backup to a new instance.
+
+</CustomContent>
+
 ## Limitations
 
 - If a TiFlash replica is enabled, it will be unavailable for a period after the restore, because the data needs to be rebuilt in TiFlash.
-- Manual backups are not supported for {{{ .starter }}} and {{{ .essential }}} instances.
+- Manual backups are not supported for {{{ .starter }}} instances. For {{{ .essential }}} instances, manual backups require TiDB version `CLOUD.202603.x` or later.
+- Manual backups do not support point-in-time restore or partial backups, such as table-level or database-level backups. Each restore creates a new instance; restoring a manual backup to an existing instance is not supported.
 - A {{{ .starter }}} or {{{ .essential }}} instance with more than 1 TiB of data does not support restoring to a new instance by default. Contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for assistance with larger datasets.

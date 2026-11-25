@@ -193,7 +193,7 @@ The default values of the preceding two configuration items are both `true`. If 
             systemctl edit tikv-24000
             ```
 
-        2. Edit the TiKV configuration file to configure the three environment variables:
+        2. Edit the systemd service configuration to set the three environment variables:
 
             ```
             [Service]

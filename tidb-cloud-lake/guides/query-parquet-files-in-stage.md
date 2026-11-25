@@ -36,7 +36,7 @@ CREATE FILE FORMAT parquet_query_format TYPE = PARQUET;
 
 ### Step 3. Query Parquet Files
 
-query with colum names:
+query with column names:
 
 ```sql
 SELECT *

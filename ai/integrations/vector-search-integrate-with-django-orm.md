@@ -11,7 +11,7 @@ This tutorial walks you through how to use the [Django](https://www.djangoprojec
 > **Note:**
 >
 > - The vector search feature in public preview. It might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-> - The vector search feature is available on [TiDB Self-Managed](/overview.md) and [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter). For TiDB Self-Managed, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
+> - The vector search feature is available on [TiDB Self-Managed](/overview.md) and [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier/?plan=starter#starter). For TiDB Self-Managed, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
 
 ## Prerequisites
 
@@ -211,7 +211,7 @@ You can create a `.env` file in the root directory of your project and set up th
 
 #### Define a vector column
 
-`tidb-django` provides a `VectorField` to store vector embeddings in a table.
+`django-tidb` provides a `VectorField` to store vector embeddings in a table.
 
 Create a table with a column named `embedding` that stores a 3-dimensional vector.
 

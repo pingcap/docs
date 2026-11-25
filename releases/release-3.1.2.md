@@ -15,7 +15,7 @@ TiDB version: 3.1.2
 + TiKV
 
     - Fix the error handling issue during backup and restoration with S3 and GCS [#7965](https://github.com/tikv/tikv/pull/7965)
-    - Fix the `DefaultNotFound` error that occurs during restoration [#7838](https://github.com/tikv/tikv/pull/7938)
+    - Fix the `DefaultNotFound` error that occurs during restoration [#7938](https://github.com/tikv/tikv/pull/7938)
 
 + Tools
 

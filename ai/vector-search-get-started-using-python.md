@@ -13,7 +13,7 @@ Throughout this tutorial, you will develop this AI application using [TiDB Vecto
 > **Note:**
 >
 > - The vector search feature in public preview. It might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-> - The vector search feature is available on [TiDB Self-Managed](/overview.md) and [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter). For TiDB Self-Managed, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
+> - The vector search feature is available on [TiDB Self-Managed](/overview.md) and [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier/?plan=starter#starter). For TiDB Self-Managed, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
 
 ## Prerequisites
 
@@ -125,7 +125,7 @@ To set up the model, copy the following code into the `example.py` file. This co
 from sentence_transformers import SentenceTransformer
 
 print("Downloading and loading the embedding model...")
-embed_model = SentenceTransformer("sentence-transformers/msmarco-MiniLM-L12-cos-v5", trust_remote_code=True)
+embed_model = SentenceTransformer("sentence-transformers/msmarco-MiniLM-L12-cos-v5", trust_remote_code=False)
 embed_model_dims = embed_model.get_sentence_embedding_dimension()
 
 def text_to_embedding(text):
@@ -133,6 +133,8 @@ def text_to_embedding(text):
     embedding = embed_model.encode(text)
     return embedding.tolist()
 ```
+
+When you use a Hugging Face Hub model ID, `trust_remote_code=False` prevents dynamic loading of custom code provided by the model repository. This setting does not replace reviewing a local model directory. If you switch to a local directory or another model that requires custom code, inspect its configuration and code files and pin the model revision before you decide whether to enable remote code.
 
 ### Step 5. Connect to TiDB
 

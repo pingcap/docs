@@ -80,7 +80,7 @@ On May 10, 2019, TiDB 3.0.0-rc.1 is released. The corresponding TiDB Ansible ver
 ## TiKV
 
 + Engine
-    - FIx the issue that may cause incorrect statistics on read traffic [#4436](https://github.com/tikv/tikv/pull/4436)
+    - Fix the issue that may cause incorrect statistics on read traffic [#4436](https://github.com/tikv/tikv/pull/4436)
     - Fix the issue that may cause prefix extractor panic when deleting a range [#4503](https://github.com/tikv/tikv/pull/4503)
     - Optimize memory management to reduce memory allocation and copying for `Iterator Key Bound Option` [#4537](https://github.com/tikv/tikv/pull/4537)
     - Fix the issue that failing to consider learner log gap may in some cases cause panic [#4559](https://github.com/tikv/tikv/pull/4559)
@@ -102,7 +102,7 @@ On May 10, 2019, TiDB 3.0.0-rc.1 is released. The corresponding TiDB Ansible ver
     - Replace the original `futures-cpupool` with `tokio-threadpool` in ReadPool to reduce context switch [#4486](https://github.com/tikv/tikv/pull/4486)
     - Add batch aggregation framework [#4533](https://github.com/tikv/tikv/pull/4533)
     - Add `BatchSelectionExecutor` [#4562](https://github.com/tikv/tikv/pull/4562)
-    - Add batch aggression function `AVG` [#4570](https://github.com/tikv/tikv/pull/4570)
+    - Add batch aggregate function `AVG` [#4570](https://github.com/tikv/tikv/pull/4570)
     - Add RPN function `LogicalAnd`[#4575](https://github.com/tikv/tikv/pull/4575)
 
 + Misc

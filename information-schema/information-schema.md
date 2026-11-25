@@ -145,7 +145,7 @@ Many `INFORMATION_SCHEMA` tables have a corresponding `SHOW` statement. The bene
 | [`TIDB_HOT_REGIONS`](/information-schema/information-schema-tidb-hot-regions.md)        | Provides statistics about which regions are hot. |
 | [`TIDB_HOT_REGIONS_HISTORY`](/information-schema/information-schema-tidb-hot-regions-history.md) | Provides history statistics about which Regions are hot. |
 | [`TIDB_INDEXES`](/information-schema/information-schema-tidb-indexes.md)                | Provides index information about TiDB tables. |
-| [`TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md)        | Provides the information of the index usage statistics on the TiDB node. ｜
+| [`TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md)        | Provides the information of the index usage statistics on the TiDB node. |
 | [`TIDB_SERVERS_INFO`](/information-schema/information-schema-tidb-servers-info.md)      | Provides a list of TiDB servers (namely, tidb-server component). |
 | [`TIDB_TRX`](/information-schema/information-schema-tidb-trx.md) | Provides the information of the transactions that are being executed on the TiDB node. |
 | [`TIFLASH_INDEXES`](/information-schema/information-schema-tiflash-indexes.md)          | Provides statistics about index building on TiFlash replicas. |
@@ -200,7 +200,7 @@ Many `INFORMATION_SCHEMA` tables have a corresponding `SHOW` statement. The bene
 | [`TIDB_HOT_REGIONS`](https://docs.pingcap.com/tidb/stable/information-schema-tidb-hot-regions)        | Provides statistics about which regions are hot. This table is not applicable to TiDB Cloud. |
 | [`TIDB_HOT_REGIONS_HISTORY`](/information-schema/information-schema-tidb-hot-regions-history.md) | Provides history statistics about which Regions are hot. |
 | [`TIDB_INDEXES`](/information-schema/information-schema-tidb-indexes.md)                | Provides index information about TiDB tables. |
-| [`TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md)        | Provides the information of the index usage statistics on the TiDB node. ｜
+| [`TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md)        | Provides the information of the index usage statistics on the TiDB node. |
 | [`TIDB_SERVERS_INFO`](/information-schema/information-schema-tidb-servers-info.md)      | Provides a list of TiDB servers (namely, tidb-server component) |
 | [`TIDB_TRX`](/information-schema/information-schema-tidb-trx.md) | Provides the information of the transactions that are being executed on the TiDB node. |
 | [`TIFLASH_INDEXES`](/information-schema/information-schema-tiflash-indexes.md)          | Provides statistics about index building on TiFlash replicas. |

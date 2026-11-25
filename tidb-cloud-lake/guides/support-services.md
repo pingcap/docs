@@ -21,11 +21,10 @@ You can access support through multiple channels:
 
 {{{ .lake }}} offers different levels of support based on your subscription tier:
 
-| Feature                                                | Personal | Business | Dedicated |
-| ------------------------------------------------------ | -------- | -------- | --------- |
-| Logging and tracking support tickets                   | ✓        | ✓        | ✓         |
-| 4/7 coverage and response window for Severity 1 issues | 24 hours | 8 hours  | 4 hours   |
-| Response to non-severity-1 issues                      | 48 hours | 24 hours | 8 hours   |
+| Feature                                                 | Personal | Business | Dedicated  |
+| ------------------------------------------------------- | -------- | -------- | ---------- |
+| Logging and tracking support tickets                    | ✓        | ✓        | ✓          |
+| 24/7 coverage and response window for Severity 1 issues | —        | 1 hour   | 30 minutes |
 
 ### Severity Levels
 
@@ -39,14 +38,3 @@ You can access support through multiple channels:
 > Please note that only Business and Dedicated customers have a Service Level Agreement (SLA) on Support Incidents. If you are using the Personal edition – while we will try to answer your question as soon as possible, we'd encourage you to also explore our Community resources:
 >
 > - [{{{ .lake }}} Community Slack Channel](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=tidbcloud)
-
-## Enterprise Support
-
-For customers with mission-critical deployments, our Dedicated edition offers enhanced support options including:
-
-- Priority response times for all severity levels
-- Dedicated support engineer
-- Proactive monitoring and issue resolution
-- Regular health checks and optimization recommendations
-
-Contact our [sales team](https://www.pingcap.com/contact-us/) to learn more about our enterprise support offerings.

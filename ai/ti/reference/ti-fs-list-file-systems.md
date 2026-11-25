@@ -1,11 +1,11 @@
 ---
 title: ti fs list-file-systems
-summary: List remote TiDB Cloud Filesystems in a region.
+summary: List remote file systems in a region.
 ---
 
 # ti fs list-file-systems
 
-Lists all Filesystems accessible with the selected TiDB Cloud credentials in the selected region. Results include display names, labels, status, quota and usage, and `has_local_token`, which indicates whether this machine has a matching local token. Token values are never included.
+Lists all file systems accessible with the selected TiDB Cloud credentials in the selected region. Results include display names, labels, status, quota and usage, and `has_local_token`, which indicates whether this machine has a matching local token. Token values are never included.
 
 When available, quota data includes media and video extraction limits and usage.
 
@@ -36,14 +36,14 @@ For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli
 
 ## Examples
 
-- List remotely managed Filesystems:
+- List remotely managed file systems:
 
     ```bash
     # Return the remote inventory for the profile's region without exposing tokens.
     ti fs list-file-systems
     ```
 
-- Filter Filesystems by display metadata:
+- Filter file systems by display metadata:
 
     ```bash
     # Match a display-name substring and one exact organization-visible label.

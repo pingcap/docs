@@ -134,6 +134,5 @@ SHOW SETTINGS LIKE 'DATA_RETENTION_TIME_IN_DAYS';
 
 | Edition                                  | Default Retention | Maximum Retention |
 | ---------------------------------------- | ----------------- | ---------------- |
-| {{{ .lake }}} Community & Enterprise Editions | 1 day (24 hours)  | 90 days          |
 | {{{ .lake }}} (Personal)                | 1 day (24 hours)  | 1 day (24 hours) |
 | {{{ .lake }}} (Business)                | 1 day (24 hours)  | 90 days          |

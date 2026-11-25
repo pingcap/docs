@@ -1,6 +1,6 @@
 ---
 title: ti fs-journal search-journal-entries
-summary: Search Filesystem journals and entries.
+summary: Search file system journals and entries.
 ---
 
 # ti fs-journal search-journal-entries
@@ -38,7 +38,7 @@ ti fs-journal search-journal-entries
 - `--cursor <string>`: Cursor returned by a previous page. When continuing, repeat the filters from the original request.
 - `--entry-type <string>`: Entry type filter.
 - `--file-system-id <string>`: Select the file system. You can also set `TI_FS_FILE_SYSTEM_ID`.
-- `--fs-token <string>`: Set the Filesystem token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected Filesystem.
+- `--fs-token <string>`: Set the file system token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected file system.
 - `--help`: Display help information.
 - `--include-entries`: Include full entry payloads in matches.
 - `--journal-kind <string>`: Journal kind filter.

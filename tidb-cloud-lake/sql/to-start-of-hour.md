@@ -1,6 +1,6 @@
 ---
 title: TO_START_OF_HOUR
-summary: Rounds down a date with time (timestamp/datetime) to the start of the hour. ## Syntax.
+summary: Rounds down a date with time (timestamp/datetime) to the start of the hour.
 ---
 
 # TO_START_OF_HOUR

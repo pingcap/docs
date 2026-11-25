@@ -1,7 +1,7 @@
 ---
 title: TiDB Cloud API Overview
 summary: Learn about what TiDB Cloud API is, its features, and how to use the API to manage your TiDB Cloud clusters.
-aliases: ['/tidbcloud/api-overview/']
+aliases: ['/tidbcloud/api-overview/','/tidbcloud/api-temporary-maintenance/']
 ---
 
 # TiDB Cloud API Overview
@@ -16,10 +16,10 @@ The API has the following features:
 
 - **JSON entities.** All entities are expressed in JSON.
 - **HTTPS-only.** You can only access the API via HTTPS, ensuring all the data sent over the network is encrypted with TLS.
-- **Key-based access and digest authentication.** Before you access the TiDB Cloud API, you must generate an API key. For more information, see [API Key Management](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-key-management). All requests are authenticated through [HTTP Digest Authentication](https://en.wikipedia.org/wiki/Digest_access_authentication), ensuring the API key is never sent over the network.
+- **Key-based access and digest authentication.** Before you access the TiDB Cloud API, you must generate an API key. For more information, see [API Key Management](https://docs.pingcap.com/tidbcloud/api/v1beta2/#section/Authentication/API-key-management). All requests are authenticated through [HTTP Digest Authentication](https://en.wikipedia.org/wiki/Digest_access_authentication), ensuring the API key is never sent over the network.
 
 The TiDB Cloud API is available in the following versions:
 
-- [v1beta2](/api/tidb-cloud-api-v1beta2.md): manage TiDB Cloud Premium instances.
-- [v1beta1](/api/tidb-cloud-api-v1beta1.md): manage TiDB Cloud Starter, Essential, and Dedicated clusters, as well as billing, Data Service, and IAM resources.
-- [v1beta](/api/tidb-cloud-api-v1beta.md): manage projects, clusters, backups, imports, and restores for TiDB Cloud.
+- [v1beta2](/api/tidb-cloud-api-v1beta2.md): manage TiDB Cloud Essential instances (running TiDB version `CLOUD.202603.x` or later) and TiDB Cloud Premium instances.
+- [v1beta1](/api/tidb-cloud-api-v1beta1.md): manage TiDB Cloud Essential instances (running TiDB v8.5.3 or earlier), TiDB Cloud Starter instances, and TiDB Cloud Dedicated clusters, as well as billing, Data Service, and IAM resources.
+- [v1beta](/api/tidb-cloud-api-v1beta.md): manage projects, clusters, backups, imports, and restores for TiDB Cloud Dedicated clusters.

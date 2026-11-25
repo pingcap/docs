@@ -3323,9 +3323,9 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - The [`tidb_redact_log`](#tidb_redact_log) variable enables you to redact SQL statements recorded in the general log.
 
-- Only successfully executed statements are logged in the general log. Failed statements are not recorded in the general log but are instead logged in the TiDB log with a `command dispatched failed` message.
+- The general log records SQL statements after compilation and before execution, so statements that fail during execution might also be recorded. Statements that fail during parsing or compilation are not recorded in the general log.
 
-- To see all records of this feature in the log, you need to set the TiDB configuration item [`log.level`](/tidb-configuration-file.md#level) to `"info"` or `"debug"` and then query the `"GENERAL_LOG"` string. The following information is recorded:
+- The general log is written at the info level, regardless of the TiDB configuration item [`log.level`](/tidb-configuration-file.md#level). You can locate log records by searching for the `"GENERAL_LOG"` string. The following information is recorded:
     - `time`: The time of the event.
     - `conn`: The ID of the current session.
     - `user`: The current session user.
@@ -5968,7 +5968,11 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 >
 > If the character check is skipped, TiDB might fail to detect invalid UTF-8 characters written by the application, cause decoding errors when `ANALYZE` is executed, and introduce other unknown encoding issues. If your application cannot guarantee the validity of the written string, it is not recommended to skip the character check.
 
-### tidb_slow_log_max_per_sec <span class="version-mark">New in v8.5.6</span>
+### tidb_slow_log_max_per_sec <span class="version-mark">New in v8.5.6 and CLOUD.202603.1</span> {#tidb_slow_log_max_per_sec}
+
+>**Note:**
+>
+> This variable is read-only for TiDB Cloud.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -5979,22 +5983,39 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - This variable controls the maximum number of slow query log entries that can be written per TiDB node per second.
     - A value of `0` means there is no limit on the number of slow query log entries written per second.
     - A value greater than `0` means TiDB writes at most the specified number of slow query log entries per second. Any excess log entries are discarded and not written to the slow query log file.
-- This variable is often used with [`tidb_slow_log_rules`](#tidb_slow_log_rules-new-in-v856) to prevent excessive slow query logs from being generated under high-workload conditions.
+- This variable is often used with [`tidb_slow_log_rules`](#tidb_slow_log_rules) to prevent excessive slow query logs from being generated under high-workload conditions.
 
-### tidb_slow_log_rules <span class="version-mark">New in v8.5.6</span>
+### tidb_slow_log_rules <span class="version-mark">New in v8.5.6 and CLOUD.202603.1</span> {#tidb_slow_log_rules}
 
-- Scope: SESSION | GLOBAL
+>**Note:**
+>
+> This variable is not supported on TiDB Cloud Starter.
+
+- Scope
+    - TiDB Self-Managed and TiDB Cloud Dedicated: SESSION | GLOBAL
+    - TiDB Cloud Essential and Premium: SESSION
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: ""
 - Type: String
 - This variable defines the triggering rules for slow query logs. It supports combining multi-dimensional metrics to provide more flexible and fine-grained logging.
-- For more information about how to use this system variable, see [Use `tidb_slow_log_rules`](/identify-slow-queries.md#use-tidb_slow_log_rules).
+- For more information about how to use this system variable, see [Configure Trigger Rules for Slow Queries](/config-slow-query-trigger-rules.md).
+
+<CustomContent platform="tidb">
 
 > **Tip:**
 >
-> - When enabling `tidb_slow_log_rules` in a production environment, it is recommended to also configure [`tidb_slow_log_max_per_sec`](#tidb_slow_log_max_per_sec-new-in-v856) to avoid excessively frequent slow query log printing.
-> - It is recommended to start with stricter conditions and gradually relax them based on troubleshooting needs. For more information on performance impact, see [Recommendations](/identify-slow-queries.md#recommendations).
+> - When enabling `tidb_slow_log_rules` in a production environment, it is recommended to also configure [`tidb_slow_log_max_per_sec`](#tidb_slow_log_max_per_sec) to avoid excessively frequent slow query log printing.
+> - It is recommended to start with stricter conditions and gradually relax them based on troubleshooting needs. For more information on performance impact, see [Recommendations](/config-slow-query-trigger-rules.md#recommendations).
+
+</CustomContent>
+<CustomContent platform="tidb-cloud">
+
+> **Tip:**
+>
+> It is recommended to start with stricter conditions and gradually relax them based on troubleshooting needs. For more information on performance impact, see [Recommendations](/config-slow-query-trigger-rules.md#recommendations).
+
+</CustomContent>
 
 ### tidb_slow_log_threshold
 
@@ -6233,6 +6254,26 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 </CustomContent>
 
+<CustomContent platform="tidb-cloud">
+
+### tidb_stmt_summary_group_by_user <span class="version-mark">New in CLOUD.202603.1</span> {#tidb_stmt_summary_group_by_user}
+
+> **Note:**
+>
+> - For TiDB Cloud Starter, this variable is not supported.
+> - For TiDB Cloud Essential and Premium, this variable is read-only.
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Boolean
+- Default value: `ON` for TiDB Cloud Essential and TiDB Cloud Premium
+- This variable controls whether to include the user who executes SQL statements as an aggregation dimension in [statement summary tables](/statement-summary-tables.md). When this variable is set to `OFF`, TiDB aggregates the same SQL digest executed by different users into the same row, and the `SAMPLE_USER` field displays one sampled user. When this variable is set to `ON`, TiDB aggregates the same SQL digest executed by different users into separate rows, and the `SAMPLE_USER` field of each row indicates the user who executed the statement.
+- Modifying this variable clears the current in-memory statement summary data because data before and after the modification is aggregated using different dimensions. This does not affect historical data persisted to disk.
+- After you enable this variable, the number of statement summary records might increase with the number of different execution users for the same SQL digest, which increases memory usage.
+
+</CustomContent>
+
 ### tidb_stmt_summary_history_size <span class="version-mark">New in v4.0</span>
 
 > **Note:**
@@ -6305,6 +6346,26 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 > **Note:**
 >
 > When [`tidb_stmt_summary_enable_persistent`](/statement-summary-tables.md#persist-statements-summary) is enabled, `tidb_stmt_summary_max_stmt_count` only limits the number of SQL digests that the [`statements_summary`](/statement-summary-tables.md#statements_summary) table can store in memory.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+### tidb_stmt_summary_persist_evicted <span class="version-mark">New in CLOUD.202603.1</span> {#tidb_stmt_summary_persist_evicted}
+
+> **Note:**
+>
+> - For TiDB Cloud Starter, this variable is not supported.
+> - For TiDB Cloud Essential and Premium, this variable is read-only.
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Boolean
+- Default value: `OFF`
+- This variable controls whether to write statement summary records evicted by LRU to the statement summary log after you enable [statements summary persistence](/statement-summary-tables.md#persist-statements-summary). TiDB marks these JSON records with `"evicted": true` so that downstream log consumers can identify them.
+- This variable takes effect only when [tidb_stmt_summary_enable_persistent](/system-variables.md#tidb_stmt_summary_enable_persistent-new-in-v660) is enabled. TiDB does not return records marked with `"evicted": true` as query results from `statements_summary_history` or `cluster_statements_summary_history`.
+- After you enable this variable, the log volume increases as LRU evictions become more frequent. TiDB writes evicted records using an asynchronous buffer mechanism. When the buffer queue is full, TiDB might drop new evicted records.
 
 </CustomContent>
 
@@ -7043,7 +7104,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Type: Integer
 - Default value: `1`
 - Range: `[0, 2147483647]` for TiDB Self-Managed and [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated), `[1, 2147483647]` for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)
-- This variable is a check item in the password complexity check. It checks whether the password contains sufficient numbers. This variable takes effect only when [`validate_password.enable`](#password_reuse_interval-new-in-v650) is enabled and [`validate_password.policy`](#validate_passwordpolicy-new-in-v650) is set to `1` (MEDIUM) or larger.
+- This variable is a check item in the password complexity check. It checks whether the password contains sufficient numbers. This variable takes effect only when [`validate_password.enable`](#validate_passwordenable-new-in-v650) is enabled and [`validate_password.policy`](#validate_passwordpolicy-new-in-v650) is set to `1` (MEDIUM) or larger.
 
 ### validate_password.policy <span class="version-mark">New in v6.5.0</span>
 
@@ -7053,7 +7114,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Type: Enumeration
 - Default value: `1`
 - Value options: `0`, `1`, and `2` for TiDB Self-Managed and [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated); `1` and `2` for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)
-- This variable controls the policy for the password complexity check. This variable takes effect only when [`validate_password.enable`](#password_reuse_interval-new-in-v650) is enabled. The value of this variable determines whether other `validate-password` variables take effect in the password complexity check, except for `validate_password.check_user_name`.
+- This variable controls the policy for the password complexity check. This variable takes effect only when [`validate_password.enable`](#validate_passwordenable-new-in-v650) is enabled. The value of this variable determines whether other `validate-password` variables take effect in the password complexity check, except for `validate_password.check_user_name`.
 - This value of this variable can be `0`, `1`, or `2` (corresponds to LOW, MEDIUM, or STRONG). Different policy levels have different checks:
     - 0 or LOW: password length.
     - 1 or MEDIUM: password length, uppercase and lowercase letters, numbers, and special characters.
@@ -7067,7 +7128,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Type: Integer
 - Default value: `1`
 - Range: `[0, 2147483647]` for TiDB Self-Managed and [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated), `[1, 2147483647]` for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)
-- This variable is a check item in the password complexity check. It checks whether the password contains sufficient special characters. This variable takes effect only when [`validate_password.enable`](#password_reuse_interval-new-in-v650) is enabled and [`validate_password.policy`](#validate_passwordpolicy-new-in-v650) is set to `1` (MEDIUM) or larger.
+- This variable is a check item in the password complexity check. It checks whether the password contains sufficient special characters. This variable takes effect only when [`validate_password.enable`](#validate_passwordenable-new-in-v650) is enabled and [`validate_password.policy`](#validate_passwordpolicy-new-in-v650) is set to `1` (MEDIUM) or larger.
 
 ### version
 

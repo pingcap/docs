@@ -34,9 +34,13 @@ If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/sign
 
 </CustomContent>
 
+> **Note:**
+>
+> PostgreSQL-compatible TiDB Cloud Starter is currently available in public preview. You can select the PostgreSQL compatibility mode when creating a Starter instance.
+
 ## Steps
 
-If you are in the `Organization Owner` or the `Project Owner` role, you can create a {{{ .starter }}} or {{{ .essential }}} instance as follows:
+If you have the `Organization Owner` or `Project Owner` role, you can create a TiDB Cloud Starter or TiDB Cloud Essential instance as follows:
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com/), and then navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
@@ -44,29 +48,43 @@ If you are in the `Organization Owner` or the `Project Owner` role, you can crea
 
 3. Select a plan.
 
-    You can start with a **Starter** instance and later upgrade to an **Essential** instance as your needs grow. For more information, see [Select a Plan](/tidb-cloud/select-cluster-tier.md).
+    You can select **Starter** or **Essential**.
 
-4. Enter a name for your instance, and then choose a cloud provider and a region where you want to host your instance.
+    For MySQL-compatible workloads, you can start with a Starter instance and later upgrade to an Essential instance as your needs grow. For more information, see [Select a Plan](/tidb-cloud/select-cluster-tier.md).
 
-5. (Optional) To group this instance in a project for management, click **Group Your Instance in a Project**, and then select the target project for the instance. If there is no project in your organization, you can create one by clicking **Create a Project**.
+4. If you select **Starter**, choose one of the following options in the **Compatibility Mode** section:
 
-6. Update the capacity of the instance.
+    - **MySQL Compatible**: the default compatibility mode for TiDB Cloud Starter.
+    - **PostgreSQL Compatible**: provides PostgreSQL compatibility and is currently in public preview. This compatibility mode is available only for TiDB Cloud Starter.
 
-    - **Starter** plan:
+5. Enter a name for your instance, and then choose a cloud provider and a region where you want to host your instance.
 
-        - You can update the spending limit for your {{{ .starter }}} instance. If the spending limit is set to 0, the instance remains free. If the spending limit is greater than 0, you need to add a credit card before creating the {{{ .starter }}} instance.
+6. (Optional) To group this instance in a project for management, click **Group Your Instance in a Project**, and then select the target project for the instance. If there is no project in your organization, you can create one by clicking **Create a Project**.
 
-        - By default, each organization can create up to five [free {{{ .starter }}} instances](/tidb-cloud/select-cluster-tier.md#starter). To create additional {{{ .starter }}} instances, you must add a credit card and specify a spending limit.
+7. Configure or review the capacity and usage quota based on the selected plan and compatibility mode. For the free usage quotas of each Starter compatibility mode, see [Select a Plan](/tidb-cloud/select-cluster-tier.md#starter).
 
-    - **Essential** plan:
+    - **MySQL-compatible Starter**:
 
-        - You must specify both a minimum and maximum number of Request Capacity Units (RCUs) for your {{{ .essential }}} instance.
+        - You can update the spending limit for your TiDB Cloud Starter instance. If the spending limit is set to 0, the instance remains free. If the spending limit is greater than 0, you need to add a credit card before creating the instance.
+        - By default, each organization can create up to five free MySQL-compatible Starter instances. To create additional instances, you must add a credit card and specify a spending limit.
 
-        - RCUs represent the compute resources provisioned for your workload. TiDB Cloud automatically scales your {{{ .essential }}} instance within this range based on demand.
+    - **PostgreSQL-compatible Starter**:
 
-7. Click **Create**.
+        During public preview, each organization can create up to 10 free PostgreSQL-compatible Starter instances.
 
-    The instance creation process starts and your instance will be created in approximately 30 seconds.
+        When an instance reaches its free quota, excessive resource consumption might be subject to usage restrictions or service suspension. If you anticipate exceeding the free usage quota, please contact <a href="mailto:support@pingcap.com">support@pingcap.com</a> to discuss your requirements.
+
+    - **Essential**:
+
+        - For {{{ .essential }}} instances running on CLOUD.202603.x or later, **Elastic Mode** is selected by default. In Elastic Mode, you do not set a maximum number of RCUs. Instead, your instance uses a fixed **Baseline RCU** of 2,000 RCUs, which is the minimum number of Request Capacity Units (RCUs) you are billed for and the initial capacity for autoscaling.
+
+        - To limit the capacity, select **Limited Mode**, and then specify the maximum number of RCUs that your instance can scale up to. {{{ .essential }}} instances on earlier versions do not support Elastic Mode; for these instances, specify both the minimum and maximum number of RCUs.
+
+        - RCUs represent the compute resources provisioned for your workload. TiDB Cloud automatically scales your {{{ .essential }}} instance based on demand. If your workload consistently requires more than 100,000 RCUs, consider upgrading to {{{ .premium }}} to avoid potential bottlenecks.
+
+8. Click **Create**.
+
+The instance creation process starts, and your instance will be created in approximately 30 seconds.
 
 ## What's next
 

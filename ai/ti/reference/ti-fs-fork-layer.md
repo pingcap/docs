@@ -1,6 +1,6 @@
 ---
 title: ti fs fork-layer
-summary: Fork a copy-on-write child layer in a TiDB Cloud Filesystem.
+summary: Fork a copy-on-write child layer in a file system.
 ---
 
 # ti fs fork-layer
@@ -34,7 +34,7 @@ ti fs fork-layer
 - `--checkpoint-id <string>`: Pin the child to this checkpoint of the parent. If omitted, pins the serialized parent tip.
 - `--dry-run`: Validate the request without applying changes.
 - `--file-system-id <string>`: Select the file system. You can also set `TI_FS_FILE_SYSTEM_ID`.
-- `--fs-token <string>`: Set the Filesystem token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected Filesystem.
+- `--fs-token <string>`: Set the file system token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected file system.
 - `--help`: Display help information.
 - `--layer-id <string>`: Stable child layer ID. If omitted, the service generates one.
 - `--layer-name <string>`: Human-readable child layer name.

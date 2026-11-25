@@ -135,7 +135,7 @@ TiDB version: 4.0.15
         - Decrease the gRPC window size to avoid the OOM that occurs when TiCDC captures too many Regions [#2202](https://github.com/pingcap/tiflow/issues/2202)
         - Fix the OOM issue that occurs when TiCDC captures too many Regions [#2673](https://github.com/pingcap/tiflow/issues/2673)
         - Fix the issue of process panic that occurs when encoding the data types such as `mysql.TypeString, mysql.TypeVarString, mysql.TypeVarchar` into JSON [#2758](https://github.com/pingcap/tiflow/issues/2758)
-        - Fix the a memory leak issue that might occur when creating a new changefeed [#2389](https://github.com/pingcap/tiflow/issues/2389)
+        - Fix a memory leak issue that might occur when creating a new changefeed [#2389](https://github.com/pingcap/tiflow/issues/2389)
         - Fix a bug that DDL handling fails when a changefeed starts at the finish TS of a schema change [#2603](https://github.com/pingcap/tiflow/issues/2603)
         - Fix the issue of potential DDL loss when the owner crashes when executing DDL statements [#1260](https://github.com/pingcap/tiflow/issues/1260)
         - Fix the issue of insecure concurrent access to the map in `SinkManager` [#2298](https://github.com/pingcap/tiflow/pull/2298)
