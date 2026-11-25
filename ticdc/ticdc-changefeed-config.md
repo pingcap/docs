@@ -353,6 +353,27 @@ The following configuration parameters control the sending behavior of bootstrap
 - Controls whether to output the value before the row data changes. The default value is true. When it is disabled, the `UPDATE` event does not output the "before" field.
 - Default value: `true`
 
+##### `decimal-handling-mode`
+
+- Controls how TiCDC encodes `DECIMAL` and `NUMERIC` values in Debezium JSON. `double` encodes values as float64 JSON numbers, which might lose precision. `string` encodes values as strings to preserve the full precision.
+- Default value: `double`
+- Value options: `double`, `string`
+- This parameter only takes effect with `protocol=debezium`. The `debezium-decimal-handling-mode` parameter in `sink-uri` takes precedence over this setting. For details and examples, see [Numeric and binary handling](/ticdc/ticdc-debezium.md#numeric-and-binary-handling).
+
+##### `bigint-unsigned-handling-mode`
+
+- Controls how TiCDC encodes `BIGINT UNSIGNED` values in Debezium JSON. `long` encodes values as signed 64-bit JSON numbers; values greater than `9223372036854775807` wrap to negative numbers. `string` encodes values as strings to preserve the full unsigned value.
+- Default value: `long`
+- Value options: `long`, `string`
+- This parameter only takes effect with `protocol=debezium`. The `debezium-bigint-unsigned-handling-mode` parameter in `sink-uri` takes precedence over this setting. For details and examples, see [Numeric and binary handling](/ticdc/ticdc-debezium.md#numeric-and-binary-handling).
+
+##### `binary-handling-mode`
+
+- Controls how TiCDC encodes binary column values in Debezium JSON. `base64`, `base64-url-safe`, and `hex` encode values as strings in the corresponding format. `bytes` uses a `bytes` schema type, but the JSON value remains a Base64-encoded string. This parameter does not affect `BIT` columns.
+- Default value: `base64`
+- Value options: `bytes`, `base64`, `base64-url-safe`, `hex`
+- This parameter only takes effect with `protocol=debezium`. The `debezium-binary-handling-mode` parameter in `sink-uri` takes precedence over this setting. For details and examples, see [Numeric and binary handling](/ticdc/ticdc-debezium.md#numeric-and-binary-handling).
+
 ### consistent
 
 Specifies the replication consistency configurations for a changefeed when using the redo log. For more information, see [Eventually consistent replication in disaster scenarios](/ticdc/ticdc-sink-to-mysql.md#eventually-consistent-replication-in-disaster-scenarios).
