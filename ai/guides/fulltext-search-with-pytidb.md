@@ -21,7 +21,7 @@ Before you begin, ensure you have the following:
 
     > **Note:**
     >
-    > Currently, full-text search is **available only on {{{ .starter }}}** in [select regions](/ai/reference/full-text-search-index.md#prerequisites).
+    > Currently, full-text search is in public preview and **available only on {{{ .starter }}}**.
 
 ## How to run
 

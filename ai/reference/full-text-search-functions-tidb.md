@@ -11,7 +11,7 @@ For how to create the full-text indexes that these functions use, see [Full-Text
 
 > **Note:**
 >
-> Currently, full-text search is **available only on {{{ .starter }}}** in [select regions](/ai/reference/full-text-search-index.md#prerequisites).
+> Currently, full-text search is in public preview and **available only on {{{ .starter }}}**.
 
 ## FTS_MATCH_WORD()
 

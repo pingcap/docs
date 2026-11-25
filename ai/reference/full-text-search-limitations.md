@@ -9,7 +9,7 @@ This document describes the known limitations of full-text search in TiDB.
 
 > **Note:**
 >
-> Full-text search is still in the early stages, and we are continuously rolling it out to more customers. Currently, full-text search is **available only on {{{ .starter }}}** in [select regions](/ai/reference/full-text-search-index.md#prerequisites).
+> Currently, full-text search is in public preview and **available only on {{{ .starter }}}**.
 
 ## Index limitations
 

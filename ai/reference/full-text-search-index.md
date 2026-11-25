@@ -9,12 +9,9 @@ This document describes how to create and manage full-text indexes in TiDB, incl
 
 To run full-text queries against a full-text index, see [Full-Text Search Functions](/ai/reference/full-text-search-functions-tidb.md).
 
-## Prerequisites
-
-Full-text search is still in the early stages, and we are continuously rolling it out to more customers. Currently, full-text search is **available only on {{{ .starter }}}** in the following regions:
-
-- AWS: `Oregon (us-west-2)`, `N. Virginia (us-east-1)`, `Tokyo (ap-northeast-1)`, `Frankfurt (eu-central-1)`, and `Singapore (ap-southeast-1)`
-
+> **Note:**
+>
+> Currently, full-text search is in public preview and **available only on {{{ .starter }}}**.
 ## Create a full-text index
 
 You can create a full-text index on a new table with `CREATE TABLE`, or add one to an existing table with `ALTER TABLE`. TiDB supports two definition syntaxes:
