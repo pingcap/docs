@@ -1,0 +1,199 @@
+---
+title: Materialized Views
+summary: Learn what materialized views are in TiDB, when to use them, and where the creation, refresh, limitation, and compatibility details belong.
+---
+
+# Materialized Views
+
+TiDB materialized views store the result of a query in a reusable object so you can avoid recomputing the same result repeatedly. This page collects the core concept, usage flow, and limitations for the feature.
+
+## Usage scenarios
+
+Materialized views are intended for workloads that repeatedly read the same query result.
+
+- Reuse expensive analytical query results.
+- Reduce repeated computation for read-heavy workloads.
+- Provide a stable result set for downstream consumers that do not need to rerun the base query each time.
+
+## Prerequisites
+
+- To create a materialized view or materialized view log, set [`tidb_mview_enable`](/system-variables.md#tidb_mview_enable) to `ON`. This variable is `OFF` by default.
+- <!-- TODO: confirm the minimum TiDB version. -->
+- <!-- TODO: confirm whether the feature depends on specific storage engines or cluster settings. -->
+
+## How it works
+
+TiDB materialized views are backed by stored data derived from a query. This page covers how to create, refresh, query, and manage materialized views.
+
+## Create and manage materialized views
+
+### Create a materialized view
+
+Use `IF NOT EXISTS` to skip creation if the specified name is already in use.
+
+For the syntax of this statement, see [`CREATE MATERIALIZED VIEW`](/sql-statements/sql-statement-create-materialized-view.md).
+
+### Create a materialized view log
+
+Use `IF NOT EXISTS` to skip creation if a materialized view log already exists on the base table.
+
+For the syntax of this statement, see [`CREATE MATERIALIZED VIEW LOG`](/sql-statements/sql-statement-create-materialized-view-log.md).
+
+### Control materialized view maintenance
+
+TiDB uses an internal maintenance session to build a materialized view. You can control the resources and storage engines used by this session with the following system variables:
+
+- [`tidb_mview_maintain_mem_quota`](/system-variables.md#tidb_mview_maintain_mem_quota): Sets the memory quota for the materialized view maintenance session.
+- [`tidb_mview_maintain_isolation_read_engines`](/system-variables.md#tidb_mview_maintain_isolation_read_engines): Specifies the storage engines that the maintenance session can use to read data.
+- [`tidb_mview_maintain_import_threads`](/system-variables.md#tidb_mview_maintain_import_threads): Sets the thread count for the `IMPORT INTO` operation used by the initial materialized view build. A value of `0` means that TiDB does not set an explicit thread count.
+- [`tidb_mview_maintain_import_disk_quota`](/system-variables.md#tidb_mview_maintain_import_disk_quota): Sets the disk quota for the `IMPORT INTO` operation used by the initial materialized view build. An empty value means that TiDB does not set an explicit disk quota.
+
+When you submit `CREATE MATERIALIZED VIEW`, TiDB records the current values of these variables in the DDL job and uses them for the initial build.
+
+### Configure background maintenance
+
+TiDB schedules automatic materialized view refresh and materialized view log purge tasks in the background. Use the following global system variables to control their concurrency on each TiDB server:
+
+- [`tidb_mview_task_max`](/system-variables.md#tidb_mview_task_max): Sets the total concurrency limit for refresh and purge tasks. The default value `0` uses the Go runtime's `GOMAXPROCS` value, with a minimum of `2`. Setting this variable to `1` also uses an effective limit of `2`.
+- [`tidb_mview_task_refresh_ratio`](/system-variables.md#tidb_mview_task_refresh_ratio): Sets the fraction of the total concurrency allocated to refresh tasks. The default value is `0.6`. TiDB allocates the remaining concurrency to purge tasks and gives each task type at least one execution slot.
+
+For example, the following configuration allows up to six background refresh tasks and four background purge tasks to run concurrently on each TiDB server:
+
+```sql
+SET GLOBAL tidb_mview_task_max = 10;
+SET GLOBAL tidb_mview_task_refresh_ratio = 0.6;
+```
+
+You can also delay new background tasks when resource usage is high:
+
+- [`tidb_mview_task_threshold_cpu`](/system-variables.md#tidb_mview_task_threshold_cpu): Sets the CPU utilization threshold relative to the CPU capacity available to the TiDB process. The default value is `0.8` (80%).
+- [`tidb_mview_task_threshold_memory`](/system-variables.md#tidb_mview_task_threshold_memory): Sets the threshold for the TiDB instance's heap memory usage as a fraction of the total memory available to the host or container. The default value is `0.8` (80%).
+
+When either enabled threshold is reached, TiDB temporarily stops starting background refresh, purge, and materialized view log statistics collection tasks. Running tasks continue to execute. Setting a threshold to `0` disables the corresponding resource check.
+
+### Refresh a materialized view
+
+Use [`REFRESH MATERIALIZED VIEW`](/sql-statements/sql-statement-refresh-materialized-view.md) to refresh a materialized view manually. You can use `FAST` refresh to apply changes from materialized view logs, or `COMPLETE` refresh to recompute the complete result of the materialized view query.
+
+`COMPLETE` refresh requires one of the following methods. Although `DELTA APPLY` only changes rows that differ, it is a complete refresh method because TiDB recomputes the full materialized view query before applying the differences.
+
+| Method | How it refreshes the materialized view | Transaction behavior |
+| --- | --- | --- |
+| `COMPLETE IN PLACE` | Deletes all existing rows from the materialized view and inserts the complete recomputed result. | Runs the delete and insert operations in one transaction. |
+| `COMPLETE DELTA APPLY` | Recomputes the complete result, compares it with the current materialized view by its grouping keys, and applies only inserted, deleted, and changed rows. The materialized view must have an explicit `PRIMARY KEY` or `UNIQUE KEY` so that TiDB can uniquely locate existing rows. | Runs the comparison and row changes in one transaction. |
+| `COMPLETE OUT OF PLACE` | Creates a shadow table, builds the complete recomputed result in that table, and then switches the materialized view to the replacement table. | Does not run as a single transaction. The existing materialized view remains available while TiDB builds the shadow table. If the build fails before cutover, the existing materialized view is not changed. |
+
+If an abandoned shadow table remains after a failed `COMPLETE OUT OF PLACE` refresh, you can manually drop it when the creation timestamp encoded in its name is valid and at least 7 days old. For details, see [`COMPLETE OUT OF PLACE`](/sql-statements/sql-statement-refresh-materialized-view.md#complete-out-of-place).
+
+Use `DRY RUN` to view the planned refresh steps without refreshing the materialized view. Use `WITH PROFILE` to execute the refresh and return step-level runtime information. To cancel a running refresh, use [`CANCEL MATERIALIZED VIEW REFRESH JOB`](/sql-statements/sql-statement-cancel-materialized-view-refresh-job.md) with the job ID in [`mysql.tidb_mview_refresh_hist`](/mysql-schema/mysql-schema-tidb-mview-refresh-hist.md).
+
+### Query a materialized view
+
+This section will describe how queries resolve to the stored result and any optimizer behavior. <!-- TODO: fill in from the spec. -->
+
+### Inspect and compare materialized views
+
+Use the following statements to inspect materialized views and their logs, and compare a materialized view with its defining query result.
+
+| Statement | Description |
+| --- | --- |
+| [`SHOW MATERIALIZED VIEWS`](/sql-statements/sql-statement-show-materialized-views.md) | List materialized views in a database. |
+| [`SHOW MATERIALIZED VIEW LOGS`](/sql-statements/sql-statement-show-materialized-view-logs.md) | List materialized view logs in a database. |
+| [`SHOW CREATE MATERIALIZED VIEW`](/sql-statements/sql-statement-show-create-materialized-view.md) | Inspect the creation statement for a materialized view. |
+| [`SHOW CREATE MATERIALIZED VIEW LOG`](/sql-statements/sql-statement-show-create-materialized-view-log.md) | Inspect the creation statement for a materialized view log on a base table. |
+| [`SHOW MATERIALIZED VIEW ... REMAIN_LOGS`](/sql-statements/sql-statement-show-materialized-view-remain-logs.md) | Inspect the remaining refresh logs for a materialized view. |
+| [`SHOW MATERIALIZED VIEW LOG ... WAIT_PURGE`](/sql-statements/sql-statement-show-materialized-view-log-wait-purge.md) | Inspect the purge backlog for a materialized view log. |
+| [`COMPARE MATERIALIZED VIEW`](/sql-statements/sql-statement-compare-materialized-view.md) | Compare a materialized view with a snapshot of its defining query result. |
+
+`COMPARE MATERIALIZED VIEW` runs on TiDB without MPP support. For large materialized views, the comparison can fail with an out-of-memory (OOM) error.
+
+### Alter a materialized view
+
+For the syntax of this statement, see [`ALTER MATERIALIZED VIEW`](/sql-statements/sql-statement-alter-materialized-view.md).
+
+### Alter a materialized view log
+
+For the syntax of this statement, see [`ALTER MATERIALIZED VIEW LOG`](/sql-statements/sql-statement-alter-materialized-view-log.md).
+
+### Purge a materialized view log
+
+To manually purge a materialized view log, use [`PURGE MATERIALIZED VIEW LOG`](/sql-statements/sql-statement-purge-materialized-view-log.md). To cancel a purge job, use [`CANCEL MATERIALIZED VIEW LOG PURGE JOB`](/sql-statements/sql-statement-cancel-materialized-view-log-purge-job.md).
+
+#### Purge throttling
+
+TiDB uses adaptive throttling to spread materialized view log purge work across an available time window. Before deleting rows, TiDB counts the rows eligible for purge and calculates a purge deadline. For a scheduled purge, the deadline does not extend beyond the next scheduled run. For a manually triggered purge, TiDB uses an internal bounded time window, shortened when an earlier next scheduled run exists.
+
+TiDB uses the following calculation to determine the target delete rate:
+
+```text
+delete time budget = time until deadline * tidb_mlog_purge_rate_budget_ratio
+target delete rate = max(pending rows / delete time budget, tidb_mlog_purge_min_rate)
+```
+
+The target delete rate is measured in rows per second. TiDB deletes rows in batches and waits between batches when deletion has progressed ahead of the target rate. This keeps the average delete rate close to the calculated target.
+
+For example, assume that 120,000 rows are pending, there are 60 seconds until the deadline, `tidb_mlog_purge_rate_budget_ratio` is `0.5`, and `tidb_mlog_purge_min_rate` is `2000`. TiDB uses 30 seconds as the delete time budget and sets the target delete rate to 4,000 rows per second. If only 20,000 rows are pending under the same settings, the calculated rate is about 667 rows per second, so TiDB uses the 2,000 rows-per-second minimum target instead.
+
+> **Note:**
+>
+> Adaptive throttling is best effort. TiDB uses a preliminary TiFlash query to count pending rows and calculate the plan. If TiDB cannot obtain the pending-row statistics, throttling configuration, or purge deadline, it continues with normal unthrottled batched deletion instead of failing the purge.
+
+You can configure materialized view log purge jobs using the following system variables:
+
+- [`tidb_mlog_purge_batch_size`](/system-variables.md#tidb_mlog_purge_batch_size): Sets the maximum number of rows deleted in each purge batch.
+- [`tidb_mlog_purge_min_rate`](/system-variables.md#tidb_mlog_purge_min_rate): Sets the lower bound of the adaptive purge target delete rate.
+- [`tidb_mlog_purge_rate_budget_ratio`](/system-variables.md#tidb_mlog_purge_rate_budget_ratio): Sets the fraction of the available time before the purge deadline that TiDB targets for deletion.
+- [`tidb_mlog_purge_delete_tiflash_threads`](/system-variables.md#tidb_mlog_purge_delete_tiflash_threads): Sets the TiFlash thread count used by purge `DELETE` statements.
+- [`tidb_mlog_log_slow_purge`](/system-variables.md#tidb_mlog_log_slow_purge): Controls whether TiDB records purge statements in the slow query log.
+
+### Collect statistics on materialized view logs
+
+TiDB automatically collects statistics on materialized view logs. [`tidb_mlog_auto_analyze_ratio`](/system-variables.md#tidb_mlog_auto_analyze_ratio) controls when TiDB updates statistics for a log that has already been analyzed:
+
+```text
+modification ratio = modifications since the last analysis / row count at the last analysis
+```
+
+If the last analyzed row count is unavailable or zero, TiDB uses the current estimated row count as the denominator. TiDB schedules analysis when the ratio is greater than `tidb_mlog_auto_analyze_ratio`. The default value `10` means that the modification count must exceed ten times the row count. Lowering this value causes more frequent statistics collection.
+
+TiDB skips logs with fewer than 1,000 estimated rows. Logs that have never been analyzed are eligible for initial analysis once they reach this minimum, regardless of the modification ratio. Background statistics collection is also subject to the [CPU and memory thresholds](#configure-background-maintenance).
+
+### Drop a materialized view
+
+For the syntax of these statements, see [`DROP MATERIALIZED VIEW`](/sql-statements/sql-statement-drop-materialized-view.md) and [`DROP MATERIALIZED VIEW LOG`](/sql-statements/sql-statement-drop-materialized-view-log.md).
+
+## System tables
+
+TiDB stores materialized view maintenance metadata in the `mysql` schema. The following tables are created for materialized view and materialized view log maintenance:
+
+- `mysql.tidb_mview_refresh_info`: Stores the current refresh scheduling information for each materialized view. This table is used internally by the automatic refresh scheduler.
+- `mysql.tidb_mlog_purge_info`: Stores the current purge scheduling information for each materialized view log. This table is used internally by the automatic purge scheduler.
+- [`mysql.tidb_mview_refresh_alert`](/mysql-schema/mysql-schema-tidb-mview-refresh-alert.md): Stores the current refresh alert level for each materialized view.
+- [`mysql.tidb_mview_refresh_hist`](/mysql-schema/mysql-schema-tidb-mview-refresh-hist.md): Stores materialized view refresh history for user queries.
+- [`mysql.tidb_mlog_purge_hist`](/mysql-schema/mysql-schema-tidb-mlog-purge-hist.md): Stores materialized view log purge history for user queries.
+
+The `_info` tables are internal maintenance metadata tables. Do not modify TiDB system tables directly.
+
+### Configure history retention
+
+Use the following global system variables to control how long TiDB retains job history:
+
+- [`tidb_mview_refresh_hist_time`](/system-variables.md#tidb_mview_refresh_hist_time): Sets the retention time for materialized view refresh history.
+- [`tidb_mlog_purge_hist_time`](/system-variables.md#tidb_mlog_purge_hist_time): Sets the retention time for materialized view log purge history.
+
+Both variables default to `168` hours (7 days) and accept values from `1` to `8760` hours. TiDB periodically deletes expired history records for jobs that are no longer running. It also deletes the oldest non-running records when either history table exceeds 1,000,000 rows, so records can be removed before the configured retention time expires. These settings control job history retention; materialized view log data is managed by [purge jobs](#purge-a-materialized-view-log).
+
+## Limitations
+
+- You cannot drop, rename, or make invisible the automatically created index on a materialized view's grouping columns, including when this index is a primary key. Refresh operations require this index. You can manage additional user-created non-unique indexes. For details, see [Index restrictions](/sql-statements/sql-statement-create-materialized-view.md#index-restrictions).
+- <!-- TODO: list unsupported DDL, DML, replication, or optimizer cases from the spec. -->
+- <!-- TODO: add size, freshness, or compatibility limits if they exist. -->
+
+## Compatibility
+
+- <!-- TODO: describe MySQL compatibility gaps or version-specific behavior. -->
+- <!-- TODO: describe behavior differences across TiDB versions or storage layouts. -->
+
+## See also
+
+- [Views](/views.md)

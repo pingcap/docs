@@ -12,6 +12,8 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | SQL Statement                                                                      | Description                                                                                            |
 | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
 | [`ALTER DATABASE`](/sql-statements/sql-statement-alter-database.md)                | Modifies a database.                                                                                   |
+| [`ALTER MATERIALIZED VIEW`](/sql-statements/sql-statement-alter-materialized-view.md) | Modifies a materialized view.                                                                         |
+| [`ALTER MATERIALIZED VIEW LOG`](/sql-statements/sql-statement-alter-materialized-view-log.md) | Modifies a materialized view log.                                                               |
 | [`ALTER SEQUENCE`](/sql-statements/sql-statement-alter-sequence.md)                | Modifies a sequence.                                                                                   |
 | [`ALTER TABLE ... ADD COLUMN`](/sql-statements/sql-statement-add-column.md)        | Adds a column to an existing table.                                                                    |
 | [`ALTER TABLE ... ADD INDEX`](/sql-statements/sql-statement-add-index.md)          | Adds an index to an existing table.                                                                    |
@@ -24,23 +26,35 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md)                      | Changes a table definition.                                                                            |
 | [`CREATE DATABASE`](/sql-statements/sql-statement-create-database.md)              | Creates a new database.                                                                                |
 | [`CREATE INDEX`](/sql-statements/sql-statement-create-index.md)                    | Creates a new index on a table.                                                                        |
+| [`CREATE MATERIALIZED VIEW`](/sql-statements/sql-statement-create-materialized-view.md) | Creates a materialized view.                                                                      |
+| [`CREATE MATERIALIZED VIEW LOG`](/sql-statements/sql-statement-create-materialized-view-log.md) | Creates a materialized view log.                                                                |
 | [`CREATE SEQUENCE`](/sql-statements/sql-statement-create-sequence.md)              | Creates a new sequence object.                                                                         |
 | [`CREATE TABLE LIKE`](/sql-statements/sql-statement-create-table-like.md)          | Copies the definition of an existing table, without copying any data.                                  |
 | [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md)                    | Creates a new table.                                                                                   |
 | [`CREATE VIEW`](/sql-statements/sql-statement-create-view.md)                      | Creates a new view.                                                                                    |
 | [`DROP DATABASE`](/sql-statements/sql-statement-drop-database.md)                  | Drops an existing database.                                                                            |
 | [`DROP INDEX`](/sql-statements/sql-statement-drop-index.md)                        | Drops an index from a table.                                                                           |
+| [`DROP MATERIALIZED VIEW`](/sql-statements/sql-statement-drop-materialized-view.md) | Drops a materialized view.                                                                             |
+| [`DROP MATERIALIZED VIEW LOG`](/sql-statements/sql-statement-drop-materialized-view-log.md) | Drops a materialized view log.                                                                   |
 | [`DROP SEQUENCE`](/sql-statements/sql-statement-drop-sequence.md)                  | Drops a sequence object.                                                                               |
 | [`DROP TABLE`](/sql-statements/sql-statement-drop-table.md)                        | Drops an existing table.                                                                               |
 | [`DROP VIEW`](/sql-statements/sql-statement-drop-view.md)                          | Drops an existing view.                                                                                |
+| [`PURGE MATERIALIZED VIEW LOG`](/sql-statements/sql-statement-purge-materialized-view-log.md) | Manually purges a materialized view log.                                                   |
+| [`REFRESH MATERIALIZED VIEW`](/sql-statements/sql-statement-refresh-materialized-view.md) | Manually refreshes a materialized view.                                                            |
 | [`RENAME TABLE`](/sql-statements/sql-statement-rename-table.md)                    | Renames a table.                                                                                       |
 | [`SHOW COLUMNS FROM`](/sql-statements/sql-statement-show-columns-from.md)          | Shows the columns from a table.                                                                        |
 | [`SHOW CREATE DATABASE`](/sql-statements/sql-statement-show-create-database.md)    | Shows the CREATE statement for a database.                                                             |
+| [`SHOW CREATE MATERIALIZED VIEW`](/sql-statements/sql-statement-show-create-materialized-view.md) | Shows the creation statement for a materialized view. |
+| [`SHOW CREATE MATERIALIZED VIEW LOG`](/sql-statements/sql-statement-show-create-materialized-view-log.md) | Shows the creation statement for a materialized view log. |
 | [`SHOW CREATE SEQUENCE`](/sql-statements/sql-statement-show-create-sequence.md)    | Shows the CREATE statement for a sequence.                                                             |
 | [`SHOW CREATE TABLE`](/sql-statements/sql-statement-show-create-table.md)          | Shows the CREATE statement for a table.                                                                |
 | [`SHOW DATABASES`](/sql-statements/sql-statement-show-databases.md)                | Shows a list of databases that the current user has privileges to.                                     |
 | [`SHOW FIELDS FROM`](/sql-statements/sql-statement-show-fields-from.md)            | Shows columns of a table.                                                                              |
 | [`SHOW INDEXES`](/sql-statements/sql-statement-show-indexes.md)                    | Shows indexes of a table.                                                                              |
+| [`SHOW MATERIALIZED VIEW LOG WAIT_PURGE`](/sql-statements/sql-statement-show-materialized-view-log-wait-purge.md) | Shows information about log records waiting to be purged. |
+| [`SHOW MATERIALIZED VIEW LOGS`](/sql-statements/sql-statement-show-materialized-view-logs.md) | Lists materialized view logs. |
+| [`SHOW MATERIALIZED VIEW REMAIN_LOGS`](/sql-statements/sql-statement-show-materialized-view-remain-logs.md) | Shows information about remaining refresh logs. |
+| [`SHOW MATERIALIZED VIEWS`](/sql-statements/sql-statement-show-materialized-views.md) | Lists materialized views. |
 | [`SHOW SCHEMAS`](/sql-statements/sql-statement-show-schemas.md)                    | An alias to `SHOW DATABASES`, which shows a list of databases that the current user has privileges to. |
 | [`SHOW TABLE NEXT_ROW_ID`](/sql-statements/sql-statement-show-table-next-rowid.md) | Shows the next row ID for a table.                                                                     |
 | [`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md)        | Shows the Region information of a table in TiDB.                                                       |
@@ -95,6 +109,8 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | [`ADMIN RESUME DDL`](/sql-statements/sql-statement-admin-resume-ddl.md)                  | Resumes DDL operations.                                                                         |
 | [`ADMIN SHOW DDL [JOBS\|JOB QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)  | Shows DDL jobs or job queries.                                                                  |
 | [`ADMIN`](/sql-statements/sql-statement-admin.md)                                        | Performs various administrative tasks.                                                          |
+| [`CANCEL MATERIALIZED VIEW REFRESH JOB`](/sql-statements/sql-statement-cancel-materialized-view-refresh-job.md) | Cancels a materialized view refresh job.                                |
+| [`CANCEL MATERIALIZED VIEW LOG PURGE JOB`](/sql-statements/sql-statement-cancel-materialized-view-log-purge-job.md) | Cancels a materialized view log purge job.                                      |
 | [`FLUSH TABLES`](/sql-statements/sql-statement-flush-tables.md)                          | Included for [MySQL compatibility](/mysql-compatibility.md). It has no effective usage in TiDB. |
 | [`SET <variable>`](/sql-statements/sql-statement-set-variable.md)                        | Modifies a system variable or user variable.                                                    |
 | [`SET [NAMES\|CHARACTER SET]`](/sql-statements/sql-statement-set-names.md)               | Set a character set and collation.                                                              |
@@ -116,6 +132,8 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | [`ADMIN RESUME DDL`](/sql-statements/sql-statement-admin-resume-ddl.md)                  | Resumes DDL operations.                                                                         |
 | [`ADMIN SHOW DDL [JOBS\|JOB QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)  | Shows DDL jobs or job queries.                                                                  |
 | [`ADMIN`](/sql-statements/sql-statement-admin.md)                                        | Performs various administrative tasks.                                                          |
+| [`CANCEL MATERIALIZED VIEW REFRESH JOB`](/sql-statements/sql-statement-cancel-materialized-view-refresh-job.md) | Cancels a materialized view refresh job.                                |
+| [`CANCEL MATERIALIZED VIEW LOG PURGE JOB`](/sql-statements/sql-statement-cancel-materialized-view-log-purge-job.md) | Cancels a materialized view log purge job.                                      |
 | [`FLUSH TABLES`](/sql-statements/sql-statement-flush-tables.md)                          | Included for [MySQL compatibility](/mysql-compatibility.md). It has no effective usage in TiDB. |
 | [`SET <variable>`](/sql-statements/sql-statement-set-variable.md)                        | Modifies a system variable or user variable.                                                    |
 | [`SET [NAMES\|CHARACTER SET]`](/sql-statements/sql-statement-set-names.md)               | Set a character set and collation.                                                              |
@@ -191,6 +209,7 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 
 | SQL Statement                                           | Description                                                   |
 | ------------------------------------------------------- | ------------------------------------------------------------- |
+| [`COMPARE MATERIALIZED VIEW`](/sql-statements/sql-statement-compare-materialized-view.md) | Compares a materialized view with a snapshot of its defining query result. |
 | [`DESC`](/sql-statements/sql-statement-desc.md)         | An alias to `DESCRIBE`, which shows the structure of a table. |
 | [`DESCRIBE`](/sql-statements/sql-statement-describe.md) | Shows the structure of a table.                               |
 | [`DO`](/sql-statements/sql-statement-do.md)             | Executes an expression but does not return any results.       |
