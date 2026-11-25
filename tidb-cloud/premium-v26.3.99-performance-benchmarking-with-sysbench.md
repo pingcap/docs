@@ -19,7 +19,7 @@ The tests were conducted on a TiDB Cloud Premium cluster with the following sett
 
 - Cluster version: TiDB-X-CLOUD.202603.1
 - Cloud provider and region: AWS (us-west-2)
-- initialRCU/Maximum RCU : 500000
+- initialRCU/Maximum RCU: 500000
 - Cluster configuration:
 
     | Node type | Node size | Instance family | Node quantity | Node storage |
