@@ -126,7 +126,7 @@ Fortunately, TiDB Lightning provides a feature called `checkpoints`, which makes
 
 If the TiDB Lightning task crashes due to unrecoverable errors (for example, data corruption), it will not pick up from the checkpoint, but will report an error and quit the task. To ensure the safety of the imported data, you must resolve these errors by using the `tidb-lightning-ctl` command before proceeding with other steps. The options include:
 
-* --checkpoint-error-destroy: This option allows you to restart importing data into failed target tables from scratch by destroying all the existing data in those tables first.
+* --checkpoint-error-destroy: This option allows you to restart importing data into failed target tables from scratch by dropping those tables and resetting their checkpoints.
 * --checkpoint-error-ignore: If migration has failed, this option clears the error status as if no errors ever happened.
 * --checkpoint-remove: This option simply clears all checkpoints, regardless of errors.
 
@@ -149,6 +149,10 @@ CREATE TABLE `my_db`.`table5` (
   UNIQUE KEY `sid` (`sid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
 ```
+
+> **Warning:**
+>
+> If `my_db.table5` has a checkpoint error, run ``tidb-lightning-ctl --config tidb-lightning.toml --checkpoint-error-destroy='`my_db`.`table5`'``. TiDB Lightning then drops `my_db.table5` and resets its checkpoint. If you need to keep the manually adjusted downstream schema in this walkthrough, recreate the table definition before retrying the import.
 
 ### Start the migration task
 
@@ -242,9 +246,9 @@ Create a new data source file called `source1.yaml`, which configures an upstrea
 source-id: "mysql-01" # Must be unique.
 
 # Specifies whether DM-worker pulls binlogs with GTID (Global Transaction Identifier).
-# The prerequisite is that you have already enabled GTID in the upstream MySQL.
+# Set this option to `true` only if GTID is enabled in the upstream MySQL and you want to start replication from a GTID set.
 # If you have configured the upstream database service to switch master between different nodes automatically, you must enable GTID.
-enable-gtid: true
+enable-gtid: false
 
 from:
   host: "${host}"           # For example: 172.16.10.81
@@ -292,12 +296,18 @@ target-database:              # The target database instance
   user: "root"
   password: "${password}"     # It is recommended to use a dmctl encrypted password.
 
-# Use block-allow-list to configure tables that require sync:
+# Use block-allow-list to configure only the exported tables that require sync:
 block-allow-list:             # The set of filter rules on matching tables in the data sources, to decide which tables need to migrate and which not. Use the black-white-list if the DM version is earlier than or equal to v2.0.0-beta.2.
   bw-rule-1:                  # The ID of the block and allow list rule.
-    do-dbs: ["my_db1"]        # The databases to be migrated. Here, my_db1 of instance 1 and my_db2 of instance 2 are configured as two separate rules to demonstrate how to prevent my_db2 of instance 1 from being replicated.
+    do-dbs: ["my_db1"]
+    do-tables:
+    - db-name: "my_db1"
+      tbl-name: "table[1-2]"  # Replicate only `table1` and `table2` from `my_db1`.
   bw-rule-2:
     do-dbs: ["my_db2"]
+    do-tables:
+    - db-name: "my_db2"
+      tbl-name: "table[3-4]"  # Replicate only `table3` and `table4` from `my_db2`.
 routes:                               # Table renaming rules ('routes') from upstream to downstream tables, in order to support merging different sharded table into a single target table.
   route-rule-1:                       # Rule name. Migrate and merge table1 and table2 from my_db1 to the downstream my_db.table5.
     schema-pattern: "my_db1"          # Rule for matching upstream schema names. It supports the wildcards "*" and "?".
@@ -317,18 +327,18 @@ mysql-instances:
     route-rules: ["route-rule-1"]     # Use the configured routing rule above to merge upstream tables.
 #       syncer-config-name: "global"  # Use the syncers configuration below.
     meta:                             # The position where the binlog replication starts when `task-mode` is `incremental` and the downstream database checkpoint does not exist. If the checkpoint exists, the checkpoint is used. If neither the `meta` configuration item nor the downstream database checkpoint exists, the migration starts from the latest binlog position of the upstream.
-      binlog-name: "${binlog-name}"   # The log location recorded in ${data-path}/my_db1/metadata in Step 1. You can either specify binlog-name + binlog-pos or binlog-gtid. When the upstream database service is configured to switch master between different nodes automatically, use binlog GTID here.
+      binlog-name: "${binlog-name}"   # The log location recorded in `${data-path}/my_db1/metadata` in Step 1. Use `binlog-name` + `binlog-pos` when GTID is not enabled in this upstream.
       binlog-pos: ${binlog-position}
-      # binlog-gtid:                  " For example: 09bec856-ba95-11ea-850a-58f2b4af5188:1-9"
+      # binlog-gtid: "09bec856-ba95-11ea-850a-58f2b4af5188:1-9"  # Use `binlog-gtid` instead if this upstream uses GTID mode.
   - source-id: "mysql-02"             # Data source ID. It is the source-id in source1.yaml.
     block-allow-list: "bw-rule-2"     # Use the block and allow list configuration above. Replicate `my_db2` in instance2.
     route-rules: ["route-rule-2"]     # Use the routing rule configured above.
 
 #       syncer-config-name: "global"  # Use the syncers configuration below.
     meta:                             # The migration starting point of binlog when task-mode is incremental and there is no checkpoint in the downstream database. If there is a checkpoint, the checkpoint will be used.
-      # binlog-name: "${binlog-name}"   # The log location recorded in ${data-path}/my_db2/metadata in Step 1. You can either specify binlog-name + binlog-pos or binlog-gtid. When the upstream database service is configured to switch master between different nodes automatically, use binlog GTID here.
-      # binlog-pos: ${binlog-position}
-      binlog-gtid: "09bec856-ba95-11ea-850a-58f2b4af5188:1-9"
+      binlog-name: "${binlog-name}"   # The log location recorded in `${data-path}/my_db2/metadata` in Step 1. Use `binlog-name` + `binlog-pos` when GTID is not enabled in this upstream.
+      binlog-pos: ${binlog-position}
+      # binlog-gtid: "09bec856-ba95-11ea-850a-58f2b4af5188:1-9"  # Use `binlog-gtid` instead if this upstream uses GTID mode.
 # (Optional) If you need to incrementally replicate some data changes that have been covered in the full migration, you need to enable the safe mode to avoid data migration errors during incremental replication.
 # This scenario is common when the fully migrated data is not part of a consistent snapshot of the data source, and the incremental data is replicated from a location earlier than the fully migrated data.
 # syncers:           # The running parameters of the sync processing unit.
@@ -338,6 +348,8 @@ mysql-instances:
 # TiDB DM automatically starts safe mode within 1 minute before starting or resuming an incremental replication task.
 #    safe-mode: true
 ```
+
+If GTID is enabled in an upstream MySQL instance and that source needs GTID mode—for example, because a primary/secondary switch is required—set `enable-gtid` to `true` for that source, comment out `binlog-name` and `binlog-pos`, and configure `binlog-gtid` instead.
 
 For more configurations, see [DM Advanced Task Configuration File](/dm/task-configuration-file-full.md).
 
