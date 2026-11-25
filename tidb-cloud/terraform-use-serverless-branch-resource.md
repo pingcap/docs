@@ -1,6 +1,6 @@
 ---
 title: Use `tidbcloud_serverless_branch` Resource
-summary: Learn how to use the serverless branch resource to create and modify a {{{ .starter }}} or {{{ .essential }}} branch.
+summary: Learn how to use the serverless branch resource to create and manage a {{{ .starter }}} or {{{ .essential }}} branch.
 ---
 
 # Use the `tidbcloud_serverless_branch` Resource

@@ -1,6 +1,6 @@
 ---
 title: Use `tidbcloud_serverless_export` Resource
-summary: Learn how to use the `tidbcloud_serverless_export` resource to create and modify data export tasks for {{{ .starter }}} or {{{ .essential }}} instances.
+summary: Learn how to use the `tidbcloud_serverless_export` resource to create and manage data export tasks for {{{ .starter }}} or {{{ .essential }}} instances.
 ---
 
 # Use `tidbcloud_serverless_export` Resource

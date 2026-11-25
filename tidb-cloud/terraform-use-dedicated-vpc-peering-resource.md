@@ -1,6 +1,6 @@
 ---
 title: Use the `tidbcloud_dedicated_vpc_peering` Resource
-summary: Learn how to use the `tidbcloud_dedicated_vpc_peering` resource to create and modify a TiDB Cloud Dedicated VPC peering.
+summary: Learn how to use the `tidbcloud_dedicated_vpc_peering` resource to create and manage a TiDB Cloud Dedicated VPC peering.
 ---
 
 # Use the `tidbcloud_dedicated_vpc_peering` Resource
