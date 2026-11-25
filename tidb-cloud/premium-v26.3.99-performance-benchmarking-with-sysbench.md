@@ -69,12 +69,12 @@ printf '\n'
 1. In the [TiDB Cloud console](https://tidbcloud.com/), create a TiDB Cloud Premium cluster that meets the [test environment](#test-environment) requirements.
 2. Prepare the test data in the `test` database.
 
-    The benchmark environment restored a pre-generated dataset using BR. The following command runs inside the BR Job container in the cluster namespace. It requires access to the benchmark S3 bucket, the internal PD endpoint, and the mounted client certificates. Set `${ACCESS_KEY}`, `${SECRET_KEY}`, and `${KEYSPACE_NAME}` to the values for the test environment. Replace `/path/to/client-key.pem`, `/path/to/ca.pem`, and `/path/to/client.pem` with the paths to the client private key, CA certificate, and client certificate mounted in the BR container, respectively.
+    The benchmark environment restored a pre-generated dataset using BR. The following command runs inside the BR Job container in the cluster namespace. It requires access to the benchmark S3 bucket, the internal PD endpoint, and the mounted client certificates. Set `${BACKUP_BUCKET}` and `${BACKUP_PREFIX}` to the S3 bucket and backup prefix for the pre-generated dataset. Set `${ACCESS_KEY}`, `${SECRET_KEY}`, and `${KEYSPACE_NAME}` to the values for the test environment. Replace `/path/to/client-key.pem`, `/path/to/ca.pem`, and `/path/to/client.pem` with the paths to the client private key, CA certificate, and client certificate mounted in the BR container, respectively.
 
     ```shell
     ./br restore db \
       --db test \
-      --storage "s3://qa-workload-datasets/benchmark/sysbench_32t_10m?access-key=${ACCESS_KEY}&secret-access-key=${SECRET_KEY}" \
+      --storage "s3://${BACKUP_BUCKET}/${BACKUP_PREFIX}?access-key=${ACCESS_KEY}&secret-access-key=${SECRET_KEY}" \
       --pd "db-pd:2379" \
       --send-credentials-to-tikv=true \
       --keyspace-name="${KEYSPACE_NAME}" \
