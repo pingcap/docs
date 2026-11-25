@@ -292,6 +292,114 @@ class TocExclusionsTest(unittest.TestCase):
             self.assertEqual(saved["sha"], "HEAD")
             self.assertEqual(saved["toc_exclusion_group_translations"], remembered)
 
+    def test_scheduled_failure_manual_recovery_then_scheduled_preparation(self):
+        self.assertEqual(PREPARE["env"]["HEAD_REF"], "${{ steps.commits.outputs.head_ref }}")
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            source, target = root / "source", root / "target"
+            source.mkdir()
+            target.mkdir()
+            (root / "bin").mkdir()
+            (root / "bin/python").symlink_to(sys.executable)
+            subprocess.run(["git", "init", "-q", str(source)], check=True)
+
+            def commit(content):
+                (source / "TOC.md").write_text(content)
+                subprocess.run(["git", "-C", str(source), "add", "TOC.md"], check=True)
+                subprocess.run([
+                    "git", "-C", str(source), "-c", "user.name=Test", "-c",
+                    "user.email=test@example.com", "commit", "-qm", "source change",
+                ], check=True)
+                return subprocess.check_output(
+                    ["git", "-C", str(source), "rev-parse", "HEAD"], text=True).strip()
+
+            base = commit(BASE)
+            failed_head = commit(BASE + "- [Before](/before.md)\n")
+            manual_source = BASE + "- [Before](/before.md)\n- [New](/new.md)\n"
+            manual_head = commit(manual_source)
+            next_head = commit(manual_source + "- [Later](/later.md)\n")
+            cursor_path = target / "latest_translation_commit.json"
+            target_path = target / "TOC.md"
+            cursor_path.write_text(json.dumps({"sha": failed_head, "pending": {
+                "TOC.md": base, "unresolved.md": base}}))
+            target_path.write_text(TARGET)
+            env = {**os.environ, "PATH": str(root / "bin") + os.pathsep + os.environ["PATH"],
+                   "RUNNER_TEMP": directory, "BASE_REF": failed_head, "HEAD_REF": failed_head,
+                   "DOCS_SOURCE_PATH": str(source), "DOCS_TARGET_PATH": str(target),
+                   "SOURCE_FILES": "TOC.md", "COMMIT_SYNC_RUN_TYPE": "schedule",
+                   "TOC_EXCLUSIONS": '{"tidb-cloud-log-redaction.md": ["TOC.md"]}',
+                   "TOC_EXCLUSION_GROUP_TRANSLATIONS": json.dumps(TRANSLATIONS)}
+            cleanup = next(step for step in STEPS if step.get("id") == "cleanup_tocs")
+
+            def run_step(step, **overrides):
+                result = subprocess.run(["bash", "-c", step["run"]],
+                    env={**env, **overrides}, capture_output=True, text=True)
+                self.assertEqual(result.returncode, 0, result.stderr)
+
+            # Scheduled failure leaves the pending baseline and no success marker.
+            run_step(PREPARE)
+            run_step(cleanup, SYNC_OUTCOME="failure")
+            self.assertEqual(target_path.read_text(), TARGET)
+            self.assertEqual(json.loads(cursor_path.read_text())["pending"]["TOC.md"], base)
+
+            # Manual full recovery produces the successful translator's output:
+            # marker M advances, but the pinned translator retains pending B.
+            manual_env = {"COMMIT_SYNC_RUN_TYPE": "workflow_dispatch",
+                          "SOURCE_FILES_TRANSLATION_MODE": "full", "HEAD_REF": manual_head}
+            run_step(PREPARE, **manual_env)
+            recovered = (TARGET + "- [以前](/before.md)\n- [新規](/new.md)\n").replace(
+                "# 目次", f"# 目次 <!--Corresponding EN commit: {manual_head}-->")
+            target_path.write_text(RESTORE(manual_source, recovered, FILES, TRANSLATIONS))
+            run_step(cleanup, **manual_env, SYNC_OUTCOME="success")
+            self.assertEqual(target_path.read_text(), recovered)
+            before = json.loads(cursor_path.read_text())
+            self.assertEqual(before["sha"], failed_head)
+            self.assertEqual(before["pending"]["TOC.md"], base)
+
+            # The next batch must persist reconciliation for the translator too.
+            run_step(PREPARE, HEAD_REF=next_head)
+            restored = target_path.read_text()
+            self.assertIn("/new.md", restored)
+            self.assertNotIn("/later.md", restored)
+            self.assertEqual(REMOVE(restored, FILES), recovered)
+            saved = json.loads(cursor_path.read_text())
+            self.assertEqual(saved["pending"], {"unresolved.md": base})
+            self.assertEqual(saved["sha"], failed_head)
+            self.assertEqual(saved["toc_exclusion_group_translations"],
+                             before["toc_exclusion_group_translations"])
+
+    def test_retry_reconciliation_requires_a_newer_checkpoint_on_current_history(self):
+        with tempfile.TemporaryDirectory() as directory:
+            subprocess.run(["git", "init", "-q", directory], check=True)
+            tree = subprocess.check_output(
+                ["git", "-C", directory, "hash-object", "-w", "-t", "tree", "--stdin"],
+                input="", text=True).strip()
+
+            def commit(name, parent=None):
+                command = ["git", "-C", directory, "-c", "user.name=Test", "-c",
+                           "user.email=test@example.com", "commit-tree", tree, "-m", name]
+                if parent:
+                    command.extend(["-p", parent])
+                return subprocess.check_output(command, text=True).strip()
+
+            base = commit("base")
+            manual = commit("manual", base)
+            head = commit("head", manual)
+            divergent = commit("divergent", base)
+            cases = [
+                (base, base, head), (manual, base, head),
+                (base, manual, base), (base, divergent, head),
+                (base, "f" * 40, head), ("f" * 40, manual, head),
+                (base[:12], base, head), (base, "", head),
+            ]
+            reconcile = MODULE["reconcile_pending_retry"]
+            for retry, marker, current_head in cases:
+                with self.subTest(retry=retry, marker=marker, head=current_head):
+                    cursor = {"sha": head, "pending": {"TOC.md": retry, "other.md": base}}
+                    content = f"<!--Corresponding EN commit: {marker}-->"
+                    reconcile(content, "TOC.md", cursor, directory, current_head)
+                    self.assertEqual(cursor["pending"], {"TOC.md": retry, "other.md": base})
+
 
 if __name__ == "__main__":
     unittest.main()
