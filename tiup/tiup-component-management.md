@@ -29,8 +29,8 @@ You can use the `tiup list` command to query the component list. This usage of t
 You can also use the following flags in the above commands:
 
 - `--installed`: checks which components or which version of a specific component has been installed locally.
--`--all`: views all components, including the hidden ones
--`--verbose`: views all columns (including installed versions and supported platforms)
+- `--all`: views all components, including the hidden ones
+- `--verbose`: views all columns (including installed versions and supported platforms)
 
 Example 1: View all currently installed components.
 
@@ -50,10 +50,10 @@ tiup list tikv
 
 ## Install components
 
-You can use the `tiup install` command to query the component list. This usage of this command is as follows:
+You can use the `tiup install` command to install components. This usage of this command is as follows:
 
 - `tiup install <component>`: installs the latest stable version of a specified component.
-- `tiup install <component>:[version]`: installs the specified version of a specified component.
+- `tiup install <component>[:version]`: installs the specified version of a specified component.
 
 Example 1: Use TiUP to install the latest stable version of TiDB.
 

@@ -13,7 +13,7 @@ The `tiup dm start` command is used to start all or part of the services of the 
 tiup dm start <cluster-name> [flags]
 ```
 
-`<cluster-name>`: the name of the cluster to operate on. If you forget the cluster name, you can check it with the [cluster list](/tiup/tiup-component-dm-list.md) command.
+`<cluster-name>`: the name of the cluster to operate on. If you forget the cluster name, you can check it with the [tiup dm list](/tiup/tiup-component-dm-list.md) command.
 
 ## Options
 

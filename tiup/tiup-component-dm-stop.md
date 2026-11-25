@@ -17,7 +17,7 @@ The `tiup dm stop` command is used to stop all or part of the services of the sp
 tiup dm stop <cluster-name> [flags]
 ```
 
-`<cluster-name>`: the name of the cluster to operate on. If you forget the cluster name, you can check it with the [cluster list](/tiup/tiup-component-dm-list.md) command.
+`<cluster-name>`: the name of the cluster to operate on. If you forget the cluster name, you can check it with the [tiup dm list](/tiup/tiup-component-dm-list.md) command.
 
 ## Options
 
