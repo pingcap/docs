@@ -562,6 +562,11 @@
   - [Privilege Management](/privilege-management.md)
   - [Table Filter](/table-filter.md)
   - [URI Formats of External Storage Services](/external-storage-uri.md)
+<<<<<<< HEAD
+=======
+  - [`ANALYZE` Embedded in DDL Statements](/ddl_embedded_analyze.md)
+  - [Configure Trigger Rules for Slow Queries](/config-slow-query-trigger-rules.md)
+>>>>>>> 8876be1aaa (docs: add a guide for configuring slow query trigger rules (#23767))
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
   - [Notifications](/tidb-cloud/notifications.md)
 - Support Plan
