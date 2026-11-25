@@ -55,7 +55,7 @@ This document introduces the user scenarios, supported upstreams and downstreams
 
 ## [TiCDC](/ticdc/ticdc-overview.md)
 
-- **User scenario**: This tool is implemented by pulling TiKV change logs. It can restore cluster data to a consistent state with any upstream TSO, and support other systems to subscribe to data changes.
+- **User scenario**: This tool is implemented by pulling TiKV change logs. It can replicate incremental data and support subscriptions to data changes by other systems. With Syncpoint enabled, it can map upstream and downstream TSOs for consistent snapshot reads and data consistency validation.
 - **Upstream**: TiDB
 - **Downstream**: TiDB, MySQL, Kafka, MQ, Confluent, storage services such as Amazon S3, GCS, Azure Blob Storage, and NFS.
 - **Advantages**: Provide TiCDC Open Protocol

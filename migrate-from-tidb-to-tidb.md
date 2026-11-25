@@ -298,4 +298,8 @@ After creating a changefeed, data written to the upstream cluster is replicated 
     tiup cdc cli changefeed create --server=http://172.16.6.125:8300 --sink-uri="mysql://root:@172.16.6.122:4000" --changefeed-id="downstream-to-upstream"
     ```
 
-3. After migrating writing services to the downstream cluster, observe for a period. If the downstream cluster is stable, you can discard the upstream cluster.
+3. After migrating writing services to the downstream cluster, observe for a period. If the downstream cluster is stable and rollback is no longer needed, remove the reverse changefeed and then discard the upstream cluster.
+
+    ```shell
+    tiup cdc cli changefeed remove --server=http://172.16.6.125:8300 --changefeed-id="downstream-to-upstream"
+    ```

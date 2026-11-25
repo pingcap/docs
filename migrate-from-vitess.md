@@ -18,7 +18,7 @@ If your data size exceeds 10 TiB, it is recommended to do the import in two step
 
 In addition to these tools, you can also use [Debezium connector for Vitess](https://debezium.io/documentation/reference/connectors/vitess.html). This connector enables you to use [Kafka Connect](https://kafka.apache.org/documentation/#connect) or [Apache Flink](https://nightlies.apache.org/flink/flink-docs-stable/) to stream changes from Vitess to TiDB.
 
-Because both Vitess and TiDB support the MySQL protocol and SQL dialect, changes at the application level are expected to be small. For tasks directly managing sharding or other implementation-specific aspects, however, the changes might be larger. To facilitate the data migration from Vitess to TiDB, TiDB introduces the [`VITESS_HASH()`](/functions-and-operators/tidb-functions.md) function, which returns the hash of a string that is compatible with Vitess' HASH function.
+Because both Vitess and TiDB support the MySQL protocol and SQL dialect, changes at the application level are expected to be small. For tasks directly managing sharding or other implementation-specific aspects, however, the changes might be larger. To facilitate the data migration from Vitess to TiDB, TiDB introduces the [`VITESS_HASH()`](/functions-and-operators/tidb-functions.md) function, which returns the hash of a number that is compatible with Vitess' HASH function.
 
 ## Examples
 
