@@ -8,6 +8,45 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes','/ai/v
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2026.
 
+## November 24, 2026
+
+**General changes**
+
+- **TiDB Cloud Premium**
+
+    - TiDB Cloud Premium introduces organization-level management for Customer-Managed Encryption Keys (CMEK) on AWS and Alibaba Cloud. In addition, the **Dual-Layer Data Encryption** option is now renamed to **Enhanced Data Encryption** in the console.
+
+        - You can register and authorize a CMEK once under **Organization Settings** > **CMEK**, and then reuse this CMEK for **Enhanced Data Encryption** in the same cloud provider and region.
+        - You can enable **Enhanced Data Encryption** when creating a TiDB Cloud Premium instance or on an existing TiDB Cloud Premium instance.
+
+      When restoring a CMEK-protected Premium backup, TiDB Cloud automatically matches the original key, which must be registered and available in the original cloud provider and region. TiDB Cloud also prevents you from removing a key while it is still required by an instance, backup snapshot, or in-progress restore.
+
+      For more information, see [Enhanced Data Encryption](https://docs.pingcap.com/tidbcloud/enhanced-data-encryption-premium/?plan=premium).
+
+- **TiDB Cloud Dedicated**
+
+    - TiDB Cloud Dedicated supports skipping pre-import compatibility checks on a per-import basis.
+
+        - For each import, you can enable the **Ignore compatibility checks** option on the import page to skip CDC and Point-in-time Restore (PITR) compatibility checks without requesting a cluster-level workaround from TiDB Cloud Support.
+        - The **Ignore compatibility checks** option is disabled by default and applies only to the import in which it is enabled.
+
+      For more information, see the import documentation:
+
+        - [Import Sample Data (SQL Files) from Cloud Storage into TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/import-sample-data/)
+        - [Import CSV Files from Cloud Storage into TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/import-csv-files/)
+        - [Import Apache Parquet Files from Cloud Storage into TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/import-parquet-files/)
+
+**Console changes**
+
+- TiDB Cloud now streamlines the Cross-Plan Restore experience with a unified entry point and a simplified two-step workflow.
+
+    You can easily restore backups from an active or deleted TiDB Cloud Dedicated cluster hosted on AWS to a new TiDB Cloud Essential or Premium instance. Select a backup, configure the destination instance's capacity, encryption, and high availability, and review the estimated monthly price before restoring.
+
+    For more information, see the following documentation:
+
+    - [Restore backups from a different plan type to a new TiDB Cloud Essential instance](https://docs.pingcap.com/tidbcloud/backup-and-restore-serverless/?plan=essential#restore-backups-from-a-different-plan-type)
+    - [Restore backups from a different plan type to a new TiDB Cloud Premium instance](https://docs.pingcap.com/tidbcloud/backup-and-restore-premium/?plan=premium#restore-backups-from-a-different-plan-type)
+
 ## November 10, 2026
 
 **Console changes**
