@@ -43,6 +43,14 @@ The TiDB configuration file supports more options than command-line parameters. 
 + Minimum value: `1`
 + Maximum value: `1048576`
 
+### `maintenance-mode`
+
++ Controls whether a TiDB server rejects new user-submitted persistent DDL jobs, including `LOCK TABLES`, and new `IMPORT INTO` statements during maintenance. TiDB returns SQL error `8277` for rejected statements.
++ Type: Boolean
++ Default value: `false`
++ This setting applies to servers that use the [TiDB X architecture](/tidb-cloud/tidb-x-architecture.md). Omit the setting on classic TiDB, which rejects it even when set to `false`.
++ When set to `true`, ordinary DML, DDL on local temporary tables, and import job management remain available. You can still release existing table locks with `UNLOCK TABLES`. Jobs that have already been submitted can continue, and TiDB can still run internal SQL for operations such as bootstrap and upgrades.
+
 ### `temp-dir` <span class="version-mark">New in v6.3.0</span>
 
 + File system location used by TiDB to store temporary data. If a feature requires local storage in TiDB nodes, TiDB stores the corresponding temporary data in this location.
