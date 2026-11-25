@@ -308,7 +308,7 @@ The `sink` parameters are described as follows:
 | `csv`                   | The CSV configuration. (Optional)                                                                                                                                                                              |
 | `date_separator`        | `STRING` type. Indicates the date separator type of the file directory. Value options are `none`, `year`, `month`, and `day`. `none` is the default value and means that the date is not separated. (Optional) |
 | `dispatchers`           | A configuration array for event dispatching. (Optional)                                                                                                                                                       |
-| `encoder_concurrency`   | `INT` type. The number of encoder threads in the MQ sink. The default value is `16`. (Optional)                                                                                                                |
+| `encoder_concurrency`   | `INT` type. The number of encoder threads. For the behavior of different downstreams, see the following description. (Optional)                                                                                                                |
 | `protocol`              | `STRING` type. For MQ sinks, you can specify the protocol format of the message. The following protocols are currently supported: `canal-json`, `open-protocol`, `avro`, `debezium`, and `simple`.               |
 | `schema_registry`       | `STRING` type. The schema registry address. (Optional)                                                                                                                                                         |
 | `terminator`            | `STRING` type. The terminator is used to separate two data change events. The default value is null, which means `"\r\n"` is used as the terminator. (Optional)                                                |
@@ -317,6 +317,14 @@ The `sink` parameters are described as follows:
 | `cloud_storage_config` | The storage sink configuration. (Optional) |
 | `open`                        | The Open Protocol configuration. (Optional)                                                                             |
 | `debezium`                    | The Debezium Protocol configuration. (Optional)                                                                             |
+
+The behavior of `sink.encoder_concurrency` varies by downstream type and TiCDC architecture:
+
+- Message queue downstreams: Both the new and old architectures support configuring the number of encoder threads. The default value is `32`.
+- Storage service downstreams (old TiCDC architecture): `8` encoder threads are always used, and this parameter does not take effect.
+- Storage service downstreams (new TiCDC architecture): Starting from v8.5.9, you can configure the number of encoder threads. Before v8.5.9, the number of encoder threads is fixed at `8`. Starting from v8.5.9, the number of threads is determined by the configured parameter value, which defaults to `32`.
+
+After the new architecture supports this parameter, for existing storage service replication tasks where this configuration is missing or set to `0`, `8` encoder threads are still used. For more information, see [`encoder-concurrency`](/ticdc/ticdc-changefeed-config.md#encoder-concurrency).
 
 `sink.column_selectors` is an array. The parameters are described as follows:
 
