@@ -25,10 +25,12 @@ SELECT JSON_ARRAYAGG(v) FROM (SELECT 1 'v' UNION SELECT 2);
 +------------------+
 | JSON_ARRAYAGG(v) |
 +------------------+
-| [2, 1]           |
+| [1, 2]           |
 +------------------+
 1 row in set (0.00 sec)
 ```
+
+The order of the values in the resulting array is not guaranteed.
 
 ## `JSON_OBJECTAGG()`
 
@@ -122,11 +124,13 @@ GROUP BY
 | name   | JSON_OBJECTAGG(attribute,value)                           |
 +--------+-----------------------------------------------------------+
 | rose   | {"color": "red", "thorns": "yes"}                         |
-| orchid | {"color": "white", "thorns": "no"}                        |
 | tulip  | {"color": "orange", "grows_from": "bulb", "thorns": "no"} |
+| orchid | {"color": "white", "thorns": "no"}                        |
 +--------+-----------------------------------------------------------+
 3 rows in set (0.00 sec)
 ```
+
+The order of the rows in the result is not guaranteed.
 
 ## See also
 
