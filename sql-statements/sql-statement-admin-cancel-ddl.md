@@ -22,7 +22,7 @@ NumList ::=
 
 ## Examples
 
-To cancel the currently running DDL jobs and return whether the corresponding jobs are successfully cancelled, use `ADMIN CANCEL DDL JOBS`:
+To cancel the currently running DDL jobs and return whether the corresponding jobs are successfully canceled, use `ADMIN CANCEL DDL JOBS`:
 
 ```sql
 ADMIN CANCEL DDL JOBS job_id [, job_id] ...;

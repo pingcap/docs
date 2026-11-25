@@ -219,7 +219,7 @@ After you export data from the TiDB Self-Managed cluster to Amazon S3, you need 
 
 3. Configure the access policy. Go to the [AWS Console > IAM > Access Management > Policies](https://console.aws.amazon.com/iamv2/home#/policies) and switch to your region to check if the access policy for TiDB Cloud exists already. If it does not exist, create a policy following this document [Creating policies on the JSON tab](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html).
 
-    The following is an example template for the json policy.
+    The following is an example template for the JSON policy.
 
     ```json
     ## Create a json policy template

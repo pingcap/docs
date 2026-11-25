@@ -7,7 +7,7 @@ summary: Learn the concept, user scenarios, usages, and limitations of importing
 
 Since v5.3.0, the [physical import mode](/tidb-lightning/tidb-lightning-physical-import-mode.md) of TiDB Lightning supports the parallel import of a single table or multiple tables. By simultaneously running multiple TiDB Lightning instances, you can import data from single or multiple tables in parallel. In this way, TiDB Lightning provides the ability to scale horizontally, which greatly reduces the time required to import large amount of data.
 
-In technical implementation, TiDB Lightning records the meta data of each instance and the data of each imported table in the target TiDB, and coordinates the Row ID allocation range of different instances, the record of global Checksum, and the configuration changes and recovery of TiKV and PD.
+In technical implementation, TiDB Lightning records the metadata of each instance and the data of each imported table in the target TiDB, and coordinates the Row ID allocation range of different instances, the record of global Checksum, and the configuration changes and recovery of TiKV and PD.
 
 You can use TiDB Lightning to import data in parallel in the following scenarios:
 
@@ -24,7 +24,7 @@ You can use TiDB Lightning to import data in parallel in the following scenarios
 
 ## Considerations
 
-To use parallel import, you need to configure `parallel-import = true`. When TiDB Lightning is started, it registers meta data in the downstream TiDB cluster and automatically detects whether there are other instances migrating data to the target cluster at the same time. If there is, it automatically enters the parallel import mode.
+To use parallel import, you need to configure `parallel-import = true`. When TiDB Lightning is started, it registers metadata in the downstream TiDB cluster and automatically detects whether there are other instances migrating data to the target cluster at the same time. If there is, it automatically enters the parallel import mode.
 
 But when migrating data in parallel, you need to take the following into consideration:
 

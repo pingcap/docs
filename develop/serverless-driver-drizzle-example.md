@@ -135,7 +135,7 @@ To complete this tutorial, you need the following:
    console.log(result);
    ```
 
-### Step 4. Run the Typescript code
+### Step 4. Run the TypeScript code
 
 1. Install `ts-node` to transform TypeScript into JavaScript, and then install `@types/node` to provide TypeScript type definitions for Node.js.
 
@@ -144,7 +144,7 @@ To complete this tutorial, you need the following:
    npm i --save-dev @types/node
    ```
 
-2. Run the Typescript code with the following command:
+2. Run the TypeScript code with the following command:
 
    ```shell
    ts-node --esm hello-world.ts

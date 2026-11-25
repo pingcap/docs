@@ -5,7 +5,7 @@ summary: The usage of SHOW BUILTINS in TiDB.
 
 # SHOW BUILTINS
 
-`SHOW BUILTINS` is used to list all supported builtin functions in TiDB.
+`SHOW BUILTINS` is used to list all supported built-in functions in TiDB.
 
 ## Synopsis
 
