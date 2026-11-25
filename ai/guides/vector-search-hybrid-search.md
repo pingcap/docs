@@ -19,11 +19,9 @@ This tutorial demonstrates how to use hybrid search in TiDB with the [pytidb](ht
 
 ## Prerequisites
 
-Full-text search is still in the early stages, and we are continuously rolling it out to more customers. Currently, full-text search is only available on {{{ .starter }}} in the following regions:
+Currently, full-text search is in public preview and only available on {{{ .starter }}}.
 
-- AWS: `Oregon (us-west-2)`, `N. Virginia (us-east-1)`, `Tokyo (ap-northeast-1)`, `Frankfurt (eu-central-1)`, and `Singapore (ap-southeast-1)`
-
-To complete this tutorial, make sure you have a {{{ .starter }}} instance in a supported region. If you don't have one, follow [Creating a {{{ .starter }}} instance](/develop/dev-guide-build-cluster-in-cloud.md) to create it.
+To complete this tutorial, make sure you have a {{{ .starter }}} instance. If you don't have one, follow [Creating a {{{ .starter }}} instance](/develop/dev-guide-build-cluster-in-cloud.md) to create it.
 
 ## Get started
 
