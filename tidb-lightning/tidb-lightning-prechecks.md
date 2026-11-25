@@ -1,6 +1,6 @@
 ---
 title: TiDB Lightning Prechecks
-summary: This document describes the checks that TiDB Lightning performs before performing a data migration task. These precheckes ensure that TiDB Lightning can perform the task smoothly.
+summary: This document describes the checks that TiDB Lightning performs before performing a data migration task. These prechecks ensure that TiDB Lightning can perform the task smoothly.
 ---
 
 # TiDB Lightning Prechecks
