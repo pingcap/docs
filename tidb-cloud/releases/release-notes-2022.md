@@ -34,10 +34,9 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - Support directly migrating data from Amazon Aurora MySQL, Amazon Relational Database Service (RDS) MySQL, or self-hosted MySQL-compatible databases to TiDB Cloud online. This feature is now in General Availability.
 
-    - Provide services in the following 6 regions:
+    - Provide services in the following 5 regions:
         - AWS Oregon (us-west-2)
         - AWS N. Virginia (us-east-1)
-        - AWS Mumbai (ap-south-1)
         - AWS Singapore (ap-southeast-1)
         - AWS Tokyo (ap-northeast-1)
         - AWS Frankfurt (eu-central-1)
@@ -140,7 +139,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
   To use the PITR feature, make sure that your TiDB cluster version is at least v6.3.0 and the TiKV node size is at least 8 vCPU and 16 GiB.
 
-  By default, backup data is stored in the same region where the cluster is created. In Japan, for TiDB clusters hosted on GCP with PITR enabled, you can choose to store backup data in one or two regions (Tokyo and/or Osaka). Restoring data from an alternative region provides a higher level of data safety and can tolerate region failures.
+  By default, backup data is stored in the same region where the cluster is created. For TiDB clusters hosted on GCP with PITR enabled, you can choose to store backup data in a supported region. Restoring data from an alternative region provides a higher level of data safety and can tolerate region failures.
 
   For more information, see [Back Up and Restore TiDB Cluster Data](/tidb-cloud/backup-and-restore.md).
 
@@ -314,12 +313,6 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     Playground contains a pre-loaded dataset of GitHub events, which allows you to get started with TiDB Cloud by running queries instantly, without importing your data or connecting to a client.
 
-## September 13, 2022
-
-**General changes**
-
-* Support a new Google Cloud region for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters: `N. Virginia (us-east4)`.
-
 ## September 9, 2022
 
 **General changes**
@@ -402,10 +395,6 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 * Introduce [Credits](/tidb-cloud/tidb-cloud-billing.md#credits) (previously named as trail points) for PoC users.
 
     You can now view information about your organization's credits on the **Credits** tab of the **Billing** page, the credits can be used to pay for TiDB Cloud fees. You can <a href="mailto:tidbcloud-support@pingcap.com">contact us</a> to get credits.
-
-## August 9, 2022
-
-* Add the support of the GCP region `Osaka` for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster creation.
 
 ## August 2, 2022
 
@@ -539,7 +528,6 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 ## May 1, 2022
 
 * Support configuring vCPU size of TiDB, TiKV, and TiFlash when you [create](/tidb-cloud/create-tidb-cluster.md) or [restore](/tidb-cloud/backup-and-restore.md#restore) a [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster.
-* Add the support of the AWS region `Mumbai` for cluster creation.
 * Update the compute, storage, and data transfer cost for [TiDB Cloud billing](/tidb-cloud/tidb-cloud-billing.md).
 
 ## April 7, 2022
