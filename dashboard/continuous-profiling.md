@@ -19,7 +19,7 @@ Continuous Profiling is an enhanced feature of [Manual Profiling](/dashboard/das
 
 - Manual Profiling only collects performance data for a short period of time (for example, 30 seconds) at the moment you initiate the profiling, while Continuous Profiling collects data continuously when it is enabled.
 - Manual Profiling can only be used to analyze current occurring problems, while Continuous Profiling can be used to analyze both the current and historical problems.
-- Manual Profiling allows to collect specific performance data for specific instances, while Continuous Profiling collects all performance data for all instances.
+- Manual Profiling allows you to collect specific performance data for specific instances, while Continuous Profiling collects all performance data for all instances.
 - Continuous Profiling stores more performance data, therefore it takes up more disk space.
 
 ## Supported performance data
