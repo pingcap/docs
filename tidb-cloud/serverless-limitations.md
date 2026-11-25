@@ -31,7 +31,7 @@ TiDB Cloud Starter 和 TiDB Cloud Essential 支持几乎所有 TiDB 支持的 wo
 
 ### 加密
 
-- 你在 TiDB Cloud Starter 或 TiDB Cloud Essential 实例中持久化的数据，使用管理你实例的云服务商提供的加密工具进行加密。对于 TiDB Cloud Starter（spending limit > 0）和 TiDB Cloud Essential 实例，在实例创建过程中可选择启用第二层加密，为默认静态加密之外提供额外的安全保障。
+- 你在 TiDB Cloud Starter 或 TiDB Cloud Essential 实例中持久化的数据，使用托管你实例的云服务商提供的加密服务进行加密。对于 TiDB Cloud Essential 实例，默认启用额外的数据库层加密（双层加密）。TiDB Cloud Starter 实例不支持双层加密。
 - 目前不支持使用 [customer-managed encryption keys (CMEK)](/tidb-cloud/tidb-cloud-encrypt-cmek-aws.md)。
 
 ### 维护窗口

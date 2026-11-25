@@ -351,7 +351,7 @@ summary: 了解不同 TiDB Cloud 套餐的功能支持状态。
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
-    <td rowspan="6" style="background-color: white;">安全</td>
+    <td rowspan="5" style="background-color: white;">安全</td>
     <td>数据库审计日志</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center;">🔒</td>
@@ -376,20 +376,12 @@ summary: 了解不同 TiDB Cloud 套餐的功能支持状态。
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
-    <td>CMEK</td>
+    <td>增强型数据加密（双层加密）</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
-    <td style="text-align:center; font-size: 14px;">❌</td>
-    <td style="text-align:center;">🔒</td>
+    <td style="text-align:center;">✅</td>
+    <td style="text-align:center;">✅<br/><span style="font-size: 14px; white-space: nowrap;">(支持 CMEK)</span></td>
     <td style="text-align:center;">🚧</td>
-    <td style="text-align:center;">✅</td>
-  </tr>
-  <tr>
-    <td>双层加密</td>
-    <td style="text-align:center;">✅</td>
-    <td style="text-align:center;">✅</td>
-    <td style="text-align:center;">🔒</td>
-    <td style="text-align:center;">🚧</td>
-    <td style="text-align:center;">✅</td>
+    <td style="text-align:center;">✅<br/><span style="font-size: 14px; white-space: nowrap;">(支持 CMEK)</span></td>
   </tr>
   <tr>
     <td>IAM（包括邮箱和密码登录、标准 SSO 及组织 SSO）</td>

@@ -144,6 +144,12 @@ summary: 了解如何将 Apache Parquet 文件从 Amazon S3、GCS 或 Azure Blob
 
         - **Target Database** 和 **Target Table**：输入要导入数据的目标数据库和表。
 
+    **高级选项**：展开面板以查看 **Ignore compatibility checks (advanced)** 选项。除非你需要将数据导入已启用 changefeed 或 Point-in-time Restore 的集群，否则请保持此选项为禁用状态。启用此选项会跳过所有导入前安全检查，包括本地磁盘空间检查。启用前，请验证目标集群的可用磁盘空间能够容纳导入的数据。
+
+    > **注意：**
+    >
+    > 导入的数据不会生成变更日志，因此不会被 changefeed 或日志备份捕获，也无法被自动检测和备份。导入完成后，在依赖 Point-in-time Restore 之前，请先对集群执行一次手动快照备份。在此之前，Point-in-time Restore 无法恢复导入与手动快照之间某个时间点的已导入行。更多信息，请参见[执行手动备份](/tidb-cloud/backup-and-restore.md#perform-a-manual-backup)。
+
 6. 点击 **Next**。TiDB Cloud 会扫描源文件。
 
 7. 查看扫描结果，检查找到的数据文件及其对应的目标表，然后点击 **Start Import**。
@@ -194,6 +200,12 @@ summary: 了解如何将 Apache Parquet 文件从 Amazon S3、GCS 或 Azure Blob
             - `my-data*.parquet`：匹配所有以 `my-data` 开头的 Parquet 文件，例如 `my-data10.parquet` 和 `my-data100.parquet`。
 
         - **Target Database** 和 **Target Table**：输入要导入数据的目标数据库和表。
+
+    **高级选项**：展开面板以查看 **Ignore compatibility checks (advanced)** 选项。除非你需要将数据导入已启用 changefeed 或 Point-in-time Restore 的集群，否则请保持此选项为禁用状态。启用此选项会跳过所有导入前安全检查，包括本地磁盘空间检查。启用前，请验证目标集群的可用磁盘空间能够容纳导入的数据。
+
+    > **注意：**
+    >
+    > 导入的数据不会生成变更日志，因此不会被 changefeed 或日志备份捕获，也无法被自动检测和备份。导入完成后，在依赖 Point-in-time Restore 之前，请先对集群执行一次手动快照备份。在此之前，Point-in-time Restore 无法恢复导入与手动快照之间某个时间点的已导入行。更多信息，请参见[执行手动备份](/tidb-cloud/backup-and-restore.md#perform-a-manual-backup)。
 
 6. 点击 **Next**。TiDB Cloud 会扫描源文件。
 
@@ -265,6 +277,12 @@ summary: 了解如何将 Apache Parquet 文件从 Amazon S3、GCS 或 Azure Blob
             - `my-data*.parquet`：匹配所有以 `my-data` 开头的 Parquet 文件，例如 `my-data10.parquet` 和 `my-data100.parquet`。
 
         - **Target Database** 和 **Target Table**：输入要导入数据的目标数据库和表。
+
+    **高级选项**：展开面板以查看 **Ignore compatibility checks (advanced)** 选项。除非你需要将数据导入已启用 changefeed 或 Point-in-time Restore 的集群，否则请保持此选项为禁用状态。启用此选项会跳过所有导入前安全检查，包括本地磁盘空间检查。启用前，请验证目标集群的可用磁盘空间能够容纳导入的数据。
+
+    > **注意：**
+    >
+    > 导入的数据不会生成变更日志，因此不会被 changefeed 或日志备份捕获，也无法被自动检测和备份。导入完成后，在依赖 Point-in-time Restore 之前，请先对集群执行一次手动快照备份。在此之前，Point-in-time Restore 无法恢复导入与手动快照之间某个时间点的已导入行。更多信息，请参见[执行手动备份](/tidb-cloud/backup-and-restore.md#perform-a-manual-backup)。
 
 6. 点击 **Next**。TiDB Cloud 会扫描源文件。
 

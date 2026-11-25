@@ -48,7 +48,7 @@ ticloud serverless create --display-name <display-name> --region <region> --max-
 | -p, --project-id string      | 指定要创建 {{{ .starter }}} 或 Essential 实例的项目 ID，默认值为 `default project`。                                                   | 否       | 仅在非交互模式下生效。                             |
 | -r, --region string          | 指定云区域名称。你可以使用 `ticloud serverless region` 命令查看所有可用区域。                            | 是       | 仅在非交互模式下生效。                             |
 | --disable-public-endpoint    | 禁用公网访问端点。如果你希望阻止 {{{ .starter }}} 或 Essential 实例的公网访问，可以使用此选项。                                         | 否       | 仅在非交互模式下生效。                             |
-| --encryption                 | 启用双层数据加密。对于 {{{ .essential }}} 实例默认启用，对于 {{{ .starter }}} 实例默认禁用。         | 否       | 仅在非交互模式下生效。                             |
+| --encryption                 | 为 {{{ .essential }}} 实例启用双层数据加密（默认启用）。不支持 {{{ .starter }}} 实例。         | 否       | 仅在非交互模式下生效。                             |
 | --max-rcu int32              | 设置 {{{ .essential }}} 实例的最大请求容量单元（RCU），最大可达 100000。                              | 否       | 仅在非交互模式下生效。                             |
 | --min-rcu int32              | 设置 {{{ .essential }}} 实例的最小请求容量单元（RCU），最小为 2000。                                 | 否       | 仅在非交互模式下生效。                             |
 | -h, --help                   | 显示此命令的帮助信息。                                                                                  | 否       | 在非交互和交互模式下均可用。                       |

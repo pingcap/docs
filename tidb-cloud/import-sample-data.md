@@ -33,6 +33,12 @@ summary: 了解如何通过 UI 将示例数据导入到 TiDB Cloud Dedicated。
 
 5. 在 **Destination Mapping** 部分，保持选中 **Use [TiDB file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping**，然后选择 **SQL** 作为数据格式。
 
+    **Advanced options**：展开面板以查看 **Ignore compatibility checks (advanced)** 选项。除非你需要将数据导入已启用 changefeed 或 Point-in-time Restore 的集群，否则请保持其为禁用状态。启用此选项会跳过所有导入前安全检查，包括本地磁盘空间检查。启用前，请验证目标集群的可用磁盘空间能够容纳导入的数据。
+
+    > **Note:**
+    >
+    > 导入的数据不会生成变更日志，因此不会被 changefeed 或日志备份捕获，也无法被自动检测和备份。导入完成后，在依赖 Point-in-time Restore 之前，请先对集群执行一次手动快照备份。在此之前，Point-in-time Restore 无法将数据恢复到导入完成后至手动快照之间的时间点，以恢复导入的行。更多信息，参见 [Perform a manual backup](/tidb-cloud/backup-and-restore.md#perform-a-manual-backup)。
+
 6. 点击 **Next**。TiDB Cloud 会扫描源文件。
 
 7. 查看扫描结果，检查找到的数据文件及其对应的目标表，然后点击 **Start Import**。
@@ -63,6 +69,12 @@ summary: 了解如何通过 UI 将示例数据导入到 TiDB Cloud Dedicated。
 4. 点击 **Next**。
 
 5. 在 **Destination Mapping** 部分，保持选中 **Use [TiDB file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping**，然后选择 **SQL** 作为数据格式。
+
+    **Advanced options**：展开面板以查看 **Ignore compatibility checks (advanced)** 选项。除非你需要将数据导入已启用 changefeed 或 Point-in-time Restore 的集群，否则请保持其为禁用状态。启用此选项会跳过所有导入前安全检查，包括本地磁盘空间检查。启用前，请验证目标集群的可用磁盘空间能够容纳导入的数据。
+
+    > **Note:**
+    >
+    > 导入的数据不会生成变更日志，因此不会被 changefeed 或日志备份捕获，也无法被自动检测和备份。导入完成后，在依赖 Point-in-time Restore 之前，请先对集群执行一次手动快照备份。在此之前，Point-in-time Restore 无法将数据恢复到导入完成后至手动快照之间的时间点，以恢复导入的行。更多信息，参见 [Perform a manual backup](/tidb-cloud/backup-and-restore.md#perform-a-manual-backup)。
 
 6. 点击 **Next**。TiDB Cloud 会扫描源文件。
 
@@ -118,6 +130,12 @@ summary: 了解如何通过 UI 将示例数据导入到 TiDB Cloud Dedicated。
     > 如果端点尚未获批，TiDB Cloud 会显示一条消息，指示连接正在等待批准。请在 [Azure 门户](https://portal.azure.com/) 中批准该请求，然后重试。
 
 5. 在 **Destination Mapping** 部分，保持选中 **Use [TiDB file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping**，然后选择 **SQL** 作为数据格式。
+
+    **Advanced options**：展开面板以查看 **Ignore compatibility checks (advanced)** 选项。除非你需要将数据导入已启用 changefeed 或 Point-in-time Restore 的集群，否则请保持其为禁用状态。启用此选项会跳过所有导入前安全检查，包括本地磁盘空间检查。启用前，请验证目标集群的可用磁盘空间能够容纳导入的数据。
+
+    > **Note:**
+    >
+    > 导入的数据不会生成变更日志，因此不会被 changefeed 或日志备份捕获，也无法被自动检测和备份。导入完成后，在依赖 Point-in-time Restore 之前，请先对集群执行一次手动快照备份。在此之前，Point-in-time Restore 无法将数据恢复到导入完成后至手动快照之间的时间点，以恢复导入的行。更多信息，参见 [Perform a manual backup](/tidb-cloud/backup-and-restore.md#perform-a-manual-backup)。
 
 6. 点击 **Next**。TiDB Cloud 会扫描源文件。
 

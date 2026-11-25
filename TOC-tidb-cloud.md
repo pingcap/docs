@@ -613,6 +613,7 @@
       - [Sysbench 性能测试报告](/tidb-cloud/v6.5-performance-benchmarking-with-sysbench.md)
   - [系统变量](/system-variables.md)
   - [服务器状态变量](/status-variables.md)
+  - [权限管理](/privilege-management.md)
   - [表库过滤](/table-filter.md)
   - [外部存储服务的 URI 格式](/external-storage-uri.md)
   - [内嵌于 DDL 的 Analyze](/ddl_embedded_analyze.md)
@@ -623,7 +624,7 @@
   - [Connected Care 概述](/tidb-cloud/connected-care-overview.md)
   - [Connected Care 详情](/tidb-cloud/connected-care-detail.md)
   - Connected Care 支持服务
-    - [Connected：Clinic 服务](/tidb-cloud/tidb-cloud-clinic.md)
+    - [Connected: Clinic 服务](/tidb-cloud/tidb-cloud-clinic.md)
     - [Connected：IM 中的 AI 聊天](/tidb-cloud/connected-ai-chat-in-im.md)
     - Connected：通过 IM 订阅 TiDB Cloud 告警
       - [通过 Slack 订阅](/tidb-cloud/monitor-alert-slack.md)

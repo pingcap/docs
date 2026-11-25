@@ -3344,9 +3344,9 @@ v5.0 后，用户仍可以单独修改以上系统变量（会有废弃警告）
 
 - [`tidb_redact_log`](#tidb_redact_log) 变量允许你对 general log 中记录的 SQL 语句进行脱敏。
 
-- general log 仅记录执行成功的语句。执行失败的语句不会记录在 general log 中，而是以 `command dispatched failed` 消息记录在 TiDB 日志中。
+- general log 在编译后、执行前记录 SQL 语句，因此执行期间失败的语句也可能会被记录。解析或编译失败的语句不会记录在 general log 中。
 
-- 要查看该功能的所有记录，你需要将 TiDB 配置项 [`log.level`](/tidb-configuration-file.md#level) 设为 `"info"` 或 `"debug"`，然后搜索 `"GENERAL_LOG"` 字符串。以下信息会被记录：
+- general log 以 info 级别写入，不受 TiDB 配置项 [`log.level`](/tidb-configuration-file.md#level) 的影响。你可以通过搜索 `"GENERAL_LOG"` 字符串来定位日志记录。以下信息会被记录：
     - `time`：事件时间。
     - `conn`：当前会话的 ID。
     - `user`：当前会话用户。

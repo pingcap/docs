@@ -221,6 +221,12 @@ TiDB Cloud 支持将数据恢复到新实例。
 
 4. 点击 **Next** 进入 **Restore to a New Instance** 页面。
 
+    <CustomContent plan="premium">
+
+    对于受 CMEK 保护的 {{{ .premium }}} 备份，在配置新实例之前，请先检查匹配的源密钥。该密钥必须已在原始云服务提供商和 region 中注册并可用。如果尚未注册，必须由 `Organization Owner` 先注册原始密钥并授予权限，然后才能继续。你不能为恢复后的实例选择其他密钥，也不能禁用 CMEK。更多信息，请参见 [从加密备份恢复](/tidb-cloud/premium/enhanced-data-encryption-premium.md#restore-from-an-encrypted-backup)。
+
+    </CustomContent>
+
 5. 配置用于恢复的新 {{{ .premium }}} 或 {{{ .byoc }}} 实例。请按照 <CustomContent plan="premium">[创建 {{{ .premium }}} 实例](/tidb-cloud/premium/create-tidb-instance-premium.md)</CustomContent><CustomContent plan="byoc">[创建 {{{ .byoc }}} 实例](/tidb-cloud/byoc/create-tidb-instance-byoc.md)</CustomContent> 中的步骤进行操作。
 
     <CustomContent plan="byoc">
@@ -265,20 +271,34 @@ TiDB Cloud 支持将数据恢复到新实例。
 
 ### 从不同套餐类型恢复备份 {#restore-backups-from-a-different-plan-type}
 
-当前，你只能将托管在 AWS 上的 {{{ .dedicated }}} 集群备份恢复到新的 {{{ .premium }}} 实例。
+你可以使用 **Cross Plan Restore** 将托管在 AWS 上、处于活动或已删除状态的 {{{ .dedicated }}} 集群中的备份快照恢复到新的 {{{ .premium }}} 实例。新实例必须使用与备份相同的云服务提供商和 region。目前，仅支持将 {{{ .dedicated }}} 集群的备份作为源。
+
+对于受 CMEK 保护的 {{{ .dedicated }}} 备份，请将其恢复到位于相同云服务提供商和 region 中的新 {{{ .premium }}} 实例。TiDB Cloud 使用原始 {{{ .dedicated }}} 密钥解密源备份，并使用为新实例注册的 {{{ .premium }}} 密钥重新加密数据。请保持原始 {{{ .dedicated }}} 密钥处于激活状态并已授予解密权限，同时在相同云服务提供商和 region 中选择一个已注册的 {{{ .premium }}} 密钥（可以是同一个密钥，也可以是不同的密钥）。如果备份未使用数据库层加密，你也可以通过选择一个已注册的密钥，为新实例选择性启用 CMEK。更多信息，请参见 [从加密备份恢复](/tidb-cloud/premium/enhanced-data-encryption-premium.md#restore-from-an-encrypted-backup)。
 
 如需恢复由 {{{ .dedicated }}} 集群生成的备份，请执行以下步骤：
 
-1. 登录 [TiDB Cloud console](https://tidbcloud.com)，然后进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面。在右上角，点击 **...**，然后点击 **Restore from Another Plan**。
+1. 在 [**My TiDB**](https://tidbcloud.com/tidbs) 页面右上角点击 **...**，然后点击 **Cross Plan Restore**。
 
-2. 在 **Select Backup** 页面，选择包含目标 {{{ .dedicated }}} 集群的项目。选择该 {{{ .dedicated }}} 集群，选择你要恢复的备份快照，然后点击 **Next**。
+2. 在 **Select Backup** 步骤中，配置以下字段，然后点击 **Next**：
+
+    - **From**：对于现有集群，选择 **Active**；对于已删除的集群，选择 **Recycle Bin (Deleted)**。
+    - **Plan** 和 **Cloud Provider**：这两个字段固定为 **Dedicated** 和 **AWS**。
+    - **Project**：选择包含源集群的项目。
+    - **Cluster Name**：选择源集群。
+    - **Backup Snapshot**：选择要恢复的快照。
+
+3. 查看 **Backup Information**，然后配置 **Restore to New Instance**：
+
+    - **Plan**：选择 **Premium**。
+    - **Project** 和 **Instance Name**：根据需要选择目标项目并输入新实例的名称。如果你的角色是 `Organization Owner`，则选择项目是可选的。如果你的角色是 `Project Owner`，则必须选择你拥有的项目。
+    - **Cloud Provider** 和 **Region**：这两个字段继承自备份，无法更改。
+    - 根据需要配置容量、加密和高可用。更多信息，请参见 [创建 {{{ .premium }}} 实例](/tidb-cloud/premium/create-tidb-instance-premium.md)。
 
     > **Note:**
     >
-    > - 确保包含该备份快照的 {{{ .dedicated }}} 集群在所选项目中处于 **Active** 或 **Deleted** 状态。
-    > - 该快照必须位于 {{{ .premium }}} 支持的 region 中。如果该 region 不受支持，请联系 [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) 为 {{{ .premium }}} 开通新的 region，或选择其他备份快照。
+    > 如果所选备份所在 region 不支持 {{{ .premium }}}，则无法继续恢复。请联系 [TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md) 以在该 region 启用 {{{ .premium }}}，或点击 **Previous** 并选择其他备份。
 
-3. 在 **Restore** 页面，按照[恢复到新实例](#restore-to-a-new-instance)中的相同步骤，将备份恢复到新实例。
+4. 查看预估月度价格和配置信息，然后点击 **Restore**，开始将备份恢复到新实例。
 
 </CustomContent>
 
@@ -302,7 +322,8 @@ TiDB Cloud 支持将数据恢复到新实例。
 >
 > - 当前仅支持恢复位于 **Amazon S3** 和 **Alibaba Cloud OSS** 中的备份。
 > - 你只能将备份恢复到由与你的存储 bucket 相同云服务提供商托管的新实例。
-> - 如果实例和存储 bucket 位于不同 region，可能会产生额外的跨 region 数据传输费用。
+> - 对于受 CMEK 保护的 {{{ .dedicated }}} 备份，请保持原始密钥处于激活状态并已授予解密备份的权限，然后使用已注册的 {{{ .premium }}} 密钥（同一个密钥或该 region 中另一个已注册的密钥），将其恢复到原始云服务提供商和 region 中的新 {{{ .premium }}} 实例。更多信息，请参见 [从加密备份恢复](/tidb-cloud/premium/enhanced-data-encryption-premium.md#restore-from-an-encrypted-backup)。
+> - 对于未使用数据库层加密的备份，如果实例和存储 bucket 位于不同 region，可能会产生额外的跨 region 数据传输费用。
 
 </CustomContent>
 
@@ -322,14 +343,14 @@ TiDB Cloud 支持将数据恢复到新实例。
 
 要从云存储恢复备份，请执行以下操作：
 
-1. 登录 [TiDB Cloud console](https://tidbcloud.com)，然后进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面。在右上角，点击 **...** ，然后点击 **Restore from Cloud Storage**。
+1. 登录 [TiDB Cloud console](https://tidbcloud.com)，然后进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面。在右上角，点击 **...**，然后点击 <CustomContent plan="premium">**Restore from Cloud Storage to Premium**</CustomContent><CustomContent plan="byoc">**Restore from Cloud Storage to BYOC**</CustomContent>。
 
-2. 在 **Select Backup Storage Location** 页面，提供以下信息：
+2. 在 **Select Backup** 部分，提供以下信息：
 
     <CustomContent plan="premium">
 
     - **Cloud Provider**：选择存储备份文件的云服务提供商。
-    - **Region**：如果你的云服务提供商是 Alibaba Cloud OSS，请选择一个 region。
+    - **Region**：如果你的备份文件存储在 Alibaba Cloud OSS 中，请选择或输入存储桶所在的 region。
     - **Backup Files URI**：输入包含备份文件的顶层文件夹的 URI。
     - **Access Key ID**：输入你的 access key ID。
     - **Access Key Secret**：输入你的 access key secret。
@@ -338,7 +359,7 @@ TiDB Cloud 支持将数据恢复到新实例。
 
     <CustomContent plan="byoc">
 
-    - **Cloud Provider**：选择存储备份文件的云服务提供商。
+    - **Cloud Provider**：该字段固定为 **Amazon S3**。当前，BYOC 仅支持从 Amazon S3 恢复备份。
     - **Backup Files URI**：输入包含备份文件的顶层文件夹的 URI。
     - **Access Key ID**：输入你的 access key ID。
     - **Access Key Secret**：输入你的 access key secret。
@@ -349,9 +370,9 @@ TiDB Cloud 支持将数据恢复到新实例。
     >
     > 要为你的存储 bucket 创建 access key，请参见 [Configure Amazon S3 access using an AWS access key](#configure-amazon-s3-access-using-an-aws-access-key)<CustomContent plan="premium"> 和 [Configure Alibaba Cloud OSS access](#configure-alibaba-cloud-oss-access)</CustomContent>。
 
-3. 点击 **Verify Backup and Next**。
+3. 点击 **Verify Backup**。验证成功后，在右侧摘要中查看备份 region、备份时间和 TiDB 版本。
 
-4. 如果验证成功，将显示 **Restore to a New Instance** 页面。查看页面顶部显示的备份信息，然后按照 <CustomContent plan="premium">[Create a {{{ .premium }}} Instance](/tidb-cloud/premium/create-tidb-instance-premium.md)</CustomContent><CustomContent plan="byoc">[Create a {{{ .byoc }}} Instance](/tidb-cloud/byoc/create-tidb-instance-byoc.md)</CustomContent> 中的步骤将备份恢复到一个新的实例。
+4. 在同一页面的 <CustomContent plan="premium">**Restore to a New Premium Instance**</CustomContent><CustomContent plan="byoc">**Restore to a New BYOC Instance**</CustomContent> 部分配置新实例。根据需要选择目标项目，输入实例名称，并配置 region 和容量。云服务提供商必须与备份存储提供商一致。有关这些设置的更多信息，请参见 <CustomContent plan="premium">[创建 {{{ .premium }}} 实例](/tidb-cloud/premium/create-tidb-instance-premium.md)</CustomContent><CustomContent plan="byoc">[创建一个 {{{ .byoc }}} 实例](/tidb-cloud/byoc/create-tidb-instance-byoc.md)</CustomContent>。
 
     <CustomContent plan="byoc">
 
@@ -365,7 +386,7 @@ TiDB Cloud 支持将数据恢复到新实例。
 
     </CustomContent>
 
-    如果备份信息不正确，点击 **Previous** 返回上一页，然后输入正确的信息。
+    如果备份信息不正确，请更新 **Select Backup** 中的字段，然后在恢复前再次点击 **Verify Backup**。
 
 5. 点击 **Restore** 以恢复备份。
 
