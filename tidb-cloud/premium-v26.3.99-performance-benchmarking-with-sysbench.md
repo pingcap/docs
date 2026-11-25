@@ -17,10 +17,9 @@ These tests demonstrate the Sysbench performance of TiDB Cloud Premium v26.3.99 
 
 The tests were conducted on a TiDB Cloud Premium cluster with the following settings:
 
-- Cluster version: v26.3.99
+- Cluster version: TiDB-X-CLOUD.202603.1
 - Cloud provider and region: AWS (us-west-2)
-- Instance platform: AWS Graviton4
-- Request Capacity Units (RCUs): 500,000
+- initialRCU/Maximum RCU : 500000
 - Cluster configuration:
 
     | Node type | Node size | Instance family | Node quantity | Node storage |
