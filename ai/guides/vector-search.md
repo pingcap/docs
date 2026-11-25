@@ -124,6 +124,8 @@ For details, see the [Auto Embedding](/ai/guides/auto-embedding.md) guide.
 
 ### Step 3. Perform vector search
 
+When using cosine distance, account for missing embeddings and all-zero vectors in stored data and in the query vector. An all-zero vector can have the expected dimension while still producing a `NULL` cosine distance. See [Missing embeddings and all-zero vectors](/ai/reference/vector-search-data-types.md#missing-embeddings-and-all-zero-vectors) for a data-quality check, and [Filter undefined distances](/ai/reference/vector-search-functions-and-operators.md#filter-undefined-distances) for query behavior and index-use trade-offs.
+
 Vector search uses vector distance metrics to measure the similarity and relevance between vectors. The closer the distance, the more relevant the record. To find the most relevant documents in the table, you need to specify a query vector.
 
 The following example assumes the query is `A swimming animal` and its vector embedding is `[1, 2, 3]`.

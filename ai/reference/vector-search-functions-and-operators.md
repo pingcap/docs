@@ -140,6 +140,18 @@ The two vectors must have the same number of dimensions. Otherwise, an error is 
 
 For embeddings from OpenAI, it is [recommended](https://help.openai.com/en/articles/6824809-embeddings-faq) that you use this function.
 
+If either argument is `NULL`, the function returns `NULL`. For non-`NULL` arguments with matching dimensions, the function also returns `NULL` if either vector has zero magnitude, because its cosine distance is undefined.
+
+| Arguments | Return value |
+| --- | --- |
+| `NULL` and `'[1,0,0]'` | `NULL` |
+| `'[0,0,0]'` and `'[1,0,0]'` | `NULL` |
+| `'[0,0,0]'` and `'[0,0,0]'` | `NULL` |
+| `'[1,0,0]'` and `'[2,0,0]'` | `0`, because the nonzero vectors have the same direction |
+| Two non-`NULL` vectors with different dimensions | An error |
+
+A `NULL` distance does not indicate a perfect match. Do not replace undefined distances with `0` when ranking results, because this makes them indistinguishable from valid zero distances.
+
 Example:
 
 ```sql
@@ -153,6 +165,27 @@ SELECT VEC_COSINE_DISTANCE('[1, 1]', '[-1, -1]');
 |                                         2 |
 +-------------------------------------------+
 ```
+
+#### Filter undefined distances
+
+In an exact distance-ordering query, ascending order places `NULL` distances before non-`NULL` distances. Missing embeddings and all-zero vectors can therefore occupy the first positions in the result.
+
+For an existing `vector_table` with `id` and `embedding VECTOR(3)` columns, filter the calculated distance to select the nearest rows with defined distances:
+
+```sql
+SELECT id, VEC_COSINE_DISTANCE(embedding, '[1,2,3]') AS distance
+FROM vector_table
+WHERE VEC_COSINE_DISTANCE(embedding, '[1,2,3]') IS NOT NULL
+ORDER BY distance
+LIMIT 10;
+```
+
+- Checking only `embedding IS NOT NULL` excludes missing embeddings but still allows all-zero vectors. Filtering the calculated distance excludes both cases.
+- If fewer than 10 rows have defined distances, the query returns fewer than 10 rows.
+- Check the query vector as well as stored embeddings. If the query vector is `NULL` or all-zero, filtering stored rows cannot produce a defined cosine distance.
+- The same-level `WHERE` condition prevents this query from using a vector index. For index-eligible candidate retrieval followed by filtering, see [Use the vector index with filters](/ai/reference/vector-search-index.md#use-the-vector-index-with-filters). Filtering a limited candidate set can return fewer than the requested number of rows and does not guarantee the exact nearest neighbors among all valid rows.
+
+For guidance on preparing stored embeddings, see [Missing embeddings and all-zero vectors](/ai/reference/vector-search-data-types.md#missing-embeddings-and-all-zero-vectors).
 
 ### VEC_NEGATIVE_INNER_PRODUCT
 
