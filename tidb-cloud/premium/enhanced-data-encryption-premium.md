@@ -71,7 +71,7 @@ Reusing a registered key requires no additional changes to your cloud KMS key po
 
 ## View encryption and key status
 
-- **Instance level**: Open the instance **Overview** or **Security** page to view whether Enhanced Data Encryption is enabled and which CMEK protects the instance.
+- **Instance level**: Open the instance **Overview** or **Security** page to view whether Enhanced Data Encryption is enabled and which encryption key protects the instance.
 - **Organization level**: Open **Organization Settings** > **CMEK** (requires `Organization Owner`) to view each registered key's status, cloud provider, region, and associated instances and backups.
 
 | Key status | Meaning and next action |
