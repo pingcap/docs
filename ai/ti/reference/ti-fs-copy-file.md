@@ -61,7 +61,7 @@ ti fs copy-file
 - `--fs-token <string>`: Set the file system token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected file system.
 - `--help`: Display help information.
 - `--layer-id <string>`: Write one copied file into a file system layer instead of the base file system. Cannot be combined with `--recursive`.
-- `--overwrite`: Replace an existing destination. An upload or a download overwrites the destination directly. When you copy within the file system (`--from-remote` with `--to-remote`), the file system does not replace an existing path, so `ti` copies the source to a temporary sibling named `<destination>.ti-tmp-<id>` and then renames it onto the destination. The rename replaces the target in one step, so a reader sees either the previous file or the complete new file. This requires read access to the source and the destination, and read, write, and delete access in the destination's directory. If the rename fails and `ti` cannot remove the temporary file, the error names the path to delete with `ti fs delete-file --path <temporary-path>`.
+- `--overwrite`: Replace an existing destination. An upload or a download overwrites the destination directly. When you copy within the file system (`--from-remote` with `--to-remote`), the file system does not replace an existing path, so `ti` copies the source to a temporary sibling named `<destination>.ti-tmp-<id>` and then renames it onto the destination. The rename replaces the target in one step, so a reader sees either the previous file or the complete new file. This requires read access to the source and the destination, and read, write, and delete access in the destination's directory. If the rename fails and `ti` cannot remove the temporary file, the error names the path. Delete it with `ti fs delete-file --path <temporary-path>` using the same `--file-system-id` and a token that has delete access. With `--recursive`, `--overwrite` has no effect: the copy is not staged or renamed, and the command stops before copying any files if a destination path already exists.
 - `--recursive`: Copy directory structure recursively. Cannot be combined with `--layer-id`; seed a layer directory through a writable FUSE mount instead.
 - `--resume`: Resume an active copy operation.
 - `--tag <string>`: Create tags `key=value` for `--to-remote` operation; repeatable.
@@ -70,7 +70,7 @@ ti fs copy-file
 - `--to-stdout`: Write `--from-remote` to stdout.
 - `--version`: Display version information.
 
-If the destination is an existing directory, or if its path ends with a separator, the file is copied to `<destination>/<source-file-name>`. Without `--overwrite`, the command stops when the resolved destination already exists.
+If the destination is an existing directory, or if its path ends with a separator, the file is copied to `<destination>/<source-file-name>`. Without `--overwrite`, the command stops when the resolved destination already exists. Two exceptions apply: a download with `--resume` (`--from-remote` with `--to-local`) skips this check and replaces an existing local file, so protect that file before you resume; and `--layer-id` skips it too, writing to the layer and replacing any existing file at that path.
 
 For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli-reference.md#global-options).
 
