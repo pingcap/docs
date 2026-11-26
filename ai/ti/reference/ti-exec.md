@@ -1,6 +1,6 @@
 ---
 title: ti exec
-summary: TiDB Cloud Filesystem に対してローカルで Filesystem をマウントせずにリモートコマンドを実行し、ワークスペースファイルを保持し、実行オプションを選択して、安全に障害に対処します。
+summary: TiDB Cloud Filesystem に対してリモートコマンドを実行し、ワークスペースファイルを保持し、実行オプションを選択して、安全に障害に対処します。
 ---
 
 # ti exec
