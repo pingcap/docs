@@ -3,7 +3,7 @@ title: 使用 AWS IAM Role 进行认证
 summary: 云原生身份委派（AWS IAM Role、Azure Managed Identity、Google Service Account federation 等）使 {{{ .lake }}} 能够在无需处理原始访问密钥的情况下，获取访问对象存储的短期凭证。这样可以将数据平面的访问控制保留在云服务提供商的控制平面内，同时你仍然拥有每一项权限的所有权。
 ---
 
-# 使用 AWS IAM Role 进行认证
+# 使用 AWS IAM Role 进行认证 <!--Corresponding EN commit: 3c4b2ba9808bc99ad09a2c8355fe16365bfa72b9-->
 
 云原生身份委派（AWS IAM Role、Azure Managed Identity、Google Service Account federation 等）使 {{{ .lake }}} 能够在无需处理原始访问密钥的情况下，获取访问对象存储的短期凭证。这样可以将数据平面的访问控制保留在云服务提供商的控制平面内，同时你仍然拥有每一项权限的所有权。
 
@@ -16,11 +16,11 @@ summary: 云原生身份委派（AWS IAM Role、Azure Managed Identity、Google 
 
 ## 工作原理 {#how-it-works}
 
-在 {{{ .lake }}} 支持团队向你的组织提供受信任主体信息后，你需要在自己的云账户中创建一个 IAM role/identity，附加一个允许执行所需对象存储操作的策略（例如读取一组存储桶），并配置 trust policy，使得只有 {{{ .lake }}} 能够使用唯一的 external ID 来 assume 该 role。随后，{{{ .lake }}} 会按需 assume 该 role，使用临时凭证访问你的存储，并在会话过期后自动登出。
+在你从 {{{ .lake }}} 的 **Connect** 对话框中获取分配给你的组织的受信任 IAM role ARN 后，你需要在自己的 AWS 账户中创建一个 IAM role，附加一个允许执行所需对象存储操作的策略（例如读取一组存储桶），并配置 trust policy，使得只有 {{{ .lake }}} 能够使用唯一的 external ID 来 assume 该 role。随后，{{{ .lake }}} 会按需 assume 该 role，使用临时凭证访问你的存储，并在会话过期后自动登出。
 
 ## 使用 IAM role {#use-iam-role}
 
-1. 提交一个支持工单，以获取你的 {{{ .lake }}} 组织对应的 IAM role ARN：
+1. 登录 {{{ .lake }}} 并点击 **Connect**。在对话框中，复制你的组织对应的 IAM role ARN：
 
    例如：`arn:aws:iam::123456789012:role/xxxxxxx/tnabcdefg/xxxxxxx-tnabcdefg`
 
