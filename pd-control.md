@@ -975,9 +975,9 @@ The `evict-slow-store-scheduler` limits PD from scheduling Leaders to abnormal T
 
 #### Slow-disk nodes
 
-Starting from v6.2.0, TiKV reports a `SlowScore` in store heartbeats to PD. This score is calculated based on disk I/O conditions and ranges from 1 to 100. A higher value indicates a higher possibility of disk performance anomalies on that node.
+Starting from TiDB v5.2.0, TiKV reports a `SlowScore` in store heartbeats to PD. This score is calculated based on disk I/O conditions and ranges from 1 to 100. A higher value indicates a higher possibility of disk performance anomalies on that node. The calculation of `SlowScore` is affected by [`raftstore.inspect-interval`](/tikv-configuration-file.md#inspect-interval).
 
-For slow-disk nodes, the detection on TiKV and the scheduling via `evict-slow-store-scheduler` on PD are enabled by default, which means no additional configuration is required.
+From v5.2.0 to v7.5.x, if you want to evict Leaders from slow-disk nodes, you need to add `evict-slow-store-scheduler` manually. Starting from v7.6.0, PD adds this scheduler to the default scheduler list, so no additional configuration is required.
 
 #### Slow-network nodes
 
