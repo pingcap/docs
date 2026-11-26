@@ -31,7 +31,7 @@ TiDB Cloud Starter/EssentialとTiDB Cloud Dedicated間の機能ギャップを�
 
 ### 暗号化 {#encryption}
 
-- TiDB Cloud Starter またはTiDB Cloud Essential インスタンスに保存されるデータは、インスタンスをホストするクラウドプロバイダーが提供する暗号化サービスを使用して暗号化されます。TiDB Cloud Essential インスタンスでは、追加のデータベースレイヤーの暗号化（デュアルレイヤー暗号化）がデフォルトで有効になっています。デュアルレイヤー暗号化は TiDB Cloud Starter インスタンスではサポートされていません。
+- TiDB Cloud Starter またはTiDB Cloud Essential インスタンスに保存されるデータは、インスタンスをホストするクラウドプロバイダーが提供する暗号化サービスを使用して暗号化されます。TiDB Cloud Essential インスタンスでは、追加のデータベースレイヤーの暗号化（二重層暗号化）がデフォルトで有効になっています。二重層暗号化は TiDB Cloud Starter インスタンスではサポートされていません。
 - [顧客管理暗号鍵（CMEK）](/tidb-cloud/tidb-cloud-encrypt-cmek-aws.md)の使用は現在利用できません。
 
 ### メンテナンスウィンドウ {#maintenance-window}
