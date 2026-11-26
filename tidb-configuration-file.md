@@ -909,7 +909,7 @@ TiDBサービスの状態に関する設定。
 - デフォルト値: `true`
 - v6.1.0より前は、この設定は`enable-collect-execution-info`によって設定されます。
 
-### `tidb_general_log` {#tidb-general-log}
+### `tidb_general_log` {#tidb_general_log}
 
 - この設定は、現在の TiDB インスタンスにおけるシステム変数 [`tidb_general_log`](/system-variables.md#tidb_general_log) の初期値を制御します。
 - デフォルト値: `false`
@@ -994,7 +994,7 @@ TiDBサービスの状態に関する設定。
 - 指定可能な値: `true` 、 `false`
 - この設定値は、システム変数[`tidb_enable_stats_owner`](/system-variables.md#tidb_enable_stats_owner-new-in-v840)の値を初期化します。
 
-### `tidb_service_scope` <span class="version-mark">v7.4.0 で新規追加</span> {#tidb-service-scope-new-in-v740}
+### `tidb_service_scope` <span class="version-mark">v7.4.0 で新規追加</span> {#tidb_service_scope-new-in-v740}
 
 - この設定項目は、現在の TiDB インスタンスにおけるシステム変数 [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) の初期値を制御します。
 - デフォルト値: `""`
