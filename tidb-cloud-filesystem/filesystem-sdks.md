@@ -25,8 +25,6 @@ Use the following server URL for each TiDB Cloud Filesystem region.
 |`aws-us-east-1`|`https://aws-us-east-1.drive9.ai`| FS token|
 |`aws-us-west-2`|`https://aws-us-west-2.drive9.ai`| FS token|
 |`aws-ap-southeast-1`|`https://aws-ap-southeast-1.drive9.ai`| FS token|
-|`gcp-us-east1`|`https://gcp-us-east1.drive9.ai`| FS token|
-|`azure-centralus`|`https://azure-centralus.drive9.ai`|FS token|
 |`alicloud-ap-southeast-1`|`https://alicloud-ap-southeast-1.drive9.ai`|FS token|
 
 Always set the SDK server URL to the endpoint of the region where your file system is located. If you do not set a server URL, most SDKs fall back to `https://api.drive9.ai`, which is not a TiDB Cloud Filesystem endpoint and rejects TiDB Cloud Filesystem tokens. A file system token works only with the endpoint of its own region.
