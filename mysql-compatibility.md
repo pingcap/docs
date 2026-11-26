@@ -170,6 +170,8 @@ In TiDB, all supported DDL changes can be performed online. However, there are s
 * TiDB supports `HASH`, `RANGE`, `LIST`, and `KEY` partitioning types. For an unsupported partition type, TiDB returns `Warning: Unsupported partition type %s, treat as normal table`, where `%s` is the specific unsupported partition type.
 * Range, Range COLUMNS, List, and List COLUMNS partitioned tables support `ADD`, `DROP`, `TRUNCATE`, `REORGANIZE`, and `EXCHANGE` operations. Other partition operations are ignored.
 * Hash and Key partitioned tables support `ADD`, `COALESCE`, `TRUNCATE`, and `EXCHANGE` operations. Other partition operations are ignored.
+* Partitioned tables that contain global indexes do not support `EXCHANGE PARTITION`. For more information, see [Limitations of global indexes](/global-indexes.md#limitations-of-global-indexes).
+* TiDB uses a different hash algorithm for Key partitioning than MySQL and ignores `LINEAR` in `LINEAR HASH` partitioning. Therefore, partition data distribution can differ between TiDB and MySQL, which can affect the rows exchanged by `EXCHANGE PARTITION`. For more information, see [Key partitioning](/partitioned-table.md#key-partitioning) and [How TiDB handles Linear Hash partitions](/partitioned-table.md#how-tidb-handles-linear-hash-partitions).
 * The following syntaxes are not supported for partitioned tables:
 
     - `SUBPARTITION`
