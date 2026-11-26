@@ -33,6 +33,7 @@ In addition, when the scheduling module is changed, you can update the `scheduli
 - Microservices are not compatible with the [Data Replication Auto Synchronous (DR Auto-Sync)](/two-data-centers-in-one-city-deployment.md) feature.
 - Microservices are not compatible with the TiDB system variable [`tidb_enable_tso_follower_proxy`](/system-variables.md#tidb_enable_tso_follower_proxy-new-in-v530).
 - Because [hibernate Regions](/tikv-configuration-file.md#hibernate-regions) might exist in a cluster, during a primary and secondary switchover of the `scheduling` microservice, the scheduling function of the cluster might be unavailable for a certain period (up to [`peer-stale-state-check-interval`](/tikv-configuration-file.md#peer-stale-state-check-interval), which is five minutes by default) to avoid redundant scheduling.
+- The `scheduling` microservice does not support the deprecated `label-property` configuration, so `reject-leader` label properties do not take effect when the `scheduling` microservice is enabled. To keep leaders off specific stores, use [Placement Rules](/configure-placement-rules.md) or `evict-leader-scheduler`. If no `scheduling` microservice is available and `enable-scheduling-fallback` is `true` (the default), PD provides scheduling itself, and `label-property` takes effect again.
 
 ## Usage
 
@@ -77,7 +78,7 @@ To deploy and configure PD microservices in a TiDB local cluster using TiUP Play
 When deploying and using PD microservices, pay attention to the following:
 
 - After you enable microservices and restart PD for a cluster, PD stops allocating TSO for the cluster. Therefore, you need to deploy the `tso` microservice in the cluster when you enable microservices.
-- If the `scheduling` microservice is deployed in a cluster, the scheduling function of the cluster is provided by the `scheduling` microservice. If the `scheduling` microservice is not deployed, the scheduling function of the cluster is still provided by PD.
+- If the `scheduling` microservice is deployed in a cluster, the scheduling function of the cluster is provided by the `scheduling` microservice. If the `scheduling` microservice is not deployed and `enable-scheduling-fallback` is `true` (the default), the scheduling function of the cluster is still provided by PD.
 - The `scheduling` microservice supports dynamic switching, which is enabled by default (`enable-scheduling-fallback` defaults to `true`). If the process of the `scheduling` microservice is terminated, PD continues to provide scheduling services for the cluster by default.
 
     If the binary versions of the `scheduling` microservice and PD are different, to prevent changes in the scheduling logic, you can disable the dynamic switching function of the `scheduling` microservice by executing `pd-ctl config set enable-scheduling-fallback false`. After this function is disabled, PD will not take over the scheduling service when the process of the `scheduling` microservice is terminated. This means that the scheduling service of the cluster will be unavailable until the `scheduling` microservice is restarted.

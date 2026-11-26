@@ -496,6 +496,8 @@ Configuration items related to labels, which only support the `reject-leader` ty
 > **Note:**
 >
 > Starting from v5.2, the configuration items related to labels are deprecated. It is recommended to use [Placement Rules](/configure-placement-rules.md#scenario-2-place-five-replicas-in-three-data-centers-in-the-proportion-of-221-and-the-leader-should-not-be-in-the-third-data-center) to configure the replica policy.
+>
+> In PD microservice mode, the `scheduling` microservice does not support `label-property`. Use [Placement Rules](/configure-placement-rules.md) or `evict-leader-scheduler` instead.
 
 ### `key` (deprecated)
 
