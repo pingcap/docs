@@ -143,7 +143,7 @@ The following rules apply:
 - The expression can reference only the target column, constants, and functions. It cannot reference another column in the table.
 - Policies are enabled by default. The default restriction setting is `NONE`.
 - `OR REPLACE` replaces an existing policy with the same name on the same column. It cannot move that policy to another column.
-- `IF NOT EXISTS` keeps an existing policy unchanged and reports a warning instead of a duplicate-policy error.
+- `IF NOT EXISTS` keeps an existing policy with the same name on the same column unchanged and reports a warning instead of a duplicate-policy error. It does not suppress errors for the same policy name on another column in the table or a different policy name on the target column.
 - `OR REPLACE` and `IF NOT EXISTS` are mutually exclusive and are available only with `CREATE MASKING POLICY`.
 
 ### Change a policy
@@ -257,7 +257,7 @@ For an input date of `1990-05-15`:
 
 ## Restrict operations that read protected columns
 
-`RESTRICT ON` prevents selected operations from using protected source values when the current session is not exempt from masking. Without these restrictions, result masking alone does not prevent statements such as `INSERT ... SELECT` from copying original values into another table.
+`RESTRICT ON` prevents selected operations from using protected source values when the current session is not exempt from masking. Without `UPDATE_SELECT`, direct assignments such as `UPDATE t SET other_column = protected_column` can copy original values. For a non-exempt session with an enabled policy, an ordinary `INSERT INTO dst SELECT protected_column FROM src` writes masked values; `INSERT_INTO_SELECT` rejects the protected source read instead.
 
 | Operation | Scope |
 | --- | --- |
@@ -303,10 +303,12 @@ Masking policies use **AT RESULT** semantics:
 The following limitations apply:
 
 - Supported policy target types include character and binary strings, the `TEXT` and `BLOB` families, integer, floating-point, and decimal types, and `DATE`, `TIME`, `DATETIME`, `TIMESTAMP`, and `YEAR`. Other types, such as `JSON`, are not supported. Individual masking functions have narrower input requirements, as described above.
-- You cannot change the type, length, or precision of a column that has a policy, even if the policy is disabled. Drop the policy before changing the column, then recreate it with an expression appropriate for the new type.
+- You cannot change the type, length, or precision of a column that has a policy, even if the policy is disabled. Before dropping the policy, block access by non-exempt sessions. Change the column, then recreate the policy with an expression appropriate for the new type. Restore access only after verifying masking and operation restrictions with a non-exempt account.
 - TiDB rejects result shapes when it cannot preserve a policy, with an error starting with `masking policy cannot be preserved through`. Examples include scalar subqueries that return a protected column in the result list, window functions over protected values, recursive CTE outputs that require masking, and `UNION` outputs with incompatible protected sources.
 - `MIN` and `MAX` over a directly protected column can return a masked result. Other aggregates over protected values, such as `GROUP_CONCAT`, are rejected when their result cannot preserve the policy. `COUNT(*)` can still return row counts.
 - Result expressions over protected columns that contain functions such as `RAND()`, variable assignments, or advisory lock functions are rejected because TiDB cannot safely rebuild them for result masking. These query-shape restrictions also apply to exempt users while the policy is enabled.
+- Outside result fields, expressions that store original protected values in session state, such as `WHERE LENGTH(@v := phone) > 0`, are rejected unless the policy resolves to the original column for the current session. This check applies even with `RESTRICT ON NONE`.
+- Non-transactional DML (`BATCH`) cannot use a shard column that is masked for the current session, even with `RESTRICT ON NONE`. This also applies to `DRY RUN` and `DRY RUN QUERY`.
 - Plan-cache eligibility depends on the policy expression. The masking built-ins and supported identity conditions can use cached plans, but a policy containing `CONCAT`, for example, bypasses plan caches with the warning `masking policy contains a function that cannot be safely cached`. Do not assume all protected queries can use a cached plan.
 
 ## Backup, restore, and replication
