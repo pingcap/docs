@@ -18,13 +18,13 @@ summary: TiDB Cloud Filesystem に対してローカルで Filesystem をマウ�
 ## 前提条件 {#prerequisites}
 
 - 最新の `ti-drive9` companion を含む TiDB Cloud CLI **v0.2.11 以降**をインストールします。これより前の `ti` リリースには `ti exec` は含まれていません。インストール済みバージョンを確認するには `ti --version` を実行します。
-- サポートされているリージョンで [Filesystem を作成](/ai/ti/reference/ti-fs-create-file-system.md) し、その ID と owner token を控えておきます。
-- その ID 用にローカルに保存された token を使用するか、環境変数に `TI_FS_TOKEN` を設定します。引数に token を露出させないため、`--fs-token` より環境変数の使用を推奨します。委任された Vault token ではコマンドを実行できません。path-scoped token では sandbox をマウントできません。
+- サポートされているリージョンで [Filesystem を作成](/ai/ti/reference/ti-fs-create-file-system.md) し、その ID とオーナートークンを控えておきます。
+- その ID 用にローカルに保存されたトークンを使用するか、環境変数に `TI_FS_TOKEN` を設定します。引数にトークンを露出させないため、`--fs-token` より環境変数の使用を推奨します。委任された Vault トークンではコマンドを実行できません。パススコープトークンではサンドボックスをマウントできません。
 - `ti exec --help` はローカルコマンドが存在することだけを確認します。companion やリモート Runtime は検証しません。両方が exec をサポートしている必要があります。
 
 ### 既存インストールのアップグレード {#upgrade-an-existing-installation}
 
-アップグレード前に、writer を停止し、Filesystem または Vault のマウントをすべてアンマウントしてください。macOS または Linux でユーザー所有の `ti` インストールを使用している場合は、最新リリースに更新し、バージョンを確認します。
+アップグレード前に、ライターを停止し、Filesystem または Vault のマウントをすべてアンマウントしてください。macOS または Linux でユーザー所有の `ti` インストールを使用している場合は、最新リリースに更新し、バージョンを確認します。
 
 ```bash
 ti update
@@ -32,9 +32,9 @@ ti --version
 ti exec --help
 ```
 
-`ti update` によって別バージョンの `ti` がインストールされる場合、`ti-drive9` companion も置き換えられます。`ti` がすでに要求されたバージョンである場合、updater は companion を更新しません。macOS または Linux で古い companion を更新するには、shell installer を再実行してください。カスタムのインストールディレクトリを維持するには `--install-dir` を使用します。
+`ti update` によって別バージョンの `ti` がインストールされる場合、`ti-drive9` companion も置き換えられます。`ti` がすでに要求されたバージョンである場合、アップデーターは companion を更新しません。macOS または Linux で古い companion を更新するには、シェルインストーラーを再実行してください。カスタムのインストールディレクトリを維持するには `--install-dir` を使用します。
 
-Windows では、PowerShell installer を再実行してください。インプレースの self-update はサポートされていません。インストール手順については、[TiDB Cloud CLI をインストールする](/ai/ti/reference/ti-install-configure-update.md#install-tidb-cloud-cli) を参照してください。
+Windows では、PowerShell インストーラーを再実行してください。インプレースでの自己更新はサポートされていません。インストール手順については、[TiDB Cloud CLI をインストールする](/ai/ti/reference/ti-install-configure-update.md#install-tidb-cloud-cli) を参照してください。
 
 ## 構文と実行 {#syntax-and-execution}
 
@@ -43,15 +43,15 @@ ti exec [options] [--] command [arg...]
 ti exec [options] 'shell command line'
 ```
 
-`ti` のオプションはリモートコマンドの前に置きます。その後ろの引数（`--help` を含む）はリモートコマンドに属します。単一の shell command line は `/bin/sh -c` によって解釈され、複数の引数は直接渡されます。
+`ti` のオプションはリモートコマンドの前に置きます。その後ろの引数（`--help` を含む）はリモートコマンドに属します。単一のシェルコマンドラインは `/bin/sh -c` によって解釈され、複数の引数は直接渡されます。
 
-サーバーが実行バックエンドを選択します。軽量 shell executor がサポートするコマンドは、sandbox を起動せずに実行できます。それ以外のコマンドでは、実行開始前に sandbox が使用されます。shell 構文だけではバックエンドは決まりません。一度開始したコマンドは、失敗後に別のバックエンドで再試行されることはありません。
+サーバーが実行バックエンドを選択します。軽量シェルエグゼキューターがサポートするコマンドは、サンドボックスを起動せずに実行できます。それ以外のコマンドでは、実行開始前にサンドボックスが使用されます。シェル構文だけではバックエンドは決まりません。一度開始したコマンドは、失敗後に別のバックエンドで再試行されることはありません。
 
-Filesystem は `/workspace` で利用できます。`/workspace` の外側のファイルは一時的です。`--fresh` は Filesystem のデータを保持したまま新しい sandbox を開始します。`-w` は作業ディレクトリを選択しますが、そのディレクトリへのアクセスを制限するものではありません。
+Filesystem は `/workspace` で利用できます。`/workspace` の外側のファイルは一時的です。`--fresh` は Filesystem のデータを保持したまま新しいサンドボックスを開始します。`-w` は作業ディレクトリを選択しますが、そのディレクトリへのアクセスを制限するものではありません。
 
 ## 例: ファイルを処理して読み戻す {#example-process-and-read-back-a-file}
 
-ローカルでは POSIX 互換 shell、リモートでは Python 3 が必要です。
+ローカルでは POSIX 互換シェル、リモートでは Python 3 が必要です。
 
 ```bash
 export TI_REGION_CODE=aws-us-east-1
@@ -87,14 +87,14 @@ ti fs delete-file --path "/$workdir" --recursive
 
 | オプション | 説明 |
 | --- | --- |
-| `--file-system-id ID` | Filesystem を選択します。代わりに `TI_FS_FILE_SYSTEM_ID` を設定するか、ID を含む token を指定することもできます。 |
-| `--fs-token TOKEN` | token を指定します。`TI_FS_TOKEN` の使用を推奨します。それ以外の場合は、選択した Filesystem のローカル保存 token を使用します。 |
+| `--file-system-id ID` | Filesystem を選択します。代わりに `TI_FS_FILE_SYSTEM_ID` を設定するか、ID を含むトークンを指定することもできます。 |
+| `--fs-token TOKEN` | トークンを指定します。`TI_FS_TOKEN` の使用を推奨します。それ以外の場合は、選択した Filesystem のローカル保存トークンを使用します。 |
 | `-w`, `--workspace PATH` | リモートの作業ディレクトリを選択します。デフォルトは、一致するローカル FUSE ディレクトリ、または Filesystem ルートです。 |
 | `-C`, `--cwd DIR` | その作業ディレクトリ内のサブディレクトリを選択します。 |
 | `-e`, `--env KEY[=VALUE]` | リモート変数を設定します。キーのみを指定した場合はローカル値をコピーします。繰り返し指定できます。 |
 | `-t`, `--timeout DURATION` | `30s` や `10m` などの期限を設定します。サーバーがより短い制限を課す場合があります。 |
-| `--fresh` | 既存の sandbox を再利用せず、新しい sandbox を開始します。 |
-| `--layer REF` | レイヤー ID、名前、または tag reference を使用します。 |
+| `--fresh` | 既存のサンドボックスを再利用せず、新しいサンドボックスを開始します。 |
+| `--layer REF` | レイヤー ID、名前、またはタグ参照を使用します。 |
 | `--read-only` | 実行中の Filesystem への書き込みを防止します。 |
 | `-v`, `--verbose` | 標準エラーに実行の詳細を表示します。 |
 
@@ -104,10 +104,10 @@ ti fs delete-file --path "/$workdir" --recursive
 
 完了したコマンドは、その正確な終了ステータスを返します。最新の `ti-drive9` companion を使用している場合は、以下のステータスをエラーメッセージとあわせて解釈してください。
 
-| Exit status | 意味 |
+| 終了ステータス | 意味 |
 | --- | --- |
 | `124` | コマンドがタイムアウトし、停止されました。 |
-| `125` | executor が失敗しました。出力または書き込みが部分的である可能性があります。 |
+| `125` | エグゼキューターが失敗しました。出力または書き込みが部分的である可能性があります。 |
 | `126` | コマンドは実行可能ではありません。 |
 | `127` | コマンドが見つかりませんでした。 |
 | `130` | 実行前のキャンセル、確認済みのキャンセル、または 2 回目の Ctrl-C 後の切断です。このステータスだけでは、リモートコマンドが停止したことは証明できません。 |
@@ -115,6 +115,6 @@ ti fs delete-file --path "/$workdir" --recursive
 
 コマンド自体がこれらの数値を返すこともあるため、終了ステータスだけでは原因を特定できません。
 
-- リモート stdin と対話型ターミナルはサポートされていません。`--output`、`--query`、`--dry-run` はサポートされていません。
+- リモートの標準入力と対話型ターミナルはサポートされていません。`--output`、`--query`、`--dry-run` はサポートされていません。
 - Ctrl-C を 1 回押すとキャンセルを要求し、確認を待ちます。もう一度押すと切断されます。その場合でもコマンドは実行中の可能性があります。
 - 結果が不明な場合は、コマンドを再実行するか判断する前に Filesystem を確認してください。切断や実行レコードの欠如は、実行が停止したことの証明にはなりません。`ti exec` が自動的に再試行することはありません。
