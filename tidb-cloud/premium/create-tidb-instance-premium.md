@@ -1,5 +1,5 @@
 ---
-title: Create a TiDB Cloud Premium Instance
+title: TiDB Cloud Premiumインスタンスを作成する
 summary: TiDB Cloud Premiumインスタンスの作成方法を学びましょう。
 ---
 
