@@ -278,7 +278,7 @@ For more configuration description, see the following configuration examples:
 
 > **Note:**
 >
-> You can securely authenticate users used for initialization when deploying a cluster via TiUP (specified via `--user`) using either a key or a cross-password:
+> You can securely authenticate users used for initialization when deploying a cluster via TiUP (specified via `--user`) using either a key or an interactive password:
 >
 > - If you use secret keys, specify the path of the keys through `-i` or `--identity_file`.
 > - If you use passwords, add the `-p` flag to enter the password interaction window.
