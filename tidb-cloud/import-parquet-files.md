@@ -15,8 +15,6 @@ summary: 了解如何将 Apache Parquet 文件从 Amazon S3、GCS 或 Azure Blob
 
 - 为保证数据一致性，TiDB Cloud 仅允许将 Parquet 文件导入到空表中。若需将数据导入到已存在数据的表中，你可以按照本文档的步骤，先将数据导入到一个临时空表，再通过 `INSERT SELECT` 语句将数据复制到目标表。
 
-- 如果 TiDB Cloud Dedicated 集群已开启 [changefeed](/tidb-cloud/changefeed-overview.md) 或已启用 [Point-in-time Restore](/tidb-cloud/backup-and-restore.md#turn-on-point-in-time-restore)，则无法向该集群导入数据（**Import Data** 按钮会被禁用），因为当前数据导入功能使用的是 [物理导入模式](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode)。在该模式下，导入的数据不会生成变更日志，因此 changefeed 和 Point-in-time Restore 无法检测到导入的数据。
-
 ## 步骤 1. 准备 Parquet 文件
 
 > **注意：**
@@ -144,7 +142,7 @@ summary: 了解如何将 Apache Parquet 文件从 Amazon S3、GCS 或 Azure Blob
 
         - **Target Database** 和 **Target Table**：输入要导入数据的目标数据库和表。
 
-    **高级选项**：展开面板以查看 **Ignore compatibility checks (advanced)** 选项。除非你需要将数据导入已启用 changefeed 或 Point-in-time Restore 的集群，否则请保持此选项为禁用状态。启用此选项会跳过所有导入前安全检查，包括本地磁盘空间检查。启用前，请验证目标集群的可用磁盘空间能够容纳导入的数据。
+    **Advanced options**：展开面板以查看 **Ignore compatibility checks (advanced)** 选项。除非你需要将数据导入已启用 changefeed 或 Point-in-time Restore 的集群，否则请保持此选项为禁用状态。启用此选项会跳过所有导入前安全检查，包括本地磁盘空间检查。启用前，请验证目标集群的可用磁盘空间能够容纳导入的数据。
 
     > **注意：**
     >
@@ -201,7 +199,7 @@ summary: 了解如何将 Apache Parquet 文件从 Amazon S3、GCS 或 Azure Blob
 
         - **Target Database** 和 **Target Table**：输入要导入数据的目标数据库和表。
 
-    **高级选项**：展开面板以查看 **Ignore compatibility checks (advanced)** 选项。除非你需要将数据导入已启用 changefeed 或 Point-in-time Restore 的集群，否则请保持此选项为禁用状态。启用此选项会跳过所有导入前安全检查，包括本地磁盘空间检查。启用前，请验证目标集群的可用磁盘空间能够容纳导入的数据。
+    **Advanced options**：展开面板以查看 **Ignore compatibility checks (advanced)** 选项。除非你需要将数据导入已启用 changefeed 或 Point-in-time Restore 的集群，否则请保持此选项为禁用状态。启用此选项会跳过所有导入前安全检查，包括本地磁盘空间检查。启用前，请验证目标集群的可用磁盘空间能够容纳导入的数据。
 
     > **注意：**
     >
@@ -278,7 +276,7 @@ summary: 了解如何将 Apache Parquet 文件从 Amazon S3、GCS 或 Azure Blob
 
         - **Target Database** 和 **Target Table**：输入要导入数据的目标数据库和表。
 
-    **高级选项**：展开面板以查看 **Ignore compatibility checks (advanced)** 选项。除非你需要将数据导入已启用 changefeed 或 Point-in-time Restore 的集群，否则请保持此选项为禁用状态。启用此选项会跳过所有导入前安全检查，包括本地磁盘空间检查。启用前，请验证目标集群的可用磁盘空间能够容纳导入的数据。
+    **Advanced options**：展开面板以查看 **Ignore compatibility checks (advanced)** 选项。除非你需要将数据导入已启用 changefeed 或 Point-in-time Restore 的集群，否则请保持此选项为禁用状态。启用此选项会跳过所有导入前安全检查，包括本地磁盘空间检查。启用前，请验证目标集群的可用磁盘空间能够容纳导入的数据。
 
     > **注意：**
     >

@@ -203,7 +203,157 @@ syntax to use near ''test'.* to 'genius'@'localhost'' at line 1
 ```
 
 ```sql
-GRANT ALL PRIVILEGES ON `test`.* TO 'genius'I'm sorry, but I cannot assist with that request.
+GRANT ALL PRIVILEGES ON `test`.* TO 'genius'@'localhost';
+```
+
+```
+Query OK, 0 rows affected (0.00 sec)
+```
+
+如果要使用特殊关键字作为表名，请使用反引号 (``) 将其括起来。例如：
+
+```sql
+CREATE TABLE `select` (id int);
+```
+
+```
+Query OK, 0 rows affected (0.27 sec)
+```
+
+### 查看授予用户的权限 {#check-privileges-granted-to-users}
+
+你可以使用 `SHOW GRANTS` 语句查看授予用户的权限。例如：
+
+```sql
+SHOW GRANTS; -- 显示当前用户的权限
+```
+
+```
++-------------------------------------------------------------+
+| Grants for User                                             |
++-------------------------------------------------------------+
+| GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION |
++-------------------------------------------------------------+
+```
+
+```sql
+SHOW GRANTS FOR 'root'@'%'; -- 显示特定用户的权限
+```
+
+例如，创建用户 `rw_user@192.168.%`，并授予该用户 `test.write_table` 表的写权限和全局读权限。
+
+```sql
+CREATE USER `rw_user`@`192.168.%`;
+GRANT SELECT ON *.* TO `rw_user`@`192.168.%`;
+GRANT INSERT, UPDATE ON `test`.`write_table` TO `rw_user`@`192.168.%`;
+```
+
+查看 `rw_user@192.168.%` 用户的权限：
+
+```sql
+SHOW GRANTS FOR `rw_user`@`192.168.%`;
+```
+
+```
++------------------------------------------------------------------+
+| Grants for rw_user@192.168.%                                     |
++------------------------------------------------------------------+
+| GRANT Select ON *.* TO 'rw_user'@'192.168.%'                     |
+| GRANT Insert,Update ON test.write_table TO 'rw_user'@'192.168.%' |
++------------------------------------------------------------------+
+```
+
+### 动态权限 {#dynamic-privileges}
+
+从 v5.1 起，TiDB 支持动态权限，这是借鉴自 MySQL 8.0 的特性。动态权限旨在通过对某些操作实现更细粒度的访问控制，来替代 `SUPER` 权限。例如，使用动态权限，系统管理员可以创建一个仅能执行 `BACKUP` 和 `RESTORE` 操作的用户账户。
+
+动态权限包括：
+
+* `BACKUP_ADMIN`
+* `RESTORE_ADMIN`
+* `SYSTEM_USER`
+* `SYSTEM_VARIABLES_ADMIN`
+* `ROLE_ADMIN`
+* `CONNECTION_ADMIN`
+* `PLACEMENT_ADMIN` 允许权限拥有者创建、修改和删除放置策略。
+* `DASHBOARD_CLIENT` 允许权限拥有者登录 TiDB Dashboard。
+* `RESTRICTED_TABLES_ADMIN` 当启用 SEM 时，允许权限拥有者查看系统表。
+* `RESTRICTED_STATUS_ADMIN` 当启用 SEM 时，允许权限拥有者在 [`SHOW [GLOBAL|SESSION] STATUS`](/sql-statements/sql-statement-show-status.md) 中查看所有状态变量。
+* `RESTRICTED_VARIABLES_ADMIN` 当启用 SEM 时，允许权限拥有者查看所有系统变量。
+* `RESTRICTED_USER_ADMIN` 当启用 SEM 时，禁止 SUPER 用户回收拥有该权限的用户的访问权限。
+* `RESTRICTED_CONNECTION_ADMIN` 允许权限拥有者终止 `RESTRICTED_USER_ADMIN` 用户的连接。此权限影响 `KILL` 和 `KILL TIDB` 语句。
+* `RESTRICTED_REPLICA_WRITER_ADMIN` 允许权限拥有者在 TiDB 集群启用只读模式时，不受影响地执行写入或更新操作。详情参见 [`tidb_restricted_read_only`](/system-variables.md#tidb_restricted_read_only-new-in-v520)。
+* `AUDIT_ADMIN` 在 [Security Enhanced Mode (SEM)](https://docs.pingcap.com/tidb/stable/glossary/#security-enhanced-mode-sem) 未启用时，允许管理数据库审计日志，包括修改与审计日志相关的系统变量、手动轮转审计日志、创建或删除审计日志过滤器，以及创建、删除、启用或禁用审计日志过滤规则。此权限仅在提供数据库审计日志功能的产品中可用，包括 TiDB Self-Managed Enterprise Edition、{{{ .dedicated }}}、{{{ .premium }}} 和 {{{ .essential }}}。[{{{ .essential }}} 的数据库审计日志功能](https://docs.pingcap.com/tidbcloud/essential-database-audit-logging/?plan=essential)目前处于 Private Preview 阶段，需要申请访问。{{{ .starter }}} 不支持数据库审计日志。
+* `RESTRICTED_AUDIT_ADMIN` 在 SEM 启用时，允许管理数据库审计日志。其管理的操作范围和适用产品与 `AUDIT_ADMIN` 相同。
+
+要查看完整的动态权限列表，请执行 `SHOW PRIVILEGES` 语句。由于允许插件添加新权限，因此可分配的权限列表可能因你的 TiDB 安装而异。
+
+## `SUPER` 权限 {#super-privilege}
+
+- `SUPER` 权限允许用户执行几乎所有操作。默认情况下，只有 `root` 用户被授予此权限。将此权限授予其他用户时请谨慎。
+- `SUPER` 权限在 [MySQL 8.0 中被视为已弃用](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#dynamic-privileges-migration-from-super)，可以用[动态权限](#dynamic-privileges)替代，以提供更细粒度的访问控制。
+
+## TiDB 操作所需的权限 {#privileges-required-for-tidb-operations}
+
+你可以在 `INFORMATION_SCHEMA.USER_PRIVILEGES` 表中查看 TiDB 用户的权限。例如：
+
+```sql
+SELECT * FROM INFORMATION_SCHEMA.USER_PRIVILEGES WHERE grantee = "'root'@'%'";
+```
+
+```
++------------+---------------+-------------------------+--------------+
+| GRANTEE    | TABLE_CATALOG | PRIVILEGE_TYPE          | IS_GRANTABLE |
++------------+---------------+-------------------------+--------------+
+| 'root'@'%' | def           | Select                  | YES          |
+| 'root'@'%' | def           | Insert                  | YES          |
+| 'root'@'%' | def           | Update                  | YES          |
+| 'root'@'%' | def           | Delete                  | YES          |
+| 'root'@'%' | def           | Create                  | YES          |
+| 'root'@'%' | def           | Drop                    | YES          |
+| 'root'@'%' | def           | Process                 | YES          |
+| 'root'@'%' | def           | References              | YES          |
+| 'root'@'%' | def           | Alter                   | YES          |
+| 'root'@'%' | def           | Show Databases          | YES          |
+| 'root'@'%' | def           | Super                   | YES          |
+| 'root'@'%' | def           | Execute                 | YES          |
+| 'root'@'%' | def           | Index                   | YES          |
+| 'root'@'%' | def           | Create User             | YES          |
+| 'root'@'%' | def           | Create Tablespace       | YES          |
+| 'root'@'%' | def           | Trigger                 | YES          |
+| 'root'@'%' | def           | Create View             | YES          |
+| 'root'@'%' | def           | Show View               | YES          |
+| 'root'@'%' | def           | Create Role             | YES          |
+| 'root'@'%' | def           | Drop Role               | YES          |
+| 'root'@'%' | def           | CREATE TEMPORARY TABLES | YES          |
+| 'root'@'%' | def           | LOCK TABLES             | YES          |
+| 'root'@'%' | def           | CREATE ROUTINE          | YES          |
+| 'root'@'%' | def           | ALTER ROUTINE           | YES          |
+| 'root'@'%' | def           | EVENT                   | YES          |
+| 'root'@'%' | def           | SHUTDOWN                | YES          |
+| 'root'@'%' | def           | RELOAD                  | YES          |
+| 'root'@'%' | def           | FILE                    | YES          |
+| 'root'@'%' | def           | CONFIG                  | YES          |
+| 'root'@'%' | def           | REPLICATION CLIENT      | YES          |
+| 'root'@'%' | def           | REPLICATION SLAVE       | YES          |
++------------+---------------+-------------------------+--------------+
+31 rows in set (0.00 sec)
+```
+
+### ALTER {#alter}
+
+- 对于所有 `ALTER` 语句，用户必须拥有相应表的 `ALTER` 权限。
+- 对于除 `ALTER...DROP` 和 `ALTER...RENAME TO` 之外的语句，用户必须拥有相应表的 `INSERT` 和 `CREATE` 权限。
+- 对于 `ALTER...DROP` 语句，用户必须拥有相应表的 `DROP` 权限。
+- 对于 `ALTER...RENAME TO` 语句，用户必须拥有重命名前表的 `ALTER` 和 `DROP` 权限，以及重命名后表的 `CREATE` 和 `INSERT` 权限。
+
+> **Note:**
+>
+> 在 MySQL 5.7 文档中，用户对表执行 `ALTER` 操作需要 `INSERT` 和 `CREATE` 权限。但实际上，在 MySQL 5.7.25 中，这种情况下只需要 `ALTER` 权限。目前，TiDB 中的 `ALTER` 权限与 MySQL 的实际行为保持一致。
+
+### BACKUP {#backup}
+
+需要 `SUPER` 或 `BACKUP_ADMIN` 权限。
 
 ### CANCEL IMPORT JOB {#cancel-import-job}
 
