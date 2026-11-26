@@ -99,7 +99,7 @@ To avoid errors, before starting the migration task, it is recommended to use th
 {{< copyable "shell-regular" >}}
 
 ```shell
-tiup dmctl --master-addr ${advertise-addr} check-task task.yaml
+tiup dmctl --master-addr ${advertise-addr} check-task task1.yaml
 ```
 
 Start the migration task by running the following command with `tiup dmctl`.
@@ -107,7 +107,7 @@ Start the migration task by running the following command with `tiup dmctl`.
 {{< copyable "shell-regular" >}}
 
 ```shell
-tiup dmctl --master-addr ${advertise-addr} start-task task.yaml
+tiup dmctl --master-addr ${advertise-addr} start-task task1.yaml
 ```
 
 The parameters used in the command above are described as follows:
@@ -117,7 +117,7 @@ The parameters used in the command above are described as follows:
 |`--master-addr`| `{advertise-addr}` of any DM-master node in the cluster where `dmctl` is to connect. For example: 172.16.10.71:8261. |
 |`start-task`| Start the migration task |
 
-If the task fails to start, after changing the configuration according to the returned result, you can run the `start-task task.yaml` command to restart the task. If you encounter problems, refer to [Handle Errors](/dm/dm-error-handling.md) and [FAQ](/dm/dm-faq.md).
+If the task fails to start, after changing the configuration according to the returned result, you can run the `start-task task1.yaml` command to restart the task. If you encounter problems, refer to [Handle Errors](/dm/dm-error-handling.md) and [FAQ](/dm/dm-faq.md).
 
 ## Step 4: Check the migration task status
 
