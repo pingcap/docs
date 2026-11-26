@@ -33,9 +33,9 @@ TiDB Cloud 提供私有终端节点、VPC Peering 以及 IP 访问列表，用�
 
 <CustomContent plan="premium">
 
-对于托管在 AWS 上的 {{{ .premium }}} 实例，你可以启用双层数据加密，在默认的存储层加密之上增加数据库层加密。启用双层数据加密后，TiDB Cloud 会对 TiKV 存储的数据、changefeed 数据和备份数据进行加密，并且你可以选择使用客户自管加密密钥（CMEK）或服务自管加密密钥。
+对于 {{{ .premium }}} 实例，增强型数据加密在默认的存储层加密之上增加数据库层加密，以保护静态数据库数据和备份数据。你可以在组织中一次性注册来自 AWS KMS 或阿里云 KMS 的客户自管加密密钥（CMEK），并在同一云服务提供商和 Region 的实例之间复用它。你可以在自己的云账户中控制主密钥授权、轮换和生命周期，而 TiDB Cloud 会跟踪密钥状态和使用情况。
 
-更多信息，请参见 [双层数据加密](/tidb-cloud/premium/dual-layer-data-encryption-premium.md)。
+更多信息，请参见 [增强数据加密](/tidb-cloud/premium/enhanced-data-encryption-premium.md)。
 
 </CustomContent>
 

@@ -55,7 +55,9 @@ summary: 了解如何创建 {{{ .premium }}} 实例。
 
 6. 对于 {{{ .premium }}} 实例，仅启用区域级高可用，且不可配置。更多信息，请参见 [High Availability](/tidb-cloud/serverless-high-availability.md)。
 
-7. 点击 **Create**。
+7. （可选）在 **Enhanced Data Encryption** 部分，启用 CMEK，并为所选云服务提供商和区域选择你组织中已注册的密钥。如果没有合适的密钥，`Organization Owner` 可以在创建页面中通过新标签页打开 **CMEK** 页面进行注册，然后返回实例创建页面进行选择。更多信息，请参见 [增强数据加密](/tidb-cloud/premium/enhanced-data-encryption-premium.md)。
+
+8. 点击 **Create**。
 
     实例创建过程随即开始。如果这是你在所选区域中的第一个实例，预配通常需要约 30 分钟。如果所选区域中已存在实例，则过程会更快，通常约 1 分钟内完成。
 

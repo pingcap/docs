@@ -169,7 +169,7 @@
     - [通过 Alibaba Cloud Private Endpoint 连接](/tidb-cloud/premium/connect-to-premium-via-alibaba-cloud-private-endpoint.md)
     - [通过 TLS 连接到 TiDB Cloud](/tidb-cloud/premium/tidb-cloud-tls-connect-to-premium.md)
   - 数据访问控制
-    - [双层数据加密](/tidb-cloud/premium/dual-layer-data-encryption-premium.md)
+    - [增强数据加密](/tidb-cloud/premium/enhanced-data-encryption-premium.md)
     - [用户可控的日志脱敏](/tidb-cloud/tidb-cloud-log-redaction.md)
   - 审计管理
     - [数据库审计日志](/tidb-cloud/premium/tidb-cloud-auditing-premium.md)
@@ -485,6 +485,7 @@
   - [TiDB 限制](/tidb-limitations.md)
   - [系统变量](/system-variables.md)
   - [服务器状态变量](/status-variables.md)
+  - [权限管理](/privilege-management.md)
   - [表库过滤](/table-filter.md)
   - [外部存储服务的 URI 格式](/external-storage-uri.md)
   - [内嵌于 DDL 的 Analyze](/ddl_embedded_analyze.md)

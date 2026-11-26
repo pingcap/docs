@@ -1,36 +1,38 @@
 ---
-title: Privilege Management
-summary: Learn how to manage the privilege.
+title: 权限管理
+summary: 了解如何管理权限。
 ---
 
-# Privilege Management
+# 权限管理
 
-TiDB supports MySQL 5.7's privilege management system, including the syntax and privilege types. The following features from MySQL 8.0 are also supported:
+TiDB 支持 MySQL 5.7 的权限管理系统，包括 MySQL 的语法和权限类型。同时 TiDB 还支持 MySQL 8.0 的以下特性：
 
-* SQL Roles, starting with TiDB 3.0.
-* Dynamic privileges, starting with TiDB 5.1.
+* 从 TiDB 3.0 开始，支持 SQL 角色。
+* 从 TiDB 5.1 开始，支持动态权限。
 
-This document introduces privilege-related TiDB operations, privileges required for TiDB operations and implementation of the privilege system.
+本文档主要介绍 TiDB 权限相关操作、各项操作需要的权限以及权限系统的实现。
 
-## Privilege-related operations
+## 权限相关操作 {#privilege-related-operations}
 
-### Grant privileges
+### 授予权限 {#grant-privileges}
 
-The [`GRANT`](/sql-statements/sql-statement-grant-privileges.md) statement grants privileges to the user accounts.
+[`GRANT`](/sql-statements/sql-statement-grant-privileges.md) 语句用于为 TiDB 中的用户分配权限。
 
-For example, use the following statement to grant the `xxx` user the privilege to read the `test` database.
+授予 `xxx` 用户对数据库 `test` 的读权限：
 
 ```sql
 GRANT SELECT ON test.* TO 'xxx'@'%';
 ```
 
-Use the following statement to grant the `xxx` user all privileges on all databases:
+为 `xxx` 用户授予所有数据库，全部权限：
 
 ```sql
 GRANT ALL PRIVILEGES ON *.* TO 'xxx'@'%';
 ```
 
-By default, [`GRANT`](/sql-statements/sql-statement-grant-privileges.md) statements will return an error if the user specified does not exist. This behavior depends on if the [SQL mode](/system-variables.md#sql_mode) `NO_AUTO_CREATE_USER` is specified:
+从 v8.5.6 版本开始，TiDB 支持兼容 MySQL 的列级权限管理机制。你可以在指定表上针对特定列授予或回收 `SELECT`、`INSERT`、`UPDATE`、`REFERENCES` 权限。更多信息参见[列级权限管理](/column-privilege-management.md)。
+
+默认情况下，如果指定的用户不存在，[`GRANT`](/sql-statements/sql-statement-grant-privileges.md) 语句将报错。该行为受 [SQL 模式](/system-variables.md#sql_mode)中的 `NO_AUTO_CREATE_USER` 控制。
 
 ```sql
 SET sql_mode=DEFAULT;
@@ -77,7 +79,7 @@ SELECT user,host,authentication_string FROM mysql.user WHERE user='idontexist';
 Empty set (0.00 sec)
 ```
 
-In the following example, the user `idontexist` is automatically created with an empty password because the SQL Mode `NO_AUTO_CREATE_USER` was not set. This is **not recommended** since it presents a security risk: miss-spelling a username will result in a new user created with an empty password:
+在下面的例子中，由于没有将 SQL 模式设置为 `NO_AUTO_CREATE_USER`，用户 `idontexist` 会被自动创建且密码为空。**不推荐**使用这种方式，因为会带来安全风险：如果用户名拼写错误，会导致新用户被创建且密码为空。
 
 ```sql
 SET @@sql_mode='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
@@ -129,7 +131,7 @@ SELECT user,host,authentication_string FROM mysql.user WHERE user='idontexist';
 1 row in set (0.01 sec)
 ```
 
-You can use fuzzy matching in [`GRANT`](/sql-statements/sql-statement-grant-privileges.md) to grant privileges to databases.
+[`GRANT`](/sql-statements/sql-statement-grant-privileges.md) 还可以模糊匹配地授予用户数据库的权限：
 
 ```sql
 GRANT ALL PRIVILEGES ON `te%`.* TO genius;
@@ -152,13 +154,13 @@ SELECT user,host,db FROM mysql.db WHERE user='genius';
 1 row in set (0.00 sec)
 ```
 
-In this example, because of the `%` in `te%`, all the databases starting with `te` are granted the privilege.
+这个例子中通过 `%` 模糊匹配，所有 `te` 开头的数据库，都被授予了权限。
 
-### Revoke privileges
+### 收回权限 {#revoke-privileges}
 
-The [`REVOKE`](/sql-statements/sql-statement-revoke-privileges.md) statement enables system administrators to revoke privileges from the user accounts.
+[`REVOKE`](/sql-statements/sql-statement-revoke-privileges.md) 语句允许系统管理员收回用户的权限。
 
-The `REVOKE` statement corresponds with the `GRANT` statement:
+`REVOKE` 语句的作用与 `GRANT` 相反：
 
 ```sql
 REVOKE ALL PRIVILEGES ON `test`.* FROM 'genius'@'localhost';
@@ -166,7 +168,7 @@ REVOKE ALL PRIVILEGES ON `test`.* FROM 'genius'@'localhost';
 
 > **Note:**
 >
-> To revoke privileges, you need the exact match. If the matching result cannot be found, an error will be displayed:
+> `REVOKE` 收回权限时只做精确匹配，若找不到记录则报错。
 
 ```sql
 REVOKE ALL PRIVILEGES ON `te%`.* FROM 'genius'@'%';
@@ -176,7 +178,7 @@ REVOKE ALL PRIVILEGES ON `te%`.* FROM 'genius'@'%';
 ERROR 1141 (42000): There is no such grant defined for user 'genius' on host '%'
 ```
 
-About fuzzy matching, escape, string and identifier:
+关于模糊匹配、转义、字符串和标识符：
 
 ```sql
 GRANT ALL PRIVILEGES ON `te\%`.* TO 'genius'@'localhost';
@@ -186,9 +188,9 @@ GRANT ALL PRIVILEGES ON `te\%`.* TO 'genius'@'localhost';
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-This example uses exact match to find the database named `te%`. Note that the `%` uses the `\` escape character so that `%` is not considered as a wildcard.
+上述例子是精确匹配名为 `te%` 的数据库，注意使用 `\` 转义字符，因此 `%` 不会被视为通配符。
 
-A string is enclosed in single quotation marks(''), while an identifier is enclosed in backticks (``). See the differences below:
+以单引号包含的部分，是一个字符串。以反引号包含的部分，是一个标识符。注意下面的区别：
 
 ```sql
 GRANT ALL PRIVILEGES ON 'test'.* TO 'genius'@'localhost';
@@ -208,7 +210,7 @@ GRANT ALL PRIVILEGES ON `test`.* TO 'genius'@'localhost';
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-If you want to use special keywords as table names, enclose them in backticks (``). For example:
+如果想将一些特殊的关键字作为表名，可以用反引号包含起来。比如：
 
 ```sql
 CREATE TABLE `select` (id int);
@@ -218,12 +220,12 @@ CREATE TABLE `select` (id int);
 Query OK, 0 rows affected (0.27 sec)
 ```
 
-### Check privileges granted to users
+### 查看为用户分配的权限 {#check-privileges-granted-to-users}
 
-You can use the `SHOW GRANTS` statement to see what privileges are granted to a user. For example:
+`SHOW GRANTS` 语句可以查看为用户分配了哪些权限。例如：
 
 ```sql
-SHOW GRANTS; -- show grants for the current user
+SHOW GRANTS; -- 显示当前用户的权限
 ```
 
 ```
@@ -235,10 +237,10 @@ SHOW GRANTS; -- show grants for the current user
 ```
 
 ```sql
-SHOW GRANTS FOR 'root'@'%'; -- show grants for a specific user
+SHOW GRANTS FOR 'root'@'%'; -- 显示特定用户的权限
 ```
 
-For example, create a user `rw_user@192.168.%` and grant the user with write privilege on the `test.write_table` table and global read privilege.
+例如，创建一个用户 `rw_user@192.168.%` 并为其授予 `test.write_table` 表的写权限，和全局读权限。
 
 ```sql
 CREATE USER `rw_user`@`192.168.%`;
@@ -246,7 +248,7 @@ GRANT SELECT ON *.* TO `rw_user`@`192.168.%`;
 GRANT INSERT, UPDATE ON `test`.`write_table` TO `rw_user`@`192.168.%`;
 ```
 
-Show granted privileges of the `rw_user@192.168.%` user:
+查看用户 `rw_user@192.168.%` 的权限：
 
 ```sql
 SHOW GRANTS FOR `rw_user`@`192.168.%`;
@@ -261,11 +263,11 @@ SHOW GRANTS FOR `rw_user`@`192.168.%`;
 +------------------------------------------------------------------+
 ```
 
-### Dynamic privileges
+### 动态权限 {#dynamic-privileges}
 
-Since v5.1, TiDB features support dynamic privileges, a feature borrowed from MySQL 8.0. Dynamic privileges are intended to replace the `SUPER` privilege by implementing more fine-grained access to certain operations. For example, using dynamic privileges, system administrators can create a user account that can only perform `BACKUP` and `RESTORE` operations.
+从 v5.1 起，TiDB 支持动态权限，这是借鉴自 MySQL 8.0 的特性。动态权限旨在通过对某些操作实现更细粒度的访问控制，来替代 `SUPER` 权限。例如，使用动态权限，系统管理员可以创建一个仅能执行 `BACKUP` 和 `RESTORE` 操作的用户账户。
 
-Dynamic privileges include:
+动态权限包括：
 
 * `BACKUP_ADMIN`
 * `RESTORE_ADMIN`
@@ -273,25 +275,27 @@ Dynamic privileges include:
 * `SYSTEM_VARIABLES_ADMIN`
 * `ROLE_ADMIN`
 * `CONNECTION_ADMIN`
-* `PLACEMENT_ADMIN` allows privilege owners to create, modify, and remove placement policies.
-* `DASHBOARD_CLIENT` allows privilege owners to log in to TiDB Dashboard.
-* `RESTRICTED_TABLES_ADMIN` allows privilege owners to view system tables when SEM is enabled.
-* `RESTRICTED_STATUS_ADMIN` allows privilege owners to view all status variables in [`SHOW [GLOBAL|SESSION] STATUS`](/sql-statements/sql-statement-show-status.md) when SEM is enabled.
-* `RESTRICTED_VARIABLES_ADMIN` allows privilege owners to view all system variables when SEM is enabled.
-* `RESTRICTED_USER_ADMIN` prohibits privilege owners to have their access revoked by SUPER users when SEM is enabled.
-* `RESTRICTED_CONNECTION_ADMIN` allows privilege owners to kill connections of `RESTRICTED_USER_ADMIN` users. This privilege affects `KILL` and `KILL TIDB` statements.
-* `RESTRICTED_REPLICA_WRITER_ADMIN` allows privilege owners to perform write or update operations without being affected when the read-only mode is enabled in the TiDB cluster. For details, see [`tidb_restricted_read_only`](/system-variables.md#tidb_restricted_read_only-new-in-v520).
+* `PLACEMENT_ADMIN` 允许创建、删除和修改放置策略 (placement policy)。
+* `DASHBOARD_CLIENT` 允许登录 TiDB Dashboard。
+* `RESTRICTED_TABLES_ADMIN` 允许在 SEM 打开的情况下查看系统表。
+* `RESTRICTED_STATUS_ADMIN` 允许在 SEM 打开的情况下查看 [`SHOW [GLOBAL|SESSION] STATUS`](/sql-statements/sql-statement-show-status.md) 中的所有状态变量。
+* `RESTRICTED_VARIABLES_ADMIN` 允许在 SEM 打开的情况下查看所有系统变量。
+* `RESTRICTED_USER_ADMIN` 当启用 SEM 时，禁止 SUPER 用户回收拥有该权限的用户的访问权限。
+* `RESTRICTED_CONNECTION_ADMIN` 允许 KILL 属于 `RESTRICTED_USER_ADMIN` 用户的连接。该权限对 `KILL` 和 `KILL TIDB` 语句生效。
+* `RESTRICTED_REPLICA_WRITER_ADMIN` 允许权限拥有者在 TiDB 集群开启了只读模式的情况下不受影响地执行写入或更新操作，详见 [`tidb_restricted_read_only` 配置项](/system-variables.md#tidb_restricted_read_only-new-in-v520)。
+* `AUDIT_ADMIN` 允许在 [Security Enhanced Mode (SEM)](https://docs.pingcap.com/tidb/stable/glossary/#security-enhanced-mode-sem) 关闭的情况下管理数据库审计日志，包括修改审计日志相关的系统变量、手动轮转审计日志、创建或删除审计日志过滤器，以及创建、删除、启用或停用审计日志过滤规则。该权限仅在提供数据库审计日志功能的产品中可用，包括 TiDB Self-Managed 企业版、{{{ .dedicated }}}、{{{ .premium }}} 和 {{{ .essential }}}。[{{{ .essential }}} 的数据库审计日志功能](https://docs.pingcap.com/tidbcloud/essential-database-audit-logging/?plan=essential)目前为 Private Preview 状态，需申请开通。{{{ .starter }}} 不支持数据库审计日志。
+* `RESTRICTED_AUDIT_ADMIN` 允许在 SEM 打开的情况下管理数据库审计日志，控制的操作范围和适用产品与 `AUDIT_ADMIN` 相同。
 
-To see the full set of dynamic privileges, execute the `SHOW PRIVILEGES` statement. Because plugins are permitted to add new privileges, the list of privileges that are assignable might differ based on your TiDB installation.
+若要查看全部的动态权限，请执行 `SHOW PRIVILEGES` 语句。由于用户可使用插件来添加新的权限，因此可分配的权限列表可能因用户的 TiDB 安装情况而异。
 
-## `SUPER` privilege
+## `SUPER` 权限 {#super-privilege}
 
-- The `SUPER` privilege allows the user to perform almost any operation. By default, only the `root` user is granted with this privilege. Be careful when granting this privilege to other users.
-- The `SUPER` privilege is considered [deprecated in MySQL 8.0](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#dynamic-privileges-migration-from-super) and can be replaced by [dynamic privileges](#dynamic-privileges) to provide more fine-grained access control.
+- 拥有 `SUPER` 权限的用户能完成几乎所有的操作，默认情况下只有 `root` 用户拥有该权限。请谨慎向其它用户授予 `SUPER` 权限。
+- `SUPER` 权限[在 MySQL 8.0 中被认为是过时的](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#dynamic-privileges-migration-from-super)，可以通过[动态权限](#dynamic-privileges)替代 `SUPER` 权限进行更细粒度的权限控制。
 
-## Privileges required for TiDB operations
+## TiDB 各操作需要的权限 {#privileges-required-for-tidb-operations}
 
-You can check privileges of TiDB users in the `INFORMATION_SCHEMA.USER_PRIVILEGES` table. For example:
+TiDB 用户目前拥有的权限可以在 `INFORMATION_SCHEMA.USER_PRIVILEGES` 表中查找到。例如：
 
 ```sql
 SELECT * FROM INFORMATION_SCHEMA.USER_PRIVILEGES WHERE grantee = "'root'@'%'";
@@ -336,179 +340,179 @@ SELECT * FROM INFORMATION_SCHEMA.USER_PRIVILEGES WHERE grantee = "'root'@'%'";
 31 rows in set (0.00 sec)
 ```
 
-### ALTER
+### ALTER {#alter}
 
-- For all `ALTER` statements, users must have the `ALTER` privilege for the corresponding table.
-- For statements except `ALTER...DROP` and `ALTER...RENAME TO`, users must have the `INSERT` and `CREATE` privileges for the corresponding table.
-- For the `ALTER...DROP` statement, users must have the `DROP` privilege for the corresponding table.
-- For the `ALTER...RENAME TO` statement, users must have the `DROP` privilege for the table before renaming, and the `CREATE` and `INSERT` privileges for the table after renaming.
-
-> **Note:**
->
-> In MySQL 5.7 documentation, users need `INSERT` and `CREATE` privileges to perform the `ALTER` operation on a table. But in reality for MySQL 5.7.25, only the `ALTER` privilege is required in this case. Currently, the `ALTER` privilege in TiDB is consistent with the actual behavior in MySQL.
-
-### BACKUP
-
-Requires the `SUPER` or `BACKUP_ADMIN` privilege.
-
-### CANCEL IMPORT JOB
-
-Requires the `SUPER` privilege to cancel jobs created by other users. Otherwise, only jobs created by the current user can be canceled.
-
-### CREATE DATABASE
-
-Requires the `CREATE` privilege for the database.
-
-### CREATE INDEX
-
-Requires the `INDEX` privilege for the table.
-
-### CREATE TABLE
-
-Requires the `CREATE` privilege for the table.
-
-To execute the `CREATE TABLE...LIKE...` statement, the `SELECT` privilege for the table is required.
-
-### CREATE VIEW
-
-Requires the `CREATE VIEW` privilege.
+- 对于所有的 `ALTER` 语句，均需要用户对所操作的表拥有 `ALTER` 权限。
+- 除 `ALTER...DROP` 和 `ALTER...RENAME TO` 外，均需要对所操作表拥有 `INSERT` 和 `CREATE` 权限。
+- 对于 `ALTER...DROP` 语句，需要对表拥有 `DROP` 权限。
+- 对于 `ALTER...RENAME TO` 语句，用户必须拥有重命名前表的 `ALTER` 和 `DROP` 权限，以及重命名后表的 `CREATE` 和 `INSERT` 权限。
 
 > **Note:**
 >
-> If the current user is not the user that creates the View, both the `CREATE VIEW` and `SUPER` privileges are required.
+> 根据 MySQL 5.7 文档中的说明，对表进行 `ALTER` 操作需要 `INSERT` 和 `CREATE` 权限，但在 MySQL 5.7.25 版本实际情况中，该操作仅需要 `ALTER` 权限。目前，TiDB 中的 `ALTER` 权限与 MySQL 实际行为保持一致。
 
-### DROP DATABASE
+### BACKUP {#backup}
 
-Requires the `DROP` privilege for the database.
+需要拥有 `SUPER` 或者 `BACKUP_ADMIN` 权限。
 
-### DROP INDEX
+### CANCEL IMPORT JOB {#cancel-import-job}
 
-Requires the `INDEX` privilege for the table.
+需要 `SUPER` 权限来取消属于其他用户的任务，否则只能取消当前用户创建的任务。
 
-### DROP TABLES
+### CREATE DATABASE {#create-database}
 
-Requires the `DROP` privilege for the table.
+需要数据库的 `CREATE` 权限。
 
-### IMPORT INTO
+### CREATE INDEX {#create-index}
 
-Requires the `SELECT`, `UPDATE`, `INSERT`, `DELETE`, and `ALTER` privileges for the target table. To import files stored locally in TiDB, the `FILE` privilege is also required.
+需要对所操作的表拥有 `INDEX` 权限。
 
-### LOAD DATA
+### CREATE TABLE {#create-table}
 
-Requires the `INSERT` privilege for the table. When you use `REPLACE INTO`, the `DELETE` privilege is also required.
+需要表的 `CREATE` 权限。
 
-### TRUNCATE TABLE
+执行 `CREATE TABLE...LIKE...` 语句时，需要该表的 `SELECT` 权限。
 
-Requires the `DROP` privilege for the table.
+### CREATE VIEW {#create-view}
 
-### RENAME TABLE
+需要拥有 `CREATE VIEW` 权限。
 
-Requires the `ALTER` and `DROP` privileges for the table before renaming and the `CREATE` and `INSERT` privileges for the table after renaming.
+> **Note:**
+>
+> 如果当前登录用户与创建视图的用户不同，除需要 `CREATE VIEW` 权限外，还需要 `SUPER` 权限。
 
-### ANALYZE TABLE
+### DROP DATABASE {#drop-database}
 
-Requires the `INSERT` and `SELECT` privileges for the table.
+需要对数据库拥有 `DROP` 权限。
 
-### LOCK STATS
+### DROP INDEX {#drop-index}
 
-Requires the `INSERT` and `SELECT` privileges for the table.
+需要对所操作的表拥有 `INDEX` 权限。
 
-### UNLOCK STATS
+### DROP TABLES {#drop-tables}
 
-Requires the `INSERT` and `SELECT` privileges for the table.
+需要对所操作的表拥有 `DROP` 权限。
 
-### SHOW
+### IMPORT INTO {#import-into}
 
-`SHOW CREATE TABLE` requires any single privilege to the table.
+需要对目标表拥有 `SELECT`、`UPDATE`、`INSERT`、`DELETE` 和 `ALTER` 权限。如果是导入存储在 TiDB 本地的文件，还需要有 `FILE` 权限。
 
-`SHOW CREATE VIEW` requires the `SHOW VIEW` privilege.
+### LOAD DATA {#load-data}
 
-`SHOW GRANTS` requires the `SELECT` privilege to the `mysql` database. If the target user is current user, `SHOW GRANTS` does not require any privilege.
+`LOAD DATA` 需要对所操作的表拥有 `INSERT` 权限。执行 `REPLACE INTO` 语句还需要对所操作的表拥有 `DELETE` 权限。
 
-`SHOW PROCESSLIST` requires the `PROCESS` privilege to show connections belonging to other users.
+### TRUNCATE TABLE {#truncate-table}
 
-`SHOW IMPORT JOB` requires the `SUPER` privilege to show connections belonging to other users. Otherwise, it only shows jobs created by the current user.
+需要对所操作的表拥有 `DROP` 权限。
 
-`SHOW STATS_LOCKED` requires the `SELECT` privilege to the `mysql.stats_table_locked` table.
+### RENAME TABLE {#rename-table}
 
-### CREATE ROLE/USER
+需要对重命名前的表拥有 `ALTER` 和 `DROP` 权限，对重命名后的表拥有 `CREATE` 和 `INSERT` 权限。
 
-`CREATE ROLE` requires the `CREATE ROLE` privilege.
+### ANALYZE TABLE {#analyze-table}
 
-`CREATE USER` requires the `CREATE USER` privilege.
+需要对所操作的表拥有 `INSERT` 和 `SELECT` 权限。
 
-### DROP ROLE/USER
+### LOCK STATS {#lock-stats}
 
-`DROP ROLE` requires the `DROP ROLE` privilege.
+需要对所操作的表拥有 `INSERT` 和 `SELECT` 权限。
 
-`DROP USER` requires the `CREATE USER` privilege.
+### UNLOCK STATS {#unlock-stats}
 
-### ALTER USER
+需要对所操作的表拥有 `INSERT` 和 `SELECT` 权限。
 
-Requires the `CREATE USER` privilege.
+### SHOW {#show}
 
-### GRANT
+`SHOW CREATE TABLE` 需要该表上的任意一种权限。
 
-Requires the `GRANT` privilege with the privileges granted by `GRANT`.
+`SHOW CREATE VIEW` 需要 `SHOW VIEW` 权限。
 
-Requires additional `CREATE USER` privilege to create a user implicitly.
+`SHOW GRANTS` 需要拥有对 `mysql` 数据库的 `SELECT` 权限。如果是使用 `SHOW GRANTS` 查看当前用户权限，则不需要任何权限。
 
-`GRANT ROLE` requires `SUPER` or `ROLE_ADMIN` privilege.
+`SHOW PROCESSLIST` 需要 `PROCESS` 权限来显示属于其他用户的连接。
 
-### REVOKE
+`SHOW IMPORT JOB` 需要 `SUPER` 权限，才能显示其他用户的连接。否则，只显示当前用户创建的作业。
 
-Requires the `GRANT` privilege and those privileges targeted by the `REVOKE` statement.
+`SHOW STATS_LOCKED` 需要拥有 `mysql.stats_table_locked` 表的 `SELECT` 权限。
 
-`REVOKE ROLE` requires `SUPER` or `ROLE_ADMIN` privilege.
+### CREATE ROLE/USER {#create-role-user}
 
-### SET GLOBAL
+`CREATE ROLE` 需要 `CREATE ROLE` 权限。
 
-Requires `SUPER` or `SYSTEM_VARIABLES_ADMIN` privilege to set global variables.
+`CREATE USER` 需要 `CREATE USER` 权限。
 
-### ADMIN
+### DROP ROLE/USER {#drop-role-user}
 
-Requires `SUPER` privilege.
+`DROP ROLE` 需要 `DROP ROLE` 权限。
 
-### SET DEFAULT ROLE
+`DROP USER` 需要 `CREATE USER` 权限。
 
-Requires `SUPER` privilege.
+### ALTER USER {#alter-user}
 
-### KILL
+`ALTER USER` 需要 `CREATE USER` 权限。
 
-Requires `SUPER` or `CONNECTION_ADMIN` privilege to kill other user sessions.
+### GRANT {#grant}
 
-### CREATE RESOURCE GROUP
+`GRANT` 需要 `GRANT` 权限并且拥有 `GRANT` 所赋予的权限。
 
-Requires `SUPER` or `RESOURCE_GROUP_ADMIN` privilege.
+若要隐式创建用户，还需要额外的 `CREATE USER` 权限。
 
-### ALTER RESOURCE GROUP
+`GRANT ROLE` 操作需要拥有 `SUPER` 或者 `ROLE_ADMIN` 权限。
 
-Requires `SUPER` or `RESOURCE_GROUP_ADMIN` privilege.
+### REVOKE {#revoke}
 
-### DROP RESOURCE GROUP
+`REVOKE` 需要 `GRANT` 权限并且拥有 `REVOKE` 所指定要撤销的权限。
 
-Requires `SUPER` or `RESOURCE_GROUP_ADMIN` privilege.
+`REVOKE ROLE` 操作需要拥有 `SUPER` 或者 `ROLE_ADMIN` 权限。
 
-### CALIBRATE RESOURCE
+### SET GLOBAL {#set-global}
 
-Requires `SUPER` or `RESOURCE_GROUP_ADMIN` privilege.
+使用 `SET GLOBAL` 设置全局变量需要拥有 `SUPER` 或者 `SYSTEM_VARIABLES_ADMIN` 权限。
 
-### SET RESOURCE GROUP
+### ADMIN {#admin}
 
-When the system variable [`tidb_resource_control_strict_mode`](/system-variables.md#tidb_resource_control_strict_mode-new-in-v820) is set to `ON`, you need to have the `SUPER` or `RESOURCE_GROUP_ADMIN` or `RESOURCE_GROUP_USER` privilege to execute this statement.
+需要拥有 `SUPER` 权限。
 
-## Implementation of the privilege system
+### SET DEFAULT ROLE {#set-default-role}
 
-### Privilege table
+需要拥有 `SUPER` 权限。
 
-The following [`mysql` system tables](/mysql-schema/mysql-schema.md) are special because all the privilege-related data is stored in them:
+### KILL {#kill}
 
-- `mysql.user` (user account, global privilege)
-- `mysql.db` (database-level privilege)
-- `mysql.tables_priv` (table-level privilege)
-- `mysql.columns_priv` (column-level privilege; not currently supported)
+使用 `KILL` 终止其他用户的会话需要拥有 `SUPER` 或者 `CONNECTION_ADMIN` 权限。
 
-These tables contain the effective range and privilege information of the data. For example, in the `mysql.user` table:
+### CREATE RESOURCE GROUP {#create-resource-group}
+
+需要拥有 `SUPER` 或者 `RESOURCE_GROUP_ADMIN` 权限。
+
+### ALTER RESOURCE GROUP {#alter-resource-group}
+
+需要拥有 `SUPER` 或者 `RESOURCE_GROUP_ADMIN` 权限。
+
+### DROP RESOURCE GROUP {#drop-resource-group}
+
+需要拥有 `SUPER` 或者 `RESOURCE_GROUP_ADMIN` 权限。
+
+### CALIBRATE RESOURCE {#calibrate-resource}
+
+需要拥有 `SUPER` 或者 `RESOURCE_GROUP_ADMIN` 权限。
+
+### SET RESOURCE GROUP {#set-resource-group}
+
+当系统变量 [`tidb_resource_control_strict_mode`](/system-variables.md#tidb_resource_control_strict_mode-new-in-v820) 设置为 `ON` 时，你需要有 `SUPER` 或者 `RESOURCE_GROUP_ADMIN` 或者 `RESOURCE_GROUP_USER` 权限才能执行该语句。
+
+## 权限系统的实现 {#implementation-of-the-privilege-system}
+
+### 授权表 {#privilege-table}
+
+以下几张 [`mysql` 系统表](/mysql-schema/mysql-schema.md)是非常特殊的表，权限相关的数据全部存储在这几张表内。
+
+- `mysql.user`：用户账户，全局权限
+- `mysql.db`：数据库级别的权限
+- `mysql.tables_priv`：表级别的权限
+- `mysql.columns_priv`：列级别的权限（从 v8.5.6 开始支持）
+
+这几张表包含了数据的生效范围和权限信息。例如，`mysql.user` 表的部分数据：
 
 ```sql
 SELECT User,Host,Select_priv,Insert_priv FROM mysql.user LIMIT 1;
@@ -523,38 +527,36 @@ SELECT User,Host,Select_priv,Insert_priv FROM mysql.user LIMIT 1;
 1 row in set (0.00 sec)
 ```
 
-In this record, `Host` and `User` determine that the connection request sent by the `root` user from any host (`%`) can be accepted. `Select_priv` and `Insert_priv` mean that the user has global `Select` and `Insert` privilege. The effective range in the `mysql.user` table is global.
+这条记录中，`Host` 和 `User` 决定了 root 用户从任意主机 (%) 发送过来的连接请求可以被接受，而 `Select_priv` 和 `Insert_priv` 表示用户拥有全局的 `Select` 和 `Insert` 权限。`mysql.user` 这张表里面的生效范围是全局的。
 
-`Host` and `User` in `mysql.db` determine which databases users can access. The effective range is the database.
+`mysql.db` 表里面包含的 `Host` 和 `User` 决定了用户可以访问哪些数据库，权限列的生效范围是数据库。
 
 > **Note:**
 >
-> It is recommended to only update the privilege tables via the supplied syntax such as `GRANT`, `CREATE USER` and `DROP USER`. Making direct edits to the underlying privilege tables will not automatically update the privilege cache, leading to unpredictable behavior until `FLUSH PRIVILEGES` is executed.
+> 建议仅通过提供的语法（如 `GRANT`、`CREATE USER` 和 `DROP USER`）来修改权限表。直接编辑底层权限表不会自动修改权限缓存，在执行 `FLUSH PRIVILEGES` 之前，可能会导致不可预测的行为。
 
-### Connection verification
+### 连接验证 {#connection-verification}
 
-When the client sends a connection request, TiDB server will verify the login operation. TiDB server first checks the `mysql.user` table. If a record of `User` and `Host` matches the connection request, TiDB server then verifies the `authentication_string`.
+当客户端发送连接请求时，TiDB 服务器会对登录操作进行验证。验证过程先检查 `mysql.user` 表，当某条记录的 `User` 和 `Host` 和连接请求匹配上了，再去验证 `authentication_string`。用户身份基于两部分信息，发起连接的客户端的 `Host`，以及用户名 `User`。如果 `User` 不为空，则用户名必须精确匹配。
 
-User identity is based on two pieces of information: `Host`, the host that initiates the connection, and `User`, the user name. If the user name is not empty, the exact match of user named is a must.
+User+Host 可能会匹配 `user` 表里面多行，为了处理这种情况，`user` 表的行是排序过的，客户端连接时会依次去匹配，并使用首次匹配到的那一行做权限验证。排序是按 `Host` 在前，`User` 在后。
 
-`User`+`Host` may match several rows in `user` table. To deal with this scenario, the rows in the `user` table are sorted. The table rows will be checked one by one when the client connects; the first matched row will be used to verify. When sorting, Host is ranked before User.
+### 请求验证 {#request-verification}
 
-### Request verification
+连接成功之后，请求验证会检测执行操作是否拥有足够的权限。
 
-When the connection is successful, the request verification process checks whether the operation has the privilege.
+对于数据库相关请求 (`INSERT`, `UPDATE`)，先检查 `mysql.user` 表里面的用户全局权限，如果权限够，则直接可以访问。如果全局权限不足，则再检查 `mysql.db` 表。
 
-For database-related requests (`INSERT`, `UPDATE`), the request verification process first checks the user's global privileges in the `mysql.user` table. If the privilege is granted, you can access directly. If not, check the `mysql.db` table.
+`user` 表的权限是全局的，并且不管默认数据库是哪一个。比如 `user` 里面有 `DELETE` 权限，就可以删除任何数据库、任何表中的任何一行。
 
-The `user` table has global privileges regardless of the default database. For example, the `DELETE` privilege in `user` can apply to any row, table, or database.
+`db` 表里面，`User` 为空是匹配匿名用户，`User` 里面不能有通配符。`Host` 和 `Db` 列里面可以有 `%` 和 `_`，可以模式匹配。
 
-In the `db` table, an empty user is to match the anonymous user name. Wildcards are not allowed in the `User` column. The value for the `Host` and `Db` columns can use `%` and `_`, which can use pattern matching.
+`user` 和 `db` 读到内存也是排序的。
 
-Data in the `user` and `db` tables is also sorted when loaded into memory.
+`tables_priv` 和 `columns_priv` 中使用 `%` 是类似的，但是在 `Db`、`Table_name`、`Column_name` 这些列不能包含 `%`。加载进来时排序也是类似的。
 
-The use of `%` in `tables_priv` and `columns_priv` is similar, but column value in `Db`, `Table_name` and `Column_name` cannot contain `%`. The sorting is also similar when loaded.
+### 生效时机 {#time-of-effect}
 
-### Time of effect
+TiDB 启动时，会将一些权限检查的表加载到内存，之后使用缓存的数据来验证权限。执行权限管理语句（如 `GRANT`、`REVOKE`、`CREATE USER` 和 `DROP USER`）将立即生效。
 
-When TiDB starts, some privilege-check tables are loaded into memory, and then the cached data is used to verify the privileges. Executing privilege management statements such as `GRANT`, `REVOKE`, `CREATE USER`, `DROP USER` will take effect immediately.
-
-Manually editing tables such as `mysql.user` with statements such as `INSERT`, `DELETE`, `UPDATE` will not take effect immediately. This behavior is compatible with MySQL, and privilege cache can be updated with the [`FLUSH PRIVILEGES`](/sql-statements/sql-statement-flush-privileges.md) statement.
+使用 `INSERT`、`DELETE`、`UPDATE` 等语句手动修改 `mysql.user` 等授权表不会立即生效。该行为与 MySQL 兼容。如需立即生效，可以手动执行 [`FLUSH PRIVILEGES`](/sql-statements/sql-statement-flush-privileges.md) 语句更新权限的缓存。

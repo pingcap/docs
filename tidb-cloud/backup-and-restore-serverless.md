@@ -197,6 +197,37 @@ TiDB Cloud 支持将数据恢复到新的 TiDB Cloud Starter 或 Essential 实�
 
 5. 在 **Restore** 页面上，按照[恢复到新实例](#restore-to-a-new-instance)中的相同步骤，将备份恢复到新实例。
 
+<CustomContent plan="essential">
+
+### 从不同套餐类型恢复备份 {#restore-backups-from-a-different-plan-type}
+
+你可以使用 **Cross Plan Restore**，将托管在 AWS 上的活动或已删除 {{{ .dedicated }}} 集群中的备份快照恢复到一个新的 {{{ .essential }}} 实例。新实例必须与该备份使用相同的云服务提供商和 Region。目前，仅支持将 {{{ .dedicated }}} 集群的备份作为源进行恢复。
+
+1. 在 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，点击右上角的 **...**，然后点击 **Cross Plan Restore**。
+
+2. 在 **Select Backup** 步骤中，配置以下字段，然后点击 **Next**：
+
+    - **From**：对于现有集群，选择 **Active**；对于已删除的集群，选择 **Recycle Bin (Deleted)**。
+    - **Plan** 和 **Cloud Provider**：这些字段固定为 **Dedicated** 和 **AWS**。
+    - **Project**：选择包含源集群的项目。
+    - **Cluster Name**：选择源集群。
+    - **Backup Snapshot**：选择要恢复的快照。
+
+3. 查看 **Backup Information**，然后配置 **Restore to New Instance**：
+
+    - **Plan**：选择 **Essential**。
+    - **Project** 和 **Instance Name**：根据需要选择目标项目，并为新实例输入名称。如果你的角色是 `Organization Owner`，则选择项目是可选的。如果你的角色是 `Project Owner`，则必须选择你拥有的项目。
+    - **Cloud Provider** 和 **Region**：这些字段继承自备份，无法更改。
+    - 根据需要配置容量、加密和高可用。更多信息，请参见[创建 TiDB Cloud Starter 或 Essential 实例](/tidb-cloud/create-tidb-cluster-serverless.md)。
+
+    > **Note:**
+    >
+    > 如果所选备份所在的 Region 不支持 {{{ .essential }}}，则无法继续执行恢复。请联系 [TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md) 以在该 Region 启用 {{{ .essential }}}，或点击 **Previous** 并选择其他备份。
+
+4. 查看预估月费和配置信息，然后点击 **Restore**，开始将备份恢复到新实例。
+
+</CustomContent>
+
 ## 限制
 
 - 如果启用了 TiFlash 副本，恢复后的一段时间内 TiFlash 将不可用，因为数据需要在 TiFlash 中重建。

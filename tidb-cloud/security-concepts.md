@@ -233,7 +233,7 @@ TiDB Cloud 通过高级加密能力保护静态数据，确保安全性并符合
 
 - 启用后，使用 CMEK 密钥对静态数据和备份进行加密。
 
-- 对于未启用 CMEK 的 TiDB Cloud Dedicated 集群，TiDB Cloud 使用托管密钥；{{{ .starter }}} 和 {{{ .essential }}} 实例仅使用托管密钥。
+- 对于未启用 CMEK 的 TiDB Cloud Dedicated 集群，TiDB Cloud 使用托管密钥；{{{ .essential }}} 实例仅使用托管密钥。
 
 **Dual-layer encryption**
 
@@ -243,7 +243,7 @@ TiDB Cloud 通过高级加密能力保护静态数据，确保安全性并符合
 
     - 在云服务提供商加密的基础上，TiDB Cloud 通过使用客户管理的加密密钥 (CMEK) 或托管密钥自动对静态数据进行加密，从而增加第二层加密。
 
-- 对于 {{{ .starter }}} 实例，双层加密默认[**禁用**](/tidb-cloud/ticloud-cluster-create.md#flags)；对于 {{{ .essential }}} 实例，双层加密默认**启用**。
+- 对于 {{{ .essential }}} 实例，双层加密默认[**启用**](/tidb-cloud/ticloud-cluster-create.md#flags)，且 {{{ .starter }}} 实例不支持双层加密。
 
 - {{{ .dedicated }}} 集群**始终使用**双层加密。如果未启用 CMEK，TiDB Cloud 会使用托管密钥对集群中的所有静态数据进行加密。
 
@@ -261,15 +261,17 @@ TiDB Cloud 通过高级加密能力保护静态数据，确保安全性并符合
 
 <CustomContent plan="premium">
 
-**Dual-Layer Data Encryption**
+**Enhanced Data Encryption**
 
-- 结合存储层加密（由云服务提供商提供）和数据库层加密，为托管在 AWS 上的 {{{ .premium }}} 实例增加一层额外的静态数据保护。
+- 为 {{{ .premium }}} 实例在存储层加密之上增加数据库层加密，支持 AWS KMS 和 Alibaba Cloud KMS。
 
-- 启用后，对 TiKV 存储的数据、changefeed 数据和备份数据进行加密。
+- 启用后，保护静态数据库数据和备份数据。
 
-- 可根据你的安全和运维需求，在 Customer-Managed Encryption Key (CMEK) 和 Service-Managed Encryption Key 之间进行选择。
+- 允许你在组织中一次注册 Customer-Managed Encryption Key (CMEK)，并在相同云服务提供商和 Region 中的实例之间复用它。
 
-详细信息参见 [Dual-Layer Data Encryption](/tidb-cloud/premium/dual-layer-data-encryption-premium.md)。
+- 跟踪密钥状态和使用情况，并防止移除实例、备份快照或进行中的恢复仍然需要的密钥。
+
+详细信息参见 [增强数据加密](/tidb-cloud/premium/enhanced-data-encryption-premium.md)。
 
 </CustomContent>
 

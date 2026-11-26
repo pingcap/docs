@@ -561,6 +561,7 @@
   - [TiDB 限制](/tidb-limitations.md)
   - [系统变量](/system-variables.md)
   - [服务器状态变量](/status-variables.md)
+  - [权限管理](/privilege-management.md)
   - [表库过滤](/table-filter.md)
   - [外部存储服务的 URI 格式](/external-storage-uri.md)
   - [为慢查询配置触发规则](/config-slow-query-trigger-rules.md)

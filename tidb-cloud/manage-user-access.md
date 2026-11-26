@@ -107,6 +107,7 @@ TiDB Cloud 定义了不同的用户角色，用于管理组织、项目和实例
 | 邀请用户加入或移除用户出组织，并编辑用户的组织角色。 | ✅ | ❌ | ❌ | ❌ | ❌ |
 | 拥有该组织下所有项目的 `Project Owner` 权限，以及该组织下所有 TiDB X 实例的 TiDB X 实例角色的所有权限。 | ✅ | ❌ | ❌ | ❌ | ❌ |
 | 创建启用客户管理加密密钥（CMEK）的项目。 | ✅ | ❌ | ❌ | ❌ | ❌ |
+| 管理和查看 {{{ .premium }}} 实例上用于[增强数据加密](/tidb-cloud/premium/enhanced-data-encryption-premium.md)的已注册 CMEK 密钥（**Organization Settings** > **CMEK**）。 | ✅ | ❌ | ❌ | ❌ | ❌ |
 | 编辑组织的支付信息。 | ✅ | ✅ | ❌ | ❌ | ❌ |
 | 查看账单并使用 [成本分析器](/tidb-cloud/tidb-cloud-billing.md#cost-explorer)。 | ✅ | ✅ | ✅ | ❌ | ❌ |
 | 管理组织的 TiDB Cloud [控制台审计日志](/tidb-cloud/tidb-cloud-console-auditing.md)。 | ✅ | ❌ | ❌ | ✅ | ❌ |

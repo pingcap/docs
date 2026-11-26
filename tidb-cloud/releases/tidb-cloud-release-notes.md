@@ -8,6 +8,45 @@ aliases: ['/zh/tidbcloud/supported-tidb-versions','/zh/tidbcloud/release-notes',
 
 本页面列出了 [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) 在 2026 年的发布说明。
 
+## 2026 年 11 月 24 日 {#november-24-2026}
+
+**常规变更**
+
+- **TiDB Cloud Premium**
+
+    - TiDB Cloud Premium 在 AWS 和阿里云上引入了 Customer-Managed Encryption Keys (CMEK) 的组织级管理。此外，控制台中的 **Dual-Layer Data Encryption** 选项现已更名为 **Enhanced Data Encryption**。
+
+        - 你可以在 **Organization Settings** > **CMEK** 下注册并授予权限一次 CMEK，然后在相同云服务提供商和 Region 中将该 CMEK 复用于 **Enhanced Data Encryption**。
+        - 你可以在创建 TiDB Cloud Premium 实例时启用 **Enhanced Data Encryption**，也可以在现有 TiDB Cloud Premium 实例上启用该功能。
+
+      恢复受 CMEK 保护的 Premium 备份时，TiDB Cloud 会自动匹配原始密钥，该密钥必须已在原始云服务提供商和 Region 中注册且可用。TiDB Cloud 还会阻止你在某个密钥仍被实例、备份快照或进行中的恢复所需时将其移除。
+
+      更多信息，请参见 [Enhanced Data Encryption](https://docs.pingcap.com/tidbcloud/enhanced-data-encryption-premium/?plan=premium)。
+
+- **TiDB Cloud Dedicated**
+
+    - TiDB Cloud Dedicated 支持按单次导入跳过导入前兼容性检查。
+
+        - 对于每次导入，你都可以在导入页面启用 **Ignore compatibility checks** 选项，以跳过 CDC 和 Point-in-time Restore (PITR) 兼容性检查，而无需向 TiDB Cloud Support 请求集群级变通方案。
+        - **Ignore compatibility checks** 选项默认禁用，并且仅适用于启用该选项的那次导入。
+
+      更多信息，请参见以下导入文档：
+
+        - [将云存储中的示例数据（SQL 文件）导入到 TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/import-sample-data/)
+        - [将云存储中的 CSV 文件导入到 TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/import-csv-files/)
+        - [将云存储中的 Apache Parquet 文件导入到 TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/import-parquet-files/)
+
+**控制台变更**
+
+- TiDB Cloud 现通过统一入口和简化的两步工作流，优化了 Cross-Plan Restore 体验。
+
+    你可以轻松地将托管在 AWS 上的活动或已删除的 TiDB Cloud Dedicated 集群中的备份恢复到新的 TiDB Cloud Essential 或 Premium 实例。选择一个备份，配置目标实例的容量、加密和高可用，并在恢复前查看预估的每月价格。
+
+    更多信息，请参见以下文档：
+
+    - [将不同计划类型的备份恢复到新的 TiDB Cloud Essential 实例](https://docs.pingcap.com/tidbcloud/backup-and-restore-serverless/?plan=essential#restore-backups-from-a-different-plan-type)
+    - [将不同计划类型的备份恢复到新的 TiDB Cloud Premium 实例](https://docs.pingcap.com/tidbcloud/backup-and-restore-premium/?plan=premium#restore-backups-from-a-different-plan-type)
+
 ## 2026 年 11 月 10 日 {#november-10-2026}
 
 **控制台变更**
@@ -615,7 +654,7 @@ aliases: ['/zh/tidbcloud/supported-tidb-versions','/zh/tidbcloud/release-notes',
 
         你可以使用自己在阿里云 Key Management Service (KMS) 中的密钥对静态数据进行加密，从而更好地控制数据安全性和合规性。
 
-        此功能现可按需提供。更多信息，请参见 [Dual-Layer Data Encryption](/tidb-cloud/premium/dual-layer-data-encryption-premium.md)。
+        此功能现可按需提供。更多信息，请参见 [增强数据加密](/tidb-cloud/premium/enhanced-data-encryption-premium.md)。
 
     - 为 TiDB Cloud Premium 实例在 **Metrics** 页面（**Instance Overview** 标签页）提供两个新的 TTL 监控指标。
 
