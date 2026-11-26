@@ -10,17 +10,17 @@ Enhanced Data Encryption は、クラウドプロバイダーのデフォルト�
 
 キーは TiDB Cloud 組織レベルで一度登録すれば、同じクラウドプロバイダーおよびリージョン内の {{{ .premium }}} インスタンス間で再利用できます。キーマテリアルはクラウド KMS 内に保持され、TiDB Cloud にはキー参照と、その認可、ステータス、使用状況を管理するために必要なメタデータのみが保存されます。
 
-## Overview {#overview}
+## 概要 {#overview}
 
 | タスク | 開始場所 | 結果 |
 | --- | --- | --- |
 | [キーを登録して認可する](#register-a-key) | **Organization Settings** > **CMEK** | インスタンスで使用する前に、組織内でキーを登録して検証します。 |
 | [暗号化を有効にする](#enable-enhanced-data-encryption) | インスタンス作成時、またはインスタンスの **Security** ページ | 同じクラウドプロバイダーおよびリージョン内で、登録済みキーを使用して CMEK を有効にします。 |
 | [キーのステータスと使用状況を確認する](#view-encryption-and-key-status) | **Organization Settings** > **CMEK** | 登録済み各キーのステータスと、関連付けられたインスタンスおよびバックアップを表示します。 |
-| [Restore from an encrypted backup](#restore-from-an-encrypted-backup) | バックアップ復元フロー | 暗号化されたバックアップの復元に必要な CMEK を使用します。 |
+| [暗号化されたバックアップから復元する](#restore-from-an-encrypted-backup) | バックアップ復元フロー | 暗号化されたバックアップの復元に必要な CMEK を使用します。 |
 | [未使用のキーを削除する](#remove-a-key) | **Organization Settings** > **CMEK** | すべての使用参照がクリアされた後、TiDB Cloud からキー登録を削除します。 |
 
-## Before you begin {#before-you-begin}
+## 始める前に {#before-you-begin}
 
 - 対象の {{{ .premium }}} インスタンスと同じクラウドプロバイダーおよびリージョン内の AWS KMS または Alibaba Cloud KMS に対称暗号化キーを用意し、そのキーポリシーを更新する権限があることを確認してください。
     - AWS については、[Create a symmetric encryption KMS key](https://docs.aws.amazon.com/kms/latest/developerguide/create-symmetric-cmk.html) を参照してください。
@@ -29,7 +29,7 @@ Enhanced Data Encryption は、クラウドプロバイダーのデフォルト�
     - **組織キーの管理と表示**（**Organization Settings** > **CMEK**）: `Organization Owner`
     - インスタンスの作成時、暗号化有効化時、または復元時に **登録済みキーを選択** する場合: そのリソース操作に必要なロール（`Organization Owner`、`Project Owner`、または `Instance Manager`）
 
-## Register a key {#register-a-key}
+## キーを登録する {#register-a-key}
 
 任意の {{{ .premium }}} インスタンスを作成する前に、キーを登録して認可できます。キーを登録すると、そのキーが組織で利用可能になりますが、インスタンス上で暗号化が有効になるわけではありません。
 
@@ -50,26 +50,26 @@ Enhanced Data Encryption は、クラウドプロバイダーのデフォルト�
 4. TiDB Cloud コンソールに戻り、キー ARN を入力してアクセスチェックを実行し、TiDB Cloud が必要な KMS 操作を実行できることを確認してから、キーを保存します。
 5. **Organization Settings** > **CMEK** に、ステータス **Idle** でキーが表示されることを確認します。同じ組織、クラウドプロバイダー、リージョン内の対象インスタンスで、このキーを選択できるようになります。
 
-## Enable Enhanced Data Encryption {#enable-enhanced-data-encryption}
+## Enhanced Data Encryption を有効にする {#enable-enhanced-data-encryption}
 
 Enhanced Data Encryption は、{{{ .premium }}} インスタンスの作成時、または既存インスタンスに対して有効にできます。一度有効にすると、CMEK を無効化したり、その場で別のキーに切り替えたりすることはできません。
 
 登録済みキーを再利用する場合、クラウド KMS のキーポリシーに追加の変更は不要です。
 
-### Enable encryption during instance creation {#enable-encryption-during-instance-creation}
+### インスタンス作成時に暗号化を有効にする {#enable-encryption-during-instance-creation}
 
 1. [**My TiDB**](https://tidbcloud.com/tidbs) ページで **Create Resource** をクリックし、**Premium** を選択して、クラウドプロバイダーとリージョンを選びます。
 2. **Enhanced Data Encryption** セクションで CMEK を有効にし、選択したクラウドプロバイダーおよびリージョン内の登録済みキーを選択します。
 3. 適切なキーが登録されていない場合、`Organization Owner` は作成フローから **CMEK** ページを開いて（新しいタブで開きます）キーを登録し、その後インスタンス作成に戻って新しいキーを選択できます。
 4. 残りの設定を完了し、**Create** をクリックします。TiDB Cloud は、CMEK を有効にする前にキーアクセスを検証します。
 
-### Enable encryption for an existing instance {#enable-encryption-for-an-existing-instance}
+### 既存のインスタンスで暗号化を有効にする {#enable-encryption-for-an-existing-instance}
 
 1. [TiDB Cloud コンソール](https://tidbcloud.com)で対象の {{{ .premium }}} インスタンスを開き、左側のナビゲーションペインで **Security** をクリックし、**Enhanced Data Encryption** セクションで **Enable** をクリックします。
 2. インスタンスのクラウドプロバイダーおよびリージョン内の登録済みキーを選択します。適切なキーが登録されていない場合は、`Organization Owner` が先に **Organization Settings** > **CMEK** で登録できます。
 3. 設定を確認し、有効化の完了後に暗号化ステータスを確認します。
 
-## View encryption and key status {#view-encryption-and-key-status}
+## 暗号化とキーのステータスを確認する {#view-encryption-and-key-status}
 
 - **インスタンスレベル**: インスタンスの **Overview** または **Security** ページを開き、Enhanced Data Encryption が有効かどうか、およびどの暗号化キーがインスタンスを保護しているかを確認します。
 - **組織レベル**: **Organization Settings** > **CMEK** を開き（`Organization Owner` が必要）、登録済み各キーのステータス、クラウドプロバイダー、リージョン、および関連付けられたインスタンスとバックアップを確認します。
@@ -81,9 +81,9 @@ Enhanced Data Encryption は、{{{ .premium }}} インスタンスの作成時�
 | **Applied** | キーは現在、同じクラウドプロバイダーおよびリージョン内の 1 つ以上のインスタンスまたはバックアップで使用されており、他の対象インスタンスでも再利用できます。 |
 | **Error** | キーが利用できないか、アクセス検証に失敗しました。クラウド KMS でキーの可用性または認可を復旧し、再度アクセスを検証してください。 |
 
-## Manage registered keys {#manage-registered-keys}
+## 登録済みキーを管理する {#manage-registered-keys}
 
-### Handle unavailable keys {#handle-unavailable-keys}
+### 利用できないキーに対処する {#handle-unavailable-keys}
 
 登録済みキーが **Error** に変わった場合、またはアクセスに失敗した場合:
 
@@ -93,7 +93,7 @@ Enhanced Data Encryption は、{{{ .premium }}} インスタンスの作成時�
 
 データベースはローカルデータ操作のために内部キーをメモリにキャッシュするため、CMEK を無効化または失効しても、進行中の操作に必ずしも直ちに影響するわけではありません。データベースは、保護されたキーをアンラップするために次回 KMS を呼び出す必要が生じるまで、キャッシュされたキーを使い続ける可能性があります。同じ CMEK を使用するすべてのインスタンスとバックアップは、この可用性への依存関係を共有します。
 
-### Remove a key {#remove-a-key}
+### キーを削除する {#remove-a-key}
 
 1. **Organization Settings** > **CMEK** で、キーに関連付けられたインスタンスとバックアップスナップショットを確認します。
 2. キー登録を削除します。いずれかのインスタンス、バックアップスナップショット、または進行中の復元がそのキーに依存している間は、キーのステータスが **Error** であっても、TiDB Cloud は削除をブロックします。
@@ -103,7 +103,7 @@ Enhanced Data Encryption は、{{{ .premium }}} インスタンスの作成時�
 >
 > TiDB Cloud でキー登録を削除しても、クラウド KMS 内のキーやそのポリシーが削除、無効化、変更されることはありません。データまたはバックアップのいずれかがそのキーを必要とする限り、クラウド KMS 内でキーとその認可を維持してください。
 
-## Restore from an encrypted backup {#restore-from-an-encrypted-backup}
+## 暗号化されたバックアップから復元する {#restore-from-an-encrypted-backup}
 
 {{{ .premium }}} バックアップを復元する際、TiDB Cloud はその暗号化メタデータを確認し、対象リージョンで対応するキー要件を適用します。
 
@@ -123,7 +123,7 @@ CMEK で保護された {{{ .dedicated }}} バックアップを、同じクラ�
 >
 > ソースインスタンスを削除した後でも、そのバックアップを復元する必要がある限り、元の CMEK を有効かつ認可済みの状態で維持してください。必要なキーマテリアルが完全に削除または破棄されると、そのキーで暗号化されたバックアップは復旧できません。
 
-## Rotate a Customer-Managed Encryption Key (CMEK) {#rotate-a-customer-managed-encryption-key-cmek}
+## 顧客管理暗号化キー（CMEK）をローテーションする {#rotate-a-customer-managed-encryption-key-cmek}
 
 キーマテリアルのローテーションは、クラウド KMS で直接設定してください。AWS KMS と Alibaba Cloud KMS では、キーマテリアルをローテーションしてもキー ID と ARN は変わらないため、TiDB Cloud 側で設定を更新する必要はありません。
 
@@ -132,9 +132,9 @@ CMEK で保護された {{{ .dedicated }}} バックアップを、同じクラ�
 - AWS については、[Rotate AWS KMS keys](https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html) を参照してください。
 - Alibaba Cloud については、[Key rotation in Alibaba Cloud KMS](https://www.alibabacloud.com/help/en/kms/key-management-service/user-guide/configure-key-rotation) を参照してください。
 
-## How encryption protects your data {#how-encryption-protects-your-data}
+## 暗号化によるデータ保護の仕組み {#how-encryption-protects-your-data}
 
-### Encryption mechanism {#encryption-mechanism}
+### 暗号化メカニズム {#encryption-mechanism}
 
 デフォルトでは、クラウドプロバイダーがストレージレイヤーで保存データを暗号化します（たとえば AWS の EBS ボリューム暗号化や S3 サーバー側暗号化）。Enhanced Data Encryption は、ストレージに書き込む前にデータベースデータとバックアップデータを暗号化する、独立したデータベース暗号化レイヤーを追加します。
 
@@ -142,7 +142,7 @@ CMEK で保護された {{{ .dedicated }}} バックアップを、同じクラ�
 
 Enhanced Data Encryption は保存中のデータを保護します。データベースはクエリ実行中に平文を処理するため、転送中のデータ保護とクエリアクセス制御には [TLS connections](/tidb-cloud/premium/tidb-cloud-tls-connect-to-premium.md) およびデータベースアクセス制御を使用してください。
 
-### Key hierarchy {#key-hierarchy}
+### キー階層 {#key-hierarchy}
 
 データベース暗号化レイヤーは、3 層のキー階層を持つエンベロープ暗号化を使用します。2 つの暗号化レイヤーは暗号化が適用される場所を示し、キー階層は暗号化キー同士がどのように保護し合うかを示します。keyspace は、インスタンスの論理ストレージ名前空間です。
 
@@ -156,7 +156,7 @@ Enhanced Data Encryption は保存中のデータを保護します。データ�
 
 AWS KMS が生成する対称キーでは、平文のマスターキーマテリアルは KMS hardware security module (HSM) の境界内に保持されます。詳細は、[Data protection in AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/data-protection.html) を参照してください。
 
-### Key authorization on AWS {#key-authorization-on-aws}
+### AWS でのキーの認可 {#key-authorization-on-aws}
 
 AWS では、生成されたキーポリシーにより、表示された TiDB Cloud principal に対して、組織の External ID を含む encryption-context 条件の下でキーへのアクセス権が付与されます。AWS KMS は暗号操作時にこの条件を評価し、encryption context を暗号化されたキーマテリアルに結び付けるため、復号にはまったく同じ context が必要になります。
 
@@ -164,19 +164,19 @@ TiDB Cloud は認証済み組織から External ID を導出するため、別�
 
 External ID は秘密情報ではなく、組織識別子です。ステートメントをキーポリシーに追加する際は、生成された `Principal`、`Action`、`Condition` フィールドを保持してください。詳細は、AWS KMS ドキュメントの [Encryption context](https://docs.aws.amazon.com/kms/latest/developerguide/encrypt_context.html) を参照してください。
 
-### Key authorization on Alibaba Cloud {#key-authorization-on-alibaba-cloud}
+### Alibaba Cloud でのキーの認可 {#key-authorization-on-alibaba-cloud}
 
 Alibaba Cloud では、クロスアカウントアクセスのために、Alibaba Cloud Resource Directory (Resource Sharing) を通じて表示された TiDB Cloud アカウントと KMS インスタンスを共有し、共有リストでそのアカウントに対して **Alibaba Cloud Gateway** を有効にし、さらに生成されたステートメントを選択した対称キーのキーポリシーに追加する必要があります。
 
 AWS と同様に、生成されたキーポリシーは、組織の External ID に結び付けられた encryption-context 条件の下で、表示された TiDB Cloud principal にキーへのアクセス権を付与し、他の組織がそのキーを使用することを防ぎます。ステートメントをキーポリシーに追加する際は、生成された `Principal`、`Action`、`Condition` フィールドを保持してください。詳細は、[Manage Keys in Alibaba Cloud KMS](https://www.alibabacloud.com/help/en/kms/key-management-service/user-guide/manage-keys-2) を参照してください。
 
-## Audit key usage {#audit-key-usage}
+## キーの使用状況を監査する {#audit-key-usage}
 
 - **TiDB Cloud でのキー管理**: [console audit logging](/tidb-cloud/tidb-cloud-console-auditing.md) を有効にして、TiDB Cloud コンソールでのキー管理およびインスタンス暗号化アクションを追跡します。
 - **KMS API アクティビティ**: AWS では、[AWS CloudTrail](https://docs.aws.amazon.com/kms/latest/developerguide/logging-using-cloudtrail.html) を使用して KMS キー操作を確認します。アクセス拒否により拒否されたクロスアカウントリクエストは呼び出し元アカウントにのみ記録され、KMS イベントには個々の SQL クエリではなくキー操作が記録されます。
 - **データベースアクセス**: [database audit logging](/tidb-cloud/premium/tidb-cloud-auditing-premium.md) を有効にして、SQL クエリおよびデータベースユーザーアクティビティを監査します。
 
-## Limitations {#limitations}
+## 制限事項 {#limitations}
 
 - {{{ .premium }}} 向け Enhanced Data Encryption は AWS KMS と Alibaba Cloud KMS をサポートします。
 - 登録済みキーは、その組織、クラウドプロバイダー、リージョン内でのみ選択できます。CMEK で保護されたバックアップのクロスリージョン復元はサポートされず、CMEK で保護された {{{ .premium }}} バックアップの復元時に別のキーへ切り替えることもできません。
@@ -184,7 +184,7 @@ AWS と同様に、生成されたキーポリシーは、組織の External ID 
 - エクスポートされたデータおよびダウンストリームシステムはインスタンスの CMEK の対象外であり、個別に暗号化する必要があります。
 - インスタンスを削除しても、保持されたバックアップスナップショットやそのキー依存関係は削除されません。必要なキーマテリアルを恒久的に失うと、それに依存する暗号化データは復旧できなくなります。
 
-## Troubleshoot key access verification {#troubleshoot-key-access-verification}
+## キーアクセス検証のトラブルシューティング {#troubleshoot-key-access-verification}
 
 - **キー登録または検証に失敗する場合**:
     - キーが、選択したクラウドプロバイダーおよびリージョン内の対称暗号化キーであることを確認してください。
