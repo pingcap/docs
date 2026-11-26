@@ -632,6 +632,7 @@
     - [User Account Management](/user-account-management.md)
     - [TiDB Password Management](/password-management.md)
     - [Role-Based Access Control](/role-based-access-control.md)
+    - [Masking Policies](/masking-policy.md)
     - [Certificate-Based Authentication](/certificate-authentication.md)
   - SQL
     - SQL Language Structure and Syntax
