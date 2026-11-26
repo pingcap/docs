@@ -321,12 +321,13 @@ BR backs up `mysql.tidb_masking_policy` with other system tables when the table 
 
 Policy records reference table and column IDs, which can change during restore. Directly copying rows from `mysql.tidb_masking_policy` does not preserve the bindings.
 
-Before taking a backup, use `SHOW MASKING POLICIES FOR table_name` to save each table's policy definitions outside the source cluster, including policy names, target columns, expressions, restrictions, and status. Update the saved definitions whenever policies change.
+Before each backup, use `SHOW MASKING POLICIES FOR table_name` to save a timestamped copy of each table's policy definitions outside the source cluster, including policy names, target columns, expressions, restrictions, and status. Save a new copy whenever policies change, and retain earlier copies.
 
-Before giving users access to restored data:
+Keep access by non-exempt sessions blocked throughout the restore and the following steps:
 
-1. Recreate the policies on the target tables using policy DDL and the saved definitions, and configure the accounts and roles referenced by the expressions.
+1. Recreate the policies on the target tables using policy DDL and the saved definitions for the target recovery point, and configure the accounts and roles referenced by the expressions.
 2. Verify query results and restricted operations using both exempt and non-exempt accounts.
+3. Restore access only after confirming that the GC safe point has passed the recreation timestamp of the last required policy.
 
 Log-backup files can contain policy metadata because log backup records changes across the data key range. Masking does not redact stored backup data.
 
