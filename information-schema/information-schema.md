@@ -39,6 +39,7 @@ Many `INFORMATION_SCHEMA` tables have a corresponding `SHOW` statement. The bene
 | `REFERENTIAL_CONSTRAINTS`                                                               | Provides information on `FOREIGN KEY` constraints. |
 | `ROUTINES`                                                                              | Not implemented by TiDB. Returns zero rows. |
 | [`SCHEMATA`](/information-schema/information-schema-schemata.md)                        | Provides similar information to `SHOW DATABASES`. |
+| [`SCHEMATA_EXTENSIONS`](/information-schema/information-schema-schemata-extensions.md) | Provides database-level read-only settings. |
 | `SCHEMA_PRIVILEGES`                                                                     | Not implemented by TiDB. Returns zero rows. |
 | `SESSION_STATUS`                                                                        | Not implemented by TiDB. Returns zero rows. |
 | [`SESSION_VARIABLES`](/information-schema/information-schema-session-variables.md)      | Provides similar functionality to the command `SHOW SESSION VARIABLES` |

@@ -5830,6 +5830,7 @@ SHOW WARNINGS;
 - Type: Boolean
 - Default value: `OFF`
 - `tidb_restricted_read_only` and [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531) behave similarly. In most cases, you should use [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531) only.
+- To restrict writes to an individual database, see [Database-Level Read-Only Mode](/database-read-only.md). Setting a database to writable does not override cluster-wide read-only restrictions.
 - Users with the `SUPER` or `SYSTEM_VARIABLES_ADMIN` privilege can modify this variable. However, if the [Security Enhanced Mode](#tidb_enable_enhanced_security) is enabled, the additional `RESTRICTED_VARIABLES_ADMIN` privilege is required to read or modify this variable.
 - `tidb_restricted_read_only` affects [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531) in the following cases:
     - Setting `tidb_restricted_read_only` to `ON` will update [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531) to `ON`.
@@ -6540,6 +6541,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Type: Boolean
 - Default value: `OFF`
 - `tidb_super_read_only` aims to be implemented as a replacement of the MySQL variable `super_read_only`. However, because TiDB is a distributed database, `tidb_super_read_only` does not make the database read-only immediately after execution, but eventually.
+- To restrict writes to an individual database, see [Database-Level Read-Only Mode](/database-read-only.md). Setting a database to writable does not override cluster-wide read-only restrictions.
 - Users with the `SUPER` or `SYSTEM_VARIABLES_ADMIN` privilege can modify this variable.
 - This variable controls the read-only status of the entire cluster. When the variable is `ON`, all TiDB servers in the entire cluster are in the read-only mode. In this case, TiDB only executes the statements that do not modify data, such as `SELECT`, `USE`, and `SHOW`. For other statements such as `INSERT` and `UPDATE`, TiDB rejects executing those statements in the read-only mode.
 - Enabling the read-only mode using this variable only ensures that the entire cluster finally enters the read-only status. If you have changed the value of this variable in a TiDB cluster but the change has not yet propagated to other TiDB servers, the un-updated TiDB servers are still **not** in the read-only mode.
