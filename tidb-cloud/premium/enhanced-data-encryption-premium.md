@@ -1,6 +1,6 @@
 ---
 title: Enhanced Data Encryption
-summary: {{{ .premium }}} インスタンス向けに Customer-Managed Encryption Key (CMEK) を登録し、Enhanced Data Encryption を有効にする方法を学びます。
+summary: "{{{ .premium }}} インスタンス向けに Customer-Managed Encryption Key (CMEK) を登録し、Enhanced Data Encryption を有効にする方法を学びます。"
 aliases: ['/ja/tidbcloud/dual-layer-data-encryption-premium']
 ---
 
