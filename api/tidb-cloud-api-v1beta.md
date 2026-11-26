@@ -12,5 +12,4 @@ Currently, you can use the following v1beta APIs to manage the resources in TiDB
 - [Project](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Project)
 - [Cluster](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Cluster)
 - [Backup](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Backup)
-- [Import (Deprecated)](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Import)
 - [Restore](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Restore)
