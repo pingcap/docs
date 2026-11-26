@@ -143,7 +143,7 @@ The following rules apply:
 - The expression can reference only the target column, constants, and functions. It cannot reference another column in the table.
 - Policies are enabled by default. The default restriction setting is `NONE`.
 - `OR REPLACE` replaces an existing policy with the same name on the same column. It cannot move that policy to another column.
-- `IF NOT EXISTS` keeps an existing policy with the same name on the same column unchanged and reports a warning instead of a duplicate-policy error. It does not suppress errors for the same policy name on another column in the table or a different policy name on the target column.
+- `IF NOT EXISTS` keeps an existing policy with the same name on the same column unchanged and reports a warning instead of a duplicate-policy error. If the initial check finds the same policy name on another column in the table or a different policy name on the target column, TiDB reports an error. If another session concurrently creates the same policy name on another column, the statement can instead return a warning without creating the requested policy. After concurrent policy creation, verify the binding using `SHOW MASKING POLICIES`.
 - `OR REPLACE` and `IF NOT EXISTS` are mutually exclusive and are available only with `CREATE MASKING POLICY`.
 
 ### Change a policy
@@ -303,7 +303,7 @@ Masking policies use **AT RESULT** semantics:
 The following limitations apply:
 
 - Supported policy target types include character and binary strings, the `TEXT` and `BLOB` families, integer, floating-point, and decimal types, and `DATE`, `TIME`, `DATETIME`, `TIMESTAMP`, and `YEAR`. Other types, such as `JSON`, are not supported. Individual masking functions have narrower input requirements, as described above.
-- You cannot change the type, length, or precision of a column that has a policy, even if the policy is disabled. Before dropping the policy, block access by non-exempt sessions. Change the column, then recreate the policy with an expression appropriate for the new type. Restore access only after verifying masking and operation restrictions with a non-exempt account.
+- You cannot change the type, length, or precision of a column that has a policy, even if the policy is disabled. Before dropping the policy, block access by non-exempt sessions. Change the column, then recreate the policy with an expression appropriate for the new type. Restore access only after verifying masking and operation restrictions with a non-exempt account and confirming that the GC safe point has passed the policy recreation timestamp. Historical reads from the interval without a policy can otherwise return original values.
 - TiDB rejects result shapes when it cannot preserve a policy, with an error starting with `masking policy cannot be preserved through`. Examples include scalar subqueries that return a protected column in the result list, window functions over protected values, recursive CTE outputs that require masking, and `UNION` outputs with incompatible protected sources.
 - `MIN` and `MAX` over a directly protected column can return a masked result. Other aggregates over protected values, such as `GROUP_CONCAT`, are rejected when their result cannot preserve the policy. `COUNT(*)` can still return row counts.
 - Result expressions over protected columns that contain functions such as `RAND()`, variable assignments, or advisory lock functions are rejected because TiDB cannot safely rebuild them for result masking. These query-shape restrictions also apply to exempt users while the policy is enabled.
@@ -321,11 +321,12 @@ BR backs up `mysql.tidb_masking_policy` with other system tables when the table 
 
 Policy records reference table and column IDs, which can change during restore. Directly copying rows from `mysql.tidb_masking_policy` does not preserve the bindings.
 
+Before taking a backup, use `SHOW MASKING POLICIES FOR table_name` to save each table's policy definitions outside the source cluster, including policy names, target columns, expressions, restrictions, and status. Update the saved definitions whenever policies change.
+
 Before giving users access to restored data:
 
-1. Inspect source policies using `SHOW MASKING POLICIES FOR table_name` and save their expressions, restrictions, and status.
-2. Recreate the policies on the target tables using policy DDL, and configure the accounts and roles referenced by the expressions.
-3. Verify query results and restricted operations using both exempt and non-exempt accounts.
+1. Recreate the policies on the target tables using policy DDL and the saved definitions, and configure the accounts and roles referenced by the expressions.
+2. Verify query results and restricted operations using both exempt and non-exempt accounts.
 
 Log-backup files can contain policy metadata because log backup records changes across the data key range. Masking does not redact stored backup data.
 
