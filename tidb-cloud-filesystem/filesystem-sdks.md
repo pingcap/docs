@@ -3,7 +3,7 @@ title: TiDB Cloud Filesystem SDKs
 summary: TiDB Cloud Filesystem と Drive9 ワークスペースエンジンの関係を理解し、6 つのプログラミング言語向けクライアント SDK ドキュメントを確認します。
 ---
 
-# TiDB Cloud Filesystem SDKs
+# TiDB Cloud Filesystem SDKs <!--Corresponding EN commit: 3c4b2ba9808bc99ad09a2c8355fe16365bfa72b9-->
 
 TiDB Cloud Filesystem は、ファイルシステム操作を実行するために Drive9 ワークスペースエンジンを使用します。TiDB Cloud Filesystem は、TiDB Cloud 上で提供される PingCAP 公式のホスト型 Drive9 サービスです。Drive9 は PingCAP が所有するオープンソースのコミュニティベースプロジェクトであり、TiDB Cloud Filesystem はそのマネージドクラウドサービスです。API レイヤーおよび SDK レイヤーでは、TiDB Cloud Filesystem サービスによって公開される drive9 エンドポイントを直接呼び出します。
 
@@ -25,8 +25,6 @@ SDK ガイドでは、サーバー URL と API キーの指定方法を含め、
 |`aws-us-east-1`|`https://aws-us-east-1.drive9.ai`| FS トークン|
 |`aws-us-west-2`|`https://aws-us-west-2.drive9.ai`| FS トークン|
 |`aws-ap-southeast-1`|`https://aws-ap-southeast-1.drive9.ai`| FS トークン|
-|`gcp-us-east1`|`https://gcp-us-east1.drive9.ai`| FS トークン|
-|`azure-centralus`|`https://azure-centralus.drive9.ai`|FS トークン|
 |`alicloud-ap-southeast-1`|`https://alicloud-ap-southeast-1.drive9.ai`|FS トークン|
 
 SDK のサーバー URL は、必ずファイルシステムが配置されているリージョンのエンドポイントに設定してください。サーバー URL を設定しない場合、多くの SDK は `https://api.drive9.ai` にフォールバックしますが、これは TiDB Cloud Filesystem のエンドポイントではなく、TiDB Cloud Filesystem トークンを受け付けません。ファイルシステムトークンは、自身のリージョンのエンドポイントでのみ使用できます。

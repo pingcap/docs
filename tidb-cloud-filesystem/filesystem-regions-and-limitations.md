@@ -3,7 +3,7 @@ title: TiDB Cloud Filesystem のリージョンと制限事項
 summary: サポートされている TiDB Cloud Filesystem のリージョン、マウントプラットフォーム要件、耐久性の境界、および現在の製品上の制限事項を確認します。
 ---
 
-# TiDB Cloud Filesystem のリージョンと制限事項
+# TiDB Cloud Filesystem のリージョンと制限事項 <!--Corresponding EN commit: 3c4b2ba9808bc99ad09a2c8355fe16365bfa72b9-->
 
 TiDB Cloud Filesystem は、以下に示すリージョンと環境でのみ利用できます。ファイルシステムを作成したり、そのデータへのアクセス方法を選択したりする前に、これらの境界を確認してください。
 
@@ -19,8 +19,6 @@ TiDB Cloud Filesystem は、以下に示すリージョンと環境でのみ利�
 | AWS | オレゴン | `aws-us-west-2` |
 | AWS | シンガポール | `aws-ap-southeast-1` |
 | Alibaba Cloud | シンガポール | `alicloud-ap-southeast-1` |
-| Google Cloud | サウスカロライナ | `gcp-us-east1` |
-| Microsoft Azure | 米国中部 | `azure-centralus` |
 
 TiDB Cloud Starter は、TiDB Cloud Filesystem が利用できない一部のリージョンもサポートしています。これらのリージョンのいずれかでファイルシステムコマンドを実行すると失敗し、そのリージョンではサービスを利用できないことを示すエラーと、サポートされているリージョンの一覧が表示されます。サポートされるファイルシステムリージョンは、各 `ti` リリースに組み込まれています。サポート対象リージョンが、インストール済みバージョンのリリース後に追加された場合は、`ti` をアップグレードしてください。サービス URL を指定しても、そのリージョンのサポートを有効にできません。
 
