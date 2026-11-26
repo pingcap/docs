@@ -612,6 +612,7 @@
       - [Sysbenchパフォーマンステストレポート](/tidb-cloud/v6.5-performance-benchmarking-with-sysbench.md)
   - [システム変数](/system-variables.md)
   - [サーバーステータス変数](/status-variables.md)
+  - [権限管理](/privilege-management.md)
   - [テーブルフィルター](/table-filter.md)
   - [外部ストレージサービスのURI形式](/external-storage-uri.md)
   - [DDL文に埋め込まれた`ANALYZE`](/ddl_embedded_analyze.md)

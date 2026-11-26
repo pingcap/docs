@@ -198,6 +198,37 @@ Recycle Bin から削除されたTiDB Cloud Essentialインスタンスを復元
 
 5. **Restore**ページで、[新しいインスタンスに復元する](#restore-to-a-new-instance)と同じ手順に従って、バックアップを新しいインスタンスに復元します。
 
+<CustomContent plan="essential">
+
+### 異なるプランタイプからバックアップを復元する {#restore-backups-from-a-different-plan-type}
+
+**Cross Plan Restore** を使用すると、AWS でホストされているアクティブまたは削除済みの {{{ .dedicated }}} クラスターのバックアップスナップショットを、新しい {{{ .essential }}} インスタンスに復元できます。新しいインスタンスは、バックアップと同じクラウドプロバイダーおよびリージョンを使用する必要があります。現在、ソースとしてサポートされているのは {{{ .dedicated }}} クラスターのバックアップのみです。
+
+1. [**My TiDB**](https://tidbcloud.com/tidbs) ページで、右上隅の **...** をクリックし、**Cross Plan Restore** をクリックします。
+
+2. **Select Backup** ステップで、以下のフィールドを設定し、**Next** をクリックします。
+
+    - **From**: 既存のクラスターの場合は **Active** を、削除済みクラスターの場合は **Recycle Bin (Deleted)** を選択します。
+    - **Plan** と **Cloud Provider**: これらのフィールドは **Dedicated** と **AWS** に固定されています。
+    - **Project**: ソースクラスターを含むプロジェクトを選択します。
+    - **Cluster Name**: ソースクラスターを選択します。
+    - **Backup Snapshot**: 復元するスナップショットを選択します。
+
+3. **Backup Information** を確認し、**Restore to New Instance** を設定します。
+
+    - **Plan**: **Essential** を選択します。
+    - **Project** と **Instance Name**: 必要に応じて宛先プロジェクトを選択し、新しいインスタンスの名前を入力します。ロールが `Organization Owner` の場合、プロジェクトの選択は任意です。ロールが `Project Owner` の場合、自分が所有するプロジェクトを選択する必要があります。
+    - **Cloud Provider** と **Region**: これらのフィールドはバックアップから引き継がれ、変更できません。
+    - 必要に応じて、キャパシティ、暗号化、高可用性を設定します。詳細は、[TiDB Cloud StarterまたはEssentialインスタンスを作成する](/tidb-cloud/create-tidb-cluster-serverless.md) を参照してください。
+
+    > **Note:**
+    >
+    > 選択したバックアップのリージョンで {{{ .essential }}} を利用できない場合、復元を続行できません。そのリージョンで {{{ .essential }}} を有効にするには [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md) にお問い合わせいただくか、**Previous** をクリックして別のバックアップを選択してください。
+
+4. 推定月額料金と設定を確認し、**Restore** をクリックして、新しいインスタンスへのバックアップの復元を開始します。
+
+</CustomContent>
+
 ## 制限事項 {#limitations}
 
 - TiFlashレプリカが有効になっている場合、データの再構築がTiFlash内で行われるため、復元後一定期間は利用できなくなります。

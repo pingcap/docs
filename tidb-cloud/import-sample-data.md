@@ -33,6 +33,12 @@ summary: TiDB Cloud DedicatedにUI経由でサンプルデータをインポー�
 
 5. **Destination Mapping**セクションで、 **自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">TiDBファイル命名規則</a>を使用する**を選択したまま、データ形式として**SQL**を選択します。
 
+    **Advanced options**: パネルを展開すると、**Ignore compatibility checks (advanced)** オプションを表示できます。changefeed または Point-in-time Restore が有効になっているクラスターにデータをインポートする必要がある場合を除き、このオプションは無効のままにしてください。このオプションを有効にすると、ローカルディスク容量のチェックを含む、インポート前のすべての安全性チェックがスキップされます。有効にする前に、対象クラスターの使用可能なディスク容量がインポートされるデータを収容できることを確認してください。
+
+    > **Note:**
+    >
+    > インポートされたデータは変更ログを生成しないため、changefeed やログバックアップではキャプチャされず、自動的に検出およびバックアップされません。インポートの完了後、Point-in-time Restore を利用する前に、クラスターの手動スナップショットバックアップを取得してください。それまでは、Point-in-time Restore ではインポート時点から手動スナップショットまでの間の時点におけるインポート済み行を復元できません。詳細については、[手動バックアップを実行する](/tidb-cloud/backup-and-restore.md#perform-a-manual-backup)を参照してください。
+
 6. **Next**をクリックします。TiDB Cloudがソースファイルをスキャンします。
 
 7. スキャン結果を確認し、検出されたデータファイルと対応するターゲットテーブルをチェックしてから、 **Start Import**をクリックします。
@@ -63,6 +69,12 @@ summary: TiDB Cloud DedicatedにUI経由でサンプルデータをインポー�
 4. **Next**をクリックしてください。
 
 5. **Destination Mapping**セクションで、 **自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">TiDBファイル命名規則</a>を使用する**を選択したまま、データ形式として**SQL**を選択します。
+
+    **Advanced options**: パネルを展開すると、**Ignore compatibility checks (advanced)** オプションを表示できます。changefeed または Point-in-time Restore が有効になっているクラスターにデータをインポートする必要がある場合を除き、このオプションは無効のままにしてください。このオプションを有効にすると、ローカルディスク容量のチェックを含む、インポート前のすべての安全性チェックがスキップされます。有効にする前に、対象クラスターの使用可能なディスク容量がインポートされるデータを収容できることを確認してください。
+
+    > **Note:**
+    >
+    > インポートされたデータは変更ログを生成しないため、changefeed やログバックアップではキャプチャされず、自動的に検出およびバックアップされません。インポートの完了後、Point-in-time Restore を利用する前に、クラスターの手動スナップショットバックアップを取得してください。それまでは、Point-in-time Restore ではインポート時点から手動スナップショットまでの間の時点におけるインポート済み行を復元できません。詳細については、[手動バックアップを実行する](/tidb-cloud/backup-and-restore.md#perform-a-manual-backup)を参照してください。
 
 6. **Next**をクリックします。TiDB Cloudがソースファイルをスキャンします。
 
@@ -123,6 +135,12 @@ summary: TiDB Cloud DedicatedにUI経由でサンプルデータをインポー�
     > エンドポイントがまだ承認されていない場合、 TiDB Cloud は接続が承認待ちであることを示すメッセージを表示します。[Azureポータル](https://portal.azure.com/)でリクエストを承認してから、再試行してください。
 
 5. **Destination Mapping**セクションで、 **自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">TiDBファイル命名規則</a>を使用する**を選択したまま、データ形式として**SQL**を選択します。
+
+    **Advanced options**: パネルを展開すると、**Ignore compatibility checks (advanced)** オプションを表示できます。changefeed または Point-in-time Restore が有効になっているクラスターにデータをインポートする必要がある場合を除き、このオプションは無効のままにしてください。このオプションを有効にすると、ローカルディスク容量のチェックを含む、インポート前のすべての安全性チェックがスキップされます。有効にする前に、対象クラスターの使用可能なディスク容量がインポートされるデータを収容できることを確認してください。
+
+    > **Note:**
+    >
+    > インポートされたデータは変更ログを生成しないため、changefeed やログバックアップではキャプチャされず、自動的に検出およびバックアップされません。インポートの完了後、Point-in-time Restore を利用する前に、クラスターの手動スナップショットバックアップを取得してください。それまでは、Point-in-time Restore ではインポート時点から手動スナップショットまでの間の時点におけるインポート済み行を復元できません。詳細については、[手動バックアップを実行する](/tidb-cloud/backup-and-restore.md#perform-a-manual-backup)を参照してください。
 
 6. **Next**をクリックします。TiDB Cloudがソースファイルをスキャンします。
 

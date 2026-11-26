@@ -15,8 +15,6 @@ summary: Amazon S3、GCS、またはAzure Blob StorageからTiDB Cloud Dedicated
 
 - データの一貫性を確保するため、 TiDB Cloud では Parquet ファイルを空のテーブルにのみインポートできます。既にデータが含まれている既存のテーブルにデータをインポートするには、このドキュメントの手順に従ってTiDB Cloud を使用して一時的な空のテーブルにデータをインポートし、その後`INSERT SELECT`文を使用してデータを対象の既存のテーブルにコピーします。
 
-- TiDB Cloud Dedicatedクラスターに[変更フィード](/tidb-cloud/changefeed-overview.md)があるか、 [特定時点への復元](/tidb-cloud/backup-and-restore.md#turn-on-point-in-time-restore)が有効になっている場合、現在のデータインポート機能は[物理インポートモード](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode)を使用しているため、クラスターにデータをインポートできません (**Import Data**ボタンが無効になります)。このモードでは、インポートされたデータは変更ログを生成しないため、変更フィードとポイントインタイム復元はインポートされたデータを検出できません。
-
 ## ステップ1. Parquetファイルを準備する {#step-1-prepare-the-parquet-files}
 
 > **Note:**
@@ -145,6 +143,12 @@ TiDB CloudにParquetファイルをインポートするには、以下の手順
 
         - **Target Database**と**Target Table**：データをインポートする対象データベースとテーブルを入力してください。
 
+    **Advanced options**: パネルを展開して、**Ignore compatibility checks (advanced)**オプションを表示します。changefeed があるクラスター、または Point-in-time Restore が有効になっているクラスターにデータをインポートする必要がある場合を除き、このオプションは無効のままにしてください。このオプションを有効にすると、ローカルディスク容量のチェックを含む、インポート前のすべての安全性チェックがスキップされます。有効にする前に、対象クラスターの使用可能なディスク容量がインポートデータを収容できることを確認してください。
+
+    > **Note:**
+    >
+    > インポートされたデータでは変更ログが生成されないため、changefeed やログバックアップでは取得されず、自動的に検出およびバックアップされません。インポートの完了後、Point-in-time Restore を利用する前に、クラスターの手動スナップショットバックアップを実行してください。それまでは、Point-in-time Restore ではインポート時点から手動スナップショットまでの間の時点におけるインポート済み行を復元できません。詳細については、[手動バックアップを実行する](/tidb-cloud/backup-and-restore.md#perform-a-manual-backup)を参照してください。
+
 6. **Next**をクリックします。TiDB Cloudがソースファイルをスキャンします。
 
 7. スキャン結果を確認し、検出されたデータファイルと対応するターゲットテーブルをチェックしてから、 **Start Import**をクリックします。
@@ -195,6 +199,12 @@ TiDB CloudにParquetファイルをインポートするには、以下の手順
             - `my-data*.parquet` : `my-data`で始まるすべての Parquet ファイルに一致します。たとえば`my-data10.parquet`や`my-data100.parquet`などです。
 
         - **Target Database**と**Target Table**：データをインポートする対象データベースとテーブルを入力してください。
+
+    **Advanced options**: パネルを展開して、**Ignore compatibility checks (advanced)**オプションを表示します。changefeed があるクラスター、または Point-in-time Restore が有効になっているクラスターにデータをインポートする必要がある場合を除き、このオプションは無効のままにしてください。このオプションを有効にすると、ローカルディスク容量のチェックを含む、インポート前のすべての安全性チェックがスキップされます。有効にする前に、対象クラスターの使用可能なディスク容量がインポートデータを収容できることを確認してください。
+
+    > **Note:**
+    >
+    > インポートされたデータでは変更ログが生成されないため、changefeed やログバックアップでは取得されず、自動的に検出およびバックアップされません。インポートの完了後、Point-in-time Restore を利用する前に、クラスターの手動スナップショットバックアップを実行してください。それまでは、Point-in-time Restore ではインポート時点から手動スナップショットまでの間の時点におけるインポート済み行を復元できません。詳細については、[手動バックアップを実行する](/tidb-cloud/backup-and-restore.md#perform-a-manual-backup)を参照してください。
 
 6. **Next**をクリックします。TiDB Cloudがソースファイルをスキャンします。
 
@@ -271,6 +281,12 @@ TiDB CloudにParquetファイルをインポートするには、以下の手順
             - `my-data*.parquet` : `my-data`で始まるすべての Parquet ファイルに一致します。たとえば`my-data10.parquet`や`my-data100.parquet`などです。
 
         - **Target Database**と**Target Table**：データをインポートする対象データベースとテーブルを入力してください。
+
+    **Advanced options**: パネルを展開して、**Ignore compatibility checks (advanced)**オプションを表示します。changefeed があるクラスター、または Point-in-time Restore が有効になっているクラスターにデータをインポートする必要がある場合を除き、このオプションは無効のままにしてください。このオプションを有効にすると、ローカルディスク容量のチェックを含む、インポート前のすべての安全性チェックがスキップされます。有効にする前に、対象クラスターの使用可能なディスク容量がインポートデータを収容できることを確認してください。
+
+    > **Note:**
+    >
+    > インポートされたデータでは変更ログが生成されないため、changefeed やログバックアップでは取得されず、自動的に検出およびバックアップされません。インポートの完了後、Point-in-time Restore を利用する前に、クラスターの手動スナップショットバックアップを実行してください。それまでは、Point-in-time Restore ではインポート時点から手動スナップショットまでの間の時点におけるインポート済み行を復元できません。詳細については、[手動バックアップを実行する](/tidb-cloud/backup-and-restore.md#perform-a-manual-backup)を参照してください。
 
 6. **Next**をクリックします。TiDB Cloudがソースファイルをスキャンします。
 

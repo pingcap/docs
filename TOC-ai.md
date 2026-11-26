@@ -62,6 +62,7 @@
   - コマンドリファレンス
     - [概要](/ai/ti/reference/ti-cli-reference.md)
     - [configure](/ai/ti/reference/ti-configure.md)
+    - [exec](/ai/ti/reference/ti-exec.md)
     - [update](/ai/ti/reference/ti-update.md)
     - TiDB Cloud Starter インスタンスを管理するための `ti db` コマンド
       - [概要](/ai/ti/reference/ti-starter-database.md)

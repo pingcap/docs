@@ -8,6 +8,45 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 このページには、2026年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリースノートが掲載されています。
 
+## 2026年11月24日 {#november-24-2026}
+
+**全般的な変更**
+
+- **TiDB Cloud Premium**
+
+    - TiDB Cloud Premium では、AWS と Alibaba Cloud における Customer-Managed Encryption Keys (CMEK) の組織レベル管理が導入されました。さらに、コンソール内の **Dual-Layer Data Encryption** オプションは **Enhanced Data Encryption** に名称変更されました。
+
+        - **Organization Settings** > **CMEK** で一度 CMEK を登録して認可すると、同じクラウドプロバイダーおよびリージョン内で、この CMEK を **Enhanced Data Encryption** に再利用できます。
+        - TiDB Cloud Premium インスタンスの作成時、または既存の TiDB Cloud Premium インスタンスで **Enhanced Data Encryption** を有効にできます。
+
+      CMEK で保護された Premium バックアップを復元する際、TiDB Cloud は元のキーを自動的に照合します。このキーは、元のクラウドプロバイダーおよびリージョンで登録済みかつ利用可能である必要があります。また、インスタンス、バックアップスナップショット、または進行中の復元で引き続き必要とされているキーは、TiDB Cloud によって削除できないようになっています。
+
+      詳細については、[Enhanced Data Encryption](https://docs.pingcap.com/tidbcloud/enhanced-data-encryption-premium/?plan=premium)を参照してください。
+
+- **TiDB Cloud Dedicated**
+
+    - TiDB Cloud Dedicated では、インポート前の互換性チェックをインポート単位でスキップできるようになりました。
+
+        - 各インポートで、インポートページの **Ignore compatibility checks** オプションを有効にすると、TiDB Cloud Support にクラスターレベルの回避策を依頼することなく、CDC および Point-in-time Restore (PITR) の互換性チェックをスキップできます。
+        - **Ignore compatibility checks** オプションはデフォルトで無効になっており、有効にしたそのインポートにのみ適用されます。
+
+      詳細については、以下のインポート関連ドキュメントを参照してください。
+
+        - [クラウドストレージから TiDB Cloud Dedicated にサンプルデータ（SQL ファイル）をインポートする](https://docs.pingcap.com/tidbcloud/import-sample-data/)
+        - [クラウドストレージから TiDB Cloud Dedicated に CSV ファイルをインポートする](https://docs.pingcap.com/tidbcloud/import-csv-files/)
+        - [クラウドストレージから TiDB Cloud Dedicated に Apache Parquet ファイルをインポートする](https://docs.pingcap.com/tidbcloud/import-parquet-files/)
+
+**コンソールの変更**
+
+- TiDB Cloud では、統一されたエントリポイントと簡素化された 2 ステップのワークフローにより、Cross-Plan Restore の操作性が向上しました。
+
+    AWS でホストされているアクティブまたは削除済みの TiDB Cloud Dedicated クラスターから、新しい TiDB Cloud Essential または Premium インスタンスにバックアップを簡単に復元できます。バックアップを選択し、復元先インスタンスのキャパシティ、暗号化、高可用性を設定してから、復元前に推定月額料金を確認できます。
+
+    詳細については、以下のドキュメントを参照してください。
+
+    - [異なるプランタイプのバックアップを新しい TiDB Cloud Essential インスタンスに復元する](https://docs.pingcap.com/tidbcloud/backup-and-restore-serverless/?plan=essential#restore-backups-from-a-different-plan-type)
+    - [異なるプランタイプのバックアップを新しい TiDB Cloud Premium インスタンスに復元する](https://docs.pingcap.com/tidbcloud/backup-and-restore-premium/?plan=premium#restore-backups-from-a-different-plan-type)
+
 ## 2026年11月10日 {#november-10-2026}
 
 **コンソールの変更**
@@ -615,7 +654,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
         Alibaba Cloud Key Management Service (KMS) にある独自のキーを使用して保存データを暗号化できるため、データセキュリティとコンプライアンスをより詳細に管理できます。
 
-        この機能はリクエストに応じて利用できるようになりました。詳細については、 [二重層データ暗号化](/tidb-cloud/premium/dual-layer-data-encryption-premium.md)を参照してください。
+        この機能はリクエストに応じて利用できるようになりました。詳細については、 [Enhanced Data Encryption](/tidb-cloud/premium/enhanced-data-encryption-premium.md)を参照してください。
 
     - TiDB Cloud Premiumインスタンス向けに、**Metrics**ページ（**Instance Overview**タブ）に2つの新しいTTL監視メトリクスを追加します。
 

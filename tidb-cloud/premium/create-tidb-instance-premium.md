@@ -1,5 +1,5 @@
 ---
-title: Create a TiDB Cloud Premium Instance
+title: TiDB Cloud Premiumインスタンスを作成する
 summary: TiDB Cloud Premiumインスタンスの作成方法を学びましょう。
 ---
 
@@ -59,7 +59,9 @@ TiDB Cloudアカウントをお持ちでない場合は、[ここ](https://tidbc
 
 6. TiDB Cloud Premiumインスタンスでは、リージョン高可用性のみが有効になっており、設定変更はできません。詳細については、[高可用性](/tidb-cloud/serverless-high-availability.md)を参照してください。
 
-7. **Create**をクリックします。
+7. （オプション）**Enhanced Data Encryption** セクションで、CMEK を有効にし、選択したクラウドプロバイダーとリージョンに対して組織内に登録済みのキーを選択します。適切なキーがない場合、`Organization Owner` は作成ページから新しいタブで **CMEK** ページを開いてキーを登録し、その後インスタンス作成に戻ってそのキーを選択できます。詳細については、[Enhanced Data Encryption](/tidb-cloud/premium/enhanced-data-encryption-premium.md) を参照してください。
+
+8. **Create**をクリックします。
 
     インスタンス作成プロセスが開始されます。選択したリージョンで初めてインスタンスを作成する場合、プロビジョニングには通常約30分かかります。選択したリージョンに既にインスタンスが存在する場合は、プロセスはより迅速に行われ、通常約1分以内に完了します。
 
