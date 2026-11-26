@@ -113,6 +113,12 @@ This document introduces DM's command-line flags.
 - The default value is `"info"`
 - Optional flag
 
+### `--redact-info-log` <span class="version-mark">New in v8.5.9 and v9.0.0</span>
+
+- Controls whether to enable log redaction in DM-worker. When enabled, DM-worker replaces sensitive information in logs with `?`.
+- The default value is `true`
+- Optional flag. Set it to `false` to disable log redaction. An explicit command-line value overrides [`redact-info-log`](/dm/dm-worker-configuration-file.md#redact-info-log-new-in-v859-and-v900) in the configuration file.
+
 ### `--name`
 
 - The name of a DM-worker node

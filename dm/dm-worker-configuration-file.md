@@ -19,7 +19,7 @@ name = "worker1"
 # Log configuration.
 log-level = "info"
 log-file = "dm-worker.log"
-redact-info-log = false
+redact-info-log = true
 
 # DM-worker listen address.
 worker-addr = ":8262"
@@ -54,11 +54,12 @@ cert-allowed-cn = ["dm"]
 
 - Specifies the log file directory. If this parameter is not specified, the logs are printed onto the standard output.
 
-### `redact-info-log` <span class="version-mark">New in v9.0.0</span>
+### `redact-info-log` <span class="version-mark">New in v8.5.9 and v9.0.0</span>
 
-- Controls whether to enable log redaction. When this configuration item is set to `true`, DM-worker logs are redacted to hide detailed DM query arguments. For more information, see [Log redaction in DM-worker side](/log-redaction.md#log-redaction-in-dm-worker-side).
-- Default value: `false`
+- Controls whether to enable log redaction. When this configuration item is set to `true`, DM-worker replaces sensitive information in logs, including detailed query arguments, with `?`. For more information, see [Log redaction in DM-worker side](/log-redaction.md#log-redaction-in-dm-worker-side).
+- Default value: `true`
 - Value options: `false`, `true`
+- You can also set this item with the `--redact-info-log` command-line flag. An explicit command-line value overrides the configuration file. To disable log redaction, set this item to `false` or pass `--redact-info-log=false`.
 
 #### `worker-addr`
 
