@@ -15,7 +15,7 @@ summary: TiDB で、挿入時に自動生成される埋め込みを使って、
 
 Auto Embedding は、AWS でホストされている {{{ .starter }}} インスタンスでのみ利用できます。
 
-このチュートリアルを完了するには、AWS でホストされている {{{ .starter }}} インスタンスと、それに接続された MySQL クライアントが必要です。インスタンスがない場合は、[{{{ .starter }}} インスタンスの作成](/develop/dev-guide-build-cluster-in-cloud.md) に従って作成してください.
+このチュートリアルを完了するには、AWS でホストされている {{{ .starter }}} インスタンスと、そのインスタンスに接続された MySQL クライアントが必要です。インスタンスがない場合は、[{{{ .starter }}} インスタンスの作成](/develop/dev-guide-build-cluster-in-cloud.md) に従って作成してください。
 
 ## ステップ 1. テーブルを作成する {#step-1-create-a-table}
 
