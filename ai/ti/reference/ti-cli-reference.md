@@ -84,7 +84,7 @@ ti db list-db-clusters --db-cluster-type starter
 ti db list-db-clusters --db-cluster-type starter --output text
 ```
 
-`ti exec` はリモートの stdout と stderr を変更せずにストリーミングし、`--output`、`--query`、`--dry-run` をサポートしません。
+`ti exec` はリモートの標準出力と標準エラー出力を変更せずにストリーミングし、`--output`、`--query`、`--dry-run` をサポートしません。
 
 `ti fs read-file` や `ti fs copy-file --to-stdout` のような生バイト指向のコマンドは、ファイル内容を直接書き出します。
 
