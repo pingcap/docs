@@ -275,6 +275,9 @@ Dynamic privileges include:
 * `ROLE_ADMIN`
 * `CONNECTION_ADMIN`
 * `PLACEMENT_ADMIN` allows privilege owners to create, modify, and remove placement policies.
+* `CREATE MASKING POLICY` allows privilege owners to create [masking policies](/masking-policy.md).
+* `ALTER MASKING POLICY` allows privilege owners to modify, enable, and disable masking policies.
+* `DROP MASKING POLICY` allows privilege owners to remove masking policies.
 * `DASHBOARD_CLIENT` allows privilege owners to log in to TiDB Dashboard.
 * `RESTRICTED_TABLES_ADMIN` allows privilege owners to view system tables when SEM is enabled.
 * `RESTRICTED_STATUS_ADMIN` allows privilege owners to view all status variables in [`SHOW [GLOBAL|SESSION] STATUS`](/sql-statements/sql-statement-show-status.md) when SEM is enabled.
