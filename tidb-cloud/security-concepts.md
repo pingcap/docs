@@ -261,7 +261,7 @@ TiDB Cloudは、高度な暗号化機能で静的データを保護し、セキ�
 
 <CustomContent plan="premium">
 
-**強化されたデータ暗号化**
+**Enhanced Data Encryption**
 
 - {{{ .premium }}} インスタンスに対して、ストレージレイヤー暗号化の上にデータベースレイヤー暗号化を追加し、AWS KMS と Alibaba Cloud KMS をサポートします。
 
