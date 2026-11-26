@@ -148,9 +148,9 @@ Enhanced Data Encryption は保存中のデータを保護します。データ�
 
 | キー | 保護対象 | 管理 |
 | --- | --- | --- |
-| Customer-managed KMS master key (CMEK) | Keyspace Master Key | クラウド KMS アカウント内で管理および認可されます。 |
-| Keyspace Master Key | keyspace 用の data encryption keys (DEKs) | 永続化されたコピーは CMEK で暗号化されます。 |
-| Data encryption key (DEK) | データベースデータおよびログ | 永続化されたコピーは Keyspace Master Key で暗号化されます。 |
+| 顧客管理の KMS マスターキー（CMEK） | Keyspace Master Key | クラウド KMS アカウント内で管理および認可されます。 |
+| Keyspace Master Key | キースペース用のデータ暗号化キー（DEK） | 永続化されたコピーは CMEK で暗号化されます。 |
+| データ暗号化キー（DEK） | データベースデータおよびログ | 永続化されたコピーは Keyspace Master Key で暗号化されます。 |
 
 各インスタンスは独自の内部キーチェーンを管理し、1 つの DEK で複数のファイルを暗号化できます。データベースはメモリにキャッシュされた内部キーを使用してローカルでデータを暗号化および復号し、上位レベルのキーを保護およびアンラップするためにクラウド KMS を呼び出します。
 
