@@ -492,6 +492,10 @@
   - [Configure Trigger Rules for Slow Queries](/config-slow-query-trigger-rules.md)
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
   - [Notifications](/tidb-cloud/notifications.md)
+  - Benchmarks
+    - v26.3.99
+      - [TPC-C Performance Test Report](/tidb-cloud/premium-v26.3.99-performance-benchmarking-with-tpcc.md)
+      - [Sysbench Performance Test Report](/tidb-cloud/premium-v26.3.99-performance-benchmarking-with-sysbench.md)
 - Support Plan
   - [Connected Care Overview](/tidb-cloud/connected-care-overview.md)
   - [Connected Care Details](/tidb-cloud/connected-care-detail.md)
