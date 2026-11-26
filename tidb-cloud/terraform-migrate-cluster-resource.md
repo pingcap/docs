@@ -14,6 +14,7 @@ Starting from TiDB Cloud Terraform Provider v0.4.0, the `tidbcloud_cluster` reso
 ## Prerequisites
 
 - Upgrade to [TiDB Cloud Terraform Provider v0.4.0 or later](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest)
+- Install [Terraform](https://developer.hashicorp.com/terraform/install) v1.5.0 or later. The `import` block and the `-generate-config-out` option used in this document require it.
 
 ## Step 1. Identify the `tidbcloud_cluster` resource to migrate
 

@@ -162,6 +162,10 @@ The following example shows how to create a {{{ .starter }}} or {{{ .essential }
 
 For a {{{ .starter }}} or {{{ .essential }}} branch that is not managed by Terraform, you can bring it under Terraform management by importing it.
 
+> **Note:**
+>
+> The `import` block and the `-generate-config-out` option used in the following steps require Terraform v1.5.0 or later.
+
 Import a {{{ .starter }}} or {{{ .essential }}} branch that is not created by Terraform as follows:
 
 1. Add an import block for the new `tidbcloud_serverless_branch` resource.

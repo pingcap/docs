@@ -146,6 +146,10 @@ You can create a data export task for a {{{ .starter }}} or {{{ .essential }}} i
 
 If a data export task for a {{{ .starter }}} or {{{ .essential }}} instance is not managed by Terraform, you can bring it under Terraform management by importing it.
 
+> **Note:**
+>
+> The `import` block and the `-generate-config-out` option used in the following steps require Terraform v1.5.0 or later.
+
 1. Add an import block for the new `tidbcloud_serverless_export` resource.
 
     Add the following import block to your `.tf` file, replace `example` with a desired resource name, and replace `${id}` with the format of `cluster_id,export_id`:

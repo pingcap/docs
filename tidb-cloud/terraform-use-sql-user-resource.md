@@ -201,6 +201,10 @@ The `builtin_role` is changed to `role_readonly`. The `password` is not shown be
 
 For a TiDB Cloud SQL user that is not managed by Terraform, you can use Terraform to manage it by importing it.
 
+> **Note:**
+>
+> The `import` block and the `-generate-config-out` option used in the following steps require Terraform v1.5.0 or later.
+
 For example, you can import a SQL user that is not created by Terraform as follows:
 
 1. Add an import block for the new `tidbcloud_sql_user` resource.
