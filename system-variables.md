@@ -532,7 +532,7 @@ For more possible values of this variable, see [Authentication plugin status](/s
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: Before v6.6.0, the default value is `OFF`. Starting from v6.6.0, the default value is `ON`.
-- This variable controls whether to enable foreign key constraint checking.
+- This variable controls whether TiDB performs foreign key constraint checks and reference actions for foreign keys enabled by `tidb_enable_foreign_key`. Setting this variable to `OFF` can also relax some DDL-time checks, such as creating a foreign key before the referenced table exists. However, TiDB still validates the foreign key definition itself.
 
 ### group_concat_max_len
 
@@ -2279,7 +2279,7 @@ Assume that you have a cluster with 4 TiDB nodes and multiple TiKV nodes. In thi
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: Before v6.6.0, the default value is `OFF`. Starting from v6.6.0, the default value is `ON`.
-- This variable controls whether to enable the `FOREIGN KEY` feature.
+- This variable controls whether to enable the `FOREIGN KEY` feature. It is the global feature gate for foreign key metadata and enforcement. After this variable is enabled, `foreign_key_checks` controls whether TiDB performs foreign key checks and reference actions.
 
 ### tidb_enable_gc_aware_memory_track
 

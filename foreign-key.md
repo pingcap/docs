@@ -160,7 +160,9 @@ Create Table: CREATE TABLE `child` (
 
 ## Foreign key constraint check
 
-TiDB supports foreign key constraint check, which is controlled by the system variable [`foreign_key_checks`](/system-variables.md#foreign_key_checks). By default, this variable is set to `ON`, meaning that the foreign key constraint check is enabled. This variable has two scopes: `GLOBAL` and `SESSION`. Keeping this variable enabled can ensure the integrity of foreign key reference relationships.
+To use foreign keys in TiDB, you must first enable the global system variable [`tidb_enable_foreign_key`](/system-variables.md#tidb_enable_foreign_key-new-in-v630). After the `FOREIGN KEY` feature is enabled, the system variable [`foreign_key_checks`](/system-variables.md#foreign_key_checks) controls whether TiDB performs foreign key constraint checks and reference actions. By default, `foreign_key_checks` is set to `ON`. This variable has two scopes: `GLOBAL` and `SESSION`. Keeping this variable enabled can ensure the integrity of foreign key reference relationships.
+
+Setting `foreign_key_checks` to `OFF` can also relax some DDL-time checks, such as creating a foreign key before the referenced table exists. However, TiDB still validates the foreign key definition itself, such as column compatibility and required indexes.
 
 The effect of disabling foreign key constraint check is as follows:
 
