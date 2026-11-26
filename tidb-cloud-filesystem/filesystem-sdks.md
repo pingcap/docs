@@ -3,7 +3,7 @@ title: TiDB Cloud Filesystem SDK
 summary: 了解 TiDB Cloud Filesystem 与 Drive9 workspace engine 的关系，并查找六种编程语言的客户端 SDK 文档。
 ---
 
-# TiDB Cloud Filesystem SDK
+# TiDB Cloud Filesystem SDK <!--Corresponding EN commit: 3c4b2ba9808bc99ad09a2c8355fe16365bfa72b9-->
 
 TiDB Cloud Filesystem 使用 Drive9 workspace engine 来执行文件系统操作。TiDB Cloud Filesystem 是 PingCAP 在 TiDB Cloud 上提供的官方托管 Drive9 服务。Drive9 是由 PingCAP 拥有的开源社区项目，而 TiDB Cloud Filesystem 是其托管云服务。在 API 和 SDK layer，你将直接调用由 TiDB Cloud Filesystem 服务暴露的 drive9 endpoint。
 
@@ -25,8 +25,6 @@ SDK 指南说明了客户端如何连接到 Drive9 server，包括如何提供 s
 |`aws-us-east-1`|`https://aws-us-east-1.drive9.ai`| FS token|
 |`aws-us-west-2`|`https://aws-us-west-2.drive9.ai`| FS token|
 |`aws-ap-southeast-1`|`https://aws-ap-southeast-1.drive9.ai`| FS token|
-|`gcp-us-east1`|`https://gcp-us-east1.drive9.ai`| FS token|
-|`azure-centralus`|`https://azure-centralus.drive9.ai`|FS token|
 |`alicloud-ap-southeast-1`|`https://alicloud-ap-southeast-1.drive9.ai`|FS token|
 
 始终将 SDK server URL 设置为你的文件系统所在 Region 的 endpoint。如果你未设置 server URL，大多数 SDK 会回退到 `https://api.drive9.ai`，但这不是 TiDB Cloud Filesystem 的 endpoint，并且会拒绝 TiDB Cloud Filesystem token。file system token 只能与其所属 Region 的 endpoint 一起使用。
