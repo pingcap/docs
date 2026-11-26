@@ -219,7 +219,7 @@ Recycle Bin から削除されたTiDB Cloud Essentialインスタンスを復元
     - **Plan**: **Essential** を選択します。
     - **Project** と **Instance Name**: 必要に応じて宛先プロジェクトを選択し、新しいインスタンスの名前を入力します。ロールが `Organization Owner` の場合、プロジェクトの選択は任意です。ロールが `Project Owner` の場合、自分が所有するプロジェクトを選択する必要があります。
     - **Cloud Provider** と **Region**: これらのフィールドはバックアップから引き継がれ、変更できません。
-    - 必要に応じて、容量、暗号化、高可用性を設定します。詳細は、[TiDB Cloud StarterまたはEssentialインスタンスを作成する](/tidb-cloud/create-tidb-cluster-serverless.md) を参照してください。
+    - 必要に応じて、キャパシティ、暗号化、高可用性を設定します。詳細は、[TiDB Cloud StarterまたはEssentialインスタンスを作成する](/tidb-cloud/create-tidb-cluster-serverless.md) を参照してください。
 
     > **Note:**
     >

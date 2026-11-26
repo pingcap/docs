@@ -40,7 +40,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 - TiDB Cloud では、統一されたエントリポイントと簡素化された 2 ステップのワークフローにより、Cross-Plan Restore の操作性が向上しました。
 
-    AWS でホストされているアクティブまたは削除済みの TiDB Cloud Dedicated クラスターから、新しい TiDB Cloud Essential または Premium インスタンスにバックアップを簡単に復元できます。バックアップを選択し、復元先インスタンスの容量、暗号化、高可用性を設定してから、復元前に推定月額料金を確認できます。
+    AWS でホストされているアクティブまたは削除済みの TiDB Cloud Dedicated クラスターから、新しい TiDB Cloud Essential または Premium インスタンスにバックアップを簡単に復元できます。バックアップを選択し、復元先インスタンスのキャパシティ、暗号化、高可用性を設定してから、復元前に推定月額料金を確認できます。
 
     詳細については、以下のドキュメントを参照してください。
 

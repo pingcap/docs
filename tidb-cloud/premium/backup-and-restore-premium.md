@@ -292,7 +292,7 @@ CMEK で保護された {{{ .dedicated }}} バックアップの場合は、同�
     - **Plan**: **Premium** を選択します。
     - **Project** と **Instance Name**: 必要に応じて復元先プロジェクトを選択し、新しいインスタンスの名前を入力します。ロールが `Organization Owner` の場合、プロジェクトの選択は任意です。ロールが `Project Owner` の場合、自分が所有するプロジェクトを選択する必要があります。
     - **Cloud Provider** と **Region**: これらのフィールドはバックアップから引き継がれ、変更できません。
-    - 必要に応じて、容量、暗号化、および高可用性を設定します。詳細については、[TiDB Cloud Premiumインスタンスを作成する](/tidb-cloud/premium/create-tidb-instance-premium.md)を参照してください。
+    - 必要に応じて、キャパシティ、暗号化、および高可用性を設定します。詳細については、[TiDB Cloud Premiumインスタンスを作成する](/tidb-cloud/premium/create-tidb-instance-premium.md)を参照してください。
 
     > **Note:**
     >
@@ -372,7 +372,7 @@ CMEK で保護された {{{ .dedicated }}} バックアップの場合は、同�
 
 3. **Verify Backup** をクリックします。検証が成功したら、右側の概要でバックアップリージョン、バックアップ時刻、および TiDB バージョンを確認します。
 
-4. 同じページの <CustomContent plan="premium">**Restore to a New Premium Instance**</CustomContent><CustomContent plan="byoc">**Restore to a New BYOC Instance**</CustomContent> セクションで、新しいインスタンスを設定します。必要に応じて復元先プロジェクトを選択し、インスタンス名を入力して、リージョンと容量を設定します。クラウドプロバイダーはバックアップストレージのプロバイダーと一致している必要があります。設定の詳細については、<CustomContent plan="premium">[TiDB Cloud Premiumインスタンスを作成する](/tidb-cloud/premium/create-tidb-instance-premium.md)</CustomContent><CustomContent plan="byoc">[{{{ .byoc }}} インスタンスを作成する](/tidb-cloud/byoc/create-tidb-instance-byoc.md)</CustomContent>を参照してください。
+4. 同じページの <CustomContent plan="premium">**Restore to a New Premium Instance**</CustomContent><CustomContent plan="byoc">**Restore to a New BYOC Instance**</CustomContent> セクションで、新しいインスタンスを設定します。必要に応じて復元先プロジェクトを選択し、インスタンス名を入力して、リージョンとキャパシティを設定します。クラウドプロバイダーはバックアップストレージのプロバイダーと一致している必要があります。設定の詳細については、<CustomContent plan="premium">[TiDB Cloud Premiumインスタンスを作成する](/tidb-cloud/premium/create-tidb-instance-premium.md)</CustomContent><CustomContent plan="byoc">[{{{ .byoc }}} インスタンスを作成する](/tidb-cloud/byoc/create-tidb-instance-byoc.md)</CustomContent>を参照してください。
 
     <CustomContent plan="byoc">
 
