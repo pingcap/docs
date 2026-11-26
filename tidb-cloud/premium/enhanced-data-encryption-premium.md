@@ -127,7 +127,7 @@ CMEK で保護された {{{ .dedicated }}} バックアップを、同じクラ�
 
 キーマテリアルのローテーションは、クラウド KMS で直接設定してください。AWS KMS と Alibaba Cloud KMS では、キーマテリアルをローテーションしてもキー ID と ARN は変わらないため、TiDB Cloud 側で設定を更新する必要はありません。
 
-キーマテリアルのローテーションは、同じ CMEK の基盤となるマテリアルを更新するものです。インスタンスを別の CMEK に切り替えたり、既存データを再暗号化したり、すでに侵害された data encryption key (DEK) に対処したりするものではありません。
+キーマテリアルのローテーションは、同じ CMEK の基盤となるマテリアルを更新するものです。インスタンスを別の CMEK に切り替えたり、既存データを再暗号化したり、すでに侵害されたデータ暗号化キー（DEK）に対処したりするものではありません。
 
 - AWS については、[Rotate AWS KMS keys](https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html) を参照してください。
 - Alibaba Cloud については、[Key rotation in Alibaba Cloud KMS](https://www.alibabacloud.com/help/en/kms/key-management-service/user-guide/configure-key-rotation) を参照してください。
@@ -140,11 +140,11 @@ CMEK で保護された {{{ .dedicated }}} バックアップを、同じクラ�
 
 ストレージアクセスとデータベースレイヤーのキー権限は別々に管理されるため、ストレージオブジェクト（たとえばサーバー側復号後の S3 ファイル）を取得しただけではデータを読み取れません。対応するキーチェーンと KMS 認可がなければ、データベースレイヤーで保護された内容は暗号化されたままです。
 
-Enhanced Data Encryption は保存中のデータを保護します。データベースはクエリ実行中に平文を処理するため、転送中のデータ保護とクエリアクセス制御には [TLS connections](/tidb-cloud/premium/tidb-cloud-tls-connect-to-premium.md) およびデータベースアクセス制御を使用してください。
+Enhanced Data Encryption は保存中のデータを保護します。データベースはクエリ実行中に平文を処理するため、転送中のデータ保護とクエリアクセス制御には [TLS 接続](/tidb-cloud/premium/tidb-cloud-tls-connect-to-premium.md) およびデータベースアクセス制御を使用してください。
 
 ### キー階層 {#key-hierarchy}
 
-データベース暗号化レイヤーは、3 層のキー階層を持つエンベロープ暗号化を使用します。2 つの暗号化レイヤーは暗号化が適用される場所を示し、キー階層は暗号化キー同士がどのように保護し合うかを示します。keyspace は、インスタンスの論理ストレージ名前空間です。
+データベース暗号化レイヤーは、3 層のキー階層を持つエンベロープ暗号化を使用します。2 つの暗号化レイヤーは暗号化が適用される場所を示し、キー階層は暗号化キー同士がどのように保護し合うかを示します。キースペースは、インスタンスの論理ストレージ名前空間です。
 
 | キー | 保護対象 | 管理 |
 | --- | --- | --- |
@@ -154,13 +154,13 @@ Enhanced Data Encryption は保存中のデータを保護します。データ�
 
 各インスタンスは独自の内部キーチェーンを管理し、1 つの DEK で複数のファイルを暗号化できます。データベースはメモリにキャッシュされた内部キーを使用してローカルでデータを暗号化および復号し、上位レベルのキーを保護およびアンラップするためにクラウド KMS を呼び出します。
 
-AWS KMS が生成する対称キーでは、平文のマスターキーマテリアルは KMS hardware security module (HSM) の境界内に保持されます。詳細は、[Data protection in AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/data-protection.html) を参照してください。
+AWS KMS が生成する対称キーでは、平文のマスターキーマテリアルは KMS のハードウェアセキュリティモジュール（HSM）の境界内に保持されます。詳細は、[Data protection in AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/data-protection.html) を参照してください。
 
 ### AWS でのキーの認可 {#key-authorization-on-aws}
 
-AWS では、生成されたキーポリシーにより、表示された TiDB Cloud principal に対して、組織の External ID を含む encryption-context 条件の下でキーへのアクセス権が付与されます。AWS KMS は暗号操作時にこの条件を評価し、encryption context を暗号化されたキーマテリアルに結び付けるため、復号にはまったく同じ context が必要になります。
+AWS では、生成されたキーポリシーにより、表示された TiDB Cloud のプリンシパルに対して、組織の External ID を含む暗号化コンテキストの条件の下でキーへのアクセス権が付与されます。AWS KMS は暗号操作時にこの条件を評価し、暗号化コンテキストを暗号化されたキーマテリアルに結び付けるため、復号にはまったく同じ context が必要になります。
 
-TiDB Cloud は認証済み組織から External ID を導出するため、別の組織からのリクエストは異なる context を持ち、たとえそのリクエストにあなたのキー ARN が含まれていても AWS KMS によって拒否されます。
+TiDB Cloud は認証済み組織から External ID を導出するため、別の組織からのリクエストは異なるコンテキストを持ち、たとえそのリクエストにあなたのキー ARN が含まれていても AWS KMS によって拒否されます。
 
 External ID は秘密情報ではなく、組織識別子です。ステートメントをキーポリシーに追加する際は、生成された `Principal`、`Action`、`Condition` フィールドを保持してください。詳細は、AWS KMS ドキュメントの [Encryption context](https://docs.aws.amazon.com/kms/latest/developerguide/encrypt_context.html) を参照してください。
 
@@ -168,13 +168,13 @@ External ID は秘密情報ではなく、組織識別子です。ステート�
 
 Alibaba Cloud では、クロスアカウントアクセスのために、Alibaba Cloud Resource Directory (Resource Sharing) を通じて表示された TiDB Cloud アカウントと KMS インスタンスを共有し、共有リストでそのアカウントに対して **Alibaba Cloud Gateway** を有効にし、さらに生成されたステートメントを選択した対称キーのキーポリシーに追加する必要があります。
 
-AWS と同様に、生成されたキーポリシーは、組織の External ID に結び付けられた encryption-context 条件の下で、表示された TiDB Cloud principal にキーへのアクセス権を付与し、他の組織がそのキーを使用することを防ぎます。ステートメントをキーポリシーに追加する際は、生成された `Principal`、`Action`、`Condition` フィールドを保持してください。詳細は、[Manage Keys in Alibaba Cloud KMS](https://www.alibabacloud.com/help/en/kms/key-management-service/user-guide/manage-keys-2) を参照してください。
+AWS と同様に、生成されたキーポリシーは、組織の External ID に結び付けられた暗号化コンテキストの条件の下で、表示された TiDB Cloud のプリンシパルにキーへのアクセス権を付与し、他の組織がそのキーを使用することを防ぎます。ステートメントをキーポリシーに追加する際は、生成された `Principal`、`Action`、`Condition` フィールドを保持してください。詳細は、[Manage Keys in Alibaba Cloud KMS](https://www.alibabacloud.com/help/en/kms/key-management-service/user-guide/manage-keys-2) を参照してください。
 
 ## キーの使用状況を監査する {#audit-key-usage}
 
-- **TiDB Cloud でのキー管理**: [console audit logging](/tidb-cloud/tidb-cloud-console-auditing.md) を有効にして、TiDB Cloud コンソールでのキー管理およびインスタンス暗号化アクションを追跡します。
+- **TiDB Cloud でのキー管理**: [コンソール監査ログ](/tidb-cloud/tidb-cloud-console-auditing.md) を有効にして、TiDB Cloud コンソールでのキー管理およびインスタンス暗号化アクションを追跡します。
 - **KMS API アクティビティ**: AWS では、[AWS CloudTrail](https://docs.aws.amazon.com/kms/latest/developerguide/logging-using-cloudtrail.html) を使用して KMS キー操作を確認します。アクセス拒否により拒否されたクロスアカウントリクエストは呼び出し元アカウントにのみ記録され、KMS イベントには個々の SQL クエリではなくキー操作が記録されます。
-- **データベースアクセス**: [database audit logging](/tidb-cloud/premium/tidb-cloud-auditing-premium.md) を有効にして、SQL クエリおよびデータベースユーザーアクティビティを監査します。
+- **データベースアクセス**: [データベース監査ログ](/tidb-cloud/premium/tidb-cloud-auditing-premium.md) を有効にして、SQL クエリおよびデータベースユーザーアクティビティを監査します。
 
 ## 制限事項 {#limitations}
 
