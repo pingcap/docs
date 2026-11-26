@@ -227,7 +227,7 @@ After creating a changefeed, TiCDC replicates changes from the included upstream
 
     ```shell
     # Stop the changefeed from the upstream cluster to the downstream cluster
-    tiup cdc cli changefeed pause -c "upstream-to-downstream" --pd=http://172.16.6.122:2379
+    tiup cdc cli changefeed pause -c "upstream-to-downstream" --server=http://127.0.0.1:8300
     # View the changefeed status
     tiup cdc cli changefeed list
     ```
