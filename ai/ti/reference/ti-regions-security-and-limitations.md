@@ -3,7 +3,7 @@ title: TiDB Cloud CLI のリージョン、セキュリティ、および制限�
 summary: サポートされるリージョン、認証の境界、セキュリティのベストプラクティス、および現在の TiDB Cloud CLI の制限事項について参照します。
 ---
 
-# TiDB Cloud CLI のリージョン、セキュリティ、および制限事項
+# TiDB Cloud CLI のリージョン、セキュリティ、および制限事項 <!--Corresponding EN commit: 3c4b2ba9808bc99ad09a2c8355fe16365bfa72b9-->
 
 このリファレンスでは、TiDB Cloud CLI の現在のリージョン、認証、プラットフォーム、およびプレビューに関する境界について説明します。ファイルシステムのリージョンと制限事項については、[TiDB Cloud Filesystem のリージョンと制限事項](/tidb-cloud-filesystem/filesystem-regions-and-limitations.md) を参照してください。
 
@@ -25,8 +25,6 @@ TiDB Cloud CLI を使用する場合、CLI 操作のデフォルトリージョ�
 | AWS | フランクフルト | `aws-eu-central-1` | サポート対象 | 非サポート |
 | AWS | 東京 | `aws-ap-northeast-1` | サポート対象 | 非サポート |
 | Alibaba Cloud | シンガポール | `alicloud-ap-southeast-1` | サポート対象 | サポート対象 |
-| Google Cloud | サウスカロライナ | `gcp-us-east1` | 非サポート | サポート対象 |
-| Microsoft Azure | 米国中部 | `azure-centralus` | 非サポート | サポート対象 |
 
 設定したリージョンが TiDB Cloud Starter をサポートしていても TiDB Cloud Filesystem をサポートしていない場合、そのリージョンで Starter インスタンスを管理できます。ファイルシステムコマンドは `unsupported endpoint` エラーで失敗します。
 
