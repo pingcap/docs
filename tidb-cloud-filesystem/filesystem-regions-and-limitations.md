@@ -3,7 +3,7 @@ title: TiDB Cloud Filesystem 区域与限制
 summary: 了解 TiDB Cloud Filesystem 支持的区域、挂载平台要求、持久性边界以及当前产品限制。
 ---
 
-# TiDB Cloud Filesystem 区域与限制
+# TiDB Cloud Filesystem 区域与限制 <!--Corresponding EN commit: 3c4b2ba9808bc99ad09a2c8355fe16365bfa72b9-->
 
 TiDB Cloud Filesystem 仅在下列区域和环境中可用。在创建文件系统或选择如何访问其数据之前，请先确认这些边界条件。
 
@@ -19,8 +19,6 @@ TiDB Cloud Filesystem 仅在下列区域和环境中可用。在创建文件系�
 | AWS | 俄勒冈 | `aws-us-west-2` |
 | AWS | 新加坡 | `aws-ap-southeast-1` |
 | Alibaba Cloud | 新加坡 | `alicloud-ap-southeast-1` |
-| Google Cloud | 南卡罗来纳 | `gcp-us-east1` |
-| Microsoft Azure | 美国中部 | `azure-centralus` |
 
 TiDB Cloud Starter 还支持一些 TiDB Cloud Filesystem 不可用的区域。在这些区域中执行文件系统命令会失败，并显示一条错误信息，指出该区域的服务不可用，同时列出受支持的区域。受支持的文件系统区域内置于每个 `ti` 发布版本中。如果某个区域的支持是在你已安装版本发布之后才新增的，请升级 `ti`；仅指定服务 URL 并不能启用该区域的支持。
 
