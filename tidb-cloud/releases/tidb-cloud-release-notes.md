@@ -25,7 +25,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 - **TiDB Cloud Dedicated**
 
-    - TiDB Cloud Dedicated では、インポートごとにインポート前の互換性チェックをスキップできるようになりました。
+    - TiDB Cloud Dedicated では、インポート前の互換性チェックをインポート単位でスキップできるようになりました。
 
         - 各インポートで、インポートページの **Ignore compatibility checks** オプションを有効にすると、TiDB Cloud Support にクラスターレベルの回避策を依頼することなく、CDC および Point-in-time Restore (PITR) の互換性チェックをスキップできます。
         - **Ignore compatibility checks** オプションはデフォルトで無効になっており、有効にしたそのインポートにのみ適用されます。
