@@ -79,6 +79,28 @@ INSERT INTO vector_table VALUES (2, '[0.3, 0.5]');       -- 2 dimensions vector,
 
 However, note that you cannot build a [vector search index](/ai/reference/vector-search-index.md) for this column, as vector distances can be only calculated between vectors with the same dimensions.
 
+## Missing embeddings and all-zero vectors
+
+`NULL` and an all-zero vector such as `[0,0,0]` are different values. A nullable vector column can store a missing embedding as `NULL`. An all-zero vector can satisfy the dimension requirement of `VECTOR(3)` and a `NOT NULL` constraint, but its cosine distance is undefined.
+
+When preparing embeddings for cosine search:
+
+- Generate an embedding before including a record in searches, or represent a missing embedding as `NULL` if your schema permits it. Avoid using an all-zero vector as a placeholder for an embedding that has not been generated.
+- Validate both stored embeddings and query vectors. Fixed dimensions and `NOT NULL` constraints alone do not ensure that cosine distance is defined.
+- Use the distance function's return value to handle undefined distances. `VEC_COSINE_DISTANCE()` returns `NULL` for missing inputs and for zero-magnitude vectors with matching dimensions. See [`VEC_COSINE_DISTANCE`](/ai/reference/vector-search-functions-and-operators.md#vec_cosine_distance) for its effect on sorting and filtering.
+
+For the `vector_table` with `embedding VECTOR(3)` defined earlier, the following query counts missing and all-zero embeddings separately:
+
+```sql
+SELECT COUNT(*) AS total_rows,
+       COUNT(CASE WHEN embedding IS NULL THEN 1 END) AS missing_embeddings,
+       COUNT(CASE WHEN embedding IS NOT NULL
+                       AND VEC_L2_NORM(embedding) = 0 THEN 1 END) AS zero_vectors
+FROM vector_table;
+```
+
+This query reads the table to compute the counts. [`VEC_L2_NORM()`](/ai/reference/vector-search-functions-and-operators.md#vec_l2_norm) measures vector magnitude; these counts help identify missing or zero-valued data before cosine search.
+
 ## Comparison
 
 You can compare vector data types using [comparison operators](/functions-and-operators/operators.md) such as `=`, `!=`, `<`, `>`, `<=`, and `>=`. For a complete list of comparison operators and functions for vector data types, see [Vector Functions and Operators](/ai/reference/vector-search-functions-and-operators.md).
