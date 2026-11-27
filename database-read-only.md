@@ -94,13 +94,14 @@ Explicitly granting [`RESTRICTED_REPLICA_WRITER_ADMIN`](/privilege-management.md
 - Compared with MySQL 8.0, TiDB also restricts local temporary tables and can reject write statements during `PREPARE`. `EXPLAIN` of restricted writes can also return error `3989`.
 - Cluster-wide read-only restrictions still apply. Setting a database to writable does not override them.
 - `IMPORT INTO` checks read-only mode at statement entry. A physical import that already started can continue after the database becomes read-only. Finish or cancel such imports before relying on unchanged data.
+- With the deprecated batch DML feature enabled (`tidb_enable_batch_dml = ON`, `tidb_batch_insert = ON`, and `tidb_dml_batch_size > 0`), an `INSERT` can partially commit before a read-only transition and then fail. Previously committed batches are not rolled back. Let the statement finish before enabling read-only mode, and check for committed rows before retrying a failed statement.
 
 ### Interaction with other tools
 
 | Tool | Behavior |
 | --- | --- |
 | TiDB Lightning | Physical imports using the `local` backend can write directly to TiKV into existing tables despite read-only mode. Control these imports separately. Logical imports obey SQL restrictions. |
-| BR and SQL `BACKUP` / `RESTORE` | Snapshot restore preserves backed-up read-only metadata. Authorized restores can restore tables and sequences into read-only databases; ordinary writes remain restricted afterward. PITR restores the state at the selected time. |
+| BR and SQL `BACKUP` / `RESTORE` | Snapshot restore preserves backed-up read-only metadata when it creates a database. If the target database already exists, restore retains its current read-only setting. Authorized restores can restore tables and sequences into read-only databases; ordinary writes to read-only databases remain restricted afterward. After restoring to an existing database, check `INFORMATION_SCHEMA.SCHEMATA_EXTENSIONS`. If you require read-only protection, run `ALTER DATABASE ... READ ONLY = 1` as needed and wait for it to complete. PITR restores the state at the selected time. |
 | Dumpling | Can export read-only databases. Replaying the SQL read-only comment does not enable read-only mode. |
 | TiCDC v8.5.8 | Does not replicate database read-only DDL to MySQL downstream databases. |
 | DM v8.5.8 | Pauses with a parsing error on upstream `ALTER DATABASE ... READ ONLY` statements. Explicitly skip these statements to resume. Writes to a read-only downstream database are rejected without the bypass privilege. |
