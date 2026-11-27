@@ -120,7 +120,13 @@ mysql> CREATE UNIQUE INDEX c1 ON t1 (c1);
 Query OK, 0 rows affected (0.31 sec)
 ```
 
-## Custom Region pre-splitting
+## Region pre-splitting
+
+Region pre-splitting divides an index key range into multiple Regions before index backfilling begins. It can help distribute index writes across Regions and reduce write hotspots when creating an index on a large table, especially when concurrent DML writes occur during index creation. Region pre-splitting is optional and does not guarantee balanced write distribution or faster index creation.
+
+You can specify the split parameters yourself or let TiDB derive split boundaries automatically from column statistics.
+
+### Custom Region pre-splitting
 
 <span class="version-mark">Supported in CLOUD.202510.1 and later for TiDB Cloud Premium, and in CLOUD.202603.1 and later for TiDB Cloud Essential</span>
 
@@ -130,18 +136,24 @@ For custom Region pre-splitting with `PRE_SPLIT_REGIONS`, see [Custom Region pre
 
 <span class="version-mark">New in v8.5.9 and v9.0.0 for TiDB Self-Managed and TiDB Cloud Dedicated, and in CLOUD.202609.1 for TiDB Cloud Essential and Premium</span>
 
-You can specify `PRE_SPLIT_REGIONS [=] AUTO` to derive Region split boundaries from existing Version 2 statistics on the leading index column.
+When adding an index with `ALTER TABLE ... ADD INDEX`, `ALTER TABLE ... ADD PRIMARY KEY`, or [`CREATE INDEX`](/sql-statements/sql-statement-create-index.md), you can specify the `PRE_SPLIT_REGIONS [=] AUTO` option to let TiDB derive Region split boundaries from existing column statistics. The equals sign (`=`) is optional.
 
-For an existing non-partitioned table `t` with at least 1,000,000 rows, use [`SHOW STATS_HEALTHY`](/sql-statements/sql-statement-show-stats-healthy.md) to check that the statistics health score is at least 80. Also ensure that the leading index column has usable Version 2 statistics. If needed, run `ANALYZE TABLE` with `ALL COLUMNS` before adding the index; see [Requirements and limitations](/sql-statements/sql-statement-add-index.md#requirements-and-limitations) for column selection and persistence effects:
+Before using the `PRE_SPLIT_REGIONS [=] AUTO` option, make sure that the table is not partitioned, has at least 1,000,000 rows, and has a statistics health score of at least 80. The leading index column must also have usable Version 2 statistics. Use [`SHOW STATS_HEALTHY`](/sql-statements/sql-statement-show-stats-healthy.md) to check the statistics health score. If the statistics are missing or outdated, run [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) with `ALL COLUMNS` before adding the index. For more information, see [Prerequisites](/sql-statements/sql-statement-add-index.md#prerequisites).
+
+For example, check the statistics health score and collect statistics if needed before creating the index:
 
 ```sql
+-- Check the statistics health score.
 SHOW STATS_HEALTHY WHERE Table_name = 't';
--- Collect or refresh statistics for all columns if needed.
+
+-- Run ANALYZE TABLE only if the existing statistics do not meet the requirements.
 ANALYZE TABLE t ALL COLUMNS;
+
+-- Add the index with automatic Region pre-splitting.
 CREATE INDEX idx_a ON t (a) PRE_SPLIT_REGIONS AUTO;
 ```
 
-This option is disabled unless explicitly specified for the index. It is best-effort: TiDB can skip pre-splitting and continue creating the index if the statistics are ineligible or if pre-splitting fails. For requirements, limitations, backfilling modes, and log messages, see [Automatic Region pre-splitting](/sql-statements/sql-statement-add-index.md#automatic-region-pre-splitting).
+TiDB can skip automatic pre-splitting if the statistics are ineligible or pre-splitting fails, without affecting index creation. For more information about the requirements, limitations, backfilling modes, failure handling, and log messages, see [Automatic Region pre-splitting](/sql-statements/sql-statement-add-index.md#automatic-region-pre-splitting).
 
 ## Expression index
 
