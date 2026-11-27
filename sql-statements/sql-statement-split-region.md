@@ -355,8 +355,6 @@ You can specify the partition to be split.
 
 ## pre_split_regions
 
-When adding an index to an existing table, you can use `PRE_SPLIT_REGIONS AUTO` to derive index Region split boundaries from existing column statistics. This per-index option differs from the table option described in this section and cannot be used as a `CREATE TABLE` table option. For details, see [Automatic Region pre-splitting](/sql-statements/sql-statement-add-index.md#automatic-region-pre-splitting).
-
 When creating a table with the `AUTO_RANDOM` or `SHARD_ROW_ID_BITS` attribute, you can also specify the `PRE_SPLIT_REGIONS` option if you want to evenly pre-split the table into Regions immediately after the table is created. The number of pre-split Regions for a table is `2^(PRE_SPLIT_REGIONS)`.
 
 > **Note:**
@@ -364,6 +362,10 @@ When creating a table with the `AUTO_RANDOM` or `SHARD_ROW_ID_BITS` attribute, y
 > The value of `PRE_SPLIT_REGIONS` must be less than or equal to that of `SHARD_ROW_ID_BITS` or `AUTO_RANDOM`.
 
 The [`tidb_scatter_region`](/system-variables.md#tidb_scatter_region) global variable affects the behavior of `PRE_SPLIT_REGIONS`. This variable controls whether to wait for Regions to be pre-split and scattered before returning results after the table creation. If there are intensive writes after creating the table, you need to set the value of this variable to `global`, then TiDB scatters the Regions of newly created tables according to the data distribution of the entire cluster. Otherwise, TiDB writes the data before the scattering is completed, which will have a significant impact on write performance.
+
+> **Note:**
+>
+> When adding an index to an existing table, you can use `PRE_SPLIT_REGIONS AUTO` to derive index Region split boundaries from existing column statistics. This per-index option differs from the table option described in this section and cannot be used as a `CREATE TABLE` table option. For more information, see [Automatic Region pre-splitting](/sql-statements/sql-statement-add-index.md#automatic-region-pre-splitting).
 
 ### Examples of pre_split_regions
 

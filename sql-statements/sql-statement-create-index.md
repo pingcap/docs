@@ -120,9 +120,9 @@ mysql> CREATE UNIQUE INDEX c1 ON t1 (c1);
 Query OK, 0 rows affected (0.31 sec)
 ```
 
-## Manual Region pre-splitting
+## Custom Region pre-splitting
 
-For manual Region pre-splitting with `PRE_SPLIT_REGIONS`, see [Manual Region pre-splitting](/sql-statements/sql-statement-add-index.md#manual-region-pre-splitting).
+For custom Region pre-splitting with `PRE_SPLIT_REGIONS`, see [Custom Region pre-splitting](/sql-statements/sql-statement-add-index.md#custom-region-pre-splitting).
 
 ## Automatic Region pre-splitting
 
@@ -560,7 +560,7 @@ The system variables associated with the `CREATE INDEX` statement are `tidb_ddl_
 * Expression indexes have compatibility issues with bindings. When the expression of an expression index has a constant, the binding created for the corresponding query expands its scope. For example, suppose that the expression in the expression index is `a+1`, and the corresponding query condition is `a+1 > 2`. In this case, the created binding is `a+? > ?`, which means that the query with the condition such as `a+2 > 2` is also forced to use the expression index and results in a poor execution plan. In addition, this also affects the baseline capturing and baseline evolution in SQL Plan Management (SPM).
 * The data written with multi-valued indexes must exactly match the defined data type. Otherwise, data writes fail. For details, see [create multi-valued indexes](/sql-statements/sql-statement-create-index.md#create-multi-valued-indexes).
 * Setting a `UNIQUE KEY` as a [global index](/global-indexes.md) with the `GLOBAL` index option is a TiDB extension for [partitioned tables](/partitioned-table.md) and is not compatible with MySQL.
-* `PRE_SPLIT_REGIONS AUTO` is a TiDB extension and is not compatible with MySQL.
+* The index-level `PRE_SPLIT_REGIONS` option, including `AUTO`, is a TiDB extension and is not compatible with MySQL.
 
 ## See also
 
