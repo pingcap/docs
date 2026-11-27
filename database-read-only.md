@@ -64,7 +64,7 @@ ALTER DATABASE app READ ONLY = 0;
 
 ## Transaction behavior
 
-Enabling read-only mode waits for existing transactions that accessed tables in the database to finish, including read transactions on other nodes. New writes are rejected after the flag propagates. Wait for `ALTER DATABASE ... READ ONLY = 1` to complete before treating the transition as finished.
+Enabling read-only mode waits for existing transactions that accessed tables in the database to finish, including read transactions on other nodes. After the flag propagates, writes from new transactions without the bypass privilege are rejected. Existing transactions may still issue ordinary writes to tables they accessed before the transition while the DDL waits for them to finish. Wait for `ALTER DATABASE ... READ ONLY = 1` to complete before treating the transition as finished.
 
 Finish blocking transactions or cancel the DDL using [`ADMIN CANCEL DDL JOBS`](/sql-statements/sql-statement-admin-cancel-ddl.md). Failed or canceled transitions roll back the setting. Disabling read-only mode does not require transaction draining.
 
