@@ -363,6 +363,10 @@ When creating a table with the `AUTO_RANDOM` or `SHARD_ROW_ID_BITS` attribute, y
 
 The [`tidb_scatter_region`](/system-variables.md#tidb_scatter_region) global variable affects the behavior of `PRE_SPLIT_REGIONS`. This variable controls whether to wait for Regions to be pre-split and scattered before returning results after the table creation. If there are intensive writes after creating the table, you need to set the value of this variable to `global`, then TiDB scatters the Regions of newly created tables according to the data distribution of the entire cluster. Otherwise, TiDB writes the data before the scattering is completed, which will have a significant impact on write performance.
 
+> **Note:**
+>
+> When adding an index to an existing table, you can use `PRE_SPLIT_REGIONS AUTO` to derive index Region split boundaries from existing column statistics. Unlike the table-level `PRE_SPLIT_REGIONS` option described in this section, `PRE_SPLIT_REGIONS AUTO` applies to individual indexes and cannot be used in a `CREATE TABLE` statement. For more information, see [Automatic Region pre-splitting](/sql-statements/sql-statement-add-index.md#automatic-region-pre-splitting).
+
 ### Examples of pre_split_regions
 
 ```sql

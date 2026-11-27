@@ -6963,6 +6963,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Range: `[1, 2147483647]`
 - Unit: Seconds
 - This variable is used to set the timeout for executing the `SPLIT REGION` statement. If a statement is not executed completely within the specified time value, a timeout error is returned.
+- For [`PRE_SPLIT_REGIONS AUTO`](/sql-statements/sql-statement-add-index.md#automatic-region-pre-splitting), all `AUTO` indexes in a DDL job share a time budget of 330 seconds by default. This budget consists of the value of this variable in the DDL worker's internal session (300 seconds by default) plus a fixed 30-second allowance for loading statistics. Changing this variable in the session that submits `ADD INDEX` or `CREATE INDEX` does not affect the budget. Loading statistics, splitting Regions, and scattering them all consume this budget.
 
 ### tidb_window_concurrency <span class="version-mark">New in v4.0</span>
 

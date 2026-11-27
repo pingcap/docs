@@ -53,7 +53,15 @@ IndexOption ::=
 |   'COMMENT' stringLit
 |   ("VISIBLE" | "INVISIBLE")
 |   ("GLOBAL" | "LOCAL")
+|   'PRE_SPLIT_REGIONS' '='? ( 'AUTO' | Int64Num | '(' SplitOption ')' )
 |   'WHERE' Expression
+
+SplitOption ::=
+    'BETWEEN' RowValue 'AND' RowValue 'REGIONS' Int64Num
+|   'BY' RowValue ( ',' RowValue )*
+
+RowValue ::=
+    '(' ValuesOpt ')'
 
 IndexTypeName ::=
     'BTREE'
@@ -111,6 +119,41 @@ Query OK, 0 rows affected (0.30 sec)
 mysql> CREATE UNIQUE INDEX c1 ON t1 (c1);
 Query OK, 0 rows affected (0.31 sec)
 ```
+
+## Region pre-splitting
+
+Region pre-splitting divides an index key range into multiple Regions before index backfilling begins. It can help distribute index writes across Regions and reduce write hotspots when creating an index on a large table, especially when concurrent DML writes occur during index creation. Region pre-splitting is optional and does not guarantee balanced write distribution or faster index creation.
+
+You can specify the split parameters yourself or let TiDB derive split boundaries automatically from column statistics.
+
+### Custom Region pre-splitting
+
+<span class="version-mark">Supported in CLOUD.202510.1 and later for TiDB Cloud Premium, and in CLOUD.202603.1 and later for TiDB Cloud Essential</span>
+
+For custom Region pre-splitting with `PRE_SPLIT_REGIONS`, see [Custom Region pre-splitting](/sql-statements/sql-statement-add-index.md#custom-region-pre-splitting).
+
+## Automatic Region pre-splitting
+
+<span class="version-mark">New in v8.5.9 and v9.0.0 for TiDB Self-Managed and TiDB Cloud Dedicated, and in CLOUD.202609.1 for TiDB Cloud Essential and Premium</span>
+
+When adding an index with `ALTER TABLE ... ADD INDEX`, `ALTER TABLE ... ADD PRIMARY KEY`, or [`CREATE INDEX`](/sql-statements/sql-statement-create-index.md), you can specify the `PRE_SPLIT_REGIONS [=] AUTO` option to let TiDB derive Region split boundaries from existing column statistics. The equals sign (`=`) is optional.
+
+Before using the `PRE_SPLIT_REGIONS [=] AUTO` option, make sure that the table is not partitioned, has at least 1,000,000 rows, and has a statistics health score of at least 80. The leading index column must also have usable Version 2 statistics. Use [`SHOW STATS_HEALTHY`](/sql-statements/sql-statement-show-stats-healthy.md) to check the statistics health score. If the statistics are missing or outdated, run [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) with `ALL COLUMNS` before adding the index. For more information, see [Prerequisites](/sql-statements/sql-statement-add-index.md#prerequisites).
+
+For example, check the statistics health score and collect statistics if needed before creating the index:
+
+```sql
+-- Check the statistics health score.
+SHOW STATS_HEALTHY WHERE Table_name = 't';
+
+-- Run ANALYZE TABLE only if the existing statistics do not meet the requirements.
+ANALYZE TABLE t ALL COLUMNS;
+
+-- Add the index with automatic Region pre-splitting.
+CREATE INDEX idx_a ON t (a) PRE_SPLIT_REGIONS AUTO;
+```
+
+TiDB can skip automatic pre-splitting if the statistics are ineligible or pre-splitting fails, without affecting index creation. For more information about the requirements, limitations, backfilling modes, failure handling, and log messages, see [Automatic Region pre-splitting](/sql-statements/sql-statement-add-index.md#automatic-region-pre-splitting).
 
 ## Expression index
 
@@ -531,6 +574,7 @@ The system variables associated with the `CREATE INDEX` statement are `tidb_ddl_
 * Expression indexes have compatibility issues with bindings. When the expression of an expression index has a constant, the binding created for the corresponding query expands its scope. For example, suppose that the expression in the expression index is `a+1`, and the corresponding query condition is `a+1 > 2`. In this case, the created binding is `a+? > ?`, which means that the query with the condition such as `a+2 > 2` is also forced to use the expression index and results in a poor execution plan. In addition, this also affects the baseline capturing and baseline evolution in SQL Plan Management (SPM).
 * The data written with multi-valued indexes must exactly match the defined data type. Otherwise, data writes fail. For details, see [create multi-valued indexes](/sql-statements/sql-statement-create-index.md#create-multi-valued-indexes).
 * Setting a `UNIQUE KEY` as a [global index](/global-indexes.md) with the `GLOBAL` index option is a TiDB extension for [partitioned tables](/partitioned-table.md) and is not compatible with MySQL.
+* The index-level `PRE_SPLIT_REGIONS` option, including `AUTO`, is a TiDB extension and is not compatible with MySQL.
 
 ## See also
 
