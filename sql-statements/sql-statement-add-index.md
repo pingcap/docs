@@ -134,7 +134,7 @@ TiDB uses encoded index keys to calculate split points based on your specified R
 
 ### Automatic Region pre-splitting
 
-<span class="version-mark">New in v8.5.9 and v9.0.0 for classic TiDB and in CLOUD.202609 for TiDB X</span>
+<span class="version-mark">New in v8.5.9 and v9.0.0 for TiDB Self-Managed and TiDB Cloud Dedicated, and in CLOUD.202609.1 for TiDB Cloud Essential and Premium</span>
 
 You can specify `PRE_SPLIT_REGIONS AUTO` to let TiDB derive Region split boundaries from existing column statistics.
 
