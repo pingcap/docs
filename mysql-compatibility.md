@@ -168,16 +168,18 @@ In TiDB, all supported DDL changes can be performed online. However, there are s
 * Adding/Dropping the primary key of the `CLUSTERED` type is unsupported. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
 * Different types of indexes (`HASH|BTREE|RTREE|FULLTEXT`) are not supported, and will be parsed and ignored when specified.
 * TiDB supports `HASH`, `RANGE`, `LIST`, and `KEY` partitioning types. For an unsupported partition type, TiDB returns `Warning: Unsupported partition type %s, treat as normal table`, where `%s` is the specific unsupported partition type.
-* Range, Range COLUMNS, List, and List COLUMNS partitioned tables support `ADD`, `DROP`, `TRUNCATE`, `REORGANIZE`, and `EXCHANGE` operations. Other partition operations are ignored.
-* Hash and Key partitioned tables support `ADD`, `COALESCE`, `TRUNCATE`, and `EXCHANGE` operations. Other partition operations are ignored.
-* Partitioned tables that contain global indexes do not support `EXCHANGE PARTITION`. For more information, see [Limitations of global indexes](/global-indexes.md#limitations-of-global-indexes).
-* TiDB uses a different hash algorithm for Key partitioning than MySQL and ignores `LINEAR` in `LINEAR HASH` partitioning. Therefore, partition data distribution can differ between TiDB and MySQL, which can affect the rows exchanged by `EXCHANGE PARTITION`. For more information, see [Key partitioning](/partitioned-table.md#key-partitioning) and [How TiDB handles Linear Hash partitions](/partitioned-table.md#how-tidb-handles-linear-hash-partitions).
-* The following syntaxes are not supported for partitioned tables:
+* TiDB does not support the following partition operations and returns an error for them:
 
-    - `SUBPARTITION`
-    - `{CHECK|OPTIMIZE|REPAIR|IMPORT|DISCARD|REBUILD} PARTITION`
+    - `REORGANIZE PARTITION` on `HASH` and `KEY` partitioned tables
+    - `EXCHANGE PARTITION` on `KEY` partitioned tables, or on partitioned tables that contain [global indexes](/global-indexes.md#limitations-of-global-indexes)
+    - `{CHECK|OPTIMIZE|REPAIR|REBUILD} PARTITION`
+    - `{DISCARD|IMPORT} PARTITION ... TABLESPACE`
+    - `PARTITION BY` or `REMOVE PARTITIONING` combined with other changes in the same `ALTER TABLE` statement
 
-    For more details on partitioning, see [Partitioning](/partitioned-table.md).
+  For more details on partitioning, see [Partitioning](/partitioned-table.md).
+
+* TiDB ignores `SUBPARTITION` definitions and returns a warning.
+* TiDB ignores `LINEAR` in `LINEAR HASH` and `LINEAR KEY` partitioning and returns a warning. TiDB also uses a different hash algorithm than MySQL for `KEY` partitioning. Therefore, rows can be placed in different partitions than in MySQL, which affects partition selection, `TRUNCATE PARTITION`, and `EXCHANGE PARTITION`. For more information, see [Key partitioning](/partitioned-table.md#key-partitioning) and [How TiDB handles Linear Hash partitions](/partitioned-table.md#how-tidb-handles-linear-hash-partitions).
 
 ### Analyzing tables
 
