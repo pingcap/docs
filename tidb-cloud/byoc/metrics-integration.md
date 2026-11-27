@@ -14,7 +14,7 @@ A single Prometheus data source provides access to instance, resource pool, and 
 Before you begin, make sure that you have:
 
 - A Grafana instance running version 10 or later. Version 11.3.1 or later is recommended.
-- AWS permissions to view load balancers in the account and Region that host your BYOC deployment, including `elasticloadbalancing:DescribeLoadBalancers`.
+- AWS permissions to view load balancers in the account and region that host your BYOC deployment, including `elasticloadbalancing:DescribeLoadBalancers`.
 - If network connectivity is not already configured, AWS permissions to configure the relevant VPC peering or PrivateLink resources, route tables, security groups, and network ACLs.
 - Network access from your Grafana environment to the BYOC metrics endpoint over HTTPS on TCP port `443`.
 
@@ -22,12 +22,12 @@ Before you begin, make sure that you have:
 
 Each AWS BYOC deployment region has a regional metrics read load balancer whose name starts with `ngx-r-`. You can find its DNS name using either the AWS console or AWS CLI.
 
-Select the AWS account and Region that host your target BYOC deployment. You do not need to know the complete load balancer name.
+Select the AWS account and region that host your target BYOC deployment. You do not need to know the complete load balancer name.
 
 <SimpleTab>
 <div label="AWS Console">
 
-1. Sign in to the AWS account that hosts your BYOC deployment and select the target AWS Region.
+1. Sign in to the AWS account that hosts your BYOC deployment and select the target AWS region.
 2. Open the **EC2** console. In the navigation pane, under **Load Balancing**, choose **Load Balancers**.
 3. Filter the load balancer list by name and search for the prefix `ngx-r-`.
 4. Select the matching load balancer and confirm that its state is **Active**.
@@ -38,7 +38,7 @@ Select the AWS account and Region that host your target BYOC deployment. You do 
 
 Make sure that the AWS CLI is installed and configured with credentials for the account that hosts your BYOC deployment.
 
-1. Set your AWS CLI profile and target Region:
+1. Set your AWS CLI profile and target region:
 
     ```bash
     BYOC_AWS_PROFILE="<your-aws-profile>"
@@ -61,7 +61,7 @@ Make sure that the AWS CLI is installed and configured with credentials for the 
 </div>
 </SimpleTab>
 
-If no matching load balancer is returned, verify the AWS account, Region, and your permission to describe load balancers.
+If no matching load balancer is returned, verify the AWS account, region, and your permission to describe load balancers.
 
 If multiple matching load balancers are listed, use their VPC IDs and deployment information to identify the correct one, or ask your BYOC administrator to confirm it.
 
