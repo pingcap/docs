@@ -98,7 +98,7 @@ Accordingly, you can view the configuration by either of the following two metho
 
 Starting from Cloud.2609.1 for TiDB Cloud Essential and Premium, TiDB Cloud Storage Engine supports Load Base Split. 
 
-Currently, Load Base Split for Cloud Storage Engine is in private preview and is disabled by default. To enable this feature, contact [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support) to modify the configuration.
+Currently, Load Base Split for Cloud Storage Engine is in private preview. During the private preview, Load Base Split is disabled by default. To request enablement for your instance, contact [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support).
 
 When enabled, CSE collects read request statistics over multiple detection rounds to identify sustained hotspots. It first selects a split position from sampled query ranges, aiming to balance read load and reduce queries that span both resulting Regions.
 
