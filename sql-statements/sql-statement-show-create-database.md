@@ -52,6 +52,8 @@ SHOW CREATE SCHEMA IF NOT EXISTS test;
 1 row in set (0.00 sec)
 ```
 
+When [database-level read-only mode](/database-read-only.md) is enabled, the output includes `/* READ ONLY = 1 */`. This is a regular SQL comment. Executing the returned `CREATE DATABASE` statement does not enable read-only mode; use [`ALTER DATABASE ... READ ONLY = 1`](/sql-statements/sql-statement-alter-database.md#read-only-setting) separately.
+
 ## MySQL compatibility
 
 `SHOW CREATE DATABASE` is expected to be fully compatible with MySQL. If you find any compatibility differences, you can [report a bug](https://docs.pingcap.com/tidb/stable/support).
