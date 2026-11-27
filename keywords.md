@@ -38,6 +38,8 @@ CREATE TABLE `select` (BEGIN int, END int);
 Query OK, 0 rows affected (0.09 sec)
 ```
 
+Starting from v8.5.9 and v9.0.0, `AUTO` is a non-reserved keyword. When using `AUTO` as a role name, enclose it in backticks, for example, ``CREATE ROLE `auto`;`` or ``SET ROLE `auto`;``.
+
 In the special case, the reserved keywords do not need backticks if they are used with the `.` delimiter:
 
 ```sql
