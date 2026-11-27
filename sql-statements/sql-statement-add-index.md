@@ -117,6 +117,8 @@ You can specify the split parameters yourself or let TiDB derive split boundarie
 
 ### Custom Region pre-splitting
 
+<span class="version-mark">Supported in CLOUD.202510.1 and later for TiDB Cloud Premium, and in CLOUD.202603.1 and later for TiDB Cloud Essential</span>
+
 When adding an index with `ALTER TABLE ... ADD INDEX` or `CREATE INDEX`, you can use the `PRE_SPLIT_REGIONS` option to specify split parameters before index backfilling begins. The option supports the following forms, and the equals sign (`=`) is optional:
 
 - `PRE_SPLIT_REGIONS [=] N`: splits the index key range into `N` Regions by calculating evenly spaced split points. `N` specifies the number of Regions.

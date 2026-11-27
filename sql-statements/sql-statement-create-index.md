@@ -122,6 +122,8 @@ Query OK, 0 rows affected (0.31 sec)
 
 ## Custom Region pre-splitting
 
+<span class="version-mark">Supported in CLOUD.202510.1 and later for TiDB Cloud Premium, and in CLOUD.202603.1 and later for TiDB Cloud Essential</span>
+
 For custom Region pre-splitting with `PRE_SPLIT_REGIONS`, see [Custom Region pre-splitting](/sql-statements/sql-statement-add-index.md#custom-region-pre-splitting).
 
 ## Automatic Region pre-splitting
